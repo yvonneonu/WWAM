@@ -13,12 +13,12 @@ import android.widget.TextView;
 
 public class ViewPager extends AppCompatActivity {
     private LinearLayout linearLayout;
+    private Button signin;
 
     private TextView login;
 
     LinearLayout dotslayout;
     TextView[] dots;
-   // private Button signin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +27,17 @@ public class ViewPager extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         androidx.viewpager.widget.ViewPager viewPager = findViewById(R.id.viewpage1);
         dotslayout = findViewById(R.id.linearLayoutdot);
-        Button signin = findViewById(R.id.signhere);
+        signin = findViewById(R.id.signhere);
         TextView signup = findViewById(R.id.signup);
 
 
-        //signin = findViewById(R.id.signhere);
+        signin = findViewById(R.id.signhere);
 
         SliderAdapter sliderAdapter = new SliderAdapter(this);
         viewPager.setAdapter(sliderAdapter);
         addDot(0);
         viewPager.addOnPageChangeListener(changeListener);
-        //ignin.setOnClickListener(v ->SignUphere());
-
+        signin.setOnClickListener(v ->SignUphere());
 
     }
 
@@ -61,7 +60,7 @@ public class ViewPager extends AppCompatActivity {
     private void SignUphere() {
         Intent intent = new Intent(ViewPager.this, Login.class);
         startActivity(intent);
-        finish();
+       // finish();
     }
 
     private void addDot(int position) {
