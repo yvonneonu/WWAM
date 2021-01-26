@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">waam</string>
+    <string name="Friends">Find New Friends with every swipe</string>
+    <string name="Matches">Find New Matches with every swipe</string>
+    <string name="Gateways">Find New Gateways with every swipe</string>
+    <string name="Events">Find New Events with every swipe</string>
+    <string name="Dating">Find New Dating with every swipe</string>
+</resources>

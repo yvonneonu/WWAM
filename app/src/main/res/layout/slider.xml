@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/events_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="140dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/image"
+            android:layout_alignStart="@+id/image"
+            android:layout_alignEnd="@+id/image"
+            android:layout_marginTop="60dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/abc_vector_test"
+            app:layout_constraintEnd_toEndOf="@+id/image"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image1"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif-black"
+            android:text="find new Mathces"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/image1"
+            app:layout_constraintStart_toStartOf="@+id/image1"
+            app:layout_constraintTop_toBottomOf="@+id/image1" />
+
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image1"
+            android:layout_alignParentStart="true"
+            android:text="with every swipe"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/title"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <Button
+            android:id="@+id/signhere"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title"
+            android:layout_alignStart="@+id/title"
+            android:layout_marginTop="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/button_location_icon"
+            android:text="Sign in with WWAM"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            app:icon="@drawable/ic_baseline_place_24"
+            app:layout_constraintEnd_toEndOf="@+id/title1"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="@+id/title1"
+            app:layout_constraintTop_toBottomOf="@+id/title1" />
+
+        <TextView
+            android:id="@+id/dont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/title"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="48dp"
+            android:text="Don't have an account?"
+            android:textColor="@color/offwhite"
+            app:layout_constraintEnd_toEndOf="@+id/signhere"
+            app:layout_constraintHorizontal_bias="0.082"
+            app:layout_constraintStart_toStartOf="@+id/signhere"
+            app:layout_constraintTop_toBottomOf="@+id/signhere" />
+
+        <TextView
+            android:id="@+id/signup"
+            android:layout_width="53dp"
+            android:layout_height="18dp"
+            android:layout_below="@+id/title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="48dp"
+            android:text="Sign up"
+            android:textColor="@color/blue"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/signhere"
+            app:layout_constraintHorizontal_bias="0.271"
+            app:layout_constraintStart_toEndOf="@+id/dont"
+            app:layout_constraintTop_toBottomOf="@+id/signhere" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
