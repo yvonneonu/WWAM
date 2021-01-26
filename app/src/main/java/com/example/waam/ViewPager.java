@@ -37,7 +37,7 @@ public class ViewPager extends AppCompatActivity {
         viewPager.setAdapter(sliderAdapter);
         addDot(0);
         viewPager.addOnPageChangeListener(changeListener);
-        signin.setOnClickListener(v ->SignUphere());
+        //ignin.setOnClickListener(v ->SignUphere());
 
 
     }
@@ -75,13 +75,12 @@ public class ViewPager extends AppCompatActivity {
 
             dots[i].setText(Html.fromHtml("&#8226"));
             dots[i].setTextSize(45);
-            dots[i].setTextColor(getResources().getColor(R.color.blue));
+            dots[i].setTextColor(getResources().getColor(R.color.offwhite));
             dotslayout.addView(dots[i]);
         }
-        if(dots.length > 0){
-            dots[position].setTextColor(getResources().getColor(R.color.white));
+        if(dots.length > 0) {
+            dots[position].setTextColor(getResources().getColor(R.color.blue));
         }
-
         /*if (dots.length == 0) {
             dots[position].setTextColor(getResources().getColor(R.color.blue));
         } else if (dots.length == 1) {
@@ -92,6 +91,8 @@ public class ViewPager extends AppCompatActivity {
             dots[position].setTextColor(getResources().getColor(R.color.yellow));
         }else if (dots.length == 4) {
             dots[position].setTextColor(getResources().getColor(R.color.red));
+
         }*/
     }
+
 }
