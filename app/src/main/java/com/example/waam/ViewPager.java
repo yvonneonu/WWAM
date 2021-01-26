@@ -15,7 +15,7 @@ public class ViewPager extends AppCompatActivity {
     private LinearLayout linearLayout;
     private Button signin;
 
-    private TextView login;
+    private TextView signup;
 
     LinearLayout dotslayout;
     TextView[] dots;
@@ -28,7 +28,7 @@ public class ViewPager extends AppCompatActivity {
         androidx.viewpager.widget.ViewPager viewPager = findViewById(R.id.viewpage1);
         dotslayout = findViewById(R.id.linearLayoutdot);
         signin = findViewById(R.id.signhere);
-        TextView signup = findViewById(R.id.signup);
+        signup = findViewById(R.id.signuphere);
 
 
         signin = findViewById(R.id.signhere);
@@ -37,7 +37,8 @@ public class ViewPager extends AppCompatActivity {
         viewPager.setAdapter(sliderAdapter);
         addDot(0);
         viewPager.addOnPageChangeListener(changeListener);
-        signin.setOnClickListener(v ->SignUphere());
+        signin.setOnClickListener(v ->Signinhere());
+        signup.setOnClickListener(v -> SignUnhere());
 
     }
 
@@ -57,11 +58,17 @@ public class ViewPager extends AppCompatActivity {
 
         }
     };
-    private void SignUphere() {
+    private void Signinhere() {
         Intent intent = new Intent(ViewPager.this, Login.class);
         startActivity(intent);
        // finish();
     }
+    private void SignUnhere() {
+        Intent intent = new Intent(ViewPager.this, SignUp.class);
+        startActivity(intent);
+        // finish();
+    }
+
 
     private void addDot(int position) {
         dots = new TextView[5];

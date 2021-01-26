@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signhere" />
 
     <TextView
-        android:id="@+id/signup"
+        android:id="@+id/signuphere"
         android:layout_width="53dp"
         android:layout_height="18dp"
         android:layout_below="@+id/title"
