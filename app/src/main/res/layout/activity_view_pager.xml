@@ -29,7 +29,9 @@
         android:paddingBottom="230dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+        app:layout_constraintStart_toStartOf="parent">
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/signhere"
@@ -56,6 +58,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="24dp"
         android:layout_marginRight="70dp"
+        android:textStyle="italic"
         android:text="Don't have an account?"
         android:textColor="@color/offwhite"
         app:layout_constraintEnd_toEndOf="@+id/signhere"
@@ -64,9 +67,8 @@
 
     <TextView
         android:id="@+id/signuphere"
-        android:layout_width="53dp"
-        android:layout_height="18dp"
-        android:layout_below="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
         android:text="Sign up"
