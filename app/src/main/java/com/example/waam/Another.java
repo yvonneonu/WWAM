@@ -17,7 +17,7 @@ public class Another extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_another);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         back = findViewById(R.id.goback);
@@ -27,10 +27,15 @@ public class Another extends AppCompatActivity {
 
         ret.setOnClickListener(v -> pressBack());
         back.setOnClickListener(v -> pressBack());
+        send.setOnClickListener(v -> sed());
     }
 
     private void pressBack() {
         Intent intent = new Intent(Another.this, Login.class);
+        startActivity(intent);
+    }
+    private void sed() {
+        Intent intent = new Intent(Another.this, passw.class);
         startActivity(intent);
     }
 }
