@@ -25,7 +25,7 @@ public class ViewPager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getSupportActionBar().hide();
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_view_pager);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         androidx.viewpager.widget.ViewPager viewPager = findViewById(R.id.viewpage1);
@@ -89,21 +89,21 @@ public class ViewPager extends AppCompatActivity {
 
 
         }
-        if(dots.length > 0) {
+        if(position == 0) {
             dots[position].setTextColor(getResources().getColor(R.color.blue));
         }
-        /*if (dots.length == 0) {
-            dots[position].setTextColor(getResources().getColor(R.color.blue));
-        } else if (dots.length == 1) {
+        if (position == 1) {
             dots[position].setTextColor(getResources().getColor(R.color.red));
-        } else if (dots.length == 2) {
+        }
+        if (position == 2) {
             dots[position].setTextColor(getResources().getColor(R.color.green));
-        } else if (dots.length == 3) {
+        }
+        if (position == 3) {
             dots[position].setTextColor(getResources().getColor(R.color.yellow));
-        }else if (dots.length == 4) {
+        }
+        if (position == 4) {
             dots[position].setTextColor(getResources().getColor(R.color.red));
-
-        }*/
+        }
     }
 
 }

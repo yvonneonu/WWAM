@@ -55,30 +55,32 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="40dp"
             android:text="I'm a"
             android:textColor="@color/white"
             android:textSize="15dp"
             app:layout_constraintStart_toStartOf="@+id/backto"
             app:layout_constraintTop_toBottomOf="@+id/backto" />
 
-        <TextView
+        <Button
             android:id="@+id/textView9"
             android:layout_width="165dp"
             android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/border"
             android:gravity="center"
             android:text="Man"
+            android:textAllCaps="false"
             android:textColor="@color/white"
+            app:backgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-        <TextView
+        <Button
             android:id="@+id/editText7"
             android:layout_width="165dp"
             android:layout_height="40dp"
@@ -87,7 +89,9 @@
             android:background="@drawable/border2"
             android:gravity="center"
             android:text="Women"
+            android:textAllCaps="false"
             android:textColor="@color/white"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -105,7 +109,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-        <TextView
+        <Button
             android:id="@+id/textView12"
             android:layout_width="165dp"
             android:layout_height="40dp"
@@ -113,19 +117,22 @@
             android:background="@drawable/border"
             android:gravity="center"
             android:text="Man"
+            android:textAllCaps="false"
             android:textColor="@color/white"
+            app:backgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="@+id/editText5"
             app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
-        <TextView
+        <Button
             android:id="@+id/editText6"
             android:layout_width="165dp"
             android:layout_height="40dp"
             android:background="@drawable/border2"
             android:gravity="center"
-            android:padding="10dp"
             android:text="Women"
+            android:textAllCaps="false"
             android:textColor="@color/white"
+            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
             app:layout_constraintEnd_toEndOf="@+id/editText7"
             app:layout_constraintHorizontal_bias="0.0"
@@ -151,7 +158,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:background="@android:color/transparent"
             android:drawablePadding="15dp"
             android:gravity="center_vertical"
@@ -344,10 +351,12 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="15dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewd"
             app:layout_constraintStart_toEndOf="@+id/imageViewd"
             app:layout_constraintTop_toTopOf="@+id/imageViewd"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            tools:visibility="visible" />
 
         <View
             android:id="@+id/view6"
@@ -403,7 +412,7 @@
             android:id="@+id/textVieww"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="By continuing you agree to receive emails from WhereWeAllMeet.
