@@ -124,7 +124,6 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="15dp"
-        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView2"

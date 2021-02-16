@@ -2,13 +2,16 @@ package com.example.waam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,21 +24,25 @@ import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
 
+    private DatePickerDialog datePickerDialog;
     private TextView lologin, name, email, password, confrim;
-    private TextView back;
-    private Button firstGen, secondGender, thirdGender, fourthGender;
+    private TextView back, birthday;
     private ImageView move;
-    int[] color;
+    private Button update;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout.activity_sign_up);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        initDatePicker();
 
 
+       // birthday = findViewById(R.id.editText3);
+        update = findViewById(R.id.forgetpass);
         lologin = findViewById(R.id.gologin);
         back = findViewById(R.id.backto);
         move = findViewById(R.id.logo);
@@ -43,39 +50,16 @@ public class SignUp extends AppCompatActivity {
         email = findViewById(R.id.editText2);
         password = findViewById(R.id.editText);
         confrim = findViewById(R.id.editText88);
-        firstGen = findViewById(R.id.textView9);
-        secondGender = findViewById(R.id.editText7);
-        thirdGender = findViewById(R.id.textView12);
-        fourthGender = findViewById(R.id.editText6);
+
 
 
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
 
-        firstGen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-               // firstGen.setBackgroundDrawable(firstGen.getResources().getDrawable(R.drawable.buttoncolor));
-               // firstGen.setTextColor(getResources().getColor(R.color.white));
-              //  firstGen.setBackgroundColor(getResources().getColor(R.color.blue));
-                //firstGen.setTextColor(getResources().getColor(R.color.blue));
-             // firstGen.setBackgroundColor(firstGen.getContext().getResources().getColor(R.color.black));
-              //  firstGen.setTextColor(firstGen.getContext().getResources().getColor(R.color.white));
-               firstGen.setBackgroundColor(Color.parseColor("#1A369C"));
-               firstGen.setBackgroundColor(R.drawable.buttoncolor);
-//               firstGen.setBackgroundResource(R.drawable.buttoncolor);
-              // firstGen.setBackgroundColor(firstGen.getContext().getResources().getColor(R.color.black));
-                //secondGender.setBackgroundColor(secondGender.getContext().getResources().getColor(R.color.white));
-            }
-        });
-        secondGender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                secondGender.setBackgroundColor(secondGender.getContext().getResources().getColor(R.color.blue));
-                //firstGen.setBackgroundColor(firstGen.getContext().getResources().getColor(R.color.white));
-            }
-        });
+
+        update.setText(getTodaysDate());
+
 
 
         move.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +79,18 @@ public class SignUp extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private String getTodaysDate() {
+
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        month = month + 1;
+        int year = c.get(Calendar.YEAR);
+        return makeDateString(day, month, year);
+
+
     }
 
 
@@ -137,4 +133,63 @@ public class SignUp extends AppCompatActivity {
         startActivity(intent);
         // finish();
     }
+
+    private void initDatePicker(){
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String date = makeDateString(dayOfMonth, month, year);
+                update.setText(date);
+            }
+        };
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        int styles = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialog = new DatePickerDialog(this, styles, dateSetListener, year, month, day);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+    }
+
+    private String makeDateString(int dayOfMonth, int month, int year) {
+        return getMonthFormat(month) + "/" + dayOfMonth + "/" + year ;
+    }
+
+    private String getMonthFormat(int month) {
+        if (month == 1)
+        return "JAN";
+        if (month == 2)
+            return "FEB";
+        if (month == 3)
+            return "MAR";
+        if (month == 4)
+            return "APR";
+        if (month == 5)
+            return "MAY";
+        if (month == 6)
+            return "JUN";
+        if (month == 7)
+            return "JUL";
+        if (month == 8)
+            return "AUG";
+        if (month == 9)
+            return "SEP";
+        if (month == 10)
+            return "OCT";
+        if (month == 11)
+            return "NOV";
+        if (month == 12)
+            return "DEC";
+        return "JAN";
+    }
+
+    public void openDatePicer(View view){
+        datePickerDialog.show();
+
+    }
+
 }

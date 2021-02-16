@@ -71,12 +71,12 @@
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/border"
             android:gravity="center"
+            android:onClick="onClick"
             android:text="Man"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            app:backgroundTint="@color/white"
+            android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -262,17 +262,21 @@
             app:layout_constraintTop_toBottomOf="@+id/imageViewe"
             app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
+        <Button
             android:id="@+id/forgetpass"
+            style="?android:spinnerStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="January 1, 1991"
-            android:textColor="@color/offwhite"
+            android:hint="January 1, 1991"
+            android:backgroundTint="@android:color/transparent"
+            android:textColorHint="@color/offwhite"
             app:layout_constraintBottom_toBottomOf="@+id/editText3"
             app:layout_constraintEnd_toEndOf="@+id/editText3"
-            app:layout_constraintTop_toTopOf="@+id/editText3" />
+            app:layout_constraintTop_toTopOf="@+id/editText3"
+            android:onClick="openDatePicer"/>
 
         <View
             android:id="@+id/view4"
