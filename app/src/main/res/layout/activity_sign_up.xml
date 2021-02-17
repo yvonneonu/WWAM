@@ -64,7 +64,8 @@
             app:layout_constraintStart_toStartOf="@+id/backto"
             app:layout_constraintTop_toBottomOf="@+id/backto" />
 
-        <Button
+        <TextView
+
             android:id="@+id/textView9"
             android:layout_width="165dp"
             android:layout_height="40dp"
@@ -72,26 +73,26 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:onClick="onClick"
+            android:onClick="colorme"
             android:text="Man"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:background="@android:color/transparent"
+            android:background="@drawable/border"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-        <Button
+        <TextView
             android:id="@+id/editText7"
             android:layout_width="165dp"
             android:layout_height="40dp"
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/border2"
             android:gravity="center"
             android:text="Women"
+            android:onClick="woooo"
             android:textAllCaps="false"
+            android:background="@drawable/border2"
             android:textColor="@color/white"
-            app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -109,21 +110,21 @@
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-        <Button
+        <TextView
             android:id="@+id/textView12"
             android:layout_width="165dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/border"
             android:gravity="center"
             android:text="Man"
+            android:onClick="who"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            app:backgroundTint="@color/white"
+            android:background="@drawable/border"
             app:layout_constraintStart_toStartOf="@+id/editText5"
             app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
-        <Button
+        <TextView
             android:id="@+id/editText6"
             android:layout_width="165dp"
             android:layout_height="40dp"
@@ -132,7 +133,7 @@
             android:text="Women"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            app:backgroundTint="@color/white"
+            android:onClick="sek"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
             app:layout_constraintEnd_toEndOf="@+id/editText7"
             app:layout_constraintHorizontal_bias="0.0"
@@ -239,7 +240,7 @@
             app:layout_constraintStart_toStartOf="@+id/imageViewe"
             app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
-        <EditText
+        <TextView
             android:id="@+id/editText3"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
@@ -276,7 +277,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/editText3"
             app:layout_constraintEnd_toEndOf="@+id/editText3"
             app:layout_constraintTop_toTopOf="@+id/editText3"
-            android:onClick="openDatePicer"/>
+            android:onClick="openDatePicker"/>
 
         <View
             android:id="@+id/view4"
