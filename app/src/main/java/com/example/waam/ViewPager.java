@@ -1,0 +1,109 @@
+package com.example.waam;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class ViewPager extends AppCompatActivity {
+    private LinearLayout linearLayout;
+    private ImageView signin;
+
+    private TextView signup;
+
+    LinearLayout dotslayout;
+    TextView[] dots;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //getSupportActionBar().hide();
+        setContentView(R.layout.activity_view_pager);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        androidx.viewpager.widget.ViewPager viewPager = findViewById(R.id.viewpage1);
+        dotslayout = findViewById(R.id.linearLayoutdot);
+        signin = findViewById(R.id.signhere);
+        signup = findViewById(R.id.signuphere);
+
+
+        signin = findViewById(R.id.signhere);
+
+        SliderAdapter sliderAdapter = new SliderAdapter(this);
+        viewPager.setAdapter(sliderAdapter);
+        addDot(0);
+        viewPager.addOnPageChangeListener(changeListener);
+        signin.setOnClickListener(v ->Signinhere());
+        signup.setOnClickListener(v -> SignUnhere());
+
+    }
+
+    androidx.viewpager.widget.ViewPager.OnPageChangeListener changeListener = new androidx.viewpager.widget.ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            addDot(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+    private void Signinhere() {
+        Intent intent = new Intent(ViewPager.this, Login.class);
+        startActivity(intent);
+       // finish();
+    }
+    private void SignUnhere() {
+        Intent intent = new Intent(ViewPager.this, SignUp.class);
+        startActivity(intent);
+        // finish();
+    }
+
+
+    private void addDot(int position) {
+        dots = new TextView[5];
+
+        dotslayout.removeAllViews();
+
+        for (int i = 0; i < dots.length; i++) {
+            Log.d("Slider", "Am in dis Onboarding textView");
+            dots[i] = new TextView(this);
+
+            dots[i].setText(Html.fromHtml("&#8226"));
+            dots[i].setTextSize(45);
+            dots[i].setTextColor(getResources().getColor(R.color.offwhite));
+            dotslayout.addView(dots[i]);
+
+
+        }
+        if(position == 0) {
+            dots[position].setTextColor(getResources().getColor(R.color.blue));
+        }
+        if (position == 1) {
+            dots[position].setTextColor(getResources().getColor(R.color.red));
+        }
+        if (position == 2) {
+            dots[position].setTextColor(getResources().getColor(R.color.green));
+        }
+        if (position == 3) {
+            dots[position].setTextColor(getResources().getColor(R.color.yellow));
+        }
+        if (position == 4) {
+            dots[position].setTextColor(getResources().getColor(R.color.red));
+        }
+    }
+
+}
