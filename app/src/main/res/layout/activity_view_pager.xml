@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cliner"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/agents_bg"
+    tools:context=".ViewPager">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpage1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:foregroundGravity="center"
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutdot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/signhere"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/title"
+        android:scaleType="centerCrop"
+        android:src="@drawable/button_login"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutdot"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutdot"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutdot" />
+
+    <TextView
+        android:id="@+id/dont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/title"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="70dp"
+        android:textStyle="italic"
+        android:text="Don't have an account?"
+        android:textColor="@color/offwhite"
+        app:layout_constraintEnd_toEndOf="@+id/signhere"
+        app:layout_constraintStart_toStartOf="@+id/signhere"
+        app:layout_constraintTop_toBottomOf="@+id/signhere" />
+
+    <TextView
+        android:id="@+id/signuphere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:text="Sign up"
+        android:textColor="@color/offblue"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dont"
+        app:layout_constraintStart_toEndOf="@+id/dont" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
