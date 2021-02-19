@@ -77,6 +77,40 @@ public class SignUp extends AppCompatActivity {
                 String Iam = iam.getText().toString();
                 String Seeking = seeking.getText().toString();
                 String Want = want.getText().toString();
+
+                if (Fullname.isEmpty()) {
+                    name.setError("Full Name is required");
+                    name.requestFocus();
+                    return;
+                }
+                if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+                    email.setError("Enter a Valid email");
+                    email.requestFocus();
+                    return;
+                }
+
+                if (Zip.isEmpty()) {
+                    zip.setError("Zip Code is required");
+                    zip.requestFocus();
+                    return;
+                }
+                if (Update.isEmpty()) {
+                    update.setError("Birthday Date is required");
+                    update.requestFocus();
+                    return;
+                }
+                if (!Passwor.equals(Confirm)) {
+                    confrim.setError("Mismatch Password");
+                    confrim.requestFocus();
+                    return;
+                }
+
+                if (Passwor.length() < 6) {
+                    password.setError("Password should be at aleast 6 character long");
+                    password.requestFocus();
+                    return;
+                }
+
                 new RegisterUser().execute(Fullname, Email, Zip, Update, Passwor, Confirm, Gender, Iam,Seeking, Want);
           if (TextUtils.isEmpty(name.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(zip.getText().toString()) || TextUtils.isEmpty(update.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
                             TextUtils.isEmpty(confrim.getText().toString()) || TextUtils.isEmpty(gender.getText().toString()) || TextUtils.isEmpty(iam.getText().toString()) || TextUtils.isEmpty(seeking.getText().toString())|| TextUtils.isEmpty(want.getText().toString())){
@@ -120,7 +154,7 @@ public class SignUp extends AppCompatActivity {
                     String message = "Successful";
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
 
-                    startActivity(new Intent(SignUp.this, MainActivity.class));
+                    startActivity(new Intent(SignUp.this, Verification1.class));
                     finish();
                 } else {
                     //response.errorBody();
