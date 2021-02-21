@@ -27,7 +27,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        android:weightSum="12"
+        android:weightSum="3"
         app:layout_constraintEnd_toEndOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView13">
@@ -36,20 +36,21 @@
             android:id="@+id/ccp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:gravity="center"
-            app:ccp_autoDetectCountry="true"
-            app:ccp_showNameCode="true"
-            app:ccp_textSize="16sp" />
+            app:ccp_textSize="16sp"
+            app:ccp_showNameCode="true">
+
+        </com.hbb20.CountryCodePicker>
 
         <EditText
             android:id="@+id/edit_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="10"
+            android:layout_weight="2"
             android:hint="Enter mobile #"
             android:inputType="phone"
-            android:maxLength="9"
+            android:maxLength="10"
             android:textSize="16sp" />
 
     </LinearLayout>

@@ -11,8 +11,9 @@ public class RegisterResponse {
     private String birth_date;
     private String password;
     private String password_confirmation ;
+    private String token;
 
-    public RegisterResponse(int id, String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password, String password_confirmation) {
+    public RegisterResponse(int id, String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password, String password_confirmation, String token) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
@@ -22,6 +23,7 @@ public class RegisterResponse {
         this.birth_date = birth_date;
         this.password = password;
         this.password_confirmation = password_confirmation;
+        this.token = token;
     }
 
     public int getId() {
@@ -94,6 +96,14 @@ public class RegisterResponse {
 
     public void setPassword_confirmation(String password_confirmation) {
         this.password_confirmation = password_confirmation;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
 

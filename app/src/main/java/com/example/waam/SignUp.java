@@ -18,13 +18,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
+
+import java.io.IOException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class SignUp extends AppCompatActivity {
 
@@ -33,8 +38,11 @@ public class SignUp extends AppCompatActivity {
     private TextView back, gender, zip, iam, seeking, want, save;
     private ImageView move;
     private Button update;
+    UserService userService;
 
-    final String url_Register = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
+
+    private static String token;
+    //final String url_Register = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +72,16 @@ public class SignUp extends AppCompatActivity {
         update.setText(getTodaysDate());
 
 
+
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                login();
+
                 String Fullname = name.getText().toString();
                 String Email = email.getText().toString();
                 String Zip = zip.getText().toString();
-                String Update= update.getText().toString();
+                String Update = update.getText().toString();
                 String Passwor = password.getText().toString();
                 String Confirm = confrim.getText().toString();
                 String Gender = gender.getText().toString();
@@ -111,9 +122,9 @@ public class SignUp extends AppCompatActivity {
                     return;
                 }
 
-                new RegisterUser().execute(Fullname, Email, Zip, Update, Passwor, Confirm, Gender, Iam,Seeking, Want);
-          if (TextUtils.isEmpty(name.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(zip.getText().toString()) || TextUtils.isEmpty(update.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
-                            TextUtils.isEmpty(confrim.getText().toString()) || TextUtils.isEmpty(gender.getText().toString()) || TextUtils.isEmpty(iam.getText().toString()) || TextUtils.isEmpty(seeking.getText().toString())|| TextUtils.isEmpty(want.getText().toString())){
+                //new RegisterUser().execute(Fullname, Email, Zip, Update, Passwor, Confirm, Gender, Iam,Seeking, Want);
+                if (TextUtils.isEmpty(name.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(zip.getText().toString()) || TextUtils.isEmpty(update.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
+                        TextUtils.isEmpty(confrim.getText().toString()) || TextUtils.isEmpty(gender.getText().toString()) || TextUtils.isEmpty(iam.getText().toString()) || TextUtils.isEmpty(seeking.getText().toString()) || TextUtils.isEmpty(want.getText().toString())) {
                     String message = "All inputs required";
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
                 } else {
@@ -150,11 +161,13 @@ public class SignUp extends AppCompatActivity {
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
 
                 if (response.isSuccessful()) {
+                    response.body().getToken();
+
                     //response.body();
                     String message = "Successful";
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
 
-                    startActivity(new Intent(SignUp.this, Verification1.class));
+                    startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                     finish();
                 } else {
                     //response.errorBody();
@@ -206,7 +219,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private String makeDateString(int dayOfMonth, int month, int year) {
-       // return getMonthFormat(month) + "-" + dayOfMonth + "-" + year;
+        // return getMonthFormat(month) + "-" + dayOfMonth + "-" + year;
         return year + "-" + getMonthFormat(month) + "-" + dayOfMonth;
     }
 
@@ -273,57 +286,60 @@ public class SignUp extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public class RegisterUser extends AsyncTask<String, Void, String>{
+    private void login() {
+        if (userService == null)
+            userService = new ApiClient().getService();
 
-        @Override
-        protected String doInBackground(String... strings) {
-            String Gender = strings[0];
-            String Seeking = strings[1];
-            String Fullname = strings[2];
-            String Email = strings[3];
-            String Birthday = strings[4];
-            String Zip = strings[5];
-            String Pass = strings[6];
-            String Confirm = strings[7];
-            String finalUrl = url_Register + "?user_gender=" + Gender + "user_seeking" + Seeking + "user_fullname" + Fullname + "user_email" + Email + "user_birth" + Birthday + "user_zip"
-                    + Zip + "user_pass" + Pass + "user_confrirm" + Confirm;
-
-
-            OkHttpClient okHttpClient = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(finalUrl)
-                    .get()
-                    .build();
-
-            okhttp3.Response response = null;
-            try {
-                response = okHttpClient.newCall(request).execute();
-                if (response.isSuccessful()){
-                    String result = response.body().string();
-                    showToast(result);
-                    if (result.equalsIgnoreCase("User registered successfully")) {
-                        showToast("Register successful");
-                        Intent i = new Intent(SignUp.this, MainActivity.class);
-                        startActivity(i);
-                        finish();
-                    }else if (result.equalsIgnoreCase("User already exists")){
-                        showToast("User already exists");
-                    }else {
-                        showToast( "oops! please try again!");
-                    }
-                }
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-    public void showToast(final String Text){
-        this.runOnUiThread(new Runnable() {
+        RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "gender", "seeking",
+                "date", "pass", "conf,");
+        Call<RegisterResponse> call = userService.registerUsers(registerRequest);
+        call.enqueue(new Callback<RegisterResponse>() {
             @Override
-            public void run() {
-                Toast.makeText(SignUp.this, "Test", Toast.LENGTH_LONG).show();
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                  if (response.isSuccessful()){
+
+                       Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
+                       token = response.body().getToken();
+
+                  } else {
+                      String message = "An error occured please try again";
+                      Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+                  }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+               String message = "An error occured please try again";          
+               Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
             }
         });
+
+    }
+    private void getSecret(){
+
+        Call<ResponseBody> call = ApiClient.getSecret(token);
+        if (userService == null)
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if (response.isSuccessful()){
+                    try {
+                        Toast.makeText(SignUp.this, response.body().string(), Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(SignUp.this, "error", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SignUp.this, "error", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
 }
