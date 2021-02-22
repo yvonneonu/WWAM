@@ -43,7 +43,6 @@ public class Enable_Location extends AppCompatActivity {
             public void onClick(View v) {
 
                 fetchLocation();
-
                 Intent intent = new Intent(Enable_Location.this, Profile.class);
                 startActivity(intent);
             }

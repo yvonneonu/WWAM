@@ -60,6 +60,15 @@
             app:layout_constraintEnd_toEndOf="@+id/user_location"
             app:layout_constraintStart_toStartOf="@+id/user_location"
             app:layout_constraintTop_toBottomOf="@+id/user_location" />
+
+        <TextView
+            style="?android:spinnerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tell Me more"
+            app:layout_constraintEnd_toEndOf="@+id/fetch_location"
+            app:layout_constraintStart_toStartOf="@+id/fetch_location"
+            app:layout_constraintTop_toBottomOf="@+id/fetch_location" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
