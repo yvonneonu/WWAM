@@ -24,6 +24,7 @@ import retrofit2.Response;
 public class Verfy2 extends AppCompatActivity {
     private TextView shownum;
 
+
     String phonenumber, otp;
     int randonnumber;
     Button getotp, con;
@@ -48,11 +49,11 @@ public class Verfy2 extends AppCompatActivity {
         fifth = findViewById(R.id.editText11);
         six = findViewById(R.id.editText13);
 
-        //String phon = getIntent().getStringExtra("phone");
+        String phon = getIntent().getStringExtra("phone");
         //shownum.setText(phon);
 
-        Intent intent = getIntent();
-        phonenumber = intent.getStringExtra("phone");
+        //Bundle bundle = getIntent().getExtras();
+       // token.getString("token");
         shownum.setText(phonenumber);
 
 
@@ -74,19 +75,22 @@ public class Verfy2 extends AppCompatActivity {
             }
         });
     }
+
     void gottensendotp(String phonenumber) {
         myotprequest myotprequest1 = new myotprequest(phonenumber);
         //if (userService == null)
         userService = new ApiClient().getService();
-        Call<myotpresponse> call = userService.otpgotten(myotprequest1, "Bearer "+token);
+
+        Call<myotpresponse> call = userService.otpgotten(myotprequest1, "Bearer " + token);
         call.enqueue(new Callback<myotpresponse>() {
             @Override
             public void onResponse(Call<myotpresponse> call, Response<myotpresponse> response) {
-                if (response.isSuccessful()){
-                    Intent mainactivity = new Intent(Verfy2.this, Successverified.class);
-                    startActivity(mainactivity);
-                    finish();
-                    //Toast.makeText(Verfy2.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                if (response.isSuccessful()) {
+                   // Intent mainactivity = new Intent(Verfy2.this, Successverified.class);
+                   // startActivity(mainactivity);
+                    String message = "Successful";
+                    //finish();
+                    Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
                     // token = response.body().getMessage();
 
                 } else {
@@ -104,5 +108,51 @@ public class Verfy2 extends AppCompatActivity {
 
             }
         });
+        resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phonenumber = shownum.getText().toString();
+
+                initialsendotp(phonenumber);
+
+                Intent mainactivity = new Intent(Verfy2.this, Splash.class);
+                startActivity(mainactivity);
+                finish();
+            }
+        });
+
+
     }
+
+    void initialsendotp(String phonenumber) {
+        otprequest myotpreques = new otprequest(phonenumber);
+        //if (userService == null)
+        userService = new ApiClient().getService();
+        Call<otpResponse> call = userService.requestortp(myotpreques, "Bearer " + token);
+        call.enqueue(new Callback<otpResponse>() {
+            @Override
+            public void onResponse(Call<otpResponse> call, Response<otpResponse> response) {
+                if (response.isSuccessful()) {
+                 //   Intent mainactivity = new Intent(Verfy2.this, Splash.class);
+                   // startActivity(mainactivity);
+                   // finish();
+                    Toast.makeText(Verfy2.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    // token = response.body().getMessage();
+
+                } else {
+                    String message = "An error occured please try again";
+                    Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<otpResponse> call, Throwable t) {
+                String message = "An error occured please try again";
+                t.printStackTrace();
+                Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
 }

@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,11 +36,13 @@ import retrofit2.Retrofit;
 public class SignUp extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
-    private TextView lologin, name, email, password, confrim;
-    private TextView back, gender, zip, iam, seeking, want, save;
+    private TextView lologin;
+    String numberToPass = "1";
+    private TextView back, gender, iam, seeking, save, want;
     private ImageView move;
     private Button update;
     UserService userService;
+    private EditText name, email, zip, password, confrim;
 
 
     private static String token;
@@ -72,7 +76,6 @@ public class SignUp extends AppCompatActivity {
         update.setText(getTodaysDate());
 
 
-
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +98,7 @@ public class SignUp extends AppCompatActivity {
                     return;
                 }
                 if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-                    email.setError("Enter a Valid email");
+                    // email.setError("Enter a Valid email");
                     email.requestFocus();
                     return;
                 }
@@ -117,7 +120,7 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 if (Passwor.length() < 6) {
-                    password.setError("Password should be at aleast 6 character long");
+                    // password.setError("Password should be at aleast 6 character long");
                     password.requestFocus();
                     return;
                 }
@@ -255,8 +258,10 @@ public class SignUp extends AppCompatActivity {
 
     public void colorme(View view) {
         if (view.getId() == gender.getId()) {
+
             gender.setBackgroundResource(R.drawable.section_tabs_active_1);
             iam.setBackgroundResource(R.drawable.border);
+
         }
 
     }
@@ -265,6 +270,7 @@ public class SignUp extends AppCompatActivity {
         if (view.getId() == iam.getId()) {
             iam.setBackgroundResource(R.drawable.sectiontabsactive2);
             gender.setBackgroundResource(R.drawable.border2);
+
         }
     }
 
@@ -272,6 +278,7 @@ public class SignUp extends AppCompatActivity {
         if (view.getId() == seeking.getId()) {
             seeking.setBackgroundResource(R.drawable.section_tabs_active_1);
             want.setBackgroundResource(R.drawable.border);
+
         }
     }
 
@@ -279,6 +286,7 @@ public class SignUp extends AppCompatActivity {
         if (view.getId() == want.getId()) {
             want.setBackgroundResource(R.drawable.sectiontabsactive2);
             seeking.setBackgroundResource(R.drawable.border2);
+           
         }
     }
 
@@ -296,50 +304,52 @@ public class SignUp extends AppCompatActivity {
         call.enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                  if (response.isSuccessful()){
+                if (response.isSuccessful()) {
 
-                       Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
-                       token = response.body().getToken();
+                    Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
+                    token = response.body().getToken();
 
-                  } else {
-                      String message = "An error occured please try again";
-                      Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
-                  }
-            }
-
-            @Override
-            public void onFailure(Call<RegisterResponse> call, Throwable t) {
-               String message = "An error occured please try again";          
-               Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-    private void getSecret(){
-
-        Call<ResponseBody> call = ApiClient.getSecret(token);
-        if (userService == null)
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                if (response.isSuccessful()){
-                    try {
-                        Toast.makeText(SignUp.this, response.body().string(), Toast.LENGTH_LONG).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }else {
-                    Toast.makeText(SignUp.this, "error", Toast.LENGTH_LONG).show();
+                } else {
+                    String message = "An error occured please try again";
+                    Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(SignUp.this, "error", Toast.LENGTH_LONG).show();
-
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                String message = "An error occured please try again";
+                Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
             }
         });
 
     }
+
+    private void getSecret() {
+
+        Call<ResponseBody> call = ApiClient.getSecret(token);
+        if (userService == null)
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    if (response.isSuccessful()) {
+                        try {
+                            Toast.makeText(SignUp.this, response.body().string(), Toast.LENGTH_LONG).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(SignUp.this, "error", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(SignUp.this, "error", Toast.LENGTH_LONG).show();
+
+                }
+            });
+
+    }
+
 }

@@ -24,7 +24,6 @@
         <activity android:name=".Splash" />
         <activity android:name=".Verification1" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LogMe" />
         <activity android:name=".passw" />
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />

@@ -48,6 +48,7 @@ public class Enable_Location extends AppCompatActivity {
     }
 
     private void fetchLocation() {
+
         if (ContextCompat.checkSelfPermission(
                 Enable_Location.this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {

@@ -72,13 +72,15 @@ public class Verification1 extends AppCompatActivity {
         getotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String phonenumber = userphoneno.getText().toString();
 
                 initialsendotp(phonenumber);
 
+
                 Intent mainactivity = new Intent(Verification1.this, Splash.class);
                 startActivity(mainactivity);
-                finish();
+               finish();
             }
         });
 
@@ -94,7 +96,7 @@ public class Verification1 extends AppCompatActivity {
            @Override
            public void onResponse(Call<otpResponse> call, Response<otpResponse> response) {
                if (response.isSuccessful()){
-                   Intent mainactivity = new Intent(Verification1.this, Splash.class);
+                  Intent mainactivity = new Intent(Verification1.this, Splash.class);
                    startActivity(mainactivity);
                    finish();
                    Toast.makeText(Verification1.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
