@@ -44,6 +44,8 @@ public class SignUp extends AppCompatActivity {
     UserService userService;
     private EditText name, email, zip, password, confrim;
 
+    String chose = "";
+
 
     private static String token;
     //final String url_Register = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
@@ -53,6 +55,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         initDatePicker();
 
@@ -87,10 +90,10 @@ public class SignUp extends AppCompatActivity {
                 String Update = update.getText().toString();
                 String Passwor = password.getText().toString();
                 String Confirm = confrim.getText().toString();
-                String Gender = gender.getText().toString();
-                String Iam = iam.getText().toString();
-                String Seeking = seeking.getText().toString();
-                String Want = want.getText().toString();
+                chose = gender.getText().toString();
+                chose = iam.getText().toString();
+                chose = seeking.getText().toString();
+                chose = want.getText().toString();
 
                 if (Fullname.isEmpty()) {
                     name.setError("Full Name is required");
@@ -259,33 +262,46 @@ public class SignUp extends AppCompatActivity {
     public void colorme(View view) {
         if (view.getId() == gender.getId()) {
 
+
+            RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass", "pass");
             gender.setBackgroundResource(R.drawable.section_tabs_active_1);
             iam.setBackgroundResource(R.drawable.border);
+            chose = gender.getText().toString();
+            registerRequest.setGender(chose);
 
         }
 
     }
 
     public void woooo(View view) {
+        RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass", "pass");
         if (view.getId() == iam.getId()) {
             iam.setBackgroundResource(R.drawable.sectiontabsactive2);
             gender.setBackgroundResource(R.drawable.border2);
+            chose = iam.getText().toString();
+            registerRequest.setGender(chose);
 
         }
     }
 
     public void who(View view) {
+        RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass", "pass");
         if (view.getId() == seeking.getId()) {
             seeking.setBackgroundResource(R.drawable.section_tabs_active_1);
             want.setBackgroundResource(R.drawable.border);
+            chose = seeking.getText().toString();
+            registerRequest.setSeeking(chose);
 
         }
     }
 
     public void sek(View view) {
+        RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass", "pass");
         if (view.getId() == want.getId()) {
             want.setBackgroundResource(R.drawable.sectiontabsactive2);
             seeking.setBackgroundResource(R.drawable.border2);
+            chose = want.getText().toString();
+            registerRequest.setSeeking(chose);
            
         }
     }

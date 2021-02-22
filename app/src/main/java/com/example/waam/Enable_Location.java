@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class Enable_Location extends AppCompatActivity {
 
                 fetchLocation();
 
+                Intent intent = new Intent(Enable_Location.this, Profile.class);
+                startActivity(intent);
             }
         });
     }
