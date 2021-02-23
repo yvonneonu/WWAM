@@ -66,7 +66,7 @@
 
         <TextView
 
-            android:id="@+id/textView9"
+            android:id="@+id/mangend"
             android:layout_width="165dp"
             android:layout_height="40dp"
             android:layout_marginStart="32dp"
@@ -82,7 +82,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <TextView
-            android:id="@+id/editText7"
+            android:id="@+id/womangend"
             android:layout_width="165dp"
             android:layout_height="40dp"
             android:layout_marginEnd="15dp"
@@ -93,11 +93,11 @@
             android:textAllCaps="false"
             android:background="@drawable/border2"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/textView9"
+            app:layout_constraintBottom_toBottomOf="@+id/mangend"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toTopOf="@+id/textView9"
+            app:layout_constraintStart_toEndOf="@+id/mangend"
+            app:layout_constraintTop_toTopOf="@+id/mangend"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -107,11 +107,11 @@
             android:layout_marginTop="10dp"
             android:text="Seeking a"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            app:layout_constraintStart_toStartOf="@+id/mangend"
+            app:layout_constraintTop_toBottomOf="@+id/mangend" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/seekman"
             android:layout_width="165dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -125,7 +125,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
         <TextView
-            android:id="@+id/editText6"
+            android:id="@+id/seekwoman"
             android:layout_width="165dp"
             android:layout_height="40dp"
             android:background="@drawable/border2"
@@ -134,11 +134,11 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:onClick="sek"
-            app:layout_constraintBottom_toBottomOf="@+id/textView12"
-            app:layout_constraintEnd_toEndOf="@+id/editText7"
+            app:layout_constraintBottom_toBottomOf="@+id/seekman"
+            app:layout_constraintEnd_toEndOf="@+id/womangend"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView12"
-            app:layout_constraintTop_toTopOf="@+id/textView12"
+            app:layout_constraintStart_toEndOf="@+id/seekman"
+            app:layout_constraintTop_toTopOf="@+id/seekman"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
@@ -149,7 +149,7 @@
             android:src="@drawable/name_icon"
             app:layout_constraintBottom_toBottomOf="@+id/editText8"
             app:layout_constraintEnd_toStartOf="@+id/editText8"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintStart_toStartOf="@+id/seekman"
             app:layout_constraintTop_toTopOf="@+id/editText8" />
 
         <EditText
@@ -170,10 +170,10 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="15dp"
-            app:layout_constraintEnd_toEndOf="@+id/editText6"
+            app:layout_constraintEnd_toEndOf="@+id/seekwoman"
             app:layout_constraintHorizontal_bias="0.074"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+            app:layout_constraintStart_toStartOf="@+id/seekman"
+            app:layout_constraintTop_toBottomOf="@+id/seekwoman" />
 
         <View
             android:id="@+id/view"

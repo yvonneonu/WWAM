@@ -8,9 +8,9 @@ public class RegisterRequest {
     private String seeking;
     private String birth_date;
     private String password;
-    private String password_confirmation ;
 
-    public RegisterRequest(String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password, String password_confirmation) {
+
+    public RegisterRequest(String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password) {
         this.fullname = fullname;
         this.email = email;
         this.zipcode = zipcode;
@@ -18,7 +18,7 @@ public class RegisterRequest {
         this.seeking = seeking;
         this.birth_date = birth_date;
         this.password = password;
-        this.password_confirmation = password_confirmation;
+
     }
 
     public String getFullname() {
@@ -77,11 +77,6 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public String getPassword_confirmation() {
-        return password_confirmation;
-    }
 
-    public void setPassword_confirmation(String password_confirmation) {
-        this.password_confirmation = password_confirmation;
-    }
+
 }

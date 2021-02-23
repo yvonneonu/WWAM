@@ -6,10 +6,9 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,31 +19,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class SignUp extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
     private TextView lologin;
     String numberToPass = "1";
-    private TextView back, gender, iam, seeking, save, want;
+    private TextView back, mangender, womangender, seekingman, save, wantwoman;
+    private String realGender, realInterest;
     private ImageView move;
     private Button update;
     UserService userService;
     private EditText name, email, zip, password, confrim;
 
     String chose = "";
+    String interest = "";
 
 
     private static String token;
@@ -59,11 +54,11 @@ public class SignUp extends AppCompatActivity {
 
         initDatePicker();
 
-        seeking = findViewById(R.id.textView12);
+        seekingman = findViewById(R.id.seekman);
         save = findViewById(R.id.editText3);
-        want = findViewById(R.id.editText6);
-        gender = findViewById(R.id.textView9);
-        iam = findViewById(R.id.editText7);
+        wantwoman = findViewById(R.id.seekwoman);
+        mangender = findViewById(R.id.mangend);
+        womangender = findViewById(R.id.womangend);
         update = findViewById(R.id.forgetpass);
         zip = findViewById(R.id.editText4);
         lologin = findViewById(R.id.gologin);
@@ -73,80 +68,15 @@ public class SignUp extends AppCompatActivity {
         email = findViewById(R.id.editText2);
         password = findViewById(R.id.editText);
         confrim = findViewById(R.id.editText88);
-
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
         update.setText(getTodaysDate());
 
-
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                register();
 
-                String Fullname = name.getText().toString();
-                String Email = email.getText().toString();
-                String Zip = zip.getText().toString();
-                String Update = update.getText().toString();
-                String Passwor = password.getText().toString();
-                String Confirm = confrim.getText().toString();
-                chose = gender.getText().toString();
-                chose = iam.getText().toString();
-                chose = seeking.getText().toString();
-                chose = want.getText().toString();
-
-                if (Fullname.isEmpty()) {
-                    name.setError("Full Name is required");
-                    name.requestFocus();
-                    return;
-                }
-                if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-                    // email.setError("Enter a Valid email");
-                    email.requestFocus();
-                    return;
-                }
-
-                if (Zip.isEmpty()) {
-                    zip.setError("Zip Code is required");
-                    zip.requestFocus();
-                    return;
-                }
-                if (Update.isEmpty()) {
-                    update.setError("Birthday Date is required");
-                    update.requestFocus();
-                    return;
-                }
-                if (!Passwor.equals(Confirm)) {
-                    confrim.setError("Mismatch Password");
-                    confrim.requestFocus();
-                    return;
-                }
-
-                if (Passwor.length() < 6) {
-                    // password.setError("Password should be at aleast 6 character long");
-                    password.requestFocus();
-                    return;
-                }
-
-                //new RegisterUser().execute(Fullname, Email, Zip, Update, Passwor, Confirm, Gender, Iam,Seeking, Want);
-                if (TextUtils.isEmpty(name.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(zip.getText().toString()) || TextUtils.isEmpty(update.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
-                        TextUtils.isEmpty(confrim.getText().toString()) || TextUtils.isEmpty(gender.getText().toString()) || TextUtils.isEmpty(iam.getText().toString()) || TextUtils.isEmpty(seeking.getText().toString()) || TextUtils.isEmpty(want.getText().toString())) {
-                    String message = "All inputs required";
-                    Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
-                } else {
-                    RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "gender", "seeking", "birth date", "password", "confirm password");
-                    registerRequest.setFullname(name.getText().toString());
-                    registerRequest.setEmail(email.getText().toString());
-                    registerRequest.setZipcode(zip.getText().toString());
-                    registerRequest.setBirth_date(update.getText().toString());
-                    registerRequest.setPassword(password.getText().toString());
-                    registerRequest.setPassword_confirmation(confrim.getText().toString());
-                    registerRequest.setGender(gender.getText().toString());
-                    registerRequest.setGender(iam.getText().toString());
-                    registerRequest.setSeeking(seeking.getText().toString());
-                    registerRequest.setSeeking(want.getText().toString());
-                    requestUser(registerRequest);
-                }
             }
         });
     }
@@ -260,48 +190,44 @@ public class SignUp extends AppCompatActivity {
 
 
     public void colorme(View view) {
-        if (view.getId() == gender.getId()) {
-
-
-            RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass", "pass");
-            gender.setBackgroundResource(R.drawable.section_tabs_active_1);
-            iam.setBackgroundResource(R.drawable.border);
-            chose = gender.getText().toString();
-            registerRequest.setGender(chose);
-
+        if (view.getId() == mangender.getId()) {
+            mangender.setBackgroundResource(R.drawable.section_tabs_active_1);
+            womangender.setBackgroundResource(R.drawable.border);
+            chose = mangender.getText().toString();
+            Log.d("UserService","my gender is"+chose);
         }
 
     }
 
     public void woooo(View view) {
-        RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass", "pass");
-        if (view.getId() == iam.getId()) {
-            iam.setBackgroundResource(R.drawable.sectiontabsactive2);
-            gender.setBackgroundResource(R.drawable.border2);
-            chose = iam.getText().toString();
-            registerRequest.setGender(chose);
-
+        if (view.getId() == womangender.getId()) {
+            womangender.setBackgroundResource(R.drawable.sectiontabsactive2);
+            mangender.setBackgroundResource(R.drawable.border2);
+            chose = womangender.getText().toString();
+            Log.d("UserService","my gender is"+chose);
         }
     }
 
     public void who(View view) {
-        RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass", "pass");
-        if (view.getId() == seeking.getId()) {
-            seeking.setBackgroundResource(R.drawable.section_tabs_active_1);
-            want.setBackgroundResource(R.drawable.border);
-            chose = seeking.getText().toString();
-            registerRequest.setSeeking(chose);
+        //RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass");
+        if (view.getId() == seekingman.getId()) {
+            seekingman.setBackgroundResource(R.drawable.section_tabs_active_1);
+            wantwoman.setBackgroundResource(R.drawable.border);
+            interest = seekingman.getText().toString();
+            Log.d("UserService","I am seeking"+interest);
+            //registerRequest.setSeeking(chose);
 
         }
     }
 
     public void sek(View view) {
-        RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass", "pass");
-        if (view.getId() == want.getId()) {
-            want.setBackgroundResource(R.drawable.sectiontabsactive2);
-            seeking.setBackgroundResource(R.drawable.border2);
-            chose = want.getText().toString();
-            registerRequest.setSeeking(chose);
+        //RegisterRequest registerRequest = new RegisterRequest("name", "email", "coed", "gender", "seek", "daqte", "oass");
+        if (view.getId() == wantwoman.getId()) {
+            wantwoman.setBackgroundResource(R.drawable.sectiontabsactive2);
+            seekingman.setBackgroundResource(R.drawable.border2);
+            interest = wantwoman.getText().toString();
+            Log.d("UserService","I am seeking"+interest);
+            //registerRequest.setSeeking(chose);
            
         }
     }
@@ -310,35 +236,79 @@ public class SignUp extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void login() {
-        if (userService == null)
+    private void register() {
+        Log.d("UserService",""+userService);
+        if (userService == null) {
             userService = new ApiClient().getService();
+        }
+            RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "gender", "seeking", "date", "pass");
+            String Fullname = name.getText().toString();
+            String Email = email.getText().toString();
+            String Zip = zip.getText().toString();
+            String Update = update.getText().toString();
+            String Passwor = password.getText().toString();
+            String Confirm = confrim.getText().toString();
+            if(Fullname.isEmpty()) {
+                name.setError("Full Name is required");
+                name.requestFocus();
+            }else if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+                // email.setError("Enter a Valid email");
+                email.requestFocus();
 
-        RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "gender", "seeking",
-                "date", "pass", "conf,");
-        Call<RegisterResponse> call = userService.registerUsers(registerRequest);
-        call.enqueue(new Callback<RegisterResponse>() {
-            @Override
-            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                if (response.isSuccessful()) {
+            }else if (Zip.isEmpty()) {
+                zip.setError("Zip Code is required");
+                zip.requestFocus();
+            } else if (Update.isEmpty()) {
+                update.setError("Birthday Date is required");
+                update.requestFocus();
+            }else if (!Passwor.equals(Confirm)) {
+                confrim.setError("Mismatch Password");
+                confrim.requestFocus();
+            }else if (Passwor.length() < 6) {
+                // password.setError("Password should be at aleast 6 character long");
+                password.requestFocus();
 
-                    Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
-                    token = response.body().getToken();
+            }else if (TextUtils.isEmpty(name.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(zip.getText().toString()) || TextUtils.isEmpty(update.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
+                    TextUtils.isEmpty(confrim.getText().toString()) || TextUtils.isEmpty(mangender.getText().toString()) || TextUtils.isEmpty(womangender.getText().toString()) || TextUtils.isEmpty(seekingman.getText().toString()) || TextUtils.isEmpty(wantwoman.getText().toString())) {
+                String message = "All inputs required";
+                Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+            } else {
+                registerRequest.setFullname(Fullname);
+                registerRequest.setEmail(Email);
+                registerRequest.setZipcode(Zip);
+                registerRequest.setBirth_date(Update);
+                registerRequest.setPassword(Passwor);
+                registerRequest.setGender(chose);
+                registerRequest.setSeeking(interest);
+                requestUser(registerRequest);
+            }
 
-                } else {
+            Call<RegisterResponse> call = userService.registerUsers(registerRequest);
+            call.enqueue(new Callback<RegisterResponse>() {
+                @Override
+                public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
+                        token = response.body().getToken();
+
+                    } else {
+                        String message = "An error occured please try again";
+                        Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RegisterResponse> call, Throwable t) {
                     String message = "An error occured please try again";
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
                 }
-            }
+            });
 
-            @Override
-            public void onFailure(Call<RegisterResponse> call, Throwable t) {
-                String message = "An error occured please try again";
-                Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
-            }
-        });
+        }
 
-    }
+
+
+
 
     private void getSecret() {
 
