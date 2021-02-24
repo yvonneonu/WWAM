@@ -278,6 +278,7 @@ public class SignUp extends AppCompatActivity {
                 registerRequest.setZipcode(Zip);
                 registerRequest.setBirth_date(Update);
                 registerRequest.setPassword(Passwor);
+                registerRequest.setPassword_confirmation(Confirm);
                 registerRequest.setGender(chose);
                 registerRequest.setSeeking(interest);
                 requestUser(registerRequest);
@@ -290,6 +291,8 @@ public class SignUp extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
                         token = response.body().getToken();
+                        Intent intent = new Intent(SignUp.this, Verification1.class);
+                        startActivity(intent);
 
                     } else {
                         String message = "An error occured please try again";

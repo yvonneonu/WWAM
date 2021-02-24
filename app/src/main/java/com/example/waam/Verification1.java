@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -74,15 +75,15 @@ public class Verification1 extends AppCompatActivity {
             public void onClick(View v) {
 
                 String phonenumber = userphoneno.getText().toString();
-
+                Log.d("tag", phonenumber);
                 initialsendotp(phonenumber);
-
-                Bundle me = new Bundle();
-                me.putString("number", phonenumber);
-
+               // Bundle me = new Bundle();
+              //  me.putString("number", phonenumber);
                 Intent mainactivity = new Intent(Verification1.this, Splash.class);
+                mainactivity.putExtra("phonenumber", phonenumber);
+                mainactivity.putExtra("token", token);
                 startActivity(mainactivity);
-               finish();
+                finish();
             }
         });
 
@@ -98,10 +99,21 @@ public class Verification1 extends AppCompatActivity {
            @Override
            public void onResponse(Call<otpResponse> call, Response<otpResponse> response) {
                if (response.isSuccessful()){
-                  Intent mainactivity = new Intent(Verification1.this, Splash.class);
+
+                   //getIntent().getExtras();
+                   token = response.body().getMessage();
+
+                  // initialsendotp(phonenumber);
+                   Bundle bundle = new Bundle();
+                   bundle.putString("phonenumber", phonenumber);
+                   bundle.putString("token", token);
+                   Intent mainactivity = new Intent(Verification1.this, Splash.class);
+                   mainactivity.putExtras(bundle);
                    startActivity(mainactivity);
-                   finish();
                    Toast.makeText(Verification1.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                   finish();
+                  //Intent mainactivity = new Intent(Verification1.this, Splash.class);
+                   //startActivity(mainactivity);
                   // token = response.body().getMessage();
 
                } else {
@@ -109,7 +121,6 @@ public class Verification1 extends AppCompatActivity {
                    Toast.makeText(Verification1.this, message, Toast.LENGTH_LONG).show();
                }
            }
-
            @Override
            public void onFailure(Call<otpResponse> call, Throwable t) {
                String message = "An error occured please try again";

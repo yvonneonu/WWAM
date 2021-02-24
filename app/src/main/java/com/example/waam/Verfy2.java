@@ -25,7 +25,7 @@ public class Verfy2 extends AppCompatActivity {
     private TextView shownum;
 
 
-    String phonenumber, otp;
+   // String phonenumber, otp;
     int randonnumber;
     Button getotp, con;
     TextView resend;
@@ -49,12 +49,14 @@ public class Verfy2 extends AppCompatActivity {
         fifth = findViewById(R.id.editText11);
         six = findViewById(R.id.editText13);
 
-        String phonenumber =  getIntent().getStringExtra("phone");
-        //shownum.setText(phon);
+        String phonenumber =  getIntent().getStringExtra("number");
+        shownum.setText(phonenumber);
 
         //Bundle bundle = getIntent().getExtras();
        // token.getString("token");
-        shownum.setText(phonenumber);
+       // Bundle bundle = getIntent().getExtras();
+//        String phonenumber = bundle.getString("phonenumber");
+        //shownum.setText(phonenumber);
 
 
         getotp.setOnClickListener(new View.OnClickListener() {
@@ -68,16 +70,16 @@ public class Verfy2 extends AppCompatActivity {
                 otp_text = fifth.getText().toString().trim();
                 otp_text = six.getText().toString().trim();
 
-                gottensendotp(phonenumber);
-                Intent mainactivity = new Intent(Verfy2.this, Successverified.class);
+                gottensendotp(token);
+               /* Intent mainactivity = new Intent(Verfy2.this, Successverified.class);
                 startActivity(mainactivity);
-                finish();
+                finish();*/
             }
         });
     }
 
-    void gottensendotp(String phonenumber) {
-        myotprequest myotprequest1 = new myotprequest(phonenumber);
+    void gottensendotp(String token) {
+        myotprequest myotprequest1 = new myotprequest(token);
         //if (userService == null)
         userService = new ApiClient().getService();
 
@@ -86,8 +88,8 @@ public class Verfy2 extends AppCompatActivity {
             @Override
             public void onResponse(Call<myotpresponse> call, Response<myotpresponse> response) {
                 if (response.isSuccessful()) {
-                   // Intent mainactivity = new Intent(Verfy2.this, Successverified.class);
-                   // startActivity(mainactivity);
+                    Intent mainactivity = new Intent(Verfy2.this, Successverified.class);
+                   startActivity(mainactivity);
                     String message = "Successful";
                     //finish();
                     Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();

@@ -15,10 +15,19 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+       // Bundle bundle = getIntent().getExtras();
+        String phonenumber = getIntent().getStringExtra("phonenumber");
+        String token = getIntent().getStringExtra("token");
+
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                Intent home = new Intent(Splash.this, Verfy2.class);
+               //home.putExtras(bundle);
+                home.putExtra("number", phonenumber);
+                home.putExtra("token", token);
                startActivity(home);
                finish();
             }
