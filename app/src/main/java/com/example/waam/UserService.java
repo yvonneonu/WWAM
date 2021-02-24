@@ -11,6 +11,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface UserService {
 
@@ -31,9 +32,11 @@ public interface UserService {
     @POST("api/otp-request")
     Call<otpResponse> requestortp(@Body otprequest otprequest, @Header("Authorization") String token);
 
-    @POST("api/otp-validate")
-    Call<myotpresponse> otpgotten (@Body myotprequest myotprequest, @Header("Authorization") String token);
+   @POST("api/otp-validate")
+    Call<myotpresponse> verifyOTP(@Body myotprequest myotprequest);
 
+    //@POST("api/otp-validate")
+    //Call<MessageResponse> verifyOTP(@Path("api_key")String apiKey, @Path("session_id")String session_id, @Path("otp_entered_by_user")String otp_entered_by_user);
 
 
 

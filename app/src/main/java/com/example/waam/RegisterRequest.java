@@ -14,11 +14,11 @@ public class RegisterRequest {
         this.fullname = fullname;
         this.email = email;
         this.zipcode = zipcode;
-        this.gender = gender;
-        this.seeking = seeking;
+        this.gender = "";
+        this.seeking = "";
         this.birth_date = birth_date;
         this.password = password;
-        this.password_confirmation = password_confirmation;
+        this.password_confirmation = password;
     }
 
     public String getFullname() {
@@ -82,6 +82,6 @@ public class RegisterRequest {
     }
 
     public void setPassword_confirmation(String password_confirmation) {
-        this.password_confirmation = password_confirmation;
+        this.password_confirmation = password;
     }
 }

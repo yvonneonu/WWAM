@@ -38,11 +38,13 @@ public class SignUp extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private TextView lologin;
     String numberToPass = "1";
-    private TextView back, gender, iam, seeking, save, want;
+    private TextView back, bender, iam, seeking, save, want;
     private ImageView move;
     private Button update;
     UserService userService;
     private EditText name, email, zip, password, confrim;
+    String gende = "";
+    String wo = "woman";
 
 
     private static String token;
@@ -59,7 +61,7 @@ public class SignUp extends AppCompatActivity {
         seeking = findViewById(R.id.textView12);
         save = findViewById(R.id.editText3);
         want = findViewById(R.id.editText6);
-        gender = findViewById(R.id.textView9);
+        bender = findViewById(R.id.textView9);
         iam = findViewById(R.id.editText7);
         update = findViewById(R.id.forgetpass);
         zip = findViewById(R.id.editText4);
@@ -71,9 +73,37 @@ public class SignUp extends AppCompatActivity {
         password = findViewById(R.id.editText);
         confrim = findViewById(R.id.editText88);
 
+        bender.setText("Man");
+        iam.setText("Woman");
+
+
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
         update.setText(getTodaysDate());
+
+        bender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bender.setText("Man");
+               // gende.setText(gender.getText().toString());
+                bender.setBackgroundResource(R.drawable.section_tabs_active_1);
+                //  String Gender = gender.getText().toString();
+
+                iam.setBackgroundResource(R.drawable.border);
+
+
+
+                //if (Gender.equals(gender)){
+
+                //gender.setText(gende);
+
+                //} else {
+                // gender.setText("female");
+                // }
+
+
+            }
+        });
 
 
         move.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +117,13 @@ public class SignUp extends AppCompatActivity {
                 String Update = update.getText().toString();
                 String Passwor = password.getText().toString();
                 String Confirm = confrim.getText().toString();
-                String Gender = gender.getText().toString();
+               String Gender = bender.getText().toString();
                 String Iam = iam.getText().toString();
-                String Seeking = seeking.getText().toString();
+               String Seeking = seeking.getText().toString();
                 String Want = want.getText().toString();
 
                 if (Fullname.isEmpty()) {
-                    name.setError("Full Name is required");
+                    //name.setError("Full Name is required");
                     name.requestFocus();
                     return;
                 }
@@ -104,17 +134,17 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 if (Zip.isEmpty()) {
-                    zip.setError("Zip Code is required");
+                   // zip.setError("Zip Code is required");
                     zip.requestFocus();
                     return;
                 }
                 if (Update.isEmpty()) {
-                    update.setError("Birthday Date is required");
+                   // update.setError("Birthday Date is required");
                     update.requestFocus();
                     return;
                 }
                 if (!Passwor.equals(Confirm)) {
-                    confrim.setError("Mismatch Password");
+                   // confrim.setError("Mismatch Password");
                     confrim.requestFocus();
                     return;
                 }
@@ -127,21 +157,31 @@ public class SignUp extends AppCompatActivity {
 
                 //new RegisterUser().execute(Fullname, Email, Zip, Update, Passwor, Confirm, Gender, Iam,Seeking, Want);
                 if (TextUtils.isEmpty(name.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(zip.getText().toString()) || TextUtils.isEmpty(update.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
-                        TextUtils.isEmpty(confrim.getText().toString()) || TextUtils.isEmpty(gender.getText().toString()) || TextUtils.isEmpty(iam.getText().toString()) || TextUtils.isEmpty(seeking.getText().toString()) || TextUtils.isEmpty(want.getText().toString())) {
+                        TextUtils.isEmpty(confrim.getText().toString())  || TextUtils.isEmpty(seeking.getText().toString()) || TextUtils.isEmpty(want.getText().toString())) {
                     String message = "All inputs required";
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
                 } else {
-                    RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "gender", "seeking", "birth date", "password", "confirm password");
+                    RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "", "", "date", "", "password");
                     registerRequest.setFullname(name.getText().toString());
                     registerRequest.setEmail(email.getText().toString());
                     registerRequest.setZipcode(zip.getText().toString());
                     registerRequest.setBirth_date(update.getText().toString());
                     registerRequest.setPassword(password.getText().toString());
-                    registerRequest.setPassword_confirmation(confrim.getText().toString());
-                    registerRequest.setGender(gender.getText().toString());
-                    registerRequest.setGender(iam.getText().toString());
+                    registerRequest.setPassword_confirmation(password.getText().toString());
+                    //registerRequest.getGender();
+                    //gende = registerRequest.getGender();
+                    //gender.setText(gende);
+                  //  iam.setText(gende);
+
+                    //gende = registerRequest.getSeeking();
+                   // registerRequest.getSeeking();
+                  //  gender.setText(gende);
+                   // iam.setText(gende);
+
+                    registerRequest.setGender(bender.getText().toString());
+                  // registerRequest.setGender(iam.getText().toString());
                     registerRequest.setSeeking(seeking.getText().toString());
-                    registerRequest.setSeeking(want.getText().toString());
+                   //registerRequest.setSeeking(want.getText().toString());
                     requestUser(registerRequest);
                 }
             }
@@ -256,7 +296,9 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-    public void colorme(View view) {
+
+
+    /*public void colorme(View view) {
         if (view.getId() == gender.getId()) {
 
             gender.setBackgroundResource(R.drawable.section_tabs_active_1);
@@ -264,12 +306,12 @@ public class SignUp extends AppCompatActivity {
 
         }
 
-    }
+    }*/
 
     public void woooo(View view) {
         if (view.getId() == iam.getId()) {
             iam.setBackgroundResource(R.drawable.sectiontabsactive2);
-            gender.setBackgroundResource(R.drawable.border2);
+            bender.setBackgroundResource(R.drawable.border2);
 
         }
     }
@@ -298,8 +340,7 @@ public class SignUp extends AppCompatActivity {
         if (userService == null)
             userService = new ApiClient().getService();
 
-        RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "gender", "seeking",
-                "date", "pass", "conf,");
+        RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "", "", "date", "password", "password");
         Call<RegisterResponse> call = userService.registerUsers(registerRequest);
         call.enqueue(new Callback<RegisterResponse>() {
             @Override
