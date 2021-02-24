@@ -70,7 +70,7 @@ public class Verification1 extends AppCompatActivity {
         final StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Intent intent = getIntent();
+       // Intent intent = getIntent();
 
         getotp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +80,8 @@ public class Verification1 extends AppCompatActivity {
 
                 initialsendotp(phonenumber);
 
+                Bundle me = new Bundle();
+                me.putString("number", phonenumber);
 
                 Intent mainactivity = new Intent(Verification1.this, Splash.class);
                 startActivity(mainactivity);

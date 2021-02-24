@@ -53,7 +53,7 @@ public class Verfy2 extends AppCompatActivity {
         fifth = findViewById(R.id.editText11);
         six = findViewById(R.id.editText13);
 
-        String phon = getIntent().getStringExtra("phone");
+        String phonenumber =  getIntent().getStringExtra("phone");
         //shownum.setText(phon);
 
         //Bundle bundle = getIntent().getExtras();
