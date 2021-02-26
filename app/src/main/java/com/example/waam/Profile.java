@@ -31,6 +31,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,21 +74,27 @@ public class Profile extends AppCompatActivity {
     String pathFile;
    // private String Document_img1="";
 
+
     ImageView imageView;
-    TextView textView, gallery;
+    TextView textView, gallery, swipe;
     private int requestCode;
     private int resultCode;
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
     private Intent data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
         gallery = findViewById(R.id.galary);
-        if (Build.VERSION.SDK_INT >= 23){
+        swipe = findViewById(R.id.textView18);
+        if (Build.VERSION.SDK_INT >= 23) {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
         }
 
@@ -98,16 +105,25 @@ public class Profile extends AppCompatActivity {
                 dispatchTakePictureIntent();
             }
         });
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
+        /*imageView.setOnClickListener(new View.OnClickListener() {
+           / @Override
             public void onClick(View v) {
-               //selectImage();
+                //selectImage();
             }
-        });
+        });*/
+
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                openGallery();
+            }
+        });
 
+        swipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             Intent intent = new Intent(Profile.this, Interest.class);
+             startActivity(intent);
             }
         });
 
@@ -117,7 +133,9 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK || requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            imageView.setImageURI(imageUri);
             if (requestCode == 1){
                 Bitmap bitmap = BitmapFactory.decodeFile(pathFile);
                 imageView.setImageBitmap(bitmap);
@@ -159,6 +177,15 @@ public class Profile extends AppCompatActivity {
             return image;
 
     }
+
+
+
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
 
 
 
