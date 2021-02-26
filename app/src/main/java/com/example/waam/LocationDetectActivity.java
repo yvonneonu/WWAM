@@ -35,10 +35,12 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
         locate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(LocationDetectActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-                    requestPermission();
-                }else {
+                if (ContextCompat.checkSelfPermission(LocationDetectActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
                     Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
+                }else {
+                    requestPermission();
+
                 }
             }
         });
@@ -59,7 +61,7 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
                     locationManager.requestLocationUpdates(provider, 400, 1, this);
                 }
             }else{
-                Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LocationDetectActivity.this,"Permission denied",Toast.LENGTH_SHORT).show();
             }
 
         }
