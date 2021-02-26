@@ -12,6 +12,30 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
+      <ImageView
+          android:id="@+id/background"
+          android:layout_width="match_parent"
+          android:layout_height="600dp"
+          android:scaleType="center"
+          android:src="@drawable/profileheadbg"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/textView19"
+          android:layout_width="300dp"
+          android:layout_height="wrap_content"
+          android:text="Choose topics that interest you"
+          android:textColor="@color/white"
+          android:textSize="40sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@+id/background" />
+
+
 
    </androidx.constraintlayout.widget.ConstraintLayout>
 
