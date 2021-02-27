@@ -56,7 +56,7 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
         if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
             Log.d("Perm", "I am in request");
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(LocationDetectActivity.this,"PERMISSION GRANTED",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LocationDetectActivity.this,"Permission Granted",Toast.LENGTH_SHORT).show();
                 Log.d("Perm", "permision granted");
             }else{
                 Log.d("Perm", "permision denied");
