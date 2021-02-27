@@ -23,8 +23,11 @@ import android.widget.Toast;
 public class LocationDetectActivity extends AppCompatActivity implements LocationListener {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private TextView locate;
+    private boolean textVisible;
     LocationManager locationManager;
     String provider;
+
+    private TextView textViewMore, moreinfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
         setContentView(R.layout.activity_enable__location);
 
         defineViews();
+        textVisible = false;
         locate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +46,20 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
 
                     Log.d("Perm", "permimisson is not granted yet and seek it");
                     requestPermission();
+                }
+            }
+        });
+
+
+        textViewMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(textVisible){
+                    textVisible = false;
+                    moreinfo.setVisibility(View.GONE);
+                }else{
+                    textVisible = true;
+                    moreinfo.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -67,7 +85,11 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
     }
 
     private void defineViews(){
+
         locate = findViewById(R.id.user_location);
+        textViewMore = findViewById(R.id.txtMore);
+        moreinfo = findViewById(R.id.textView18);
+
     }
 
     public void requestPermission(){
