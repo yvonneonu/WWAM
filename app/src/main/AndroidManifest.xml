@@ -10,7 +10,7 @@
         android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -25,14 +25,14 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Interest"></activity>
-        <activity android:name=".Profile">
+        <activity android:name=".LocationDetectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Profile" />
         <activity android:name=".Enable_Location" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />
@@ -43,11 +43,13 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
-        <activity android:name=".ViewPager"></activity>
+        <activity android:name=".ViewPager">
+
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.android.fileprovider"
+            android:authorities="android.support.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
