@@ -36,10 +36,12 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(LocationDetectActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                    Log.d("Perm", "permimisson is already granted so execution stops here");
                     Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
                 }else {
-                    requestPermission();
 
+                    Log.d("Perm", "permimisson is not granted yet and seek it");
+                    requestPermission();
                 }
             }
         });
@@ -51,15 +53,13 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {// If request is cancelled, the result arrays are empty.
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+            Log.d("Perm", "I am in request");
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // permission was granted, yay! Do the
-                // location-related task you need to do.
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    //Request location updates:
-                    locationManager.requestLocationUpdates(provider, 400, 1, this);
-                }
+                Toast.makeText(LocationDetectActivity.this,"PERMISSION GRANTED",Toast.LENGTH_SHORT).show();
+                Log.d("Perm", "permision granted");
             }else{
+                Log.d("Perm", "permision denied");
                 Toast.makeText(LocationDetectActivity.this,"Permission denied",Toast.LENGTH_SHORT).show();
             }
 
@@ -83,12 +83,7 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
                                     MY_PERMISSIONS_REQUEST_LOCATION);
                         }
                     })
-                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
+                    .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss())
                     .create()
                     .show();
 
