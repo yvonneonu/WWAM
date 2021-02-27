@@ -36,7 +36,6 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(LocationDetectActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-
                     Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
                 }else {
                     requestPermission();
