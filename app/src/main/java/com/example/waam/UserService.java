@@ -26,7 +26,7 @@ public interface UserService {
     Call<otpResponse> requestortp(@Body otprequest otprequest, @Header("Authorization") String token);
 
     @POST("api/otp-validate")
-    Call<Myotpresponse> otpgotten (@Body Myotprequest myotprequest);
+    Call<Myotpresponse> otpgotten (@Body String myotprequest, @Header("Authorization") String bearer);
     //, @Header("Authorization") String token);
     @POST("api/otp-resend")
     Call<Resendotpresponse> resendotpgotten (@Body Resendotprequest resendotprequest, @Header("Authorization") String toke);

@@ -27,7 +27,7 @@ public class Verfy2 extends AppCompatActivity {
     TextView resend;
     String otp_text;
     String phonenumber = "";
-    private String token;
+    private String bearer;
     EditText first, secd, third, fourt, fifth, six;
     UserService userService;
 
@@ -41,8 +41,10 @@ public class Verfy2 extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        if (bundle != null)
-            token = bundle.getString("token");
+        if (bundle != null){
+            bearer = bundle.getString("token");
+        }
+
 
 
         getotp = findViewById(R.id.button2);
@@ -83,6 +85,11 @@ public class Verfy2 extends AppCompatActivity {
             public void onClick(View v) {
                 String phonenumber = shownum.getText().toString();
                 Log.d("tag", phonenumber);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("phonenumber", phonenumber);
+                bundle.putString("bearer", bearer);
+
                 otpresend(phonenumber);
 
                 // Bundle me = new Bundle();
@@ -98,7 +105,7 @@ public class Verfy2 extends AppCompatActivity {
     }
 
     private void gottensendotp() {
-        Log.d("UserService", "" + userService);
+       // Log.d("UserService", "" + userService);
         if (userService == null) {
             userService = new ApiClient().getService();
         }
@@ -114,17 +121,23 @@ public class Verfy2 extends AppCompatActivity {
 
         myotprequest.setOtp(completeotp);
 
-        requestotp(myotprequest);
+        Log.d("Bearering",""+bearer);
+        requestotp(completeotp,bearer);
     }
 
-    private void requestotp(Myotprequest myotprequest) {
-        Call<Myotpresponse> call = ApiClient.getService().otpgotten(myotprequest);
+    private void requestotp(String myotprequest, String bearer) {
+        Call<Myotpresponse> call = ApiClient.getService().otpgotten(myotprequest, bearer);
         call.enqueue(new Callback<Myotpresponse>() {
             @Override
             public void onResponse(Call<Myotpresponse> call, Response<Myotpresponse> response) {
+
+                Log.d("Sunday", "i am workin");
+                Log.d("Error", response.errorBody().toString());
                 if (response.isSuccessful()) {
                     // response.body().getToken();
 
+                    Log.d("SUCCESS","In Sucess");
+                    Log.d("SUCCESS",response.body().getOtp());
                     //response.body();
                     String message = "Successful";
                     Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
@@ -153,7 +166,7 @@ public class Verfy2 extends AppCompatActivity {
         Log.d("UserService", "" + userService);
         if (userService == null) {
             userService = new ApiClient().getService();
-            Call<Resendotpresponse> resendotpresponseCall = userService.resendotpgotten(resendotprequest, "Bearer " + token);
+            Call<Resendotpresponse> resendotpresponseCall = userService.resendotpgotten(resendotprequest, "Bearer " + bearer);
             resendotpresponseCall.enqueue(new Callback<Resendotpresponse>() {
                 @Override
                 public void onResponse(Call<Resendotpresponse> call, Response<Resendotpresponse> response) {
@@ -163,9 +176,13 @@ public class Verfy2 extends AppCompatActivity {
                         //token = response.body().getMessage();
 
                         // initialsendotp(phonenumber);
+                        Log.d("INSIDE","I am inside response");
+                        Log.d("INSIDE",""+response.body());
+                        // initialsendotp(phonenumber);
+                        //Log.d("RESPONSE", response.body().getMessage());
                         Bundle bundle = new Bundle();
                         bundle.putString("phonenumber", phonenumber);
-                        bundle.putString("token", token);
+                        bundle.putString("token", bearer);
 
                         /*Intent mainactivity = new Intent(Verfy2.this, L.class);
                         mainactivity.putExtras(bundle);

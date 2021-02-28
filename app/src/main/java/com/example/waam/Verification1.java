@@ -77,9 +77,9 @@ public class Verification1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               String me = ccp.getTextView_selectedCountry().getText().toString();
+               String me = ccp.getSelectedCountryCodeWithPlus();
                 String phonenumbe = userphoneno.getText().toString();
-                String phonenumber =me + phonenumbe;
+                String phonenumber = me + phonenumbe;
                 Log.d("tag", phonenumber);
                 initialsendotp(phonenumber);
 
@@ -109,8 +109,12 @@ public class Verification1 extends AppCompatActivity {
                    //getIntent().getExtras();
                    //token = response.body().getMessage();
 
+                   Log.d("INSIDE","I am inside response");
+                   Log.d("INSIDE",""+response.body());
                   // initialsendotp(phonenumber);
+                   Log.d("RESPONSE", response.body().getMessage());
                    Bundle bundle = new Bundle();
+
                    bundle.putString("phonenumber", phonenumber);
                    bundle.putString("token", token);
 
@@ -118,6 +122,7 @@ public class Verification1 extends AppCompatActivity {
                    mainactivity.putExtras(bundle);
                    startActivity(mainactivity);
                    Toast.makeText(Verification1.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+
                    finish();
                   //Intent mainactivity = new Intent(Verification1.this, Splash.class);
                    //startActivity(mainactivity);
