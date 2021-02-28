@@ -77,7 +77,9 @@ public class Verification1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String phonenumber = userphoneno.getText().toString();
+               String me = ccp.getTextView_selectedCountry().getText().toString();
+                String phonenumbe = userphoneno.getText().toString();
+                String phonenumber =me + phonenumbe;
                 Log.d("tag", phonenumber);
                 initialsendotp(phonenumber);
 

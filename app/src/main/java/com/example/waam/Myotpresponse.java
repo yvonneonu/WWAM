@@ -1,9 +1,9 @@
 package com.example.waam;
 
-public class myotpresponse {
+public class Myotpresponse {
     private String otp;
 
-    public myotpresponse(String otp) {
+    public Myotpresponse(String otp) {
         this.otp = otp;
     }
 

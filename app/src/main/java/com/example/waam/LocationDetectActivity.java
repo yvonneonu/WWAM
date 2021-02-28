@@ -17,6 +17,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +27,11 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private TextView locate;
     LocationManager locationManager;
+    Button fetch;
     String provider;
+   // Spinner spinner;
+  //  String[] words = {"While using the app, you will allow WhereWeAllMeet to access your location to provide ypu the best experience."
+   // };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +39,10 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
         setContentView(R.layout.activity_enable__location);
 
         defineViews();
-        locate.setOnClickListener(new View.OnClickListener() {
+
+      //  ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, words);
+      //  spinner.setAdapter(adapter);
+        fetch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(LocationDetectActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -67,7 +77,8 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
     }
 
     private void defineViews(){
-        locate = findViewById(R.id.user_location);
+        fetch = findViewById(R.id.fetch_location);
+       // spinner = findViewById(R.id.spinner);
     }
 
     public void requestPermission(){

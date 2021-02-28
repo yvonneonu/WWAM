@@ -106,8 +106,8 @@ public class SignUp extends AppCompatActivity {
                     finish();
                 } else {
                     //response.errorBody();
-                    String message = "An error occured please try again";
-                    Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+                   // String message = "An error occured please try again";
+                    //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -307,36 +307,5 @@ public class SignUp extends AppCompatActivity {
 
         }
 
-
-
-
-
-    private void getSecret() {
-
-        Call<ResponseBody> call = ApiClient.getSecret(token);
-        if (userService == null)
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                    if (response.isSuccessful()) {
-                        try {
-                            Toast.makeText(SignUp.this, response.body().string(), Toast.LENGTH_LONG).show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast.makeText(SignUp.this, "error", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(SignUp.this, "error", Toast.LENGTH_LONG).show();
-
-                }
-            });
-
-    }
 
 }

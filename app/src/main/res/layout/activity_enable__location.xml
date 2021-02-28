@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -62,13 +63,23 @@
             app:layout_constraintTop_toBottomOf="@+id/user_location" />
 
         <TextView
-            style="?android:spinnerStyle"
+            android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tell Me more"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="@+id/fetch_location"
             app:layout_constraintStart_toStartOf="@+id/fetch_location"
             app:layout_constraintTop_toBottomOf="@+id/fetch_location" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="@+id/textView18" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

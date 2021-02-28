@@ -1,9 +1,9 @@
 package com.example.waam;
 
-public class myotprequest {
+public class Myotprequest {
     private String otp;
 
-    public myotprequest(String otp) {
+    public Myotprequest(String otp) {
         this.otp = otp;
     }
 

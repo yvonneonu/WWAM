@@ -25,16 +25,19 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".CompleteProfile"></activity>
         <activity android:name=".LocationDetectActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".Profile" />
+        <activity android:name=".Profile" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".Enable_Location" />
-        <activity android:name=".Successverified" />
+        <activity android:name=".Successverified">
+        </activity>
         <activity android:name=".Verfy2" />
         <activity android:name=".Splash" />
         <activity android:name=".Verification1" />
@@ -43,13 +46,13 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
+        <activity android:name=".Interest" />
         <activity android:name=".ViewPager">
-
         </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="android.support.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
