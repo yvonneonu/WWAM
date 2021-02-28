@@ -25,13 +25,15 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".DrawelayoutActivity"></activity>
-        <activity android:name=".LocationDetectActivity">
+        <activity android:name=".DrawelayoutActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".LocationDetectActivity">
+
         </activity>
         <activity android:name=".Profile" />
         <activity android:name=".Enable_Location" />

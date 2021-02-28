@@ -4,17 +4,16 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BecomeAMemberFragment#newInstance} factory method to
+ * Use the {@link AgentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BecomeAMemberFragment extends Fragment {
+public class AgentFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +24,7 @@ public class BecomeAMemberFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public BecomeAMemberFragment() {
+    public AgentFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +34,11 @@ public class BecomeAMemberFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BecomeAMemberFragment.
+     * @return A new instance of fragment AgentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BecomeAMemberFragment newInstance(String param1, String param2) {
-        BecomeAMemberFragment fragment = new BecomeAMemberFragment();
+    public static AgentFragment newInstance(String param1, String param2) {
+        AgentFragment fragment = new AgentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -50,11 +49,9 @@ public class BecomeAMemberFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("TAG","I am in oncreate");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
         }
     }
 
@@ -62,7 +59,6 @@ public class BecomeAMemberFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.d("TAG","I am in oncreate");
-        return inflater.inflate(R.layout.fragment_become_a_member, container, false);
+        return inflater.inflate(R.layout.fragment_agent, container, false);
     }
 }
