@@ -28,6 +28,7 @@ public class Verfy2 extends AppCompatActivity {
     String otp_text;
     String phonenumber = "";
     String token;
+    String otp;
     private String bearer;
     EditText first, secd, third, fourt, fifth, six;
     UserService userService;
@@ -90,15 +91,7 @@ public class Verfy2 extends AppCompatActivity {
                 bundle.putString("phonenumber", phonenumber);
                 bundle.putString("bearer", token);
 
-                otpresend(phonenumber);
-
-                // Bundle me = new Bundle();
-                //  me.putString("number", phonenumber);
-               /* Intent mainactivity = new Intent(Verification1.this, Splash.class);
-                mainactivity.putExtra("phonenumber", phonenumber);
-                mainactivity.putExtra("token", token);
-                startActivity(mainactivity);
-                finish();*/
+                otpresend();
             }
         });
 
@@ -130,117 +123,52 @@ public class Verfy2 extends AppCompatActivity {
             Log.d("Bearering", "" + bearer);
             //requestotp(completeotp, bearer);
         }
-        Call<Myotpresponse> call = userService.otpgotten(myotprequest, "Bearer " +bearer);
-        call.enqueue(new Callback<Myotpresponse>() {
-            @Override
-            public void onResponse(Call<Myotpresponse> call, Response<Myotpresponse> response) {
-                if (response.isSuccessful()) {
-                    // Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Verfy2.this, Successverified.class);
-                    startActivity(intent);
-
-                } else {
-                    String message = "An error occured please try again";
-                    Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<Myotpresponse> call, Throwable t) {
-                String message = "An error occured please try again";
-                Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
-
-
-            }
-        });
-
-
-       /* private void requestotp ( myotprequest, bearer){
-            Call<Myotpresponse> call = ApiClient.getService().otpgotten(Myotprequest);
-            call.enqueue(new Callback<Myotpresponse>() {
-                @Override
-                public void onResponse(Call<Myotpresponse> call, Response<Myotpresponse> response) {
-
-                    Log.d("Sunday", "i am workin");
-                    Log.d("Error", response.errorBody().toString());
-                    if (response.isSuccessful()) {
-                        // response.body().getToken();
-
-                        Log.d("SUCCESS", "In Sucess");
-                        Log.d("SUCCESS", response.body().getOtp());
-                        //response.body();
-                        String message = "Successful";
-                        Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
-
-                        startActivity(new Intent(Verfy2.this, LocationDetectActivity.class));
-                        finish();
-                    } else {
-                        //response.errorBody();
-                        String message = "An error occured please try again";
-                        Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
-                    }
-                }
-
-
-                @Override
-                public void onFailure(Call<Myotpresponse> call, Throwable t) {
-                    String message = t.getLocalizedMessage();
-                    Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
-                }
-            });
-
-        }*/
     }
 
-        private void otpresend (String phonenumber){
-            Resendotprequest resendotprequest = new Resendotprequest(phonenumber);
-            Log.d("UserService", "" + userService);
+        private void otpresend () {
             if (userService == null) {
                 userService = new ApiClient().getService();
-                Call<Resendotpresponse> resendotpresponseCall = userService.resendotpgotten(resendotprequest, "Bearer "+bearer);
-                resendotpresponseCall.enqueue(new Callback<Resendotpresponse>() {
-                    @Override
-                    public void onResponse(Call<Resendotpresponse> call, Response<Resendotpresponse> response) {
-                        if (response.isSuccessful()) {
-
-                            //getIntent().getExtras();
-                            //token = response.body().getMessage();
-
-                            // initialsendotp(phonenumber);
-                            Log.d("INSIDE", "I am inside response");
-                            Log.d("INSIDE", "" + response.body());
-                            // initialsendotp(phonenumber);
-                            //Log.d("RESPONSE", response.body().getMessage());
-                            Bundle bundle = new Bundle();
-                            bundle.putString("phonenumber", phonenumber);
-                            bundle.putString("token", bearer);
-
-                            Intent intent = new Intent(Verfy2.this, Successverified.class);
-                            startActivity(intent);
-                        /*Intent mainactivity = new Intent(Verfy2.this, L.class);
-                        mainactivity.putExtras(bundle);
-                        startActivity(mainactivity);
-                        Toast.makeText(Verfy2.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                        finish();*/
-                        } else {
-                            String message = "An error occured please try again";
-                            Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Resendotpresponse> call, Throwable t) {
-
-                        String message = "An error occured please try again";
-                        t.printStackTrace();
-                        Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
-                    }
-                });
+            }
+            Resendotprequest resendotprequest = new Resendotprequest("phonenumber");
+            Log.d("UserService", "" + userService);
+            //if (userService == null) {
+            String number = shownum.getText().toString();
+            if (number.isEmpty()) {
+                shownum.setError("error");
+            } else {
+                resendotprequest.setPhone_number(number);
+                otpuser(resendotprequest);
             }
         }
 
+    private void otpuser(Resendotprequest resendotprequest) {
+        Call<Resendotpresponse> resendotpresponseCall = ApiClient.getService().resendotpgotten(resendotprequest, "Bearer "+bearer);
+        resendotpresponseCall.enqueue(new Callback<Resendotpresponse>() {
+            @Override
+            public void onResponse(Call<Resendotpresponse> call, Response<Resendotpresponse> response) {
+                if (response.isSuccessful()) {
+                    // response.body().getToken();
+
+                    //response.body();
+                    String message = "Successful";
+                    Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
+
+                    //startActivity(new Intent(Verfy2.this, Verification1.class).putExtra("token", response.body().getToken()));
+                    // finish();
+
+                } else {
+                    //response.errorBody();
+                    // String message = "An error occured please try again";
+                    //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Resendotpresponse> call, Throwable t) {
+
+            }
+        });
+    }
 
 
     private void requestotp(Myotprequest myotprequest) {
@@ -255,7 +183,7 @@ public class Verfy2 extends AppCompatActivity {
                 String message = "Successful";
                 Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(Verfy2.this, Verification1.class).putExtra("token", response.body().getOtp()));
+                startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
                 finish();
             } else {
                 //response.errorBody();

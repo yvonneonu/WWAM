@@ -85,11 +85,11 @@ public class Verification1 extends AppCompatActivity {
 
                // Bundle me = new Bundle();
               //  me.putString("number", phonenumber);
-                Intent mainactivity = new Intent(Verification1.this, Splash.class);
-                mainactivity.putExtra("phonenumber", phonenumber);
-                mainactivity.putExtra("token", token);
-                startActivity(mainactivity);
-                finish();
+//                Intent mainactivity = new Intent(Verification1.this, Splash.class);
+//                mainactivity.putExtra("phonenumber", phonenumber);
+//                mainactivity.putExtra("token", token);
+//                startActivity(mainactivity);
+//                finish();
             }
         });
 

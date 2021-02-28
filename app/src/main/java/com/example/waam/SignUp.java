@@ -282,28 +282,28 @@ public class SignUp extends AppCompatActivity {
                 registerRequest.setSeeking(interest);
                 requestUser(registerRequest);
             }
-
-            Call<RegisterResponse> call = userService.registerUsers(registerRequest);
-            call.enqueue(new Callback<RegisterResponse>() {
-                @Override
-                public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                    if (response.isSuccessful()) {
-                     // Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
-                       Intent intent = new Intent(SignUp.this, Verification1.class);
-                        startActivity(intent);
-
-                    } else {
-                        String message = "An error occured please try again";
-                        Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<RegisterResponse> call, Throwable t) {
-                    String message = "An error occured please try again";
-                    Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
-                }
-            });
+//
+//            Call<RegisterResponse> call = userService.registerUsers(registerRequest);
+//            call.enqueue(new Callback<RegisterResponse>() {
+//                @Override
+//                public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+//                    if (response.isSuccessful()) {
+//                     // Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
+//                       Intent intent = new Intent(SignUp.this, Verification1.class);
+//                        startActivity(intent);
+//
+//                    } else {
+//                        String message = "An error occured please try again";
+//                        Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<RegisterResponse> call, Throwable t) {
+//                    String message = "An error occured please try again";
+//                    Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+//                }
+//            });
 
         }
 
