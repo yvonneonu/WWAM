@@ -122,11 +122,11 @@ public class Verfy2 extends AppCompatActivity {
         myotprequest.setOtp(completeotp);
 
         Log.d("Bearering",""+bearer);
-        requestotp(completeotp,bearer);
+        requestotp(myotprequest);
     }
 
-    private void requestotp(String myotprequest, String bearer) {
-        Call<Myotpresponse> call = ApiClient.getService().otpgotten(myotprequest, bearer);
+    private void requestotp(Myotprequest myotprequest) {
+        Call<Myotpresponse> call = ApiClient.getService().otpgotten(myotprequest);
         call.enqueue(new Callback<Myotpresponse>() {
             @Override
             public void onResponse(Call<Myotpresponse> call, Response<Myotpresponse> response) {

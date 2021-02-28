@@ -57,11 +57,7 @@ public class Verification1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification1);
 
-        Bundle bundle = getIntent().getExtras();
-
-        if (bundle != null)
-        token = bundle.getString("token");
-
+        token  = getIntent().getStringExtra("token");
 
         ccp = findViewById(R.id.ccp);
         userphoneno = findViewById(R.id.edit_text);
@@ -100,17 +96,19 @@ public class Verification1 extends AppCompatActivity {
         otprequest myotpreques = new otprequest(phonenumber);
        //if (userService == null)
            userService = new ApiClient().getService();
+           Log.d("UserBearer",""+token);
        Call<otpResponse> call = userService.requestortp(myotpreques, "Bearer "+token);
        call.enqueue(new Callback<otpResponse>() {
            @Override
            public void onResponse(Call<otpResponse> call, Response<otpResponse> response) {
                if (response.isSuccessful()){
 
+
                    //getIntent().getExtras();
                    //token = response.body().getMessage();
 
                    Log.d("INSIDE","I am inside response");
-                   Log.d("INSIDE",""+response.body());
+                   Log.d("INSIDE",""+response.body().getMessage());
                   // initialsendotp(phonenumber);
                    Log.d("RESPONSE", response.body().getMessage());
                    Bundle bundle = new Bundle();

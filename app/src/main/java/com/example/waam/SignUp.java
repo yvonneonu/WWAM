@@ -290,7 +290,9 @@ public class SignUp extends AppCompatActivity {
                     if (response.isSuccessful()) {
                      // Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
                        Intent intent = new Intent(SignUp.this, Verification1.class);
-                        startActivity(intent);
+                       String  token = response.body().getToken();
+                       intent.putExtra("token",token);
+                       startActivity(intent);
 
                     } else {
                         String message = "An error occured please try again";
