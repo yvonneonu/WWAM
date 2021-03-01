@@ -25,13 +25,13 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
 
         drawer.addDrawerListener(toggle);
@@ -51,26 +51,32 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         switch (item.getItemId()){
             case R.id.membership:
                 fragment = new BecomeAMemberFragment();
+
                 break;
 
             case R.id.explore:
                 fragment = new ExploreFragment();
+                item.setIcon(R.drawable.lowernav_explore_icon_active);
                 break;
 
             case R.id.messages:
                 fragment = new MessagesFragment();
+                item.setIcon(R.drawable.lowernav_messages_icon_active);
                 break;
 
             case R.id.friends:
                 fragment = new FriendsFragment();
+                item.setIcon(R.drawable.lowernav_friends_icon_active);
                 break;
 
             case R.id.profile:
                 fragment = new ProfileFragment();
+                item.setIcon(R.drawable.lowernav_profile_icon_active);
                 break;
 
             case R.id.agent:
                 fragment = new AgentFragment();
+                item.setIcon(R.drawable.lowernav_agent_icon_active);
                 break;
         }
         if(fragment != null){
