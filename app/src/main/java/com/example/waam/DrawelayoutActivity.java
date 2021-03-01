@@ -36,6 +36,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
 
         drawer.addDrawerListener(toggle);
 
+
         toggle.syncState();
         Log.d("TAG","in activity null");
         Fragment fragment = new ExploreFragment();

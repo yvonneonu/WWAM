@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.android.material.card.MaterialCardView;
+
 import java.util.Objects;
 
 /**
@@ -23,12 +25,13 @@ import java.util.Objects;
  * Use the {@link BecomeAMemberFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BecomeAMemberFragment extends Fragment {
+public class BecomeAMemberFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private MaterialCardView materialCardView;
     private MenuItem menuItem;
 
     // TODO: Rename and change types of parameters
@@ -72,13 +75,15 @@ public class BecomeAMemberFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.d("TAG","I am in oncreate");
+
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
+        materialCardView = view.findViewById(R.id.material);
+
+        materialCardView.setOnClickListener(this);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Upgrade Your Plan");
-        //Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.toolbar);
         return view;
 
     }
@@ -87,14 +92,27 @@ public class BecomeAMemberFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        Log.d("OncreateOptions","Options menu");
         inflater.inflate(R.menu.main_menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.invite);
+        //menuItem = menu.findItem(R.id.invite);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
             Toast.makeText(getActivity(), "Am a responsing to plus", Toast.LENGTH_SHORT).show();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.material:
+                break;
+
+            case R.id.materialone:
+                break;
+
+            case R.id.materialtwo:
+                break;
+        }
     }
 }
