@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -31,7 +32,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private MaterialCardView materialCardView;
+    private LinearLayout materialCardView;
     private MenuItem menuItem;
 
     // TODO: Rename and change types of parameters
@@ -78,7 +79,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
-        materialCardView = view.findViewById(R.id.material);
+        materialCardView = view.findViewById(R.id.layone);
 
         materialCardView.setOnClickListener(this);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -105,13 +106,13 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.material:
+            case R.id.layone:
                 break;
 
-            case R.id.materialone:
+            case R.id.laytwo:
                 break;
 
-            case R.id.materialtwo:
+            case R.id.laythree:
                 break;
         }
     }
