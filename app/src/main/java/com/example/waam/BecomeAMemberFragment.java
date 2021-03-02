@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,7 +34,9 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private LinearLayout materialCardView;
-    private MenuItem menuItem;
+    //private MenuItem menuItem;
+
+    public boolean active;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -107,6 +110,8 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.layone:
+                Intent intent = new Intent(getActivity(),PaymentPage.class);
+                startActivity(intent);
                 break;
 
             case R.id.laytwo:
