@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -33,14 +34,16 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private LinearLayout materialCardView;
+    private LinearLayout linearLayoutOne, linearLayoutTwo, linearLayoutThree, linearLayoutFour, linearLayoutFive;
+    private RadioButton radioButtonone;
+    private RadioButton radioButtontwo;
+    private RadioButton radioButtonthree;
     //private MenuItem menuItem;
-
-    public boolean active;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public BecomeAMemberFragment() {
         // Required empty public constructor
@@ -82,9 +85,25 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
-        materialCardView = view.findViewById(R.id.layone);
 
-        materialCardView.setOnClickListener(this);
+        linearLayoutOne = view.findViewById(R.id.layone);
+        linearLayoutTwo = view.findViewById(R.id.laytwo);
+        linearLayoutThree = view.findViewById(R.id.laythree);
+        linearLayoutFour = view.findViewById(R.id.layfour);
+        linearLayoutFive = view.findViewById(R.id.purchase);
+
+
+        radioButtonone = view.findViewById(R.id.radioButtonone);
+        radioButtontwo = view.findViewById(R.id.radioButtontwo);
+        radioButtonthree = view.findViewById(R.id.radioButtonthree);
+
+        linearLayoutOne.setOnClickListener(this);
+        linearLayoutTwo.setOnClickListener(this);
+        linearLayoutThree.setOnClickListener(this);
+        linearLayoutFour.setOnClickListener(this);
+        linearLayoutFive.setOnClickListener(this);
+
+
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Upgrade Your Plan");
@@ -108,17 +127,72 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        final int layoutOne = R.id.layone;
+        final int layoutTwo = R.id.laytwo;
+        final int layoutThree = R.id.laythree;
+        final int layoutFour = R.id.layfour;
+        final int radioOne = R.id.radioButtonone;
+        final int radioTwo = R.id.radioButtontwo;
+        final int radioThree = R.id.radioButtonthree;
+        final int purchase = R.id.purchase;
+
+
         switch (v.getId()){
-            case R.id.layone:
+
+            case layoutOne:
+                setClicked(linearLayoutTwo,linearLayoutThree,linearLayoutFour,linearLayoutOne);
+                break;
+
+            case layoutTwo:
+                setClicked(linearLayoutOne,linearLayoutThree,linearLayoutFour,linearLayoutTwo);
+                break;
+
+            case layoutThree:
+                setClicked(linearLayoutOne,linearLayoutTwo,linearLayoutFour,linearLayoutThree);
+                break;
+
+
+            case layoutFour:
+                setClicked(linearLayoutOne,linearLayoutTwo,linearLayoutThree,linearLayoutFour);
+                break;
+
+            case radioOne:
+                manageCheckedRadio(radioButtonthree,radioButtontwo,radioButtonone);
+                break;
+
+            case radioTwo:
+                manageCheckedRadio(radioButtonone,radioButtonthree,radioButtontwo);
+                break;
+
+            case radioThree:
+                manageCheckedRadio(radioButtonone,radioButtontwo,radioButtonthree);
+                break;
+
+            case purchase:
                 Intent intent = new Intent(getActivity(),PaymentPage.class);
                 startActivity(intent);
-                break;
-
-            case R.id.laytwo:
-                break;
-
-            case R.id.laythree:
-                break;
         }
+    }
+
+
+    private void manageCheckedRadio(RadioButton radFirst, RadioButton radSec, RadioButton radReal){
+        if(radFirst.isChecked()){
+            radFirst.setChecked(false);
+        }
+
+        if(radSec.isChecked()){
+            radSec.setChecked(false);
+        }
+        radReal.setChecked(false);
+
+    }
+
+
+    private void setClicked(LinearLayout first, LinearLayout second, LinearLayout third,LinearLayout original){
+        first.setBackgroundResource(R.drawable.price_box_bg);
+        second.setBackgroundResource(R.drawable.price_box_bg);
+        third.setBackgroundResource(R.drawable.price_box_bg);
+        original.setBackgroundResource(R.drawable.price_box_bg_full);
     }
 }

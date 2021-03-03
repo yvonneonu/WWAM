@@ -17,11 +17,11 @@
                 </shape>
             </item>
 
-            <item android:right="5dp">
+            <!--<item android:right="5dp">
 
-                <bitmap android:layout_height="match_parent" android:gravity="center_vertical|right" android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                <bitmap android:layout_height="match_parent" android:gravity="center_vertical|right" android:src="@drawable/ic_action_name" />
 
-            </item>
+            </item>-->
 
         </layer-list>
 
