@@ -67,28 +67,29 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cardNumbLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/stroke"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingHorizontal="10dp"
-                android:gravity="center"
-                android:paddingVertical="20dp"
-                android:layout_marginTop="10dp">
+                android:paddingVertical="20dp">
 
                 <TextView
                     android:id="@+id/textView24"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Card Number" />
 
                 <EditText
                     android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:layout_gravity="end"
                     android:text="0123456" />
 
             </LinearLayout>
