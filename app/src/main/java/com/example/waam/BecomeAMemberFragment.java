@@ -14,6 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -28,16 +30,16 @@ import java.util.Objects;
  * Use the {@link BecomeAMemberFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BecomeAMemberFragment extends Fragment implements View.OnClickListener {
+public class BecomeAMemberFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private LinearLayout linearLayoutOne, linearLayoutTwo, linearLayoutThree, linearLayoutFour, linearLayoutFive;
-    private RadioButton radioButtonone;
-    private RadioButton radioButtontwo;
-    private RadioButton radioButtonthree;
+    private CheckBox radioButtonone;
+    private CheckBox radioButtontwo;
+    private CheckBox radioButtonthree;
     //private MenuItem menuItem;
 
     // TODO: Rename and change types of parameters
@@ -48,15 +50,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     public BecomeAMemberFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BecomeAMemberFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static BecomeAMemberFragment newInstance(String param1, String param2) {
         BecomeAMemberFragment fragment = new BecomeAMemberFragment();
@@ -104,6 +97,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         linearLayoutFive.setOnClickListener(this);
 
 
+        radioButtonone.setOnCheckedChangeListener(this);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Upgrade Your Plan");
@@ -132,18 +126,12 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         final int layoutTwo = R.id.laytwo;
         final int layoutThree = R.id.laythree;
         final int layoutFour = R.id.layfour;
-        final int radioOne = R.id.radioButtonone;
-        final int radioTwo = R.id.radioButtontwo;
-        final int radioThree = R.id.radioButtonthree;
         final int purchase = R.id.purchase;
 
-
         switch (v.getId()){
-
             case layoutOne:
                 setClicked(linearLayoutTwo,linearLayoutThree,linearLayoutFour,linearLayoutOne);
                 break;
-
             case layoutTwo:
                 setClicked(linearLayoutOne,linearLayoutThree,linearLayoutFour,linearLayoutTwo);
                 break;
@@ -152,21 +140,8 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 setClicked(linearLayoutOne,linearLayoutTwo,linearLayoutFour,linearLayoutThree);
                 break;
 
-
             case layoutFour:
                 setClicked(linearLayoutOne,linearLayoutTwo,linearLayoutThree,linearLayoutFour);
-                break;
-
-            case radioOne:
-                manageCheckedRadio(radioButtonthree,radioButtontwo,radioButtonone);
-                break;
-
-            case radioTwo:
-                manageCheckedRadio(radioButtonone,radioButtonthree,radioButtontwo);
-                break;
-
-            case radioThree:
-                manageCheckedRadio(radioButtonone,radioButtontwo,radioButtonthree);
                 break;
 
             case purchase:
@@ -176,23 +151,72 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     }
 
 
-    private void manageCheckedRadio(RadioButton radFirst, RadioButton radSec, RadioButton radReal){
-        if(radFirst.isChecked()){
-            radFirst.setChecked(false);
-        }
-
-        if(radSec.isChecked()){
-            radSec.setChecked(false);
-        }
-        radReal.setChecked(false);
-
-    }
-
-
     private void setClicked(LinearLayout first, LinearLayout second, LinearLayout third,LinearLayout original){
         first.setBackgroundResource(R.drawable.price_box_bg);
         second.setBackgroundResource(R.drawable.price_box_bg);
         third.setBackgroundResource(R.drawable.price_box_bg);
         original.setBackgroundResource(R.drawable.price_box_bg_full);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        final int radioOne = R.id.radioButtonone;
+        final int radioTwo = R.id.radioButtontwo;
+        final int radioThree = R.id.radioButtonthree;
+
+        switch (buttonView.getId()){
+
+            case radioOne:
+                if(radioButtonthree.isChecked()){
+                    radioButtonthree.setChecked(false);
+                }
+
+                if(radioButtontwo.isChecked()){
+                    radioButtontwo.setChecked(false);
+                }
+                if(radioButtonone.isChecked()){
+                    Log.d("RadioButton","I am here");
+                    radioButtonone.setChecked(false);
+                }else{
+                    radioButtonone.setChecked(true);
+                }
+
+                break;
+
+            case radioTwo:
+                if (radioButtonone.isChecked()){
+                    radioButtonone.setChecked(false);
+                }
+
+                if(radioButtonthree.isChecked()){
+                    radioButtonthree.setChecked(false);
+                }
+
+                if(radioButtontwo.isChecked()){
+                    radioButtontwo.setChecked(false);
+                }else{
+                    radioButtontwo.setChecked(true);
+                }
+
+                break;
+
+            case radioThree:
+
+                if (radioButtonone.isChecked()){
+                    radioButtonone.setChecked(false);
+                }
+
+                if(radioButtontwo.isChecked()){
+                    radioButtontwo.setChecked(false);
+                }
+
+                if(radioButtonthree.isChecked()){
+                    radioButtonthree.setChecked(false);
+                }else{
+                    radioButtonthree.setChecked(true);
+                }
+
+                break;
+        }
     }
 }
