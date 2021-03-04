@@ -1,343 +1,421 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Interest">
 
-   <androidx.constraintlayout.widget.ConstraintLayout
+
+   <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent">
+       android:orientation="vertical">
 
-      <ImageView
-          android:id="@+id/background"
+      <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
-          android:layout_height="510dp"
-          android:scaleType="center"
-          android:src="@drawable/profileheadbg"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.0"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+          android:layout_height="match_parent">
 
-      <TextView
-          android:id="@+id/textView19"
-          android:layout_width="300dp"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="60dp"
-          android:text="Choose topics that interest you"
-          android:textAlignment="textEnd"
-          android:textColor="@color/white"
-          android:textSize="40sp"
-          android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="@+id/background" />
+         <ImageView
+             android:id="@+id/imageView10"
+             android:layout_width="match_parent"
+             android:layout_height="500dp"
+             android:scaleType="fitXY"
+             android:src="@drawable/profileheadbg"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintVertical_bias="0.0" />
+
+         <TextView
+             android:id="@+id/textView23"
+             android:layout_width="250dp"
+             android:layout_height="100dp"
+             android:layout_marginTop="20dp"
+             android:layout_marginEnd="5dp"
+             android:text="Choose topics that interest you"
+             android:textAlignment="textEnd"
+             android:textColor="@color/white"
+             android:textSize="30sp"
+             android:textStyle="bold"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.756"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+         <ImageView
+             android:id="@+id/imageView0"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginStart="5dp"
+             android:layout_marginTop="5dp"
+             android:layout_marginEnd="5dp"
+             android:scaleType="fitCenter"
+             android:src="@drawable/diningout"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.072"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="@+id/imageView10"
+             app:layout_constraintVertical_bias="0.277" />
+
+         <TextView
+             android:id="@+id/textView20"
+             android:layout_width="70dp"
+             android:layout_height="20dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Dining Out"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView0"
+             app:layout_constraintTop_toTopOf="@+id/imageView0" />
+
+          <CheckBox
+            android:id="@+id/radioButton"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="dinning_out"
+            android:scaleX="1"
+            android:scaleY="1"
+              android:buttonTint="@color/yellow"
+              style ="@style/CustomCheckbox02"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView0"
+            app:layout_constraintStart_toStartOf="@+id/textView20" />
+
+         <ImageView
+             android:id="@+id/imageView1"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginStart="5dp"
+             android:layout_marginEnd="5dp"
+             android:scaleType="fitCenter"
+             android:src="@drawable/travel"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView0"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.498"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="@+id/imageView0"
+             app:layout_constraintVertical_bias="0.0" />
+
+         <TextView
+             android:id="@+id/textView21"
+             android:layout_width="50dp"
+             android:layout_height="20dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Travel"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView1"
+             app:layout_constraintTop_toTopOf="@+id/imageView1" />
+
+         <CheckBox
+            android:id="@+id/radioButton1"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:onClick="travel"
+            android:scaleX="1"
+            android:scaleY="1"
+             android:buttonTint="@color/yellow"
+            style="@style/CustomCheckbox02"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView1"
+            app:layout_constraintStart_toStartOf="@+id/textView21" />
+
+         <ImageView
+             android:id="@+id/imageView2"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginStart="8dp"
+             android:layout_marginEnd="5dp"
+             android:src="@drawable/sports"
+
+             app:layout_constraintBottom_toBottomOf="@+id/imageView1"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.909"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="@+id/imageView1"
+             app:layout_constraintVertical_bias="0.0" />
+
+         <TextView
+             android:id="@+id/textView2"
+             android:layout_width="50dp"
+             android:layout_height="20dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Sports"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView2"
+             app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <CheckBox
+            android:id="@+id/radioButton2"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="sport"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:buttonTint="@color/yellow"
+           style="@style/CustomCheckbox02"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/textView2" />
+
+         <ImageView
+             android:id="@+id/imageView3"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginTop="20dp"
+             android:src="@drawable/nightclubsdancing"
+             app:layout_constraintEnd_toEndOf="@+id/imageView0"
+             app:layout_constraintStart_toStartOf="@+id/imageView0"
+             app:layout_constraintTop_toBottomOf="@+id/imageView0" />
+
+         <TextView
+             android:id="@+id/textView3"
+             android:layout_width="80dp"
+             android:layout_height="40dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Nightclubs/Dancing"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView3"
+             app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+         <CheckBox
+             android:id="@+id/radioButton3"
+             android:layout_width="40dp"
+             android:layout_height="30dp"
+             android:layout_marginBottom="5dp"
+             android:onClick="nightclubs"
+             android:scaleX="1"
+             android:scaleY="1"
+             android:buttonTint="@color/yellow"
+            style="@style/CustomCheckbox02"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+             app:layout_constraintStart_toStartOf="@+id/textView3" />
+
+         <ImageView
+             android:id="@+id/imageView4"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginTop="20dp"
+             android:layout_marginBottom="15dp"
+             android:src="@drawable/coffeeconversation"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+             app:layout_constraintEnd_toEndOf="@+id/imageView1"
+             app:layout_constraintHorizontal_bias="1.0"
+             app:layout_constraintStart_toStartOf="@+id/imageView1"
+             app:layout_constraintTop_toBottomOf="@+id/imageView1"
+             app:layout_constraintVertical_bias="0.0" />
+
+         <TextView
+             android:id="@+id/textView4"
+             android:layout_width="90dp"
+             android:layout_height="40dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Coffee Conversation"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView4"
+             app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+         <CheckBox
+             android:id="@+id/radioButton4"
+             android:layout_width="40dp"
+             android:layout_height="30dp"
+             android:layout_marginBottom="5dp"
+             android:scaleX="1"
+             android:scaleY="1"
+             android:buttonTint="@color/yellow"
+             android:onClick="coffeeconversation"
+             style="@style/CustomCheckbox02"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+             app:layout_constraintStart_toStartOf="@+id/textView4" />
+
+         <ImageView
+             android:id="@+id/imageView5"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginTop="20dp"
+             android:layout_marginBottom="15dp"
+             android:src="@drawable/mmuseumart"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+             app:layout_constraintEnd_toEndOf="@+id/imageView2"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toStartOf="@+id/imageView2"
+             app:layout_constraintTop_toBottomOf="@+id/imageView2"
+             app:layout_constraintVertical_bias="0.0" />
+
+         <TextView
+             android:id="@+id/textView5"
+             android:layout_width="90dp"
+             android:layout_height="30dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Museum / Art"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView5"
+             app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+         <CheckBox
+             android:id="@+id/radioButton5"
+             android:layout_width="40dp"
+             android:layout_height="30dp"
+             android:layout_marginBottom="4dp"
+             android:scaleX="1"
+             android:scaleY="1"
+             android:buttonTint="@color/yellow"
+             android:onClick="museumart"
+            style="@style/CustomCheckbox02"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+             app:layout_constraintStart_toStartOf="@+id/textView5" />
+
+         <ImageView
+             android:id="@+id/imageView6"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginTop="15dp"
+             android:src="@drawable/mmoviesvideos"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+             app:layout_constraintEnd_toEndOf="@+id/imageView3"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toStartOf="@+id/imageView3"
+             app:layout_constraintTop_toBottomOf="@+id/imageView3"
+             app:layout_constraintVertical_bias="1.0" />
+
+         <TextView
+             android:id="@+id/textView6"
+             android:layout_width="105dp"
+             android:layout_height="30dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Movies / Videos"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView6"
+             app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+          <CheckBox
+              android:id="@+id/radioButton6"
+              style="@style/CustomCheckbox02"
+              android:layout_width="25dp"
+              android:layout_height="25dp"
+              android:layout_marginBottom="4dp"
+              android:onClick="moviesorVideos"
+              android:scaleX="1"
+              android:scaleY="1"
+              android:buttonTint="@color/yellow"
+              android:shadowColor="#FFEB3B"
+              app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+              app:layout_constraintStart_toStartOf="@+id/textView6" />
+
+         <ImageView
+             android:id="@+id/imageView8"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginTop="15dp"
+             android:src="@drawable/mmusicconcerts"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+             app:layout_constraintEnd_toEndOf="@+id/imageView4"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toStartOf="@+id/imageView4"
+             app:layout_constraintTop_toBottomOf="@+id/imageView4"
+             app:layout_constraintVertical_bias="1.0" />
+
+         <TextView
+             android:id="@+id/textView8"
+             android:layout_width="100dp"
+             android:layout_height="30dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Music Concerts"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView8"
+             app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+         <CheckBox
+             android:id="@+id/radioButton8"
+             android:layout_width="40dp"
+             android:layout_height="30dp"
+             android:layout_marginBottom="4dp"
+             android:scaleX="1"
+             android:scaleY="1"
+             android:buttonTint="@color/yellow"
+             android:onClick="musicconcept"
+            style="@style/CustomCheckbox02"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+             app:layout_constraintStart_toStartOf="@+id/textView8" />
+
+         <ImageView
+             android:id="@+id/imageView9"
+             android:layout_width="110dp"
+             android:layout_height="100dp"
+             android:layout_marginTop="15dp"
+             android:src="@drawable/winetasting"
+             app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+             app:layout_constraintEnd_toEndOf="@+id/imageView5"
+             app:layout_constraintHorizontal_bias="1.0"
+             app:layout_constraintStart_toStartOf="@+id/imageView5"
+             app:layout_constraintTop_toBottomOf="@+id/imageView5"
+             app:layout_constraintVertical_bias="1.0" />
+
+         <TextView
+             android:id="@+id/textView9"
+             android:layout_width="90dp"
+             android:layout_height="30dp"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="8dp"
+             android:text="Wine Testing"
+             android:textColor="@color/white"
+             app:layout_constraintStart_toStartOf="@+id/imageView9"
+             app:layout_constraintTop_toTopOf="@+id/imageView9" />
+
+          <CheckBox
+              android:id="@+id/radioButton9"
+              style="@style/CustomCheckbox02"
+              android:layout_width="40dp"
+              android:layout_height="30dp"
+              android:layout_marginBottom="4dp"
+              android:onClick="winetesting"
+              android:scaleX="1"
+              android:scaleY="1"
+              android:buttonTint="@color/yellow"
+              app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+              app:layout_constraintStart_toStartOf="@+id/textView9" />
 
 
-      <ImageView
-          android:id="@+id/imageView7"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="16dp"
-          android:scaleType="fitCenter"
-          android:src="@drawable/diningout"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/textView19" />
+         <Button
+             android:id="@+id/button4"
+             android:layout_width="250dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="15dp"
+             android:backgroundTint="@color/blue"
+             android:text="SAVE AND CONTINUE"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
-      <TextView
-          android:id="@+id/textView20"
-          android:layout_width="70dp"
-          android:layout_height="20dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Dining Out"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/imageView7"
-          app:layout_constraintTop_toTopOf="@+id/imageView7" />
-
-      <RadioButton
-          android:id="@+id/radioButton"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:layout_marginBottom="5dp"
-          android:checked="true"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-          app:layout_constraintStart_toStartOf="@+id/textView20" />
-
-      <ImageView
-          android:id="@+id/imageView1"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginStart="5dp"
-          android:scaleType="fitCenter"
-          android:src="@drawable/travel"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-          app:layout_constraintStart_toEndOf="@+id/imageView7"
-          app:layout_constraintTop_toTopOf="@+id/imageView7"
-          app:layout_constraintVertical_bias="0.0" />
-
-      <TextView
-          android:id="@+id/textView21"
-          android:layout_width="50dp"
-          android:layout_height="20dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Travel"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toEndOf="@+id/imageView7"
-          app:layout_constraintTop_toTopOf="@+id/imageView1" />
-
-      <RadioButton
-          android:id="@+id/radioButton1"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:layout_marginBottom="5dp"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView1"
-          app:layout_constraintStart_toStartOf="@+id/textView21" />
-
-      <ImageView
-          android:id="@+id/imageView2"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginStart="5dp"
-          android:layout_marginEnd="8dp"
-          android:src="@drawable/sports"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView1"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@+id/imageView1"
-          app:layout_constraintTop_toTopOf="@+id/imageView1" />
-
-      <TextView
-          android:id="@+id/textView2"
-          android:layout_width="50dp"
-          android:layout_height="20dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Sports"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/imageView2"
-          app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-      <RadioButton
-          android:id="@+id/radioButton2"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:layout_marginBottom="5dp"
-          android:checked="true"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-          app:layout_constraintStart_toStartOf="@+id/textView2" />
-
-      <ImageView
-          android:id="@+id/imageView3"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginTop="16dp"
-          android:src="@drawable/nightclubsdancing"
-          app:layout_constraintStart_toStartOf="@+id/imageView7"
-          app:layout_constraintTop_toBottomOf="@+id/imageView7" />
-
-      <TextView
-          android:id="@+id/textView3"
-          android:layout_width="80dp"
-          android:layout_height="40dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Nightclubs/Dancing"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/imageView3"
-          app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
-      <RadioButton
-          android:id="@+id/radioButton3"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:layout_marginBottom="5dp"
-          android:checked="true"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-          app:layout_constraintStart_toStartOf="@+id/textView3" />
-
-      <ImageView
-          android:id="@+id/imageView4"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginStart="5dp"
-          android:src="@drawable/coffeeconversation"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-          app:layout_constraintStart_toEndOf="@+id/imageView3"
-          app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
-      <TextView
-          android:id="@+id/textView4"
-          android:layout_width="90dp"
-          android:layout_height="40dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Coffee Conversation"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/imageView4"
-          app:layout_constraintTop_toTopOf="@+id/imageView4" />
-
-      <RadioButton
-          android:id="@+id/radioButton4"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:layout_marginBottom="5dp"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-          app:layout_constraintStart_toStartOf="@+id/textView4" />
-
-      <ImageView
-          android:id="@+id/imageView5"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginStart="5dp"
-          android:layout_marginEnd="8dp"
-          android:src="@drawable/mmuseumart"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@+id/imageView4"
-          app:layout_constraintTop_toTopOf="@+id/imageView4" />
-
-      <TextView
-          android:id="@+id/textView5"
-          android:layout_width="90dp"
-          android:layout_height="30dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Museum / Art"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/imageView5"
-          app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
-      <RadioButton
-          android:id="@+id/radioButton5"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:layout_marginBottom="4dp"
-          android:checked="true"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-          app:layout_constraintStart_toStartOf="@+id/textView5" />
-
-      <ImageView
-          android:id="@+id/imageView6"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginTop="16dp"
-          android:src="@drawable/mmoviesvideos"
-          app:layout_constraintBottom_toBottomOf="@+id/background"
-          app:layout_constraintStart_toStartOf="@+id/imageView3"
-          app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-      <TextView
-          android:id="@+id/textView6"
-          android:layout_width="105dp"
-          android:layout_height="30dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Movies / Videos"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/imageView6"
-          app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-      <RadioButton
-          android:id="@+id/radioButton6"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:layout_marginBottom="4dp"
-          android:checked="true"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-          app:layout_constraintStart_toStartOf="@+id/textView6" />
-
-      <ImageView
-          android:id="@+id/imageView8"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginStart="5dp"
-          android:src="@drawable/mmusicconcerts"
-          app:layout_constraintBottom_toBottomOf="@+id/background"
-          app:layout_constraintStart_toEndOf="@+id/imageView6"
-          app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-      <TextView
-          android:id="@+id/textView8"
-          android:layout_width="100dp"
-          android:layout_height="30dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Music Concerts"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/imageView8"
-          app:layout_constraintTop_toTopOf="@+id/imageView8" />
-
-      <RadioButton
-          android:id="@+id/radioButton8"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:layout_marginBottom="4dp"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-          app:layout_constraintStart_toStartOf="@+id/textView8" />
-
-      <ImageView
-          android:id="@+id/imageView9"
-          android:layout_width="130dp"
-          android:layout_height="120dp"
-          android:layout_marginStart="5dp"
-          android:layout_marginEnd="8dp"
-          android:src="@drawable/winetasting"
-          app:layout_constraintBottom_toBottomOf="@+id/background"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@+id/imageView8"
-          app:layout_constraintTop_toTopOf="@+id/imageView8" />
-
-      <TextView
-          android:id="@+id/textView9"
-          android:layout_width="90dp"
-          android:layout_height="30dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
-          android:text="Wine Testing"
-          android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/imageView9"
-          app:layout_constraintTop_toTopOf="@+id/imageView9" />
-
-      <RadioButton
-          android:id="@+id/radioButton9"
-          android:layout_width="40dp"
-          android:layout_height="30dp"
-          android:checked="true"
-          android:layout_marginBottom="4dp"
-          app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-          app:layout_constraintStart_toStartOf="@+id/textView9" />
-
-      <Button
-          android:id="@+id/button4"
-          android:layout_width="250dp"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="32dp"
-          android:text="SAVE AND CONTINUE"
-          android:backgroundTint="@color/blue"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/background" />
-
-      <Button
-          android:id="@+id/swipe"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
-          android:backgroundTint="@color/white"
-          android:text="Skip for now >>"
-          android:textAllCaps="false"
-          android:textColor="@color/offwhite"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/button4" />
+         <Button
+             android:id="@+id/swipe"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="16dp"
+             android:layout_marginBottom="10dp"
+             android:backgroundTint="@color/white"
+             android:text="Skip for now >>"
+             android:textAllCaps="false"
+             android:textColor="@color/offwhite"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/button4" />
 
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+   </LinearLayout>
+</ScrollView>
