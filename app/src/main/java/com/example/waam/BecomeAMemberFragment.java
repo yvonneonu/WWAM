@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.BulletSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,7 +39,8 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private LinearLayout linearLayoutOne, linearLayoutTwo, linearLayoutThree, linearLayoutFour, linearLayoutFive;
+    private MaterialCardView linearLayoutOne, linearLayoutTwo, linearLayoutThree, linearLayoutFour;
+    private LinearLayout linearLayoutFive, layoutPlan;
     private CheckBox radioButtonone;
     private CheckBox radioButtontwo;
     private CheckBox radioButtonthree;
@@ -79,12 +83,17 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
 
+        SpannableString string = new SpannableString("Text with\nBullet point");
+        string.setSpan(new BulletSpan(), 10, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
         linearLayoutOne = view.findViewById(R.id.layone);
         linearLayoutTwo = view.findViewById(R.id.laytwo);
         linearLayoutThree = view.findViewById(R.id.laythree);
         linearLayoutFour = view.findViewById(R.id.layfour);
         linearLayoutFive = view.findViewById(R.id.purchase);
 
+        layoutPlan = view.findViewById(R.id.layoutplan);
 
         radioButtonone = view.findViewById(R.id.radioButtonone);
         radioButtontwo = view.findViewById(R.id.radioButtontwo);
@@ -151,7 +160,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     }
 
 
-    private void setClicked(LinearLayout first, LinearLayout second, LinearLayout third,LinearLayout original){
+    private void setClicked(MaterialCardView first, MaterialCardView second, MaterialCardView third,MaterialCardView original){
         first.setBackgroundResource(R.drawable.price_box_bg);
         second.setBackgroundResource(R.drawable.price_box_bg);
         third.setBackgroundResource(R.drawable.price_box_bg);
