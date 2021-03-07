@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -30,7 +32,6 @@ public class CompleteProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_profile);
 
-        //image = findViewById(R.id.linearLayout);
 
         firstImage = findViewById(R.id.imageView);
         secondImage = findViewById(R.id.imageView1);
@@ -43,23 +44,23 @@ public class CompleteProfile extends AppCompatActivity {
         ninethImage = findViewById(R.id.imageView8);
         wipe = findViewById(R.id.swipe);
 
-        Intent intent = getIntent();
-        if (intent.getExtras() != null){
-            String image1 = intent.getStringExtra("image");
-           // image.setImage
-            //image.setImageURI(imageUri);
-           // if (requestCode == 1) {
-               // Bitmap bitmap = BitmapFactory.decodeFile(pathFile);
-                //image.setImageBitmap(bitmap);
-
-        }
-
 
         firstImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
                 bottomSheet.show(getSupportFragmentManager(),"TAG");
+
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(firstImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
 
@@ -68,6 +69,17 @@ public class CompleteProfile extends AppCompatActivity {
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
                 bottomSheet.show(getSupportFragmentManager(),"TAG");
+
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(secondImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
 
@@ -76,6 +88,16 @@ public class CompleteProfile extends AppCompatActivity {
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
                 bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(thirdImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
 
@@ -84,6 +106,16 @@ public class CompleteProfile extends AppCompatActivity {
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
                 bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(fourthImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
 
@@ -92,6 +124,16 @@ public class CompleteProfile extends AppCompatActivity {
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
                 bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(fivethImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
 
@@ -100,6 +142,16 @@ public class CompleteProfile extends AppCompatActivity {
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
                 bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(sixthImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
 
@@ -108,34 +160,55 @@ public class CompleteProfile extends AppCompatActivity {
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
                 bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(seventhImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
 
         eightImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                BottomSheetDialog bottomSheetDialog= new BottomSheetDialog(CompleteProfile.this);
-                View botomSjeetDialogview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_picture,
-                        (LinearLayout)findViewById(R.id.picture));
-                bottomSheetDialog.setContentView(botomSjeetDialogview);
-                bottomSheetDialog.show();
-
+                BottomSheet bottomSheet = new BottomSheet();
+                bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(eightImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
 
         ninethImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                BottomSheetDialog bottomSheetDialog= new BottomSheetDialog(CompleteProfile.this);
-                View botomSjeetDialogview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_picture,
-                        (LinearLayout)findViewById(R.id.picture));
-                bottomSheetDialog.setContentView(botomSjeetDialogview);
-                bottomSheetDialog.show();
-
+                BottomSheet bottomSheet = new BottomSheet();
+                bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(ninethImage);
+                        bottomSheet.dismiss();
+                    }
+                });
             }
         });
+
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

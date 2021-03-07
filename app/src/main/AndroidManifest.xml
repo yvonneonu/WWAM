@@ -25,7 +25,9 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".finalProfile"></activity>
+        <activity android:name=".finalProfile">
+
+        </activity>
         <activity android:name=".picture" />
         <activity android:name=".CompleteProfile">
             <intent-filter>
