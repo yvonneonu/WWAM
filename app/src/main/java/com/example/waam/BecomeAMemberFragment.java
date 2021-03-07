@@ -42,7 +42,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private static final String ARG_PARAM2 = "param2";
     private MaterialCardView linearLayoutOne, linearLayoutTwo, linearLayoutThree, linearLayoutFour;
     private LinearLayout linearLayoutFive, layoutPlan;
-    private TextView firstTxt, secondTxt, thirdTxt, fourthTxt;
     private CheckBox radioButtonone;
     private CheckBox radioButtontwo;
     private CheckBox radioButtonthree;
@@ -98,10 +97,10 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         layoutPlan = view.findViewById(R.id.layoutplan);
 
 
-        firstTxt = view.findViewById(R.id.textView28);
-        secondTxt = view.findViewById(R.id.textView29);
-        thirdTxt = view.findViewById(R.id.textView32);
-        fourthTxt = view.findViewById(R.id.textView33);
+        TextView firstTxt = view.findViewById(R.id.textView28);
+        TextView secondTxt = view.findViewById(R.id.textView29);
+        TextView thirdTxt = view.findViewById(R.id.textView32);
+        TextView fourthTxt = view.findViewById(R.id.textView33);
 
         radioButtonone = view.findViewById(R.id.radioButtonone);
         radioButtontwo = view.findViewById(R.id.radioButtontwo);
