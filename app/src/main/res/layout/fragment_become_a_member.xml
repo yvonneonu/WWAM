@@ -14,8 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -39,7 +38,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <CheckBox
                     android:id="@+id/radioButtonone"
@@ -48,6 +48,8 @@
                     android:layout_marginStart="24dp"
 
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/view7"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,50 +95,52 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@android:color/black"
-                    android:visibility="visible"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/layoutplan"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewone" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/layoutplan"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view7">
+                    app:layout_constraintStart_toStartOf="parent">
 
                     <TextView
                         android:id="@+id/textView28"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
 
                     <TextView
                         android:id="@+id/textView29"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
 
                     <TextView
                         android:id="@+id/textView32"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
 
                     <TextView
                         android:id="@+id/textView33"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
 
                 </LinearLayout>
 
@@ -159,9 +163,10 @@
             android:checkable="true"
             app:cardElevation="4dp"
             android:layout_marginTop="10dp">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <CheckBox
                     android:id="@+id/radioButtontwo"
@@ -169,6 +174,8 @@
                     android:layout_height="41dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/view8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -215,30 +222,55 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@android:color/black"
-                    android:visibility="visible"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/layoutplantwo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewfour" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
 
                 <LinearLayout
                     android:id="@+id/layoutplantwo"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view8">
+                    app:layout_constraintStart_toStartOf="parent">
 
 
+                    <TextView
+                        android:id="@+id/textView34fourtin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/textView35fourtin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/textView36fourtin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/textView37fourtin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
                 </LinearLayout>
 
 
@@ -262,7 +294,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <CheckBox
                     android:id="@+id/radioButtonthree"
@@ -270,6 +302,8 @@
                     android:layout_height="41dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/view9"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -316,29 +350,54 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@android:color/black"
-                    android:visibility="visible"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/layoutplanthree"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewseven" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/layoutplanthree"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/view9">
+                    app:layout_constraintStart_toStartOf="parent">
 
 
+                    <TextView
+                        android:id="@+id/textView38twe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/textView39twe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/textView40twe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FDFDFD" />
+
+                    <TextView
+                        android:id="@+id/textView41twe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -362,7 +421,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <CheckBox
                     android:id="@+id/radioButton2"
@@ -370,6 +429,8 @@
                     android:layout_height="41dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/view11"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -383,7 +444,8 @@
                     android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="@+id/radioButton2"
                     app:layout_constraintStart_toEndOf="@+id/radioButton2"
-                    app:layout_constraintTop_toTopOf="@+id/radioButton2" />
+                    app:layout_constraintTop_toTopOf="@+id/radioButton2"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
                     android:id="@+id/textView21"
@@ -414,25 +476,52 @@
                     android:id="@+id/view11"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#000000"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/layoutplanfour"
                     app:layout_constraintEnd_toEndOf="@+id/textView20"
-                    app:layout_constraintStart_toStartOf="@+id/radioButton2"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                    app:layout_constraintStart_toStartOf="@+id/radioButton2" />
 
                 <LinearLayout
                     android:id="@+id/layoutplanfour"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView20"
-                    app:layout_constraintStart_toStartOf="@+id/radioButton2"
-                    app:layout_constraintTop_toTopOf="@+id/view11">
+                    app:layout_constraintStart_toStartOf="@+id/radioButton2">
 
 
+                    <TextView
+                        android:id="@+id/textView42hun"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/textView43hun"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/textView44hun"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/textView45hun"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
