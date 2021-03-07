@@ -73,12 +73,7 @@ public class Profile extends AppCompatActivity {
                 dispatchTakePictureIntent();
             }
         });
-        /*imageView.setOnClickListener(new View.OnClickListener() {
-           / @Override
-            public void onClick(View v) {
-                //selectImage();
-            }
-        });*/
+
 
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
