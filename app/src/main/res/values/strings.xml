@@ -17,7 +17,7 @@
 
     <string-array name="card_type">
         <item>Visa</item>
-        <item>string_value2</item>
-        <item>string_value3</item>
+        <item>MasterCard</item>
+        <item>DebitCard</item>
     </string-array>
 </resources>

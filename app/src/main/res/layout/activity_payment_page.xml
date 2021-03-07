@@ -60,10 +60,11 @@
                     android:text="Card Type" />
 
                 <Spinner
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/SpinnerTheme"
-                    android:entries="@array/card_type"/>
+                    android:gravity="end"
+                    android:entries="@array/card_type" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,6 +89,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:text="0123456" />
@@ -293,7 +295,6 @@
                     android:layout_gravity="center"
                     android:text="Subscribe now" />
             </LinearLayout>
-
 
 
         </LinearLayout>
