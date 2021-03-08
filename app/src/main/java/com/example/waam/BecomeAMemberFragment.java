@@ -114,9 +114,11 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         TextView secondTxt = view.findViewById(R.id.textView29);
         TextView thirdTxt = view.findViewById(R.id.textView32);
         TextView fourthTxt = view.findViewById(R.id.textView33);
+
         TextView firsttin = view.findViewById(R.id.textView34fourtin);
         TextView secondtin = view.findViewById(R.id.textView35fourtin);
         TextView thirdtin = view.findViewById(R.id.textView36fourtin);
+
         TextView fourtin = view.findViewById(R.id.textView37fourtin);
 
         TextView firsttwe = view.findViewById(R.id.textView38twe);
