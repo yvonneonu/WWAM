@@ -25,7 +25,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 public class CompleteProfile extends AppCompatActivity {
     private ImageView firstImage, secondImage,thirdImage, fourthImage, fivethImage, sixthImage, seventhImage, eightImage, ninethImage, photo, gallerysave;;
     private TextView wipe;
-    private ImageView image;
+    private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,8 @@ public class CompleteProfile extends AppCompatActivity {
         setContentView(R.layout.activity_complete_profile);
 
 
-        firstImage = findViewById(R.id.imageView);
+
+        firstImage = findViewById(R.id.imageView0);
         secondImage = findViewById(R.id.imageView1);
         thirdImage = findViewById(R.id.imageView2);
         fourthImage = findViewById(R.id.imageView3);
@@ -42,10 +43,19 @@ public class CompleteProfile extends AppCompatActivity {
         seventhImage = findViewById(R.id.imageView6);
         eightImage = findViewById(R.id.imageView7);
         ninethImage = findViewById(R.id.imageView8);
+        image = findViewById(R.id.image);
+        imagefirst = findViewById(R.id.image1);
+        imagesecond = findViewById(R.id.image2);
+        imagethird = findViewById(R.id.image3);
+        imagefourth = findViewById(R.id.image4);
+        imagefifth = findViewById(R.id.image5);
+        imagesixth = findViewById(R.id.image6);
+        imageseveth = findViewById(R.id.image7);
+        imageeight = findViewById(R.id.image8);
         wipe = findViewById(R.id.swipe);
 
 
-        firstImage.setOnClickListener(new View.OnClickListener() {
+        image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
@@ -57,14 +67,17 @@ public class CompleteProfile extends AppCompatActivity {
                         Glide.with(CompleteProfile.this)
                                 .asBitmap()
                                 .load(uri)
-                                .into(firstImage);
+                                .into(image);
+                        firstImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
                 });
             }
         });
 
-        secondImage.setOnClickListener(new View.OnClickListener() {
+        imagefirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
@@ -76,14 +89,17 @@ public class CompleteProfile extends AppCompatActivity {
                         Glide.with(CompleteProfile.this)
                                 .asBitmap()
                                 .load(uri)
-                                .into(secondImage);
+                                .into(imagefirst);
+                        secondImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
                 });
             }
         });
 
-        thirdImage.setOnClickListener(new View.OnClickListener() {
+        imagesecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
@@ -94,14 +110,17 @@ public class CompleteProfile extends AppCompatActivity {
                         Glide.with(CompleteProfile.this)
                                 .asBitmap()
                                 .load(uri)
-                                .into(thirdImage);
+                                .into(imagesecond);
+                        thirdImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
                 });
             }
         });
 
-        fourthImage.setOnClickListener(new View.OnClickListener() {
+        imagethird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
@@ -112,14 +131,39 @@ public class CompleteProfile extends AppCompatActivity {
                         Glide.with(CompleteProfile.this)
                                 .asBitmap()
                                 .load(uri)
-                                .into(fourthImage);
+                                .into(imagethird);
+                       fourthImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
+                        bottomSheet.dismiss();
+
+                    }
+                });
+            }
+        });
+
+        imagefourth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheet bottomSheet = new BottomSheet();
+                bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(imagefourth);
+                        fivethImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
                 });
             }
         });
 
-        fivethImage.setOnClickListener(new View.OnClickListener() {
+       imagefifth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
@@ -130,14 +174,38 @@ public class CompleteProfile extends AppCompatActivity {
                         Glide.with(CompleteProfile.this)
                                 .asBitmap()
                                 .load(uri)
-                                .into(fivethImage);
+                                .into(imagefifth);
+                        bottomSheet.dismiss();
+                        sixthImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+
+        imagesixth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheet bottomSheet = new BottomSheet();
+                bottomSheet.show(getSupportFragmentManager(),"TAG");
+                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                    @Override
+                    public void selectedImageListener(Uri uri) {
+                        Glide.with(CompleteProfile.this)
+                                .asBitmap()
+                                .load(uri)
+                                .into(imagesixth);
+                        seventhImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
                 });
             }
         });
 
-        sixthImage.setOnClickListener(new View.OnClickListener() {
+        imageseveth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
@@ -148,14 +216,17 @@ public class CompleteProfile extends AppCompatActivity {
                         Glide.with(CompleteProfile.this)
                                 .asBitmap()
                                 .load(uri)
-                                .into(sixthImage);
+                                .into(imageseveth);
+                        eightImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
                 });
             }
         });
 
-        seventhImage.setOnClickListener(new View.OnClickListener() {
+       imageeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet bottomSheet = new BottomSheet();
@@ -166,43 +237,10 @@ public class CompleteProfile extends AppCompatActivity {
                         Glide.with(CompleteProfile.this)
                                 .asBitmap()
                                 .load(uri)
-                                .into(seventhImage);
-                        bottomSheet.dismiss();
-                    }
-                });
-            }
-        });
-
-        eightImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheet bottomSheet = new BottomSheet();
-                bottomSheet.show(getSupportFragmentManager(),"TAG");
-                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
-                    @Override
-                    public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(eightImage);
-                        bottomSheet.dismiss();
-                    }
-                });
-            }
-        });
-
-        ninethImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheet bottomSheet = new BottomSheet();
-                bottomSheet.show(getSupportFragmentManager(),"TAG");
-                bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
-                    @Override
-                    public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(ninethImage);
+                                .into(imageeight);
+                        ninethImage.setVisibility(View.GONE);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
                 });
