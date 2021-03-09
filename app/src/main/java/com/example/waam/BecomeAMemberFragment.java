@@ -99,7 +99,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         int color = getActivity().getResources().getColor(R.color.green);
         SpannableString string = new SpannableString("Bullet point");
-        string.setSpan(new BulletSpan(20,color,20),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        string.setSpan(new BulletSpan(20,color,10),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
         linearLayoutOne = view.findViewById(R.id.layone);

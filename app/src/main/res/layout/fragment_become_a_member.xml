@@ -23,7 +23,6 @@
             android:text="Upgrade your plan to unlock more amazing features" />
 
 
-
         <worker8.com.github.radiogroupplus.RadioGroupPlus
             android:id="@+id/plus"
             android:layout_width="match_parent"
@@ -46,8 +45,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <RadioButton
                         android:id="@+id/radioButtonone"
@@ -63,8 +61,8 @@
                     <TextView
                         android:id="@+id/textViewone"
                         android:layout_width="wrap_content"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:text="$9.95"
                         android:textColor="#000000"
                         android:textSize="30sp"
@@ -87,7 +85,7 @@
                         android:id="@+id/textViewthree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_weight="1"
                         android:text="1 Month"
                         android:textColor="#000000"
@@ -101,9 +99,7 @@
                         android:id="@+id/view7"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplan"
@@ -148,8 +144,18 @@
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                     </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -161,14 +167,14 @@
                 android:id="@+id/laytwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:checkable="true"
                 android:clickable="true"
                 android:focusable="true"
-                android:checkable="true"
-                app:cardElevation="4dp"
-                android:layout_marginTop="10dp">
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:cardElevation="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -212,7 +218,7 @@
                         android:id="@+id/textViewsix"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_weight="1"
                         android:text="3 Month"
                         android:textColor="#000000"
@@ -227,9 +233,7 @@
                         android:id="@+id/view8"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplantwo"
@@ -278,6 +282,18 @@
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
                     </LinearLayout>
+
+
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -339,7 +355,7 @@
                         android:id="@+id/textViewnine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_weight="1"
                         android:text="12 Month"
                         android:textColor="#000000"
@@ -354,8 +370,6 @@
                         android:id="@+id/view9"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
                         android:layout_marginBottom="8dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
@@ -404,6 +418,17 @@
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
                     </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/imageButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -466,7 +491,7 @@
                         android:id="@+id/textView20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_weight="1"
                         android:text="Dating Agent"
                         android:textColor="#000000"
@@ -484,8 +509,8 @@
                         android:background="#000000"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplanfour"
-                        app:layout_constraintEnd_toEndOf="@+id/textView20"
-                        app:layout_constraintStart_toStartOf="@+id/radioButton2" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <LinearLayout
                         android:id="@+id/layoutplanfour"
@@ -527,6 +552,18 @@
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
                     </LinearLayout>
+
+
+                    <ImageButton
+                        android:id="@+id/imageButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -660,7 +697,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>-->
-
 
 
         <!--<com.google.android.material.card.MaterialCardView
@@ -1056,8 +1092,8 @@
             android:id="@+id/purchase"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
             android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/sectiontabsactive2"
             android:gravity="center"
             android:orientation="horizontal">
@@ -1084,9 +1120,6 @@
 
 
     </LinearLayout>
-
-
-
 
 
 </ScrollView>
