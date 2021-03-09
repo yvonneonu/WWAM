@@ -34,7 +34,7 @@ public class CompleteProfile extends AppCompatActivity {
         setContentView(R.layout.activity_complete_profile);
         String imageUri = getIntent().getStringExtra("getProfilePics");
 
-        Log.d("Complete",imageUri);
+        Log.d("Complete", imageUri);
         String Fullname = getIntent().getStringExtra("nameprofile");
 
         firstImage = findViewById(R.id.imageView0);
