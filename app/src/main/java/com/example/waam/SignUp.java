@@ -2,6 +2,7 @@ package com.example.waam;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -42,6 +43,7 @@ public class SignUp extends AppCompatActivity {
     UserService userService;
     private CardView cardView1;
     private EditText name, email, zip, password, confrim;
+    //ConstraintLayout constraintLayou;
 
     String chose = "";
     String interest = "";
@@ -93,6 +95,7 @@ public class SignUp extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                           // constraintLayou.setVisibility(View.GONE);
                             cardView1.setVisibility(View.GONE);
                         }
                     }, 5000);

@@ -66,7 +66,7 @@ public class CompleteProfile extends AppCompatActivity {
                 .load(Uri.parse(imageUri))
                 .into(profile);
 
-        name.setText(Fullname);
+       // name.setText(Fullname);
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
