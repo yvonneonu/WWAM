@@ -107,12 +107,12 @@ public class Profile extends AppCompatActivity {
             imageView.setImageURI(imageUri);
             if (requestCode == 1){
                 Bitmap bitmap = BitmapFactory.decodeFile(pathFile);
-                Glide.with(this)
+                /*Glide.with(this)
                         .asBitmap()
                         .circleCrop()
                         .load(imageUri)
-                        .into(imageView);
-                //imageView.setImageBitmap(bitmap);
+                        .into(imageView);*/
+                imageView.setImageBitmap(bitmap);
             }
         }
     }

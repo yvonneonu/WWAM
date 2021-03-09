@@ -20,7 +20,7 @@ public class Successverified extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent home = new Intent(Successverified.this, Enable_Location.class);
+                Intent home = new Intent(Successverified.this, LocationDetectActivity.class);
                 home.putExtra("name", Fullname);
                 startActivity(home);
                 finish();
