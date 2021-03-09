@@ -1,9 +1,12 @@
 package com.example.waam;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -85,6 +88,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,8 +97,9 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
 
+        int color = 00000;
         SpannableString string = new SpannableString("Bullet point");
-        string.setSpan(new BulletSpan(),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        string.setSpan(new BulletSpan(20,color,20),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
         linearLayoutOne = view.findViewById(R.id.layone);
