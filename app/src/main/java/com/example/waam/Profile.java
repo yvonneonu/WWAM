@@ -87,7 +87,8 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile.this, Interest.class);
-                intent.putExtra("profilepics", imageUri);
+                Log.d("ImageUri",imageUri.toString());
+                intent.putExtra("profilepics", imageUri.toString());
                 intent.putExtra("name", Fullname);
                 startActivity(intent);
             }

@@ -32,9 +32,10 @@ public class CompleteProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_profile);
-        Uri imageUri = (Uri)getIntent().getSerializableExtra("getProfilePics");
-        String Fullname = getIntent().getStringExtra("nameprofile");
+        String imageUri = getIntent().getStringExtra("getProfilePics");
 
+        Log.d("Complete",imageUri);
+        String Fullname = getIntent().getStringExtra("nameprofile");
 
         firstImage = findViewById(R.id.imageView0);
         secondImage = findViewById(R.id.imageView1);
@@ -61,7 +62,8 @@ public class CompleteProfile extends AppCompatActivity {
 
         Glide.with(this)
                 .asBitmap()
-                .load(imageUri)
+                .circleCrop()
+                .load(Uri.parse(imageUri))
                 .into(profile);
 
         name.setText(Fullname);
@@ -268,6 +270,7 @@ public class CompleteProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
+                intent.putExtra("image", imageUri.toString());
                 startActivity(intent);
             }
         });

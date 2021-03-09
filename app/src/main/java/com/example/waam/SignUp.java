@@ -137,7 +137,7 @@ public class SignUp extends AppCompatActivity {
 
                     Intent intent = new Intent(SignUp.this, Verification1.class);
                     intent.putExtra("token", response.body().getToken());
-                    intent.putExtra("name", name.getText());
+                    intent.putExtra("name", name.getText().toString());
                     startActivity(intent);
                    // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                    // intent.putExtra("profilepics", imageUri);

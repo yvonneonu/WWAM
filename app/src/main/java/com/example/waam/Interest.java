@@ -33,7 +33,11 @@ public class Interest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
-        Uri imageUri = (Uri)getIntent().getSerializableExtra("profilepics");
+
+
+
+        String imageUri = getIntent().getStringExtra("profilepics");
+        Log.d("ImageUriIN",imageUri);
         String Fullname = getIntent().getStringExtra("name");
 
         wipe = findViewById(R.id.swipe);
