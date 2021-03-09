@@ -97,7 +97,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
 
-        int color = 00000;
+        int color = getActivity().getResources().getColor(R.color.green);
         SpannableString string = new SpannableString("Bullet point");
         string.setSpan(new BulletSpan(20,color,20),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
