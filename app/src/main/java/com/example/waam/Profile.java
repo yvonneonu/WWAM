@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -105,7 +107,12 @@ public class Profile extends AppCompatActivity {
             imageView.setImageURI(imageUri);
             if (requestCode == 1){
                 Bitmap bitmap = BitmapFactory.decodeFile(pathFile);
-                imageView.setImageBitmap(bitmap);
+                Glide.with(this)
+                        .asBitmap()
+                        .circleCrop()
+                        .load(imageUri)
+                        .into(imageView);
+                //imageView.setImageBitmap(bitmap);
             }
         }
     }
