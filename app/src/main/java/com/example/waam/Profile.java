@@ -39,6 +39,7 @@ import retrofit2.http.Url;
 
 public class Profile extends AppCompatActivity {
 
+    private static final int PICTURE_TAKEN = 4 ;
     //public static final String KEY_User_Document1 = "doc1";
     String pathFile;
     // private String Document_img1="";
@@ -50,6 +51,7 @@ public class Profile extends AppCompatActivity {
     private int resultCode;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
+    private Uri photouri;
     private Intent data;
     private String profilePics;
 
@@ -102,18 +104,27 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK || requestCode == PICK_IMAGE){
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
             imageView.setImageURI(imageUri);
-            if (requestCode == 1){
-                Bitmap bitmap = BitmapFactory.decodeFile(pathFile);
+                //Bitmap bitmap = BitmapFactory.decodeFile(pathFile);
                 Glide.with(this)
                         .asBitmap()
                         .circleCrop()
                         .load(imageUri)
                         .into(imageView);
                 //imageView.setImageBitmap(bitmap);
-            }
+
+        }else if(resultCode == RESULT_OK && requestCode == PICTURE_TAKEN){
+            imageUri = photouri;
+            Glide.with(this)
+                    .asBitmap()
+                    .circleCrop()
+                    .load(imageUri)
+                    .into(imageView);
+
+        }else{
+            Toast.makeText(this,"No image was selected ",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -122,14 +133,14 @@ public class Profile extends AppCompatActivity {
         Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePicture.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
-            File photoFile = null;
+            File photoFile ;
             photoFile = createPhotoFile();
             if (photoFile != null) {
 
                 pathFile = photoFile.getAbsolutePath();
-                Uri photouri = FileProvider.getUriForFile(Profile.this, "com.example.android.fileprovider", photoFile);
+                photouri = FileProvider.getUriForFile(Profile.this, "com.example.android.fileprovider", photoFile);
                 takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photouri);
-                startActivityForResult(takePicture, 1);
+                startActivityForResult(takePicture, PICTURE_TAKEN);
             }
 
             // Continue only if the File was successfully created
