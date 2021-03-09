@@ -43,13 +43,13 @@ public class Profile extends AppCompatActivity {
 
 
     ImageView imageView;
-    TextView textView, gallery;
+    TextView textView, gallery, wipe;
     private int requestCode;
     private int resultCode;
-    Button wipe;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     private Intent data;
+    private String profilePics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        String Fullname = getIntent().getStringExtra("name");
 
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
@@ -86,6 +87,8 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile.this, Interest.class);
+                intent.putExtra("profilepics", imageUri);
+                intent.putExtra("name", Fullname);
                 startActivity(intent);
             }
         });
@@ -97,7 +100,7 @@ public class Profile extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK || requestCode == PICK_IMAGE){
-           // imageUri = data.getData();
+            imageUri = data.getData();
             imageView.setImageURI(imageUri);
             if (requestCode == 1){
                 Bitmap bitmap = BitmapFactory.decodeFile(pathFile);

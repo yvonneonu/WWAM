@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,11 +27,14 @@ public class Interest extends AppCompatActivity {
     String MoviesorVideos = "";
     String MusicConcerts = "";
     String Winetesting = "";
+   // String Fullname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
+        Uri imageUri = (Uri)getIntent().getSerializableExtra("profilepics");
+        String Fullname = getIntent().getStringExtra("name");
 
         wipe = findViewById(R.id.swipe);
         zeroRadio = findViewById(R.id.radioButton);
@@ -57,6 +61,8 @@ public class Interest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Interest.this, CompleteProfile.class);
+                intent.putExtra("getProfilePics", imageUri);
+                intent.putExtra("nameprofile", Fullname);
                 startActivity(intent);
             }
         });

@@ -51,6 +51,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private static final int MY_CAMERA_REQUEST_CODE = 100;
 
 
+
     public BottomSheet() {
 
     }
@@ -61,6 +62,14 @@ public class BottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_picture, container, false);
         TextView takePic = view.findViewById(R.id.textView28);
+        TextView cancel = view.findViewById(R.id.textView2);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
 
         takePic.setOnClickListener(new View.OnClickListener() {
@@ -152,29 +161,6 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     }
 
-    /*public void requestPermission(){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACESS_C)){
-            new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.title_location_permission)
-                    .setMessage(R.string.text_location_permission)
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                    MY_PERMISSIONS_REQUEST_LOCATION);
-                        }
-                    })
-                    .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss())
-                    .create()
-                    .show();
-
-        }else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-        }
-    }*/
 
     public interface SelectedImage{
         void selectedImageListener(Uri uri);

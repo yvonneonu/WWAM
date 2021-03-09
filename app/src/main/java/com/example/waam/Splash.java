@@ -18,6 +18,7 @@ public class Splash extends AppCompatActivity {
        // Bundle bundle = getIntent().getExtras();
         String phonenumber = getIntent().getStringExtra("phonenumber");
         String token = getIntent().getStringExtra("token");
+        String Fullname = getIntent().getStringExtra("name");
 
 
 
@@ -28,6 +29,7 @@ public class Splash extends AppCompatActivity {
                //home.putExtras(bundle);
                 home.putExtra("number", phonenumber);
                 home.putExtra("token", token);
+                home.putExtra("name", Fullname);
                startActivity(home);
                finish();
             }

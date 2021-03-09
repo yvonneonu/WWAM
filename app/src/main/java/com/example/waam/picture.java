@@ -27,7 +27,7 @@ public class picture extends AppCompatActivity {
 
     String pathFile;
     ImageView imageView;
-    TextView gallery, takePicsave;
+    TextView gallery, takePicsave, cancel;
     private int requestCode;
     private int resultCode;
     Button wipe;
@@ -42,9 +42,17 @@ public class picture extends AppCompatActivity {
 
         gallery = findViewById(R.id.textView27);
         takePicsave = findViewById(R.id.textView28);
+        cancel = findViewById(R.id.textView2);
+
        // if (Build.VERSION.SDK_INT >= 23) {
             //requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
        // }
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //bottom
+            }
+        });
 
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override

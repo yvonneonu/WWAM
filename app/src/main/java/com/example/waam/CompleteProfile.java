@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,14 +25,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class CompleteProfile extends AppCompatActivity {
     private ImageView firstImage, secondImage,thirdImage, fourthImage, fivethImage, sixthImage, seventhImage, eightImage, ninethImage, photo, gallerysave;;
-    private TextView wipe;
-    private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight;
+    private TextView wipe, name;
+    private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight, profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_profile);
-
+        Uri imageUri = (Uri)getIntent().getSerializableExtra("getProfilePics");
+        String Fullname = getIntent().getStringExtra("nameprofile");
 
 
         firstImage = findViewById(R.id.imageView0);
@@ -44,6 +46,7 @@ public class CompleteProfile extends AppCompatActivity {
         eightImage = findViewById(R.id.imageView7);
         ninethImage = findViewById(R.id.imageView8);
         image = findViewById(R.id.image);
+        profile = findViewById(R.id.imageView12);
         imagefirst = findViewById(R.id.image1);
         imagesecond = findViewById(R.id.image2);
         imagethird = findViewById(R.id.image3);
@@ -53,7 +56,15 @@ public class CompleteProfile extends AppCompatActivity {
         imageseveth = findViewById(R.id.image7);
         imageeight = findViewById(R.id.image8);
         wipe = findViewById(R.id.swipe);
+        name = findViewById(R.id.textView19);
 
+
+        Glide.with(this)
+                .asBitmap()
+                .load(imageUri)
+                .into(profile);
+
+        name.setText(Fullname);
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,9 +101,14 @@ public class CompleteProfile extends AppCompatActivity {
                                 .asBitmap()
                                 .load(uri)
                                 .into(imagefirst);
+                        Log.d("Bed", "mad");
                         secondImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
-                        linearLayout.setVisibility(View.GONE);
+                        Log.d("Bedy", "mad");
+                        LinearLayout linearLayout1 = findViewById(R.id.linearLayout1);
+                        TextView view1 = findViewById(R.id.text1);
+                        view1.setVisibility(View.GONE);
+                        linearLayout1.setVisibility(View.INVISIBLE);
+                        Log.d("Bedm", "mad");
                         bottomSheet.dismiss();
                     }
                 });
@@ -112,7 +128,7 @@ public class CompleteProfile extends AppCompatActivity {
                                 .load(uri)
                                 .into(imagesecond);
                         thirdImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout2);
                         linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
@@ -133,7 +149,7 @@ public class CompleteProfile extends AppCompatActivity {
                                 .load(uri)
                                 .into(imagethird);
                        fourthImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout3);
                         linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
 
@@ -155,7 +171,7 @@ public class CompleteProfile extends AppCompatActivity {
                                 .load(uri)
                                 .into(imagefourth);
                         fivethImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout4);
                         linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
@@ -177,7 +193,7 @@ public class CompleteProfile extends AppCompatActivity {
                                 .into(imagefifth);
                         bottomSheet.dismiss();
                         sixthImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout5);
                         linearLayout.setVisibility(View.GONE);
                     }
                 });
@@ -196,8 +212,9 @@ public class CompleteProfile extends AppCompatActivity {
                                 .asBitmap()
                                 .load(uri)
                                 .into(imagesixth);
+
                         seventhImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout6);
                         linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
@@ -218,7 +235,7 @@ public class CompleteProfile extends AppCompatActivity {
                                 .load(uri)
                                 .into(imageseveth);
                         eightImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout7);
                         linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
@@ -239,7 +256,7 @@ public class CompleteProfile extends AppCompatActivity {
                                 .load(uri)
                                 .into(imageeight);
                         ninethImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout8);
                         linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
                     }
