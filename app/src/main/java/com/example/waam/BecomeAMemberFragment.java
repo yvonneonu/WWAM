@@ -99,7 +99,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         int color = getActivity().getResources().getColor(R.color.green);
         SpannableString string = new SpannableString("Bullet point");
-        string.setSpan(new BulletSpan(20,color,10),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        string.setSpan(new BulletSpan(),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
         linearLayoutOne = view.findViewById(R.id.layone);
@@ -252,7 +252,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                             LinearLayout linearLayoutone,LinearLayout linearLayouttwo,
                             LinearLayout linearLayoutthree,LinearLayout linearLayoutOriginal,
                             TextView[] arrayOne, TextView[] arrayTwo, TextView[] arrayThree, TextView[] arrayReal,View view){
-        first.setBackgroundColor(Objects.requireNonNull(getActivity()).getResources().getColor(R.color.white));
+        first.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
         second.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
         third.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
         original.setBackgroundColor(getActivity().getResources().getColor(R.color.priceBackgrouond));
