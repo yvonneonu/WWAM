@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class Interest extends AppCompatActivity {
 
-    private Button wipe;
+    private TextView wipe;
     private CheckBox zeroRadio, oneRadio, twoRadio, threeRadio, fourRadio, fiveRadio, sixRadio, sevenRadio, eightRadio;
     private TextView zeroText, oneText, twoText, threeText, fourText, fiveText, sixText, sevenText, eightText;
     String Dinninout = "";
