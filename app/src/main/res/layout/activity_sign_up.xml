@@ -88,7 +88,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
             android:gravity="center"
-            android:text="Women"
+            android:text="Woman"
             android:onClick="woooo"
             android:textAllCaps="false"
             android:background="@drawable/border2"
@@ -130,7 +130,7 @@
             android:layout_height="40dp"
             android:background="@drawable/border2"
             android:gravity="center"
-            android:text="Women"
+            android:text="Woman"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:onClick="sek"
@@ -465,7 +465,25 @@ You can withdraw consent at any time."
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toTopOf="@+id/textView15" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/background">
 
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                tools:layout_editor_absoluteX="189dp"
+                tools:layout_editor_absoluteY="508dp" />
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

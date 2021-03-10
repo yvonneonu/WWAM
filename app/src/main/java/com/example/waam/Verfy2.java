@@ -32,6 +32,7 @@ public class Verfy2 extends AppCompatActivity {
     private String bearer;
     EditText first, secd, third, fourt, fifth, six;
     UserService userService;
+    String Fullname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class Verfy2 extends AppCompatActivity {
         six = findViewById(R.id.editText13);
 
         String phonenumber = getIntent().getStringExtra("number");
+        String Fullname = getIntent().getStringExtra("name");
         shownum.setText(phonenumber);
         final StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -68,17 +70,8 @@ public class Verfy2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-              /*  otp_text = first.getText().toString().trim();
-                otp_text = secd.getText().toString().trim();
-                otp_text = third.getText().toString().trim();
-                otp_text = fourt.getText().toString().trim();
-                otp_text = fifth.getText().toString().trim();
-                otp_text = six.getText().toString().trim();*/
-
                 gottensendotp();
-              /* Intent mainactivity = new Intent(Verfy2.this, Successverified.class);
-                startActivity(mainactivity);
-                finish();*/
+
             }
         });
         resend.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +176,11 @@ public class Verfy2 extends AppCompatActivity {
                 String message = "Successful";
                 Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
+                Intent intent = new Intent(Verfy2.this, Successverified.class);
+                intent.putExtra("token", response.body().getOtp());
+                intent.putExtra("name", Fullname);
+                startActivity(intent);
+                //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
                 finish();
             } else {
                 //response.errorBody();

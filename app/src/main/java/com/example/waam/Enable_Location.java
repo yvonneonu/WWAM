@@ -33,6 +33,7 @@ public class Enable_Location extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enable__location);
 
+
         fetch = findViewById(R.id.fetch_location);
         user_location = findViewById(R.id.user_location);
 
@@ -44,6 +45,7 @@ public class Enable_Location extends AppCompatActivity {
 
                 fetchLocation();
                 Intent intent = new Intent(Enable_Location.this, Profile.class);
+
                 startActivity(intent);
             }
         });

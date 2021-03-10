@@ -1,12 +1,15 @@
 package com.example.waam;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -16,6 +19,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,10 +40,12 @@ public class SignUp extends AppCompatActivity {
     private ImageView move;
     private Button update;
     UserService userService;
+    private CardView cardView1;
     private EditText name, email, zip, password, confrim;
 
     String chose = "";
     String interest = "";
+    String Fullname;
 
 
     private static String token;
@@ -54,6 +60,7 @@ public class SignUp extends AppCompatActivity {
 
         initDatePicker();
 
+        cardView1 = findViewById(R.id.cardview);
         seekingman = findViewById(R.id.seekman);
         save = findViewById(R.id.editText3);
         wantwoman = findViewById(R.id.seekwoman);
@@ -72,12 +79,38 @@ public class SignUp extends AppCompatActivity {
         back.setOnClickListener(v -> Signback());
         update.setText(getTodaysDate());
 
+
+
+        final ProgressBar progressBar = new ProgressBar(SignUp.this);
+
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register();
+                if (isNetworkAvailableAndConnected()){
+                    register();
+                    cardView1.setVisibility(View.VISIBLE);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            cardView1.setVisibility(View.GONE);
+                        }
+                    }, 5000);
+                }
+                else {
+                    Toast.makeText(SignUp.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                }
             }
         });
+    }
+
+    private boolean isNetworkAvailableAndConnected() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        boolean isNetworkAvailable = cm.getActiveNetworkInfo() != null;
+        boolean isNetworkConnected = isNetworkAvailable &&
+                cm.getActiveNetworkInfo().isConnected();
+        return isNetworkConnected;
     }
 
     private String getTodaysDate() {
@@ -100,7 +133,12 @@ public class SignUp extends AppCompatActivity {
                     String message = "Successful";
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
 
-                    startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
+                    Intent intent = new Intent(SignUp.this, Verification1.class);
+                    intent.putExtra("token", response.body().getToken());
+                    intent.putExtra("name", name.getText().toString());
+                    startActivity(intent);
+                   // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
+                   // intent.putExtra("profilepics", imageUri);
                     finish();
                 } else {
                     //response.errorBody();
@@ -261,6 +299,10 @@ public class SignUp extends AppCompatActivity {
             }else if (!Passwor.equals(Confirm)) {
                 confrim.setError("Mismatch Password");
                 confrim.requestFocus();
+            }else if (chose.isEmpty()) {
+                Toast.makeText(SignUp.this, "Choose your gender", Toast.LENGTH_LONG).show();
+            }else if (interest.isEmpty()) {
+                Toast.makeText(SignUp.this, "Choose your gender", Toast.LENGTH_LONG).show();
             }else if (Passwor.length() < 6) {
                 // password.setError("Password should be at aleast 6 character long");
                 password.requestFocus();
@@ -280,30 +322,7 @@ public class SignUp extends AppCompatActivity {
                 registerRequest.setSeeking(interest);
                 requestUser(registerRequest);
             }
-//
-//            Call<RegisterResponse> call = userService.registerUsers(registerRequest);
-//            call.enqueue(new Callback<RegisterResponse>() {
-//                @Override
-//                public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-//                    if (response.isSuccessful()) {
-//                     // Toast.makeText(SignUp.this, response.body().getToken(), Toast.LENGTH_LONG).show();
-//                       Intent intent = new Intent(SignUp.this, Verification1.class);
-//                        startActivity(intent);
-//
-//                    } else {
-//                        String message = "An error occured please try again";
-//                        Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<RegisterResponse> call, Throwable t) {
-//                    String message = "An error occured please try again";
-//                    Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
-//                }
-//            });
+
 
         }
-
-
 }

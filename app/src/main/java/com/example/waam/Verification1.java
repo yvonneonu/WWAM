@@ -49,6 +49,7 @@ public class Verification1 extends AppCompatActivity {
     String API_KEY;
     private String token;
     UserService userService;
+    String Fullname;
 
 
 
@@ -83,13 +84,6 @@ public class Verification1 extends AppCompatActivity {
                 Log.d("tag", phonenumber);
                 initialsendotp(phonenumber);
 
-               // Bundle me = new Bundle();
-              //  me.putString("number", phonenumber);
-//                Intent mainactivity = new Intent(Verification1.this, Splash.class);
-//                mainactivity.putExtra("phonenumber", phonenumber);
-//                mainactivity.putExtra("token", token);
-//                startActivity(mainactivity);
-//                finish();
             }
         });
 
@@ -117,6 +111,7 @@ public class Verification1 extends AppCompatActivity {
 
                    bundle.putString("phonenumber", phonenumber);
                    bundle.putString("token", token);
+                   bundle.putString("name", Fullname);
 
                    Intent mainactivity = new Intent(Verification1.this, Splash.class);
                    mainactivity.putExtras(bundle);

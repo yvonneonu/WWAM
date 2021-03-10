@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -37,19 +39,21 @@ import retrofit2.http.Url;
 
 public class Profile extends AppCompatActivity {
 
+    private static final int PICTURE_TAKEN = 4 ;
     //public static final String KEY_User_Document1 = "doc1";
     String pathFile;
     // private String Document_img1="";
 
 
     ImageView imageView;
-    TextView textView, gallery;
+    TextView textView, gallery, wipe;
     private int requestCode;
     private int resultCode;
-    Button wipe;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
+    private Uri photouri;
     private Intent data;
+    private String profilePics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        String Fullname = getIntent().getStringExtra("name");
 
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
@@ -73,12 +78,7 @@ public class Profile extends AppCompatActivity {
                 dispatchTakePictureIntent();
             }
         });
-        /*imageView.setOnClickListener(new View.OnClickListener() {
-           / @Override
-            public void onClick(View v) {
-                //selectImage();
-            }
-        });*/
+
 
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +91,9 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile.this, Interest.class);
+                Log.d("ImageUri",imageUri.toString());
+                intent.putExtra("profilepics", imageUri.toString());
+                intent.putExtra("name", Fullname);
                 startActivity(intent);
             }
         });
@@ -101,13 +104,27 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK || requestCode == PICK_IMAGE){
-           // imageUri = data.getData();
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
             imageView.setImageURI(imageUri);
-            if (requestCode == 1){
-                Bitmap bitmap = BitmapFactory.decodeFile(pathFile);
-                imageView.setImageBitmap(bitmap);
-            }
+                //Bitmap bitmap = BitmapFactory.decodeFile(pathFile);
+                Glide.with(this)
+                        .asBitmap()
+                        .circleCrop()
+                        .load(imageUri)
+                        .into(imageView);
+                //imageView.setImageBitmap(bitmap);
+
+        }else if(resultCode == RESULT_OK && requestCode == PICTURE_TAKEN){
+            imageUri = photouri;
+            Glide.with(this)
+                    .asBitmap()
+                    .circleCrop()
+                    .load(imageUri)
+                    .into(imageView);
+
+        }else{
+            Toast.makeText(this,"No image was selected ",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -116,14 +133,14 @@ public class Profile extends AppCompatActivity {
         Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePicture.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
-            File photoFile = null;
+            File photoFile ;
             photoFile = createPhotoFile();
             if (photoFile != null) {
 
                 pathFile = photoFile.getAbsolutePath();
-                Uri photouri = FileProvider.getUriForFile(Profile.this, "com.example.android.fileprovider", photoFile);
+                photouri = FileProvider.getUriForFile(Profile.this, "com.example.android.fileprovider", photoFile);
                 takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photouri);
-                startActivityForResult(takePicture, 1);
+                startActivityForResult(takePicture, PICTURE_TAKEN);
             }
 
             // Continue only if the File was successfully created
