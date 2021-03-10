@@ -392,6 +392,7 @@
                     app:layout_constraintVertical_bias="1.0" />
 
                 <View
+                    android:id="@+id/view10"
                     android:layout_width="320dp"
                     android:layout_height="2dp"
                     android:layout_marginTop="8dp"
@@ -431,6 +432,16 @@
                     android:background="#c0c0c0"
                     app:layout_constraintStart_toStartOf="@+id/imageView15"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:text="Swipe Next"
+                    app:layout_constraintEnd_toEndOf="@+id/view10"
+                    app:layout_constraintStart_toStartOf="@+id/view9"
+                    app:layout_constraintTop_toBottomOf="@+id/view10" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
