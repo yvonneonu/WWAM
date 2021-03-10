@@ -42,6 +42,8 @@
         </intent-filter>
         </activity>
         <activity android:name=".Enable_Location" />
+        <activity android:name=".DrawelayoutActivity" />
+        <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />
         <activity android:name=".Splash" />
