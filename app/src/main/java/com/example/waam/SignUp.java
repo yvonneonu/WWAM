@@ -130,10 +130,8 @@ public class SignUp extends AppCompatActivity {
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-
                 if (response.isSuccessful()) {
-                   // response.body().getToken();
-
+                    //response.body().getToken();
                     //response.body();
                     String message = "Successful";
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();

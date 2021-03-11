@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -18,46 +17,49 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class LocationDetectActivity extends AppCompatActivity implements LocationListener {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    String Fullname;
     private TextView locate;
+    private boolean textVisible;
     LocationManager locationManager;
-    Button fetch;
     String provider;
-   // Spinner spinner;
-  //  String[] words = {"While using the app, you will allow WhereWeAllMeet to access your location to provide ypu the best experience."
-   // };
+
+    private TextView textViewMore, moreinfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enable__location);
-        String Fullname = getIntent().getStringExtra("name");
 
         defineViews();
-
-      //  ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, words);
-      //  spinner.setAdapter(adapter);
-        fetch.setOnClickListener(new View.OnClickListener() {
+        textVisible = false;
+        locate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(LocationDetectActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                     Log.d("Perm", "permimisson is already granted so execution stops here");
                     Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LocationDetectActivity.this, Profile.class);
-                    intent.putExtra("name", Fullname);
-                    startActivity(intent);
                 }else {
 
                     Log.d("Perm", "permimisson is not granted yet and seek it");
                     requestPermission();
+                }
+            }
+        });
+
+
+        textViewMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(textVisible){
+                    textVisible = false;
+                    moreinfo.setVisibility(View.GONE);
+                }else{
+                    textVisible = true;
+                    moreinfo.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -83,8 +85,11 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
     }
 
     private void defineViews(){
-        fetch = findViewById(R.id.fetch_location);
-       // spinner = findViewById(R.id.spinner);
+
+        locate = findViewById(R.id.user_location);
+        textViewMore = findViewById(R.id.txtMore);
+        moreinfo = findViewById(R.id.textView18);
+
     }
 
     public void requestPermission(){
