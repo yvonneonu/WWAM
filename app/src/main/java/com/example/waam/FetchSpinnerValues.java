@@ -14,6 +14,7 @@ public class FetchSpinnerValues {
 
     private static  FetchSpinnerValues spinnerValues;
 
+
     private FetchSpinnerValues(){
 
     }
@@ -27,8 +28,7 @@ public class FetchSpinnerValues {
     }
 
 
-    private void fetchEducation(){
-
+    private void fetchEducation(EducationListener educationListener){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("www.google.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -44,7 +44,11 @@ public class FetchSpinnerValues {
                     Log.d("Error Code",""+response.code());
                     return;
                 }
-                response.body();
+
+                if(educationListener != null){
+                    educationListener.onEducationListener(response.body());
+                }
+
             }
 
             @Override
@@ -56,6 +60,9 @@ public class FetchSpinnerValues {
     }
 
 
+    public interface EducationListener{
+        void onEducationListener(List<String> userSchool);
+    }
 
 
 
