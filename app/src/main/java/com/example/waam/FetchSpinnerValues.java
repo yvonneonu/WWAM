@@ -28,7 +28,7 @@ public class FetchSpinnerValues {
     }
 
 
-    private void fetchEducation(EducationListener educationListener){
+    public void fetchEducation(EducationListener educationListener){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("www.google.com/")
                 .addConverterFactory(GsonConverterFactory.create())
