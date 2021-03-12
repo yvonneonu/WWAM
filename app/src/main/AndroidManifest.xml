@@ -31,11 +31,7 @@
         <activity android:name=".CompleteProfile"></activity>
         <activity android:name=".LocationDetectActivity" />
         <activity android:name=".Profile">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Enable_Location" />
         <activity android:name=".DrawelayoutActivity" />
@@ -50,7 +46,15 @@
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
         <activity android:name=".Interest" />
-        <activity android:name=".ViewPager"></activity>
+        <activity android:name=".ViewPager">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
