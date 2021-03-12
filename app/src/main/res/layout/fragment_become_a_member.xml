@@ -319,8 +319,8 @@
 
                     <RadioButton
                         android:id="@+id/radioButtonthree"
-                        android:layout_width="30dp"
-                        android:layout_height="41dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
@@ -334,6 +334,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="$24.95"
+                        android:gravity="center"
                         android:textColor="#000000"
                         android:textSize="30sp"
                         app:layout_constraintBottom_toBottomOf="@+id/radioButtonthree"
