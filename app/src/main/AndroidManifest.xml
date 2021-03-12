@@ -23,22 +23,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Waam"
+
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".LookingFor"></activity>
-        <activity android:name=".finalProfile"></activity>
+        <activity android:name=".LookingFor">
+
+        </activity>
+        <activity android:name=".finalProfile">
+
+        </activity>
         <activity android:name=".picture" />
-        <activity android:name=".CompleteProfile"></activity>
+        <activity android:name=".CompleteProfile">
+
+        </activity>
         <activity android:name=".LocationDetectActivity" />
         <activity android:name=".Profile">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Enable_Location" />
-        <activity android:name=".DrawelayoutActivity" />
+        <activity android:name=".DrawelayoutActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />
@@ -50,7 +59,9 @@
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
         <activity android:name=".Interest" />
-        <activity android:name=".ViewPager"></activity>
+        <activity android:name=".ViewPager">
+
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
