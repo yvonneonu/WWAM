@@ -149,7 +149,6 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
-
                 String message = t.getLocalizedMessage();
                 Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
             }
