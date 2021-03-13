@@ -103,7 +103,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
 
-        for (int i = 0 ; i < StringFeatures.length ; i++) {
+        /*for (int i = 0 ; i < StringFeatures.length ; i++) {
             LinearLayout linearLayout = new LinearLayout(getActivity());
 
             ImageButton button = new ImageButton(getActivity());
@@ -118,7 +118,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
             linearLayout.addView(button);
             linearLayout.addView(textView);
             layoutPlan.addView(linearLayout);
-        }
+        }*/
 
 
         int color = getActivity().getResources().getColor(R.color.green);
