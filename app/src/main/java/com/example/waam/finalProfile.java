@@ -15,7 +15,7 @@ public class finalProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_final_profile);
-        Spinner spinner =  findViewById(R.id.spinner);
+        Spinner spinner =  findViewById(R.id.planets_spinner);
 
         FetchSpinnerValues.getSpinnerValues().fetchEducation(new FetchSpinnerValues.EducationListener() {
             @Override

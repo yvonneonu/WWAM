@@ -23,11 +23,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.Objects;
@@ -46,7 +48,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private MaterialCardView linearLayoutOne, linearLayoutTwo, linearLayoutThree, linearLayoutFour;
-    private LinearLayout layoutPlan;
+    private LinearLayout layoutPlan, LinearTextConatainer;
     private LinearLayout layoutPlantwo;
     private LinearLayout layoutPlanthree;
     private LinearLayout layoutPlanfour;
@@ -96,6 +98,28 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
+
+        String[] StringFeatures = new String[]{"Bullet point one","Bullet point two","Bullet point three","Bullet point four"};
+
+
+
+        for (int i = 0 ; i < StringFeatures.length ; i++) {
+            LinearLayout linearLayout = new LinearLayout(getActivity());
+
+            ImageButton button = new ImageButton(getActivity());
+            TextView textView = new TextView(getActivity());
+            textView.setText(StringFeatures[i]);
+            //button.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.circle));
+            Glide.with(getActivity())
+                    .asBitmap()
+                    .load(R.drawable.circle)
+                    .into(button);
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            linearLayout.addView(button);
+            linearLayout.addView(textView);
+            layoutPlan.addView(linearLayout);
+        }
+
 
         int color = getActivity().getResources().getColor(R.color.green);
         SpannableString string = new SpannableString("Bullet point");
@@ -252,7 +276,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                             LinearLayout linearLayoutone,LinearLayout linearLayouttwo,
                             LinearLayout linearLayoutthree,LinearLayout linearLayoutOriginal,
                             TextView[] arrayOne, TextView[] arrayTwo, TextView[] arrayThree, TextView[] arrayReal,View view){
-        first.setBackgroundColor(Objects.requireNonNull(getActivity()).getResources().getColor(R.color.white));
+        first.setBackgroundColor((getActivity()).getResources().getColor(R.color.white));
         second.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
         third.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
         original.setBackgroundColor(getActivity().getResources().getColor(R.color.priceBackgrouond));
