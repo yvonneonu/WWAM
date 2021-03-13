@@ -103,7 +103,7 @@ public class Login extends AppCompatActivity {
 
                 if (response.isSuccessful()){
                     LoginResponse loginResponse = response.body();
-                    startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
+                    startActivity(new Intent(Login.this, DiscoverDrawerLayerout.class).putExtra("name", loginResponse));
                     finish();
 
 

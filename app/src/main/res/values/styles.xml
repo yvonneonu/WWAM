@@ -4,6 +4,7 @@
     <style name="CustomCheckbox02" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_selector</item>
         <item name="color">@color/yellow</item>
+        <item name="android:textColorSecondary">@color/black</item>
 
     </style>
 </resources>
