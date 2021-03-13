@@ -9,9 +9,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import androidx.appcompat.widget.Toolbar;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -34,13 +37,25 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         drawer1 = findViewById(R.id.drawer1_layout);
+
+        /*toolbar2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // drawer1.addDrawerListener(toolbar2);
+                //R.string.open, R.string.close;
+                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer1, toolbar2, R.string.open, R.string.close);
+            }
+        });
+       // Toolbar toggle = new Toolbar(this, drawer1, toolbar2, R.string.open, R.string.close);*/
+
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer1, toolbar2, R.string.open, R.string.close);
+       //
+        //toggle.setDrawerArrowDrawable(R.drawable.ic_baseline_menu_24, );
 
         drawer1.addDrawerListener(toggle);
-
-
-       toggle.syncState();
-       Log.d("TAG", "in activity null");
+        toggle.syncState();
+       //Log.d("TAG", "in activity null");
        // Fragment fragment = new BecomeAMemberFragment();
       //  FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
       //  ft.add(R.id.fragmentcontainer, fragment);
