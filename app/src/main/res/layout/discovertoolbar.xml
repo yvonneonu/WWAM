@@ -2,7 +2,6 @@
 <androidx.appcompat.widget.Toolbar
     android:layout_width="match_parent"
     android:id="@+id/icon"
-    app:navigationIcon="@drawable/ic_baseline_menu_24"
     android:layout_height="?attr/actionBarSize"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -10,10 +9,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-  <ImageView
+  <!--<ImageView
        android:layout_marginStart="0dp"
       android:scaleType="centerInside"
        android:layout_width="wrap_content"
        android:src="@drawable/topnavlogo"
-       android:layout_height="?attr/actionBarSize"/>
+       android:layout_height="?attr/actionBarSize"/>-->
 </androidx.appcompat.widget.Toolbar>
