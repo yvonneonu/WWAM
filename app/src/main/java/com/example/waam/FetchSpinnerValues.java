@@ -27,24 +27,27 @@ public class FetchSpinnerValues {
         return spinnerValues;
     }
 
-
-    public void fetchEducation(EducationListener educationListener){
+    public void fetchEducation(EducationListener educationListener,String token){
+        //http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/education
+        String baseUrl = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("www.google.com/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         MysticApi educationResult = retrofit.create(MysticApi.class);
-        Call<List<String>> allEdu = educationResult.getEducation();
+        Call<List<String>> allEdu = educationResult.getEducation(token);
 
         allEdu.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 if(!response.isSuccessful()){
                     Log.d("Error Code",""+response.code());
+                    Log.d("Error",response.headers().toString());
                     return;
                 }
 
+                Log.d("Successful","Got to the server");
                 if(educationListener != null){
                     educationListener.onEducationListener(response.body());
                 }
@@ -53,7 +56,6 @@ public class FetchSpinnerValues {
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-
                 Log.d("Error Message",t.getMessage());
             }
         });

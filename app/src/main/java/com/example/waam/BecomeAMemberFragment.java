@@ -191,9 +191,9 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         thirdTxt.setText(string);
         fourthTxt.setText(string);
 
-       for(int i= 0 ; i < arrayTin.length ; i++){
-           arrayTin[i].setText(string);
-       }
+        for (TextView textView : arrayTin) {
+            textView.setText(string);
+        }
 
         for(int i= 0 ; i < arrayTin.length ; i++){
             arrayTwe[i].setText(string);

@@ -27,13 +27,15 @@
         tools:targetApi="m">
         <activity android:name=".PaymentPage"></activity>
         <activity android:name=".DrawelayoutActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".LocationDetectActivity"></activity>
+
+        <activity android:name=".finalProfile">
+
+
+        </activity>
+        <activity android:name=".LocationDetectActivity">
+        </activity>
         <activity android:name=".Profile" />
         <activity android:name=".Enable_Location" />
         <activity android:name=".Successverified" />
@@ -44,7 +46,14 @@
         <activity android:name=".passw" />
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
-        <activity android:name=".Login" />
+        <activity android:name=".Login" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ViewPager" />
 
         <provider

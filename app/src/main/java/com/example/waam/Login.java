@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
     private ImageView logm;
     private TextView text;
     private TextView pressback;
-
+    private String loginToken;
     private EditText editPass;
     private EditText editEmail;
 
@@ -102,8 +102,12 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()){
-                    LoginResponse loginResponse = response.body();
-                    startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
+                    loginToken = response.body().getToken();
+
+                    Intent intent = new Intent(Login.this,finalProfile.class);
+                    intent.putExtra("token",loginToken);
+                    startActivity(intent);
+                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
                     finish();
 
 

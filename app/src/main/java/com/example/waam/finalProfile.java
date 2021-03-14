@@ -17,6 +17,7 @@ public class finalProfile extends AppCompatActivity {
         setContentView(R.layout.activity_final_profile);
         Spinner spinner =  findViewById(R.id.planets_spinner);
 
+        String token = getIntent().getStringExtra("token");
         FetchSpinnerValues.getSpinnerValues().fetchEducation(new FetchSpinnerValues.EducationListener() {
             @Override
             public void onEducationListener(List<String> userSchool) {
@@ -24,6 +25,6 @@ public class finalProfile extends AppCompatActivity {
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(areasAdapter);
             }
-        });
+        },token);
     }
 }
