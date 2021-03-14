@@ -49,8 +49,18 @@ public class FetchSpinnerValues {
                     return;
                 }
 
-               Log.d("Success","Succesfully connected");
+                List<String> name = new ArrayList<>();
+                List<EduactionRsesult> userSchool = response.body().getModel();
 
+                for(int i = 0 ; i < userSchool.size() ; i++){
+                    name.add(userSchool.get(i).getName());
+                    Log.d("Name",userSchool.get(i).getName());
+                }
+                Log.d("Success","Succesfully connected");
+                List<EduactionRsesult> results =response.body().getModel();
+                if(educationListener != null){
+                    educationListener.onEducationListener(name);
+                }
 
 
             }

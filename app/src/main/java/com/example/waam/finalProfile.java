@@ -3,9 +3,11 @@ package com.example.waam;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class finalProfile extends AppCompatActivity {
