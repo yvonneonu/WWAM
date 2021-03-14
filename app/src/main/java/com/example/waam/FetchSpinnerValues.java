@@ -1,7 +1,9 @@
 package com.example.waam;
 
 import android.util.Log;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -12,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FetchSpinnerValues {
 
+    private static final String TAG = "CRASHED" ;
     private static  FetchSpinnerValues spinnerValues;
 
 
@@ -36,11 +39,31 @@ public class FetchSpinnerValues {
                 .build();
 
         MysticApi educationResult = retrofit.create(MysticApi.class);
-        Call<List<String>> allEdu = educationResult.getEducation(token);
+        Call<RecordModel> allEdu = educationResult.getEducation("Bearer "+token);
 
-        allEdu.enqueue(new Callback<List<String>>() {
+        allEdu.enqueue(new Callback<RecordModel>() {
             @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+            public void onResponse(Call<RecordModel> call, Response<RecordModel> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Error","An error ocured");
+                    return;
+                }
+
+               Log.d("Success","Succesfully connected");
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<RecordModel> call, Throwable t) {
+                Log.d(TAG, "Something is wrong " + t.getMessage());
+            }
+        });
+
+        /*allEdu.enqueue(new Callback<List<RecordModel>>() {
+            @Override
+            public void onResponse(Call<List<RecordModel>> call, Response<List<String>> response) {
                 if(!response.isSuccessful()){
                     Log.d("Error Code",""+response.code());
                     Log.d("Error",response.headers().toString());
@@ -58,7 +81,7 @@ public class FetchSpinnerValues {
             public void onFailure(Call<List<String>> call, Throwable t) {
                 Log.d("Error Message",t.getMessage());
             }
-        });
+        });*/
     }
 
 
