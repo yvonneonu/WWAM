@@ -30,6 +30,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         Toolbar toolbar2 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar2);
 
+        toolbar2.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+
         NavigationView navigationView1 = findViewById(R.id.nav_view);
         navigationView1.setNavigationItemSelectedListener(this);
 
@@ -38,28 +40,19 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         drawer1 = findViewById(R.id.drawer1_layout);
 
-        /*toolbar2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // drawer1.addDrawerListener(toolbar2);
-                //R.string.open, R.string.close;
-                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer1, toolbar2, R.string.open, R.string.close);
-            }
-        });
-       // Toolbar toggle = new Toolbar(this, drawer1, toolbar2, R.string.open, R.string.close);*/
-
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer1, toolbar2, R.string.open, R.string.close);
-       //
+       // toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
         //toggle.setDrawerArrowDrawable(R.drawable.ic_baseline_menu_24, );
+
 
         drawer1.addDrawerListener(toggle);
         toggle.syncState();
        //Log.d("TAG", "in activity null");
-       // Fragment fragment = new BecomeAMemberFragment();
-      //  FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-      //  ft.add(R.id.fragmentcontainer, fragment);
-      //  ft.commit();
+       Fragment fragment = new DiscoverFragment();
+       FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+       ft.add(R.id.fragmentcontainer, fragment);
+       ft.commit();
     }
 
     @Override
