@@ -58,7 +58,7 @@
                 android:layout_marginTop="8dp"
                 android:text="location"
                 app:layout_constraintEnd_toEndOf="@+id/textView19"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.538"
                 app:layout_constraintStart_toStartOf="@+id/textView19"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -106,8 +106,8 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayout"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginLeft="10dp"
@@ -118,15 +118,15 @@
 
                         <ImageView
                             android:id="@+id/image"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -140,7 +140,7 @@
                                 android:id="@+id/imageView0"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -149,7 +149,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -158,8 +158,8 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayout2"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginLeft="10dp"
                         app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -169,15 +169,15 @@
 
                         <ImageView
                             android:id="@+id/image1"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout1"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -191,7 +191,7 @@
                                 android:id="@+id/imageView1"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -201,7 +201,7 @@
                                 android:id="@+id/text1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -210,8 +210,8 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayout4"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginLeft="10dp"
                         app:layout_constraintBottom_toBottomOf="@+id/frameLayout2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -221,15 +221,15 @@
 
                         <ImageView
                             android:id="@+id/image2"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout2"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -243,7 +243,7 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -252,7 +252,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -262,8 +262,8 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayout5"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="@+id/frameLayout"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -272,15 +272,15 @@
 
                         <ImageView
                             android:id="@+id/image3"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout3"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -294,7 +294,7 @@
                                 android:id="@+id/imageView3"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -303,7 +303,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -313,8 +313,8 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayout3"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="@+id/frameLayout2"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -323,15 +323,15 @@
 
                         <ImageView
                             android:id="@+id/image4"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout4"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -345,7 +345,7 @@
                                 android:id="@+id/imageView4"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -354,7 +354,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -365,8 +365,8 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayout6"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="@+id/frameLayout4"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -375,15 +375,15 @@
 
                         <ImageView
                             android:id="@+id/image5"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout5"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -397,7 +397,7 @@
                                 android:id="@+id/imageView5"
                                 android:layout_width="26dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -406,7 +406,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -417,8 +417,8 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="@+id/frameLayout5"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -427,15 +427,15 @@
 
                         <ImageView
                             android:id="@+id/image6"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout6"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -449,7 +449,7 @@
                                 android:id="@+id/imageView6"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -458,7 +458,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -469,8 +469,8 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayout7"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="@+id/frameLayout3"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -479,15 +479,15 @@
 
                         <ImageView
                             android:id="@+id/image7"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout7"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -501,7 +501,7 @@
                                 android:id="@+id/imageView7"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -510,7 +510,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -520,8 +520,8 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="@+id/frameLayout6"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -530,15 +530,15 @@
 
                         <ImageView
                             android:id="@+id/image8"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout8"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/uploaphotofromgallerybg"
@@ -552,7 +552,7 @@
                                 android:id="@+id/imageView8"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="33dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/galleryicon"
                                 tools:layout_editor_absoluteX="2dp"
@@ -561,7 +561,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
+                                android:layout_marginLeft="16dp"
                                 android:text="Add Media"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />

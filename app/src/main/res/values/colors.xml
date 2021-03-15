@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#1A369C</color>
-    <color name="offwhite">#B5CFC0C0</color>
+    <color name="offwhite">#B5A8A6A6</color>
     <color name="red">#EA1319</color>
     <color name="green">#32F4E2</color>
     <color name="babyblack">#43423C</color>
@@ -16,5 +16,4 @@
     <color name="yellow">#FFEB3B</color>
     <color name="bulletColor">#228B22</color>
     <color name="priceBackgrouond">#272822</color>
-
 </resources>

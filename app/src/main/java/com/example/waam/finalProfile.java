@@ -24,11 +24,11 @@ public class finalProfile extends AppCompatActivity {
         image = findViewById(R.id.imageView12);
 
 
-        Glide.with(this)
+       /* Glide.with(this)
                 .asBitmap()
                 .circleCrop()
                 .load(Uri.parse(imageUri))
-                .into(image);
+                .into(image);*/
 
 
         textView = findViewById(R.id.textView34);

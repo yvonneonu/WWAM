@@ -37,7 +37,7 @@ public class Interest extends AppCompatActivity {
 
 
         String imageUri = getIntent().getStringExtra("profilepics");
-        Log.d("ImageUriIN",imageUri);
+//        Log.d("ImageUriIN",imageUri);
         String Fullname = getIntent().getStringExtra("name");
 
         wipe = findViewById(R.id.swipe);
