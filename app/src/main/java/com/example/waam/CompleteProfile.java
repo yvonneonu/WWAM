@@ -34,7 +34,7 @@ public class CompleteProfile extends AppCompatActivity {
         setContentView(R.layout.activity_complete_profile);
         String imageUri = getIntent().getStringExtra("getProfilePics");
 
-//        Log.d("Complete",imageUri);
+        Log.d("Complete", imageUri);
         String Fullname = getIntent().getStringExtra("nameprofile");
 
         firstImage = findViewById(R.id.imageView0);
@@ -270,7 +270,7 @@ public class CompleteProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
-                //intent.putExtra("image", imageUri.toString());
+                intent.putExtra("image", imageUri.toString());
                 startActivity(intent);
             }
         });

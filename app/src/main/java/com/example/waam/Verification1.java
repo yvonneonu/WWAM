@@ -49,7 +49,7 @@ public class Verification1 extends AppCompatActivity {
     String API_KEY;
     private String token;
     UserService userService;
-    String Fullname;
+    String name;
 
 
 
@@ -57,11 +57,13 @@ public class Verification1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification1);
+       //String name = getIntent().getStringExtra("name");
 
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null)
         token = bundle.getString("token");
+        name = bundle.getString("name");
 
 
         ccp = findViewById(R.id.ccp);
@@ -111,7 +113,7 @@ public class Verification1 extends AppCompatActivity {
 
                    bundle.putString("phonenumber", phonenumber);
                    bundle.putString("token", token);
-                   bundle.putString("name", Fullname);
+                   bundle.putString("name", name);
 
                    Intent mainactivity = new Intent(Verification1.this, Splash.class);
                    mainactivity.putExtras(bundle);

@@ -2,42 +2,31 @@ package com.example.waam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
-import com.bumptech.glide.Glide;
+import java.util.ArrayList;
+import java.util.List;
 
 public class finalProfile extends AppCompatActivity {
 
-    private TextView textView;
-    private ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_final_profile);
+        Spinner spinner =  findViewById(R.id.planets_spinner);
 
-        String imageUri = getIntent().getStringExtra("image");
-        image = findViewById(R.id.imageView12);
-
-
-       Glide.with(this)
-                .asBitmap()
-                .circleCrop()
-                .load(Uri.parse(imageUri))
-                .into(image);
-
-
-        textView = findViewById(R.id.textView34);
-        textView.setOnClickListener(new View.OnClickListener() {
+        String token = getIntent().getStringExtra("token");
+        FetchSpinnerValues.getSpinnerValues().fetchEducation(new FetchSpinnerValues.EducationListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(finalProfile.this, LookingFor.class);
-                startActivity(intent);
+            public void onEducationListener(List<String> qualification) {
+                ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
+                qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(qualificationAdapter);
             }
-        });
+        },token);
     }
 }

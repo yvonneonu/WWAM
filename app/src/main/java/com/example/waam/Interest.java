@@ -66,7 +66,7 @@ public class Interest extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Interest.this, CompleteProfile.class);
                 intent.putExtra("getProfilePics", imageUri);
-                intent.putExtra("nameprofile", Fullname);
+                intent.putExtra("name", Fullname);
                 startActivity(intent);
             }
         });

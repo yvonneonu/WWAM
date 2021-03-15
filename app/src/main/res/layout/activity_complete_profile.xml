@@ -15,7 +15,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="390dp">
+            android:layout_height="wrap_content">
 
 
             <ImageView
@@ -102,7 +102,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="540dp">
+                    android:layout_height="wrap_content">
 
                     <FrameLayout
                         android:id="@+id/frameLayout"
@@ -587,7 +587,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:backgroundTint="@color/bpTransparent"
                         android:text="Skip for now >>"
                         android:textAllCaps="false"
                         android:textColor="@color/offwhite"

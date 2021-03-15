@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -23,7 +22,6 @@ import android.widget.Toast;
 
 public class LocationDetectActivity extends AppCompatActivity implements LocationListener {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    String Fullname;
     private TextView locate;
     private boolean textVisible;
     LocationManager locationManager;
@@ -35,7 +33,6 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enable__location);
-        String Fullname = getIntent().getStringExtra("name");
 
         defineViews();
         textVisible = false;
@@ -45,9 +42,6 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
                 if (ContextCompat.checkSelfPermission(LocationDetectActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                     Log.d("Perm", "permimisson is already granted so execution stops here");
                     Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LocationDetectActivity.this, Profile.class);
-                    intent.putExtra("name", Fullname);
-                    startActivity(intent);
                 }else {
 
                     Log.d("Perm", "permimisson is not granted yet and seek it");
