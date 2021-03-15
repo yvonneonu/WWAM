@@ -46,6 +46,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Name"
                 app:layout_constraintEnd_toEndOf="@+id/imageView12"
+                app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="@+id/imageView12"
                 app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
@@ -56,7 +57,7 @@
                 android:layout_marginTop="20dp"
                 android:text="location"
                 app:layout_constraintEnd_toEndOf="@+id/textView19"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.538"
                 app:layout_constraintStart_toStartOf="@+id/textView19"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -124,10 +125,12 @@
 
                     <View
                         android:id="@+id/view"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView11"
                         app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
@@ -167,10 +170,12 @@
 
                     <View
                         android:id="@+id/view1"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView"
                         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -201,10 +206,12 @@
 
                     <View
                         android:id="@+id/view2"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="42dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/view1"
                         app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
@@ -255,10 +262,12 @@
 
                     <View
                         android:id="@+id/view3"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView2"
                         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -298,10 +307,12 @@
 
                     <View
                         android:id="@+id/view4"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView3"
                         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -341,10 +352,12 @@
 
                     <View
                         android:id="@+id/view5"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView4"
                         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -384,10 +397,12 @@
 
                     <View
                         android:id="@+id/view7"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView13"
                         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -427,10 +442,12 @@
 
                     <View
                         android:id="@+id/view9"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView14"
                         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -471,10 +488,12 @@
 
                     <View
                         android:id="@+id/view10"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView15"
                         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -514,10 +533,12 @@
 
                     <View
                         android:id="@+id/view12"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView16"
                         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -557,10 +578,12 @@
 
                     <View
                         android:id="@+id/view13"
-                        android:layout_width="320dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView16"
                         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
