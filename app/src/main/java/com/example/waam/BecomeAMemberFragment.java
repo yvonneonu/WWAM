@@ -51,6 +51,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private LinearLayout layoutPlanthree;
     private LinearLayout layoutPlanfour;
     private View firstView, secondView, thirdView, fourthView;
+    private String price;
 
 
     TextView[] firstFeature, secondFeature, thirdFeature, fourFeature;
@@ -101,6 +102,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         SpannableString string = new SpannableString("Bullet point");
         string.setSpan(new BulletSpan(),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+        price = "20";
 
         linearLayoutOne = view.findViewById(R.id.layone);
         linearLayoutTwo = view.findViewById(R.id.laytwo);
@@ -242,6 +244,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                     //uu...
                 }
                 Intent intent = new Intent(getActivity(),PaymentPage.class);
+                intent.putExtra("price",price);
                 startActivity(intent);
         }
     }
