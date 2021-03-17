@@ -12,6 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FetchSpinnerValues {
+
     private static final String TAG = "CRASHED" ;
     private static  FetchSpinnerValues spinnerValues;
 
@@ -69,6 +70,27 @@ public class FetchSpinnerValues {
             }
         });
 
+        /*allEdu.enqueue(new Callback<List<RecordModel>>() {
+            @Override
+            public void onResponse(Call<List<RecordModel>> call, Response<List<String>> response) {
+                if(!response.isSuccessful()){
+                    Log.d("Error Code",""+response.code());
+                    Log.d("Error",response.headers().toString());
+                    return;
+                }
+
+                Log.d("Successful","Got to the server");
+                if(educationListener != null){
+                    educationListener.onEducationListener(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Log.d("Error Message",t.getMessage());
+            }
+        });*/
     }
 
 
