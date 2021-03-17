@@ -270,7 +270,7 @@ public class CompleteProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
-                //intent.putExtra("image", imageUri.toString());
+                intent.putExtra("image", imageUri.toString());
                 startActivity(intent);
             }
         });

@@ -18,6 +18,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
     private TextView locate;
     private boolean textVisible;
     LocationManager locationManager;
+    Button loca;
     String provider;
 
     private TextView textViewMore, moreinfo;
@@ -39,7 +41,7 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
 
         defineViews();
         textVisible = false;
-        locate.setOnClickListener(new View.OnClickListener() {
+        loca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(LocationDetectActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -95,6 +97,7 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
         locate = findViewById(R.id.user_location);
         textViewMore = findViewById(R.id.txtMore);
         moreinfo = findViewById(R.id.textView18);
+        loca = findViewById(R.id.fetch_location);
 
     }
 

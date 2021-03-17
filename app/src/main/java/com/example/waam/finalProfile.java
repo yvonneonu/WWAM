@@ -36,6 +36,7 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(finalProfile.this, LookingFor.class);
+                intent.putExtra("images", imageUri.toString());
                 startActivity(intent);
             }
         });

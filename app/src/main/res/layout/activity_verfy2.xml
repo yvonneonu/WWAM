@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Enter your mobile number"
+        android:text="Enter Your Code"
         android:textAlignment="center"
         android:textColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,107 +45,158 @@
         app:layout_constraintTop_toTopOf="@+id/imageView5"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/editText9"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
+        app:cardElevation="22dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:inputType="number"
-        android:maxLength="1"
-        android:padding="20dp"
-        android:paddingBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/textView14">
 
-    <EditText
-        android:inputType="number"
-        android:id="@+id/editText10"
+        <EditText
+            android:id="@+id/editText9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:backgroundTint="@color/white"
+            android:maxLength="1"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:padding="20dp"
-        android:paddingBottom="20dp"
-        android:maxLength="1"
-        app:layout_constraintBottom_toBottomOf="@+id/editText9"
-        app:layout_constraintStart_toEndOf="@+id/editText9"
-        app:layout_constraintTop_toTopOf="@+id/editText9" />
+        android:layout_marginStart="8dp"
+        app:cardElevation="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView">
 
-    <EditText
-        android:id="@+id/editText12"
+        <EditText
+            android:id="@+id/editText10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:textSize="20sp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:textAlignment="center" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:inputType="number"
-        android:maxLength="1"
-        android:padding="20dp"
-        android:paddingBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText10"
-        app:layout_constraintStart_toEndOf="@+id/editText10"
-        app:layout_constraintTop_toTopOf="@+id/editText10" />
+        android:layout_marginStart="8dp"
+        app:cardElevation="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/cardView2">
 
-    <EditText
-        android:id="@+id/editText15"
+        <EditText
+            android:id="@+id/editText12"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:textSize="20sp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:textAlignment="center" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:inputType="number"
-        android:maxLength="1"
-        android:padding="20dp"
-        android:paddingBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText12"
-        app:layout_constraintStart_toEndOf="@+id/editText12"
-        app:layout_constraintTop_toTopOf="@+id/editText12"
-        app:layout_constraintVertical_bias="0.6" />
+        android:layout_marginStart="8dp"
+        app:cardElevation="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView3"
+        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:layout_constraintTop_toTopOf="@+id/cardView3">
 
-    <EditText
-        android:id="@+id/editText11"
+        <EditText
+            android:id="@+id/editText15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:inputType="number"
+            android:textSize="20sp"
+            android:maxLength="1"
+            android:textAlignment="center" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:inputType="number"
-        android:maxLength="1"
-        android:padding="20dp"
-        android:paddingBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText15"
-        app:layout_constraintStart_toEndOf="@+id/editText15"
-        app:layout_constraintTop_toTopOf="@+id/editText15" />
+        android:layout_marginStart="8dp"
+        app:cardElevation="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView4"
+        app:layout_constraintStart_toEndOf="@+id/cardView4"
+        app:layout_constraintTop_toTopOf="@+id/cardView4">
 
-    <EditText
-        android:id="@+id/editText13"
+        <EditText
+            android:id="@+id/editText11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:inputType="number"
+            android:textSize="20sp"
+            android:maxLength="1"
+            android:textAlignment="center" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView6"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="16dp"
-        android:inputType="number"
-        android:maxLength="1"
-        android:padding="20dp"
-        android:paddingBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText11"
+        android:layout_marginStart="8dp"
+
+        app:cardElevation="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toEndOf="@+id/editText11"
-        app:layout_constraintTop_toTopOf="@+id/editText11"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/cardView5"
+        app:layout_constraintTop_toTopOf="@+id/cardView5"
+        app:layout_constraintVertical_bias="0.687">
+
+        <EditText
+            android:id="@+id/editText13"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:inputType="number"
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/blue"
         android:text="CONTINUE"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/editText13"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editText9"
-        app:layout_constraintTop_toBottomOf="@+id/editText12" />
+        app:layout_constraintEnd_toEndOf="@+id/cardView6"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="I diidn't get a code"
         android:textColor="@color/blue"
@@ -155,6 +206,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <TextView
+        android:id="@+id/textView35"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -163,8 +215,9 @@
 Data Policy, cooking use and the Privacy Policy."
         android:textColor="@color/offwhite"
         app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

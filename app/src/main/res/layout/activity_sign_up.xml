@@ -54,21 +54,27 @@
             app:layout_constraintStart_toEndOf="@+id/backto"
             app:layout_constraintTop_toTopOf="@+id/backto"
             app:layout_constraintVertical_bias="0.0" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/notshow"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="40dp"
-            android:text="I'm a"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            app:layout_constraintStart_toStartOf="@+id/backto"
-            app:layout_constraintTop_toBottomOf="@+id/backto" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="335dp"
+                android:text="I'm a"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+            <TextView
 
             android:id="@+id/mangend"
             android:layout_width="165dp"
@@ -467,6 +473,8 @@ You can withdraw consent at any time."
             app:layout_constraintBottom_toBottomOf="@+id/textView15"
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toTopOf="@+id/textView15" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview"

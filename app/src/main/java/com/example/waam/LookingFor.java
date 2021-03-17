@@ -23,7 +23,7 @@ public class LookingFor extends AppCompatActivity {
         textView = findViewById(R.id.textView34);
         image = findViewById(R.id.imageView12);
 
-        String imageUri = getIntent().getStringExtra("image");
+        String imageUri = getIntent().getStringExtra("images");
 
 
         Glide.with(this)
