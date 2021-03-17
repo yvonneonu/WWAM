@@ -13,7 +13,7 @@ public class RecordModel {
     private List<EducationModel> records = new ArrayList<>();
 
     private List<EducationModel> getRecords(){
-        return getRecords();
+        return records;
     }
 }
 
