@@ -12,8 +12,9 @@ public class RecordModel {
     @SerializedName("records")
     private List<EducationModel> records = new ArrayList<>();
 
-    private List<EducationModel> getRecords(){
+    public List<EducationModel> getRecords(){
         return records;
+
     }
 }
 
