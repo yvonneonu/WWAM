@@ -25,8 +25,8 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".LookingFor"></activity>
-        <activity android:name=".finalProfile"></activity>
+        <activity android:name=".LookingFor"/>
+        <activity android:name=".finalProfile"/>
         <activity android:name=".picture" />
         <activity android:name=".CompleteProfile"/>
         <activity android:name=".LocationDetectActivity" />
@@ -35,13 +35,16 @@
         </activity>
         <activity android:name=".Enable_Location" />
         <activity android:name=".DrawelayoutActivity">
+
+        </activity>
+        <activity android:name=".PaymentPage">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />
         <activity android:name=".Splash" />

@@ -48,7 +48,7 @@ import okhttp3.Response;
 public class PaymentPage extends AppCompatActivity {
     String price;
 
-    private static final String BACKEND_URL = "http://10.0.2.2:4242/";
+    private static final String BACKEND_URL = "http://54.188.200.48/api/";
     private OkHttpClient httpClient = new OkHttpClient();
     private String paymentIntentClientSecret;
     CardInputWidget cardInputWidget;
@@ -70,7 +70,7 @@ public class PaymentPage extends AppCompatActivity {
         });
         stripe = new Stripe(
                 getApplicationContext(),
-                Objects.requireNonNull("pk_test_TYooMQauvdEDq54NiTphI7jx")
+                Objects.requireNonNull(getString(R.string.publishablekey))
         );
 
         cardInputWidget = findViewById(R.id.cardInputWidget);
@@ -103,10 +103,18 @@ public class PaymentPage extends AppCompatActivity {
 
 
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
-        String json = "";
+
+        String json = "{"
+                + "\"currency\":\"usd\","
+                + "\"items\":["
+                + "{\"id\":\"photo_subscription\"}"
+                + "]"
+                + "}";
+
+
         RequestBody body = RequestBody.create(json, mediaType);
         Request request = new Request.Builder()
-                .url(BACKEND_URL + "create.php")
+                .url(BACKEND_URL + "upgrademembership")
                 .post(body)
                 .build();
         httpClient.newCall(request)
