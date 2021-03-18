@@ -29,11 +29,11 @@ public class finalProfile extends AppCompatActivity {
         Spinner spinner =  findViewById(R.id.one);
         String token = getIntent().getStringExtra("token");
 
-       Glide.with(this)
+      /* Glide.with(this)
                 .asBitmap()
                 .circleCrop()
                 .load(Uri.parse(imageUri))
-                .into(image);
+                .into(image);*/
 
 
         textView = findViewById(R.id.textView34);

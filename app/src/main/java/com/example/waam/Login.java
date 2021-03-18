@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
     private ImageView logm;
     private TextView text;
     private TextView pressback;
-
+    private String loginToken;
     private EditText editPass;
     private EditText editEmail;
 
