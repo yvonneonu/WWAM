@@ -23,6 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Waam"
+
+
+        android:screenOrientation="sensorPortrait"
+
+
+
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".DiscoverDrawerLayerout">
@@ -45,6 +51,12 @@
 
         </activity>
         <activity android:name=".Profile">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".DrawelayoutActivity">
         </activity>
@@ -68,11 +80,6 @@
         </activity>
         <activity android:name=".ViewPager">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider
