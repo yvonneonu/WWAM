@@ -36,6 +36,7 @@ public class CompleteProfile extends AppCompatActivity {
 
 //        Log.d("Complete",imageUri);
         String Fullname = getIntent().getStringExtra("nameprofile");
+        String tired = getIntent().getStringExtra("token");
 
         firstImage = findViewById(R.id.imageView0);
         secondImage = findViewById(R.id.imageView1);
@@ -271,6 +272,8 @@ public class CompleteProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
                 intent.putExtra("image", imageUri.toString());
+                intent.putExtra("everytoken", tired);
+                Log.d("TAG", "TOKENSHOW7 " +tired);
                 startActivity(intent);
             }
         });

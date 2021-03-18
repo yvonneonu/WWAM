@@ -39,6 +39,7 @@ public class Interest extends AppCompatActivity {
         String imageUri = getIntent().getStringExtra("profilepics");
 //        Log.d("ImageUriIN",imageUri);
         String Fullname = getIntent().getStringExtra("name");
+        String token = getIntent().getStringExtra("mytoken");
 
         wipe = findViewById(R.id.swipe);
         zeroRadio = findViewById(R.id.radioButton);
@@ -67,6 +68,8 @@ public class Interest extends AppCompatActivity {
                 Intent intent = new Intent(Interest.this, CompleteProfile.class);
                 intent.putExtra("getProfilePics", imageUri);
                 intent.putExtra("nameprofile", Fullname);
+                intent.putExtra("token", token);
+                Log.d("TAG", "TOKENSHOW6 " +token);
                 startActivity(intent);
             }
         });

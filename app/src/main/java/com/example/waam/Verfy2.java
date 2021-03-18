@@ -178,6 +178,8 @@ public class Verfy2 extends AppCompatActivity {
 
                 Intent intent = new Intent(Verfy2.this, Successverified.class);
                 intent.putExtra("token", response.body().getOtp());
+                intent.putExtra("tokenbearer", bearer);
+                Log.d("TAG", "TOKENSHOW2 " +bearer);
                 intent.putExtra("name", Fullname);
                 startActivity(intent);
                 //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));

@@ -38,6 +38,7 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enable__location);
         String Fullname = getIntent().getStringExtra("name");
+        String token = getIntent().getStringExtra("bearer");
 
         defineViews();
         textVisible = false;
@@ -49,6 +50,8 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
                     Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LocationDetectActivity.this, Profile.class);
                     intent.putExtra("name", Fullname);
+                    intent.putExtra("alltoken", token);
+                    Log.d("TAG", "TOKENSHOW4 " +token);
                     startActivity(intent);
                 }else {
 

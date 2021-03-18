@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -27,7 +28,8 @@ public class finalProfile extends AppCompatActivity {
         String imageUri = getIntent().getStringExtra("image");
         image = findViewById(R.id.imageView12);
         Spinner spinner =  findViewById(R.id.one);
-        String token = getIntent().getStringExtra("token");
+        String token = getIntent().getStringExtra("everytoken");
+        Log.d("sorry", "iknowyouaretired "+token);
 
        Glide.with(this)
                 .asBitmap()
@@ -42,6 +44,8 @@ public class finalProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(finalProfile.this, LookingFor.class);
                 intent.putExtra("images", imageUri.toString());
+                Log.d("TAG", "TOKENSHOW8 " +token);
+
                 startActivity(intent);
             }
         });

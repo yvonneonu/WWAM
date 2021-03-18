@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 public class Splash extends AppCompatActivity {
 
@@ -15,9 +16,12 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-       // Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
+       // bundle.getString("token");
         String phonenumber = getIntent().getStringExtra("phonenumber");
-        String token = getIntent().getStringExtra("token");
+    //    String token = getIntent().getStringExtra("token");
+        String token = bundle.getString("token");
+        Log.d("TAG", "TOKENSHOW " +token);
         String Fullname = getIntent().getStringExtra("name");
 
 

@@ -111,6 +111,7 @@ public class Verification1 extends AppCompatActivity {
 
                    bundle.putString("phonenumber", phonenumber);
                    bundle.putString("token", token);
+                   Log.d("TAG", "TOKENSHOW1 " +token);
                    bundle.putString("name", Fullname);
 
                    Intent mainactivity = new Intent(Verification1.this, Splash.class);

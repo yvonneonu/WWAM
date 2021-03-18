@@ -62,6 +62,7 @@ public class Profile extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         String Fullname = getIntent().getStringExtra("name");
+        String bigTokeng = getIntent().getStringExtra("alltoken");
 
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
@@ -94,6 +95,8 @@ public class Profile extends AppCompatActivity {
                 Log.d("ImageUri",imageUri.toString());
                 intent.putExtra("profilepics", imageUri.toString());
                 intent.putExtra("name", Fullname);
+                intent.putExtra("mytoken", bigTokeng);
+                Log.d("TAG", "TOKENSHOW5 " +bigTokeng);
                 startActivity(intent);
             }
         });
