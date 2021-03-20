@@ -20,6 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.android.ApiResultCallback;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.PaymentIntentResult;
+import com.stripe.android.PaymentSession;
 import com.stripe.android.Stripe;
 //import com.stripe.android.model.Card;
 //import com.stripe.android.model.Card;
@@ -34,6 +35,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -88,10 +93,9 @@ public class PaymentPage extends AppCompatActivity {
 
     private void onPaymentSuccess(@NonNull final Response response) throws IOException {
         Gson gson = new Gson();
-        new TypeToken<Map<String, String>>(){}.getType();
+        Type type = new TypeToken<Map<String, String>>(){}.getType();
         Map<String, String> responseMap = gson.fromJson(
-                Objects.requireNonNull(response.body()).string(),
-                new TypeToken<Map<String, String>>(){}.getType()
+                Objects.requireNonNull(response.body()).string(),type
         );
         paymentIntentClientSecret = responseMap.get("clientSecret");
     }
@@ -112,7 +116,19 @@ public class PaymentPage extends AppCompatActivity {
                 + "}";
 
 
-        RequestBody body = RequestBody.create(json, mediaType);
+        int amount = 2000;
+        Map<String, Object> payMap = new HashMap<>();
+        Map<String, Object> itemMap = new HashMap<>();
+
+        List<Map<String, Object>> itemList = new ArrayList<>();
+        payMap.put("currency", "usd");
+        itemMap.put("id", "photo_subscription");
+        itemMap.put("amount", amount);
+        itemList.add(itemMap);
+        payMap.put("items", itemList);
+        String gsonTojson = new Gson().toJson(payMap);
+        RequestBody body = RequestBody.create(gsonTojson,mediaType);
+        
         Request request = new Request.Builder()
                 .url(BACKEND_URL + "upgrademembership")
                 .post(body)
@@ -132,7 +148,10 @@ public class PaymentPage extends AppCompatActivity {
                         context,
                         PaymentConfiguration.getInstance(context).getPublishableKey()
                 );
-                stripe.confirmPayment(this, confirmParams);
+
+
+
+                stripe.confirmPayment();
             }
         });
     }
