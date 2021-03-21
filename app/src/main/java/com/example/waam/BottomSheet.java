@@ -48,6 +48,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private Intent data;
     private Uri photouri;
     private SelectedImage imageListener;
+    private String noit;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
 
 
