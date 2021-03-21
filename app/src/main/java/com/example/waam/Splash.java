@@ -1,10 +1,11 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Splash extends AppCompatActivity {
 
@@ -15,9 +16,15 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-       // Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
+       // bundle.getString("token");
+
         String phonenumber = getIntent().getStringExtra("phonenumber");
-        String token = getIntent().getStringExtra("token");
+    //    String token = getIntent().getStringExtra("token");
+        String token = bundle.getString("token");
+
+
+        Log.d("TAG", "TOKENSHOW " +token);
         String Fullname = getIntent().getStringExtra("name");
 
 
@@ -28,7 +35,11 @@ public class Splash extends AppCompatActivity {
                Intent home = new Intent(Splash.this, Verfy2.class);
                //home.putExtras(bundle);
                 home.putExtra("number", phonenumber);
-                home.putExtra("token", token);
+              //  home.putExtra("token", token);
+                if (token != null) {
+                    home.putExtra("token", token);
+                }
+
                 home.putExtra("name", Fullname);
                startActivity(home);
                finish();

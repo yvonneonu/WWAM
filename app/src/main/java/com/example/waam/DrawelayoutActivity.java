@@ -35,9 +35,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
 
         drawer.addDrawerListener(toggle);
-
-
         toggle.syncState();
+
         Log.d("TAG","in activity null");
         Fragment fragment = new BecomeAMemberFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

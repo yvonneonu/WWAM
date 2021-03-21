@@ -1,41 +1,28 @@
 package com.example.waam;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-
-import retrofit2.http.Url;
 
 public class Profile extends AppCompatActivity {
 
@@ -62,6 +49,7 @@ public class Profile extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         String Fullname = getIntent().getStringExtra("name");
+        String bigTokeng = getIntent().getStringExtra("alltoken");
 
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
@@ -90,11 +78,20 @@ public class Profile extends AppCompatActivity {
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile.this, Interest.class);
-                Log.d("ImageUri",imageUri.toString());
-                intent.putExtra("profilepics", imageUri.toString());
-                intent.putExtra("name", Fullname);
-                startActivity(intent);
+                if (imageUri != null){
+
+                    Intent intent = new Intent(Profile.this, Interest.class);
+                    Log.d("ImageUri",imageUri.toString());
+                    intent.putExtra("profilepics", imageUri.toString());
+                    intent.putExtra("name", Fullname);
+                    intent.putExtra("mytoken", bigTokeng);
+                    Log.d("TAG", "TOKENSHOW5 " +bigTokeng);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(Profile.this, "please select an image", Toast.LENGTH_LONG).show();
+                    Log.d("Swip", "wipe");
+                }
+
             }
         });
 

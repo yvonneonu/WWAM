@@ -1,8 +1,5 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -23,9 +20,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,18 +33,20 @@ public class SignUp extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private TextView lologin;
     String numberToPass = "1";
-    private TextView back, mangender, womangender, seekingman, save, wantwoman;
+    private TextView back, mangender, womangender, seekingman, save, wantwoman, textView;
     private String realGender, realInterest;
     private ImageView move;
     private Button update;
     UserService userService;
     private CardView cardView1;
     private EditText name, email, zip, password, confrim;
+    //ConstraintLayout constraintLayou;
 
     String chose = "";
     String interest = "";
     String Fullname;
 
+    ConstraintLayout constraintLayout;
 
     private static String token;
     //final String url_Register = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
@@ -69,16 +69,17 @@ public class SignUp extends AppCompatActivity {
         update = findViewById(R.id.forgetpass);
         zip = findViewById(R.id.editText4);
         lologin = findViewById(R.id.gologin);
+        textView = findViewById(R.id.textView);
         back = findViewById(R.id.backto);
         move = findViewById(R.id.logo);
         name = findViewById(R.id.editText8);
+        constraintLayout = findViewById(R.id.notshow);
         email = findViewById(R.id.editText2);
         password = findViewById(R.id.editText);
         confrim = findViewById(R.id.editText88);
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
         update.setText(getTodaysDate());
-
 
 
         final ProgressBar progressBar = new ProgressBar(SignUp.this);
@@ -89,11 +90,16 @@ public class SignUp extends AppCompatActivity {
                 if (isNetworkAvailableAndConnected()){
                     register();
                     cardView1.setVisibility(View.VISIBLE);
+                    constraintLayout.setVisibility(View.INVISIBLE);
+                    //textView.setVisibility(View.VISIBLE);
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                           // constraintLayou.setVisibility(View.GONE);
                             cardView1.setVisibility(View.GONE);
+                            constraintLayout.setVisibility(View.VISIBLE);
+                           // textView.setVisibility(View.VISIBLE);
                         }
                     }, 5000);
                 }
@@ -149,7 +155,6 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
-
                 String message = t.getLocalizedMessage();
                 Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
             }
@@ -287,7 +292,7 @@ public class SignUp extends AppCompatActivity {
                 name.setError("Full Name is required");
                 name.requestFocus();
             }else if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-                // email.setError("Enter a Valid email");
+                email.setError("Enter a Valid email");
                 email.requestFocus();
 
             }else if (Zip.isEmpty()) {
@@ -297,7 +302,7 @@ public class SignUp extends AppCompatActivity {
                 update.setError("Birthday Date is required");
                 update.requestFocus();
             }else if (!Passwor.equals(Confirm)) {
-                confrim.setError("Mismatch Password");
+                confrim.setError("Wrong Password");
                 confrim.requestFocus();
             }else if (chose.isEmpty()) {
                 Toast.makeText(SignUp.this, "Choose your gender", Toast.LENGTH_LONG).show();

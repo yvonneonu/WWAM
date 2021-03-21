@@ -1,27 +1,17 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class CompleteProfile extends AppCompatActivity {
     private ImageView firstImage, secondImage,thirdImage, fourthImage, fivethImage, sixthImage, seventhImage, eightImage, ninethImage, photo, gallerysave;;
@@ -34,8 +24,9 @@ public class CompleteProfile extends AppCompatActivity {
         setContentView(R.layout.activity_complete_profile);
         String imageUri = getIntent().getStringExtra("getProfilePics");
 
-        Log.d("Complete",imageUri);
+//        Log.d("Complete",imageUri);
         String Fullname = getIntent().getStringExtra("nameprofile");
+        String tired = getIntent().getStringExtra("token");
 
         firstImage = findViewById(R.id.imageView0);
         secondImage = findViewById(R.id.imageView1);
@@ -66,7 +57,7 @@ public class CompleteProfile extends AppCompatActivity {
                 .load(Uri.parse(imageUri))
                 .into(profile);
 
-        name.setText(Fullname);
+       // name.setText(Fullname);
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +262,11 @@ public class CompleteProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
                 intent.putExtra("image", imageUri.toString());
+                if (tired != null){
+                    intent.putExtra("everytoken", tired);
+                }
+
+                Log.d("TAG", "TOKENSHOW7 " +tired);
                 startActivity(intent);
             }
         });
