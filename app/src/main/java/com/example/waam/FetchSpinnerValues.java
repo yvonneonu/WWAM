@@ -1,7 +1,6 @@
 package com.example.waam;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;

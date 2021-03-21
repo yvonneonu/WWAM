@@ -1,38 +1,17 @@
 package com.example.waam;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.credentials.HintRequest;
-import com.google.android.gms.auth.api.phone.SmsRetriever;
-import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.hbb20.CountryCodePicker;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Random;
+import com.hbb20.CountryCodePicker;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -116,6 +95,7 @@ public class Verification1 extends AppCompatActivity {
 
                    Intent mainactivity = new Intent(Verification1.this, Splash.class);
                    mainactivity.putExtras(bundle);
+
                    startActivity(mainactivity);
                    Toast.makeText(Verification1.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
 

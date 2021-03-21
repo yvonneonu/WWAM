@@ -1,7 +1,5 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
@@ -44,6 +44,9 @@ public class finalProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(finalProfile.this, LookingFor.class);
                 intent.putExtra("images", imageUri.toString());
+                if (token != null){
+                    intent.putExtra("token", token);
+                }
                 Log.d("TAG", "TOKENSHOW8 " +token);
 
                 startActivity(intent);

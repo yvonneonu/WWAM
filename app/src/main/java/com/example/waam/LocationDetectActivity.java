@@ -1,11 +1,5 @@
 package com.example.waam;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +15,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class LocationDetectActivity extends AppCompatActivity implements LocationListener {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -50,7 +50,10 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
                     Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LocationDetectActivity.this, Profile.class);
                     intent.putExtra("name", Fullname);
-                    intent.putExtra("alltoken", token);
+                    if (token != null){
+                        intent.putExtra("alltoken", token);
+                    }
+
                     Log.d("TAG", "TOKENSHOW4 " +token);
                     startActivity(intent);
                 }else {

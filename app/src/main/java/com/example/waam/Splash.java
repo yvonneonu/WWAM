@@ -1,11 +1,11 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Splash extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class Splash extends AppCompatActivity {
                Intent home = new Intent(Splash.this, Verfy2.class);
                //home.putExtras(bundle);
                 home.putExtra("number", phonenumber);
-                home.putExtra("token", token);
+              //  home.putExtra("token", token);
                 if (token != null) {
                     home.putExtra("token", token);
                 }

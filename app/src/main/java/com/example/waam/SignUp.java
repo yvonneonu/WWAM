@@ -1,9 +1,5 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -20,14 +16,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -84,7 +80,6 @@ public class SignUp extends AppCompatActivity {
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
         update.setText(getTodaysDate());
-
 
 
         final ProgressBar progressBar = new ProgressBar(SignUp.this);

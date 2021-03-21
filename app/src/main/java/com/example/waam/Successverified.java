@@ -1,11 +1,11 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Successverified extends AppCompatActivity {
 
@@ -24,7 +24,10 @@ public class Successverified extends AppCompatActivity {
             public void run() {
                 Intent home = new Intent(Successverified.this, LocationDetectActivity.class);
                 home.putExtra("name", Fullname);
-                home.putExtra("bearer", token);
+                if (token != null){
+                    home.putExtra("bearer", token);
+                }
+
                 Log.d("TAG", "TOKENSHOW3 " +token);
                 startActivity(home);
                 finish();

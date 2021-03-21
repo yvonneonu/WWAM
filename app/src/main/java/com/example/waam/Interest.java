@@ -1,17 +1,13 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Interest extends AppCompatActivity {
 
@@ -68,7 +64,10 @@ public class Interest extends AppCompatActivity {
                 Intent intent = new Intent(Interest.this, CompleteProfile.class);
                 intent.putExtra("getProfilePics", imageUri);
                 intent.putExtra("nameprofile", Fullname);
-                intent.putExtra("token", token);
+                if (token != null){
+                    intent.putExtra("token", token);
+                }
+
                 Log.d("TAG", "TOKENSHOW6 " +token);
                 startActivity(intent);
             }
