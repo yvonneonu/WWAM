@@ -3,11 +3,14 @@ package com.example.waam;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +24,7 @@ public class finalProfile extends AppCompatActivity {
     private ImageView image;
     private String spinn;
     private boolean textVisible;
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +42,14 @@ public class finalProfile extends AppCompatActivity {
                     .into(image);
         }
 
+        count = 0;
         textView = findViewById(R.id.textView);
         educate = findViewById(R.id.textView26);
-
-
         Spinner spinner = findViewById(R.id.one);
         Spinner career = findViewById(R.id.carer);
         Spinner body = findViewById(R.id.spinnN);
         Spinner ethni = findViewById(R.id.ethnic);
-        textView.setText(spinn);
+       // textView.setText(spinn);
 
         //textView.setText(spinn);
         //String token = getIntent().getStringExtra("everytoken");
@@ -77,11 +80,42 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onEducationListener(List<String> qualification) {
 
-                    ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
-                    qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinner.setAdapter(qualificationAdapter);
-                        spinn = spinner.getSelectedItem().toString();
-                        //textView.setText(spinn);
+                ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
+                qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(qualificationAdapter);
+               // spinn = spinner.getSelectedItem().toString();
+
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view,
+                                               int position, long id) {
+
+                        String item = "nothing";
+                        // On selecting a spinner item
+Log.d()
+                        count++;
+
+                        Log.d("Counts",""+count);
+                        if(count > 1){
+                            item = parent.getItemAtPosition(position).toString();
+                            textView.setText(item);
+                        }
+
+
+                        // showing a toast on selecting an item
+                        Toast.makeText(parent.getContext(), item, Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg0) {
+                        // TODO Auto-generated method stub
+                        Log.d("Nothing","Nothing was selected");
+                    }
+
+                });
+
+                //textView.setText(spinn);
             }
         },toks);
 
@@ -92,6 +126,7 @@ public class finalProfile extends AppCompatActivity {
                 userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 career.setAdapter(userSchollAdapter);
                 spinn = career.getSelectedItem().toString();
+
                 //educate.setText(spinn);
             }
         }, toks);
