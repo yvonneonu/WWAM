@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class finalProfile extends AppCompatActivity {
 
-    private TextView textView, swipe;
+    private TextView textView, swipe, educate;
     private ImageView image;
     private String spinn;
     private boolean textVisible;
@@ -40,10 +39,14 @@ public class finalProfile extends AppCompatActivity {
         }
 
         textView = findViewById(R.id.textView);
+        educate = findViewById(R.id.textView26);
 
 
         Spinner spinner = findViewById(R.id.one);
         Spinner career = findViewById(R.id.carer);
+        Spinner body = findViewById(R.id.spinnN);
+        Spinner ethni = findViewById(R.id.ethnic);
+        textView.setText(spinn);
 
         //textView.setText(spinn);
         //String token = getIntent().getStringExtra("everytoken");
@@ -51,7 +54,7 @@ public class finalProfile extends AppCompatActivity {
         //Log.d("sorry", "iknowyouaretired "+token);
 
 
-        textView.setText(spinn);
+     //   textView.setText(spinn);
 
         swipe = findViewById(R.id.textView34);
         swipe.setOnClickListener(new View.OnClickListener() {
@@ -70,57 +73,50 @@ public class finalProfile extends AppCompatActivity {
             }
         });
 
+        FetchSpinnerValues.getSpinnerValues().fetchEducation(new FetchSpinnerValues.EducationListener() {
+            @Override
+            public void onEducationListener(List<String> qualification) {
+
+                    ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
+                    qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(qualificationAdapter);
+                        spinn = spinner.getSelectedItem().toString();
+                        //textView.setText(spinn);
+            }
+        },toks);
 
         FetchSpinnerValues.getSpinnerValues().fetchOccupation(new FetchSpinnerValues.OccupationListener() {
             @Override
             public void onOccupationListener(List<String> userSchool) {
-
-                if (career == null) {
-
-                    ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSchool);
-
-                    qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                    spinn = career.getSelectedItem().toString();
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            career.setAdapter(qualificationAdapter);
-
-                            textView.setText(spinn);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-                }
-
-
+                ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSchool);
+                userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                career.setAdapter(userSchollAdapter);
+                spinn = career.getSelectedItem().toString();
+                //educate.setText(spinn);
             }
         }, toks);
-        // spinn = spinner.getSelectedItem().toString();
-                    // spinn = spinner.getSelectedItem().toString();
-                    //  textView.setText("spi")
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+        FetchSpinnerValues.getSpinnerValues().fetchBody(new FetchSpinnerValues.BodyTypeListener() {
+            @Override
+            public void onBodyTypeListener(List<String> userBody) {
+                ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userBody);
+                userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                body.setAdapter(userSchollAdapter);
+                spinn = body.getSelectedItem().toString();
+            }
+        }, toks);
 
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
-
+        FetchSpinnerValues.getSpinnerValues().fetchEthnicity(new FetchSpinnerValues.EthnicityListener() {
+            @Override
+            public void onEthnicityListener(List<String> userEthnicity) {
+                ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userEthnicity);
+                userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ethni.setAdapter(userSchollAdapter);
+                spinn = ethni.getSelectedItem().toString();
+            }
+        }, toks);
 
 
     }
-
-
 
 }

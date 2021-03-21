@@ -10,4 +10,10 @@ public interface MysticApi {
 
     @GET("occupation")
     Call<OcupationRecordModel> getOccupation(@Header("Authorization")String token);
+
+    @GET("bodytype")
+    Call<BodyTypeResultRecordModel> getBody (@Header("Authorization")String token);
+
+    @GET("ethnicity")
+    Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
 }

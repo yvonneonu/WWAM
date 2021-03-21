@@ -117,4 +117,89 @@ public class FetchSpinnerValues {
     public interface OccupationListener {
         void onOccupationListener(List<String> userSchool);
         }
+    public void fetchBody(BodyTypeListener bodyTypeListener, String token){
+        String baseUrl = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        MysticApi bodyResult = retrofit.create(MysticApi.class);
+        Call<BodyTypeResultRecordModel> allBody = bodyResult.getBody("Bearer "+token);
+        allBody.enqueue(new Callback<BodyTypeResultRecordModel>() {
+            @Override
+            public void onResponse(Call<BodyTypeResultRecordModel> call, Response<BodyTypeResultRecordModel> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Error", "An error ocured");
+                    return;
+                }
+                List<String> body = new ArrayList<>();
+                List<BodyTypeResult> userBody = response.body().getBodyTypeRecord();
+                for (int i = 0 ; i < userBody.size() ; i++) {
+
+                    body.add(userBody.get(i).getName());
+                    Log.d("Name",userBody.get(i).getName());
+
+                }
+
+                Log.d("Success","Succesfully connected");
+                List<BodyTypeResult> bodyTypeResultsList = response.body().getBodyTypeRecord();
+                if (bodyTypeListener != null) {
+                    bodyTypeListener.onBodyTypeListener(body);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BodyTypeResultRecordModel> call, Throwable t) {
+
+                Log.d(TAG, "Something is wrong " + t.getMessage());
+            }
+        });
     }
+    public interface BodyTypeListener {
+        void onBodyTypeListener(List<String> userBody);
+    }
+
+    public void fetchEthnicity(EthnicityListener ethnicityListener, String token){
+        //http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/education
+        String baseUrl = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        MysticApi ethnicityResult = retrofit.create(MysticApi.class);
+        Call<EthnicityRecordmodel> allEth = ethnicityResult.getEthnicity("Bearer " + token);
+        allEth.enqueue(new Callback<EthnicityRecordmodel>() {
+            @Override
+            public void onResponse(Call<EthnicityRecordmodel> call, Response<EthnicityRecordmodel> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Error", "An error ocured");
+                    return;
+                }
+
+                List<String> ethnicalname = new ArrayList<>();
+                List<EthnicityResult> userEthnicity = response.body().getEtnicrecords();
+
+                for (int i = 0; i < userEthnicity.size(); i++) {
+                    ethnicalname.add(userEthnicity.get(i).getName());
+                    Log.d("Name", userEthnicity.get(i).getName());
+                }
+                Log.d("Success", "Succesfully connected");
+                List<EthnicityResult> results = response.body().getEtnicrecords();
+                if (ethnicityListener != null) {
+                    ethnicityListener.onEthnicityListener(ethnicalname);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EthnicityRecordmodel> call, Throwable t) {
+
+                Log.d(TAG, "Something is wrong " + t.getMessage());
+            }
+        });
+    }
+
+
+    public interface EthnicityListener {
+        void onEthnicityListener(List<String> userEthnicity);
+    }
+}

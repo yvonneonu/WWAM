@@ -252,6 +252,7 @@
                     app:layout_constraintVertical_bias="1.0" />
 
                 <Spinner
+                    android:id="@+id/spinnN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/textView2"
@@ -297,6 +298,7 @@
                     app:layout_constraintVertical_bias="1.0" />
 
                 <Spinner
+                    android:id="@+id/ethnic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/textView3"
