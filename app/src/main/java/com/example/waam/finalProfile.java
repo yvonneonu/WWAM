@@ -93,7 +93,7 @@ public class finalProfile extends AppCompatActivity {
 
                         String item = "nothing";
                         // On selecting a spinner item
-//Log.d()
+Log.d()
                         count++;
 
                         Log.d("Counts",""+count);
