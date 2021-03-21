@@ -44,6 +44,7 @@ public class SignUp extends AppCompatActivity {
     UserService userService;
     private CardView cardView1;
     private EditText name, email, zip, password, confrim;
+    //ConstraintLayout constraintLayou;
 
     String chose = "";
     String interest = "";
@@ -100,6 +101,7 @@ public class SignUp extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                           // constraintLayou.setVisibility(View.GONE);
                             cardView1.setVisibility(View.GONE);
                             constraintLayout.setVisibility(View.VISIBLE);
                            // textView.setVisibility(View.VISIBLE);

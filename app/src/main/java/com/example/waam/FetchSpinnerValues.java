@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class FetchSpinnerValues {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        SpinnerApi educationResult = retrofit.create(SpinnerApi.class);
+        MysticApi educationResult = retrofit.create(MysticApi.class);
         Call<RecordModel> allEdu = educationResult.getEducation("Bearer "+token);
 
         allEdu.enqueue(new Callback<RecordModel>() {
@@ -49,14 +50,14 @@ public class FetchSpinnerValues {
                 }
 
                 List<String> name = new ArrayList<>();
-                List<EducationModel> userSchool = response.body().getRecords();
+                List<EduactionRsesult> userSchool = response.body().getModel();
 
                 for(int i = 0 ; i < userSchool.size() ; i++){
                     name.add(userSchool.get(i).getName());
                     Log.d("Name",userSchool.get(i).getName());
                 }
                 Log.d("Success","Succesfully connected");
-                List<EducationModel> results =response.body().getRecords();
+                List<EduactionRsesult> results =response.body().getModel();
                 if(educationListener != null){
                     educationListener.onEducationListener(name);
                 }

@@ -15,5 +15,6 @@
     <color name="offblue">#51eaea</color>
     <color name="yellow">#FFEB3B</color>
     <color name="bulletColor">#228B22</color>
+    <color name="notsel">#DDDCDC</color>
     <color name="priceBackgrouond">#272822</color>
 </resources>

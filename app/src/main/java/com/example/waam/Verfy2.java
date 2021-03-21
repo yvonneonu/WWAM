@@ -42,10 +42,12 @@ public class Verfy2 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
+
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
             bearer = bundle.getString("token");
+
         }
 
 
@@ -83,6 +85,7 @@ public class Verfy2 extends AppCompatActivity {
 
                 bundle.putString("phonenumber", phonenumber);
                 bundle.putString("bearer", token);
+               // bundle.putString("name", Fullname);
 
                 otpresend();
             }
@@ -181,6 +184,7 @@ public class Verfy2 extends AppCompatActivity {
                 intent.putExtra("tokenbearer", bearer);
                 Log.d("TAG", "TOKENSHOW2 " +bearer);
                 intent.putExtra("name", Fullname);
+
                 startActivity(intent);
                 //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
                 finish();
