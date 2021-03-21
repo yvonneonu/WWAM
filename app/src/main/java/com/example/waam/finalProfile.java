@@ -16,15 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class finalProfile extends AppCompatActivity {
+public class finalProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private TextView textView, swipe, educate;
     private ImageView image;
     private String spinn;
     private boolean textVisible;
     private int count;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class finalProfile extends AppCompatActivity {
         count = 0;
         textView = findViewById(R.id.textView);
         educate = findViewById(R.id.textView26);
-        Spinner spinner = findViewById(R.id.one);
+        spinner = findViewById(R.id.one);
         Spinner career = findViewById(R.id.carer);
         Spinner body = findViewById(R.id.spinnN);
         Spinner ethni = findViewById(R.id.ethnic);
@@ -57,7 +59,15 @@ public class finalProfile extends AppCompatActivity {
         //Log.d("sorry", "iknowyouaretired "+token);
 
 
+        List<String> names = new ArrayList<>();
      //   textView.setText(spinn);
+
+        names.add("Cynthia");
+        names.add("Yvonne");
+        names.add("Hailey");
+        names.add("Juliet");
+        names.add("Maria");
+        spinner.setOnItemSelectedListener(this);
 
         swipe = findViewById(R.id.textView34);
         swipe.setOnClickListener(new View.OnClickListener() {
@@ -65,13 +75,8 @@ public class finalProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(finalProfile.this, LookingFor.class);
                 if (imageUri != null) {
-                    intent.putExtra("images", imageUri.toString());
+                    intent.putExtra("images", imageUri);
                 }
-
-                /*if (token != null){
-                    intent.putExtra("token", token);
-                }*/
-                //Log.d("TAG", "TOKENSHOW8 " +token);
                 startActivity(intent);
             }
         });
@@ -79,43 +84,10 @@ public class finalProfile extends AppCompatActivity {
         FetchSpinnerValues.getSpinnerValues().fetchEducation(new FetchSpinnerValues.EducationListener() {
             @Override
             public void onEducationListener(List<String> qualification) {
-
-                ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
+                ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, names);
                 qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(qualificationAdapter);
-               // spinn = spinner.getSelectedItem().toString();
 
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view,
-                                               int position, long id) {
-
-                        String item = "nothing";
-                        // On selecting a spinner item
-Log.d()
-                        count++;
-
-                        Log.d("Counts",""+count);
-                        if(count > 1){
-                            item = parent.getItemAtPosition(position).toString();
-                            textView.setText(item);
-                        }
-
-
-                        // showing a toast on selecting an item
-                        Toast.makeText(parent.getContext(), item, Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> arg0) {
-                        // TODO Auto-generated method stub
-                        Log.d("Nothing","Nothing was selected");
-                    }
-
-                });
-
-                //textView.setText(spinn);
             }
         },toks);
 
@@ -126,7 +98,6 @@ Log.d()
                 userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 career.setAdapter(userSchollAdapter);
                 spinn = career.getSelectedItem().toString();
-
                 //educate.setText(spinn);
             }
         }, toks);
@@ -141,17 +112,31 @@ Log.d()
             }
         }, toks);
 
-        FetchSpinnerValues.getSpinnerValues().fetchEthnicity(new FetchSpinnerValues.EthnicityListener() {
-            @Override
-            public void onEthnicityListener(List<String> userEthnicity) {
-                ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userEthnicity);
-                userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                ethni.setAdapter(userSchollAdapter);
-                spinn = ethni.getSelectedItem().toString();
-            }
+        FetchSpinnerValues.getSpinnerValues().fetchEthnicity(userEthnicity -> {
+            ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userEthnicity);
+            userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ethni.setAdapter(userSchollAdapter);
+            spinn = ethni.getSelectedItem().toString();
         }, toks);
 
 
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        count++;
+
+        if(count > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+        Log.d("Nothing","Nothing is fine");
+    }
 }
+
+
+
