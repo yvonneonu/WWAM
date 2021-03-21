@@ -20,15 +20,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="20sp"
             android:text="Upgrade your plan to unlock more amazing features" />
-
 
 
         <worker8.com.github.radiogroupplus.RadioGroupPlus
             android:id="@+id/plus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
 
             <com.google.android.material.card.MaterialCardView
@@ -36,18 +37,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginVertical="5dp"
                 android:layout_marginTop="10dp"
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
                 android:orientation="horizontal"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardElevation="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <RadioButton
                         android:id="@+id/radioButtonone"
@@ -63,8 +66,8 @@
                     <TextView
                         android:id="@+id/textViewone"
                         android:layout_width="wrap_content"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:text="$9.95"
                         android:textColor="#000000"
                         android:textSize="30sp"
@@ -112,7 +115,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplan"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -121,16 +124,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
-                        <LinearLayout
-                            android:id="@+id/linCont"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:orientation="horizontal">
 
-
-                        </LinearLayout>
-
-                        <TextView
+                        <!-- <TextView
                             android:id="@+id/textView28"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -156,7 +151,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF" /> -->
 
                     </LinearLayout>
 
@@ -170,16 +165,17 @@
                 android:id="@+id/laytwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:checkable="true"
                 android:clickable="true"
                 android:focusable="true"
-                android:checkable="true"
-                app:cardElevation="4dp"
-                android:layout_marginTop="10dp">
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:cardElevation="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/consttwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -249,7 +245,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplantwo"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -259,7 +255,7 @@
                         app:layout_constraintStart_toStartOf="parent">
 
 
-                        <TextView
+                        <!--<TextView
                             android:id="@+id/textView34fourtin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -285,7 +281,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF" /> -->
                     </LinearLayout>
 
 
@@ -307,6 +303,7 @@
                 app:cardElevation="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constthree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -375,7 +372,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplanthree"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -385,7 +382,7 @@
                         app:layout_constraintStart_toStartOf="parent">
 
 
-                        <TextView
+                        <!-- <TextView
                             android:id="@+id/textView38twe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -411,7 +408,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF" /> -->
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -424,7 +421,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
-
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true"
@@ -433,6 +429,7 @@
                 app:cardElevation="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constfour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -498,7 +495,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplanfour"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -508,7 +505,7 @@
                         app:layout_constraintStart_toStartOf="@+id/radioButton2">
 
 
-                        <TextView
+                        <!-- <TextView
                             android:id="@+id/textView42hun"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -534,7 +531,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF" /> -->
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
