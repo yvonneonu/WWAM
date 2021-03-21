@@ -378,7 +378,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
             button.setLayoutParams(imageParams);
             textView.setText(stringFeature);
             textView.setTextColor(getActivity().getResources().getColor(R.color.white));
-            //textView.setLayoutParams(new );
             linearLayout.addView(button);
             linearLayout.addView(textView);
             linearLayouting.addView(linearLayout);
