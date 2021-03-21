@@ -146,7 +146,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/view" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/edutextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -159,6 +159,7 @@
                         app:layout_constraintVertical_bias="1.0" />
 
                     <Spinner
+                        android:id="@+id/educatespinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="@+id/textView"
