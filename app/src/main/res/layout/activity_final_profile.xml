@@ -84,7 +84,7 @@
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="1018dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
@@ -454,10 +454,10 @@
 
                     <View
                         android:id="@+id/view10"
-                        android:layout_width="0dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView15"
@@ -478,9 +478,11 @@
                         android:id="@+id/textView8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
                         android:hint="Do you drink?"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.042"
                         app:layout_constraintStart_toEndOf="@+id/imageView16"
                         app:layout_constraintTop_toTopOf="@+id/imageView16"
                         app:layout_constraintVertical_bias="0.0" />
@@ -488,18 +490,19 @@
                     <Spinner
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView8"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.751"
+                        app:layout_constraintStart_toEndOf="@+id/textView8"
                         app:layout_constraintTop_toTopOf="@+id/textView8"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view12"
-                        android:layout_width="0dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView16"
@@ -520,9 +523,11 @@
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
                         android:hint="Salary"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.042"
                         app:layout_constraintStart_toEndOf="@+id/imageView17"
                         app:layout_constraintTop_toTopOf="@+id/imageView17"
                         app:layout_constraintVertical_bias="1.0" />
@@ -530,18 +535,19 @@
                     <Spinner
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView9"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.793"
+                        app:layout_constraintStart_toEndOf="@+id/textView9"
                         app:layout_constraintTop_toTopOf="@+id/textView9"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view13"
-                        android:layout_width="0dp"
+                        android:layout_width="300dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginEnd="52dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView16"
