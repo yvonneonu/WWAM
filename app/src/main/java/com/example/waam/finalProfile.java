@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,9 +50,10 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         Spinner career = findViewById(R.id.carer);
         Spinner body = findViewById(R.id.spinnN);
         Spinner ethni = findViewById(R.id.ethnic);
-       // textView.setText(spinn);
+        Spinner fait = findViewById(R.id.faith);
+        Spinner polit = findViewById(R.id.politic);
+        Spinner childre = findViewById(R.id.children);
 
-        //textView.setText(spinn);
         //String token = getIntent().getStringExtra("everytoken");
         String toks = getIntent().getStringExtra("token");
         //Log.d("sorry", "iknowyouaretired "+token);
@@ -84,7 +84,7 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         FetchSpinnerValues.getSpinnerValues().fetchEducation(new FetchSpinnerValues.EducationListener() {
             @Override
             public void onEducationListener(List<String> qualification) {
-                ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, names);
+                ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
                 qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(qualificationAdapter);
 
@@ -105,21 +105,40 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         FetchSpinnerValues.getSpinnerValues().fetchBody(new FetchSpinnerValues.BodyTypeListener() {
             @Override
             public void onBodyTypeListener(List<String> userBody) {
-                ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userBody);
-                userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                body.setAdapter(userSchollAdapter);
+                ArrayAdapter<String> userBodyAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userBody);
+                userBodyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                body.setAdapter(userBodyAdapter);
                 spinn = body.getSelectedItem().toString();
             }
         }, toks);
 
         FetchSpinnerValues.getSpinnerValues().fetchEthnicity(userEthnicity -> {
-            ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userEthnicity);
-            userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            ethni.setAdapter(userSchollAdapter);
+            ArrayAdapter<String> userEhtnicityAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userEthnicity);
+            userEhtnicityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ethni.setAdapter(userEhtnicityAdapter);
             spinn = ethni.getSelectedItem().toString();
         }, toks);
 
+        FetchSpinnerValues.getSpinnerValues().fetchFaith(userFaith ->  {
+            ArrayAdapter<String> userFaithAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userFaith);
+            userFaithAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            fait.setAdapter(userFaithAdapter);
+            spinn = fait.getSelectedItem().toString();
+        }, toks);
 
+        FetchSpinnerValues.getSpinnerValues().fetchPolitics(userPolitics ->  {
+            ArrayAdapter<String> userPoliticsAdapetr = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userPolitics);
+            userPoliticsAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            polit.setAdapter(userPoliticsAdapetr);
+            spinn = polit.getSelectedItem().toString();
+        }, toks);
+
+        FetchSpinnerValues.getSpinnerValues().fetchChildren(userChildren ->  {
+            ArrayAdapter<String> userChildrenAdapetr = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userChildren);
+            userChildrenAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            childre.setAdapter(userChildrenAdapetr);
+            spinn = childre.getSelectedItem().toString();
+        }, toks);
     }
 
     @Override
