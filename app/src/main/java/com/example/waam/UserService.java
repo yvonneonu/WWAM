@@ -31,6 +31,9 @@ public interface UserService {
     @POST("api/otp-resend")
     Call<Resendotpresponse> resendotpgotten (@Body Resendotprequest resendotprequest, @Header("Authorization") String toke);
 
+    @POST("ephemeralkey")
+    Call<Ephemeral> getEphemeral(@Body String epheral,@Header("Authorization") String token);
+
 
 
     //Call<otpResponse> requestortp(@Body otprequest otprequest, @Header("Authorization: Bearer") String token);

@@ -18,9 +18,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.android.ApiResultCallback;
+import com.stripe.android.CustomerSession;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.PaymentIntentResult;
 import com.stripe.android.PaymentSession;
+import com.stripe.android.PaymentSessionConfig;
 import com.stripe.android.Stripe;
 //import com.stripe.android.model.Card;
 //import com.stripe.android.model.Card;
@@ -29,6 +31,7 @@ import com.stripe.android.model.PaymentIntent;
 import com.stripe.android.model.PaymentMethod;
 import com.stripe.android.model.PaymentMethodCreateParams;
 import com.stripe.android.model.SourceTypeModel.*;
+import com.stripe.android.view.BillingAddressFields;
 import com.stripe.android.view.CardInputWidget;
 
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +60,7 @@ public class PaymentPage extends AppCompatActivity {
     private OkHttpClient httpClient = new OkHttpClient();
     private String paymentIntentClientSecret;
     CardInputWidget cardInputWidget;
+    PaymentSession paymentSession;
     private Stripe stripe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +155,6 @@ public class PaymentPage extends AppCompatActivity {
 
 
 
-                stripe.confirmPayment();
             }
         });
     }
@@ -247,6 +250,18 @@ public class PaymentPage extends AppCompatActivity {
                 activity.onPaymentSuccess(response);
             }
         }
+    }
+
+
+
+    private void setUpPayment(){
+        CustomerSession.initCustomerSession(this, new ExampleEphemeralKeyProvider());
+        paymentSession = new PaymentSession(this, new PaymentSessionConfig.Builder()
+                .setShippingInfoRequired(false)
+                .setShippingMethodsRequired(false)
+                .setBillingAddressFields(BillingAddressFields.None)
+                .build());
+
     }
 
 }
