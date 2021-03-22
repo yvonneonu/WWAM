@@ -61,6 +61,11 @@
         <activity android:name=".Verfy2" >
 
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Splash" />
         <activity android:name=".Verification1" >
@@ -71,13 +76,16 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp">
 
+
         </activity>
         <activity android:name=".Login" >
+
 
         </activity>
         <activity android:name=".Interest" >
         </activity>
         <activity android:name=".ViewPager">
+
 
         </activity>
 

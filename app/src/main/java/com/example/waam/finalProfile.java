@@ -25,7 +25,17 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
     private String spinn;
     private boolean textVisible;
     private int count;
-    Spinner spinner;
+    private int count1;
+    private int count2;
+    private int count3;
+    private int count4;
+    private int count5;
+    private int count6;
+    private int count7;
+    private int count8;
+    private int count9;
+    private int count10;
+    Spinner spinner, career;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +57,7 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         textView = findViewById(R.id.textView);
         educate = findViewById(R.id.textView26);
         spinner = findViewById(R.id.one);
-        Spinner career = findViewById(R.id.carer);
+        career = findViewById(R.id.carer);
         Spinner body = findViewById(R.id.spinnN);
         Spinner ethni = findViewById(R.id.ethnic);
         Spinner fait = findViewById(R.id.faith);
@@ -73,11 +83,21 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         swipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(finalProfile.this, LookingFor.class);
-                if (imageUri != null) {
-                    intent.putExtra("images", imageUri);
+                if (textView.toString().isEmpty() ){
+                    textView.setError("Choose your Career");
+                    //||
+                    textView.requestFocus();
+                  //  Toast.makeText()
+                }else if (textView.toString().isEmpty()){
+
+                }else{
+                    Intent intent = new Intent(finalProfile.this, LookingFor.class);
+                    if (imageUri != null) {
+                        intent.putExtra("images", imageUri);
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
+
             }
         });
 
@@ -139,13 +159,72 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
             childre.setAdapter(userChildrenAdapetr);
             spinn = childre.getSelectedItem().toString();
         }, toks);
+
+        FetchSpinnerValues.getSpinnerValues().fetchSmoke(userSmoke ->  {
+            ArrayAdapter<String> userSmokeAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSmoke);
+            userSmokeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            childre.setAdapter(userSmokeAdapter);
+            spinn = childre.getSelectedItem().toString();
+        }, toks);
+
+        FetchSpinnerValues.getSpinnerValues().fetchDrink(userDrink ->  {
+            ArrayAdapter<String> userDrinkAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userDrink);
+            userDrinkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            childre.setAdapter(userDrinkAdapter);
+            spinn = childre.getSelectedItem().toString();
+        }, toks);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         count++;
+        count1++;
+        count2++;
+        count3++;
+        count4++;
+        count5++;
+        count6++;
+        count7++;
+        count8++;
+        count9++;
+        count10++;
 
+
+
+        if(view.getId() == R.id.one){
+
+            if(count > 1) textView.setText(spinner.getSelectedItem().toString());
+
+
+        }else if(view.getId() == R.id.one){
+
+            if(count > 1) textView.setText(career.getSelectedItem().toString());
+
+        }else if(count > 1){
+            if(count > 1) textView.setText(career.getSelectedItem().toString());
+        }
         if(count > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else if(count1 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else  if(count2 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else  if(count3 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else  if(count4 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else  if(count5 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }
+        else  if(count6 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else  if(count7 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else  if(count8 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else  if(count9 > 1){
+            textView.setText(spinner.getSelectedItem().toString());
+        }else  if(count10 > 1){
             textView.setText(spinner.getSelectedItem().toString());
         }
     }

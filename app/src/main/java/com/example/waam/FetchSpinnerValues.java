@@ -331,8 +331,98 @@ public class FetchSpinnerValues {
             }
         });
     }
-
     public interface ChildrenListener{
         void onChildrenListerner(List<String> userChildren);
+    }
+
+    public void fetchSmoke(SmokeListener smokeListener, String token) {
+        //http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/education
+        String baseUrl = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MysticApi smokeResult = retrofit.create(MysticApi.class);
+        Call<SmokeRecordModel> allSmok = smokeResult.getSmoke("Bearer " + token);
+
+        allSmok.enqueue(new Callback<SmokeRecordModel>() {
+            @Override
+            public void onResponse(Call<SmokeRecordModel> call, Response<SmokeRecordModel> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Error", "An error ocured");
+                    return;
+                }
+
+                List<String> nameSmoke = new ArrayList<>();
+                List<SmokeResult> userSmoke = response.body().getSmokeRecord();
+
+                for (int i = 0; i < userSmoke.size(); i++) {
+                    nameSmoke.add(userSmoke.get(i).getName());
+                    Log.d("Name", userSmoke.get(i).getName());
+                }
+                Log.d("Success", "Succesfully connected");
+                List<SmokeResult> resultsSmoke = response.body().getSmokeRecord();
+                if (smokeListener != null) {
+                    smokeListener.onSmokeListerner(nameSmoke);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SmokeRecordModel> call, Throwable t) {
+                Log.d(TAG, "Something is wrong " + t.getMessage());
+            }
+        });
+    }
+
+
+
+    public interface SmokeListener{
+        void onSmokeListerner(List<String> userSmoke);
+    }
+
+
+    public void fetchDrink(DrinkListener drinkListener, String token) {
+        //http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/education
+        String baseUrl = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MysticApi drinkResult = retrofit.create(MysticApi.class);
+        Call<DrinkRecordModel> allDrink = drinkResult.getDrink("Bearer " + token);
+
+        allDrink.enqueue(new Callback<DrinkRecordModel>() {
+            @Override
+            public void onResponse(Call<DrinkRecordModel> call, Response<DrinkRecordModel> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Error", "An error ocured");
+                    return;
+                }
+
+                List<String> nameDrink = new ArrayList<>();
+                List<DrinkResult> userDrink = response.body().getDrinkRecords();
+
+                for (int i = 0; i < userDrink.size(); i++) {
+                    nameDrink.add(userDrink.get(i).getName());
+                    Log.d("Name", userDrink.get(i).getName());
+                }
+                Log.d("Success", "Succesfully connected");
+                List<DrinkResult> resultsDrink = response.body().getDrinkRecords();
+                if (drinkListener != null) {
+                    drinkListener.onDrinkListerner(nameDrink);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DrinkRecordModel> call, Throwable t) {
+                Log.d(TAG, "Something is wrong " + t.getMessage());
+            }
+        });
+    }
+
+    public interface DrinkListener{
+        void onDrinkListerner(List<String> userDrink);
     }
 }

@@ -25,4 +25,10 @@ public interface MysticApi {
 
     @GET("children")
     Call<ChildrenRecordModel> getChildren (@Header("Authorization")String token);
+
+    @GET("smoke")
+    Call<SmokeRecordModel> getSmoke (@Header("Authorization")String token);
+
+    @GET("drink")
+    Call<DrinkRecordModel> getDrink (@Header("Authorization")String token);
 }
