@@ -35,6 +35,8 @@ public interface UserService {
     Call<Ephemeral> getEphemeral(@Body String epheral,@Header("Authorization") String token);
 
 
+    @POST("upgrademembership")
+    Call<UpgradeMembership> upgrade(@Body UpgradeMembership upgrade, @Header("Authorization") String token);
 
     //Call<otpResponse> requestortp(@Body otprequest otprequest, @Header("Authorization: Bearer") String token);
 

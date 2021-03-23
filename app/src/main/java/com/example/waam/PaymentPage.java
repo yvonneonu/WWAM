@@ -23,6 +23,7 @@ import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.PaymentIntentResult;
 import com.stripe.android.PaymentSession;
 import com.stripe.android.PaymentSessionConfig;
+import com.stripe.android.PaymentSessionData;
 import com.stripe.android.Stripe;
 //import com.stripe.android.model.Card;
 //import com.stripe.android.model.Card;
@@ -45,22 +46,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import okhttp3.Call;
-import okhttp3.Callback;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PaymentPage extends AppCompatActivity {
     String price;
 
     private static final String BACKEND_URL = "http://54.188.200.48/api/";
-    private OkHttpClient httpClient = new OkHttpClient();
+    //private OkHttpClient httpClient = new OkHttpClient();
     private String paymentIntentClientSecret;
     CardInputWidget cardInputWidget;
-    PaymentSession paymentSession;
+    private PaymentSession paymentSession;
+    private LinearLayout pay;
+    private String payMeth;
     private Stripe stripe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,21 +83,36 @@ public class PaymentPage extends AppCompatActivity {
                 finish();
             }
         });
-        stripe = new Stripe(
+        /*stripe = new Stripe(
                 getApplicationContext(),
                 Objects.requireNonNull(getString(R.string.publishablekey))
-        );
+        );*/
 
-        cardInputWidget = findViewById(R.id.cardInputWidget);
-        startCheckout();
+
+        pay = findViewById(R.id.sub);
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setUpPayment();
+                //paymentSession.presentPaymentMethodSelection();
+            }
+        });
+
+
+
+
+        //cardInputWidget = findViewById(R.id.cardInputWidget);
+        //startCheckout();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Handle the result of stripe.confirmPayment
-        stripe.onPaymentResult(requestCode, data, new PaymentResultCallback(this));
+        if (data != null) {
+            paymentSession.handlePaymentData(requestCode, resultCode, data);
+        }
     }
 
 
@@ -106,7 +127,7 @@ public class PaymentPage extends AppCompatActivity {
 
 
 
-    private void startCheckout() {
+    /*private void startCheckout() {
         // ...
 
 
@@ -157,20 +178,19 @@ public class PaymentPage extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 
-    private void displayAlert(@NonNull String title,
+    /*private void displayAlert(@NonNull String title,
                               @Nullable String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", null);
         builder.create().show();
-    }
+    }*/
 
-    private static final class PaymentResultCallback
-            implements ApiResultCallback<PaymentIntentResult> {
+    private static final class PaymentResultCallback implements ApiResultCallback<PaymentIntentResult> {
         @NonNull
         private final WeakReference<PaymentPage> activityRef;
 
@@ -190,16 +210,16 @@ public class PaymentPage extends AppCompatActivity {
             if (status == PaymentIntent.Status.Succeeded) {
                 // Payment completed successfully
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                activity.displayAlert(
+                /*activity.displayAlert(
                         "Payment completed",
                         gson.toJson(paymentIntent)
-                );
+                );*/
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed
-                activity.displayAlert(
+                /*activity.displayAlert(
                         "Payment failed",
                         Objects.requireNonNull(paymentIntent.getLastPaymentError()).getMessage()
-                );
+                );*/
             }
         }
 
@@ -211,12 +231,12 @@ public class PaymentPage extends AppCompatActivity {
             }
 
             // Payment request failed – allow retrying using the same payment method
-            activity.displayAlert("Error", e.toString());
+            //activity.displayAlert("Error", e.toString());
         }
     }
 
 
-    private static final class PayCallback implements Callback {
+    /*private static final class PayCallback implements Callback {
         @NonNull private final WeakReference<PaymentPage> activityRef;
         PayCallback(@NonNull PaymentPage activity) {
             activityRef = new WeakReference<>(activity);
@@ -250,8 +270,7 @@ public class PaymentPage extends AppCompatActivity {
                 activity.onPaymentSuccess(response);
             }
         }
-    }
-
+    }*/
 
 
     private void setUpPayment(){
@@ -262,6 +281,74 @@ public class PaymentPage extends AppCompatActivity {
                 .setBillingAddressFields(BillingAddressFields.None)
                 .build());
 
+
+        paymentSession.init(new PaymentSession.PaymentSessionListener() {
+
+
+            @Override
+            public void onCommunicatingStateChanged(boolean b) {
+
+            }
+
+
+            @Override
+            public void onError(int i, @NotNull String s) {
+
+            }
+
+            @Override
+            public void onPaymentSessionDataChanged(@NotNull PaymentSessionData data) {
+                if (data.getUseGooglePay()) {
+                    // customer intends to pay with Google Pay
+                } else {
+                    final PaymentMethod paymentMethod = data.getPaymentMethod();
+                    if (paymentMethod != null) {
+                        payMeth = paymentMethod.toString();
+                    }
+                }
+
+                // Update your UI here with other data
+                if (data.isPaymentReadyToCharge()) {
+                    // Use the data to complete your charge - see below.
+
+                    UpgradeMembership mem = new UpgradeMembership();
+                    mem.setCurrency("USD");
+                    mem.setPayment_method_id(payMeth);
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    UserService upgrademem = retrofit.create(UserService.class);
+                    Call<UpgradeMembership> membership = upgrademem.upgrade(mem,"");
+                    membership.enqueue(new Callback<UpgradeMembership>() {
+                        @Override
+                        public void onResponse(Call<UpgradeMembership> call, retrofit2.Response<UpgradeMembership> response) {
+                            if(!response.isSuccessful()){
+                                Toast.makeText(PaymentPage.this,"An error occured",Toast.LENGTH_SHORT).show();
+                            }
+
+                            Toast.makeText(PaymentPage.this,"Payment was succesful",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<UpgradeMembership> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
+
+    private void confirmPayment(@NonNull String clientSecret, @NonNull String paymentMethodId) {
+        stripe.confirmPayment(this,
+                ConfirmPaymentIntentParams.createWithPaymentMethodId(
+                        paymentMethodId,
+                        clientSecret
+                )
+        );
     }
 
 }
