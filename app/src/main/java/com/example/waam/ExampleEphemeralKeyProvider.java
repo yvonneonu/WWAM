@@ -13,6 +13,9 @@ import com.stripe.android.EphemeralKeyUpdateListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.reactivex.rxjava3.annotations.NonNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +27,9 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
 
     @Override
     public void createEphemeralKey(@NonNull @Size(min = 4) String apiVersion, @NotNull EphemeralKeyUpdateListener ephemeralKeyUpdateListener) {
+
+        final Map<String, String> apiParamMap = new HashMap<>();
+        apiParamMap.put("api_version", apiVersion);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/")
