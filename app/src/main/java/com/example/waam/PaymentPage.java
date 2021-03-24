@@ -62,7 +62,7 @@ public class PaymentPage extends AppCompatActivity {
 
     private static final String BACKEND_URL = "http://54.188.200.48/api/";
     //private OkHttpClient httpClient = new OkHttpClient();
-    private String paymentIntentClientSecret;
+    //private String paymentIntentClientSecret;
     CardInputWidget cardInputWidget;
     private PaymentSession paymentSession;
     private LinearLayout pay;
@@ -286,7 +286,6 @@ public class PaymentPage extends AppCompatActivity {
 
         paymentSession.init(new PaymentSession.PaymentSessionListener() {
 
-
             @Override
             public void onCommunicatingStateChanged(boolean b) {
 
@@ -321,19 +320,26 @@ public class PaymentPage extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     UserService upgrademem = retrofit.create(UserService.class);
-                    Call<UpgradeMembership> membership = upgrademem.upgrade(mem,token);
-                    membership.enqueue(new Callback<UpgradeMembership>() {
+                    Call<UpgradeMembershipResponse> membership = upgrademem.upgrade(mem,token);
+                    membership.enqueue(new Callback<UpgradeMembershipResponse>() {
                         @Override
-                        public void onResponse(Call<UpgradeMembership> call, retrofit2.Response<UpgradeMembership> response) {
+                        public void onResponse(Call<UpgradeMembershipResponse> call, retrofit2.Response<UpgradeMembershipResponse> response) {
                             if(!response.isSuccessful()){
                                 Toast.makeText(PaymentPage.this,"An error occured",Toast.LENGTH_SHORT).show();
                             }
 
+                            String clientSecret = response.body().getGetClientSecret();
+
+                            confirmPayment(clientSecret,payMeth);
+
+                            //UpgradeMembership members = response.body().getClientSecreet;
+                            //confirmPayment("client",paymentIntentClientSecret);
                             Toast.makeText(PaymentPage.this,"Payment was succesful",Toast.LENGTH_SHORT).show();
                         }
 
+
                         @Override
-                        public void onFailure(Call<UpgradeMembership> call, Throwable t) {
+                        public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
 
                         }
                     });

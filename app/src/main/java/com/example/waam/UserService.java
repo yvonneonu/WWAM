@@ -36,7 +36,7 @@ public interface UserService {
 
 
     @POST("upgrademembership")
-    Call<UpgradeMembership> upgrade(@Body UpgradeMembership upgrade, @Header("Authorization") String token);
+    Call<UpgradeMembershipResponse> upgrade(@Body UpgradeMembership upgrade, @Header("Authorization") String token);
 
     //Call<otpResponse> requestortp(@Body otprequest otprequest, @Header("Authorization: Bearer") String token);
 
