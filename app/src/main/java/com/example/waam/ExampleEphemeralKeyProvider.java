@@ -25,6 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
 
+    private final String token;
+
+    public ExampleEphemeralKeyProvider(String token) {
+        this.token = token;
+    }
+
     @Override
     public void createEphemeralKey(@NonNull @Size(min = 4) String apiVersion, @NotNull EphemeralKeyUpdateListener ephemeralKeyUpdateListener) {
 
@@ -38,7 +44,6 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
 
         UserService ephemeralPost  = retrofit.create(UserService.class);
 
-        String token = "";
         Call<Ephemeral> ephemeralCall = ephemeralPost.getEphemeral("2020-08-27","Bearer "+token);
 
         ephemeralCall.enqueue(new Callback<Ephemeral>() {

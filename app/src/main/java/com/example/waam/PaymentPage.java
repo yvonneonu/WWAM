@@ -67,6 +67,7 @@ public class PaymentPage extends AppCompatActivity {
     private PaymentSession paymentSession;
     private LinearLayout pay;
     private String payMeth;
+    private String token;
     private Stripe stripe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class PaymentPage extends AppCompatActivity {
         setSupportActionBar(bar);
         price = getIntent().getStringExtra("price");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        token = getIntent().getStringExtra("");
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,14 +118,14 @@ public class PaymentPage extends AppCompatActivity {
     }
 
 
-    private void onPaymentSuccess(@NonNull final Response response) throws IOException {
+    /*private void onPaymentSuccess(@NonNull final Response response) throws IOException {
         Gson gson = new Gson();
         Type type = new TypeToken<Map<String, String>>(){}.getType();
         Map<String, String> responseMap = gson.fromJson(
                 Objects.requireNonNull(response.body()).string(),type
         );
         paymentIntentClientSecret = responseMap.get("clientSecret");
-    }
+    }*/
 
 
 
@@ -190,7 +192,7 @@ public class PaymentPage extends AppCompatActivity {
         builder.create().show();
     }*/
 
-    private static final class PaymentResultCallback implements ApiResultCallback<PaymentIntentResult> {
+    /*private static final class PaymentResultCallback implements ApiResultCallback<PaymentIntentResult> {
         @NonNull
         private final WeakReference<PaymentPage> activityRef;
 
@@ -213,13 +215,13 @@ public class PaymentPage extends AppCompatActivity {
                 /*activity.displayAlert(
                         "Payment completed",
                         gson.toJson(paymentIntent)
-                );*/
+                );
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed
                 /*activity.displayAlert(
                         "Payment failed",
                         Objects.requireNonNull(paymentIntent.getLastPaymentError()).getMessage()
-                );*/
+                );
             }
         }
 
@@ -233,7 +235,7 @@ public class PaymentPage extends AppCompatActivity {
             // Payment request failed – allow retrying using the same payment method
             //activity.displayAlert("Error", e.toString());
         }
-    }
+    }*/
 
 
     /*private static final class PayCallback implements Callback {
@@ -274,7 +276,7 @@ public class PaymentPage extends AppCompatActivity {
 
 
     private void setUpPayment(){
-        CustomerSession.initCustomerSession(this, new ExampleEphemeralKeyProvider());
+        CustomerSession.initCustomerSession(this, new ExampleEphemeralKeyProvider(token));
         paymentSession = new PaymentSession(this, new PaymentSessionConfig.Builder()
                 .setShippingInfoRequired(false)
                 .setShippingMethodsRequired(false)
@@ -319,7 +321,7 @@ public class PaymentPage extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     UserService upgrademem = retrofit.create(UserService.class);
-                    Call<UpgradeMembership> membership = upgrademem.upgrade(mem,"");
+                    Call<UpgradeMembership> membership = upgrademem.upgrade(mem,token);
                     membership.enqueue(new Callback<UpgradeMembership>() {
                         @Override
                         public void onResponse(Call<UpgradeMembership> call, retrofit2.Response<UpgradeMembership> response) {
