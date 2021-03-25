@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -29,9 +31,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
+import com.stripe.android.CustomerSession;
+import com.stripe.android.PaymentSession;
+import com.stripe.android.PaymentSessionConfig;
+import com.stripe.android.PaymentSessionData;
+import com.stripe.android.Stripe;
+import com.stripe.android.model.ConfirmPaymentIntentParams;
+import com.stripe.android.model.PaymentMethod;
+import com.stripe.android.view.BillingAddressFields;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import worker8.com.github.radiogroupplus.RadioGroupPlus;
 
 /**
@@ -52,6 +68,15 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private LinearLayout layoutPlanfour;
     private View firstView, secondView, thirdView, fourthView;
     private String price;
+    private String membertype;
+    private Button selectPaymentMethod;
+    private String clientSecret;
+    private String selectedPaymentMethod;
+    private PaymentMethod paymentMethod;
+    private PaymentSession paymentSession;
+    private Stripe stripe;
+
+    private String token;
 
 
     TextView[] firstFeature, secondFeature, thirdFeature, fourFeature;
@@ -81,6 +106,11 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("TAG","I am in oncreate");
+
+
+        //stripe = ;
+        token = getActivity().getIntent().getStringExtra("");
+        setUpPayment();
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -112,10 +142,16 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         radioGroupPlus = view.findViewById(R.id.plus);
 
+        selectPaymentMethod  = view.findViewById(R.id.button7);
+
         layoutPlan = view.findViewById(R.id.layoutplan);
         layoutPlantwo = view.findViewById(R.id.layoutplantwo);
         layoutPlanthree = view.findViewById(R.id.layoutplanthree);
         layoutPlanfour = view.findViewById(R.id.layoutplanfour);
+
+
+
+
 
         TextView firstTxt = view.findViewById(R.id.textView28);
         TextView secondTxt = view.findViewById(R.id.textView29);
@@ -182,6 +218,16 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         }
 
 
+        if(paymentMethod != null){
+
+            selectPaymentMethod.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    paymentSession.presentPaymentMethodSelection(selectedPaymentMethod);
+                }
+            });
+        }
+
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Upgrade Your Plan");
@@ -204,6 +250,27 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            paymentSession.handlePaymentData(requestCode, resultCode, data);
+        }
+    }
+
+
+    private void confirmPayment(
+            @NonNull String clientSecret,
+            @NonNull String paymentMethodId
+    ) {
+        stripe.confirmPayment(this,
+                ConfirmPaymentIntentParams.createWithPaymentMethodId(
+                        paymentMethodId,
+                        clientSecret
+                )
+        );
+    }
+
+    @Override
     public void onClick(View v) {
 
         final int layoutOne = R.id.layone;
@@ -211,6 +278,11 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         final int layoutThree = R.id.laythree;
         final int layoutFour = R.id.layfour;
         final int purchase = R.id.purchase;
+
+        final int radGroupone = R.id.radioButtonone;
+        final int radGrouptwo = R.id.radioButtontwo;
+        final int radGroupthree = R.id.radioButtonthree;
+        final int radGroupFour = R.id.radioButton2;
 
         switch (v.getId()){
             case layoutOne:
@@ -241,8 +313,22 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
             case purchase:
                 int choseId = radioGroupPlus.getCheckedRadioButtonId();
                 switch (choseId){
-                    //uu...
+                    case radGroupone:
+                        membertype = "first";
+                        break;
+                    case radGrouptwo:
+                        membertype = "second";
+                        break;
+                    case radGroupthree:
+                        membertype = "third";
+                        break;
+                    case radGroupFour:
+                        membertype = "four";
+                        break;
+
                 }
+
+
                 Intent intent = new Intent(getActivity(),PaymentPage.class);
                 intent.putExtra("price",price);
                 startActivity(intent);
@@ -289,6 +375,126 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    private void setUpPayment(){
 
+        CustomerSession.initCustomerSession(getActivity(), new ExampleEphemeralKeyProvider(token));
+
+        paymentSession = new PaymentSession(this, new PaymentSessionConfig.Builder()
+                .setShippingInfoRequired(false)
+                .setShippingMethodsRequired(false)
+                .setBillingAddressFields(BillingAddressFields.None)
+                .build());
+
+
+        paymentSession.init(new PaymentSession.PaymentSessionListener() {
+            @Override
+            public void onCommunicatingStateChanged(boolean b) {
+
+            }
+
+            @Override
+            public void onError(int i, @NotNull String s) {
+
+            }
+
+            @Override
+            public void onPaymentSessionDataChanged(@NotNull PaymentSessionData data) {
+
+                if (data.getUseGooglePay()) {
+                    // customer intends to pay with Google Pay
+                } else {
+                    paymentMethod = data.getPaymentMethod();
+                    if (paymentMethod != null) {
+                        selectedPaymentMethod = paymentMethod.toString();
+                    }
+                }
+
+
+                if(data.isPaymentReadyToCharge()){
+
+                    UpgradeMembership upgradeMembership = new UpgradeMembership();
+                    upgradeMembership.setCurrency("USD");
+                    upgradeMembership.setPayment_method_id(selectedPaymentMethod);
+
+
+                }
+            }
+        });
+
+    }
+
+
+
+
+
+    /*private void setUpPayment(){
+        CustomerSession.initCustomerSession(this, new ExampleEphemeralKeyProvider(token));
+
+
+
+        paymentSession.init(new PaymentSession.PaymentSessionListener() {
+
+            @Override
+            public void onCommunicatingStateChanged(boolean b) {
+
+            }
+
+
+            @Override
+            public void onError(int i, @NotNull String s) {
+
+            }
+
+            @Override
+            public void onPaymentSessionDataChanged(@NotNull PaymentSessionData data) {
+                if (data.getUseGooglePay()) {
+                    // customer intends to pay with Google Pay
+                } else {
+                    final PaymentMethod paymentMethod = data.getPaymentMethod();
+                    if (paymentMethod != null) {
+                        payMeth = paymentMethod.toString();
+                    }
+                }
+
+                // Update your UI here with other data
+                if (data.isPaymentReadyToCharge()) {
+                    // Use the data to complete your charge - see below.
+
+                    UpgradeMembership mem = new UpgradeMembership();
+                    mem.setCurrency("USD");
+                    mem.setPayment_method_id(payMeth);
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    UserService upgrademem = retrofit.create(UserService.class);
+                    Call<UpgradeMembershipResponse> membership = upgrademem.upgrade(mem,token);
+                    membership.enqueue(new Callback<UpgradeMembershipResponse>() {
+                        @Override
+                        public void onResponse(Call<UpgradeMembershipResponse> call, retrofit2.Response<UpgradeMembershipResponse> response) {
+                            if(!response.isSuccessful()){
+                                //Toast.makeText(PaymentPage.this,"An error occured",Toast.LENGTH_SHORT).show();
+                            }
+
+                            String clientSecret = response.body().getGetClientSecret();
+
+                            //confirmPayment(clientSecret,payMeth);
+
+                            //UpgradeMembership members = response.body().getClientSecreet;
+                            //confirmPayment("client",paymentIntentClientSecret);
+                            //Toast.makeText(PaymentPage.this,"Payment was succesful",Toast.LENGTH_SHORT).show();
+                        }
+
+
+                        @Override
+                        public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+    }*/
 
 }
