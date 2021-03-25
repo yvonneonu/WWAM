@@ -119,7 +119,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 getActivity().getApplicationContext(),
                 Objects.requireNonNull(getString(R.string.publishablekey)));
 
-        token = getActivity().getIntent().getStringExtra("");
+        token = getActivity().getIntent().getStringExtra("toks");
         setUpPayment();
 
 
@@ -235,7 +235,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         }
 
 
-        if(!(clientSecret.isEmpty()) && !(selectedPaymentMethod.isEmpty())){
+        /*if(!(clientSecret.isEmpty()) && !(selectedPaymentMethod.isEmpty())){
 
             linearLayoutFive.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -243,7 +243,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                     confirmPayment(clientSecret,selectedPaymentMethod);
                 }
             });
-        }
+        }*/
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
@@ -423,6 +423,8 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                     paymentMethod = data.getPaymentMethod();
                     if (paymentMethod != null) {
                         selectedPaymentMethod = paymentMethod.toString();
+
+                        Log.d("Select",selectedPaymentMethod);
                     }
                 }
 
@@ -432,7 +434,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                     UpgradeMembership upgradeMembership = new UpgradeMembership();
                     upgradeMembership.setCurrency("USD");
                     upgradeMembership.setPayment_method_id(selectedPaymentMethod);
-
 
                 }
             }

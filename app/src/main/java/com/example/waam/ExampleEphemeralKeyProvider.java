@@ -54,6 +54,7 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
                     return;
                 }
 
+                Log.d("connection","Connection succesful");
                 Ephemeral ephemeral = response.body();
 
                 Log.d("EphemeralString",ephemeral.getEphemeralString());

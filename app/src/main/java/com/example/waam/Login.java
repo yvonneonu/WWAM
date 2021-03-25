@@ -103,7 +103,12 @@ public class Login extends AppCompatActivity {
 
                 if (response.isSuccessful()){
                     LoginResponse loginResponse = response.body();
-                    startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
+
+                    String token = loginResponse.getToken();
+                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
+                    Intent intent = new Intent(Login.this,DrawelayoutActivity.class);
+                    intent.putExtra("toks",token);
+                    startActivity(intent);
                     finish();
 
 
