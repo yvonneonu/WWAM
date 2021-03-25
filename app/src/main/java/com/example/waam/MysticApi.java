@@ -31,4 +31,7 @@ public interface MysticApi {
 
     @GET("drink")
     Call<DrinkRecordModel> getDrink (@Header("Authorization")String token);
+
+    @GET("income")
+    Call<SalaryRecordModel> getSalary (@Header("Authorization")String token);
 }

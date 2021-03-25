@@ -76,9 +76,9 @@
             <TextView
 
                 android:id="@+id/mangend"
-                android:layout_width="165dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border"
                 android:gravity="center"
@@ -86,25 +86,24 @@
                 android:text="Man"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/editText5"
+                app:layout_constraintEnd_toStartOf="@+id/womangend"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <TextView
                 android:id="@+id/womangend"
-                android:layout_width="165dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/border2"
                 android:gravity="center"
                 android:onClick="woooo"
                 android:text="Woman"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/mangend"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mangend"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/mangend"
+                app:layout_constraintTop_toTopOf="@+id/mangend" />
 
             <TextView
             android:id="@+id/editText5"
@@ -118,33 +117,33 @@
 
             <TextView
                 android:id="@+id/seekman"
-                android:layout_width="165dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:onClick="who"
                 android:text="Man"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/editText8"
-                app:layout_constraintStart_toStartOf="@+id/editText5"
+                app:layout_constraintEnd_toStartOf="@+id/seekwoman"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
             <TextView
                 android:id="@+id/seekwoman"
-                android:layout_width="165dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/border2"
                 android:gravity="center"
                 android:onClick="sek"
                 android:text="Woman"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/seekman"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/seekman"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/seekman"
+                app:layout_constraintTop_toTopOf="@+id/seekman" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -428,34 +427,36 @@
                 app:layout_constraintStart_toStartOf="@+id/imageViewco"
                 app:layout_constraintTop_toBottomOf="@+id/editText88" />
 
-        <TextView
-            android:id="@+id/textVieww"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="By continuing you agree to receive emails from WhereWeAllMeet.
+            <TextView
+                android:id="@+id/textVieww"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="8dp"
+                android:text="By continuing you agree to receive emails from WhereWeAllMeet.
 You can withdraw consent at any time."
-            android:textColor="@color/offwhite"
-            android:textSize="13dp"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="@+id/view8"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/view8"
-            app:layout_constraintTop_toBottomOf="@+id/view8" />
+                android:textColor="@color/offwhite"
+                android:textSize="13dp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/view8"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/view8"
+                app:layout_constraintTop_toBottomOf="@+id/view8" />
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="320dp"
-            android:layout_height="80dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/registerbutton"
-            app:layout_constraintEnd_toEndOf="@+id/textVieww"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textVieww"
-            app:layout_constraintTop_toBottomOf="@+id/textVieww"
-            tools:srcCompat="@tools:sample/avatars" />
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/registerbutton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.384"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textVieww"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/textView15"

@@ -40,6 +40,7 @@
         </activity>
         <activity android:name=".finalProfile">
 
+
         </activity>
         <activity android:name=".picture" />
         <activity android:name=".CompleteProfile">
@@ -47,7 +48,6 @@
         </activity>
 
         <activity android:name=".LocationDetectActivity" >
-
 
         </activity>
         <activity android:name=".Profile">
@@ -60,12 +60,6 @@
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" >
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Splash" />
         <activity android:name=".Verification1" >
@@ -76,11 +70,14 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp">
 
-
         </activity>
         <activity android:name=".Login" >
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Interest" >
         </activity>

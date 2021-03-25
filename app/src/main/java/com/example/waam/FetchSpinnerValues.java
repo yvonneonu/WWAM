@@ -21,7 +21,6 @@ public class FetchSpinnerValues {
 
     }
 
-
     public static FetchSpinnerValues getSpinnerValues() {
         if (spinnerValues == null) {
             spinnerValues = new FetchSpinnerValues();
@@ -424,5 +423,49 @@ public class FetchSpinnerValues {
 
     public interface DrinkListener{
         void onDrinkListerner(List<String> userDrink);
+    }
+
+    public void fetchSalay(SalaryListener salaryListener, String token) {
+        //http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/education
+        String baseUrl = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MysticApi salaryResult = retrofit.create(MysticApi.class);
+        Call<SalaryRecordModel> allSalary = salaryResult.getSalary("Bearer " + token);
+
+        allSalary.enqueue(new Callback<SalaryRecordModel>() {
+            @Override
+            public void onResponse(Call<SalaryRecordModel> call, Response<SalaryRecordModel> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Error", "An error ocured");
+                    return;
+                }
+
+                List<String> nameSalary = new ArrayList<>();
+                List<SalaryResult> userSalary = response.body().getSalaryResults();
+
+                for (int i = 0; i < userSalary.size(); i++) {
+                    nameSalary.add(userSalary.get(i).getName());
+                    Log.d("Name", userSalary.get(i).getName());
+                }
+                Log.d("Success", "Succesfully connected");
+                List<SalaryResult> resultsSalary = response.body().getSalaryResults();
+                if (salaryListener != null) {
+                    salaryListener.onSalaryListerner(nameSalary);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SalaryRecordModel> call, Throwable t) {
+                Log.d(TAG, "Something is wrong " + t.getMessage());
+            }
+        });
+    }
+
+    public interface SalaryListener{
+        void onSalaryListerner(List<String> userSalary);
     }
 }

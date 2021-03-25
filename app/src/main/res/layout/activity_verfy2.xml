@@ -65,6 +65,9 @@
             android:backgroundTint="@color/white"
             android:inputType="number"
             android:maxLength="1"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@+id/editText10"
             android:textAlignment="center"
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
@@ -88,7 +91,10 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:inputType="number"
+            android:nextFocusDown="@+id/editText12"
             android:maxLength="1"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:textAlignment="center"
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
@@ -112,8 +118,12 @@
             android:backgroundTint="@color/white"
             android:inputType="number"
             android:maxLength="1"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@+id/editText15"
             android:textAlignment="center"
             android:textSize="20sp" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -130,11 +140,14 @@
 
         <EditText
             android:id="@+id/editText15"
+            android:nextFocusDown="@+id/editText11"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:inputType="number"
             android:maxLength="1"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:textAlignment="center"
             android:textSize="20sp" />
 
@@ -154,11 +167,14 @@
 
         <EditText
             android:id="@+id/editText11"
+            android:nextFocusDown="@+id/editText13"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:inputType="number"
             android:maxLength="1"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:textAlignment="center"
             android:textSize="20sp" />
 
@@ -168,7 +184,6 @@
         android:id="@+id/cardView6"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         app:cardElevation="22dp"
@@ -184,6 +199,8 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:inputType="number"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:maxLength="1"
             android:textAlignment="center"
             android:textSize="20sp" />

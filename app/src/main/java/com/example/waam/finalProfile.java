@@ -20,9 +20,9 @@ import java.util.List;
 
 public class finalProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private TextView textView, swipe, educate;
+    private TextView textView, swipe, career1;
     private ImageView image;
-    private String spinn;
+    private String spinn, ret;
     private boolean textVisible;
     private int count;
     private int count1;
@@ -55,9 +55,9 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
 
         count = 0;
         textView = findViewById(R.id.textView);
-        educate = findViewById(R.id.textView26);
+      //  career1 = findViewById(R.id.textView26);
         spinner = findViewById(R.id.one);
-        career = findViewById(R.id.carer);
+       // career = findViewById(R.id.carer);
         Spinner body = findViewById(R.id.spinnN);
         Spinner ethni = findViewById(R.id.ethnic);
         Spinner fait = findViewById(R.id.faith);
@@ -101,6 +101,17 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        FetchSpinnerValues.getSpinnerValues().fetchOccupation(new FetchSpinnerValues.OccupationListener() {
+            @Override
+            public void onOccupationListener(List<String> userSchool) {
+                ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, names);
+                userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                career.setAdapter(userSchollAdapter);
+                spinn = career.getSelectedItem().toString();
+                //educate.setText(spinn);
+            }
+        }, toks);
+
         FetchSpinnerValues.getSpinnerValues().fetchEducation(new FetchSpinnerValues.EducationListener() {
             @Override
             public void onEducationListener(List<String> qualification) {
@@ -110,17 +121,6 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
 
             }
         },toks);
-
-        FetchSpinnerValues.getSpinnerValues().fetchOccupation(new FetchSpinnerValues.OccupationListener() {
-            @Override
-            public void onOccupationListener(List<String> userSchool) {
-                ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSchool);
-                userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                career.setAdapter(userSchollAdapter);
-                spinn = career.getSelectedItem().toString();
-                //educate.setText(spinn);
-            }
-        }, toks);
 
         FetchSpinnerValues.getSpinnerValues().fetchBody(new FetchSpinnerValues.BodyTypeListener() {
             @Override
@@ -173,21 +173,28 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
             childre.setAdapter(userDrinkAdapter);
             spinn = childre.getSelectedItem().toString();
         }, toks);
+
+        FetchSpinnerValues.getSpinnerValues().fetchSalay(userSalary ->  {
+            ArrayAdapter<String> userSalaryAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSalary);
+            userSalaryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            childre.setAdapter(userSalaryAdapter);
+            spinn = childre.getSelectedItem().toString();
+        }, toks);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         count++;
-        count1++;
-        count2++;
-        count3++;
-        count4++;
-        count5++;
-        count6++;
-        count7++;
-        count8++;
-        count9++;
-        count10++;
+      //  count1++;
+     //   count2++;
+      //  count3++;
+     //   count4++;
+     //   count5++;
+       // count6++;
+        //count7++;
+       // count8++;
+        // count9++;
+       // count10++;
 
 
 
@@ -196,37 +203,9 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
             if(count > 1) textView.setText(spinner.getSelectedItem().toString());
 
 
-        }else if(view.getId() == R.id.one){
+        }
 
-            if(count > 1) textView.setText(career.getSelectedItem().toString());
 
-        }else if(count > 1){
-            if(count > 1) textView.setText(career.getSelectedItem().toString());
-        }
-        if(count > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else if(count1 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else  if(count2 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else  if(count3 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else  if(count4 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else  if(count5 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }
-        else  if(count6 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else  if(count7 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else  if(count8 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else  if(count9 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }else  if(count10 > 1){
-            textView.setText(spinner.getSelectedItem().toString());
-        }
     }
 
     @Override

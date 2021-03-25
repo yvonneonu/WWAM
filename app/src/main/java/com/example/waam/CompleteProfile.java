@@ -51,11 +51,13 @@ public class CompleteProfile extends AppCompatActivity {
         name = findViewById(R.id.textView19);
 
 
-        Glide.with(this)
-                .asBitmap()
-                .circleCrop()
-                .load(Uri.parse(imageUri))
-                .into(profile);
+        if (imageUri != null) {
+            Glide.with(this)
+                    .asBitmap()
+                    .circleCrop()
+                    .load(Uri.parse(imageUri))
+                    .into(profile);
+        }
 
        // name.setText(Fullname);
 
@@ -261,7 +263,10 @@ public class CompleteProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
-                intent.putExtra("image", imageUri.toString());
+                if (imageUri != null){
+                    intent.putExtra("image", imageUri.toString());
+                }
+
                 if (tired != null){
                     intent.putExtra("everytoken", tired);
                 }
