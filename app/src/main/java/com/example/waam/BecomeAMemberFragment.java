@@ -108,15 +108,21 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         Log.d("TAG","I am in oncreate");
 
 
-        //stripe = ;
-        token = getActivity().getIntent().getStringExtra("");
-        setUpPayment();
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
+
+
+        stripe = new Stripe(
+                getActivity().getApplicationContext(),
+                Objects.requireNonNull(getString(R.string.publishablekey)));
+
+        token = getActivity().getIntent().getStringExtra("");
+        setUpPayment();
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -224,6 +230,17 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 @Override
                 public void onClick(View v) {
                     paymentSession.presentPaymentMethodSelection(selectedPaymentMethod);
+                }
+            });
+        }
+
+
+        if(!(clientSecret.isEmpty()) && !(selectedPaymentMethod.isEmpty())){
+
+            linearLayoutFive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    confirmPayment(clientSecret,selectedPaymentMethod);
                 }
             });
         }
