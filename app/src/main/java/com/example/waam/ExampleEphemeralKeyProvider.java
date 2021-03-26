@@ -43,21 +43,23 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
                 .build();
 
         UserService ephemeralPost  = retrofit.create(UserService.class);
+        Call<Ephemeral> ephemeralCall = ephemeralPost.getEphemeral(apiVersion,"Bearer "+token);
 
-        Call<Ephemeral> ephemeralCall = ephemeralPost.getEphemeral("2020-08-27","Bearer "+token);
+
 
         ephemeralCall.enqueue(new Callback<Ephemeral>() {
             @Override
             public void onResponse(Call<Ephemeral> call, Response<Ephemeral> response) {
                 if(!response.isSuccessful()){
+                    Log.d("Err",""+response.code());
                     Log.d("Error","An error occured");
                     return;
                 }
 
                 Log.d("connection","Connection succesful");
                 Ephemeral ephemeral = response.body();
-
                 Log.d("EphemeralString",ephemeral.getEphemeralString());
+
                 ephemeralKeyUpdateListener.onKeyUpdate(ephemeral.getEphemeralString());
 
             }

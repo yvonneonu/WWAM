@@ -105,6 +105,7 @@ public class Login extends AppCompatActivity {
                     LoginResponse loginResponse = response.body();
 
                     String token = loginResponse.getToken();
+                    Log.d("Toks",token);
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
                     Intent intent = new Intent(Login.this,DrawelayoutActivity.class);
                     intent.putExtra("toks",token);

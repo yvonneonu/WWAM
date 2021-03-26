@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
 import com.stripe.android.CustomerSession;
+
 import com.stripe.android.PaymentSession;
 import com.stripe.android.PaymentSessionConfig;
 import com.stripe.android.PaymentSessionData;
@@ -39,6 +40,7 @@ import com.stripe.android.Stripe;
 import com.stripe.android.model.ConfirmPaymentIntentParams;
 import com.stripe.android.model.PaymentMethod;
 import com.stripe.android.view.BillingAddressFields;
+import com.stripe.android.view.PaymentMethodsActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -74,6 +76,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private String selectedPaymentMethod;
     private PaymentMethod paymentMethod;
     private PaymentSession paymentSession;
+    private PaymentMethodsActivity paymentMethodsActivity;
     private Stripe stripe;
 
     private String token;
@@ -224,15 +227,15 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         }
 
 
-        if(paymentMethod != null){
+
 
             selectPaymentMethod.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    paymentSession.presentPaymentMethodSelection(selectedPaymentMethod);
+                    paymentSession.presentPaymentMethodSelection(null);
                 }
             });
-        }
+
 
 
         /*if(!(clientSecret.isEmpty()) && !(selectedPaymentMethod.isEmpty())){
