@@ -2,9 +2,9 @@ package com.example.waam;
 
 public class Ephemeral {
 
-    private String ephemeralString;
+    private String id;
 
     public String getEphemeralString() {
-        return ephemeralString;
+        return id;
     }
 }

@@ -1,10 +1,7 @@
 package com.example.waam;
 
 
-
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Size;
 
@@ -20,13 +17,13 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
 
     private final String token;
+    UserService userService;
 
+    String empgeral;
     public ExampleEphemeralKeyProvider(String token) {
         this.token = token;
     }
@@ -37,41 +34,84 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
         final Map<String, String> apiParamMap = new HashMap<>();
         apiParamMap.put("api_version", apiVersion);
 
-        Retrofit retrofit = new Retrofit.Builder()
+         user(apiVersion, ephemeralKeyUpdateListener);
+       /* Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        UserService ephemeralPost  = retrofit.create(UserService.class);
-        Call<Ephemeral> ephemeralCall = ephemeralPost.getEphemeral(apiVersion,"Bearer "+token);
-
-
+        UserService ephemeralPost = retrofit.create(UserService.class);
+        Call<Ephemeral> ephemeralCall = ephemeralPost.getEphemeral(apiVersion, "Bearer " + token);
 
         ephemeralCall.enqueue(new Callback<Ephemeral>() {
             @Override
             public void onResponse(Call<Ephemeral> call, Response<Ephemeral> response) {
-                if(!response.isSuccessful()){
-                    Log.d("Err",""+response.code());
-                    Log.d("Error","An error occured");
+                if (!response.isSuccessful()) {
+                    Log.d("Err", "" + response.code());
+                    Log.d("Error", "An error occured");
                     return;
                 }
 
-                Log.d("connection","Connection succesful");
+                Log.d("connection", "Connection succesful");
                 Ephemeral ephemeral = response.body();
-                Log.d("EphemeralString",ephemeral.getEphemeralString());
+                Log.d("EphemeralString", ephemeral.getEphemeralString());
 
                 ephemeralKeyUpdateListener.onKeyUpdate(ephemeral.getEphemeralString());
-
             }
+
             @Override
             public void onFailure(Call<Ephemeral> call, Throwable t) {
 
-                Log.d("EphemeralString",t.getMessage());
+                Log.d("EphemeralString", t.getMessage());
             }
-        });
+        });*/
+
+   // }
 
 
-
-
+//}
     }
-}
+        public void user (String api, EphemeralKeyUpdateListener ephemeralKeyUpdateListener){
+            EphemeralPost ephemeral = new EphemeralPost();
+
+            userService = new ApiClient().getService();
+            ephemeral.setStripeVersion(api);
+            Call<Ephemeral> ephemeralCall = userService.getEphemeral(ephemeral, "Bearer " +token);
+            ephemeralCall.enqueue(new Callback<Ephemeral>() {
+                @Override
+                public void onResponse(Call<Ephemeral> call, Response<Ephemeral> response) {
+                    if (!response.isSuccessful()) {
+                        Log.d("Err", "" + response.body());
+
+                        Log.d("Error", "An error occured");
+
+                        return;
+                    }
+
+
+                    Ephemeral eph = response.body();
+
+                    ephemeralKeyUpdateListener.onKeyUpdate(eph.getEphemeralString());
+                    Log.d("Anything", eph.getEphemeralString());
+                    Log.d("connection", "Connection succesful");
+                    Ephemeral ephemeral = response.body();
+                    Log.d("EphemeralString", ephemeral.getEphemeralString());
+
+                    //Toast.makeText(ExampleEphemeralKeyProvider.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+
+                }
+
+                @Override
+                public void onFailure(Call<Ephemeral> call, Throwable t) {
+
+                    String message = "An error occured please try again";
+                    t.printStackTrace();
+                    Log.d("MYWORLD", "" + t.getMessage());
+
+                }
+            });
+        }
+    }
+
+
+

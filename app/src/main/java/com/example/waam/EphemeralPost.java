@@ -7,4 +7,9 @@ public class EphemeralPost {
     public String getStripe_version() {
         return stripe_version;
     }
+
+    public void setStripeVersion(String api) {
+        this.stripe_version = api;
+
+    }
 }
