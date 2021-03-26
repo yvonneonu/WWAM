@@ -20,9 +20,9 @@ import java.util.List;
 
 public class finalProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private TextView textView, swipe, career1;
+    private TextView textView, swipe, careerText;
     private ImageView image;
-    private String spinn, ret;
+    private String spinn,spinn2, ret;
     private boolean textVisible;
     private int count;
     private int count1;
@@ -35,7 +35,7 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
     private int count8;
     private int count9;
     private int count10;
-    Spinner spinner, career;
+    Spinner spinner, careerSpin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,9 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
 
         count = 0;
         textView = findViewById(R.id.textView);
-      //  career1 = findViewById(R.id.textView26);
+        careerText = findViewById(R.id.textView26);
         spinner = findViewById(R.id.one);
-       // career = findViewById(R.id.carer);
+        careerSpin = findViewById(R.id.carer);
         Spinner body = findViewById(R.id.spinnN);
         Spinner ethni = findViewById(R.id.ethnic);
         Spinner fait = findViewById(R.id.faith);
@@ -77,7 +77,20 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         names.add("Hailey");
         names.add("Juliet");
         names.add("Maria");
-        spinner.setOnItemSelectedListener(this);
+
+        //careerSpin.setOnItemSelectedListener(this);
+        //spinner.setOnItemSelectedListener(this);
+
+
+        if (careerSpin.isClickable()){
+            careerSpin.setOnItemSelectedListener(this);
+          //  textView.setText("bcxxbg");
+
+        }
+        if (spinner.isClickable()){
+            spinner.setOnItemSelectedListener(this);
+
+        }
 
         swipe = findViewById(R.id.textView34);
         swipe.setOnClickListener(new View.OnClickListener() {
@@ -106,8 +119,9 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
             public void onOccupationListener(List<String> userSchool) {
                 ArrayAdapter<String> userSchollAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, names);
                 userSchollAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                career.setAdapter(userSchollAdapter);
-                spinn = career.getSelectedItem().toString();
+                careerSpin.setAdapter(userSchollAdapter);
+                spinn2 = careerSpin.getSelectedItem().toString();
+                //careerText.setText(spinn2);
                 //educate.setText(spinn);
             }
         }, toks);
@@ -115,9 +129,10 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         FetchSpinnerValues.getSpinnerValues().fetchEducation(new FetchSpinnerValues.EducationListener() {
             @Override
             public void onEducationListener(List<String> qualification) {
-                ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
+                ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, names);
                 qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(qualificationAdapter);
+                spinn = spinner.getSelectedItem().toString();
 
             }
         },toks);
@@ -185,25 +200,38 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         count++;
-      //  count1++;
-     //   count2++;
-      //  count3++;
-     //   count4++;
-     //   count5++;
-       // count6++;
+        count1++;
+        //   count2++;
+        //  count3++;
+        //   count4++;
+        //   count5++;
+        // count6++;
         //count7++;
-       // count8++;
+        // count8++;
         // count9++;
-       // count10++;
+        // count10++;
+          if(careerSpin.isSelected()){
+
+        //if(careerSpin.isClickable()){
+        //if(careerSpin.isClickable()){
+        if (count > 1)
+
+            careerSpin.setOnItemSelectedListener(this);
+
+            // if(count > 1)
+            careerText.setText(careerSpin.getSelectedItem().toString());
+        }
+
+        //if (view.getId() == R.id.one){
 
 
-
-        if(view.getId() == R.id.one){
-
-            if(count > 1) textView.setText(spinner.getSelectedItem().toString());
+        if (count1 > 1) {
+            textView.setText(spinner.getSelectedItem().toString());
 
 
         }
+
+
 
 
     }
