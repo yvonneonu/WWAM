@@ -54,6 +54,7 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         }
 
         count = 0;
+        count1 = 0;
         textView = findViewById(R.id.textView);
         careerText = findViewById(R.id.textView26);
         spinner = findViewById(R.id.one);
@@ -82,15 +83,15 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         //spinner.setOnItemSelectedListener(this);
 
 
-        if (careerSpin.isClickable()){
+        //if (careerSpin.isClickable()){
             careerSpin.setOnItemSelectedListener(this);
           //  textView.setText("bcxxbg");
 
-        }
-        if (spinner.isClickable()){
-            spinner.setOnItemSelectedListener(this);
+       // }
+       // if (spinner.isClickable()){
+           spinner.setOnItemSelectedListener(this);
 
-        }
+     //   }
 
         swipe = findViewById(R.id.textView34);
         swipe.setOnClickListener(new View.OnClickListener() {
@@ -199,6 +200,7 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
         count++;
         count1++;
         //   count2++;
@@ -210,23 +212,26 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         // count8++;
         // count9++;
         // count10++;
-          if(careerSpin.isSelected()){
+
+        if (view.getId() == R.id.carer){
+
+          if(count > 1) careerText.setText(careerSpin.getSelectedItem().toString());
+          }
 
         //if(careerSpin.isClickable()){
         //if(careerSpin.isClickable()){
-        if (count > 1)
+       // if (count > 1)
 
-            careerSpin.setOnItemSelectedListener(this);
+         //   careerSpin.setOnItemSelectedListener(this);
 
             // if(count > 1)
-            careerText.setText(careerSpin.getSelectedItem().toString());
-        }
+           // careerText.setText(careerSpin.getSelectedItem().toString());
+       // }
 
-        //if (view.getId() == R.id.one){
+        if (view.getId() == R.id.one){
 
 
-        if (count1 > 1) {
-            textView.setText(spinner.getSelectedItem().toString());
+        if (count1 > 1) textView.setText(spinner.getSelectedItem().toString());
 
 
         }
