@@ -97,8 +97,8 @@ public class Login extends AppCompatActivity {
                 if (response.isSuccessful()){
                     loginToken = response.body().getToken();
 
-                    //Intent intent = new Intent(Login.this,DiscoverDrawerLayerout.class);
-                    Intent intent = new Intent(Login.this,finalProfile.class);
+                    Intent intent = new Intent(Login.this,DiscoverDrawerLayerout.class);
+                    //Intent intent = new Intent(Login.this,finalProfile.class);
                     intent.putExtra("token",loginToken);
                     startActivity(intent);
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
