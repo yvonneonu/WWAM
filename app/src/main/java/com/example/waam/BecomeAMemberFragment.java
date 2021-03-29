@@ -52,6 +52,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import worker8.com.github.radiogroupplus.RadioGroupPlus;
 
+import static com.google.android.gms.common.util.CollectionUtils.listOf;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BecomeAMemberFragment#newInstance} factory method to
@@ -72,11 +74,8 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private String price;
     private String membertype;
     private Button selectPaymentMethod;
-    private String clientSecret;
-    private String selectedPaymentMethod;
-    private PaymentMethod paymentMethod;
+    //private PaymentMethod paymentMethod;
     private PaymentSession paymentSession;
-    private PaymentMethodsActivity paymentMethodsActivity;
     private Stripe stripe;
 
     private String token;
@@ -274,6 +273,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             paymentSession.handlePaymentData(requestCode, resultCode, data);
+            //Log.d("Payment",data.)
         }
     }
 
@@ -399,44 +399,48 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         CustomerSession.initCustomerSession(getActivity(), new ExampleEphemeralKeyProvider(token));
 
+        Log.d("CustomerSession","Customer session started");
         paymentSession = new PaymentSession(this, new PaymentSessionConfig.Builder()
                 .setShippingInfoRequired(false)
                 .setShippingMethodsRequired(false)
                 .setBillingAddressFields(BillingAddressFields.None)
+                .setPaymentMethodTypes(
+                        listOf(PaymentMethod.Type.Card)
+                )
+                .setShouldShowGooglePay(true)
                 .build());
+
 
 
         paymentSession.init(new PaymentSession.PaymentSessionListener() {
             @Override
             public void onCommunicatingStateChanged(boolean b) {
-
+                Log.d("Network","Network is loading");
             }
 
             @Override
             public void onError(int i, @NotNull String s) {
 
+                Log.d("onError","An error occured");
             }
 
             @Override
             public void onPaymentSessionDataChanged(@NotNull PaymentSessionData data) {
 
+                Log.d("OnPaymentSession","On payment session is active");
                 if (data.getUseGooglePay()) {
                     // customer intends to pay with Google Pay
                 } else {
+                    PaymentMethod paymentMethod;
                     paymentMethod = data.getPaymentMethod();
-                    if (paymentMethod != null) {
-                        selectedPaymentMethod = paymentMethod.toString();
 
-                        Log.d("Select",selectedPaymentMethod);
+                    if (paymentMethod != null) {
+
                     }
                 }
 
 
                 if(data.isPaymentReadyToCharge()){
-
-                    UpgradeMembership upgradeMembership = new UpgradeMembership();
-                    upgradeMembership.setCurrency("USD");
-                    upgradeMembership.setPayment_method_id(selectedPaymentMethod);
 
                 }
             }

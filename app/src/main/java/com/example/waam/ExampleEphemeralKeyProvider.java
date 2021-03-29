@@ -2,9 +2,11 @@ package com.example.waam;
 
 
 import android.util.Log;
+import android.view.ViewTreeObserver;
 
 import androidx.annotation.Size;
 
+import com.google.gson.Gson;
 import com.stripe.android.EphemeralKeyProvider;
 import com.stripe.android.EphemeralKeyUpdateListener;
 
@@ -23,7 +25,6 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
     private final String token;
     UserService userService;
 
-    String empgeral;
     public ExampleEphemeralKeyProvider(String token) {
         this.token = token;
     }
@@ -83,6 +84,7 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
                     if (!response.isSuccessful()) {
                         Log.d("Err", "" + response.body());
 
+
                         Log.d("Error", "An error occured");
 
                         return;
@@ -91,8 +93,9 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
 
                     Ephemeral eph = response.body();
 
-                    ephemeralKeyUpdateListener.onKeyUpdate(eph.getEphemeralString());
-                    Log.d("Anything", eph.getEphemeralString());
+                    ephemeralKeyUpdateListener.onKeyUpdate(new Gson().toJson(eph).toString());
+                    String jzon = new Gson().toJson(eph);
+                    Log.d("Anything", jzon);
                     Log.d("connection", "Connection succesful");
                     Ephemeral ephemeral = response.body();
                     Log.d("EphemeralString", ephemeral.getEphemeralString());
