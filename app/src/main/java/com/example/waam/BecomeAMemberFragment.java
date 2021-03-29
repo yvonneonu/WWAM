@@ -1,20 +1,11 @@
 package com.example.waam;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.BulletSpan;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,16 +14,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.card.MaterialCardView;
 import com.stripe.android.CustomerSession;
-
 import com.stripe.android.PaymentSession;
 import com.stripe.android.PaymentSessionConfig;
 import com.stripe.android.PaymentSessionData;
@@ -40,16 +33,11 @@ import com.stripe.android.Stripe;
 import com.stripe.android.model.ConfirmPaymentIntentParams;
 import com.stripe.android.model.PaymentMethod;
 import com.stripe.android.view.BillingAddressFields;
-import com.stripe.android.view.PaymentMethodsActivity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import worker8.com.github.radiogroupplus.RadioGroupPlus;
 
 import static com.google.android.gms.common.util.CollectionUtils.listOf;
@@ -235,6 +223,13 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 }
             });
 
+        linearLayoutFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //confirmPayment();
+            }
+        });
+
 
 
         /*if(!(clientSecret.isEmpty()) && !(selectedPaymentMethod.isEmpty())){
@@ -413,6 +408,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
         paymentSession.init(new PaymentSession.PaymentSessionListener() {
+
             @Override
             public void onCommunicatingStateChanged(boolean b) {
                 Log.d("Network","Network is loading");

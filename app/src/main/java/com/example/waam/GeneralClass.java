@@ -11,7 +11,7 @@ public class GeneralClass extends Application {
         super.onCreate();
         PaymentConfiguration.init(
                 getApplicationContext(),
-                "pk_test_TYooMQauvdEDq54NiTphI7jx"
+                "pk_test_51ITAgKBgd3O4ny7mXz17kU4QCrp3hQ0CQjpSdjHhXmDkoDYxRVgj9diGYnenw5cCVBigd0iFLv1kZ1LhDaTKlhlh00ZJpFHeVy"
         );
     }
 }
