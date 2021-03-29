@@ -38,6 +38,10 @@ public interface UserService {
     @POST("upgrademembership")
     Call<UpgradeMembershipResponse> upgrade(@Body UpgradeMembership upgrade, @Header("Authorization") String token);
 
+
+    @POST("upgrademembership2")
+    Call<UpgradeMembershipResponse> upgr(@Body Upgara upgra , @Header("Authorization") String token);
+
     //Call<otpResponse> requestortp(@Body otprequest otprequest, @Header("Authorization: Bearer") String token);
 
     //void registerUsers(String toString, String toString1);

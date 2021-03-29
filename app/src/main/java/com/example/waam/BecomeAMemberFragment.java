@@ -38,6 +38,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import worker8.com.github.radiogroupplus.RadioGroupPlus;
 
 import static com.google.android.gms.common.util.CollectionUtils.listOf;
@@ -223,9 +228,45 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 }
             });
 
+
+
+
         linearLayoutFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String BASE_URL = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                UserService userService = retrofit.create(UserService.class);
+
+                String member = "tweer";
+                Upgara upgara = new Upgara();
+                upgara.setMembertype_id(member);
+                upgara.setCurrency("USD");
+                Call<UpgradeMembershipResponse> upgradeMembershipResponse = userService.upgr(upgara, token);
+
+                upgradeMembershipResponse.enqueue(new Callback<UpgradeMembershipResponse>() {
+                    @Override
+                    public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
+                        if(!response.isSuccessful()){
+                            Log.d("Error code",response.body().getGetClientSecret());
+                            Log.d("Error ", "There was an error ");
+                            return;
+                        }
+
+                        Log.d("Client secret",response.body().getGetClientSecret());
+                    }
+
+                    @Override
+                    public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
+
+                        Log.d("Failure",t.getMessage());
+                    }
+                });
                 //confirmPayment();
             }
         });
@@ -273,10 +314,11 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     }
 
 
-    private void confirmPayment(
-            @NonNull String clientSecret,
-            @NonNull String paymentMethodId
-    ) {
+    private void confirmPayment(@NonNull String clientSecret, @NonNull String paymentMethodId) {
+
+
+
+
         stripe.confirmPayment(this,
                 ConfirmPaymentIntentParams.createWithPaymentMethodId(
                         paymentMethodId,
@@ -431,7 +473,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                     paymentMethod = data.getPaymentMethod();
 
                     if (paymentMethod != null) {
-
+                        Log.d("Paymethod",data.getPaymentMethod().toString());
                     }
                 }
 
