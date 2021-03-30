@@ -2,9 +2,9 @@ package com.example.waam;
 
 public class UpgradeMembershipResponse {
 
-    private String getClientSecret;
+    private String client_secret;
 
-    public String getGetClientSecret() {
-        return getClientSecret;
+    public String getClientSecret() {
+        return client_secret;
     }
 }

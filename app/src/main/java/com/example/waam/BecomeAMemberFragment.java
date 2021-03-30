@@ -41,8 +41,6 @@ import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import worker8.com.github.radiogroupplus.RadioGroupPlus;
 
 import static com.google.android.gms.common.util.CollectionUtils.listOf;
@@ -70,6 +68,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     //private PaymentMethod paymentMethod;
     private PaymentSession paymentSession;
     private Stripe stripe;
+    UserService userService;
 
     private String token;
 
@@ -101,6 +100,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("TAG","I am in oncreate");
+
 
 
         if (getArguments() != null) {
@@ -225,6 +225,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 @Override
                 public void onClick(View v) {
                     paymentSession.presentPaymentMethodSelection(null);
+                    Log.d("Tree","month");
                 }
             });
 
@@ -234,8 +235,13 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         linearLayoutFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               // String ugradee = "";
+                Upgara upgara = new Upgara();
+                upgara.setCurrency("USD");
+                upgara.setMembertype_id("2");
+                payment(upgara);
 
-                String BASE_URL = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
+               /* String BASE_URL = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -266,10 +272,71 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
                         Log.d("Failure",t.getMessage());
                     }
-                });
+                });*/
                 //confirmPayment();
             }
+             public void payment (Upgara upgara){
+
+                userService = new ApiClient().getService();
+                Call<UpgradeMembershipResponse> upgradeMembershipResponseCall = userService.upgr(upgara,"Bearer " +token);
+                upgradeMembershipResponseCall.enqueue(new Callback<UpgradeMembershipResponse>() {
+                    @Override
+                    public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
+                        if(!response.isSuccessful()){
+                            Log.d("Error code",response.body().getClientSecret());
+                            Log.d("Error ", "There was an error ");
+                            return;
+                        }
+
+                        Log.d("Client secret",response.body().getClientSecret());
+                    }
+
+                    @Override
+                    public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
+
+                        Log.d("Failure",t.getMessage());
+                    }
+                });
+
+
+              /*  ephemeralCall.enqueue(new Callback<Ephemeral>() {
+                    @Override
+                    public void onResponse(Call<Ephemeral> call, Response<Ephemeral> response) {
+                        if (!response.isSuccessful()) {
+                            Log.d("Err", "" + response.body());
+
+
+                            Log.d("Error", "An error occured");
+
+                            return;
+                        }
+
+
+                        Ephemeral eph = response.body();
+
+                        ephemeralKeyUpdateListener.onKeyUpdate(new Gson().toJson(eph).toString());
+                        String jzon = new Gson().toJson(eph);
+                        Log.d("Anything", jzon);
+                        Log.d("connection", "Connection succesful");
+                        Ephemeral ephemeral = response.body();
+                        Log.d("EphemeralString", ephemeral.getEphemeralString());
+
+                        //Toast.makeText(ExampleEphemeralKeyProvider.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Ephemeral> call, Throwable t) {
+
+                        String message = "An error occured please try again";
+                        t.printStackTrace();
+                        Log.d("MYWORLD", "" + t.getMessage());
+
+                    }
+                });*/
+            }
         });
+
 
 
 

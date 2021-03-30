@@ -1,61 +1,32 @@
 package com.example.waam;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.stripe.android.ApiResultCallback;
 import com.stripe.android.CustomerSession;
-import com.stripe.android.PaymentConfiguration;
-import com.stripe.android.PaymentIntentResult;
 import com.stripe.android.PaymentSession;
 import com.stripe.android.PaymentSessionConfig;
 import com.stripe.android.PaymentSessionData;
 import com.stripe.android.Stripe;
-//import com.stripe.android.model.Card;
-//import com.stripe.android.model.Card;
 import com.stripe.android.model.ConfirmPaymentIntentParams;
-import com.stripe.android.model.PaymentIntent;
 import com.stripe.android.model.PaymentMethod;
-import com.stripe.android.model.PaymentMethodCreateParams;
-import com.stripe.android.model.SourceTypeModel.*;
 import com.stripe.android.view.BillingAddressFields;
 import com.stripe.android.view.CardInputWidget;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+//import com.stripe.android.model.Card;
+//import com.stripe.android.model.Card;
 
 public class PaymentPage extends AppCompatActivity {
     String price;
@@ -85,10 +56,10 @@ public class PaymentPage extends AppCompatActivity {
                 finish();
             }
         });
-        /*stripe = new Stripe(
+        stripe = new Stripe(
                 getApplicationContext(),
                 Objects.requireNonNull(getString(R.string.publishablekey))
-        );*/
+        );
 
 
         pay = findViewById(R.id.sub);
@@ -112,8 +83,10 @@ public class PaymentPage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("Activity", "Sit down is called");
         if (data != null) {
             paymentSession.handlePaymentData(requestCode, resultCode, data);
+            Log.d("Activity", "Sit down is called");
         }
     }
 
@@ -305,6 +278,8 @@ public class PaymentPage extends AppCompatActivity {
                     final PaymentMethod paymentMethod = data.getPaymentMethod();
                     if (paymentMethod != null) {
                         payMeth = paymentMethod.toString();
+
+                       // Log.d("Tree",payMeth);
                     }
                 }
 
@@ -312,37 +287,6 @@ public class PaymentPage extends AppCompatActivity {
                 if (data.isPaymentReadyToCharge()) {
                     // Use the data to complete your charge - see below.
 
-                    UpgradeMembership mem = new UpgradeMembership();
-                    mem.setCurrency("USD");
-                    mem.setPayment_method_id(payMeth);
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    UserService upgrademem = retrofit.create(UserService.class);
-                    Call<UpgradeMembershipResponse> membership = upgrademem.upgrade(mem,token);
-                    membership.enqueue(new Callback<UpgradeMembershipResponse>() {
-                        @Override
-                        public void onResponse(Call<UpgradeMembershipResponse> call, retrofit2.Response<UpgradeMembershipResponse> response) {
-                            if(!response.isSuccessful()){
-                                Toast.makeText(PaymentPage.this,"An error occured",Toast.LENGTH_SHORT).show();
-                            }
-
-                            String clientSecret = response.body().getGetClientSecret();
-
-                            confirmPayment(clientSecret,payMeth);
-
-                            //UpgradeMembership members = response.body().getClientSecreet;
-                            //confirmPayment("client",paymentIntentClientSecret);
-                            Toast.makeText(PaymentPage.this,"Payment was succesful",Toast.LENGTH_SHORT).show();
-                        }
-
-
-                        @Override
-                        public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
-
-                        }
-                    });
                 }
             }
         });
