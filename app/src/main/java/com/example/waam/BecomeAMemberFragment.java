@@ -470,8 +470,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                             )
                     );
 
-                    Toast.makeText(getActivity(),"Your payment was succesful"+membertype,Toast.LENGTH_SHORT).show();
-
+                   if(response.body().getMessage().equals("Transaction Successfully")) Toast.makeText(getActivity(),"Your payment was succesful"+membertype,Toast.LENGTH_SHORT).show();
                     Log.d("Client secret",response.body().getClientSecret());
                 }
 
