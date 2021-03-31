@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BodyTypeResultRecordModel {
+public class BodyTypeRecordModel {
     @SerializedName("records")
     private List<BodyTypeResult> bodyTypeRecord = new ArrayList<>();
 

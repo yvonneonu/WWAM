@@ -62,10 +62,13 @@ public class Interest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Interest.this, CompleteProfile.class);
-                intent.putExtra("getProfilePics", imageUri);
+
                 intent.putExtra("nameprofile", Fullname);
                 if (token != null){
                     intent.putExtra("token", token);
+                }
+                if (imageUri != null){
+                    intent.putExtra("getProfilePics", imageUri);
                 }
 
                 Log.d("TAG", "TOKENSHOW6 " +token);

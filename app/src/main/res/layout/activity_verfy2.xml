@@ -49,9 +49,12 @@
         android:id="@+id/cardView"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        app:cardElevation="22dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:cardElevation="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/cardView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14">
 
@@ -59,12 +62,14 @@
             android:id="@+id/editText9"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number"
-            android:textSize="20sp"
-            android:textAlignment="center"
             android:backgroundTint="@color/white"
+            android:inputType="number"
             android:maxLength="1"
-            />
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@+id/editText10"
+            android:textAlignment="center"
+            android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
 
 
@@ -73,8 +78,10 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:cardElevation="22dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toStartOf="@+id/cardView3"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@+id/cardView">
 
@@ -83,10 +90,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
-            android:textSize="20sp"
             android:inputType="number"
+            android:nextFocusDown="@+id/editText12"
             android:maxLength="1"
-            android:textAlignment="center" />
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:textAlignment="center"
+            android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -94,8 +104,10 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:cardElevation="22dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintEnd_toStartOf="@+id/cardView4"
         app:layout_constraintStart_toEndOf="@+id/cardView2"
         app:layout_constraintTop_toTopOf="@+id/cardView2">
 
@@ -104,10 +116,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
-            android:textSize="20sp"
             android:inputType="number"
             android:maxLength="1"
-            android:textAlignment="center" />
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@+id/editText15"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -115,20 +131,25 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:cardElevation="22dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView3"
+        app:layout_constraintEnd_toStartOf="@+id/cardView5"
         app:layout_constraintStart_toEndOf="@+id/cardView3"
         app:layout_constraintTop_toTopOf="@+id/cardView3">
 
         <EditText
             android:id="@+id/editText15"
+            android:nextFocusDown="@+id/editText11"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:inputType="number"
-            android:textSize="20sp"
             android:maxLength="1"
-            android:textAlignment="center" />
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -137,20 +158,25 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:cardElevation="22dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView4"
+        app:layout_constraintEnd_toStartOf="@+id/cardView6"
         app:layout_constraintStart_toEndOf="@+id/cardView4"
         app:layout_constraintTop_toTopOf="@+id/cardView4">
 
         <EditText
             android:id="@+id/editText11"
+            android:nextFocusDown="@+id/editText13"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:inputType="number"
-            android:textSize="20sp"
             android:maxLength="1"
-            android:textAlignment="center" />
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -159,11 +185,10 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-
+        android:layout_marginEnd="24dp"
         app:cardElevation="22dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/cardView5"
         app:layout_constraintTop_toTopOf="@+id/cardView5"
         app:layout_constraintVertical_bias="0.687">
@@ -174,6 +199,8 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/white"
             android:inputType="number"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:maxLength="1"
             android:textAlignment="center"
             android:textSize="20sp" />

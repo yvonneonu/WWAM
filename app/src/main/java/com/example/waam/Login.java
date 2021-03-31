@@ -1,11 +1,8 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -15,26 +12,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
-import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.app.AppCompatActivity;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
-
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class Login extends AppCompatActivity {
     private TextView signup;
     private ImageView logm;
     private TextView text;
     private TextView pressback;
-
+    private String loginToken;
     private EditText editPass;
     private EditText editEmail;
 
@@ -102,14 +95,13 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()){
-                    LoginResponse loginResponse = response.body();
+                    loginToken = response.body().getToken();
 
-                    String token = loginResponse.getToken();
-                    Log.d("Toks",token);
-                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
-                    Intent intent = new Intent(Login.this,DrawelayoutActivity.class);
-                    intent.putExtra("toks",token);
+                    Intent intent = new Intent(Login.this,DiscoverDrawerLayerout.class);
+                    //Intent intent = new Intent(Login.this,finalProfile.class);
+                    intent.putExtra("token",loginToken);
                     startActivity(intent);
+                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
                     finish();
 
 

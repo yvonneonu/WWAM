@@ -12,8 +12,26 @@ public interface MysticApi {
     Call<OcupationRecordModel> getOccupation(@Header("Authorization")String token);
 
     @GET("bodytype")
-    Call<BodyTypeResultRecordModel> getBody (@Header("Authorization")String token);
+    Call<BodyTypeRecordModel> getBody (@Header("Authorization")String token);
 
     @GET("ethnicity")
     Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
+
+    @GET("faith")
+    Call<FaithRecordModel> getFaith (@Header("Authorization")String token);
+
+    @GET("politics")
+    Call<PoliticsRecordModel> getPolitics (@Header("Authorization")String token);
+
+    @GET("children")
+    Call<ChildrenRecordModel> getChildren (@Header("Authorization")String token);
+
+    @GET("smoke")
+    Call<SmokeRecordModel> getSmoke (@Header("Authorization")String token);
+
+    @GET("drink")
+    Call<DrinkRecordModel> getDrink (@Header("Authorization")String token);
+
+    @GET("income")
+    Call<SalaryRecordModel> getSalary (@Header("Authorization")String token);
 }
