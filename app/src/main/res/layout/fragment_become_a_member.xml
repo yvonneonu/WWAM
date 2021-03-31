@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <!-- TODO: Update blank fragment layout -->
+<!-- TODO: Update blank fragment layout -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="20sp"
             android:text="Upgrade your plan to unlock more amazing features" />
 
 
@@ -28,8 +27,7 @@
             android:id="@+id/plus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
 
             <com.google.android.material.card.MaterialCardView
@@ -37,18 +35,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_marginVertical="5dp"
                 android:layout_marginTop="10dp"
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:cardBackgroundColor="#FFFFFF"
                 app:cardElevation="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -90,7 +85,7 @@
                         android:id="@+id/textViewthree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_weight="1"
                         android:text="1 Month"
                         android:textColor="#000000"
@@ -104,9 +99,7 @@
                         android:id="@+id/view7"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplan"
@@ -115,7 +108,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -124,8 +117,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
-
-                        <!-- <TextView
+                        <TextView
                             android:id="@+id/textView28"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -151,9 +143,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" /> -->
-
+                            android:textColor="#FFFFFF" />
                     </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -175,7 +177,6 @@
                 app:cardElevation="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/consttwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -217,7 +218,7 @@
                         android:id="@+id/textViewsix"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_weight="1"
                         android:text="3 Month"
                         android:textColor="#000000"
@@ -232,9 +233,7 @@
                         android:id="@+id/view8"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplantwo"
@@ -245,7 +244,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplantwo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -255,7 +254,7 @@
                         app:layout_constraintStart_toStartOf="parent">
 
 
-                        <!--<TextView
+                        <TextView
                             android:id="@+id/textView34fourtin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -281,8 +280,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" /> -->
+                            android:textColor="#FFFFFF" />
                     </LinearLayout>
+
+
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -303,7 +314,6 @@
                 app:cardElevation="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constthree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -345,7 +355,7 @@
                         android:id="@+id/textViewnine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_weight="1"
                         android:text="12 Month"
                         android:textColor="#000000"
@@ -360,8 +370,6 @@
                         android:id="@+id/view9"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
                         android:layout_marginBottom="8dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
@@ -372,7 +380,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplanthree"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -382,7 +390,7 @@
                         app:layout_constraintStart_toStartOf="parent">
 
 
-                        <!-- <TextView
+                        <TextView
                             android:id="@+id/textView38twe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -408,8 +416,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" /> -->
+                            android:textColor="#FFFFFF" />
                     </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/imageButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -421,6 +440,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
+
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true"
@@ -429,7 +449,6 @@
                 app:cardElevation="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constfour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -472,7 +491,7 @@
                         android:id="@+id/textView20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_weight="1"
                         android:text="Dating Agent"
                         android:textColor="#000000"
@@ -490,12 +509,12 @@
                         android:background="#000000"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplanfour"
-                        app:layout_constraintEnd_toEndOf="@+id/textView20"
-                        app:layout_constraintStart_toStartOf="@+id/radioButton2" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <LinearLayout
                         android:id="@+id/layoutplanfour"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -505,7 +524,7 @@
                         app:layout_constraintStart_toStartOf="@+id/radioButton2">
 
 
-                        <!-- <TextView
+                        <TextView
                             android:id="@+id/textView42hun"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -531,8 +550,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" /> -->
+                            android:textColor="#FFFFFF" />
                     </LinearLayout>
+
+
+                    <ImageButton
+                        android:id="@+id/imageButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -666,7 +697,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>-->
-
 
 
         <!--<com.google.android.material.card.MaterialCardView
@@ -1068,8 +1098,8 @@
             android:id="@+id/purchase"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
             android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/sectiontabsactive2"
             android:gravity="center"
             android:orientation="horizontal">
@@ -1098,294 +1128,291 @@
     </LinearLayout>
 
 
-
-
-
 </ScrollView>
-        <!--<LinearLayout
-            android:id="@+id/material"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+    <!--<LinearLayout
+        android:id="@+id/material"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/price_box_bg">
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="9.95$"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:gravity="center"
-                    android:text="$9.95"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
-                    app:layout_constraintStart_toEndOf="@+id/radioButton"
-                    app:layout_constraintTop_toTopOf="@+id/radioButton"
-                    app:lineHeight="50sp" />
-
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:text="/mo."
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView19"
-                    app:layout_constraintTop_toTopOf="@+id/textView19" />
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:text="1 Month"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="33dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/materialone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/price_box_bg"
-            android:layout_marginTop="20dp"
-            >
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView19one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:gravity="center"
-                    android:text="$14.95"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
-                    app:lineHeight="50sp"
-                    tools:layout_editor_absoluteX="94dp"
-                    tools:layout_editor_absoluteY="15dp" />
-
-                <TextView
-                    android:id="@+id/textView20one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:text="/mo."
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView19one"
-                    app:layout_constraintTop_toTopOf="@+id/textView19one" />
-
-                <TextView
-                    android:id="@+id/textView21one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="3 Month"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="9.95$"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialtwo"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            app:cardElevation="5dp">
+            android:background="@drawable/price_box_bg">
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="9.95$"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="$9.95"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintStart_toEndOf="@+id/radioButton"
+                app:layout_constraintTop_toTopOf="@+id/radioButton"
+                app:lineHeight="50sp" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="/mo."
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView19"
+                app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="1 Month"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="33dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/materialone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/price_box_bg"
+        android:layout_marginTop="20dp"
+        >
 
 
-                <ImageButton
-                    android:id="@+id/imageButtontwo"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/select_bubble"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView19two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="$24.95"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageButtontwo"
-                    app:layout_constraintStart_toEndOf="@+id/imageButtontwo"
-                    app:layout_constraintTop_toTopOf="@+id/imageButtontwo"
-                    app:lineHeight="50sp" />
-
-                <TextView
-                    android:id="@+id/textView20two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginTop="16dp"
-                    android:text="/mo."
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView19two"
-                    app:layout_constraintTop_toTopOf="@+id/textView19two" />
-
-                <TextView
-                    android:id="@+id/textView21two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="12 Month"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="9.95$"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialthree"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            app:cardElevation="5dp">
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView19one"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="$14.95"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:lineHeight="50sp"
+                tools:layout_editor_absoluteX="94dp"
+                tools:layout_editor_absoluteY="15dp" />
+
+            <TextView
+                android:id="@+id/textView20one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="/mo."
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView19one"
+                app:layout_constraintTop_toTopOf="@+id/textView19one" />
+
+            <TextView
+                android:id="@+id/textView21one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="3 Month"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="9.95$"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialtwo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="5dp">
 
-                <ImageButton
-                    android:id="@+id/imageButtonthree"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/select_bubble"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView19three"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="$249.95"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageButtonthree"
-                    app:layout_constraintStart_toEndOf="@+id/imageButtonthree"
-                    app:layout_constraintTop_toTopOf="@+id/imageButtonthree"
-                    app:lineHeight="50sp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView20three"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginTop="16dp"
-                    android:text="/mo."
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView19three"
-                    app:layout_constraintTop_toTopOf="@+id/textView19three" />
 
-                <TextView
-                    android:id="@+id/textView21three"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="Dating Agent"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/imageButtontwo"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/select_bubble"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="9.95$"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView> -->
+            <TextView
+                android:id="@+id/textView19two"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="$24.95"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButtontwo"
+                app:layout_constraintStart_toEndOf="@+id/imageButtontwo"
+                app:layout_constraintTop_toTopOf="@+id/imageButtontwo"
+                app:lineHeight="50sp" />
+
+            <TextView
+                android:id="@+id/textView20two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="16dp"
+                android:text="/mo."
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView19two"
+                app:layout_constraintTop_toTopOf="@+id/textView19two" />
+
+            <TextView
+                android:id="@+id/textView21two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="12 Month"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="9.95$"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialthree"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="5dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imageButtonthree"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/select_bubble"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView19three"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="$249.95"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButtonthree"
+                app:layout_constraintStart_toEndOf="@+id/imageButtonthree"
+                app:layout_constraintTop_toTopOf="@+id/imageButtonthree"
+                app:lineHeight="50sp" />
+
+            <TextView
+                android:id="@+id/textView20three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="16dp"
+                android:text="/mo."
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView19three"
+                app:layout_constraintTop_toTopOf="@+id/textView19three" />
+
+            <TextView
+                android:id="@+id/textView21three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Dating Agent"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="9.95$"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView> -->
 
 
 
