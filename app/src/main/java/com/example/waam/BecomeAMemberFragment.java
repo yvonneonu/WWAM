@@ -21,21 +21,33 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+
 import com.google.android.material.card.MaterialCardView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.stripe.android.ApiResultCallback;
 import com.stripe.android.CustomerSession;
+import com.stripe.android.PaymentIntentResult;
 import com.stripe.android.PaymentSession;
 import com.stripe.android.PaymentSessionConfig;
 import com.stripe.android.PaymentSessionData;
 import com.stripe.android.Stripe;
 import com.stripe.android.model.ConfirmPaymentIntentParams;
+import com.stripe.android.model.PaymentIntent;
 import com.stripe.android.model.PaymentMethod;
 import com.stripe.android.view.BillingAddressFields;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.util.Map;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -65,10 +77,12 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private String price;
     private String membertype;
     private Button selectPaymentMethod;
-    //private PaymentMethod paymentMethod;
+    private PaymentMethod paymentMethod;
     private PaymentSession paymentSession;
     private Stripe stripe;
+    private String pay;
     UserService userService;
+    private String paymentIntentClientSecret;
 
     private String token;
 
@@ -220,7 +234,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
 
-
             selectPaymentMethod.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -230,9 +243,60 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
             });
 
 
+       //if (paymentMethod != null){
+            linearLayoutFive.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (paymentMethod != null){
+                        confirmPayment(pay);
+                        Log.d("clickfor pay", "now");
+                    }
+                //    Log.d("clickfor pay", "now");
+                    // String ugradee = "";
+                  //  Upgara upgara = new Upgara();
+                  //  upgara.setCurrency("USD");
+                  //  upgara.setMembertype_id("2");
+                  //  payment(upgara);
+                   // String pay = paymentMethod.id;
 
 
-        linearLayoutFive.setOnClickListener(new View.OnClickListener() {
+                   // confirmPayment(pay);
+                }
+
+                 public void payment (Upgara upgara){
+
+                userService = new ApiClient().getService();
+                Call<UpgradeMembershipResponse> upgradeMembershipResponseCall = userService.upgr(upgara,"Bearer " +token);
+                upgradeMembershipResponseCall.enqueue(new Callback<UpgradeMembershipResponse>() {
+                    @Override
+                    public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
+                        if(!response.isSuccessful()){
+                            Log.d("Error code",response.body().getClientSecret());
+                            Log.d("Error ", "There was an error ");
+
+                            return;
+
+                        }
+
+
+                        Log.d("Client secret",response.body().getClientSecret());
+                    }
+
+                    @Override
+                    public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
+
+                        Log.d("Failure",t.getMessage());
+                    }
+                });
+
+                 }
+            });
+
+
+        //}
+
+        /*linearLayoutFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // String ugradee = "";
@@ -274,7 +338,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                     }
                 });*/
                 //confirmPayment();
-            }
+           /* }
              public void payment (Upgara upgara){
 
                 userService = new ApiClient().getService();
@@ -333,9 +397,9 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                         Log.d("MYWORLD", "" + t.getMessage());
 
                     }
-                });*/
-            }
-        });
+              //  });*/
+         //   }
+       // });
 
 
 
@@ -374,25 +438,127 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        stripe.onPaymentResult(requestCode, data, new PaymentResultCallback(this));
+
         if (data != null) {
             paymentSession.handlePaymentData(requestCode, resultCode, data);
+
             //Log.d("Payment",data.)
+
         }
+
     }
 
 
-    private void confirmPayment(@NonNull String clientSecret, @NonNull String paymentMethodId) {
+
+    private void confirmPayment( @NonNull String paymentMethodId) {
+
+       // UpgradeMembership upgradeMembership = new UpgradeMembership();
+        UpgradeMembership upgara = new UpgradeMembership();
+        upgara.setMembertype_id("1");
+        upgara.setCurrency("USD");
+        upgara.setPayment_method_id(pay);
+        userService = new ApiClient().getService();
+        Call<UpgradeMembershipResponse> upgradeMembershipResponseCall = userService.upgrade(upgara,"Bearer " +token);
+        upgradeMembershipResponseCall.enqueue(new Callback<UpgradeMembershipResponse>() {
+            @Override
+            public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
+                if(!response.isSuccessful()){
+                    Log.d("Error code",response.body().getClientSecret());
+                    Log.d("Error ", "There was an error ");
+
+                    return;
 
 
+                }
+
+                stripe.confirmPayment(BecomeAMemberFragment.this,
+
+                        ConfirmPaymentIntentParams.createWithPaymentMethodId(
+                                paymentMethodId,
+                              response.body().getClientSecret()
+
+                        )
+                );
+
+               Log.d("Client secret",response.body().getClientSecret());
+            }
+
+            @Override
+            public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
+
+                Log.d("Failure",t.getMessage());
+            }
+        });
 
 
-        stripe.confirmPayment(this,
-                ConfirmPaymentIntentParams.createWithPaymentMethodId(
-                        paymentMethodId,
-                        clientSecret
-                )
+    }
+
+    private static final class PayCallback implements Callback {
+        @NonNull private final WeakReference<BecomeAMemberFragment> activityRef;
+        PayCallback(@NonNull BecomeAMemberFragment activity) {
+            activityRef = new WeakReference<>(activity);
+
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) {
+
+            final BecomeAMemberFragment activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+            if (!response.isSuccessful()) {
+              //  activity.runOnUiThread(() ->
+
+                Log.d("iwanttosleep", "slep");
+                //);
+            } else {
+                try {
+                    activity.onPaymentSuccess(response);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
+
+        @Override
+        public void onFailure(Call call, Throwable t) {
+
+        }
+
+    }
+    private void onPaymentSuccess(@NonNull final Response response) throws IOException {
+        Gson gson = new Gson();
+        Type type = new TypeToken<Map<String, String>>(){}.getType();
+        Map<String, String> responseMap = gson.fromJson(
+                Objects.requireNonNull(response.body()).toString(),
+                type
         );
+        paymentIntentClientSecret = responseMap.get("clientSecret");
     }
+
+  //  @Override
+  //  public void onResponse(@NonNull Call call, @NonNull final Response response)
+    //        throws IOException {
+      //  final CheckoutActivityJava activity = activityRef.get();
+      /*  if (activity == null) {
+            return;
+        }
+        if (!response.isSuccessful()) {
+          //  activity.runOnUiThread(() ->
+                   // Toast.makeText(
+                          //  activity, "Error: " + response.toString(), Toast.LENGTH_LONG
+                  //  ).show()
+            );
+        } else {
+            activity.onPaymentSuccess(response);
+        }*/
+    //}
+
+
 
     @Override
     public void onClick(View v) {
@@ -434,7 +600,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                         secondFeature,thirdFeature,fourFeature,fourthView);
                 break;
 
-            case purchase:
+           /* case purchase:
                 int choseId = radioGroupPlus.getCheckedRadioButtonId();
                 switch (choseId){
                     case radGroupone:
@@ -450,12 +616,12 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                         membertype = "four";
                         break;
 
-                }
+                }*/
 
 
-                Intent intent = new Intent(getActivity(),PaymentPage.class);
-                intent.putExtra("price",price);
-                startActivity(intent);
+              //  Intent intent = new Intent(getActivity(),PaymentPage.class);
+               // intent.putExtra("price",price);
+              //  startActivity(intent);
         }
     }
 
@@ -536,11 +702,12 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 if (data.getUseGooglePay()) {
                     // customer intends to pay with Google Pay
                 } else {
-                    PaymentMethod paymentMethod;
+                    //PaymentMethod paymentMethod;
                     paymentMethod = data.getPaymentMethod();
 
                     if (paymentMethod != null) {
-                        Log.d("Paymethod",data.getPaymentMethod().toString());
+                        pay = paymentMethod.id;
+                        Log.d("Paymee",data.getPaymentMethod().toString());
                     }
                 }
 
@@ -553,6 +720,56 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
     }
 
+    private static final class PaymentResultCallback implements ApiResultCallback<PaymentIntentResult>  {
+
+        @NonNull private final WeakReference<BecomeAMemberFragment> activityRef;
+        PaymentResultCallback(@NonNull BecomeAMemberFragment activity) {
+            activityRef = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void onError(@NotNull Exception e) {
+            final BecomeAMemberFragment activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+
+        }
+
+        @Override
+        public void onSuccess(@NotNull PaymentIntentResult paymentIntentResult) {
+
+            final BecomeAMemberFragment activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+            PaymentIntent paymentIntent = paymentIntentResult.getIntent();
+            PaymentIntent.Status status = paymentIntent.getStatus();
+            if (status == PaymentIntent.Status.Succeeded) {
+                // Payment completed successfully
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                activity.displayAlert(
+                        "Payment completed",
+                        gson.toJson(paymentIntent)
+                );
+            } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
+                // Payment failed – allow retrying using a different payment method
+                activity.displayAlert(
+                        "Payment failed",
+                        Objects.requireNonNull(paymentIntent.getLastPaymentError()).getMessage()
+                );
+            }
+        }
+    }
+
+    private void displayAlert(@NonNull String title,
+                              @Nullable String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setTitle(title)
+                .setMessage(message);
+        builder.setPositiveButton("Ok", null);
+        builder.create().show();
+    }
 
 
 
