@@ -9,6 +9,11 @@ import retrofit2.http.POST;
 public interface UserService {
 
 
+    @GET ("user")
+    Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
+
+    @GET ("profile")
+    Call<profileresponse> responseuser(@Body profilerequest profilerequest);
 
     @POST("api/login")
     Call<LoginResponse>loginUser(@Body LoginRequest loginRequest);
@@ -26,9 +31,16 @@ public interface UserService {
     @POST("api/otp-resend")
     Call<Resendotpresponse> resendotpgotten (@Body Resendotprequest resendotprequest, @Header("Authorization") String toke);
 
+    @POST("api/ephemeralkey")
+    Call<Ephemeral> getEphemeral(@Body EphemeralPost ephemeralPost, @Header("Authorization") String token);
 
 
+    @POST("api/upgrademembership")
+    Call<UpgradeMembershipResponse> upgrade(@Body UpgradeMembership upgrade, @Header("Authorization") String token);
 
+
+    @POST("api/upgrademembership2")
+    Call<UpgradeMembershipResponse> upgr(@Body Upgara upgra , @Header("Authorization") String token);
 
     //Call<otpResponse> requestortp(@Body otprequest otprequest, @Header("Authorization: Bearer") String token);
 
