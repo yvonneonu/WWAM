@@ -12,8 +12,8 @@ public interface UserService {
     @GET ("user")
     Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
-    @GET ("profile")
-    Call<profileresponse> responseuser(@Body profilerequest profilerequest);
+   // @GET ("profile")
+    //Call<profileresponse> responseuser(@Body profilerequest profilerequest);
 
     @POST("api/login")
     Call<LoginResponse>loginUser(@Body LoginRequest loginRequest);
