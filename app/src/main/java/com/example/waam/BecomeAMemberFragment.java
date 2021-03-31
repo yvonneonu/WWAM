@@ -467,6 +467,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                     Log.d("Error code",response.body().getClientSecret());
                     Log.d("Error ", "There was an error ");
 
+
                     return;
 
 
