@@ -2,13 +2,14 @@ package com.example.waam;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface UserService {
 
 
-    @GET ("user")
+    @GET("user")
     Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
    // @GET ("profile")
