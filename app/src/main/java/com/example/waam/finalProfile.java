@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-public class finalProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class finalProfile extends AppCompatActivity {
 
     private TextView textView, swipe, careerText;
     private ImageView image;
@@ -79,19 +79,106 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         names.add("Juliet");
         names.add("Maria");
 
-        //careerSpin.setOnItemSelectedListener(this);
-        //spinner.setOnItemSelectedListener(this);
+        careerSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count++;
+                Log.d("InCareer","Running");
+                Log.d("InCareer",""+count);
+                if (count > 1) careerText.setText(careerSpin.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count1++;
+                if(count1 > 1) textView.setText(spinner.getSelectedItem().toString());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
-        //if (careerSpin.isClickable()){
-            careerSpin.setOnItemSelectedListener(this);
-          //  textView.setText("bcxxbg");
+        body.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count2++;
 
-       // }
-       // if (spinner.isClickable()){
-           spinner.setOnItemSelectedListener(this);
+            }
 
-     //   }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        ethni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count3++;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        fait.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count4++;
+                if(count4 > 1) ;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        polit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count5++;
+
+                if(count5 > 1) ;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        childre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count6++;
+                if(count6 > 1);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         swipe = findViewById(R.id.textView34);
         swipe.setOnClickListener(new View.OnClickListener() {
@@ -198,54 +285,11 @@ public class finalProfile extends AppCompatActivity implements AdapterView.OnIte
         }, toks);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-        count++;
-        count1++;
-        //   count2++;
-        //  count3++;
-        //   count4++;
-        //   count5++;
-        // count6++;
-        //count7++;
-        // count8++;
-        // count9++;
-        // count10++;
-
-        if (view.getId() == R.id.carer){
-
-          if(count > 1) careerText.setText(careerSpin.getSelectedItem().toString());
-          }
-
-        //if(careerSpin.isClickable()){
-        //if(careerSpin.isClickable()){
-       // if (count > 1)
-
-         //   careerSpin.setOnItemSelectedListener(this);
-
-            // if(count > 1)
-           // careerText.setText(careerSpin.getSelectedItem().toString());
-       // }
-
-        if (view.getId() == R.id.one){
-
-
-        if (count1 > 1) textView.setText(spinner.getSelectedItem().toString());
-
-
-        }
 
 
 
 
-    }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-        Log.d("Nothing","Nothing is fine");
-    }
 }
 
 
