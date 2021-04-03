@@ -75,6 +75,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

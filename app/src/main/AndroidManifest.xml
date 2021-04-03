@@ -27,13 +27,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".DiscoverEvent">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".DiscoverDrawerLayerout"></activity>
+        <activity android:name=".DiscoverDrawerLayerout">
+
+        </activity>
         <activity android:name=".LookingFor"></activity>
         <activity android:name=".finalProfile"></activity>
         <activity android:name=".picture" />
@@ -52,9 +50,16 @@
         <activity android:name=".SignUp"></activity>
         <activity android:name=".Login">
 
+
         </activity>
         <activity android:name=".Interest"></activity>
-        <activity android:name=".ViewPager"></activity>
+        <activity android:name=".ViewPager">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
