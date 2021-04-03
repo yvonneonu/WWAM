@@ -29,25 +29,26 @@ public class DiscoverEvent extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            //mToolbar = findViewById(R.id.tool_bar);
-            //setSupportActionBar(mToolbar);
-          //  mTvTitle = findViewById(R.id.tv_title);
+            setContentView(R.layout.activity_discover_event);
+            mToolbar = findViewById(R.id.tool_bar);
+            setSupportActionBar(mToolbar);
+           mTvTitle = findViewById(R.id.tv_title);
             mFragmentManager = getSupportFragmentManager();
 
             initFragments();
 
+
         }
 
         private void initFragments() {
-            EchelonFragment echelonFragment = new EchelonFragment();//梯形布局
-            mFragments.add(echelonFragment);
-            mManagerNames.add("EchelonLayoutManager");
+            SlideFragment slideFragment = new SlideFragment();//滑动布局
+            mFragments.add(slideFragment);
+            mManagerNames.add("SlideLayoutManager");
 
 
 
             mFragmentManager.beginTransaction()
-                  //  .add(R.id.container_layout, mFragments.get(0))
+                    .add(R.id.container_layout, mFragments.get(0))
                   //  .add(R.id.container_layout,mFragments.get(1))
                   //  .add(R.id.container_layout,mFragments.get(2))
 //                    .hide(mFragments.get(2))
@@ -71,10 +72,10 @@ public class DiscoverEvent extends AppCompatActivity {
         private void switchFragment(int position) {
             mFragmentManager.beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .hide(mCurrentFragment)
+                   // .hide(mCurrentFragment)
                     .show(mFragments.get(position))
                     .commit();
             mCurrentFragment = mFragments.get(position);
-            mTvTitle.setText(mManagerNames.get(position));
+//            mTvTitle.setText(mManagerNames.get(position));
         }
     }
