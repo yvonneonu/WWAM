@@ -73,7 +73,7 @@ public class SignUp extends AppCompatActivity {
         back = findViewById(R.id.backto);
         move = findViewById(R.id.logo);
         name = findViewById(R.id.editText8);
-        constraintLayout = findViewById(R.id.notshow);
+        //constraintLayout = findViewById(R.id.notshow);
         email = findViewById(R.id.editText2);
         password = findViewById(R.id.editText);
         confrim = findViewById(R.id.editText88);
