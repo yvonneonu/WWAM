@@ -75,7 +75,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private LinearLayout layoutPlanfour;
     private View firstView, secondView, thirdView, fourthView;
     private String price;
-    private String membertype;
+    private String membertype = "";
     private Button selectPaymentMethod;
     private PaymentMethod paymentMethod;
     private PaymentSession paymentSession;
@@ -244,53 +244,22 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
        //if (paymentMethod != null){
+
+
+
             linearLayoutFive.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
+
+
                     if (paymentMethod != null){
                         confirmPayment(pay);
                         Log.d("clickfor pay", "now");
                     }
-                //    Log.d("clickfor pay", "now");
-                    // String ugradee = "";
-                  //  Upgara upgara = new Upgara();
-                  //  upgara.setCurrency("USD");
-                  //  upgara.setMembertype_id("2");
-                  //  payment(upgara);
-                   // String pay = paymentMethod.id;
-
-
-                   // confirmPayment(pay);
                 }
 
-                 public void payment (Upgara upgara){
 
-                userService = new ApiClient().getService();
-                Call<UpgradeMembershipResponse> upgradeMembershipResponseCall = userService.upgr(upgara,"Bearer " +token);
-                upgradeMembershipResponseCall.enqueue(new Callback<UpgradeMembershipResponse>() {
-                    @Override
-                    public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
-                        if(!response.isSuccessful()){
-                            Log.d("Error code",response.body().getClientSecret());
-                            Log.d("Error ", "There was an error ");
-
-                            return;
-
-                        }
-
-
-                        Log.d("Client secret",response.body().getClientSecret());
-                    }
-
-                    @Override
-                    public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
-
-                        Log.d("Failure",t.getMessage());
-                    }
-                });
-
-                 }
             });
 
 
@@ -453,110 +422,73 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
     private void confirmPayment( @NonNull String paymentMethodId) {
 
+        final int radGroupone = R.id.radioButtonone;
+        final int radGrouptwo = R.id.radioButtontwo;
+        final int radGroupthree = R.id.radioButtonthree;
+        final int radGroupFour = R.id.radioButton2;
+
+
+        int choseId = radioGroupPlus.getCheckedRadioButtonId();
+        switch (choseId){
+            case radGroupone:
+                membertype = "1";
+                break;
+            case radGrouptwo:
+                membertype = "2";
+                break;
+            case radGroupthree:
+                membertype = "3";
+                break;
+            case radGroupFour:
+                membertype = "4";
+                break;
+
+        }
        // UpgradeMembership upgradeMembership = new UpgradeMembership();
-        UpgradeMembership upgara = new UpgradeMembership();
-        upgara.setMembertype_id("1");
-        upgara.setCurrency("USD");
-        upgara.setPayment_method_id(pay);
-        userService = new ApiClient().getService();
-        Call<UpgradeMembershipResponse> upgradeMembershipResponseCall = userService.upgrade(upgara,"Bearer " +token);
-        upgradeMembershipResponseCall.enqueue(new Callback<UpgradeMembershipResponse>() {
-            @Override
-            public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
-                if(!response.isSuccessful()){
-                    Log.d("Error code",response.body().getClientSecret());
-                    Log.d("Error ", "There was an error ");
+        if(!membertype.isEmpty()){
+            UpgradeMembership upgara = new UpgradeMembership();
+            upgara.setMembertype_id(membertype);
+            upgara.setCurrency("USD");
+            upgara.setPayment_method_id(pay);
+            userService = new ApiClient().getService();
+            Call<UpgradeMembershipResponse> upgradeMembershipResponseCall = userService.upgrade(upgara,"Bearer " +token);
+            upgradeMembershipResponseCall.enqueue(new Callback<UpgradeMembershipResponse>() {
+                @Override
+                public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
+                    if(!response.isSuccessful()){
+                        Log.d("Error code",response.errorBody().toString());
+                        Log.d("Error ", "There was an error "+membertype);
 
-                    return;
+                        return;
+                    }
 
+                    stripe.confirmPayment(BecomeAMemberFragment.this,
+                            ConfirmPaymentIntentParams.createWithPaymentMethodId(
+                                    paymentMethodId,
+                                    response.body().getClientSecret()
 
+                            )
+                    );
+
+                   if(response.body().getMessage().equals("Transaction Successfully")) Toast.makeText(getActivity(),"Your payment was succesful"+membertype,Toast.LENGTH_SHORT).show();
+                    Log.d("Client secret",response.body().getClientSecret());
                 }
 
-                stripe.confirmPayment(BecomeAMemberFragment.this,
+                @Override
+                public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
 
-                        ConfirmPaymentIntentParams.createWithPaymentMethodId(
-                                paymentMethodId,
-                              response.body().getClientSecret()
-
-                        )
-                );
-
-               Log.d("Client secret",response.body().getClientSecret());
-            }
-
-            @Override
-            public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
-
-                Log.d("Failure",t.getMessage());
-            }
-        });
-
-
-    }
-
-    private static final class PayCallback implements Callback {
-        @NonNull private final WeakReference<BecomeAMemberFragment> activityRef;
-        PayCallback(@NonNull BecomeAMemberFragment activity) {
-            activityRef = new WeakReference<>(activity);
-
-        }
-
-        @Override
-        public void onResponse(Call call, Response response) {
-
-            final BecomeAMemberFragment activity = activityRef.get();
-            if (activity == null) {
-                return;
-            }
-            if (!response.isSuccessful()) {
-              //  activity.runOnUiThread(() ->
-
-                Log.d("iwanttosleep", "slep");
-                //);
-            } else {
-                try {
-                    activity.onPaymentSuccess(response);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.d("Failure",t.getMessage());
                 }
-            }
+            });
 
 
+        }else{
+            Toast.makeText(getActivity(),"Please Select your package",Toast.LENGTH_SHORT).show();
         }
 
-        @Override
-        public void onFailure(Call call, Throwable t) {
-
-        }
 
     }
-    private void onPaymentSuccess(@NonNull final Response response) throws IOException {
-        Gson gson = new Gson();
-        Type type = new TypeToken<Map<String, String>>(){}.getType();
-        Map<String, String> responseMap = gson.fromJson(
-                Objects.requireNonNull(response.body()).toString(),
-                type
-        );
-        paymentIntentClientSecret = responseMap.get("clientSecret");
-    }
 
-  //  @Override
-  //  public void onResponse(@NonNull Call call, @NonNull final Response response)
-    //        throws IOException {
-      //  final CheckoutActivityJava activity = activityRef.get();
-      /*  if (activity == null) {
-            return;
-        }
-        if (!response.isSuccessful()) {
-          //  activity.runOnUiThread(() ->
-                   // Toast.makeText(
-                          //  activity, "Error: " + response.toString(), Toast.LENGTH_LONG
-                  //  ).show()
-            );
-        } else {
-            activity.onPaymentSuccess(response);
-        }*/
-    //}
 
 
 
@@ -569,10 +501,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         final int layoutFour = R.id.layfour;
         final int purchase = R.id.purchase;
 
-        final int radGroupone = R.id.radioButtonone;
-        final int radGrouptwo = R.id.radioButtontwo;
-        final int radGroupthree = R.id.radioButtonthree;
-        final int radGroupFour = R.id.radioButton2;
+
 
         switch (v.getId()){
             case layoutOne:
@@ -600,7 +529,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                         secondFeature,thirdFeature,fourFeature,fourthView);
                 break;
 
-           /* case purchase:
+           /*case purchase:
                 int choseId = radioGroupPlus.getCheckedRadioButtonId();
                 switch (choseId){
                     case radGroupone:
@@ -616,12 +545,12 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                         membertype = "four";
                         break;
 
-                }*/
+                }
 
 
               //  Intent intent = new Intent(getActivity(),PaymentPage.class);
                // intent.putExtra("price",price);
-              //  startActivity(intent);
+              //  startActivity(intent);*/
         }
     }
 
@@ -771,77 +700,5 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         builder.create().show();
     }
 
-
-
-
-    /*private void setUpPayment(){
-        CustomerSession.initCustomerSession(this, new ExampleEphemeralKeyProvider(token));
-
-
-
-        paymentSession.init(new PaymentSession.PaymentSessionListener() {
-
-            @Override
-            public void onCommunicatingStateChanged(boolean b) {
-
-            }
-
-
-            @Override
-            public void onError(int i, @NotNull String s) {
-
-            }
-
-            @Override
-            public void onPaymentSessionDataChanged(@NotNull PaymentSessionData data) {
-                if (data.getUseGooglePay()) {
-                    // customer intends to pay with Google Pay
-                } else {
-                    final PaymentMethod paymentMethod = data.getPaymentMethod();
-                    if (paymentMethod != null) {
-                        payMeth = paymentMethod.toString();
-                    }
-                }
-
-                // Update your UI here with other data
-                if (data.isPaymentReadyToCharge()) {
-                    // Use the data to complete your charge - see below.
-
-                    UpgradeMembership mem = new UpgradeMembership();
-                    mem.setCurrency("USD");
-                    mem.setPayment_method_id(payMeth);
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    UserService upgrademem = retrofit.create(UserService.class);
-                    Call<UpgradeMembershipResponse> membership = upgrademem.upgrade(mem,token);
-                    membership.enqueue(new Callback<UpgradeMembershipResponse>() {
-                        @Override
-                        public void onResponse(Call<UpgradeMembershipResponse> call, retrofit2.Response<UpgradeMembershipResponse> response) {
-                            if(!response.isSuccessful()){
-                                //Toast.makeText(PaymentPage.this,"An error occured",Toast.LENGTH_SHORT).show();
-                            }
-
-                            String clientSecret = response.body().getGetClientSecret();
-
-                            //confirmPayment(clientSecret,payMeth);
-
-                            //UpgradeMembership members = response.body().getClientSecreet;
-                            //confirmPayment("client",paymentIntentClientSecret);
-                            //Toast.makeText(PaymentPage.this,"Payment was succesful",Toast.LENGTH_SHORT).show();
-                        }
-
-
-                        @Override
-                        public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
-
-                        }
-                    });
-                }
-            }
-        });
-
-    }*/
 
 }
