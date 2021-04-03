@@ -74,7 +74,9 @@ public class finalProfile extends AppCompatActivity {
      //   textView.setText(spinn);
 
         names.add("Cynthia");
+        names.add("Cyndy");
         names.add("Yvonne");
+
         names.add("Hailey");
         names.add("Juliet");
         names.add("Maria");
