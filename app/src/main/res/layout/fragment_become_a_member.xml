@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="20sp"
             android:text="Upgrade your plan to unlock more amazing features" />
 
 
@@ -27,7 +28,8 @@
             android:id="@+id/plus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
 
             <com.google.android.material.card.MaterialCardView
@@ -35,12 +37,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginVertical="5dp"
                 android:layout_marginTop="10dp"
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
                 android:orientation="horizontal"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardElevation="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -86,7 +90,7 @@
                         android:id="@+id/textViewthree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginEnd="24dp"
                         android:layout_weight="1"
                         android:text="1 Month"
                         android:textColor="#000000"
@@ -100,7 +104,9 @@
                         android:id="@+id/view7"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="16dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplan"
@@ -109,7 +115,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplan"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -118,7 +124,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
-                        <TextView
+
+                        <!-- <TextView
                             android:id="@+id/textView28"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -144,19 +151,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" />
-                    </LinearLayout>
+                            android:textColor="#FFFFFF" /> -->
 
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_baseline_more_vert_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -220,7 +217,7 @@
                         android:id="@+id/textViewsix"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginEnd="24dp"
                         android:layout_weight="1"
                         android:text="3 Month"
                         android:textColor="#000000"
@@ -235,7 +232,9 @@
                         android:id="@+id/view8"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="16dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplantwo"
@@ -246,7 +245,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplantwo"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -256,7 +255,7 @@
                         app:layout_constraintStart_toStartOf="parent">
 
 
-                        <TextView
+                        <!--<TextView
                             android:id="@+id/textView34fourtin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -282,20 +281,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF" /> -->
                     </LinearLayout>
-
-
-                    <ImageButton
-                        android:id="@+id/imageButton3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_baseline_more_vert_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -358,7 +345,7 @@
                         android:id="@+id/textViewnine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginEnd="24dp"
                         android:layout_weight="1"
                         android:text="12 Month"
                         android:textColor="#000000"
@@ -373,6 +360,8 @@
                         android:id="@+id/view9"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
                         android:layout_marginBottom="8dp"
                         android:background="@android:color/black"
                         android:visibility="gone"
@@ -383,7 +372,7 @@
 
                     <LinearLayout
                         android:id="@+id/layoutplanthree"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -393,7 +382,7 @@
                         app:layout_constraintStart_toStartOf="parent">
 
 
-                        <TextView
+                        <!-- <TextView
                             android:id="@+id/textView38twe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -419,19 +408,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF" /> -->
                     </LinearLayout>
-
-                    <ImageButton
-                        android:id="@+id/imageButton4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_baseline_more_vert_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -443,7 +421,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
-
                 android:checkable="true"
                 android:clickable="true"
                 android:focusable="true"
@@ -495,7 +472,7 @@
                         android:id="@+id/textView20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginEnd="24dp"
                         android:layout_weight="1"
                         android:text="Dating Agent"
                         android:textColor="#000000"
@@ -513,12 +490,12 @@
                         android:background="#000000"
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/layoutplanfour"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintEnd_toEndOf="@+id/textView20"
+                        app:layout_constraintStart_toStartOf="@+id/radioButton2" />
 
                     <LinearLayout
                         android:id="@+id/layoutplanfour"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical"
@@ -528,7 +505,7 @@
                         app:layout_constraintStart_toStartOf="@+id/radioButton2">
 
 
-                        <TextView
+                        <!-- <TextView
                             android:id="@+id/textView42hun"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -554,20 +531,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF" /> -->
                     </LinearLayout>
-
-
-                    <ImageButton
-                        android:id="@+id/imageButton5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_baseline_more_vert_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -701,6 +666,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>-->
+
 
 
         <!--<com.google.android.material.card.MaterialCardView
