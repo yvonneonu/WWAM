@@ -175,7 +175,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
 
-        TextView firstTxt = view.findViewById(R.id.textView28);
+      /*  TextView firstTxt = view.findViewById(R.id.textView28);
         TextView secondTxt = view.findViewById(R.id.textView29);
         TextView thirdTxt = view.findViewById(R.id.textView32);
         TextView fourthTxt = view.findViewById(R.id.textView33);
@@ -194,7 +194,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         TextView firsthun = view.findViewById(R.id.textView42hun);
         TextView secondhun = view.findViewById(R.id.textView43hun);
         TextView thirdhun = view.findViewById(R.id.textView44hun);
-        TextView fourthun = view.findViewById(R.id.textView45hun);
+        TextView fourthun = view.findViewById(R.id.textView45hun);*/
 
 
         firstView = view.findViewById(R.id.view7);
@@ -207,9 +207,9 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         fourFeature = new TextView[]{view.findViewById(R.id.textView19),view.findViewById(R.id.textView21),view.findViewById(R.id.textView20)};
 
 
-        TextView[] arrayTin = new TextView[]{firsttin,secondtin,thirdtin,fourtin};
+       /* TextView[] arrayTin = new TextView[]{firsttin,secondtin,thirdtin,fourtin};
         TextView[] arrayTwe = new TextView[]{firsttwe,secondtwe,thirdtwe,fourttwe};
-        TextView[] arrayHun = new TextView[]{firsthun,secondhun,thirdhun,fourthun};
+        TextView[] arrayHun = new TextView[]{firsthun,secondhun,thirdhun,fourthun};*/
 
         //Boolean[] state = new Boolean[]{firstActive,secondActive,thirdActive,fourthActive};
         arrayView = new View[]{firstView,secondView, thirdView,fourthView};
@@ -252,7 +252,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         }
 
 
-        firstTxt.setText(string);
+       /* firstTxt.setText(string);
         secondTxt.setText(string);
         thirdTxt.setText(string);
         fourthTxt.setText(string);
@@ -267,7 +267,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         for(int i= 0 ; i < arrayTin.length ; i++){
             arrayHun[i].setText(string);
-        }
+        }*/
 
 
 
@@ -754,7 +754,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
             button.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.circles));
             button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             button.setLayoutParams(imageParams);
-           // textView.setText(stringFeature);
+            textView.setText(stringFeature);
             textView.setTextColor(getActivity().getResources().getColor(R.color.white));
             linearLayout.addView(button);
             linearLayout.addView(textView);
@@ -766,4 +766,4 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
 
-//}
+}
