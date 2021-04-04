@@ -46,7 +46,7 @@ public class finalProfile extends AppCompatActivity {
 
 //        Log.d("Complete",imageUri);
         String Fullname = getIntent().getStringExtra("nameprofile");
-        String tired = getIntent().getStringExtra("everytoken");
+      //  String tired = getIntent().getStringExtra("everytoken");
 
 
 
@@ -258,10 +258,10 @@ public class finalProfile extends AppCompatActivity {
                     if (imageUri != null) {
                         intent.putExtra("images", imageUri);
                     }
-                    if (tired != null){
-                        intent.putExtra("everytoken", tired);
+                    if (token != null){
+                        intent.putExtra("token", token);
                     }
-                    Log.d("TAG", "TOKENSHOW7 " +tired);
+                    Log.d("TAG", "TOKENSHOW7 " +token);
                     startActivity(intent);
 
 

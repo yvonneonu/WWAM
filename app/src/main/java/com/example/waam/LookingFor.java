@@ -78,7 +78,7 @@ public class LookingFor extends AppCompatActivity {
         drink = findViewById(R.id.drink);
         sala = findViewById(R.id.salary);
 
-        String token = getIntent().getStringExtra("everytoken");
+        String token = getIntent().getStringExtra("token");
         //String toks = getIntent().getStringExtra("token");
         //Log.d("sorry", "iknowyouaretired "+token);
 
