@@ -221,6 +221,36 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         linearLayoutFive.setOnClickListener(this);
 
 
+
+
+        firstFeature = new TextView[]{view.findViewById(R.id.textViewone),view.findViewById(R.id.textViewtwo),view.findViewById(R.id.textViewthree)};
+        secondFeature = new TextView[]{view.findViewById(R.id.textViewfour),view.findViewById(R.id.textViewfive),view.findViewById(R.id.textViewsix)};
+        thirdFeature = new TextView[]{view.findViewById(R.id.textViewseven),view.findViewById(R.id.textVieweight),view.findViewById(R.id.textViewnine)};
+        fourFeature = new TextView[]{view.findViewById(R.id.textView19),view.findViewById(R.id.textView21),view.findViewById(R.id.textView20)};
+
+
+        constraintLayoutOne = view.findViewById(R.id.constone);
+        constraintLayoutTwo = view.findViewById(R.id.consttwo);
+        constraintLayoutThree = view.findViewById(R.id.constthree);
+        constraintLayoutFour = view.findViewById(R.id.constfour);
+
+        arrayView = new View[]{firstView,secondView, thirdView,fourthView};
+        linearLayouts = new LinearLayout[]{layoutPlan,layoutPlantwo,layoutPlanthree,layoutPlanfour};
+        constraintLayouts = new ConstraintLayout[]{constraintLayoutOne,constraintLayoutTwo,constraintLayoutThree,constraintLayoutFour};
+
+
+        LinearLayout[] linearLayoutLoop = new LinearLayout[]{layoutPlan,layoutPlantwo,layoutPlanthree,layoutPlanfour};
+
+        /*TextView[] arrayTin = new TextView[]{firsttin,secondtin,thirdtin,fourtin};
+        TextView[] arrayTwe = new TextView[]{firsttwe,secondtwe,thirdtwe,fourttwe};
+        TextView[] arrayHun = new TextView[]{firsthun,secondhun,thirdhun,fourthun};*/
+
+        //This programmatically creates the line
+        for(LinearLayout layout : linearLayoutLoop){
+            addToParent(layout);
+        }
+
+
         firstTxt.setText(string);
         secondTxt.setText(string);
         thirdTxt.setText(string);
