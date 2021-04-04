@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
@@ -79,6 +80,13 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private String pay;
     UserService userService;
     private String paymentIntentClientSecret;
+
+
+    private LinearLayout[] linearLayouts;
+    private ConstraintLayout constraintLayoutOne, constraintLayoutTwo, constraintLayoutThree, constraintLayoutFour;
+    private ConstraintLayout[] constraintLayouts;
+
+
 
     private String token;
 
