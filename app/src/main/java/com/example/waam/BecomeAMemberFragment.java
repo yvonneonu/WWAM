@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
@@ -79,6 +81,13 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private String pay;
     UserService userService;
     private String paymentIntentClientSecret;
+
+
+    private LinearLayout[] linearLayouts;
+    private ConstraintLayout constraintLayoutOne, constraintLayoutTwo, constraintLayoutThree, constraintLayoutFour;
+    private ConstraintLayout[] constraintLayouts;
+
+
 
     private String token;
 
@@ -166,7 +175,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
 
-        TextView firstTxt = view.findViewById(R.id.textView28);
+      /*  TextView firstTxt = view.findViewById(R.id.textView28);
         TextView secondTxt = view.findViewById(R.id.textView29);
         TextView thirdTxt = view.findViewById(R.id.textView32);
         TextView fourthTxt = view.findViewById(R.id.textView33);
@@ -185,7 +194,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         TextView firsthun = view.findViewById(R.id.textView42hun);
         TextView secondhun = view.findViewById(R.id.textView43hun);
         TextView thirdhun = view.findViewById(R.id.textView44hun);
-        TextView fourthun = view.findViewById(R.id.textView45hun);
+        TextView fourthun = view.findViewById(R.id.textView45hun);*/
 
 
         firstView = view.findViewById(R.id.view7);
@@ -198,9 +207,9 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         fourFeature = new TextView[]{view.findViewById(R.id.textView19),view.findViewById(R.id.textView21),view.findViewById(R.id.textView20)};
 
 
-        TextView[] arrayTin = new TextView[]{firsttin,secondtin,thirdtin,fourtin};
+       /* TextView[] arrayTin = new TextView[]{firsttin,secondtin,thirdtin,fourtin};
         TextView[] arrayTwe = new TextView[]{firsttwe,secondtwe,thirdtwe,fourttwe};
-        TextView[] arrayHun = new TextView[]{firsthun,secondhun,thirdhun,fourthun};
+        TextView[] arrayHun = new TextView[]{firsthun,secondhun,thirdhun,fourthun};*/
 
         //Boolean[] state = new Boolean[]{firstActive,secondActive,thirdActive,fourthActive};
         arrayView = new View[]{firstView,secondView, thirdView,fourthView};
@@ -213,7 +222,37 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         linearLayoutFive.setOnClickListener(this);
 
 
-        firstTxt.setText(string);
+
+
+        firstFeature = new TextView[]{view.findViewById(R.id.textViewone),view.findViewById(R.id.textViewtwo),view.findViewById(R.id.textViewthree)};
+        secondFeature = new TextView[]{view.findViewById(R.id.textViewfour),view.findViewById(R.id.textViewfive),view.findViewById(R.id.textViewsix)};
+        thirdFeature = new TextView[]{view.findViewById(R.id.textViewseven),view.findViewById(R.id.textVieweight),view.findViewById(R.id.textViewnine)};
+        fourFeature = new TextView[]{view.findViewById(R.id.textView19),view.findViewById(R.id.textView21),view.findViewById(R.id.textView20)};
+
+
+        constraintLayoutOne = view.findViewById(R.id.constone);
+        constraintLayoutTwo = view.findViewById(R.id.consttwo);
+        constraintLayoutThree = view.findViewById(R.id.constthree);
+        constraintLayoutFour = view.findViewById(R.id.constfour);
+
+        arrayView = new View[]{firstView,secondView, thirdView,fourthView};
+        linearLayouts = new LinearLayout[]{layoutPlan,layoutPlantwo,layoutPlanthree,layoutPlanfour};
+        constraintLayouts = new ConstraintLayout[]{constraintLayoutOne,constraintLayoutTwo,constraintLayoutThree,constraintLayoutFour};
+
+
+        LinearLayout[] linearLayoutLoop = new LinearLayout[]{layoutPlan,layoutPlantwo,layoutPlanthree,layoutPlanfour};
+
+        /*TextView[] arrayTin = new TextView[]{firsttin,secondtin,thirdtin,fourtin};
+        TextView[] arrayTwe = new TextView[]{firsttwe,secondtwe,thirdtwe,fourttwe};
+        TextView[] arrayHun = new TextView[]{firsthun,secondhun,thirdhun,fourthun};*/
+
+        //This programmatically creates the line
+        for(LinearLayout layout : linearLayoutLoop){
+            addToParent(layout);
+        }
+
+
+       /* firstTxt.setText(string);
         secondTxt.setText(string);
         thirdTxt.setText(string);
         fourthTxt.setText(string);
@@ -228,7 +267,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         for(int i= 0 ; i < arrayTin.length ; i++){
             arrayHun[i].setText(string);
-        }
+        }*/
 
 
 
@@ -697,6 +736,34 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         builder.setPositiveButton("Ok", null);
         builder.create().show();
     }
+    private void addToParent(LinearLayout linearLayouting){
+
+
+        String[] StringFeatures = new String[]{"Bullet point one","Bullet point two","Bullet point three","Bullet point four"};
+        for (String stringFeature : StringFeatures) {
+            LinearLayout linearLayout = new LinearLayout(getActivity());
+           LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            linearLayout.setLayoutParams(params);
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            TextView textView = new TextView(getActivity());
+            textView.setTextSize(15);
+            ImageView button = new ImageView(getActivity());
+           LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            imageParams.setMarginEnd(20);
+            imageParams.bottomMargin = 10;
+            button.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.circles));
+            button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            button.setLayoutParams(imageParams);
+            textView.setText(stringFeature);
+            textView.setTextColor(getActivity().getResources().getColor(R.color.white));
+            linearLayout.addView(button);
+            linearLayout.addView(textView);
+            linearLayouting.addView(linearLayout);
+
+        }
+
+    }
+
 
 
 }
