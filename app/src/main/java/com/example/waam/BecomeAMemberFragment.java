@@ -541,30 +541,22 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
         switch (v.getId()){
+
             case layoutOne:
-                setClicked(linearLayoutTwo,linearLayoutThree,linearLayoutFour
-                        ,linearLayoutOne,layoutPlantwo,layoutPlanthree,
-                        layoutPlanfour,layoutPlan,secondFeature,thirdFeature,fourFeature,firstFeature,firstView);
+                setClickedArray(constraintLayoutOne,layoutPlan,secondFeature,thirdFeature,fourFeature,firstFeature,firstView);
                 break;
             case layoutTwo:
-                setClicked(linearLayoutOne,linearLayoutThree,linearLayoutFour,
-                        linearLayoutTwo,layoutPlan,layoutPlanthree,layoutPlanfour,
-                        layoutPlantwo,firstFeature,thirdFeature,fourFeature,secondFeature,secondView);
+                setClickedArray(constraintLayoutTwo,layoutPlantwo,firstFeature,thirdFeature,fourFeature,secondFeature,secondView);
                 break;
 
             case layoutThree:
-                setClicked(linearLayoutOne,linearLayoutTwo,linearLayoutFour,
-                        linearLayoutThree,layoutPlan,layoutPlantwo,
-                        layoutPlanfour,layoutPlanthree,firstFeature,secondFeature,
-                        fourFeature,thirdFeature,thirdView);
+                setClickedArray(constraintLayoutThree,layoutPlanthree,firstFeature,secondFeature, fourFeature,thirdFeature,thirdView);
                 break;
 
             case layoutFour:
-                setClicked(linearLayoutOne,linearLayoutTwo,linearLayoutThree,
-                        linearLayoutFour,layoutPlan,layoutPlantwo,
-                        layoutPlanthree,layoutPlanfour,firstFeature,
-                        secondFeature,thirdFeature,fourFeature,fourthView);
+                setClickedArray(constraintLayoutFour,layoutPlanfour,firstFeature, secondFeature,thirdFeature,fourFeature,fourthView);
                 break;
+
 
            /*case purchase:
                 int choseId = radioGroupPlus.getCheckedRadioButtonId();
@@ -592,7 +584,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     }
 
 
-    private void setClicked(MaterialCardView first, MaterialCardView second,
+    /*private void setClicked(MaterialCardView first, MaterialCardView second,
                             MaterialCardView third,MaterialCardView original,
                             LinearLayout linearLayoutone,LinearLayout linearLayouttwo,
                             LinearLayout linearLayoutthree,LinearLayout linearLayoutOriginal,
@@ -629,7 +621,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         for(int i = 0 ; i < arrayOne.length ; i++){
             arrayReal[i].setTextColor(getActivity().getResources().getColor(R.color.white));
         }
-    }
+    }*/
 
     private void setUpPayment(){
 
@@ -764,6 +756,52 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
     }
 
+
+    private void setClickedArray(ConstraintLayout constraintLayout,LinearLayout linearLayout,TextView[] arrayOne,
+                                 TextView[] arrayTwo, TextView[] arrayThree, TextView[] arrayReal,View view){
+
+        for(ConstraintLayout cons : constraintLayouts ){
+            if(cons == constraintLayout){
+                cons.setBackgroundColor(getActivity().getResources().getColor(R.color.priceBackgrouond));
+            }else{
+                cons.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            }
+        }
+        for (LinearLayout layout : linearLayouts) {
+            if (layout == linearLayout) {
+                layout.setVisibility(View.VISIBLE);
+            } else {
+                layout.setVisibility(View.GONE);
+            }
+        }
+
+
+        for (View value : arrayView) {
+            if (value == view) {
+                value.setVisibility(View.VISIBLE);
+            } else {
+                value.setVisibility(View.GONE);
+            }
+        }
+
+        for (TextView textView : arrayOne) {
+            textView.setTextColor(getActivity().getResources().getColor(R.color.black));
+        }
+
+        for(int i = 0 ; i < arrayOne.length ; i++){
+            arrayTwo[i].setTextColor(getActivity().getResources().getColor(R.color.black));
+        }
+
+        for(int i = 0 ; i < arrayOne.length ; i++){
+            arrayThree[i].setTextColor(getActivity().getResources().getColor(R.color.black));
+        }
+
+        for(int i = 0 ; i < arrayOne.length ; i++){
+            arrayReal[i].setTextColor(getActivity().getResources().getColor(R.color.white));
+        }
+
+
+    }
 
 
 }
