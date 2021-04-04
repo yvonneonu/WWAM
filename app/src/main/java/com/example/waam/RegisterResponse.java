@@ -13,6 +13,12 @@ public class RegisterResponse {
     private String password_confirmation ;
     private String token;
 
+    public String getMessage() {
+        return message;
+    }
+
+    private String message;
+
     public RegisterResponse(int id, String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password, String password_confirmation, String token) {
         this.id = id;
         this.fullname = fullname;

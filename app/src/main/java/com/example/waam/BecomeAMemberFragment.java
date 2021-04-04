@@ -120,6 +120,8 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         super.onCreate(savedInstanceState);
         Log.d("TAG","I am in oncreate");
 
+        token = getActivity().getIntent().getStringExtra("toking");
+
         PaymentConfiguration.init(getActivity(), "pk_test_51ITAgKBgd3O4ny7mXz17kU4QCrp3hQ0CQjpSdjHhXmDkoDYxRVgj9diGYnenw5cCVBigd0iFLv1kZ1LhDaTKlhlh00ZJpFHeVy");
 
 
@@ -173,30 +175,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
 
 
-
-
-      /*  TextView firstTxt = view.findViewById(R.id.textView28);
-        TextView secondTxt = view.findViewById(R.id.textView29);
-        TextView thirdTxt = view.findViewById(R.id.textView32);
-        TextView fourthTxt = view.findViewById(R.id.textView33);
-
-        TextView firsttin = view.findViewById(R.id.textView34fourtin);
-        TextView secondtin = view.findViewById(R.id.textView35fourtin);
-        TextView thirdtin = view.findViewById(R.id.textView36fourtin);
-
-        TextView fourtin = view.findViewById(R.id.textView37fourtin);
-
-        TextView firsttwe = view.findViewById(R.id.textView38twe);
-        TextView secondtwe = view.findViewById(R.id.textView39twe);
-        TextView thirdtwe = view.findViewById(R.id.textView40twe);
-        TextView fourttwe = view.findViewById(R.id.textView41twe);
-
-        TextView firsthun = view.findViewById(R.id.textView42hun);
-        TextView secondhun = view.findViewById(R.id.textView43hun);
-        TextView thirdhun = view.findViewById(R.id.textView44hun);
-        TextView fourthun = view.findViewById(R.id.textView45hun);*/
-
-
         firstView = view.findViewById(R.id.view7);
         secondView = view.findViewById(R.id.view8);
         thirdView = view.findViewById(R.id.view9);
@@ -206,12 +184,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         thirdFeature = new TextView[]{view.findViewById(R.id.textViewseven),view.findViewById(R.id.textVieweight),view.findViewById(R.id.textViewnine)};
         fourFeature = new TextView[]{view.findViewById(R.id.textView19),view.findViewById(R.id.textView21),view.findViewById(R.id.textView20)};
 
-
-       /* TextView[] arrayTin = new TextView[]{firsttin,secondtin,thirdtin,fourtin};
-        TextView[] arrayTwe = new TextView[]{firsttwe,secondtwe,thirdtwe,fourttwe};
-        TextView[] arrayHun = new TextView[]{firsthun,secondhun,thirdhun,fourthun};*/
-
-        //Boolean[] state = new Boolean[]{firstActive,secondActive,thirdActive,fourthActive};
         arrayView = new View[]{firstView,secondView, thirdView,fourthView};
 
 
@@ -242,9 +214,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         LinearLayout[] linearLayoutLoop = new LinearLayout[]{layoutPlan,layoutPlantwo,layoutPlanthree,layoutPlanfour};
 
-        /*TextView[] arrayTin = new TextView[]{firsttin,secondtin,thirdtin,fourtin};
-        TextView[] arrayTwe = new TextView[]{firsttwe,secondtwe,thirdtwe,fourttwe};
-        TextView[] arrayHun = new TextView[]{firsthun,secondhun,thirdhun,fourthun};*/
 
         //This programmatically creates the line
         for(LinearLayout layout : linearLayoutLoop){
@@ -252,22 +221,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         }
 
 
-       /* firstTxt.setText(string);
-        secondTxt.setText(string);
-        thirdTxt.setText(string);
-        fourthTxt.setText(string);
 
-       for(int i= 0 ; i < arrayTin.length ; i++){
-           arrayTin[i].setText(string);
-       }
-
-        for(int i= 0 ; i < arrayTin.length ; i++){
-            arrayTwe[i].setText(string);
-        }
-
-        for(int i= 0 ; i < arrayTin.length ; i++){
-            arrayHun[i].setText(string);
-        }*/
 
 
 
@@ -280,7 +234,6 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
             });
 
 
-       //if (paymentMethod != null){
 
 
 
@@ -300,125 +253,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
             });
 
 
-        //}
 
-        /*linearLayoutFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // String ugradee = "";
-                Upgara upgara = new Upgara();
-                upgara.setCurrency("USD");
-                upgara.setMembertype_id("2");
-                payment(upgara);
-
-               /* String BASE_URL = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(BASE_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                UserService userService = retrofit.create(UserService.class);
-
-                String member = "tweer";
-                Upgara upgara = new Upgara();
-                upgara.setMembertype_id(member);
-                upgara.setCurrency("USD");
-                Call<UpgradeMembershipResponse> upgradeMembershipResponse = userService.upgr(upgara, token);
-
-                upgradeMembershipResponse.enqueue(new Callback<UpgradeMembershipResponse>() {
-                    @Override
-                    public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
-                        if(!response.isSuccessful()){
-                            Log.d("Error code",response.body().getGetClientSecret());
-                            Log.d("Error ", "There was an error ");
-                            return;
-                        }
-
-                        Log.d("Client secret",response.body().getGetClientSecret());
-                    }
-
-                    @Override
-                    public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
-
-                        Log.d("Failure",t.getMessage());
-                    }
-                });*/
-                //confirmPayment();
-           /* }
-             public void payment (Upgara upgara){
-
-                userService = new ApiClient().getService();
-                Call<UpgradeMembershipResponse> upgradeMembershipResponseCall = userService.upgr(upgara,"Bearer " +token);
-                upgradeMembershipResponseCall.enqueue(new Callback<UpgradeMembershipResponse>() {
-                    @Override
-                    public void onResponse(Call<UpgradeMembershipResponse> call, Response<UpgradeMembershipResponse> response) {
-                        if(!response.isSuccessful()){
-                            Log.d("Error code",response.body().getClientSecret());
-                            Log.d("Error ", "There was an error ");
-                            return;
-                        }
-
-                        Log.d("Client secret",response.body().getClientSecret());
-                    }
-
-                    @Override
-                    public void onFailure(Call<UpgradeMembershipResponse> call, Throwable t) {
-
-                        Log.d("Failure",t.getMessage());
-                    }
-                });
-
-
-              /*  ephemeralCall.enqueue(new Callback<Ephemeral>() {
-                    @Override
-                    public void onResponse(Call<Ephemeral> call, Response<Ephemeral> response) {
-                        if (!response.isSuccessful()) {
-                            Log.d("Err", "" + response.body());
-
-
-                            Log.d("Error", "An error occured");
-
-                            return;
-                        }
-
-
-                        Ephemeral eph = response.body();
-
-                        ephemeralKeyUpdateListener.onKeyUpdate(new Gson().toJson(eph).toString());
-                        String jzon = new Gson().toJson(eph);
-                        Log.d("Anything", jzon);
-                        Log.d("connection", "Connection succesful");
-                        Ephemeral ephemeral = response.body();
-                        Log.d("EphemeralString", ephemeral.getEphemeralString());
-
-                        //Toast.makeText(ExampleEphemeralKeyProvider.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Ephemeral> call, Throwable t) {
-
-                        String message = "An error occured please try again";
-                        t.printStackTrace();
-                        Log.d("MYWORLD", "" + t.getMessage());
-
-                    }
-              //  });*/
-         //   }
-       // });
-
-
-
-
-        /*if(!(clientSecret.isEmpty()) && !(selectedPaymentMethod.isEmpty())){
-
-            linearLayoutFive.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    confirmPayment(clientSecret,selectedPaymentMethod);
-                }
-            });
-        }*/
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;

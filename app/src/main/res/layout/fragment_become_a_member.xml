@@ -131,21 +131,18 @@
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView29"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView32"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView33"
                             android:layout_width="match_parent"
@@ -261,21 +258,18 @@
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView35fourtin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView36fourtin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView37fourtin"
                             android:layout_width="match_parent"
@@ -388,21 +382,18 @@
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView39twe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView40twe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FDFDFD" />
-
                         <TextView
                             android:id="@+id/textView41twe"
                             android:layout_width="match_parent"
@@ -511,21 +502,18 @@
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView43hun"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView44hun"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#FFFFFF" />
-
                         <TextView
                             android:id="@+id/textView45hun"
                             android:layout_width="match_parent"
@@ -553,24 +541,20 @@
             android:gravity="center"
             android:orientation="horizontal"
             app:cardElevation="10dp">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-
                 <CheckBox
                     android:id="@+id/radioButtonone"
                     android:layout_width="30dp"
                     android:layout_height="41dp"
                     android:layout_marginStart="24dp"
-
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/view7"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/textViewone"
                     android:layout_width="wrap_content"
@@ -582,7 +566,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/radioButtonone"
                     app:layout_constraintStart_toEndOf="@+id/radioButtonone"
                     app:layout_constraintTop_toTopOf="@+id/radioButtonone" />
-
                 <TextView
                     android:id="@+id/textViewtwo"
                     android:layout_width="wrap_content"
@@ -593,7 +576,6 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textViewone"
                     app:layout_constraintTop_toTopOf="@+id/textViewone" />
-
                 <TextView
                     android:id="@+id/textViewthree"
                     android:layout_width="wrap_content"
@@ -607,7 +589,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/view7"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <View
                     android:id="@+id/view7"
                     android:layout_width="0dp"
@@ -620,7 +601,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/layoutplan"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
-
                 <LinearLayout
                     android:id="@+id/layoutplan"
                     android:layout_width="100dp"
@@ -631,40 +611,32 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
-
                     <TextView
                         android:id="@+id/textView28"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView29"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView32"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView33"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                 </LinearLayout>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.card.MaterialCardView>-->
 
 
@@ -681,11 +653,9 @@
             android:checkable="true"
             app:cardElevation="4dp"
             android:layout_marginTop="10dp">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <CheckBox
                     android:id="@+id/radioButtontwo"
                     android:layout_width="30dp"
@@ -696,7 +666,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/view8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/textViewfour"
                     android:layout_width="wrap_content"
@@ -708,7 +677,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/radioButtontwo"
                     app:layout_constraintStart_toEndOf="@+id/radioButtontwo"
                     app:layout_constraintTop_toTopOf="@+id/radioButtontwo" />
-
                 <TextView
                     android:id="@+id/textViewfive"
                     android:layout_width="wrap_content"
@@ -719,7 +687,6 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textViewfour"
                     app:layout_constraintTop_toTopOf="@+id/textViewfour" />
-
                 <TextView
                     android:id="@+id/textViewsix"
                     android:layout_width="wrap_content"
@@ -733,8 +700,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/view8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-
                 <View
                     android:id="@+id/view8"
                     android:layout_width="0dp"
@@ -748,8 +713,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent" />
-
-
                 <LinearLayout
                     android:id="@+id/layoutplantwo"
                     android:layout_width="100dp"
@@ -760,29 +723,24 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
-
-
                     <TextView
                         android:id="@+id/textView34fourtin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView35fourtin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView36fourtin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView37fourtin"
                         android:layout_width="match_parent"
@@ -790,10 +748,7 @@
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.card.MaterialCardView>-->
 
 
@@ -809,11 +764,9 @@
             android:gravity="center"
             android:orientation="horizontal"
             app:cardElevation="4dp">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <CheckBox
                     android:id="@+id/radioButtonthree"
                     android:layout_width="30dp"
@@ -824,7 +777,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/view9"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/textViewseven"
                     android:layout_width="wrap_content"
@@ -836,7 +788,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/radioButtonthree"
                     app:layout_constraintStart_toEndOf="@+id/radioButtonthree"
                     app:layout_constraintTop_toTopOf="@+id/radioButtonthree" />
-
                 <TextView
                     android:id="@+id/textVieweight"
                     android:layout_width="wrap_content"
@@ -847,7 +798,6 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textViewseven"
                     app:layout_constraintTop_toTopOf="@+id/textViewseven" />
-
                 <TextView
                     android:id="@+id/textViewnine"
                     android:layout_width="wrap_content"
@@ -861,8 +811,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/view9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-
                 <View
                     android:id="@+id/view9"
                     android:layout_width="0dp"
@@ -876,7 +824,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent" />
-
                 <LinearLayout
                     android:id="@+id/layoutplanthree"
                     android:layout_width="100dp"
@@ -887,29 +834,24 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
-
-
                     <TextView
                         android:id="@+id/textView38twe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView39twe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView40twe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FDFDFD" />
-
                     <TextView
                         android:id="@+id/textView41twe"
                         android:layout_width="match_parent"
@@ -917,9 +859,7 @@
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.card.MaterialCardView>-->
 
 
@@ -929,18 +869,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginTop="10dp"
-
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:orientation="horizontal"
             app:cardElevation="4dp">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <CheckBox
                     android:id="@+id/radioButton2"
                     android:layout_width="30dp"
@@ -951,7 +888,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/view11"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
@@ -964,7 +900,6 @@
                     app:layout_constraintStart_toEndOf="@+id/radioButton2"
                     app:layout_constraintTop_toTopOf="@+id/radioButton2"
                     app:layout_constraintVertical_bias="1.0" />
-
                 <TextView
                     android:id="@+id/textView21"
                     android:layout_width="wrap_content"
@@ -975,7 +910,6 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textView19"
                     app:layout_constraintTop_toTopOf="@+id/textView19" />
-
                 <TextView
                     android:id="@+id/textView20"
                     android:layout_width="wrap_content"
@@ -989,7 +923,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/view11"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <View
                     android:id="@+id/view11"
                     android:layout_width="0dp"
@@ -1000,7 +933,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/layoutplanfour"
                     app:layout_constraintEnd_toEndOf="@+id/textView20"
                     app:layout_constraintStart_toStartOf="@+id/radioButton2" />
-
                 <LinearLayout
                     android:id="@+id/layoutplanfour"
                     android:layout_width="100dp"
@@ -1011,29 +943,24 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView20"
                     app:layout_constraintStart_toStartOf="@+id/radioButton2">
-
-
                     <TextView
                         android:id="@+id/textView42hun"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView43hun"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView44hun"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
-
                     <TextView
                         android:id="@+id/textView45hun"
                         android:layout_width="match_parent"
@@ -1041,9 +968,7 @@
                         android:text="TextView"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.card.MaterialCardView>-->
 
 
@@ -1052,24 +977,22 @@
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/price_drawable"
-
             android:orientation="vertical">
-
-
         </LinearLayout>-->
 
         <Button
             android:id="@+id/button7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SELECT CARD" />
+            android:layout_margin="10dp"
+            android:text="Select Payment Method" />
 
         <LinearLayout
             android:id="@+id/purchase"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="10dp"
             android:layout_marginTop="20dp"
+            android:layout_margin="10dp"
             android:background="@drawable/sectiontabsactive2"
             android:gravity="center"
             android:orientation="horizontal">
@@ -1098,14 +1021,15 @@
     </LinearLayout>
 
 
+
+
+
 </ScrollView>
     <!--<LinearLayout
         android:id="@+id/material"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -1119,7 +1043,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
@@ -1131,7 +1054,6 @@
                 app:layout_constraintStart_toEndOf="@+id/radioButton"
                 app:layout_constraintTop_toTopOf="@+id/radioButton"
                 app:lineHeight="50sp" />
-
             <TextView
                 android:id="@+id/textView20"
                 android:layout_width="wrap_content"
@@ -1143,7 +1065,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView19"
                 app:layout_constraintTop_toTopOf="@+id/textView19" />
-
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
@@ -1156,7 +1077,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="33dp"
@@ -1167,8 +1087,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-
     <LinearLayout
         android:id="@+id/materialone"
         android:layout_width="match_parent"
@@ -1176,12 +1094,9 @@
         android:background="@drawable/price_box_bg"
         android:layout_marginTop="20dp"
         >
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <TextView
                 android:id="@+id/textView19one"
                 android:layout_width="wrap_content"
@@ -1193,7 +1108,6 @@
                 app:lineHeight="50sp"
                 tools:layout_editor_absoluteX="94dp"
                 tools:layout_editor_absoluteY="15dp" />
-
             <TextView
                 android:id="@+id/textView20one"
                 android:layout_width="wrap_content"
@@ -1205,7 +1119,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView19one"
                 app:layout_constraintTop_toTopOf="@+id/textView19one" />
-
             <TextView
                 android:id="@+id/textView21one"
                 android:layout_width="wrap_content"
@@ -1218,7 +1131,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="wrap_content"
@@ -1230,21 +1142,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialtwo"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         app:cardElevation="5dp">
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-
             <ImageButton
                 android:id="@+id/imageButtontwo"
                 android:layout_width="70dp"
@@ -1255,7 +1161,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/textView19two"
                 android:layout_width="wrap_content"
@@ -1269,7 +1174,6 @@
                 app:layout_constraintStart_toEndOf="@+id/imageButtontwo"
                 app:layout_constraintTop_toTopOf="@+id/imageButtontwo"
                 app:lineHeight="50sp" />
-
             <TextView
                 android:id="@+id/textView20two"
                 android:layout_width="wrap_content"
@@ -1282,7 +1186,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView19two"
                 app:layout_constraintTop_toTopOf="@+id/textView19two" />
-
             <TextView
                 android:id="@+id/textView21two"
                 android:layout_width="wrap_content"
@@ -1295,7 +1198,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="wrap_content"
@@ -1307,20 +1209,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialthree"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         app:cardElevation="5dp">
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <ImageButton
                 android:id="@+id/imageButtonthree"
                 android:layout_width="70dp"
@@ -1331,7 +1228,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/textView19three"
                 android:layout_width="wrap_content"
@@ -1345,7 +1241,6 @@
                 app:layout_constraintStart_toEndOf="@+id/imageButtonthree"
                 app:layout_constraintTop_toTopOf="@+id/imageButtonthree"
                 app:lineHeight="50sp" />
-
             <TextView
                 android:id="@+id/textView20three"
                 android:layout_width="wrap_content"
@@ -1358,7 +1253,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView19three"
                 app:layout_constraintTop_toTopOf="@+id/textView19three" />
-
             <TextView
                 android:id="@+id/textView21three"
                 android:layout_width="wrap_content"
@@ -1371,7 +1265,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="wrap_content"
@@ -1383,8 +1276,3 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView> -->
-
-
-
-
-

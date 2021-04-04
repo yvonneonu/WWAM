@@ -25,7 +25,6 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 

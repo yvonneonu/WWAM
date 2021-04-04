@@ -147,6 +147,7 @@ public class SignUp extends AppCompatActivity {
                    // intent.putExtra("profilepics", imageUri);
                     finish();
                 } else {
+                    Toast.makeText(SignUp.this,response.body().getMessage(),Toast.LENGTH_LONG).show();
                    // response.body();
                    // Toast.makeText(SignUp.this, (CharSequence) response.body(), Toast.LENGTH_LONG).show();
                     //response.errorBody();
