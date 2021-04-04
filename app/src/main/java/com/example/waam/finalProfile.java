@@ -184,7 +184,7 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count7++;
-                if (count7 > 1)
+                if (count7 > 1);
             }
 
             @Override
