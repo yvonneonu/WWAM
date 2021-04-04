@@ -1,7 +1,5 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -12,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -153,7 +153,7 @@ public class Verfy2 extends AppCompatActivity {
                     // finish();
 
                 } else {
-                    //response.errorBody();
+                    response.body();
                     // String message = "An error occured please try again";
                     //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
                 }
@@ -189,6 +189,7 @@ public class Verfy2 extends AppCompatActivity {
                 //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
                 finish();
             } else {
+                response.body();
                 //response.errorBody();
                 // String message = "An error occured please try again";
                 //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
@@ -198,8 +199,8 @@ public class Verfy2 extends AppCompatActivity {
 
         @Override
         public void onFailure(Call<Myotpresponse> call, Throwable t) {
-            String message = t.getLocalizedMessage();
-            Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
+           // String message = t.getLocalizedMessage();
+            Toast.makeText(Verfy2.this, t.getMessage(), Toast.LENGTH_LONG).show();
         }
 
     });

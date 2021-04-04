@@ -147,7 +147,11 @@ public class SignUp extends AppCompatActivity {
                    // intent.putExtra("profilepics", imageUri);
                     finish();
                 } else {
+                   // response.body();
+                   // Toast.makeText(SignUp.this, (CharSequence) response.body(), Toast.LENGTH_LONG).show();
                     //response.errorBody();
+                   // response.errorBody();
+
                    // String message = "An error occured please try again";
                     //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
                 }
@@ -155,8 +159,8 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+              //  String message = t.getLocalizedMessage();
+                Toast.makeText(SignUp.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

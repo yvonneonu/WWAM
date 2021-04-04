@@ -115,8 +115,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
 
-                String message = t.getLocalizedMessage();
-                Toast.makeText(Login.this,message,Toast.LENGTH_LONG).show();
+                //String message = t.getLocalizedMessage();
+                Toast.makeText(Login.this, t.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });
