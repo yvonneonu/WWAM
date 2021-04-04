@@ -31,22 +31,21 @@
                 android:id="@+id/imageView12"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginTop="32dp"
                 android:src="@drawable/profileimg"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.088" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:gravity="center"
                 android:text="Name"
                 app:layout_constraintEnd_toEndOf="@+id/imageView12"
-                app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="@+id/imageView12"
                 app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
@@ -54,7 +53,8 @@
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
                 android:text="location"
                 app:layout_constraintEnd_toEndOf="@+id/textView19"
                 app:layout_constraintHorizontal_bias="0.538"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="What I'm Looking For"
+                android:text="More Details About Me"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -95,8 +95,7 @@
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="24dp"
                         android:src="@drawable/aboutmeiconcareer"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.019"
+                        app:layout_constraintBottom_toTopOf="@+id/view"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,31 +103,29 @@
                         android:id="@+id/textView26"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Career"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.038"
                         app:layout_constraintStart_toEndOf="@+id/imageView11"
                         app:layout_constraintTop_toTopOf="@+id/imageView11"
                         app:layout_constraintVertical_bias="0.6" />
 
                     <Spinner
+                        android:id="@+id/carer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView26"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.792"
-                        app:layout_constraintStart_toEndOf="@+id/textView26"
                         app:layout_constraintTop_toTopOf="@+id/textView26"
                         app:layout_constraintVertical_bias="0.8" />
 
                     <View
                         android:id="@+id/view"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView11"
@@ -146,35 +143,31 @@
                         app:layout_constraintTop_toBottomOf="@+id/view" />
 
                     <TextView
-                        android:id="@+id/edutextView"
+                        android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Education"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.039"
-                        app:layout_constraintStart_toEndOf="@+id/imageView11"
-                        app:layout_constraintTop_toTopOf="@+id/imageView"
-                        app:layout_constraintVertical_bias="1.0" />
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
                     <Spinner
-                        android:id="@+id/educatespinner"
+                        android:id="@+id/one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="end"
                         app:layout_constraintBottom_toBottomOf="@+id/textView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.774"
-                        app:layout_constraintStart_toEndOf="@+id/textView"
+                        app:layout_constraintEnd_toEndOf="@+id/carer"
                         app:layout_constraintTop_toTopOf="@+id/textView"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view1"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView"
@@ -187,8 +180,6 @@
                         android:layout_height="20dp"
                         android:layout_marginTop="12dp"
                         android:src="@drawable/aboutmeiconheight"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/imageView"
                         app:layout_constraintTop_toBottomOf="@+id/view1" />
 
@@ -196,34 +187,29 @@
                         android:id="@+id/textView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Height"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.043"
-                        app:layout_constraintStart_toEndOf="@+id/imageView11"
-                        app:layout_constraintTop_toTopOf="@+id/imageView1"
-                        app:layout_constraintVertical_bias="1.0" />
+                        app:layout_constraintStart_toEndOf="@+id/imageView1"
+                        app:layout_constraintTop_toTopOf="@+id/imageView1" />
 
                     <View
                         android:id="@+id/view2"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="42dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/view1"
                         app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
                     <Spinner
+                        android:id="@+id/spin3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.788"
-                        app:layout_constraintStart_toEndOf="@+id/textView1"
+                        app:layout_constraintEnd_toEndOf="@+id/one"
                         app:layout_constraintTop_toTopOf="@+id/textView1"
                         app:layout_constraintVertical_bias="0.0" />
 
@@ -233,8 +219,6 @@
                         android:layout_height="20dp"
                         android:layout_marginTop="12dp"
                         android:src="@drawable/aboutmeiconbodytype"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/imageView1"
                         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
@@ -242,31 +226,29 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Body Type"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.039"
                         app:layout_constraintStart_toEndOf="@+id/imageView2"
                         app:layout_constraintTop_toTopOf="@+id/imageView2"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <Spinner
+                        android:id="@+id/spinnN"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView2"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.77"
-                        app:layout_constraintStart_toEndOf="@+id/textView2"
                         app:layout_constraintTop_toTopOf="@+id/textView2"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view3"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView2"
@@ -287,31 +269,28 @@
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Ethnicity"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.037"
                         app:layout_constraintStart_toEndOf="@+id/imageView3"
                         app:layout_constraintTop_toTopOf="@+id/imageView3"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <Spinner
+                        android:id="@+id/ethnic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView3"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.783"
-                        app:layout_constraintStart_toEndOf="@+id/textView3"
-                        app:layout_constraintTop_toTopOf="@+id/textView3"
-                        app:layout_constraintVertical_bias="1.0" />
+                        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
                     <View
                         android:id="@+id/view4"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView3"
@@ -332,31 +311,28 @@
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Faith"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.035"
                         app:layout_constraintStart_toEndOf="@+id/imageView4"
                         app:layout_constraintTop_toTopOf="@+id/imageView4"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <Spinner
+                        android:id="@+id/faith"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="@+id/textView4"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.802"
-                        app:layout_constraintStart_toEndOf="@+id/textView4"
+                        app:layout_constraintEnd_toEndOf="@+id/ethnic"
                         app:layout_constraintTop_toTopOf="@+id/textView4"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view5"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView4"
@@ -377,31 +353,29 @@
                         android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Politics"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView13"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.036"
                         app:layout_constraintStart_toEndOf="@+id/imageView13"
                         app:layout_constraintTop_toTopOf="@+id/imageView13"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <Spinner
+                        android:id="@+id/politic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView5"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.789"
-                        app:layout_constraintStart_toEndOf="@+id/textView5"
                         app:layout_constraintTop_toTopOf="@+id/textView5"
                         app:layout_constraintVertical_bias="0.8" />
 
                     <View
                         android:id="@+id/view7"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView13"
@@ -422,31 +396,29 @@
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Do you have children?"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView14"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.052"
                         app:layout_constraintStart_toEndOf="@+id/imageView14"
                         app:layout_constraintTop_toTopOf="@+id/imageView14"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <Spinner
+                        android:id="@+id/children"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView6"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.668"
-                        app:layout_constraintStart_toEndOf="@+id/textView6"
                         app:layout_constraintTop_toTopOf="@+id/textView6"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view9"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView14"
@@ -468,31 +440,29 @@
                         android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:hint="Do you smoke?"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.052"
                         app:layout_constraintStart_toEndOf="@+id/imageView15"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView14"
+                        app:layout_constraintTop_toTopOf="@+id/imageView15"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <Spinner
+                        android:id="@+id/smoke"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView7"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.734"
-                        app:layout_constraintStart_toEndOf="@+id/textView7"
                         app:layout_constraintTop_toTopOf="@+id/textView7"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view10"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView15"
@@ -523,21 +493,21 @@
                         app:layout_constraintVertical_bias="0.0" />
 
                     <Spinner
+                        android:id="@+id/drink"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView8"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.751"
-                        app:layout_constraintStart_toEndOf="@+id/textView8"
                         app:layout_constraintTop_toTopOf="@+id/textView8"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view12"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView16"
@@ -568,21 +538,21 @@
                         app:layout_constraintVertical_bias="1.0" />
 
                     <Spinner
+                        android:id="@+id/salary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView9"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.793"
-                        app:layout_constraintStart_toEndOf="@+id/textView9"
                         app:layout_constraintTop_toTopOf="@+id/textView9"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <View
                         android:id="@+id/view13"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="52dp"
+                        android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView16"
@@ -612,7 +582,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view13" />
+                        app:layout_constraintTop_toBottomOf="@+id/view13"
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

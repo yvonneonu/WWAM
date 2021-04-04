@@ -205,6 +205,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
                     <Spinner
+                        android:id="@+id/spin3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="@+id/textView1"
@@ -492,6 +493,7 @@
                         app:layout_constraintVertical_bias="0.0" />
 
                     <Spinner
+                        android:id="@+id/drink"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
@@ -536,6 +538,7 @@
                         app:layout_constraintVertical_bias="1.0" />
 
                     <Spinner
+                        android:id="@+id/salary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
