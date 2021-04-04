@@ -1,5 +1,7 @@
 package com.example.waam;
 
+import java.util.List;
+
 public class RegisterResponse {
 
     private int id;
@@ -12,12 +14,14 @@ public class RegisterResponse {
     private String password;
     private String password_confirmation ;
     private String token;
+    private List<String> errors;
 
-    public String getMessage() {
-        return message;
+
+    public List<String> getMessage() {
+        return errors;
     }
 
-    private String message;
+
 
     public RegisterResponse(int id, String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password, String password_confirmation, String token) {
         this.id = id;

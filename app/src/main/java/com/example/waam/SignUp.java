@@ -24,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.gson.Gson;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -140,14 +142,21 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(SignUp.this, Verification1.class);
-                    intent.putExtra("token", response.body().getToken());
+                    //.putExtra("token", response.body().getToken());
                     intent.putExtra("name", name.getText().toString());
                     startActivity(intent);
                    // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                    // intent.putExtra("profilepics", imageUri);
                     finish();
                 } else {
-                    Toast.makeText(SignUp.this,response.body().getMessage(),Toast.LENGTH_LONG).show();
+                    if(response.errorBody() != null){
+                       Gson gson = new Gson();
+                       String gsonToString = gson.toJson(response.errorBody());
+                       Log.d("Gson",gsonToString);
+                    }
+
+
+
                    // response.body();
                    // Toast.makeText(SignUp.this, (CharSequence) response.body(), Toast.LENGTH_LONG).show();
                     //response.errorBody();
