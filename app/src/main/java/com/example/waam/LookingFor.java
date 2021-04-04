@@ -40,7 +40,7 @@ public class LookingFor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_final_profile);
+        setContentView(R.layout.activity_looking_for);
 
 
         String imageUri = getIntent().getStringExtra("images");

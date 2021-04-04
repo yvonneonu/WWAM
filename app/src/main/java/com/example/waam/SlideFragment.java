@@ -60,6 +60,7 @@ public class SlideFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+
                // initListener();
             }
         });
