@@ -13,11 +13,20 @@ public class RegisterResponse {
     private String password_confirmation ;
     private String token;
 
-    public String getMessage() {
-        return message;
+
+    public RegisterResponse(String errors) {
+        this.errors = errors;
     }
 
-    private String message;
+    public String getErrors() {
+        return errors;
+    }
+
+    public void setErrors(String errors) {
+        this.errors = errors;
+    }
+
+    private String errors;
 
     public RegisterResponse(int id, String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password, String password_confirmation, String token) {
         this.id = id;

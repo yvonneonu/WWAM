@@ -248,11 +248,11 @@ public class LookingFor extends AppCompatActivity {
 
                 }else{
                     Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
-                    if (imageUri != null) {
+                   // if (imageUri != null) {
                         intent.putExtra("images", imageUri);
                         intent.putExtra("toking",token);
                         startActivity(intent);
-                    }
+                    //}
                 }
             }
         });

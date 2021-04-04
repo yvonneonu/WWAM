@@ -154,6 +154,9 @@ public class Verfy2 extends AppCompatActivity {
 
                 } else {
                     response.body();
+                    String message = "Invalid OTP given";
+                    Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
+
                     // String message = "An error occured please try again";
                     //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
                 }
@@ -161,6 +164,9 @@ public class Verfy2 extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Resendotpresponse> call, Throwable t) {
+                String message = "Invalid OTP given";
+                t.printStackTrace();
+                Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
 
             }
         });

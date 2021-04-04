@@ -105,13 +105,13 @@ public class Verification1 extends AppCompatActivity {
                   // token = response.body().getMessage();
 
                } else {
-                   String message = "An error occured please try again";
+                   String message = "The number  is unverified";
                    Toast.makeText(Verification1.this, message, Toast.LENGTH_LONG).show();
                }
            }
            @Override
            public void onFailure(Call<otpResponse> call, Throwable t) {
-               String message = "An error occured please try again";
+               String message = "The number  is unverified";
                t.printStackTrace();
                Toast.makeText(Verification1.this, message, Toast.LENGTH_LONG).show();
            }
