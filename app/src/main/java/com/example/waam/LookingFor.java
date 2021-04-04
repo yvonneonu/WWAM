@@ -43,7 +43,7 @@ public class LookingFor extends AppCompatActivity {
         setContentView(R.layout.activity_final_profile);
 
 
-        String imageUri = getIntent().getStringExtra("image");
+        String imageUri = getIntent().getStringExtra("images");
         image = findViewById(R.id.imageView12);
         if (imageUri != null) {
             Glide.with(this)

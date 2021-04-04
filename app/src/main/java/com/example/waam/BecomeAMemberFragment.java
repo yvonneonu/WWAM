@@ -137,7 +137,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 getActivity().getApplicationContext(),
                 Objects.requireNonNull(getString(R.string.publishablekey)));
 
-        token = getActivity().getIntent().getStringExtra("toks");
+        token = getActivity().getIntent().getStringExtra("toking");
         setUpPayment();
 
 

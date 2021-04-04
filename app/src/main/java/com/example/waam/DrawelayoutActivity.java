@@ -24,6 +24,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         setContentView(R.layout.activity_drawelayout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        String token = getIntent().getStringExtra("toking");
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
