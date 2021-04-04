@@ -35,7 +35,7 @@ public class finalProfile extends AppCompatActivity {
     private int count8;
     private int count9;
     private int count10;
-    Spinner spinner, careerSpin;
+    Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +59,12 @@ public class finalProfile extends AppCompatActivity {
         careerText = findViewById(R.id.textView26);
         spinner = findViewById(R.id.one);
         careerSpin = findViewById(R.id.carer);
-        Spinner body = findViewById(R.id.spinnN);
-        Spinner ethni = findViewById(R.id.ethnic);
-        Spinner fait = findViewById(R.id.faith);
-        Spinner polit = findViewById(R.id.politic);
-        Spinner childre = findViewById(R.id.children);
+        body = findViewById(R.id.spinnN);
+        ethni = findViewById(R.id.ethnic);
+        fait = findViewById(R.id.faith);
+        polit = findViewById(R.id.politic);
+        childre = findViewById(R.id.children);
+        smok = findViewById(R.id.smoke);
 
         String token = getIntent().getStringExtra("everytoken");
         //String toks = getIntent().getStringExtra("token");
@@ -179,6 +180,18 @@ public class finalProfile extends AppCompatActivity {
             }
         });
 
+        smok.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count7++;
+                if (count7 > 1)
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         swipe = findViewById(R.id.textView34);
         swipe.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +279,7 @@ public class finalProfile extends AppCompatActivity {
         FetchSpinnerValues.getSpinnerValues().fetchSmoke(userSmoke ->  {
             ArrayAdapter<String> userSmokeAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSmoke);
             userSmokeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            childre.setAdapter(userSmokeAdapter);
+            smok.setAdapter(userSmokeAdapter);
             spinn = childre.getSelectedItem().toString();
         }, token);
 
