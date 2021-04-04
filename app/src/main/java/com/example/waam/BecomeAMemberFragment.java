@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -735,6 +736,34 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         builder.setPositiveButton("Ok", null);
         builder.create().show();
     }
+    private void addToParent(LinearLayout linearLayouting){
 
 
-}
+        String[] StringFeatures = new String[]{"Bullet point one","Bullet point two","Bullet point three","Bullet point four"};
+        for (String stringFeature : StringFeatures) {
+            LinearLayout linearLayout = new LinearLayout(getActivity());
+           LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            linearLayout.setLayoutParams(params);
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            TextView textView = new TextView(getActivity());
+            textView.setTextSize(15);
+            ImageView button = new ImageView(getActivity());
+           LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            imageParams.setMarginEnd(20);
+            imageParams.bottomMargin = 10;
+            button.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.circles));
+            button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            button.setLayoutParams(imageParams);
+           // textView.setText(stringFeature);
+            textView.setTextColor(getActivity().getResources().getColor(R.color.white));
+            linearLayout.addView(button);
+            linearLayout.addView(textView);
+            linearLayouting.addView(linearLayout);
+
+        }
+
+    }
+
+
+
+//}

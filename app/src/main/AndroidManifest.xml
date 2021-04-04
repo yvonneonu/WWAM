@@ -42,8 +42,16 @@
         <activity android:name=".CompleteProfile"></activity>
         <activity android:name=".LocationDetectActivity"></activity>
         <activity android:name=".Profile"></activity>
-        <activity android:name=".DrawelayoutActivity"></activity>
-        <activity android:name=".PaymentPage" />
+        <activity android:name=".DrawelayoutActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PaymentPage" >
+
+        </activity>
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2"></activity>
 
@@ -59,11 +67,7 @@
         </activity>
         <activity android:name=".Interest"></activity>
         <activity android:name=".ViewPager">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider
