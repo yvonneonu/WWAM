@@ -49,6 +49,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         Log.d("TAG","not null");
+
         switch (item.getItemId()){
             case R.id.membership:
                 fragment = new BecomeAMemberFragment();

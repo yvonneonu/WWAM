@@ -78,6 +78,9 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         getaway = view.findViewById(R.id.button10);
 
         event.setOnClickListener(this);
+        dateIdeas.setOnClickListener(this);
+        getaway.setOnClickListener(this);
+
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Explore");
