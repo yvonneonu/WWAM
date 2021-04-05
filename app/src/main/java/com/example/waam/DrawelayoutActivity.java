@@ -52,7 +52,6 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         switch (item.getItemId()){
             case R.id.membership:
                 fragment = new BecomeAMemberFragment();
-
                 break;
 
             case R.id.explore:

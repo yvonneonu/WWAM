@@ -4,10 +4,13 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.Objects;
 
@@ -16,12 +19,14 @@ import java.util.Objects;
  * Use the {@link ExploreFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExploreFragment extends Fragment {
+public class ExploreFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Button event, dateIdeas, getaway;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -56,6 +61,11 @@ public class ExploreFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        Fragment fragment = new BecomeAMemberFragment();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.frcontainer,fragment);
+        ft.commit();
     }
 
     @Override
@@ -63,9 +73,38 @@ public class ExploreFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
+        event = view.findViewById(R.id.button8);
+        dateIdeas = view.findViewById(R.id.button9);
+        getaway = view.findViewById(R.id.button10);
+
+        event.setOnClickListener(this);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Explore");
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Fragment fragment = null;
+        switch (v.getId()){
+            case R.id.button8:
+                fragment = new EventFragment();
+
+                break;
+            case R.id.button9:
+                fragment = new DateIdeasFragment();
+                break;
+            case R.id.button10:
+                fragment = new GetaAwayFragment();
+                break;
+        }
+
+        if(fragment != null){
+            Log.d("TAG","not null");
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentcontainer,fragment);
+            ft.commit();
+        }
     }
 }
