@@ -1,7 +1,9 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -78,4 +80,9 @@ public class DiscoverEvent extends AppCompatActivity {
             mCurrentFragment = mFragments.get(position);
 //            mTvTitle.setText(mManagerNames.get(position));
         }
+
+    public void backtologin(View view) {
+        Intent intent = new Intent(DiscoverEvent.this, DiscoverFragment.class);
+        startActivity(intent);
     }
+}

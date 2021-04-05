@@ -1,48 +1,49 @@
 package com.example.waam;
 
 public class SlideBean {
+
+
     private int mItemBg;
     private String mTitle;
-    private int mUserIcon;
+    private String mUserIcon;
     private String mUserSay;
 
-    public SlideBean(int mItemBg, String mTitle, int mUserIcon, String mUserSay) {
+    public SlideBean(int mItemBg, String mTitle, String mUserIcon, String mUserSay) {
         this.mItemBg = mItemBg;
         this.mTitle = mTitle;
         this.mUserIcon = mUserIcon;
         this.mUserSay = mUserSay;
     }
 
-    public int getItemBg() {
+    public int getmItemBg() {
         return mItemBg;
     }
 
-    public void setItemBg(int mItemBg) {
+    public void setmItemBg(int mItemBg) {
         this.mItemBg = mItemBg;
     }
 
-    public String getTitle() {
+    public String getmTitle() {
         return mTitle;
     }
 
-    public void setTitle(String mTitle) {
+    public void setmTitle(String mTitle) {
         this.mTitle = mTitle;
     }
 
-    public int getUserIcon() {
+    public String getmUserIcon() {
         return mUserIcon;
     }
 
-    public void setUserIcon(int mUserIcon) {
+    public void setmUserIcon(String mUserIcon) {
         this.mUserIcon = mUserIcon;
     }
 
-    public String getUserSay() {
+    public String getmUserSay() {
         return mUserSay;
     }
 
-    public void setUserSay(String mUserSay) {
+    public void setmUserSay(String mUserSay) {
         this.mUserSay = mUserSay;
     }
 }
-

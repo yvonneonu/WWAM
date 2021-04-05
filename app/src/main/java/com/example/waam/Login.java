@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity {
                    Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
                     //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
                     //Intent intent = new Intent(Login.this,finalProfile.class);
-                    intent.putExtra("token",loginToken);
+                    intent.putExtra("toking",loginToken);
                     startActivity(intent);
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
                     finish();
@@ -109,6 +109,7 @@ public class Login extends AppCompatActivity {
                 }else {
                     String message = "An error occured please try again";
                     Toast.makeText(Login.this,message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(Login.this,"Email or Password mismatch!", Toast.LENGTH_LONG).show();
                 }
             }
 

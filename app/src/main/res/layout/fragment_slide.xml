@@ -8,31 +8,31 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="470dp"
         />
-
     <ImageView
         android:id="@+id/deny"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="490dp"
         android:scaleType="centerCrop"
         android:src="@drawable/deny" />
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="170dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="490dp"
         android:scaleType="centerCrop"
         android:src="@drawable/view" />
 
     <ImageView
+        android:id="@+id/allow"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="270dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="490dp"
         android:scaleType="centerCrop"
         android:src="@drawable/like" />
 

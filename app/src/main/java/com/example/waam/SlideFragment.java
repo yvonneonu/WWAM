@@ -1,6 +1,7 @@
 package com.example.waam;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ public class SlideFragment extends Fragment {
     private static final String TAG = "SlideFragment";
     private RecyclerView mRecyclerView;
    // private SmileView mSmileView;
-    private ImageView deny;
+   // private ImageView deny;
     private SlideLayoutManager mSlideLayoutManager;
     private ItemTouchHelper mItemTouchHelper;
     private ItemTouchHelperCallback mItemTouchHelperCallback;
@@ -38,7 +39,6 @@ public class SlideFragment extends Fragment {
     private  List<SlideBean> mList = new ArrayList<>();
     private int mLikeCount = 50;
     private int mDislikeCount = 50;
-
 
 
     @Nullable
@@ -54,7 +54,15 @@ public class SlideFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         //mSmileView = rootView.findViewById(R.id.smile_view);
 
-        deny = rootView.findViewById(R.id.deny);
+        ImageView deny = rootView.findViewById(R.id.deny);
+        deny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DiscoverFragment.class);
+                startActivity(intent);
+            }
+        });
+       /* deny = rootView.findViewById(R.id.deny);
 
         deny.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +71,7 @@ public class SlideFragment extends Fragment {
 
                // initListener();
             }
-        });
+        });*/
 
         //deny.seLike(mLikeCount);
         //mSmileView.setLike(mLikeCount);
@@ -115,25 +123,25 @@ public class SlideFragment extends Fragment {
      * 向集合中添加数据
      */
     private void addData(){
-        int[] icons = {R.drawable.eventcardimg, R.drawable.nightclubsdancing, R.drawable.coffeeconversation,
-                R.drawable.diningout, R.drawable.eventcardimg, R.drawable.diningout};
-        String[] titles = {"Acknowledging", "Belief", "Confidence", "Dreaming", "Happiness", "Confidence"};
+        String[] icons = {"$389","$337", "$675","$389","$389","$389", "$389"};
+
+        String[] titles = {"Tours with Chamber Access", "Belief Tours with Chamber Access", "Tours with Chamber Access", "DreamingTours with Chamber Access", "Tours with Chamber Access", "Confidence Tours with Chamber Access"};
         String[] says = {
-                "Do one thing at a time, and do well.",
+                "Vega to GC West Rim Helicopter",
                 "Keep on going never give up.",
-                "Whatever is worth doing is worth doing well.",
+                "Vega to GC West Rim Helicopter Tours with Chamber Access",
                 "I can because i think i can.",
-                "Jack of all trades and master of none.",
+                "Vega to GC West Rim Helicopter Tours with Chamber Access",
                 "Keep on going never give up.",
                 "Whatever is worth doing is worth doing well.",
         };
-        int[] bgs = {
+        int[] bgs = {R.drawable.diningout,
                 R.drawable.eventcardimg,
                 R.drawable.nightclubsdancing,
+                R.drawable.travel,
                 R.drawable.coffeeconversation,
                 R.drawable.diningout,
-                R.drawable.eventcardimg,
-                R.drawable.diningout
+                R.drawable.discovereventsbox
         };
 
         for (int i = 0; i < 6; i++) {
@@ -157,10 +165,11 @@ public class SlideFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             SlideBean bean = mList.get(position);
-            holder.imgBg.setImageResource(bean.getItemBg());
-            holder.tvTitle.setText(bean.getTitle());
-            holder.userIcon.setImageResource(bean.getUserIcon());
-            holder.userSay.setText(bean.getUserSay());
+           // holder.imgBg.setImageResource(bean.getItemBg());
+            holder.imgBg.setImageResource(bean.getmItemBg());
+            holder.tvTitle.setText(bean.getmTitle());
+            holder.userIcon.setText(bean.getmUserIcon());
+            holder.userSay.setText(bean.getmUserSay());
         }
 
         @Override
@@ -170,7 +179,7 @@ public class SlideFragment extends Fragment {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             ImageView imgBg;
-            ImageView userIcon;
+            TextView userIcon;
             TextView tvTitle;
             TextView userSay;
 

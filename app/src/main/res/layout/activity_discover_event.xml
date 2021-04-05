@@ -18,9 +18,11 @@
         android:background="@color/orange"
         >
         <ImageView
+            android:id="@+id/B"
             android:layout_width="15dp"
             android:src="@drawable/topnav_back_icon"
             android:scaleType="centerCrop"
+            android:onClick="backtologin"
             android:layout_marginLeft="25dp"
             android:layout_height="15dp"/>
         <TextView
@@ -40,6 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
+
+
 
 </LinearLayout>
 
