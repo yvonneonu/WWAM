@@ -27,7 +27,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM2 = "param2";
     private Button event, dateIdeas, getaway;
 
-
+    private Button[] buttonsArrays;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -62,7 +62,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        Fragment fragment = new BecomeAMemberFragment();
+        Fragment fragment = new EventFragment();
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.add(R.id.frcontainer,fragment);
         ft.commit();
@@ -77,14 +77,18 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         dateIdeas = view.findViewById(R.id.button9);
         getaway = view.findViewById(R.id.button10);
 
+        //options that make th
         event.setOnClickListener(this);
         dateIdeas.setOnClickListener(this);
         getaway.setOnClickListener(this);
 
+
+        buttonsArrays = new Button[]{event,dateIdeas,getaway};
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Explore");
         return view;
+
     }
 
     @Override
@@ -93,21 +97,35 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.button8:
                 fragment = new EventFragment();
-
+                getClicked(v);
                 break;
             case R.id.button9:
                 fragment = new DateIdeasFragment();
+                getClicked(v);
                 break;
             case R.id.button10:
                 fragment = new GetaAwayFragment();
+                getClicked(v);
                 break;
         }
 
         if(fragment != null){
             Log.d("TAG","not null");
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragmentcontainer,fragment);
+            ft.replace(R.id.frcontainer,fragment);
             ft.commit();
+        }
+    }
+
+
+    private void getClicked(View view){
+
+        for(int i = 0 ; i < buttonsArrays.length ; i++){
+            if(view.getId() == buttonsArrays[i].getId()){
+               buttonsArrays[i].setBackgroundColor(getActivity().getResources().getColor(R.color.purple_500));
+            }else{
+                buttonsArrays[i].setBackground(getActivity().getResources().getDrawable(R.drawable.button_border));
+            }
         }
     }
 }
