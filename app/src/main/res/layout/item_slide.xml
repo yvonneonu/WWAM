@@ -92,8 +92,8 @@
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
             android:background="#b2b2b2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
 
