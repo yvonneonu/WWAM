@@ -2,6 +2,7 @@ package com.example.waam;
 
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ public class SlideFragment extends Fragment {
     private static final String TAG = "SlideFragment";
     private RecyclerView mRecyclerView;
    // private SmileView mSmileView;
-   // private ImageView deny;
+    private ImageView deny, aloow;
     private SlideLayoutManager mSlideLayoutManager;
     private ItemTouchHelper mItemTouchHelper;
     private ItemTouchHelperCallback mItemTouchHelperCallback;
@@ -54,11 +55,19 @@ public class SlideFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         //mSmileView = rootView.findViewById(R.id.smile_view);
 
-        ImageView deny = rootView.findViewById(R.id.deny);
+        aloow = rootView.findViewById(R.id.allow);
+        deny = rootView.findViewById(R.id.deny);
         deny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DiscoverFragment.class);
+                Intent intent = new Intent(getActivity(), DiscoverDrawerLayerout.class);
+                startActivity(intent);
+            }
+        });
+        aloow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MatchFragment.class);
                 startActivity(intent);
             }
         });
@@ -135,6 +144,7 @@ public class SlideFragment extends Fragment {
                 "Keep on going never give up.",
                 "Whatever is worth doing is worth doing well.",
         };
+        String[] neededStrike = {"$145", "$213", "$245", "$234", "$244", "$131", "$311"};
         int[] bgs = {R.drawable.diningout,
                 R.drawable.eventcardimg,
                 R.drawable.nightclubsdancing,
@@ -143,9 +153,11 @@ public class SlideFragment extends Fragment {
                 R.drawable.diningout,
                 R.drawable.discovereventsbox
         };
+        String[] rateon = {"3.4", "4.6", "8.9", "7.5", "9.3", "7.3", "5.8"};
+        String[] seconrate = {"(119 Ratings)", "(309 Ratings)", "(329 Ratings)", "(209 Ratings)", "(165 Ratings)", "(109 Ratings)", "(197 Ratings)"};
 
         for (int i = 0; i < 6; i++) {
-            mList.add(new SlideBean(bgs[i],titles[i],icons[i],says[i]));
+            mList.add(new SlideBean(bgs[i],titles[i],icons[i],says[i], rateon[i], seconrate[i], neededStrike[i]));
         }
     }
 
@@ -170,6 +182,10 @@ public class SlideFragment extends Fragment {
             holder.tvTitle.setText(bean.getmTitle());
             holder.userIcon.setText(bean.getmUserIcon());
             holder.userSay.setText(bean.getmUserSay());
+            holder.firstra.setText(bean.getMfirstrate());
+            holder.secondra.setText(bean.getMsecondrating());
+            holder.strike.setText(bean.getNumberSrike());
+            holder.strike.setPaintFlags(holder.strike.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         @Override
@@ -181,7 +197,7 @@ public class SlideFragment extends Fragment {
             ImageView imgBg;
             TextView userIcon;
             TextView tvTitle;
-            TextView userSay;
+            TextView userSay, firstra, secondra, strike;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -189,6 +205,9 @@ public class SlideFragment extends Fragment {
                 userIcon = itemView.findViewById(R.id.img_user);
                 tvTitle = itemView.findViewById(R.id.tv_title);
                 userSay = itemView.findViewById(R.id.tv_user_say);
+                firstra = itemView.findViewById(R.id.firs_rating);
+                secondra = itemView.findViewById(R.id.secon_rating);
+                strike = itemView.findViewById(R.id.strike);
             }
         }
     }

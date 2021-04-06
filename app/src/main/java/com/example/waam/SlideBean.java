@@ -7,12 +7,18 @@ public class SlideBean {
     private String mTitle;
     private String mUserIcon;
     private String mUserSay;
+    private String mfirstrate;
+    private String msecondrating;
+    private String numberSrike;
 
-    public SlideBean(int mItemBg, String mTitle, String mUserIcon, String mUserSay) {
+    public SlideBean(int mItemBg, String mTitle, String mUserIcon, String mUserSay, String mfirstrate, String msecondrating, String numberSrike) {
         this.mItemBg = mItemBg;
         this.mTitle = mTitle;
         this.mUserIcon = mUserIcon;
         this.mUserSay = mUserSay;
+        this.mfirstrate = mfirstrate;
+        this.msecondrating = msecondrating;
+        this.numberSrike = numberSrike;
     }
 
     public int getmItemBg() {
@@ -45,5 +51,29 @@ public class SlideBean {
 
     public void setmUserSay(String mUserSay) {
         this.mUserSay = mUserSay;
+    }
+
+    public String getMfirstrate() {
+        return mfirstrate;
+    }
+
+    public void setMfirstrate(String mfirstrate) {
+        this.mfirstrate = mfirstrate;
+    }
+
+    public String getMsecondrating() {
+        return msecondrating;
+    }
+
+    public void setMsecondrating(String msecondrating) {
+        this.msecondrating = msecondrating;
+    }
+
+    public String getNumberSrike() {
+        return numberSrike;
+    }
+
+    public void setNumberSrike(String numberSrike) {
+        this.numberSrike = numberSrike;
     }
 }

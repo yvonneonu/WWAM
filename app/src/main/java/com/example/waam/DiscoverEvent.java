@@ -82,7 +82,7 @@ public class DiscoverEvent extends AppCompatActivity {
         }
 
     public void backtologin(View view) {
-        Intent intent = new Intent(DiscoverEvent.this, DiscoverFragment.class);
+        Intent intent = new Intent(DiscoverEvent.this, DiscoverDrawerLayerout.class);
         startActivity(intent);
     }
 }
