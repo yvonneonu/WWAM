@@ -48,7 +48,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="170dp"
             android:scaleType="centerCrop"
             android:src="@drawable/discovereventsbox"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
             android:id="@+id/imageView19"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="170dp"
             android:layout_marginEnd="24dp"
             android:scaleType="centerCrop"
             android:src="@drawable/discovermatchesbox"
@@ -127,6 +127,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
         <TextView
+            android:id="@+id/matches"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"

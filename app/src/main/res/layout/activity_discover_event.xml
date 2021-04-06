@@ -15,7 +15,7 @@
         android:visibility="visible"
 
         app:contentInsetStart="0dp"
-        android:background="@color/orange"
+        android:background="@drawable/findeventsbuttonbg"
         >
         <ImageView
             android:id="@+id/B"
