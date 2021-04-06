@@ -6,16 +6,23 @@ public class EventModel {
     private int rating;
     private int currentPrice;
     private int oldPrice;
-    private String image;
+    private int image;
 
-    public String getImage() {
+    public EventModel(String title, int image, int rating, int oldPrice, int currentPrice){
+        this.title = title;
+        this.image = image;
+        this.rating = rating;
+        this.oldPrice = oldPrice;
+        this.currentPrice = currentPrice;
+    }
+
+    public int getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         this.image = image;
     }
-
 
     public String getTitle() {
         return title;

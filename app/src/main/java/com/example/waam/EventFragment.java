@@ -1,12 +1,18 @@
 package com.example.waam;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +29,10 @@ public class EventFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private GeneralFactory generalFactory;
+    private RecyclerView recyclerView;
+    private EventAdapter eventAdapter;
+    private List<EventModel> eventModels;
 
     public EventFragment() {
         // Required empty public constructor
@@ -53,12 +63,29 @@ public class EventFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        generalFactory = GeneralFactory.getGeneralFactory();
+        eventModels = generalFactory.getEventModelList();
+        eventAdapter = new EventAdapter(eventModels,getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_event, container, false);
+        recyclerView = view.findViewById(R.id.recycle);
+        if(eventAdapter != null){
+           recyclerView.setAdapter(eventAdapter);
+
+           recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
+
+
+        return view;
+
+
+
+
     }
 }
