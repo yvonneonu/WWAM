@@ -52,15 +52,15 @@
 
                         <TextView
                             android:id="@+id/current"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:text="TextView" />
 
                         <TextView
                             android:id="@+id/old"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
                             android:layout_weight="1"
                             android:text="sport"
                             android:textAppearance="?attr/textAppearanceBody2"
@@ -76,7 +76,7 @@
 
                         <TextView
                             android:id="@+id/value"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="support"
@@ -85,13 +85,14 @@
 
                         <RatingBar
                             android:id="@+id/ratingBar"
-                            android:layout_width="0dp"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
 
                         <TextView
                             android:id="@+id/textView45"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="TextView" />

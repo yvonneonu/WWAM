@@ -75,8 +75,70 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Collections"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView46"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="View All"
+                        android:textColor="@color/purple_500"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Discover experiences based on this themes"
+                    app:layout_constraintStart_toStartOf="@+id/textView44"
+                    app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayout9"
+                    app:layout_constraintStart_toStartOf="@+id/textView44"
+                    app:layout_constraintTop_toBottomOf="@+id/textView47"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
+
 </FrameLayout>

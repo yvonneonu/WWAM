@@ -52,7 +52,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
                 .centerCrop()
                 .load(eventModel.getImage())
                 .into(holder.imageViewPlace);
-
     }
 
     @Override

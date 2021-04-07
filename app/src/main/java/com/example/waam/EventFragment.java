@@ -32,7 +32,6 @@ public class EventFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private GeneralFactory generalFactory;
-    private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
     private List<EventModel> eventModels;
 
@@ -82,7 +81,7 @@ public class EventFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event, container, false);
-        recyclerView = view.findViewById(R.id.recycle);
+        RecyclerView recyclerView = view.findViewById(R.id.recycle);
 
         if(eventAdapter != null){
            recyclerView.setAdapter(eventAdapter);
