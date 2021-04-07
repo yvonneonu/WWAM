@@ -165,7 +165,7 @@ public class SlideFragment extends Fragment {
     /**
      * 适配器
      */
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    static class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         @NotNull
         @Override

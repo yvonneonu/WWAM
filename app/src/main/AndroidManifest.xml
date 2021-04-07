@@ -28,20 +28,18 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
-        <activity android:name=".MatchFragment"></activity>
-        <activity android:name=".DiscoverEvent">
-
-        </activity>
-        <activity android:name=".DiscoverDrawerLayerout"></activity>
+        <activity android:name=".Matchfriends"></activity>
+        <activity android:name=".MatchFragment" />
+        <activity android:name=".DiscoverEvent"></activity>
+        <activity android:name=".DiscoverDrawerLayerout" />
         <activity android:name=".LookingFor" />
         <activity android:name=".finalProfile" />
         <activity android:name=".picture" />
         <activity android:name=".CompleteProfile" />
         <activity android:name=".LocationDetectActivity" />
         <activity android:name=".Profile" />
-        <activity android:name=".DrawelayoutActivity"></activity>
-        <activity android:name=".PaymentPage"></activity>
+        <activity android:name=".DrawelayoutActivity" />
+        <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />
         <activity android:name=".Splash" />
@@ -58,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Interest" />
-        <activity android:name=".ViewPager"></activity>
+        <activity android:name=".ViewPager" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

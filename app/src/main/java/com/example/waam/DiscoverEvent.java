@@ -2,7 +2,6 @@ package com.example.waam;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -39,15 +38,12 @@ public class DiscoverEvent extends AppCompatActivity {
 
             initFragments();
 
-
         }
 
         private void initFragments() {
             SlideFragment slideFragment = new SlideFragment();//滑动布局
             mFragments.add(slideFragment);
             mManagerNames.add("SlideLayoutManager");
-
-
 
             mFragmentManager.beginTransaction()
                     .add(R.id.container_layout, mFragments.get(0))
@@ -62,14 +58,11 @@ public class DiscoverEvent extends AppCompatActivity {
             switchFragment(0);
         }
 
-
-        @Override
+       /* @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             getMenuInflater().inflate(R.menu.menu, menu);
             return true;
-        }
-
-
+        }*/
 
         private void switchFragment(int position) {
             mFragmentManager.beginTransaction()
