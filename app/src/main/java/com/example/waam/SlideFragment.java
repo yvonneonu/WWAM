@@ -177,6 +177,7 @@ public class SlideFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             SlideBean bean = mList.get(position);
+            SlideBean bean
            // holder.imgBg.setImageResource(bean.getItemBg());
             holder.imgBg.setImageResource(bean.getmItemBg());
             holder.tvTitle.setText(bean.getmTitle());
