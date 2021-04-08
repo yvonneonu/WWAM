@@ -3,7 +3,9 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/acme</item>
         <item>@font/actor</item>
+        <item>@font/aguafina_script</item>
         <item>@font/bungee</item>
+        <item>@font/damion</item>
         <item>@font/montserrat</item>
         <item>@font/tillana</item>
     </array>

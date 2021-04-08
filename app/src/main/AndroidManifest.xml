@@ -28,7 +28,13 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Matchfriends"></activity>
+        <activity android:name=".Matchfriends">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MatchFragment" />
         <activity android:name=".DiscoverEvent"></activity>
         <activity android:name=".DiscoverDrawerLayerout" />
@@ -49,11 +55,7 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Interest" />
         <activity android:name=".ViewPager" />
@@ -67,6 +69,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
