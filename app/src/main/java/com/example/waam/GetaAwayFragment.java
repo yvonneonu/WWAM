@@ -3,10 +3,16 @@ package com.example.waam;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,20 +29,14 @@ public class GetaAwayFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private GeneralFactory generalFactory;
+    private EventAdapter eventAdapter;
+    private List<EventModel> eventModels;
 
     public GetaAwayFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GetaAwayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static GetaAwayFragment newInstance(String param1, String param2) {
         GetaAwayFragment fragment = new GetaAwayFragment();
         Bundle args = new Bundle();
@@ -53,12 +53,36 @@ public class GetaAwayFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        generalFactory = GeneralFactory.getGeneralFactory();
+        eventModels = generalFactory.getEventModelList();
+        eventAdapter = new EventAdapter(eventModels,getActivity());
+
+        eventAdapter.setOnTouch(new EventAdapter.ResponToTouchListener() {
+            @Override
+            public void touchListener(int position) {
+                Toast.makeText(getActivity(),"Mean face"+eventModels.get(position),Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_geta_away, container, false);
+        View view = inflater.inflate(R.layout.fragment_generic_edg, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recycle);
+        RecyclerView recyclerViewtwo = view.findViewById(R.id.cyclertwo);
+
+        if(eventAdapter != null){
+            recyclerView.setAdapter(eventAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
+
+        if(eventAdapter != null){
+            recyclerViewtwo.setAdapter(eventAdapter);
+            recyclerViewtwo.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        }
+        return view;
     }
 }
