@@ -31,7 +31,7 @@ import java.util.List;
 public class SlideFragment extends Fragment {
     private static final String TAG = "SlideFragment";
     private RecyclerView mRecyclerView;
-   // private SmileView mSmileView;
+    // private SmileView mSmileView;
     private ImageView deny, aloow;
     private SlideLayoutManager mSlideLayoutManager;
     private ItemTouchHelper mItemTouchHelper;
@@ -84,7 +84,7 @@ public class SlideFragment extends Fragment {
 
         //deny.seLike(mLikeCount);
         //mSmileView.setLike(mLikeCount);
-   //     mSmileView.setDisLike(mDislikeCount);
+        //     mSmileView.setDisLike(mDislikeCount);
 
         mAdapter = new MyAdapter();
         mRecyclerView.setAdapter(mAdapter);
@@ -110,12 +110,12 @@ public class SlideFragment extends Fragment {
             public void onSlided(RecyclerView.ViewHolder viewHolder, Object o, int direction) {
                 if (direction == ItemConfig.SLIDED_LEFT) {
                     mDislikeCount--;
-                   // mSmileView.setDisLike(mDislikeCount);
-                  //  mSmileView.disLikeAnimation();
+                    // mSmileView.setDisLike(mDislikeCount);
+                    //  mSmileView.disLikeAnimation();
                 } else if (direction == ItemConfig.SLIDED_RIGHT) {
                     mLikeCount++;
                     //mSmileView.setLike(mLikeCount);
-                   // mSmileView.likeAnimation();
+                    // mSmileView.likeAnimation();
                 }
                 int position = viewHolder.getAdapterPosition();
                 Log.e(TAG, "onSlided--position:" + position);
@@ -165,7 +165,7 @@ public class SlideFragment extends Fragment {
     /**
      * 适配器
      */
-    static class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         @NotNull
         @Override
@@ -177,8 +177,7 @@ public class SlideFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             SlideBean bean = mList.get(position);
-            SlideBean bean
-           // holder.imgBg.setImageResource(bean.getItemBg());
+            // holder.imgBg.setImageResource(bean.getItemBg());
             holder.imgBg.setImageResource(bean.getmItemBg());
             holder.tvTitle.setText(bean.getmTitle());
             holder.userIcon.setText(bean.getmUserIcon());
