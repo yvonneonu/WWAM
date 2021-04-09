@@ -1,5 +1,9 @@
 package com.example.waam;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,13 +12,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import androidx.appcompat.widget.Toolbar;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -54,6 +51,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
        ft.add(R.id.fragmentcontainer, fragment);
        ft.commit();
+
     }
 
     @Override
