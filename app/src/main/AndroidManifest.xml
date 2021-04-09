@@ -29,14 +29,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".Matchfriends">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".MatchFragment" />
-        <activity android:name=".DiscoverEvent"></activity>
+        <activity android:name=".MatchFragment">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".DiscoverEvent">
+
+        </activity>
         <activity android:name=".DiscoverDrawerLayerout" />
         <activity android:name=".LookingFor" />
         <activity android:name=".finalProfile" />
@@ -55,7 +59,6 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login">
-
         </activity>
         <activity android:name=".Interest" />
         <activity android:name=".ViewPager" />

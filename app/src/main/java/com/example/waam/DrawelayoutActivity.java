@@ -43,6 +43,13 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmentcontainer,fragment);
         ft.commit();
+
+        Fragment fragment1 = new MessagesFragment();
+        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+        ft1.replace(R.id.fragmentcontainer, fragment1);
+        ft1.commit();
+        bottomNavigationView.setSelectedItemId(R.id.messages);
+
     }
 
     @Override
@@ -63,6 +70,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             case R.id.messages:
                 fragment = new MessagesFragment();
                 item.setIcon(R.drawable.lowernav_messages_icon_active);
+
                 break;
 
             case R.id.friends:
@@ -104,4 +112,6 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             super.onBackPressed();
         }
     }
+
+
 }

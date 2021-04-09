@@ -54,6 +54,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="110dp"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="You and Adrea have matched with each other and are now friends.
 Get to know eachother."
         android:textColor="@color/white"
@@ -65,8 +66,10 @@ Get to know eachother."
         android:id="@+id/imageView21"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profileuser"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
@@ -74,24 +77,34 @@ Get to know eachother."
         android:id="@+id/imageView25"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profilematch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/imageView26"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sendmessagebutton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView21" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/keepswiping"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:scaleType="centerCrop"
+        android:onClick="keepswiping"
+        android:src="@drawable/keepswipingbutton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView25" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView26" />
 </androidx.constraintlayout.widget.ConstraintLayout>
