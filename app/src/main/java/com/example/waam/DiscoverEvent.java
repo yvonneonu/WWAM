@@ -38,6 +38,10 @@ public class DiscoverEvent extends AppCompatActivity {
 
             initFragments();
 
+            Fragment fragment = new MessagesFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.fragmentcontainer,fragment);
+            ft.commit();
         }
 
         private void initFragments() {
@@ -56,6 +60,8 @@ public class DiscoverEvent extends AppCompatActivity {
             mCurrentFragment = mFragments.get(0);
 //            mTvTitle.setText(mManagerNames.get(0));
             switchFragment(0);
+
+
         }
 
        /* @Override
