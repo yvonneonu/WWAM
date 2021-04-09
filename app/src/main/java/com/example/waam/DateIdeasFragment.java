@@ -73,14 +73,8 @@ public class DateIdeasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_date_ideas, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycle);
+
         RecyclerView recyclerViewtwo = view.findViewById(R.id.cyclertwo);
-
-
-        if(eventAdapter != null){
-            recyclerView.setAdapter(eventAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        }
 
         if(eventAdapter != null){
             recyclerViewtwo.setAdapter(eventAdapter);
