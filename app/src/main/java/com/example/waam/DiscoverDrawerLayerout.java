@@ -52,6 +52,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
        ft.add(R.id.fragmentcontainer, fragment);
        ft.commit();
 
+
     }
 
     @Override

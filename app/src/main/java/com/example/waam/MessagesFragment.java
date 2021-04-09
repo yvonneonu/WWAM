@@ -16,7 +16,7 @@ import java.util.Objects;
  * Use the {@link MessagesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MessagesFragment extends Fragment {
+public class MessagesFragment extends Fragment implements View.OnClickListener{
 
     FrameLayout fragment;
     // TODO: Rename parameter arguments, choose names that match
@@ -57,6 +57,7 @@ public class MessagesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -70,5 +71,10 @@ public class MessagesFragment extends Fragment {
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
         return  view;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

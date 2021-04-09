@@ -41,16 +41,17 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Log.d("TAG","in activity null");
         Fragment fragment = new ExploreFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragmentcontainer,fragment);
-        ft.commit();
+            ft.add(R.id.fragmentcontainer,fragment);
+            ft.commit();
 
-       /* Fragment fragment1 = new MessagesFragment();
+        /*Fragment fragment1 = new MessagesFragment();
         FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-        ft1.replace(R.id.fragmentcontainer, fragment1);
+        ft1.add(R.id.fragmentcontainer, fragment1);
         ft1.commit();
         bottomNavigationView.setSelectedItemId(R.id.messages);*/
+}
 
-    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -88,13 +89,15 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 item.setIcon(R.drawable.lowernav_agent_icon_active);
                 break;
         }
-        if(fragment != null){
-            Log.d("TAG","not null");
+        if(fragment != null) {
+            Log.d("TAG", "not null");
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragmentcontainer,fragment);
+            ft.replace(R.id.fragmentcontainer, fragment);
             ft.commit();
             drawer.closeDrawer(GravityCompat.START);
             return true;
+
+
         }else{
             Log.d("TAG","is null");
         }
