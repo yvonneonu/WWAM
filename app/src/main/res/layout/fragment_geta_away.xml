@@ -97,7 +97,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/title"
+                            android:text="Although the default strings file is named"
                             android:textAppearance="?attr/textAppearanceHeadline6" />
 
                         <LinearLayout
@@ -116,14 +116,14 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="TextView" />
+                                    android:text="$80" />
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="5dp"
                                     android:layout_weight="1"
-                                    android:text="sport"
+                                    android:text="$100"
                                     android:textAppearance="?attr/textAppearanceBody2"
                                     android:textColor="?android:attr/textColorSecondary" />
                             </LinearLayout>
@@ -139,7 +139,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="support"
+                                    android:text="4.5"
                                     android:textAppearance="?attr/textAppearanceBody2"
                                     android:textColor="?android:attr/textColorSecondary" />
 
@@ -153,7 +153,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="TextView" />
+                                    android:text="(200 ratings)" />
 
                             </LinearLayout>
 
@@ -173,6 +173,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp">
+
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -25,6 +27,7 @@ public class EventFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private TextView textView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -72,7 +75,8 @@ public class EventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_generic_edg, container, false);
 
         RecyclerView recyclerViewtwo = view.findViewById(R.id.cyclertwo);
-
+        textView = view.findViewById(R.id.oof);
+        textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         if(eventAdapter != null){
             recyclerViewtwo.setAdapter(eventAdapter);
             recyclerViewtwo.setLayoutManager(new GridLayoutManager(getActivity(),2));
