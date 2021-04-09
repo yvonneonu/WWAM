@@ -143,7 +143,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.P)
+    //@RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -152,7 +152,8 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
 
-        int color = getActivity().getResources().getColor(R.color.green);
+        Log.d("Become","Inside Become a membwer");
+       // int color = getActivity().getResources().getColor(R.color.green);
         SpannableString string = new SpannableString("Bullet point");
         string.setSpan(new BulletSpan(),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 

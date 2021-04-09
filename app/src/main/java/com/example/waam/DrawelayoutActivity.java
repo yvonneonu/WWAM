@@ -39,7 +39,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         toggle.syncState();
 
         Log.d("TAG","in activity null");
-        Fragment fragment = new BecomeAMemberFragment();
+        Fragment fragment = new ExploreFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmentcontainer,fragment);
         ft.commit();
@@ -56,10 +56,10 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         Log.d("TAG","not null");
+
         switch (item.getItemId()){
             case R.id.membership:
                 fragment = new BecomeAMemberFragment();
-
                 break;
 
             case R.id.explore:
