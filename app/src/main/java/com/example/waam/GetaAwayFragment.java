@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -92,6 +93,8 @@ public class GetaAwayFragment extends Fragment {
         ratStarSix = view.findViewById(R.id.starsix);
         imageViewTrending = view.findViewById(R.id.imageView29);
         ScrollView myScrollView = view.findViewById(R.id.scroll);
+        HorizontalScrollView horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
         RatingBar[] ratingBars = new RatingBar[]{ratStarone,ratStartwo,ratStarthree,ratStarfour,ratStarFive,ratStarSix};
 
         for (RatingBar ratingBar : ratingBars) {
@@ -99,7 +102,7 @@ public class GetaAwayFragment extends Fragment {
         }
 
         myScrollView.setVerticalScrollBarEnabled(false);
-        myScrollView.setHorizontalScrollBarEnabled(false);
+       horizontalScrollView.setHorizontalScrollBarEnabled(false);
         imageViewTrending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

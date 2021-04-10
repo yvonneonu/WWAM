@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -46,7 +47,6 @@ public class DateIdeasFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     public static DateIdeasFragment newInstance(String param1, String param2) {
         DateIdeasFragment fragment = new DateIdeasFragment();
         Bundle args = new Bundle();
@@ -68,12 +68,7 @@ public class DateIdeasFragment extends Fragment {
         eventModels = generalFactory.getEventModelList();
         eventAdapter = new EventAdapter(eventModels,getActivity());
 
-        eventAdapter.setOnTouch(new EventAdapter.ResponToTouchListener() {
-            @Override
-            public void touchListener(int position) {
-                Toast.makeText(getActivity(),"Mean face"+eventModels.get(position),Toast.LENGTH_SHORT).show();
-            }
-        });
+        eventAdapter.setOnTouch(position -> Toast.makeText(getActivity(),"Mean face "+eventModels.get(position).getTitle(),Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -92,26 +87,17 @@ public class DateIdeasFragment extends Fragment {
         ratStarSix = view.findViewById(R.id.starsix);
         imageViewTrending = view.findViewById(R.id.imageView29);
         ScrollView myScrollView = view.findViewById(R.id.scroll);
+        HorizontalScrollView horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
         myScrollView.setVerticalScrollBarEnabled(false);
-        myScrollView.setHorizontalScrollBarEnabled(false);
         RatingBar[] ratingBars = new RatingBar[]{ratStarone,ratStartwo,ratStarthree,ratStarfour,ratStarFive,ratStarSix};
 
         for (RatingBar ratingBar : ratingBars) {
             ratingBar.setNumStars(1);
         }
 
-        imageViewTrending.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToTrending();
-            }
-        });
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToTrending();
-            }
-        });
+        imageViewTrending.setOnClickListener(v -> moveToTrending());
+        linearLayout.setOnClickListener(v -> moveToTrending());
         if(eventAdapter != null){
             recyclerViewtwo.setAdapter(eventAdapter);
             recyclerViewtwo.setLayoutManager(new GridLayoutManager(getActivity(),2));

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -93,7 +94,8 @@ public class EventFragment extends Fragment {
         imageViewTrending = view.findViewById(R.id.imageView29);
         ScrollView myScrollView = view.findViewById(R.id.scroll);
         RatingBar[] ratingBars = new RatingBar[]{ratStarone,ratStartwo,ratStarthree,ratStarfour,ratStarFive,ratStarSix};
-
+        HorizontalScrollView horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
         for (RatingBar ratingBar : ratingBars) {
             ratingBar.setNumStars(1);
         }
