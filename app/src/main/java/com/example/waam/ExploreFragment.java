@@ -63,10 +63,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
         Fragment fragment = new EventFragment();
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.remove( fragment);
-       ft.replace(R.id.frcontainer, fragment);
-       ft.attach(fragment);
-
+        ft.add(R.id.frcontainer,fragment);
         ft.commit();
     }
 
