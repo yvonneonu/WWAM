@@ -34,6 +34,7 @@ public class GeneralFactory {
     }
 
     public List<EventModel> getEventModelList(){
+        eventModelList.clear();
         makeEvent();
         eventModelList.addAll(Arrays.asList(eventModelsArrays));
         return  eventModelList;

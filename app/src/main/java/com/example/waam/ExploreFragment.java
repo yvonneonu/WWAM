@@ -1,15 +1,20 @@
 package com.example.waam;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.Objects;
 
@@ -61,7 +66,12 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        setHasOptionsMenu(true);
         Fragment fragment = new EventFragment();
+        if(event != null){
+
+        }
+
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.add(R.id.frcontainer,fragment);
         ft.commit();
@@ -80,7 +90,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         event.setOnClickListener(this);
         dateIdeas.setOnClickListener(this);
         getaway.setOnClickListener(this);
-
+        event.setBackgroundColor(getActivity().getResources().getColor(R.color.purple_500));
 
         buttonsArrays = new Button[]{event,dateIdeas,getaway};
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -88,6 +98,32 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Explore");
         return view;
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.exploremenu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        final int Location = R.id.location;
+        final int Search = R.id.search;
+        switch (item.getItemId()){
+
+            case Location:
+                Fragment fragment = new LocationFragment();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentcontainer,fragment);
+                ft.commit();
+                break;
+            case Search:
+                Log.d("Search","Search is being clicked");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
