@@ -42,6 +42,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Fragment fragment;
         if(clicked){
             fragment = new MessagesFragment();
+            bottomNavigationView.setSelectedItemId(R.id.messages);
+
 
         }else{
             fragment = new ExploreFragment();
