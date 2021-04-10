@@ -35,6 +35,7 @@ public class Matchfriends extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Matchfriends.this, DrawelayoutActivity.class);
+                intent.putExtra("clicked",true);
                 startActivity(intent);
                 //myFragment.setArguments(v);
                 //fragmentTransaction.add(R.id.frameLayout, myFragment).commit();
