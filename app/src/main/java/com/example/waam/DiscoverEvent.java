@@ -38,10 +38,7 @@ public class DiscoverEvent extends AppCompatActivity {
 
             initFragments();
 
-            Fragment fragment = new MessagesFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.fragmentcontainer,fragment);
-            ft.commit();
+
         }
 
         private void initFragments() {
