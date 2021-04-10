@@ -25,7 +25,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         String token = getIntent().getStringExtra("toking");
-
+        boolean clicked = getIntent().getBooleanExtra("clicked",false);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -39,10 +39,17 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         toggle.syncState();
 
         Log.d("TAG","in activity null");
-        Fragment fragment = new ExploreFragment();
+        Fragment fragment;
+        if(clicked){
+            fragment = new MessagesFragment();
+
+        }else{
+            fragment = new ExploreFragment();
+        }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmentcontainer,fragment);
         ft.commit();
+
 
         /*Fragment fragment1 = new MessagesFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
