@@ -10,6 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
+        android:background="@drawable/splitbg"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,8 +20,10 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/splitbg"
-            tools:layout_editor_absoluteX="-24dp"
-            tools:layout_editor_absoluteY="0dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView29"
@@ -119,11 +122,13 @@
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/findeventsbuttonbg"
             android:gravity="center"
             android:text="Find Events"
             android:textAlignment="center"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
@@ -133,11 +138,13 @@
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/findmatchesbuttonbg"
             android:gravity="center"
             android:text="Find Matches"
             android:textAlignment="center"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView37" />
     </androidx.constraintlayout.widget.ConstraintLayout>
