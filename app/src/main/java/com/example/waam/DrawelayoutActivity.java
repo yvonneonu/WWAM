@@ -43,13 +43,6 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmentcontainer,fragment);
         ft.commit();
-
-       /* Fragment fragment1 = new MessagesFragment();
-        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-        ft1.replace(R.id.fragmentcontainer, fragment1);
-        ft1.commit();
-        bottomNavigationView.setSelectedItemId(R.id.messages);*/
-
     }
 
     @Override
