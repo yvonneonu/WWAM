@@ -51,25 +51,20 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:src="@drawable/deny" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="100dp"
-                            android:src="@drawable/deny" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginStart="146dp"
-                            android:layout_marginTop="80dp"
-                            android:layout_marginRight="83dp"
-                            android:text="shownjncdbc" />
-                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="146dp"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginRight="83dp"
+                        android:text="shownjncdbc" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,22 +73,16 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/findmatchesbuttonbg" />
 
-                    <RelativeLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/findmatchesbuttonbg" />
-
-                        <TextView
-                            android:layout_width="0.2dp"
-                            android:layout_height="fill_parent"
-                            android:layout_alignParentRight="true"
-                            android:text="ytdngghny" />
-                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="0.2dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentRight="true"
+                        android:text="ytdngghny" />
                 </LinearLayout>
             </LinearLayout>
         </HorizontalScrollView>
