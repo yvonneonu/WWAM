@@ -61,7 +61,9 @@ public class GetaAwayFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         generalFactory = GeneralFactory.getGeneralFactory();
+
         eventModels = generalFactory.getEventModelList();
+
         eventAdapter = new EventAdapter(eventModels,getActivity());
 
         eventAdapter.setOnTouch(new EventAdapter.ResponToTouchListener() {
