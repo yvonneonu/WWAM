@@ -1,16 +1,15 @@
 package com.example.waam;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.Objects;
 
@@ -64,7 +63,10 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
         Fragment fragment = new EventFragment();
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.frcontainer,fragment);
+        ft.remove( fragment);
+       ft.replace(R.id.frcontainer, fragment);
+       ft.attach(fragment);
+
         ft.commit();
     }
 

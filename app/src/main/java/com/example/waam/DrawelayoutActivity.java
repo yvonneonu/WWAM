@@ -41,12 +41,19 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Log.d("TAG","in activity null");
         Fragment fragment = new ExploreFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.fragmentcontainer,fragment);
+
+            //ft.add(R.id.frcontainer,fragment);
+            ft.add(R.id.fragmentcontainer, fragment);
+
+
+           // ft.replace(R.id.frcontainer, fragment);
+//            ft.add(R.id.frcontainer, fragment);
             ft.commit();
 
-        /*Fragment fragment1 = new MessagesFragment();
+      /*  Fragment fragment1 = new MessagesFragment();
         FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-        ft1.add(R.id.fragmentcontainer, fragment1);
+        ft1.remove(fragment1);
+        ft1.replace(R.id.fragmentcontainer,fragment1);
         ft1.commit();
         bottomNavigationView.setSelectedItemId(R.id.messages);*/
 }

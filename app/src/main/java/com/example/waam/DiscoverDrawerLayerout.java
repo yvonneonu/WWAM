@@ -53,7 +53,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
        ft.commit();
 
 
-    }
+
+}
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
