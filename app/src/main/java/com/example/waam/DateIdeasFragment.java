@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -90,6 +91,9 @@ public class DateIdeasFragment extends Fragment {
         ratStarFive = view.findViewById(R.id.starfive);
         ratStarSix = view.findViewById(R.id.starsix);
         imageViewTrending = view.findViewById(R.id.imageView29);
+        ScrollView myScrollView = view.findViewById(R.id.scroll);
+        myScrollView.setVerticalScrollBarEnabled(false);
+        myScrollView.setHorizontalScrollBarEnabled(false);
         RatingBar[] ratingBars = new RatingBar[]{ratStarone,ratStartwo,ratStarthree,ratStarfour,ratStarFive,ratStarSix};
 
         for (RatingBar ratingBar : ratingBars) {

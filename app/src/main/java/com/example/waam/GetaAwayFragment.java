@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -90,12 +91,15 @@ public class GetaAwayFragment extends Fragment {
         ratStarFive = view.findViewById(R.id.starfive);
         ratStarSix = view.findViewById(R.id.starsix);
         imageViewTrending = view.findViewById(R.id.imageView29);
+        ScrollView myScrollView = view.findViewById(R.id.scroll);
         RatingBar[] ratingBars = new RatingBar[]{ratStarone,ratStartwo,ratStarthree,ratStarfour,ratStarFive,ratStarSix};
 
         for (RatingBar ratingBar : ratingBars) {
             ratingBar.setNumStars(1);
         }
 
+        myScrollView.setVerticalScrollBarEnabled(false);
+        myScrollView.setHorizontalScrollBarEnabled(false);
         imageViewTrending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
