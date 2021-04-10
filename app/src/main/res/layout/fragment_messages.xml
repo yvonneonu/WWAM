@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,79 +9,77 @@
     tools:context=".MessagesFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <TextView
-        android:layout_marginTop="20dp"
-        android:text="New Friends"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/blue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <HorizontalScrollView
-        android:id="@+id/hsv"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentTop="true"
-        android:fillViewport="true"
-        android:measureAllChildren="false"
-        android:scrollbars="none" >
-        <LinearLayout
-            android:id="@+id/innerLay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-            <LinearLayout
-                android:id="@+id/asthma_action_plan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical" >
+        android:layout_height="match_parent">
 
-                <RelativeLayout
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:src="@drawable/deny" />
-
-                    <TextView
+                        android:id="@+id/imageView27"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginStart="146dp"
-                        android:layout_marginTop="80dp"
-                        android:layout_marginRight="83dp"
-                        android:text="shownjncdbc" />
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/controlled_medication"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical" >
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent" >
+                        tools:src="@tools:sample/avatars" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView52"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TextView" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
                     <ImageView
+                        android:id="@+id/imageView30"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/findmatchesbuttonbg" />
-                    <TextView
-                        android:layout_width="0.2dp"
-                        android:layout_height="fill_parent"
-                        android:layout_alignParentRight="true"
-                        android:text="ytdngghny" />
-                </RelativeLayout>
+                        tools:src="@tools:sample/avatars" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView53"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TextView" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:src="@tools:sample/avatars" />
+                </FrameLayout>
             </LinearLayout>
-    </LinearLayout>
-    </HorizontalScrollView>
-
-
+        </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
