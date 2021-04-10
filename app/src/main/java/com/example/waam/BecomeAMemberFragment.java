@@ -66,21 +66,17 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private MaterialCardView linearLayoutOne, linearLayoutTwo, linearLayoutThree, linearLayoutFour;
     private LinearLayout layoutPlan;
     private LinearLayout layoutPlantwo;
     private LinearLayout layoutPlanthree;
     private LinearLayout layoutPlanfour;
     private View firstView, secondView, thirdView, fourthView;
-    private String price;
     private String membertype = "";
-    private Button selectPaymentMethod;
     private PaymentMethod paymentMethod;
     private PaymentSession paymentSession;
     private Stripe stripe;
     private String pay;
-    UserService userService;
-    private String paymentIntentClientSecret;
+    //private String paymentIntentClientSecret;
 
 
     private LinearLayout[] linearLayouts;
@@ -157,17 +153,15 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         SpannableString string = new SpannableString("Bullet point");
         string.setSpan(new BulletSpan(),0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        price = "20";
-
-        linearLayoutOne = view.findViewById(R.id.layone);
-        linearLayoutTwo = view.findViewById(R.id.laytwo);
-        linearLayoutThree = view.findViewById(R.id.laythree);
-        linearLayoutFour = view.findViewById(R.id.layfour);
+        MaterialCardView linearLayoutOne = view.findViewById(R.id.layone);
+        MaterialCardView linearLayoutTwo = view.findViewById(R.id.laytwo);
+        MaterialCardView linearLayoutThree = view.findViewById(R.id.laythree);
+        MaterialCardView linearLayoutFour = view.findViewById(R.id.layfour);
         LinearLayout linearLayoutFive = view.findViewById(R.id.purchase);
 
         radioGroupPlus = view.findViewById(R.id.plus);
 
-        selectPaymentMethod  = view.findViewById(R.id.button7);
+        Button selectPaymentMethod = view.findViewById(R.id.button7);
 
         layoutPlan = view.findViewById(R.id.layoutplan);
         layoutPlantwo = view.findViewById(R.id.layoutplantwo);
@@ -323,7 +317,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
             upgara.setMembertype_id(membertype);
             upgara.setCurrency("USD");
             upgara.setPayment_method_id(pay);
-            userService = new ApiClient().getService();
+            UserService userService = new ApiClient().getService();
             Call<UpgradeMembershipResponse> upgradeMembershipResponseCall = userService.upgrade(upgara,"Bearer " +token);
             upgradeMembershipResponseCall.enqueue(new Callback<UpgradeMembershipResponse>() {
                 @Override
@@ -525,7 +519,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         public void onError(@NotNull Exception e) {
             final BecomeAMemberFragment activity = activityRef.get();
             if (activity == null) {
-                return;
+                Log.d("Activity","null");
             }
 
         }

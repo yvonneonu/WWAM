@@ -104,4 +104,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             super.onBackPressed();
         }
     }
+
+    public void setIconForNav(){
+
+    }
 }
