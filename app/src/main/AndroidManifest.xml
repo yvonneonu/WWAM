@@ -34,9 +34,11 @@
 
         </activity>
         <activity android:name=".DiscoverDrawerLayerout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".LookingFor"></activity>
@@ -50,11 +52,7 @@
         <activity android:name=".DrawelayoutActivity">
 
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".PaymentPage" >

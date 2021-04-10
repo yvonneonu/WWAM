@@ -39,9 +39,13 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         toggle.syncState();
 
         Log.d("TAG","in activity null");
+
         Fragment fragment = new ExploreFragment();
+        Fragment fragment1 = new MessagesFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmentcontainer,fragment);
+        ft.add(R.id.fragmentcontainer, fragment1);
+
         ft.commit();
     }
 
