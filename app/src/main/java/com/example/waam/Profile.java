@@ -116,21 +116,10 @@ public class Profile extends AppCompatActivity {
 
     private void Hereapi() {
         GetImageResponse getImageResponse = new GetImageResponse("picture");
-        String imagww = imageView.toString();
+        String imagww = imageUri.toString();
 
-        if (imageView != null){
-            imageView.setImageURI(imageUri);
-            Glide.with(this)
-                    .asBitmap()
-                    .circleCrop()
-                    .load(imageUri)
-                    .into(imageView);
-        }else {
-            getImageResponse.setPicture(imagww);
-            requestPicture(getImageResponse);
-        }
-
-
+        getImageResponse.setPicture(imagww);
+        requestPicture(getImageResponse);
        // userService.
        // Call<GetImage> getImageCall = ApiClient.getService().getimage()
 
@@ -141,8 +130,8 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetImage> call, Response<GetImage> response) {
                 if (!response.isSuccessful()){
-                    String message = "Successful";
-                    Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                   // String message = "Successful";
+                  //  Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
                     Log.d("imageview",response.errorBody().toString());
                 }
             }
