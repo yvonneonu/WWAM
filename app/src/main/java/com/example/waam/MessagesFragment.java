@@ -85,7 +85,7 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         friendAdapter  = new FriendAdapter();
         recyclerView.setAdapter(friendAdapter);
         addImagenText();
-        //assert activity != null;
+        assert activity != null;
 
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
         return  view;
