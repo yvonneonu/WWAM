@@ -29,9 +29,11 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
 
@@ -42,8 +44,18 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Fragment fragment;
         if(clicked){
             fragment = new MessagesFragment();
-            bottomNavigationView.setSelectedItemId(R.id.messages);
+            bottomNavigationView.getMenu().getItem(1).setChecked(true);
 
+            //onNavigationItemSelected(fragment);
+            //fragment.setSe(true);
+           /* bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+                @Override
+                public void onNavigationItemReselected(@NonNull MenuItem item) {
+                    item.setIcon(R.drawable.lowernav_messages_icon_active);
+                }
+            });(*/
+         // bottomNavigationView.setSelectedItemId(R.id.messages);
+          // bottomNavigationView.onScreenStateChanged(0);
 
         }else{
             fragment = new ExploreFragment();
@@ -57,6 +69,20 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragmentcontainer, fragment1);
         fragmentTransaction.commit();*/
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //updateNavigationBarState();
+    }
+
+
+
+    // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -119,6 +145,4 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             super.onBackPressed();
         }
     }
-
-
 }
