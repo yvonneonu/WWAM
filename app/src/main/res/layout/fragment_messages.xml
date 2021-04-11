@@ -29,6 +29,7 @@
             android:scrollbars="horizontal"
             android:layout_width="409dp"
             android:layout_height="206dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentTop="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,62 +44,68 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/topnav_profile" />
+                    <ImageView
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/topnav_profile"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="40dp"
-
+                        android:gravity="center"
+                        android:text="ada"
+                        android:layout_marginStart="20dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
                     <ImageButton
-                    android:id="@+id/imageButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    app:layout_constraintStart_toEndOf="@id/imageButton"
-                    app:layout_constraintTop_toTopOf="@id/imageButton"
-                    tools:src="@drawable/deny" />
+                        android:id="@+id/imageButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintStart_toEndOf="@id/imageButton"
+                        app:layout_constraintTop_toTopOf="@id/imageButton"
+                        tools:src="@drawable/deny" />
 
-                <Button
-                    android:layout_marginStart="15dp"
-                    android:id="@+id/button13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Button" />
+                    <Button
+                        android:id="@+id/button13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Button"
+                        app:layout_constraintStart_toStartOf="@+id/imageButton1"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/button14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_weight="1"
-                    android:text="Button" />
+                    <Button
+                        android:id="@+id/button14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Button"
+                        app:layout_constraintEnd_toEndOf="@+id/button13"
+                        app:layout_constraintTop_toBottomOf="@+id/button13" />
 
-                <Button
-                    android:id="@+id/button15"
-                    android:layout_marginStart="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Button" />
+                    <Button
+                        android:id="@+id/button15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Button"
+                        app:layout_constraintEnd_toEndOf="@+id/button16"
+                        app:layout_constraintTop_toBottomOf="@+id/button16" />
 
-                <Button
-                    android:id="@+id/button16"
-                    android:layout_marginStart="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Button" />
+                    <Button
+                        android:id="@+id/button16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Button"
+                        app:layout_constraintEnd_toEndOf="@+id/button14"
+                        app:layout_constraintTop_toBottomOf="@+id/button14" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </HorizontalScrollView>

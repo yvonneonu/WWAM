@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,10 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 import java.io.IOException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Profile extends AppCompatActivity {
 
     private static final int PICTURE_TAKEN = 4 ;
@@ -31,9 +36,12 @@ public class Profile extends AppCompatActivity {
     String pathFile;
     // private String Document_img1="";
 
+    UserService userService;
 
+    private String token;
     ImageView imageView;
     TextView textView, gallery, wipe;
+    Button upload;
     private int requestCode;
     private int resultCode;
     private static final int PICK_IMAGE = 100;
@@ -54,6 +62,7 @@ public class Profile extends AppCompatActivity {
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
         gallery = findViewById(R.id.galary);
+        upload = findViewById(R.id.button3);
         wipe = findViewById(R.id.swipe);
         if (Build.VERSION.SDK_INT >= 23) {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
@@ -95,9 +104,57 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Hereapi();
+            }
+        });
 
     }
 
+    private void Hereapi() {
+        GetImageResponse getImageResponse = new GetImageResponse("picture");
+        String imagww = imageView.toString();
+
+        if (imageView != null){
+            imageView.setImageURI(imageUri);
+            Glide.with(this)
+                    .asBitmap()
+                    .circleCrop()
+                    .load(imageUri)
+                    .into(imageView);
+        }else {
+            getImageResponse.setPicture(imagww);
+            requestPicture(getImageResponse);
+        }
+
+
+       // userService.
+       // Call<GetImage> getImageCall = ApiClient.getService().getimage()
+
+    }
+    private void requestPicture(GetImageResponse getImageResponse){
+        Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer " +token);
+        getImageCall.enqueue(new Callback<GetImage>() {
+            @Override
+            public void onResponse(Call<GetImage> call, Response<GetImage> response) {
+                if (!response.isSuccessful()){
+                    String message = "Successful";
+                    Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                    Log.d("imageview",response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetImage> call, Throwable t) {
+
+                Log.d("noimage",t.getMessage());
+            }
+        });
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
