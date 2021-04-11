@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -80,17 +81,30 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+
+
         fragment = view.findViewById(R.id.frameLayout);
-        recyclerView = view.findViewById(R.id.recyclerView2);
-        friendAdapter  = new FriendAdapter();
-        recyclerView.setAdapter(friendAdapter);
-        addImagenText();
+
+
         assert activity != null;
 
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
+        showImage(view);
+
+
         return  view;
 
     }
+
+    private void showImage(View view) {
+        recyclerView = view.findViewById(R.id.recyclerView2);
+        friendAdapter  = new FriendAdapter();
+        addImagenText();
+        recyclerView.setAdapter(friendAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager());
+    }
+
 
     private void addImagenText() {
 
