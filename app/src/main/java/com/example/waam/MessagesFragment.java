@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -80,11 +81,15 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
+        addImagenText();
         fragment = view.findViewById(R.id.frameLayout);
         recyclerView = view.findViewById(R.id.recyclerView2);
-        friendAdapter  = new FriendAdapter();
+        friendAdapter  = new FriendAdapter(imageList,getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setAdapter(friendAdapter);
-        addImagenText();
+        recyclerView.setLayoutManager((layoutManager));
+
+
         assert activity != null;
 
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
@@ -93,7 +98,6 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
     }
 
     private void addImagenText() {
-
         int[] image = {R.drawable.discovermatchesbox,
                 R.drawable.travel,
                 R.drawable.eventcardimg,
@@ -102,10 +106,10 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
                 R.drawable.coffeeconversation,
                 R.drawable.discovereventsbox
         };
-        String[] name = {"Adrea", "Dorathy", "Kiyomi", "David", "Don", "Kira"
 
-        };
-        for (int i = 0; i < 6; i++) {
+        String[] name = {"Adrea", "Dorathy", "Kiyomi", "David", "Don", "Kira","Alicia"};
+
+        for (int i = 0; i < image.length ; i++) {
             imageList.add(new ModelImages(image[i], name[i]));
         }
 
@@ -116,39 +120,5 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    private class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.Viewholder>{
-        @NonNull
-        @Override
-        public FriendAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.newfriendslide, parent, false);
-            return new FriendAdapter.Viewholder(view);
 
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull FriendAdapter.Viewholder holder, int position) {
-
-            ModelImages images = imageList.get(position);
-            holder.imageView.setImageResource(images.getImage());
-            holder.textView.setText(images.getName());
-        }
-
-        @Override
-        public int getItemCount() {
-            return imageList.size();
-        }
-
-        public class Viewholder extends RecyclerView.ViewHolder{
-            ImageView imageView;
-            TextView textView;
-
-
-            public Viewholder(@NonNull View itemView) {
-                super(itemView);
-                imageView = itemView.findViewById(R.id.imageView27);
-                textView = itemView.findViewById(R.id.namemessa);
-
-            }
-        }
-    }
 }
