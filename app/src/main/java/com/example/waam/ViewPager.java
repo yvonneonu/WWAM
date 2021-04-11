@@ -1,17 +1,15 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ViewPager extends AppCompatActivity {
     private LinearLayout linearLayout;
@@ -42,6 +40,7 @@ public class ViewPager extends AppCompatActivity {
         viewPager.addOnPageChangeListener(changeListener);
         signin.setOnClickListener(v ->Signinhere());
         signup.setOnClickListener(v -> SignUnhere());
+      //  viewPager.setOffscreenPageLimit(2);
 
     }
 
@@ -89,6 +88,7 @@ public class ViewPager extends AppCompatActivity {
 
 
         }
+
         if(position == 0) {
             dots[position].setTextColor(getResources().getColor(R.color.blue));
         }
@@ -103,7 +103,10 @@ public class ViewPager extends AppCompatActivity {
         }
         if (position == 4) {
             dots[position].setTextColor(getResources().getColor(R.color.red));
+
         }
+
     }
+
 
 }

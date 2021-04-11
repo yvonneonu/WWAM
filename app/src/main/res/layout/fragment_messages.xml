@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,92 +11,100 @@
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <TextView
-        android:layout_marginTop="20dp"
-        android:text="New Friends"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/blue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-    <FrameLayout
-        android:layout_width="350dp"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView25"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/entertainment_img"
-            tools:src="@tools:sample/avatars" />
-
-        <LinearLayout
-            android:layout_marginTop="70dp"
+        <TextView
+            android:id="@+id/textView51"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_marginStart="20dp"
+            android:text="New Friends"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toTopOf="@+id/hsv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-            <TextView
-                android:id="@+id/textView48"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:text="Entertainment" />
-        </LinearLayout>
-
-
-    </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="350dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/entertainment_img"
-                tools:src="@tools:sample/avatars" />
+        <HorizontalScrollView
+            android:id="@+id/hsv"
+            android:scrollbars="horizontal"
+            android:layout_width="409dp"
+            android:layout_height="206dp"
+            android:layout_alignParentTop="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView51">
 
             <LinearLayout
-                android:layout_marginTop="70dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView4"
+                <ImageView
+                    android:id="@+id/imageButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:text="Entertainment" />
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/topnav_profile" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+                    <ImageButton
+                    android:id="@+id/imageButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintStart_toEndOf="@id/imageButton"
+                    app:layout_constraintTop_toTopOf="@id/imageButton"
+                    tools:src="@drawable/deny" />
+
+                <Button
+                    android:layout_marginStart="15dp"
+                    android:id="@+id/button13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/button14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/button15"
+                    android:layout_marginStart="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/button16"
+                    android:layout_marginStart="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
+        </HorizontalScrollView>
 
 
-        </FrameLayout>
-    </LinearLayout>
-    </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>
