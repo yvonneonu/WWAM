@@ -17,7 +17,7 @@ public interface UserService {
     //Call<profileresponse> responseuser(@Body profilerequest profilerequest);
 
 
-    @PATCH("api//profile")
+    @PATCH("api/profile")
     Call<GetImage>getimage(@Body GetImageResponse getImageResponse, @Header("Authorization") String token);
 
     @POST("api/login")

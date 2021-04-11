@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +38,7 @@ public class Profile extends AppCompatActivity {
     // private String Document_img1="";
 
     UserService userService;
-
+    String tokinfromLogin;
     private String token;
     ImageView imageView;
     TextView textView, gallery, wipe;
@@ -59,6 +60,7 @@ public class Profile extends AppCompatActivity {
         String Fullname = getIntent().getStringExtra("name");
         String bigTokeng = getIntent().getStringExtra("alltoken");
 
+        tokinfromLogin = getIntent().getStringExtra("toking");
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
         gallery = findViewById(R.id.galary);
@@ -108,6 +110,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Log.d("Clicked","Yes i am");
                 Hereapi();
             }
         });
@@ -116,28 +119,34 @@ public class Profile extends AppCompatActivity {
 
     private void Hereapi() {
         GetImageResponse getImageResponse = new GetImageResponse("picture");
-        String imagww = imageUri.toString();
-
-        getImageResponse.setPicture(imagww);
+        Log.d("ImageUrl",imageUri.toString());
+        getImageResponse.setPicture(imageUri.toString());
         requestPicture(getImageResponse);
        // userService.
        // Call<GetImage> getImageCall = ApiClient.getService().getimage()
 
     }
     private void requestPicture(GetImageResponse getImageResponse){
-        Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer " +token);
-        getImageCall.enqueue(new Callback<GetImage>() {
+        Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer " +tokinfromLogin);
+        getImageCall.enqueue(new Callback() {
             @Override
-            public void onResponse(Call<GetImage> call, Response<GetImage> response) {
+            public void onResponse(Call call, Response response) {
                 if (!response.isSuccessful()){
-                   // String message = "Successful";
-                  //  Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                    String message = "Something went wrong";
+                    Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                    Log.d("imageview",response.message());
                     Log.d("imageview",response.errorBody().toString());
+                    return;
                 }
+
+
+                String message = "Successful";
+                Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                Log.d("Body",new Gson().toJson(response.body()));
             }
 
             @Override
-            public void onFailure(Call<GetImage> call, Throwable t) {
+            public void onFailure(Call call, Throwable t) {
 
                 Log.d("noimage",t.getMessage());
             }
