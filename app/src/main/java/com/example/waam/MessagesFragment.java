@@ -85,7 +85,7 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         friendAdapter  = new FriendAdapter();
         recyclerView.setAdapter(friendAdapter);
         addImagenText();
-        assert activity != null;
+        //assert activity != null;
 
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
         return  view;
@@ -93,6 +93,21 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
     }
 
     private void addImagenText() {
+
+        int[] image = {R.drawable.discovermatchesbox,
+                R.drawable.travel,
+                R.drawable.eventcardimg,
+                R.drawable.diningout,
+                R.drawable.nightclubsdancing,
+                R.drawable.coffeeconversation,
+                R.drawable.discovereventsbox
+        };
+        String[] name = {"Adrea", "Dorathy", "Kiyomi", "David", "Don", "Kira"
+
+        };
+        for (int i = 0; i < 6; i++) {
+            imageList.add(new ModelImages(image[i], name[i]));
+        }
 
     }
 
@@ -114,6 +129,8 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         public void onBindViewHolder(@NonNull FriendAdapter.Viewholder holder, int position) {
 
             ModelImages images = imageList.get(position);
+            holder.imageView.setImageResource(images.getImage());
+            holder.textView.setText(images.getName());
         }
 
         @Override
@@ -129,6 +146,7 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
             public Viewholder(@NonNull View itemView) {
                 super(itemView);
                 imageView = itemView.findViewById(R.id.imageView27);
+                textView = itemView.findViewById(R.id.namemessa);
 
             }
         }
