@@ -5,10 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -98,13 +95,13 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
     }
 
     private void addImagenText() {
-        int[] image = {R.drawable.discovermatchesbox,
-                R.drawable.travel,
-                R.drawable.eventcardimg,
-                R.drawable.diningout,
-                R.drawable.nightclubsdancing,
-                R.drawable.coffeeconversation,
-                R.drawable.discovereventsbox
+        int[] image = {R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user,
+                R.drawable.group_img_2,
+                R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user
         };
 
         String[] name = {"Adrea", "Dorathy", "Kiyomi", "David", "Don", "Kira","Alicia"};
