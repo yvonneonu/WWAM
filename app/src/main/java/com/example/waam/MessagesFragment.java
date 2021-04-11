@@ -5,10 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,6 +23,9 @@ import java.util.Objects;
  * create an instance of this fragment.
  */
 public class MessagesFragment extends Fragment implements View.OnClickListener{
+    private RecyclerView recyclerView;
+    private FriendAdapter friendAdapter;
+    private List<ModelImages> imageList = new ArrayList<>();
 
     FrameLayout fragment;
     // TODO: Rename parameter arguments, choose names that match
@@ -72,6 +81,10 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         fragment = view.findViewById(R.id.frameLayout);
+        recyclerView = view.findViewById(R.id.recyclerView2);
+        friendAdapter  = new FriendAdapter();
+        recyclerView.setAdapter(friendAdapter);
+        addImagenText();
         assert activity != null;
 
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
@@ -79,8 +92,45 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
 
     }
 
+    private void addImagenText() {
+
+    }
+
     @Override
     public void onClick(View v) {
 
+    }
+
+    private class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.Viewholder>{
+        @NonNull
+        @Override
+        public FriendAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.newfriendslide, parent, false);
+            return new FriendAdapter.Viewholder(view);
+
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull FriendAdapter.Viewholder holder, int position) {
+
+            ModelImages images = imageList.get(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return imageList.size();
+        }
+
+        public class Viewholder extends RecyclerView.ViewHolder{
+            ImageView imageView;
+            TextView textView;
+
+
+            public Viewholder(@NonNull View itemView) {
+                super(itemView);
+                imageView = itemView.findViewById(R.id.imageView27);
+
+            }
+        }
     }
 }
