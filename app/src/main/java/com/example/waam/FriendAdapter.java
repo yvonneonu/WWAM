@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.Viewholder>{
@@ -31,7 +33,12 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.Viewholder
     @Override
     public void onBindViewHolder(@NonNull FriendAdapter.Viewholder holder, int position) {
         ModelImages images = modelImagesList.get(position);
-        holder.imageView.setImageResource(images.getImage());
+
+        Glide.with(context)
+                .asBitmap()
+                .circleCrop()
+                .load(images.getImage())
+                .into(holder.imageView);
         holder.textView.setText(images.getName());
     }
 
