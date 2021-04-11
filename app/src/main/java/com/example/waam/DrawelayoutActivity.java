@@ -26,6 +26,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         String token = getIntent().getStringExtra("toking");
+        boolean locClicked = getIntent().getBooleanExtra("locationDetails",false);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -40,20 +41,25 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         toggle.syncState();
 
         Log.d("TAG","in activity null");
-        Fragment fragment = new ExploreFragment();
+        Fragment fragment;
         int container = R.id.fragmentcontainer;
+        if(locClicked){
+            fragment = new BecomeAMemberFragment();
+        }else{
+            fragment = new ExploreFragment();
+        }
         FrameLayout frameLayout = findViewById(R.id.fragmentcontainer);
         frameLayout.removeAllViews();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(container,fragment);
         ft.commit();
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         Log.d("TAG","not null");
-
         switch (item.getItemId()){
             case R.id.membership:
                 fragment = new BecomeAMemberFragment();
@@ -85,7 +91,6 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 break;
         }
         if(fragment != null){
-            Log.d("TAG","not null");
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentcontainer,fragment);
             ft.commit();
@@ -109,7 +114,4 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         }
     }
 
-    public void setIconForNav(){
-
-    }
 }
