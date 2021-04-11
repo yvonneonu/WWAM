@@ -22,8 +22,13 @@ import java.util.Objects;
  */
 public class MessagesFragment extends Fragment implements View.OnClickListener{
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView1;
+
     private FriendAdapter friendAdapter;
+    private ChatAdapter chatAdapter;
+
     private List<ModelImages> imageList = new ArrayList<>();
+    private List<ModelChat> chatList = new ArrayList<>();
 
     FrameLayout fragment;
     // TODO: Rename parameter arguments, choose names that match
@@ -79,12 +84,22 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         addImagenText();
+        addChatText();
         fragment = view.findViewById(R.id.frameLayout);
         recyclerView = view.findViewById(R.id.recyclerView2);
+        recyclerView1 = view.findViewById(R.id.recyclerView4);
+
         friendAdapter  = new FriendAdapter(imageList,getActivity());
+        chatAdapter = new ChatAdapter(chatList,getActivity());
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
         recyclerView.setAdapter(friendAdapter);
+        recyclerView1.setAdapter(chatAdapter);
+
         recyclerView.setLayoutManager((layoutManager));
+        recyclerView1.setLayoutManager(layoutManager1);
 
 
         assert activity != null;
@@ -92,6 +107,34 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
         return  view;
 
+    }
+
+    private void addChatText() {
+        int[] display = {
+                R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user,
+                R.drawable.group_img_2,
+                R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user
+
+        };
+
+        String[] dispChat = {"Ebuka Obi", "Blessing Obi", "Brown White", "Alexander White", "Chris Paul", "Peter Mac", "LordBroke huhge"
+
+        };
+        String[] message = {"Hey, how are you today?", "Hey, how are you today?", "Hey, how are you today?", "Hey, how are you today?", "Hey, how are you today?",
+                "Hey, how are you today?", "Hey, how are you today?"
+
+        };
+        String[] time = {"1:30 PM", "2:00 PM", "12:30 PM", "3:30 PM", "9:30 AM", "12:30 PM", "10:30 PM"
+
+        };
+        for (int i = 0; i < display.length; i++){
+           chatList.add(new ModelChat(display[i], dispChat[i], message[i], time[i]));
+
+        }
     }
 
     private void addImagenText() {
