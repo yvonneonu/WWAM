@@ -5,10 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,6 +24,9 @@ import java.util.Objects;
  * create an instance of this fragment.
  */
 public class MessagesFragment extends Fragment implements View.OnClickListener{
+    private RecyclerView recyclerView;
+    private FriendAdapter friendAdapter;
+    private List<ModelImages> imageList = new ArrayList<>();
 
     FrameLayout fragment;
     // TODO: Rename parameter arguments, choose names that match
@@ -71,7 +81,15 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
+        addImagenText();
         fragment = view.findViewById(R.id.frameLayout);
+        recyclerView = view.findViewById(R.id.recyclerView2);
+        friendAdapter  = new FriendAdapter(imageList,getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setAdapter(friendAdapter);
+        recyclerView.setLayoutManager((layoutManager));
+
+
         assert activity != null;
 
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
@@ -79,8 +97,28 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
 
     }
 
+    private void addImagenText() {
+        int[] image = {R.drawable.discovermatchesbox,
+                R.drawable.travel,
+                R.drawable.eventcardimg,
+                R.drawable.diningout,
+                R.drawable.nightclubsdancing,
+                R.drawable.coffeeconversation,
+                R.drawable.discovereventsbox
+        };
+
+        String[] name = {"Adrea", "Dorathy", "Kiyomi", "David", "Don", "Kira","Alicia"};
+
+        for (int i = 0; i < image.length ; i++) {
+            imageList.add(new ModelImages(image[i], name[i]));
+        }
+
+    }
+
     @Override
     public void onClick(View v) {
 
     }
+
+
 }
