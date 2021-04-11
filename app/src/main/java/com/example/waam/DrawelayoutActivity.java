@@ -3,6 +3,7 @@ package com.example.waam;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -40,8 +41,11 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
 
         Log.d("TAG","in activity null");
         Fragment fragment = new ExploreFragment();
+        int container = R.id.fragmentcontainer;
+        FrameLayout frameLayout = findViewById(R.id.fragmentcontainer);
+        frameLayout.removeAllViews();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragmentcontainer,fragment);
+        ft.add(container,fragment);
         ft.commit();
     }
 

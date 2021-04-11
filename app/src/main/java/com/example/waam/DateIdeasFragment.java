@@ -91,7 +91,6 @@ public class DateIdeasFragment extends Fragment {
         horizontalScrollView.setHorizontalScrollBarEnabled(false);
         myScrollView.setVerticalScrollBarEnabled(false);
         RatingBar[] ratingBars = new RatingBar[]{ratStarone,ratStartwo,ratStarthree,ratStarfour,ratStarFive,ratStarSix};
-
         for (RatingBar ratingBar : ratingBars) {
             ratingBar.setNumStars(1);
         }
