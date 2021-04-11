@@ -42,15 +42,18 @@
         <activity android:name=".picture" />
         <activity android:name=".MatchFragment"/>
         <activity android:name=".Matchfriends">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".CompleteProfile"></activity>
         <activity android:name=".LocationDetectActivity"></activity>
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Profile">
+
+        </activity>
         <activity android:name=".DrawelayoutActivity">
 
         </activity>
@@ -73,6 +76,11 @@
         <activity android:name=".Interest"></activity>
         <activity android:name=".ViewPager">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <provider

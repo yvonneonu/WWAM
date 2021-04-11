@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +21,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Profile extends AppCompatActivity {
 
@@ -31,9 +37,12 @@ public class Profile extends AppCompatActivity {
     String pathFile;
     // private String Document_img1="";
 
-
+    UserService userService;
+    String tokinfromLogin;
+    private String token;
     ImageView imageView;
     TextView textView, gallery, wipe;
+    Button upload;
     private int requestCode;
     private int resultCode;
     private static final int PICK_IMAGE = 100;
@@ -51,9 +60,11 @@ public class Profile extends AppCompatActivity {
         String Fullname = getIntent().getStringExtra("name");
         String bigTokeng = getIntent().getStringExtra("alltoken");
 
+        tokinfromLogin = getIntent().getStringExtra("toking");
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
         gallery = findViewById(R.id.galary);
+        upload = findViewById(R.id.button3);
         wipe = findViewById(R.id.swipe);
         if (Build.VERSION.SDK_INT >= 23) {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
@@ -95,9 +106,53 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("Clicked","Yes i am");
+                Hereapi();
+            }
+        });
 
     }
 
+    private void Hereapi() {
+        GetImageResponse getImageResponse = new GetImageResponse("picture");
+        Log.d("ImageUrl",imageUri.toString());
+        getImageResponse.setPicture(imageUri.toString());
+        requestPicture(getImageResponse);
+       // userService.
+       // Call<GetImage> getImageCall = ApiClient.getService().getimage()
+
+    }
+    private void requestPicture(GetImageResponse getImageResponse){
+        Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer " +tokinfromLogin);
+        getImageCall.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (!response.isSuccessful()){
+                    String message = "Something went wrong";
+                    Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                    Log.d("imageview",response.message());
+                    Log.d("imageview",response.errorBody().toString());
+                    return;
+                }
+
+
+                String message = "Successful";
+                Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                Log.d("Body",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+                Log.d("noimage",t.getMessage());
+            }
+        });
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
