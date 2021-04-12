@@ -1,21 +1,19 @@
 package com.example.waam;
 
-import java.io.Serializable;
-
-public class Location implements Serializable {
-    private int image;
+public class LocationModel {
+    private String image;
     private String name;
 
-    public Location(int image, String name) {
+    public LocationModel(String image, String name) {
         this.image = image;
         this.name = name;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

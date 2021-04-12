@@ -6,16 +6,16 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,13 +34,9 @@ public class EventFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
     private EventAdapter eventAdapter;
     private List<EventModel> eventModels;
-    private LinearLayout linearLayout;
-    private RatingBar ratStarone, ratStartwo, ratStarthree, ratStarfour, ratStarFive,ratStarSix;
-    private ImageView imageViewTrending;
 
     public EventFragment() {
         // Required empty public constructor
@@ -58,21 +54,11 @@ public class EventFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
 
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory();
         eventModels = generalFactory.getEventModelList();
         eventAdapter = new EventAdapter(eventModels,getActivity());
-        eventAdapter.setOnTouch(new EventAdapter.ResponToTouchListener() {
-            @Override
-            public void touchListener(int position) {
-                Toast.makeText(getActivity(),"Mean face "+eventModels.get(position),Toast.LENGTH_SHORT).show();
-            }
-        });
+        eventAdapter.setOnTouch(position -> Toast.makeText(getActivity(),"Mean face "+eventModels.get(position),Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -82,34 +68,36 @@ public class EventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_generic_edg, container, false);
 
         RecyclerView recyclerViewtwo = view.findViewById(R.id.cyclertwo);
-        linearLayout = view.findViewById(R.id.linearLayout10);
-        ratStarone = view.findViewById(R.id.ratStarone);
-        ratStartwo = view.findViewById(R.id.startwo);
-        ratStarthree = view.findViewById(R.id.starthree);
-        ratStarfour = view.findViewById(R.id.starfour);
-        ratStarFive = view.findViewById(R.id.starfive);
-        ratStarSix = view.findViewById(R.id.starsix);
-        imageViewTrending = view.findViewById(R.id.imageView29);
-        RatingBar[] ratingBars = new RatingBar[]{ratStarone,ratStartwo,ratStarthree,ratStarfour,ratStarFive,ratStarSix};
+        LinearLayout linearLayout = view.findViewById(R.id.linearLayout10);
+        RatingBar ratStarone = view.findViewById(R.id.ratStarone);
+        RatingBar ratStartwo = view.findViewById(R.id.startwo);
+        RatingBar ratStarthree = view.findViewById(R.id.starthree);
+        RatingBar ratStarfour = view.findViewById(R.id.starfour);
+        RatingBar ratStarFive = view.findViewById(R.id.starfive);
+        RatingBar ratStarSix = view.findViewById(R.id.starsix);
+        ImageView imageViewTrending = view.findViewById(R.id.imageView29);
+        ScrollView myScrollView = view.findViewById(R.id.scroll);
+
+        RatingBar[] ratingBars = new RatingBar[]{ratStarone, ratStartwo, ratStarthree, ratStarfour, ratStarFive, ratStarSix};
+        HorizontalScrollView horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
+
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
 
         for (RatingBar ratingBar : ratingBars) {
             ratingBar.setNumStars(1);
         }
 
-        imageViewTrending.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToTrending();
-            }
-        });
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToTrending();
-            }
-        });
+        myScrollView.setVerticalScrollBarEnabled(false);
+        myScrollView.setHorizontalScrollBarEnabled(false);
+
+        imageViewTrending.setOnClickListener(v -> moveToTrending());
+
+        linearLayout.setOnClickListener(v -> moveToTrending());
+
         TextView textView = view.findViewById(R.id.oof);
+
         textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
         if(eventAdapter != null){
             recyclerViewtwo.setAdapter(eventAdapter);
             recyclerViewtwo.setLayoutManager(new GridLayoutManager(getActivity(),2));

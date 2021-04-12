@@ -76,14 +76,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
             ratingBar = itemView.findViewById(R.id.ratingBar);
             materialCardView = itemView.findViewById(R.id.card);
 
-            materialCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(responToTouchListener != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            responToTouchListener.touchListener(position);
-                        }
+            materialCardView.setOnClickListener(v -> {
+                if(responToTouchListener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        responToTouchListener.touchListener(position);
                     }
                 }
             });
@@ -92,6 +89,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
 
 
     interface ResponToTouchListener{
-        public void touchListener(int position);
+        void touchListener(int position);
     }
 }
