@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,9 +17,9 @@ import java.util.List;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationHolder>{
 
-    List<Location> locationList;
-    Context context;
-
+    private final List<Location> locationList;
+    private final Context context;
+    private LocationListener locationListener;
     public LocationAdapter(List<Location> locationList, Context context){
         this.locationList = locationList;
         this.context = context;
@@ -31,6 +32,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         return new LocationHolder(view);
     }
 
+
+    public void onLocationListener(LocationListener locationListener){
+        this.locationListener = locationListener;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull LocationHolder holder, int position) {
 
@@ -39,7 +45,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         Glide.with(context)
                 .asBitmap()
                 .centerInside()
-                .load(location.getImageUrl())
+                .load(location.getImage())
                 .into(holder.imageView);
     }
 
@@ -50,12 +56,29 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
     public class LocationHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageView;
-        private TextView textView;
+        private final ImageView imageView;
+        private final TextView textView;
         public LocationHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
             textView = itemView.findViewById(R.id.name);
+            LinearLayout linearLayout = itemView.findViewById(R.id.lin);
+
+            linearLayout.setOnClickListener(v -> {
+                if(locationListener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        locationListener.selectLocation(position);
+                    }
+                }
+            });
+
+
+
         }
+    }
+
+    interface LocationListener{
+        void selectLocation(int pos);
     }
 }

@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -33,12 +35,8 @@ public class GetaAwayFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private GeneralFactory generalFactory;
     private EventAdapter eventAdapter;
     private List<EventModel> eventModels;
-    private LinearLayout linearLayout;
-    private RatingBar ratStarone, ratStartwo, ratStarthree, ratStarfour, ratStarFive,ratStarSix;
-    private ImageView imageViewTrending;
 
     public GetaAwayFragment() {
         // Required empty public constructor
@@ -60,18 +58,13 @@ public class GetaAwayFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        generalFactory = GeneralFactory.getGeneralFactory();
+        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory();
 
         eventModels = generalFactory.getEventModelList();
 
         eventAdapter = new EventAdapter(eventModels,getActivity());
 
-        eventAdapter.setOnTouch(new EventAdapter.ResponToTouchListener() {
-            @Override
-            public void touchListener(int position) {
-                Toast.makeText(getActivity(),"Mean face"+eventModels.get(position),Toast.LENGTH_SHORT).show();
-            }
-        });
+        eventAdapter.setOnTouch(position -> Toast.makeText(getActivity(),"Mean face"+eventModels.get(position),Toast.LENGTH_SHORT).show());
 
     }
 
@@ -82,32 +75,29 @@ public class GetaAwayFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_geta_away, container, false);
 
         RecyclerView recyclerViewtwo = view.findViewById(R.id.cyclertwo);
-        linearLayout = view.findViewById(R.id.linearLayout10);
-        ratStarone = view.findViewById(R.id.ratStarone);
-        ratStartwo = view.findViewById(R.id.startwo);
-        ratStarthree = view.findViewById(R.id.starthree);
-        ratStarfour = view.findViewById(R.id.starfour);
-        ratStarFive = view.findViewById(R.id.starfive);
-        ratStarSix = view.findViewById(R.id.starsix);
-        imageViewTrending = view.findViewById(R.id.imageView29);
-        RatingBar[] ratingBars = new RatingBar[]{ratStarone,ratStartwo,ratStarthree,ratStarfour,ratStarFive,ratStarSix};
+        LinearLayout linearLayout = view.findViewById(R.id.linearLayout10);
+        RatingBar ratStarone = view.findViewById(R.id.ratStarone);
+        RatingBar ratStartwo = view.findViewById(R.id.startwo);
+        RatingBar ratStarthree = view.findViewById(R.id.starthree);
+        RatingBar ratStarfour = view.findViewById(R.id.starfour);
+        RatingBar ratStarFive = view.findViewById(R.id.starfive);
+        RatingBar ratStarSix = view.findViewById(R.id.starsix);
+        ImageView imageViewTrending = view.findViewById(R.id.imageView29);
+        ScrollView myScrollView = view.findViewById(R.id.scroll);
+
+        HorizontalScrollView horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
+
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
+        RatingBar[] ratingBars = new RatingBar[]{ratStarone, ratStartwo, ratStarthree, ratStarfour, ratStarFive, ratStarSix};
 
         for (RatingBar ratingBar : ratingBars) {
             ratingBar.setNumStars(1);
         }
 
-        imageViewTrending.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToTrending();
-            }
-        });
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToTrending();
-            }
-        });
+        myScrollView.setVerticalScrollBarEnabled(false);
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
+        imageViewTrending.setOnClickListener(v -> moveToTrending());
+        linearLayout.setOnClickListener(v -> moveToTrending());
 
         if(eventAdapter != null){
             recyclerViewtwo.setAdapter(eventAdapter);

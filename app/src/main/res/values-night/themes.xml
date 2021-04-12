@@ -20,5 +20,15 @@
         <item name="android:background">@drawable/bg_spinner</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">?attr/colorPrimaryVariant</item>
+        <item name="colorControlActivated">?attr/colorSecondaryVariant</item>
+    </style>
+
+    <style name="CustomCheckbox02" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_selector</item>
+        <item name="color">@color/yellow</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
 
 </resources>

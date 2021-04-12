@@ -41,7 +41,6 @@ public class SignUp extends AppCompatActivity {
     private CardView cardView1;
     private EditText name, email, zip, password, confrim;
     //ConstraintLayout constraintLayou;
-
     String chose = "";
     String interest = "";
     String Fullname;
