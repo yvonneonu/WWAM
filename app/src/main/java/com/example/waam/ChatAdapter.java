@@ -39,6 +39,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Viewholder> {
                 .circleCrop()
                 .load(chat.getImages())
                 .into(holder.imageView);
+
+
+
         holder.name.setText(chat.getNames());
         holder.message.setText(chat.getChatSms());
         holder.time.setText(chat.getTime());
