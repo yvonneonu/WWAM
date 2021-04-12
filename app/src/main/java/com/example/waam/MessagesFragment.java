@@ -23,12 +23,17 @@ import java.util.Objects;
 public class MessagesFragment extends Fragment implements View.OnClickListener{
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
+    private RecyclerView recyclerView2;
+
+   private String DEFAULT_SPAN_COUNT = "2";
 
     private FriendAdapter friendAdapter;
     private ChatAdapter chatAdapter;
+    private CustomAdapter customAdapter;
 
     private List<ModelImages> imageList = new ArrayList<>();
     private List<ModelChat> chatList = new ArrayList<>();
+    private List<itemModel> arrayList = new ArrayList<>();
 
     FrameLayout fragment;
     // TODO: Rename parameter arguments, choose names that match
@@ -70,9 +75,7 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
         }
-
 
     }
 
@@ -85,21 +88,31 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         addImagenText();
         addChatText();
+        groupImage();
         fragment = view.findViewById(R.id.frameLayout);
         recyclerView = view.findViewById(R.id.recyclerView2);
         recyclerView1 = view.findViewById(R.id.recyclerView4);
+        recyclerView2 = view.findViewById(R.id.recyclerView5);
 
         friendAdapter  = new FriendAdapter(imageList,getActivity());
         chatAdapter = new ChatAdapter(chatList,getActivity());
+        customAdapter = new CustomAdapter(arrayList,getActivity());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+       // GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), GridLayoutManager.DEFAULT_SPAN_COUNT);
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
+
 
         recyclerView.setAdapter(friendAdapter);
         recyclerView1.setAdapter(chatAdapter);
+        recyclerView2.setAdapter(customAdapter);
 
         recyclerView.setLayoutManager((layoutManager));
         recyclerView1.setLayoutManager(layoutManager1);
+        recyclerView2.setLayoutManager(linearLayoutManager3);
+        //recyclerView2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
 
         assert activity != null;
@@ -107,6 +120,17 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
         return  view;
 
+    }
+
+    private void groupImage() {
+        int[] diip = { R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user,
+
+        };
+        for (int i = 0; i < diip.length; i++){
+            arrayList.add(new itemModel(diip[i]));
+        }
     }
 
     private void addChatText() {
