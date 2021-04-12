@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,11 +54,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
 
     public class Viewholder extends RecyclerView.ViewHolder{
         ImageView image, download;
+        TextView UserTile, MessageChat, UserTime;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             download = itemView.findViewById(R.id.download);
+            UserTile = itemView.findViewById(R.id.textView54);
+            MessageChat = itemView.findViewById(R.id.messagehere);
+            UserTile = itemView.findViewById(R.id.tv_ime);
         }
     }
 }

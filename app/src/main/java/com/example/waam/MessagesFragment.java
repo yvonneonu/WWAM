@@ -128,8 +128,24 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
                 R.drawable.profile_img_user,
 
         };
+        String[] GroupNme = {
+                "Group Chat", "Group Chat", "Group Chat"
+
+        };
+
+        String[] MessageChat = {
+                "Hey, how are you today?",
+                "Hey, here we are here",
+                "Hey lets all meet here"
+
+        };
+        String[] timeschat = {
+                "12:30 PM", "1:45 PM", "9;20 PM"
+
+        };
+
         for (int i = 0; i < diip.length; i++){
-            arrayList.add(new itemModel(diip[i]));
+            arrayList.add(new itemModel(diip[i], GroupNme[i], MessageChat[i], timeschat[i]));
         }
     }
 
