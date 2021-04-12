@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SearcMessage">
+    <!--actionbar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/blue"
+        android:visibility="visible"
+
+        app:contentInsetStart="0dp"
+        app:elevation="10dp">
+
+        <TextView
+            android:id="@+id/B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:onClick="backtologin"
+            android:text="Cancel"
+            android:textColor="@color/offwhite" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Message"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="110dp"
+            android:textSize="22sp"
+            />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_marginLeft="95dp"
+            android:src="@drawable/messageicon"
+            android:layout_height="40dp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/container_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+
+
+</LinearLayout>
+
+
+
+
