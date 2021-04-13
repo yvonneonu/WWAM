@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Viewholder> {
     List<ModelChat> modelChatList;
     Context context;
+    OnChatListener onChatListener;
 
     public ChatAdapter (List<ModelChat> modelChatList, Context context){
         this.modelChatList = modelChatList;
@@ -41,7 +43,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Viewholder> {
                 .into(holder.imageView);
 
 
-
         holder.name.setText(chat.getNames());
         holder.message.setText(chat.getChatSms());
         holder.time.setText(chat.getTime());
@@ -55,6 +56,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Viewholder> {
     public class Viewholder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView name, message, time;
+        ConstraintLayout constraintLayout;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -62,6 +64,28 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Viewholder> {
             name = itemView.findViewById(R.id.textView52);
             message = itemView.findViewById(R.id.textView53);
             time = itemView.findViewById(R.id.tv_ime);
+            constraintLayout = itemView.findViewById(R.id.all);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onChatListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                         onChatListener.OnChatClick(position);
+                        }
+                    }
+
+                }
+            });
         }
     }
+    public interface OnChatListener{
+        void OnChatClick(int position);
+        }
+
+        public void ChatMethod(OnChatListener onChatListener){
+        this.onChatListener = onChatListener;
+
+        }
 }

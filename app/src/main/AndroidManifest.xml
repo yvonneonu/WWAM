@@ -28,25 +28,20 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".SearcMessage"></activity>
-        <activity android:name=".DiscoverEvent"></activity>
-        <activity android:name=".DiscoverDrawerLayerout"></activity>
+        <activity android:name=".ChatMessage"></activity>
+        <activity android:name=".SearcMessage" />
+        <activity android:name=".DiscoverEvent" />
+        <activity android:name=".DiscoverDrawerLayerout" />
         <activity android:name=".LookingFor" />
         <activity android:name=".finalProfile" />
         <activity android:name=".picture" />
         <activity android:name=".MatchFragment" />
-        <activity android:name=".Matchfriends">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Matchfriends"></activity>
         <activity android:name=".CompleteProfile" />
         <activity android:name=".LocationDetectActivity" />
-        <activity android:name=".Profile"></activity>
-        <activity android:name=".DrawelayoutActivity"></activity>
-        <activity android:name=".PaymentPage"></activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".DrawelayoutActivity" />
+        <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />
         <activity android:name=".Splash" />
@@ -57,7 +52,13 @@
         <activity android:name=".SignUp" />
         <activity android:name=".Login"></activity>
         <activity android:name=".Interest" />
-        <activity android:name=".ViewPager"></activity>
+        <activity android:name=".ViewPager">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

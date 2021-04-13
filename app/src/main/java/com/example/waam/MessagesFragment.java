@@ -25,7 +25,7 @@ import java.util.Objects;
  * Use the {@link MessagesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MessagesFragment extends Fragment implements View.OnClickListener{
+public class MessagesFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
     private RecyclerView recyclerView2;
@@ -121,10 +121,19 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
         //recyclerView2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
 
+        chatAdapter.ChatMethod(new ChatAdapter.OnChatListener() {
+            @Override
+            public void OnChatClick(int position) {
+                Intent intent = new Intent(getActivity(), ChatMessage.class);
+                startActivity(intent);
+            }
+        });
         assert activity != null;
 
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
         return  view;
+
+
 
     }
 
@@ -201,10 +210,6 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -223,4 +228,5 @@ public class MessagesFragment extends Fragment implements View.OnClickListener{
        }
         return super.onOptionsItemSelected(item);
     }
+
 }
