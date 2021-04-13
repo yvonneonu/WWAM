@@ -43,6 +43,7 @@ public class Profile extends AppCompatActivity {
     ImageView imageView;
     TextView textView, gallery, wipe;
     Button upload;
+    String bigTokeng;
     private int requestCode;
     private int resultCode;
     private static final int PICK_IMAGE = 100;
@@ -58,7 +59,7 @@ public class Profile extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         String Fullname = getIntent().getStringExtra("name");
-        String bigTokeng = getIntent().getStringExtra("alltoken");
+      bigTokeng = getIntent().getStringExtra("alltoken");
 
         tokinfromLogin = getIntent().getStringExtra("toking");
         textView = findViewById(R.id.captureImage);
@@ -127,12 +128,12 @@ public class Profile extends AppCompatActivity {
 
     }
     private void requestPicture(GetImageResponse getImageResponse){
-        Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer " +tokinfromLogin);
+        Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer "+bigTokeng);
         getImageCall.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 if (!response.isSuccessful()){
-                    String message = "Something went wrong";
+                    String message = "something went wrong";
                     Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
                     Log.d("imageview",response.message());
                     Log.d("imageview",response.errorBody().toString());

@@ -13,6 +13,9 @@ public class SearcMessage extends AppCompatActivity {
         setContentView(R.layout.activity_searc_message);
     }
 
-    public void backtologin(View view) {
+    public void back(View view) {
+      finish();
+       // Intent intent = new Intent(SearcMessage.this, ChatMessage.class);
+      //  startActivity(intent);
     }
 }

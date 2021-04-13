@@ -21,8 +21,9 @@
             android:id="@+id/B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:onClick="backtologin"
+            android:layout_marginLeft="15dp"
+            android:onClick="back"
+
             android:text="Cancel"
             android:textColor="@color/offwhite" />
 
@@ -42,12 +43,40 @@
             android:layout_height="40dp"/>
 
     </androidx.appcompat.widget.Toolbar>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    app:cardElevation="20dp"
+    android:layout_height="wrap_content">
 
+    <TextView
+
+        android:id="@+id/textView55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:hint="To:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:layout_width="match_parent"
+       android:hint="Selected Friends Name"
+        android:layout_marginLeft="30dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toEndOf="@+id/textView55"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.cardview.widget.CardView>
     <FrameLayout
         android:id="@+id/container_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
+
 
 
 

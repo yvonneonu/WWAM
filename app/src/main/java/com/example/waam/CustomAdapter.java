@@ -27,6 +27,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
     @Override
     public CustomAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.groupmessage, parent, false);
+
         return new Viewholder(view);
     }
 
@@ -51,6 +52,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
     public int getItemCount() {
         return arrayList.size();
     }
+
 
     public class Viewholder extends RecyclerView.ViewHolder{
         ImageView image, download;
