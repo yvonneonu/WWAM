@@ -29,6 +29,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".ChatMessage"></activity>
+        <activity android:name=".LocationDetailActivity" />
         <activity android:name=".SearcMessage" />
         <activity android:name=".DiscoverEvent" />
         <activity android:name=".DiscoverDrawerLayerout" />
