@@ -76,8 +76,12 @@ public class LocationDetailActivity extends AppCompatActivity implements Navigat
         invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                startActivityForResult(pickContact, REQUEST_CONTACT);
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, "Join me to use the wwam app");
+                i.putExtra(Intent.EXTRA_SUBJECT, "Share with");
+                i = Intent.createChooser(i,"Send to a friend");
+                startActivity(i);
             }
         });
 
@@ -100,31 +104,6 @@ public class LocationDetailActivity extends AppCompatActivity implements Navigat
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CONTACT && data != null){
-            Uri contactUri = data.getData();
-            Cursor cursor = null;
-            Log.d("Contact",contactUri.toString());
-
-            try {
-                String phoneNo = null;
-                String name = null;
-
-                Uri uri = data.getData();
-                cursor = getContentResolver().query(uri, null, null, null, null);
-                cursor.moveToFirst();
-                int  phoneIndex =cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                int  nameIndex =cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-                phoneNo = cursor.getString(phoneIndex);
-                name = cursor.getString(nameIndex);
-
-                Log.e("Names",name+","+phoneNo);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
     }
 
 
