@@ -71,7 +71,7 @@
                 android:id="@+id/view14"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="8dp"
                 android:background="@color/offwhite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

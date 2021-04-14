@@ -48,11 +48,10 @@
         android:layout_width="23dp"
         android:layout_height="25dp"
         android:layout_marginStart="38dp"
-        android:layout_marginLeft="38dp"
         android:layout_marginTop="150dp"
         android:scaleType="fitCenter"
         android:src="@drawable/email_icon"
-        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
@@ -81,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
         android:drawableTint="@color/offwhite"
@@ -95,19 +94,21 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:background="#c0c0c0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/password_icon"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
@@ -150,11 +151,12 @@
         android:id="@+id/view2"
         android:layout_width="0dp"
         android:layout_height="2dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="52dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="25dp"
         android:background="#c0c0c0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <ImageView
@@ -165,8 +167,8 @@
         android:src="@drawable/login_button"
         android:textColor="@color/white"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/editText4"
-        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <TextView
@@ -177,9 +179,9 @@
         android:text="Don't have an account?"
         android:textColor="@color/offwhite"
         android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.396"
-        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
