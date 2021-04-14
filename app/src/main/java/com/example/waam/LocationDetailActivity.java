@@ -66,23 +66,15 @@ public class LocationDetailActivity extends AppCompatActivity implements Navigat
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         dialog.getWindow().getAttributes().windowAnimations = R.style.animations ;
-        rateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.show();
-            }
-        });
+        rateButton.setOnClickListener(v -> dialog.show());
 
-        invite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, "Join me to use the wwam app");
-                i.putExtra(Intent.EXTRA_SUBJECT, "Share with");
-                i = Intent.createChooser(i,"Send to a friend");
-                startActivity(i);
-            }
+        invite.setOnClickListener(v -> {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_TEXT, "Join me to use the wwam app");
+            i.putExtra(Intent.EXTRA_SUBJECT, "Share with");
+            i = Intent.createChooser(i,"Send to a friend");
+            startActivity(i);
         });
 
         submit.setOnClickListener(v -> {
