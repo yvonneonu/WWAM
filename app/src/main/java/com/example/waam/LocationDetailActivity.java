@@ -71,8 +71,8 @@ public class LocationDetailActivity extends AppCompatActivity implements Navigat
         invite.setOnClickListener(v -> {
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_TEXT, "Join me to use the wwam app");
-            i.putExtra(Intent.EXTRA_SUBJECT, "Share with");
+            i.putExtra(Intent.EXTRA_TEXT, "Share with");
+            i.putExtra(Intent.EXTRA_SUBJECT, "Join me to use the wwam app");
             i = Intent.createChooser(i,"Send to a friend");
             startActivity(i);
         });
