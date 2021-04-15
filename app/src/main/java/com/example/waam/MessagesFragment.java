@@ -128,6 +128,23 @@ public class MessagesFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        customAdapter.CusomMethod(new CustomAdapter.OnCustomListener() {
+            @Override
+            public void OnCustomClick(int positon) {
+                Intent intent = new Intent(getActivity(), ChatMessage.class);
+                startActivity(intent);
+            }
+        });
+
+        friendAdapter.OnFriendMethod(new FriendAdapter.OnfriendListener() {
+            @Override
+            public void OnFriendClick(int poaition) {
+                Intent intent = new Intent(getActivity(), ChatMessage.class);
+                startActivity(intent);
+            }
+        });
+
         assert activity != null;
 
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");

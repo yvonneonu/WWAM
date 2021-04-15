@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ import java.util.List;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder>{
     Context context;
     List<itemModel> arrayList;
+    OnCustomListener onCustomListener;
 
     public CustomAdapter(List<itemModel> arrayList, Context context){
         this.arrayList = arrayList;
@@ -57,6 +59,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
     public class Viewholder extends RecyclerView.ViewHolder{
         ImageView image, download;
         TextView UserTile, MessageChat, UserTime;
+        ConstraintLayout constraintLayout;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +68,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
             UserTile = itemView.findViewById(R.id.textView54);
             MessageChat = itemView.findViewById(R.id.messagehere);
             UserTile = itemView.findViewById(R.id.tv_ime);
+            constraintLayout = itemView.findViewById(R.id.custom);
+
+            constraintLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onCustomListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            onCustomListener.OnCustomClick(position);
+                        }
+                    }
+                }
+            });
         }
+    }
+    public interface OnCustomListener{
+        void OnCustomClick(int positon);
+    }
+    public void CusomMethod(OnCustomListener onCustomListener){
+        this.onCustomListener = onCustomListener;
     }
 }

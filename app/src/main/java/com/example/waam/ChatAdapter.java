@@ -66,16 +66,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Viewholder> {
             time = itemView.findViewById(R.id.tv_ime);
             constraintLayout = itemView.findViewById(R.id.all);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onChatListener != null){
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION){
-                         onChatListener.OnChatClick(position);
+                            onChatListener.OnChatClick(position);
                         }
                     }
-
                 }
             });
         }
