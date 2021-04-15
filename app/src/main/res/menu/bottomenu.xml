@@ -21,5 +21,5 @@
     <item
         android:id="@+id/agent"
         android:title="Agents"
-        android:icon="@drawable/icon_agent"/>
+        android:icon="@drawable/lowernav_agent_icon"/>
 </menu>

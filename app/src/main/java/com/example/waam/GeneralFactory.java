@@ -8,12 +8,24 @@ public class GeneralFactory {
     private static GeneralFactory generalFactory;
     private final List<EventModel> eventModelList;
     private EventModel[] eventModelsArrays;
+    private List<Location> locationList;
 
 
     private GeneralFactory(){
+
         eventModelList = new ArrayList<>();
+        locationList = new ArrayList<>();
     }
 
+    int[] images = new int[]{R.drawable.eventcardimg,
+            R.drawable.event_img,
+            R.drawable.city_img,
+            R.drawable.discover_featured_img,
+            R.drawable.event_img,
+            R.drawable.city_img,
+            R.drawable.discover_featured_img,
+            R.drawable.event_img};
+    String[] locationNames = new String[]{"Las Vegas","Los Angeles","Minneapolis","Mississipi","Atlanta","Florida","Miami","Kansas"};
     public static GeneralFactory getGeneralFactory(){
         if(generalFactory == null){
             generalFactory = new GeneralFactory();
@@ -34,8 +46,22 @@ public class GeneralFactory {
     }
 
     public List<EventModel> getEventModelList(){
+        eventModelList.clear();
         makeEvent();
         eventModelList.addAll(Arrays.asList(eventModelsArrays));
         return  eventModelList;
+    }
+
+
+    public void makeLocation(){
+        for(int i = 0 ; i < images.length ; i++){
+            locationList.add(new Location(images[i],locationNames[i]));
+        }
+    }
+
+    public List<Location> getLocationList(){
+        locationList.clear();
+        makeLocation();
+        return locationList;
     }
 }
