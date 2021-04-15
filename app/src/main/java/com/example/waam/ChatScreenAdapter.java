@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -17,10 +20,13 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static  final int LEFT = 0;
     private final List<Chat> listOfChats;
     private final Context context;
+    private String senderId;
+    private String recieverId;
 
     public ChatScreenAdapter(List<Chat> chatHolder, Context context) {
         this.listOfChats = chatHolder;
         this.context = context;
+        senderId = "yvonne";
     }
 
     @NonNull
@@ -40,6 +46,20 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         final Chat chat = listOfChats.get(position);
+        if(chat.getSenderId().equals(senderId)){
+            Senderview  senderView = (Senderview) holder;
+            senderView.textView.setText(chat.getMessage());
+        }else{
+
+            final ReceiverView receiverView = (ReceiverView) holder;
+            receiverView.textView.setText(chat.getMessage());
+            Glide.with(context)
+                    .asBitmap()
+                    .load(R.drawable.profile_img_user)
+                    .circleCrop()
+                    .into(receiverView.imageView);
+
+        }
        /* if(chat.getSenderId().equals(user.getUid())){
             SenderView senderView = (SenderView) holder;
             senderView.textView.setText(chat.getMessage());
@@ -59,12 +79,18 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
             });*/
 
+
+
+
     }
 
     @Override
     public int getItemCount() {
         return listOfChats.size();
     }
+
+
+
     public static class Senderview extends RecyclerView.ViewHolder{
         TextView textView;
         ImageView imageView;
@@ -76,9 +102,9 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             imageView = itemView.findViewById(R.id.circleimage1);
             emoji = itemView.findViewById(R.id.emojiButton);
 
-
         }
     }
+
     public static class ReceiverView extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView textView;

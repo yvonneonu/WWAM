@@ -9,12 +9,14 @@ public class GeneralFactory {
     private final List<EventModel> eventModelList;
     private EventModel[] eventModelsArrays;
     private List<Location> locationList;
+    private List<Chat> chatList;
 
 
     private GeneralFactory(){
 
         eventModelList = new ArrayList<>();
         locationList = new ArrayList<>();
+
     }
 
     int[] images = new int[]{R.drawable.eventcardimg,
@@ -32,6 +34,13 @@ public class GeneralFactory {
         }
         return generalFactory;
     }
+
+    private String[] messagesArray = new String[]{"RecyclerView, while powerful and capable","RecyclerView, while powerful and capable","As you may have noticed, RecyclerView"};
+    private String senderId = "yvonne";
+    private String receiverId = "bamidele";
+    private String chatId = "";
+
+
 
     public void makeEvent(){
         EventModel eventModelone = new EventModel("As you may have noticed," +
@@ -64,4 +73,20 @@ public class GeneralFactory {
         makeLocation();
         return locationList;
     }
+
+    private void makeMessage(){
+        chatList = new ArrayList<>();
+        for(int i = 0 ; i < messagesArray.length ; i++){
+            Chat chat = new Chat(messagesArray[i],senderId,receiverId, chatId);
+            chatList.add(chat);
+        }
+    }
+
+    public List<Chat> getChatList(){
+        makeMessage();
+        return chatList;
+    }
+
+
+
 }

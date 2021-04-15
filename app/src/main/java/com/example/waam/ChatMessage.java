@@ -18,8 +18,9 @@ public class ChatMessage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_message);
+        chats = GeneralFactory.getGeneralFactory().getChatList();
         recyclerView = findViewById(R.id.recyclerView);
-       chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
+        chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
         recyclerView.setAdapter(chatScreenAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
