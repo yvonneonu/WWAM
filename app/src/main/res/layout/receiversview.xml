@@ -29,6 +29,7 @@
         android:textSize="20sp" />
 
     <ImageView
+        android:id="@+id/like"
         android:layout_marginStart="35dp"
         android:layout_width="40dp"
         android:src="@drawable/like_save_icon"
