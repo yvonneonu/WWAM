@@ -52,6 +52,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         frameLayout.removeAllViews();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(container,fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
 
     }
@@ -93,6 +94,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         if(fragment != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentcontainer,fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
             drawer.closeDrawer(GravityCompat.START);
             return true;
