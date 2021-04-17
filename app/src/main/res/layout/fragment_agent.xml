@@ -33,7 +33,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Choose the perfect agent for you and get assisted in finding the
-perfect dae today"
+perfect date today."
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@ perfect dae today"
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -49,6 +49,8 @@ perfect dae today"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

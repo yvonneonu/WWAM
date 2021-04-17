@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,12 @@ import java.util.List;
  */
 public class AgentFragment extends Fragment {
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView1;
     private AgentAdapter agentAdapter;
 
+
     private List<AgentModel> agentModelList = new ArrayList<>();
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,23 +73,44 @@ public class AgentFragment extends Fragment {
         // Inflate the layout for this fragment
         addAgent();
         View view = inflater.inflate(R.layout.fragment_agent, container, false);
+      //  View
         recyclerView = view.findViewById(R.id.recyclerView);
+       //recyclerView1 = view.findViewById(R.id.rec);
+
         agentAdapter = new AgentAdapter(agentModelList,getActivity());
+        //agentAdapter1 = new AgentAdapter1(agentModel1s, getActivity());
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
+       // LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
+
         recyclerView.setAdapter(agentAdapter);
+      //  recyclerView1.setAdapter(agentAdapter1);
+
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        agentAdapter.AgentMethod(new AgentAdapter.OnAgentListener() {
+            @Override
+            public void onAgentCick(int position) {
+                Intent intent = new Intent(getActivity(), AgentProfile.class);
+                startActivity(intent);
+            }
+        });
+        //recyclerView1.setLayoutManager(linearLayoutManager1);
         return view;
+
+
     }
 
     private void addAgent() {
         int[] display = {
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user,
-                R.drawable.group_img_2,
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user
+                R.drawable.agent_1_img,
+                R.drawable.agent_2_img,
+                R.drawable.agent_3_img,
+                R.drawable.agent_4_img,
+                R.drawable.agent_5_img,
+                R.drawable.agent_6_img,
+                R.drawable.agent_1_img
         };
         String[] name = {"Ebuka Obi", "Blessing Peter", "Brown White", "Alexander Helger", "Chris Paul", "Peter Mac", "LordBroke Saint"
         };
@@ -96,8 +121,30 @@ public class AgentFragment extends Fragment {
         String[] rating2 = {"(101 Ratings)", "(109 Ratings)", "(115 Ratings)", "(209 Ratings)", "(159 Ratings)", "(100 Ratings)", "(119 Ratings)"
 
         };
+
+        int[] display1 = {
+                R.drawable.agent_6_img,
+                R.drawable.agent_5_img,
+                R.drawable.agent_4_img,
+                R.drawable.agent_3_img,
+                R.drawable.agent_2_img,
+                R.drawable.agent_1_img,
+                R.drawable.agent_6_img
+        };
+        String[] name1 = {"LordBroke Saint", "Brown White", "Ebuka Obi", "Blessing Peter", "Peter Mac", "Alexander Helger", "Chris Paul"
+        };
+
+        String[] rating1 = {"4.5", "3.0", "3.2", "4.1", "3.1", "6.0", "4.8"
+
+        };
+        String[] rating3 = {"(102 Ratings)", "(105 Ratings)", "(103 Ratings)", "(109 Ratings)", "(150 Ratings)", "(101 Ratings)", "(115 Ratings)"
+
+        };
+
+
+
         for (int i = 0; i < display.length; i++){
-            agentModelList.add(new AgentModel(display[i], name[i], rating[i], rating2[i]));
+            agentModelList.add(new AgentModel(display[i], name[i], rating[i], rating2[i], display1[i], name1[i], rating1[i], rating3[i]));
         }
     }
 
