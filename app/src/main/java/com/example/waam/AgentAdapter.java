@@ -33,10 +33,13 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.Viewholder> 
     public void onBindViewHolder(@NonNull AgentAdapter.Viewholder holder, int position) {
         AgentModel agentModel = agentModelList.get(position);
         holder.firstAgent.setImageResource(agentModel.getImage());
-        holder.secondAgent.setImageResource(agentModel.getImage());
+      //  holder.secondAgent.setImageResource(agentModel.getImage());
         holder.firstName.setText(agentModel.getName());
-        holder.secondName.setText(agentModel.getName());
-
+       // holder.secondName.setText(agentModel.getName());
+        holder.firstRate.setText(agentModel.getRating());
+       // holder.secondRate.setText(agentModel.getRating());
+        holder.number1Rate.setText(agentModel.getRating1());
+    //    holder.number2Rate.setText(agentModel.getRating1());
 
     }
 
@@ -53,13 +56,13 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.Viewholder> 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             firstAgent = itemView.findViewById(R.id.agentimage);
-            secondAgent = itemView.findViewById(R.id.secondImage);
+            //secondAgent = itemView.findViewById(R.id.secondImage);
             firstName = itemView.findViewById(R.id.agentName);
-            secondName = itemView.findViewById(R.id.secondAg);
+           // secondName = itemView.findViewById(R.id.secondAg);
             firstRate = itemView.findViewById(R.id.rateone);
-            secondRate = itemView.findViewById(R.id.ratetwo);
+           // secondRate = itemView.findViewById(R.id.ratetwo);
             number1Rate = itemView.findViewById(R.id.numb);
-            number2Rate = itemView.findViewById(R.id.numb2);
+          //  number2Rate = itemView.findViewById(R.id.numb2);
 
         }
     }
