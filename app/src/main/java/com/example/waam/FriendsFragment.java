@@ -76,6 +76,18 @@ public class FriendsFragment extends Fragment {
         FriendModel friendAdder = new FriendModel("Add Friend","250+ Nearby",addFriend);
         friendModelList.add(0,friendAdder);
         friendAdapt = new FriendAdapt(friendModelList,getActivity());
+
+
+        friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
+            @Override
+            public void friendResponder(int position) {
+                if(position == 0){
+                    Log.d("AddFriend","You clicked Add");
+                }else{
+                    Log.d("Chat","Move to Chat");
+                }
+            }
+        });
     }
 
 
@@ -96,6 +108,7 @@ public class FriendsFragment extends Fragment {
             }
             @Override
             public boolean onQueryTextChange(String s) {
+                friendAdapt.getFilter().filter(s);
                 Log.d("TAG", "QueryTextChange: " + s);
                 return false;
             }

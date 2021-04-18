@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/inv"
-        android:title="Invite"
-        android:icon="@drawable/invite_button"
-        app:showAsAction="always"/>
 
     <item android:id="@+id/menu_item_search"
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
 
-    <item android:id="@+id/menu_item_clear"
-        android:title="@string/clear_search"
-        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/inv"
+        android:title="Invite"
+        android:icon="@drawable/invite_button"
+        app:showAsAction="always"/>
+
+
 
 
 
