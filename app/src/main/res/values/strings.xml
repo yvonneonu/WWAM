@@ -30,4 +30,8 @@
     <string name="title">title</string>
     <string name="secondary_text">secondary text</string>
     <string name="supporting_text">supporting text</string>
+    <string name="detail">Information about the dating agent and how they will perform their services. the client interview procwss and commuication schedule.</string>
+    <string name="moreDetail"> Lorem Ipsum dolor sit amet, consector adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequaat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cipidata non prodent. sunt in culpa qui officia deserunt mollit anim id est labourum.</string>
 </resources>
