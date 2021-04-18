@@ -178,6 +178,7 @@ public class AgentProfile extends AppCompatActivity implements NavigationView.On
             case R.id.friends:
                 fragment = new FriendsFragment();
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
+                finish();
                 break;
 
             case R.id.profile:
