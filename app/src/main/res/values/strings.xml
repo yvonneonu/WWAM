@@ -30,4 +30,6 @@
     <string name="title">title</string>
     <string name="secondary_text">secondary text</string>
     <string name="supporting_text">supporting text</string>
+    <string name="search">search</string>
+    <string name="clear_search">clearsearch</string>
 </resources>

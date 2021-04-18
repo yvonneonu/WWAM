@@ -1,14 +1,24 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -27,6 +37,9 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private FriendAdapt friendAdapt;
+    private List<FriendModel> friendModelList;
+    private GeneralFactory generalFactory;
     public FriendsFragment() {
         // Required empty public constructor
     }
@@ -56,6 +69,59 @@ public class FriendsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
+        generalFactory = GeneralFactory.getGeneralFactory();
+        friendModelList = generalFactory.getFriendModelList();
+        int addFriend = R.drawable.add_new_friend_icon;
+        FriendModel friendAdder = new FriendModel("Add Friend","250+ Nearby",addFriend);
+        friendModelList.add(0,friendAdder);
+        friendAdapt = new FriendAdapt(friendModelList,getActivity());
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.friendsmenu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.d("TAG", "QueryTextSubmit: " + s);
+
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Log.d("TAG", "QueryTextChange: " + s);
+                return false;
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final int search = R.id.menu_item_search;
+        final int invite = R.id.inv;
+        switch (item.getItemId()){
+            case search:
+                break;
+            case invite:
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, "Join me to use the wwam app");
+                i.putExtra(Intent.EXTRA_SUBJECT, "Share with");
+                i = Intent.createChooser(i,"Send to a friend");
+                startActivity(i);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+
     }
 
     @Override
@@ -63,9 +129,14 @@ public class FriendsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.friends_recycler);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        recyclerView.setAdapter(friendAdapt);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Friends");
         return view;
     }
+
+
 }

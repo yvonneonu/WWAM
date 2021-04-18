@@ -1,5 +1,8 @@
 package com.example.waam;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,16 +11,10 @@ public class GeneralFactory {
     private static GeneralFactory generalFactory;
     private final List<EventModel> eventModelList;
     private EventModel[] eventModelsArrays;
-    private List<Location> locationList;
+    private final List<Location> locationList;
+    private List<FriendModel> friendModelList;
 
-
-    private GeneralFactory(){
-
-        eventModelList = new ArrayList<>();
-        locationList = new ArrayList<>();
-    }
-
-    int[] images = new int[]{R.drawable.eventcardimg,
+    private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
             R.drawable.city_img,
             R.drawable.discover_featured_img,
@@ -25,6 +22,41 @@ public class GeneralFactory {
             R.drawable.city_img,
             R.drawable.discover_featured_img,
             R.drawable.event_img};
+    private final int[] frimage = new int[]{
+            R.drawable.friend_profie,
+            R.drawable.friend_profie_2,
+            R.drawable.friend_profie_3,
+            R.drawable.friend_profie_4,
+            R.drawable.friend_profie_5,
+            R.drawable.friend_profie_6,
+    };
+
+    private final String[] firstname = new String[]{
+            "John",
+            "Stephen",
+            "Thomas",
+            "Albert",
+            "Charles",
+            "Bamidele",
+    };
+
+    private final String[] lastname = new String[]{
+            "Doe",
+            "Hawkings",
+            "Edison",
+            "Einstein",
+            "Darwin",
+            "Omonayin",
+    };
+
+
+    private GeneralFactory(){
+        eventModelList = new ArrayList<>();
+        locationList = new ArrayList<>();
+        friendModelList = new ArrayList<>();
+    }
+
+
     String[] locationNames = new String[]{"Las Vegas","Los Angeles","Minneapolis","Mississipi","Atlanta","Florida","Miami","Kansas"};
     public static GeneralFactory getGeneralFactory(){
         if(generalFactory == null){
@@ -63,5 +95,19 @@ public class GeneralFactory {
         locationList.clear();
         makeLocation();
         return locationList;
+    }
+
+
+    public void makeFriends(){
+
+        for(int i = 0 ; i < frimage.length ; i++){
+            friendModelList.add(new FriendModel(firstname[i],lastname[i],frimage[i]));
+        }
+    }
+
+    public List<FriendModel> getFriendModelList(){
+        friendModelList.clear();
+        makeFriends();
+        return friendModelList;
     }
 }
