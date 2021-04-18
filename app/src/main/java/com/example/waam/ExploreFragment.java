@@ -72,7 +72,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
         }
 
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.add(R.id.frcontainer,fragment);
         ft.commit();
     }
@@ -146,7 +146,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
         if(fragment != null){
             Log.d("TAG","not null");
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
             ft.replace(R.id.frcontainer,fragment);
             ft.commit();
         }

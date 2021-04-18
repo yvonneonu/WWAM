@@ -40,8 +40,6 @@ public class LocationDetailActivity extends AppCompatActivity implements Navigat
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         invite = findViewById(R.id.button12);
         dialog = new Dialog(LocationDetailActivity.this);
         dialog.setContentView(R.layout.custom_dialog);
@@ -83,12 +81,9 @@ public class LocationDetailActivity extends AppCompatActivity implements Navigat
         });
 
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LocationDetailActivity.this,"CAncel is clicked",Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
+        cancel.setOnClickListener(v -> {
+            Toast.makeText(LocationDetailActivity.this,"CAncel is clicked",Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         });
 
     }
