@@ -49,6 +49,10 @@ public class GeneralFactory {
             "Omonayin",
     };
 
+    private String[] messagesArray = new String[]{"RecyclerView, while powerful and capable","RecyclerView, while powerful and capable","As you may have noticed, RecyclerView"};
+    private String senderId = "yvonne";
+    private String receiverId = "bamidele";
+    private String chatId = "";
 
     private GeneralFactory(){
         eventModelList = new ArrayList<>();
