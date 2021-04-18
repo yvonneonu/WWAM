@@ -38,6 +38,7 @@
         <activity android:name=".LookingFor" />
         <activity android:name=".finalProfile" />
         <activity android:name=".picture" />
+        <activity android:name=".LocationDetailActivity"/>
         <activity android:name=".MatchFragment" />
         <activity android:name=".Matchfriends" />
         <activity android:name=".CompleteProfile" />
