@@ -13,6 +13,7 @@ public class GeneralFactory {
     private EventModel[] eventModelsArrays;
     private final List<Location> locationList;
     private List<FriendModel> friendModelList;
+    private List<Chat> chatList;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -58,6 +59,7 @@ public class GeneralFactory {
         eventModelList = new ArrayList<>();
         locationList = new ArrayList<>();
         friendModelList = new ArrayList<>();
+        chatList = new ArrayList<>();
     }
 
 
@@ -114,4 +116,18 @@ public class GeneralFactory {
         makeFriends();
         return friendModelList;
     }
+
+    private void makeMessage(){
+        chatList = new ArrayList<>();
+        for(int i = 0 ; i < messagesArray.length ; i++){
+            Chat chat = new Chat(messagesArray[i],senderId,receiverId, chatId);
+            chatList.add(chat);
+        }
+    }
+
+    public List<Chat> getChatList(){
+        makeMessage();
+        return chatList;
+    }
+
 }
