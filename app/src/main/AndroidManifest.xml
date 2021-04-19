@@ -29,7 +29,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".AgentProfile">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ChatMessage" />
         <activity android:name=".SearcMessage" />
@@ -54,11 +58,7 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Interest" />
         <activity android:name=".ViewPager">

@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -30,11 +32,13 @@ public class AgentProfile extends AppCompatActivity implements NavigationView.On
     private boolean visible;
     private TextView textSeeMore, more, moreDetail;
 
+    ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agent_profile);
+
 
         Toolbar toolbar2 = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar2);
@@ -44,20 +48,48 @@ public class AgentProfile extends AppCompatActivity implements NavigationView.On
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
+        boolean clicked = getIntent().getBooleanExtra("clicked",false);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         drawer1 = findViewById(R.id.drawer1_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer1, toolbar2, R.string.open, R.string.close);
 
+
         drawer1.addDrawerListener(toggle);
         toggle.syncState();
 
-       toolbar2.setLogo(R.drawable.topnavlogo);
-       toolbar2.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+
+        toolbar2.setLogo(R.drawable.topnavlogo);
+        toolbar2.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+
 
         textSeeMore = findViewById(R.id.textView80);
         more = findViewById(R.id.textView78);
         moreDetail = findViewById(R.id.textView79);
         visible = false;
+        // overridePendingTransition(0, 0);
+        Fragment fragment;
+        if (clicked) {
+            fragment = new MessagesFragment();
+            bottomNavigationView.getMenu().getItem(1).setChecked(true);
+
+            //onNavigationItemSelected(fragment);
+            //fragment.setSe(true);
+           /* bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+                @Override
+                public void onNavigationItemReselected(@NonNull MenuItem item) {
+                    item.setIcon(R.drawable.lowernav_messages_icon_active);
+                }
+            });(*/
+            // bottomNavigationView.setSelectedItemId(R.id.messages);
+            // bottomNavigationView.onScreenStateChanged(0);
+
+        } else {
+            fragment = new ExploreFragment();
+        }
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.fragmentcontainer, fragment);
+
+        ft.commit();
 
 
         androidx.viewpager.widget.ViewPager viewPager = findViewById(R.id.viewPager);
@@ -152,33 +184,53 @@ public class AgentProfile extends AppCompatActivity implements NavigationView.On
         Toast.makeText(AgentProfile.this, "Book me", Toast.LENGTH_SHORT).show();
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+       // bottomNavigationView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
         Log.d("TAG", "not null");
         switch (item.getItemId()) {
             case R.id.membership:
                 fragment = new BecomeAMemberFragment();
-                finish();
-
+               // finish();
+                bottomNavigationView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
                 break;
 
-            case R.id.discover:
-                fragment = new DiscoverFragment();
+            case R.id.explore:
+                fragment = new ExploreFragment();
                 item.setIcon(R.drawable.lowernav_explore_icon_active);
-                finish();
+                constraintLayout = findViewById(R.id.constraintLayout);
+                constraintLayout.setVisibility(View.INVISIBLE);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.add(R.id.fragmentcontainer, fragment);
+                ft.commit();
+
+              //  overridePendingTransition(0, 0);
                 break;
 
             case R.id.messages:
                 fragment = new MessagesFragment();
                 item.setIcon(R.drawable.lowernav_messages_icon_active);
-                finish();
+                FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+                ft1.add(R.id.fragmentcontainer, fragment);
+                constraintLayout = findViewById(R.id.constraintLayout);
+                constraintLayout.setVisibility(View.INVISIBLE);
+                bottomNavigationView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
+                ft1.commit();
+
+              //  overridePendingTransition(0, 0);
                 break;
 
             case R.id.friends:
                 fragment = new FriendsFragment();
+
+                bottomNavigationView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
-                finish();
+
+
+
                 break;
 
             case R.id.profile:
