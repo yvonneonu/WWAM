@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,12 +21,10 @@ import java.util.List;
  */
 public class AgentFragment extends Fragment {
     private RecyclerView recyclerView;
-    private RecyclerView recyclerView1;
     private AgentAdapter agentAdapter;
+    private List<AgentModel> agentModelList;
 
-
-    private List<AgentModel> agentModelList = new ArrayList<>();
-
+    private GeneralFactory generalFactory;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,34 +64,31 @@ public class AgentFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        generalFactory = GeneralFactory.getGeneralFactory();
+        agentModelList = generalFactory.getAgentModelList();
+
+        agentAdapter = new AgentAdapter(agentModelList,getActivity());
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        addAgent();
         View view = inflater.inflate(R.layout.fragment_agent, container, false);
-      //  View
+
         recyclerView = view.findViewById(R.id.recyclerView);
-       //recyclerView1 = view.findViewById(R.id.rec);
-
-        agentAdapter = new AgentAdapter(agentModelList,getActivity());
-        //agentAdapter1 = new AgentAdapter1(agentModel1s, getActivity());
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
-       // LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
-
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setAdapter(agentAdapter);
-      //  recyclerView1.setAdapter(agentAdapter1);
 
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         agentAdapter.AgentMethod(new AgentAdapter.OnAgentListener() {
             @Override
             public void onAgentCick(int position) {
+                AgentModel agentModel = agentModelList.get(position);
                 Intent intent = new Intent(getActivity(), AgentProfile.class);
+                intent.putExtra("agent",agentModel);
                 startActivity(intent);
             }
         });
@@ -102,51 +98,7 @@ public class AgentFragment extends Fragment {
 
     }
 
-    private void addAgent() {
-        int[] display = {
-                R.drawable.agent_1_img,
-                R.drawable.agent_2_img,
-                R.drawable.agent_3_img,
-                R.drawable.agent_4_img,
-                R.drawable.agent_5_img,
-                R.drawable.agent_6_img,
-                R.drawable.agent_1_img
-        };
-        String[] name = {"Ebuka Obi", "Blessing Peter", "Brown White", "Alexander Helger", "Chris Paul", "Peter Mac", "LordBroke Saint"
-        };
 
-        String[] rating = {"3.5", "5.0", "4.2", "5.1", "4.1", "7.0", "5.8"
-
-        };
-        String[] rating2 = {"(101 Ratings)", "(109 Ratings)", "(115 Ratings)", "(209 Ratings)", "(159 Ratings)", "(100 Ratings)", "(119 Ratings)"
-
-        };
-
-        int[] display1 = {
-                R.drawable.agent_6_img,
-                R.drawable.agent_5_img,
-                R.drawable.agent_4_img,
-                R.drawable.agent_3_img,
-                R.drawable.agent_2_img,
-                R.drawable.agent_1_img,
-                R.drawable.agent_6_img
-        };
-        String[] name1 = {"LordBroke Saint", "Brown White", "Ebuka Obi", "Blessing Peter", "Peter Mac", "Alexander Helger", "Chris Paul"
-        };
-
-        String[] rating1 = {"4.5", "3.0", "3.2", "4.1", "3.1", "6.0", "4.8"
-
-        };
-        String[] rating3 = {"(102 Ratings)", "(105 Ratings)", "(103 Ratings)", "(109 Ratings)", "(150 Ratings)", "(101 Ratings)", "(115 Ratings)"
-
-        };
-
-
-
-        for (int i = 0; i < display.length; i++){
-            agentModelList.add(new AgentModel(display[i], name[i], rating[i], rating2[i], display1[i], name1[i], rating1[i], rating3[i]));
-        }
-    }
 
 
 }
