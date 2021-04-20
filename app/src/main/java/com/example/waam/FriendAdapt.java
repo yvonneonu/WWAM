@@ -20,7 +20,7 @@ import java.util.List;
 public class FriendAdapt extends RecyclerView.Adapter<FriendAdapt.FriendHolder> implements Filterable {
     private final List<FriendModel> friendsContainer;
     private final Context context;
-    private List<FriendModel> FullfriendModelList;
+    private final List<FriendModel> FullfriendModelList;
     private FriendAptListener friendAptListener;
     public FriendAdapt(List<FriendModel> friendsContainer, Context context) {
         this.friendsContainer = friendsContainer;
