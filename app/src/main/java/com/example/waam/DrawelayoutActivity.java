@@ -60,8 +60,10 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         }else{
             fragment = new ExploreFragment();
         }
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmentcontainer,fragment);
+        ft.addToBackStack(null);
         ft.commit();
 
 
@@ -122,11 +124,22 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 break;
         }
         if(fragment != null){
-            Log.d("TAG","not null");
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            if(fragment == new AgentFragment()){
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentcontainer,fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }else{
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentcontainer,fragment);
+                ft.commit();
+                drawer.closeDrawer(GravityCompat.START);
+            }
+
+            /*FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentcontainer,fragment);
             ft.commit();
-            drawer.closeDrawer(GravityCompat.START);
+            drawer.closeDrawer(GravityCompat.START);*/
             return true;
         }else{
             Log.d("TAG","is null");

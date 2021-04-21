@@ -91,6 +91,7 @@ public class AgentFragment extends Fragment {
                 Fragment fr = new AgentDetailFragment(agentModel);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentcontainer,fr)
+                        .addToBackStack(null)
                         .commit();
             }
         });

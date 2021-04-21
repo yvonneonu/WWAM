@@ -52,9 +52,9 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.Viewholder> 
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        ImageView firstAgent, secondAgent;
-        TextView firstName, secondName, firstRate, secondRate, number1Rate, number2Rate;
-        CardView cardView, cardView1;
+        ImageView firstAgent;
+        TextView firstName,firstRate, number1Rate;
+        CardView cardView;
        // CardView ;
 
 
