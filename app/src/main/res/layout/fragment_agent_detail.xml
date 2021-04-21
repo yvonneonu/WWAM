@@ -17,18 +17,22 @@
             <ImageView
                 android:id="@+id/imageView36"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/agent_4_img"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/textView88"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="TextView"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +41,14 @@
             <LinearLayout
                 android:id="@+id/linearLayout16"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/textView92"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView88">
@@ -48,28 +57,39 @@
                     android:id="@+id/textView89"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:gravity=""
+                    android:text="4.5"
+                    android:textSize="18sp"
+                    app:drawableRightCompat="@drawable/itemiconratings" />
 
                 <TextView
                     android:id="@+id/textView90"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="(109 ratings)" />
 
-                <RatingBar
-                    android:id="@+id/ratingBar3"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/textView91"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:gravity="center|end"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar3"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:numStars="1" />
+
+                    <TextView
+                        android:id="@+id/textView91"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rate Now" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -77,6 +97,9 @@
                 android:id="@+id/textView92"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporlabore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa massa ultricies. Sagit a scelerisque purus semper eget duis. Pulvinar neque laoreet suspendisse interdum consectetur libero id
                  faucibus. Arcu non odio euismod lacinia at quis risus. Et magnis dis parturient montes nascetur ridimus mauris. Venenatis cras sed felis eget velit aliquet. Commodo viverra maecenas accumsan lacus vel.
                  Faucibus purus in massa tempor nec. Curabitur gravida arcu ac tortor dignissim convPharetra magna ac placerat vestibulum lectus. Gravida in fermentum et sollicitudin aTincidunt eget nullam non nisi est sit amet facilisis.  Tempor orci eu lobortis elementum nibh tellus Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Purus in massa tempor nec feuSed faucibus turpis in eu mi bibendum neque. Nibh praesent tristique magna sit. Aliquet bibendum enim facilisis graviellus elementum sagittis vitae et leo. Cras sed felis eget velit. In ante metus dictum at tempor commodo ullamcorper.

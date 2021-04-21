@@ -88,7 +88,7 @@ public class AgentFragment extends Fragment {
             public void onAgentCick(int position) {
                 AgentModel agentModel = agentModelList.get(position);
 
-                Fragment fr = AgentDetailFragment.newInstance(agentModel);
+                Fragment fr = new AgentDetailFragment(agentModel);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentcontainer,fr)
                         .commit();
