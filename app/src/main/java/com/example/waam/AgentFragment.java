@@ -87,9 +87,11 @@ public class AgentFragment extends Fragment {
             @Override
             public void onAgentCick(int position) {
                 AgentModel agentModel = agentModelList.get(position);
-                Intent intent = new Intent(getActivity(), AgentProfile.class);
-                intent.putExtra("agent",agentModel);
-                startActivity(intent);
+
+                Fragment fr = AgentDetailFragment.newInstance(agentModel);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentcontainer,fr)
+                        .commit();
             }
         });
         //recyclerView1.setLayoutManager(linearLayoutManager1);
