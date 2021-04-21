@@ -12,51 +12,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-/**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
- */
+import java.util.Objects;
+
 public class AgentDetailFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private AgentModel agentModel;
+    private final AgentModel agentModel;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    /*public AgentDetailFragment() {
-        // Required empty public constructor
-    }*/
     public AgentDetailFragment(AgentModel agentModel){
         this.agentModel = agentModel;
     }
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-
-     * @return A new instance of fragment AgentDetailFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    /*public static AgentDetailFragment newInstance(AgentModel agentModel) {
-        AgentDetailFragment fragment = new AgentDetailFragment();
-        Bundle args = new Bundle();
-        args.putSerializable("agentmodee", agentModel);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
       //agentModel = (AgentModel) getActivity().getIntent().getSerializableExtra("agentmodee");
     }
 
@@ -69,7 +37,7 @@ public class AgentDetailFragment extends Fragment {
         TextView textViewname =  view.findViewById(R.id.textView88);
         TextView textViewRate = view.findViewById(R.id.textView90);
         TextView ratingValue = view.findViewById(R.id.textView89);
-        Glide.with(getActivity())
+        Glide.with(Objects.requireNonNull(getActivity()))
                 .asBitmap()
                 .load(agentModel.getImage())
                 .into(imageone);
