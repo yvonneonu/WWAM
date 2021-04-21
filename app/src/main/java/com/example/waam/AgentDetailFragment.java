@@ -67,6 +67,7 @@ public class AgentDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_agent_detail, container, false);
         ImageView imageone = view.findViewById(R.id.imageView36);
         TextView textViewname =  view.findViewById(R.id.textView88);
+        TextView textViewRate = view.findViewById(R.id.textView90);
         TextView ratingValue = view.findViewById(R.id.textView89);
         Glide.with(getActivity())
                 .asBitmap()
@@ -74,6 +75,7 @@ public class AgentDetailFragment extends Fragment {
                 .into(imageone);
         textViewname.setText(agentModel.getName());
         ratingValue.setText(agentModel.getRating());
+        textViewRate.setText(agentModel.getRating1());
         return view;
     }
 }

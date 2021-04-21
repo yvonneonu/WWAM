@@ -12,9 +12,9 @@ public class GeneralFactory {
     private final List<EventModel> eventModelList;
     private EventModel[] eventModelsArrays;
     private final List<Location> locationList;
-    private List<FriendModel> friendModelList;
+    private final List<FriendModel> friendModelList;
     private List<Chat> chatList;
-    private List<AgentModel> agentModelList;
+    private final List<AgentModel> agentModelList;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -51,10 +51,7 @@ public class GeneralFactory {
             "Omonayin",
     };
 
-    private String[] messagesArray = new String[]{"RecyclerView, while powerful and capable","RecyclerView, while powerful and capable","As you may have noticed, RecyclerView"};
-    private String senderId = "yvonne";
-    private String receiverId = "bamidele";
-    private String chatId = "";
+    private final String[] messagesArray = new String[]{"RecyclerView, while powerful and capable","RecyclerView, while powerful and capable","As you may have noticed, RecyclerView"};
 
     private GeneralFactory(){
         eventModelList = new ArrayList<>();
@@ -93,10 +90,7 @@ public class GeneralFactory {
             R.drawable.agent_1_img,
             R.drawable.agent_6_img
     };
-    String[] name1 = {"LordBroke Saint", "Brown White", "Ebuka Obi", "Blessing Peter", "Peter Mac", "Alexander Helger", "Chris Paul"};
 
-    String[] rating1 = {"4.5", "3.0", "3.2", "4.1", "3.1", "6.0", "4.8"};
-    String[] rating3 = {"(102 Ratings)", "(105 Ratings)", "(103 Ratings)", "(109 Ratings)", "(150 Ratings)", "(101 Ratings)", "(115 Ratings)"};
     public static GeneralFactory getGeneralFactory(){
         if(generalFactory == null){
             generalFactory = new GeneralFactory();
@@ -153,7 +147,10 @@ public class GeneralFactory {
     private void makeMessage(){
         chatList = new ArrayList<>();
         for(int i = 0 ; i < messagesArray.length ; i++){
-            Chat chat = new Chat(messagesArray[i],senderId,receiverId, chatId);
+            String senderId = "yvonne";
+            String receiverId = "bamidele";
+            String chatId = "";
+            Chat chat = new Chat(messagesArray[i], senderId, receiverId, chatId);
             chatList.add(chat);
         }
     }
