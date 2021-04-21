@@ -17,7 +17,6 @@ import java.util.Objects;
 public class AgentDetailFragment extends Fragment {
 
     private final AgentModel agentModel;
-
     public AgentDetailFragment(AgentModel agentModel){
         this.agentModel = agentModel;
     }
