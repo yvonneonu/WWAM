@@ -4,4 +4,34 @@
     <item
         android:id="@+id/membership"
         android:title="Membership" />
+    <item
+        android:id="@+id/dailymatch"
+        android:title="Daily Matches"/>
+    <item
+        
+        android:id="@+id/upcomingevent"
+        android:title="Upcoming Events"/>
+
+    <item
+        android:id="@+id/seewhoview"
+        android:title="See Who Viewed You"/>
+
+    <item
+        android:id="@+id/datingagent"
+        android:title="Dating Agent"/>
+    <item
+        android:id="@+id/friend"
+        android:title="Friends"/>
+    <item
+        android:id="@+id/notification"
+        android:title="Notifications"/>
+    <item
+        android:id="@+id/setting"
+        android:title="Settings"/>
+    <item
+        android:id="@+id/help"
+        android:title="Help"/>
+
+
+
 </menu>
