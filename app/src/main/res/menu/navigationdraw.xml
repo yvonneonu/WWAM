@@ -8,7 +8,6 @@
         android:id="@+id/dailymatch"
         android:title="Daily Matches"/>
     <item
-        
         android:id="@+id/upcomingevent"
         android:title="Upcoming Events"/>
 
