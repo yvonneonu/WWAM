@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -18,6 +19,9 @@ import com.google.android.material.navigation.NavigationView;
 
 public class DrawelayoutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    private BottomNavigationView bottomNavigationView;
+    private  Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +34,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
@@ -96,6 +100,16 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 fragment = new BecomeAMemberFragment();
                 break;
 
+            case R.id.friend:
+                fragment = new FriendsFragment();
+
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                break;
+
+            case R.id.datingagent:
+                fragment = new AgentFragment();
+                break;
+
             case R.id.explore:
                 fragment = new ExploreFragment();
                 item.setIcon(R.drawable.lowernav_explore_icon_active);
@@ -110,6 +124,11 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             case R.id.friends:
                 fragment = new FriendsFragment();
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
+                break;
+
+            case R.id.dailymatch:
+                intent = new Intent(DrawelayoutActivity.this, DailyMatch.class);
+
                 break;
 
             case R.id.profile:
@@ -130,6 +149,9 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             return true;
         }else{
             Log.d("TAG","is null");
+            startActivity(intent);
+
+
         }
 
         return false;
