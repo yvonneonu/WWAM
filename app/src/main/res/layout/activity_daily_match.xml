@@ -17,34 +17,73 @@
         app:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
 
     <ImageView
         android:id="@+id/goback"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:onClick="pressback"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:src="@drawable/topnav_back_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/tool_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="My Matches"
         android:textColor="@android:color/black"
         android:textSize="22sp"
         android:textStyle="bold"
+        />
+    </androidx.appcompat.widget.Toolbar>
 
-        app:layout_constraintBottom_toBottomOf="@+id/tool_bar1"
+
+    <TextView
+        android:id="@+id/mangend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+
+        android:onClick="match"
+        android:text="Matches"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/event"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar1" />
+
+    <TextView
+        android:id="@+id/event"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:onClick="match"
+        android:text="Events"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        app:layout_constraintEnd_toStartOf="@+id/mangend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar1" />
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/event">
 
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

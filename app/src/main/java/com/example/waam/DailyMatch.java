@@ -6,6 +6,8 @@ import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class DailyMatch extends AppCompatActivity {
 
@@ -18,10 +20,21 @@ public class DailyMatch extends AppCompatActivity {
         setContentView(R.layout.activity_daily_match);
         toolbar = findViewById(R.id.tool_bar1);
 
-
+        Fragment fragment = new DrawerMatchFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frame,fragment);
+        ft.commit();
     }
 
     public void pressback(View view) {
         finish();
+    }
+
+    public void match(View view) {
+        Fragment fragment = new DrawerMatchFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frame,fragment);
+        ft.commit();
+
     }
 }

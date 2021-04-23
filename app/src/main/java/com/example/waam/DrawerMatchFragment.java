@@ -1,12 +1,17 @@
 package com.example.waam;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,9 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
  * create an instance of this fragment.
  */
 public class DrawerMatchFragment extends Fragment {
-    RecyclerView recyclerView;
-    matchModel matchModel;
-   // private List<ModelImages> imageList = new ArrayList<>();
+   private RecyclerView recyclerView;
+   private machModelAdapter machModelAdapter;
+   // matchModel matchModel;
+    private List<matchModel> matchModels = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,7 +69,37 @@ public class DrawerMatchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_drawer_match, container, false);
+        design();
+        Log.d("match", ""+matchModels.size());
         recyclerView = view.findViewById(R.id.recycler1);
+        machModelAdapter = new machModelAdapter(matchModels,getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
+        recyclerView.setAdapter(machModelAdapter);
+        recyclerView.setLayoutManager(layoutManager);
         return view;
+    }
+
+    private void design() {
+        int[] display = {
+                R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user,
+                R.drawable.group_img_2,
+                R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user
+
+        };
+        String[] dispChat = {"Ebuka, 38", "Blessing, 45", "Brown, 32", "Alexander, 31", "Chris, 25", "Peter, 18", "LordBroke, 28"
+        };
+        String[] message = {"Las Vegas, NV", "Lagos state, Nigeria", "Las Vegas, NV", "Las Vegas, NV§", "Las Vegas, NV",
+                "Las Vegas, NV", "Las Vegas, NV"
+
+        };
+
+        for (int i = 0; i < display.length; i++) {
+            matchModels.add(new matchModel(display[i], dispChat[i], message[i]));
+        }
     }
 }
