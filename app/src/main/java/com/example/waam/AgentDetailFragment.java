@@ -47,4 +47,6 @@ public class AgentDetailFragment extends Fragment {
         textViewRate.setText(agentModel.getRating1());
         return view;
     }
+
+
 }
