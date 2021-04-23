@@ -128,7 +128,9 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 break;
 
             case R.id.dailymatch:
-                intent = new Intent(DrawelayoutActivity.this, DailyMatch.class);
+                fragment = new FindMtchBlankFragment();
+
+               // intent = new Intent(DrawelayoutActivity.this, DailyMatch.class);
 
                 break;
 
