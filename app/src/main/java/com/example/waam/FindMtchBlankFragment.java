@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,20 +76,30 @@ public class FindMtchBlankFragment extends Fragment {
         eventText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new DrawerEventFragment();
-                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-                ft.replace(R.id.frame,fragment);
-                ft.commit();
+
+                if (v.getId() == eventText.getId()){
+                    eventText.setBackgroundColor(Color.BLUE);
+                    textView.setBackgroundResource(R.drawable.drawerborder);
+                    Fragment fragment = new DrawerEventFragment();
+                    FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame,fragment);
+                    ft.commit();
+                }
             }
         });
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new DrawerMatchFragment();
-                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-                ft.replace(R.id.frame,fragment);
-                ft.commit();
+                if (v.getId() == textView.getId()){
+                    textView.setBackgroundColor(Color.BLUE);
+                    eventText.setBackgroundResource(R.drawable.drawerborder);
+                    Fragment fragment = new DrawerMatchFragment();
+                    FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame,fragment);
+                    ft.commit();
+                }
+
             }
         });
         return view;
