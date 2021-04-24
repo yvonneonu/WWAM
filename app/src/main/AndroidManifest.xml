@@ -28,8 +28,9 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".DailyMatch"></activity>
-        <activity android:name=".AgentProfile"></activity>
+        <activity android:name=".Unfriend"></activity>
+        <activity android:name=".DailyMatch" />
+        <activity android:name=".AgentProfile" />
         <activity android:name=".ChatMessage" />
         <activity android:name=".SearcMessage" />
         <activity android:name=".DiscoverEvent" />
@@ -59,9 +60,9 @@
         <activity android:name=".passw" />
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
         <activity android:name=".Interest" />
-        <activity android:name=".ViewPager"></activity>
+        <activity android:name=".ViewPager" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
