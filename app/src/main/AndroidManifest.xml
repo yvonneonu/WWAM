@@ -28,6 +28,7 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".Unfriend"></activity>
         <activity android:name=".DailyMatch"></activity>
         <activity android:name=".AgentProfile"></activity>
         <activity android:name=".ChatMessage" />
