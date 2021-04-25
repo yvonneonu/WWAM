@@ -14,6 +14,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.connectycube.auth.session.ConnectycubeSettings;
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.LogLevel;
+import com.connectycube.core.exception.ResponseException;
+import com.connectycube.users.model.ConnectycubeUser;
+
+import org.jivesoftware.smack.ConnectionListener;
+import org.jivesoftware.smack.XMPPConnection;
+
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -33,13 +43,79 @@ public class Login extends AppCompatActivity {
 
     final String url_Login = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
 
+    private final String APP_ID  = "4646";
+    private final String AUTH_KEY = "LgQ83jMWXugtEJy";
+    private final String AUTH_SECRET  = "Ar2sVW5e7bpqe8e";
+    private final String ACCOUNT_KEY = "bjDayBi-fZ2MRx3JK8Mq";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
+        ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
+        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
+        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
+        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        final ConnectycubeUser user = new ConnectycubeUser();
+        user.setId(4103566);
+        user.setPassword("12345678");
+
+        chatService.login(user, new EntityCallback() {
+            @Override
+            public void onSuccess(Object o, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onError(ResponseException errors) {
+
+            }
+        });
+
+
+        ConnectionListener connectionListener = new ConnectionListener() {
+            @Override
+            public void connected(XMPPConnection connection) {
+
+            }
+
+            @Override
+            public void authenticated(XMPPConnection xmppConnection, boolean b) {
+
+            }
+
+
+            @Override
+            public void connectionClosed() {
+
+            }
+
+            @Override
+            public void connectionClosedOnError(Exception e) {
+
+            }
+
+            @Override
+            public void reconnectingIn(int seconds) {
+
+            }
+
+            @Override
+            public void reconnectionSuccessful() {
+
+            }
+
+            @Override
+            public void reconnectionFailed(Exception e) {
+
+            }
+        };
+
+        ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);
 
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);

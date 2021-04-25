@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.connectycube.auth.session.ConnectycubeSettings;
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.LogLevel;
+import com.connectycube.core.exception.ResponseException;
+import com.connectycube.users.model.ConnectycubeUser;
+
+import org.jivesoftware.smack.ConnectionListener;
+import org.jivesoftware.smack.XMPPConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +50,11 @@ public class MessagesFragment extends Fragment {
     private List<ModelImages> imageList = new ArrayList<>();
     private List<ModelChat> chatList = new ArrayList<>();
     private List<itemModel> arrayList = new ArrayList<>();
+
+    private final String APP_ID  = "4646";
+    private final String AUTH_KEY = "LgQ83jMWXugtEJy";
+    private final String AUTH_SECRET  = "Ar2sVW5e7bpqe8e";
+    private final String ACCOUNT_KEY = "bjDayBi-fZ2MRx3JK8Mq";
 
     FrameLayout fragment;
     // TODO: Rename parameter arguments, choose names that match
@@ -81,6 +97,68 @@ public class MessagesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        ConnectycubeSettings.getInstance().init(getActivity(), APP_ID, AUTH_KEY, AUTH_SECRET);
+        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
+        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
+        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
+
+        final ConnectycubeUser user = new ConnectycubeUser();
+        user.setId(4103566);
+        user.setPassword("12345678");
+
+        chatService.login(user, new EntityCallback() {
+            @Override
+            public void onSuccess(Object o, Bundle bundle) {
+                Log.d("Login", "Was succesful");
+            }
+
+            @Override
+            public void onError(ResponseException errors) {
+
+            }
+        });
+
+
+        ConnectionListener connectionListener = new ConnectionListener() {
+            @Override
+            public void connected(XMPPConnection connection) {
+
+            }
+
+            @Override
+            public void authenticated(XMPPConnection xmppConnection, boolean b) {
+
+            }
+
+
+            @Override
+            public void connectionClosed() {
+
+            }
+
+            @Override
+            public void connectionClosedOnError(Exception e) {
+
+            }
+
+            @Override
+            public void reconnectingIn(int seconds) {
+
+            }
+
+            @Override
+            public void reconnectionSuccessful() {
+
+            }
+
+            @Override
+            public void reconnectionFailed(Exception e) {
+
+            }
+        };
+
+        ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);
 
     }
 
