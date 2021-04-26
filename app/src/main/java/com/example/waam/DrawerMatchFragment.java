@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,7 +62,20 @@ public class DrawerMatchFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
+
+        if(machModelAdapter != null){
+            machModelAdapter.MatchMethod(new machModelAdapter.onMatchListener() {
+                @Override
+                public void OnMatchClick(int position) {
+                    matchModel match = matchModels.get(position);
+                    Intent intent = new Intent(getActivity(), Unfriend.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
     }
 
     @Override
@@ -73,12 +87,31 @@ public class DrawerMatchFragment extends Fragment {
         Log.d("match", ""+matchModels.size());
         recyclerView = view.findViewById(R.id.recycler1);
         machModelAdapter = new machModelAdapter(matchModels,getActivity());
+
+        machModelAdapter.MatchMethod(new machModelAdapter.onMatchListener() {
+            @Override
+            public void OnMatchClick(int position) {
+                matchModel match = matchModels.get(position);
+
+                UnfriendBottomsheet bottomsheet = new UnfriendBottomsheet();
+                bottomsheet.show(getFragmentManager(), "TAG");
+              //  bottomsheet.
+
+               // Intent intent = new Intent(getActivity(), Unfriend.class);
+              //  Log.d("modelAdapter", "true");
+                //startActivity(intent);
+            }
+        });
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setAdapter(machModelAdapter);
         recyclerView.setLayoutManager(layoutManager);
         return view;
+
+
     }
+
 
     private void design() {
         int[] display = {
@@ -102,4 +135,5 @@ public class DrawerMatchFragment extends Fragment {
             matchModels.add(new matchModel(display[i], dispChat[i], message[i]));
         }
     }
+
 }

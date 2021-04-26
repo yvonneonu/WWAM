@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/all"
+            android:id="@+id/all1"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginStart="100dp">
