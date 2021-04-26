@@ -15,7 +15,6 @@
     >
 
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_marginRight="10dp"
@@ -36,15 +35,19 @@
 
             <TextView
                 android:id="@+id/textView27"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
                 android:background="@color/white"
+                android:gravity="center"
+                android:padding="10dp"
                 android:text="Unfriend"
-                android:textStyle="bold"
-                android:textSize="15sp"
                 android:textAlignment="center"
                 android:textColor="@color/blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView28"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,23 +56,29 @@
                 android:id="@+id/view"
                 android:layout_width="400dp"
                 android:layout_height="2dp"
+                android:layout_marginTop="3dp"
+
                 android:background="#c0c0c0"
-                app:layout_constraintBottom_toBottomOf="@+id/textView27"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
             <TextView
                 android:id="@+id/textView28"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
                 android:background="@color/white"
-                android:textStyle="bold"
+                android:padding="10dp"
                 android:text="Block User"
                 android:textAlignment="center"
                 android:textColor="@color/blue"
-                app:layout_constraintTop_toBottomOf="@+id/textView27"
-                tools:layout_editor_absoluteX="16dp" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -94,14 +103,18 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:gravity="center"
                 android:padding="10dp"
-                android:textStyle="bold"
                 android:text="Cancel"
                 android:textAlignment="center"
                 android:textColor="@color/blue"
                 android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
