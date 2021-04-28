@@ -43,10 +43,11 @@ public class Login extends AppCompatActivity {
 
     final String url_Login = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
 
-    private final String APP_ID  = "4646";
-    private final String AUTH_KEY = "LgQ83jMWXugtEJy";
-    private final String AUTH_SECRET  = "Ar2sVW5e7bpqe8e";
-    private final String ACCOUNT_KEY = "bjDayBi-fZ2MRx3JK8Mq";
+    private final String APP_ID  = "4663";
+    private final String AUTH_KEY = "RWV8dBeCsCh6g2a";
+    private final String AUTH_SECRET  = "yhuExsebKPu8F8S";
+    private final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
+    private String token = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +62,13 @@ public class Login extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         final ConnectycubeUser user = new ConnectycubeUser();
+        user.setLogin(token);
         user.setId(4103566);
         user.setPassword("12345678");
-
         chatService.login(user, new EntityCallback() {
             @Override
             public void onSuccess(Object o, Bundle bundle) {
-
+                Log.d("Valid",""+user);
             }
 
             @Override

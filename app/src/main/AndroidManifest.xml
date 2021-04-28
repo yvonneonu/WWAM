@@ -45,11 +45,6 @@
         <activity android:name=".LocationDetectActivity" />
         <activity android:name=".Profile" />
         <activity android:name=".DrawelayoutActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
@@ -61,7 +56,11 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Interest" />
         <activity android:name=".ViewPager">

@@ -107,10 +107,12 @@ public class MessagesFragment extends Fragment {
         user.setId(4103566);
         user.setPassword("12345678");
 
+        user.setLogin("chantale");
         chatService.login(user, new EntityCallback() {
             @Override
             public void onSuccess(Object o, Bundle bundle) {
                 Log.d("Login", "Was succesful");
+                Log.d("Connecty",""+user);
             }
 
             @Override
