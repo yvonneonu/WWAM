@@ -38,15 +38,21 @@ public class Login extends AppCompatActivity {
     private ImageView logm;
     private TextView text;
     private TextView pressback;
-    private String loginToken;
+    String loginToken;
     private EditText editPass;
     private EditText editEmail;
     String Email;
     String Password;
 
-    final ConnectycubeUser user = new ConnectycubeUser();
+    static final String APP_ID = "4663";
+    static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
+    static final String AUTH_SECRET = "yhuExsebKPu8F8S";
+    static final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
+//
 
-    String token = ConnectycubeSessionManager.getInstance().getToken();
+
+
+
 
     final String url_Login = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
 
@@ -56,26 +62,21 @@ public class Login extends AppCompatActivity {
        // getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
-        Email = ConnectycubeSessionManager.getInstance().getToken();
-
-        Password = ConnectycubeSessionManager.getInstance().getToken();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        initcomit();
-        ConnectycubeChatService.ConfigurationBuilder chatServiceConfigurationBuilder = new ConnectycubeChatService.ConfigurationBuilder();
+        //initcomit();
 
 
-        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
 
 
-        chatServiceConfigurationBuilder.setSocketTimeout(60);
-        chatServiceConfigurationBuilder.setKeepAlive(true);
-        chatServiceConfigurationBuilder.setUseTls(true); //By default TLS is disabled.
-        ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
-
+        ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
+        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
 
         ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
+
+        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
+
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);
         Log.d("TAG", "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
@@ -93,24 +94,29 @@ public class Login extends AppCompatActivity {
       //  logm.setOnClickListener(v -> Themain());
 
 
-        //user.getEmail();
-      // user.getPassword();
-      // user.setId(21);
+        ConnectycubeChatService.ConfigurationBuilder chatServiceConfigurationBuilder = new ConnectycubeChatService.ConfigurationBuilder();
+        chatServiceConfigurationBuilder.setSocketTimeout(60);
+        chatServiceConfigurationBuilder.setKeepAlive(true);
+        chatServiceConfigurationBuilder.setUseTls(true); //By default TLS is disabled.
+        ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
 
-       /// user.setId(4107218);
-       // user.setPassword("12345678");
-       // user.setLogin("dora@gmail.com");
 
-       //user.getEmail()
-        user.setId(23);
-      //  user.setEmail(Email);
-        user.setPassword(token);
-       // user.setEmail(Email);
-       //user.setPassword(Password);
+        final ConnectycubeUser user = new ConnectycubeUser();
+
+       loginToken = ConnectycubeSessionManager.getInstance().getToken();
+        //loginToken = ConnectycubeSessionManager.getInstance().getToken();
+        Log.d("show", "show");
+
+        user.setId(4663);
+        user.setPassword("");
+       // user.setPassword(loginToken);
+        user.getId();
+        user.setLogin(loginToken);
 
         chatService.login(user, new EntityCallback() {
             @Override
             public void onSuccess(Object o, Bundle bundle) {
+
                 Log.d("Tag", ""+user);
             }
 
@@ -118,15 +124,13 @@ public class Login extends AppCompatActivity {
             public void onError(ResponseException e) {
 
             }
+
         });
-
-
-
 
         ConnectionListener connectionListener = new ConnectionListener() {
             @Override
             public void connected(XMPPConnection connection) {
-                Log.d("Tag", ""+user);
+
             }
 
             @Override
@@ -163,6 +167,16 @@ public class Login extends AppCompatActivity {
 
         ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);
 
+        //user.getEmail();
+      // user.getPassword();
+      // user.setId(21);
+
+       /// user.setId(4107218);
+       // user.setPassword("12345678");
+       // user.setLogin("dora@gmail.com");
+
+       //user.getEmail()
+
 
         logm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,14 +212,8 @@ public class Login extends AppCompatActivity {
     }
 
 
-    private void initcomit() {
 
-        ConnectycubeSettings.getInstance().init(getApplicationContext(), Constant.APP_ID, Constant.AUTH_KEY, Constant.AUTH_SECRET);
-        ConnectycubeSettings.getInstance().setAccountKey(Constant.ACCOUNT_KEY);
 
-        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-
-    }
 
 
     public void loginUser(LoginRequest loginRequest){

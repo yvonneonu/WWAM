@@ -14,6 +14,8 @@ public class ChatMessage extends AppCompatActivity {
     private ChatScreenAdapter chatScreenAdapter;
     private List<Chat> chats;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,11 @@ public class ChatMessage extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
         recyclerView.setAdapter(chatScreenAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+
+        // Provide chat connection configuration
+
+
 
     }
 

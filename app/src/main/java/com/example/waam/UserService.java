@@ -13,6 +13,8 @@ public interface UserService {
     @GET("user")
     Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
+    //@GET("api/connectycubeverify")
+   // Call<>
    // @GET ("profile")
     //Call<profileresponse> responseuser(@Body profilerequest profilerequest);
 
