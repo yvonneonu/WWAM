@@ -43,6 +43,7 @@ public class Login extends AppCompatActivity {
     private EditText editEmail;
     String Email;
     String Password;
+    private ConnectycubeChatService chatService;
 
     static final String APP_ID = "4663";
     static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
@@ -61,21 +62,15 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
        // getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
-
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //initcomit();
-
-
-
 
         ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
         ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
 
         ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-
-        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
+        chatService = ConnectycubeChatService.getInstance();
 
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);
@@ -101,31 +96,14 @@ public class Login extends AppCompatActivity {
         ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
 
 
-        final ConnectycubeUser user = new ConnectycubeUser();
 
-       loginToken = ConnectycubeSessionManager.getInstance().getToken();
+
+       //String loginsToken = ConnectycubeSessionManager.getInstance().getToken();
         //loginToken = ConnectycubeSessionManager.getInstance().getToken();
         Log.d("show", "show");
 
-        user.setId(4663);
-        user.setPassword("");
-       // user.setPassword(loginToken);
-        user.getId();
-        user.setLogin(loginToken);
 
-        chatService.login(user, new EntityCallback() {
-            @Override
-            public void onSuccess(Object o, Bundle bundle) {
 
-                Log.d("Tag", ""+user);
-            }
-
-            @Override
-            public void onError(ResponseException e) {
-
-            }
-
-        });
 
         ConnectionListener connectionListener = new ConnectionListener() {
             @Override
@@ -178,34 +156,28 @@ public class Login extends AppCompatActivity {
        //user.getEmail()
 
 
-        logm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        logm.setOnClickListener(v -> {
+            //user = editEmail.getText().toString();
+            Email = editEmail.getText().toString();
+            Password = editPass.getText().toString();
+
+            new loginAut().execute(Email, Password);
 
 
+            if (TextUtils.isEmpty(editEmail.getText().toString()) || TextUtils.isEmpty(editPass.getText().toString())){
+                String message = "All inputs required";
+                Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
 
-                //user = editEmail.getText().toString();
-                Email = editEmail.getText().toString();
-                Password = editPass.getText().toString();
+            }else {
 
-                new loginAut().execute(Email, Password);
-
-
-                if (TextUtils.isEmpty(editEmail.getText().toString()) || TextUtils.isEmpty(editPass.getText().toString())){
-                    String message = "All inputs required";
-                    Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
-
-                }else {
-
-                    LoginRequest loginRequest = new LoginRequest("email", "password");
-                    loginRequest.setEmail(editEmail.getText().toString());
-                    loginRequest.setPassword(editPass.getText().toString());
+                LoginRequest loginRequest = new LoginRequest("email", "password");
+                loginRequest.setEmail(editEmail.getText().toString());
+                loginRequest.setPassword(editPass.getText().toString());
 
 
-                   loginUser(loginRequest);
+               loginUser(loginRequest);
 
 
-                }
             }
         });
 
@@ -226,7 +198,27 @@ public class Login extends AppCompatActivity {
 
                 if (response.isSuccessful()){
                     loginToken = response.body().getToken();
-                 Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
+                    Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
+                    final ConnectycubeUser user = new ConnectycubeUser();
+                    user.setId(4134562);
+                    user.setPassword("12345678");
+
+                    chatService.login(user, new EntityCallback() {
+                        @Override
+                        public void onSuccess(Object o, Bundle bundle) {
+
+                            String token = ConnectycubeSessionManager.getInstance().getToken();
+
+                        }
+
+                        @Override
+                        public void onError(ResponseException e) {
+
+                            Log.d("Error",e.getMessage());
+                        }
+
+                    });
+                    Log.d("LoginTOken",loginToken);
                   //  Intent intent = new Intent(Login.this, Profile.class);
                     //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
                   //  Intent intent = new Intent(Login.this,finalProfile.class);
