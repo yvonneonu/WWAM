@@ -57,14 +57,17 @@
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login" >
+
+        </activity>
+        <activity android:name=".Interest" />
+
+        <activity android:name=".ViewPager" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".Interest" />
-        <activity android:name=".ViewPager" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

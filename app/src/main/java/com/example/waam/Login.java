@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,10 +19,8 @@ import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
 import com.connectycube.core.exception.ResponseException;
+import com.connectycube.users.ConnectycubeUsers;
 import com.connectycube.users.model.ConnectycubeUser;
-
-import org.jivesoftware.smack.ConnectionListener;
-import org.jivesoftware.smack.XMPPConnection;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -45,6 +42,9 @@ public class Login extends AppCompatActivity {
     String Password;
     private ConnectycubeChatService chatService;
 
+    boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
+
+
     static final String APP_ID = "4663";
     static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
     static final String AUTH_SECRET = "yhuExsebKPu8F8S";
@@ -52,6 +52,7 @@ public class Login extends AppCompatActivity {
 //
 
 
+  int b = 4152184;
 
 
 
@@ -105,57 +106,6 @@ public class Login extends AppCompatActivity {
 
 
 
-        ConnectionListener connectionListener = new ConnectionListener() {
-            @Override
-            public void connected(XMPPConnection connection) {
-
-            }
-
-            @Override
-            public void authenticated(XMPPConnection xmppConnection, boolean b) {
-
-            }
-
-
-            @Override
-            public void connectionClosed() {
-
-            }
-
-            @Override
-            public void connectionClosedOnError(Exception e) {
-
-            }
-
-            @Override
-            public void reconnectingIn(int seconds) {
-
-            }
-
-            @Override
-            public void reconnectionSuccessful() {
-
-            }
-
-            @Override
-            public void reconnectionFailed(Exception e) {
-
-            }
-        };
-
-        ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);
-
-        //user.getEmail();
-      // user.getPassword();
-      // user.setId(21);
-
-       /// user.setId(4107218);
-       // user.setPassword("12345678");
-       // user.setLogin("dora@gmail.com");
-
-       //user.getEmail()
-
-
         logm.setOnClickListener(v -> {
             //user = editEmail.getText().toString();
             Email = editEmail.getText().toString();
@@ -170,7 +120,31 @@ public class Login extends AppCompatActivity {
 
             }else {
 
+                final ConnectycubeUser user = new ConnectycubeUser();
+                user.setId(b);
+                user.setLogin("Grace");
+                user.setEmail(Email);
+                user.setFullName(Email);
+                user.setPassword(Password);
+
+                ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
+                    @Override
+                    public void onSuccess(ConnectycubeUser user, Bundle args) {
+
+                        Log.d("doraaa", ""+user.getId());
+                        Log.d("doraaa", ""+user.getLogin());
+                        Log.d("doraaa", ""+user.getEmail());
+                        Log.d("doraaa", ""+user.getPassword());
+                    }
+
+                    @Override
+                    public void onError(ResponseException error) {
+
+                        Log.d("error", ""+error.getMessage());
+                    }
+                });
                 LoginRequest loginRequest = new LoginRequest("email", "password");
+              //  loginRequest.se
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
 
@@ -199,25 +173,8 @@ public class Login extends AppCompatActivity {
                 if (response.isSuccessful()){
                     loginToken = response.body().getToken();
                     Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
-                    final ConnectycubeUser user = new ConnectycubeUser();
-                    user.setId(4134562);
-                    user.setPassword("12345678");
 
-                    chatService.login(user, new EntityCallback() {
-                        @Override
-                        public void onSuccess(Object o, Bundle bundle) {
 
-                            String token = ConnectycubeSessionManager.getInstance().getToken();
-
-                        }
-
-                        @Override
-                        public void onError(ResponseException e) {
-
-                            Log.d("Error",e.getMessage());
-                        }
-
-                    });
                     Log.d("LoginTOken",loginToken);
                   //  Intent intent = new Intent(Login.this, Profile.class);
                     //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);

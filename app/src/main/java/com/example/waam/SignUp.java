@@ -24,6 +24,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.connectycube.auth.session.ConnectycubeSessionManager;
+import com.connectycube.auth.session.ConnectycubeSettings;
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.LogLevel;
+import com.connectycube.core.exception.ResponseException;
+import com.connectycube.users.ConnectycubeUsers;
+import com.connectycube.users.model.ConnectycubeUser;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +54,19 @@ public class SignUp extends AppCompatActivity {
     String interest = "";
     String Fullname;
 
+    private ConnectycubeChatService chatService;
+
+    static final String APP_ID = "4663";
+    static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
+    static final String AUTH_SECRET = "yhuExsebKPu8F8S";
+    static final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
+//
+
+
+
+    String Passwor;
+    String Email;
+
     ConstraintLayout constraintLayout;
 
     private static String token;
@@ -57,6 +79,12 @@ public class SignUp extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
+        ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
+        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
+
+
+        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
+        chatService = ConnectycubeChatService.getInstance();
         initDatePicker();
 
         cardView1 = findViewById(R.id.cardview);
@@ -286,16 +314,21 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void register() {
+
+
         Log.d("UserService",""+userService);
         if (userService == null) {
             userService = new ApiClient().getService();
         }
+
+
             RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "gender", "seeking", "date", "pass");
-            String Fullname = name.getText().toString();
-            String Email = email.getText().toString();
+
+            Fullname = name.getText().toString();
+            Email = email.getText().toString();
             String Zip = zip.getText().toString();
             String Update = update.getText().toString();
-            String Passwor = password.getText().toString();
+            Passwor = password.getText().toString();
             String Confirm = confrim.getText().toString();
             if(Fullname.isEmpty()) {
                 name.setError("Full Name is required");
@@ -326,6 +359,32 @@ public class SignUp extends AppCompatActivity {
                 String message = "All inputs required";
                 Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
             } else {
+
+                final ConnectycubeUser user = new ConnectycubeUser("marvin18", "supersecurepwd");
+                user.setLogin(Fullname);
+                user.setPassword(Passwor);
+                user.setEmail(Email);
+                user.setFullName(Fullname);
+                user.setPhone("47802323143");
+                user.setWebsite("https://dozensofdreams.com");
+
+                String token = ConnectycubeSessionManager.getInstance().getToken();
+
+                ConnectycubeUsers.signUp(user).performAsync(new EntityCallback<ConnectycubeUser>() {
+                    @Override
+                    public void onSuccess(ConnectycubeUser user, Bundle args) {
+                        Log.d("cheicbirbv", ""+user.getId());
+                        Log.d("giry", ""+token);
+                    }
+
+                    @Override
+                    public void onError(ResponseException error) {
+
+                        Log.d("errw", "error");
+                    }
+                });
+                Log.d("meemmemememe", ""+user);
+
                 registerRequest.setFullname(Fullname);
                 registerRequest.setEmail(Email);
                 registerRequest.setZipcode(Zip);
@@ -335,7 +394,10 @@ public class SignUp extends AppCompatActivity {
                 registerRequest.setGender(chose);
                 registerRequest.setSeeking(interest);
                 requestUser(registerRequest);
+
+
             }
+
 
 
         }
