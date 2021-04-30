@@ -124,8 +124,9 @@ public class Login extends AppCompatActivity {
                 user.setId(b);
                 user.setLogin("Grace");
                 user.setEmail(Email);
-                user.setFullName(Email);
+               // user.setFullName(Email);
                 user.setPassword(Password);
+
 
                 ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
@@ -135,6 +136,7 @@ public class Login extends AppCompatActivity {
                         Log.d("doraaa", ""+user.getLogin());
                         Log.d("doraaa", ""+user.getEmail());
                         Log.d("doraaa", ""+user.getPassword());
+                        Log.d("doraaa", ""+user.getFullName());
                     }
 
                     @Override
@@ -148,18 +150,12 @@ public class Login extends AppCompatActivity {
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
 
-
                loginUser(loginRequest);
-
 
             }
         });
 
     }
-
-
-
-
 
 
     public void loginUser(LoginRequest loginRequest){
@@ -201,7 +197,9 @@ public class Login extends AppCompatActivity {
         });
     }
 
-   private void Themain() {
+
+
+    private void Themain() {
         Intent intent = new Intent(Login.this, MainActivity.class);
         startActivity(intent);
         // finish();
@@ -264,6 +262,7 @@ public class Login extends AppCompatActivity {
         }
 
     }
+
 
 
 
