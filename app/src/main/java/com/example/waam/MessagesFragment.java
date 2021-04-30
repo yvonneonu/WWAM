@@ -22,6 +22,8 @@ import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
 import com.connectycube.core.exception.ResponseException;
+import com.connectycube.core.helper.StringifyArrayList;
+import com.connectycube.users.ConnectycubeUsers;
 import com.connectycube.users.model.ConnectycubeUser;
 
 import org.jivesoftware.smack.ConnectionListener;
@@ -161,6 +163,32 @@ public class MessagesFragment extends Fragment {
         };
 
         ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);
+
+
+        final ConnectycubeUser usertwo = new ConnectycubeUser("marvin18", "supersecurepwd");
+        usertwo.setLogin("marvin18");
+        usertwo.setPassword("supersecurepwd");
+        usertwo.setEmail("awesomeman@gmail.com");
+        usertwo.setFullName("Marvin Simon");
+        usertwo.setPhone("47802323143");
+        usertwo.setWebsite("https://dozensofdreams.com");
+        StringifyArrayList<String> tags = new StringifyArrayList<>();
+        tags.add("iphone");
+        tags.add("apple");
+        usertwo.setTags(tags);
+
+        ConnectycubeUsers.signUp(usertwo).performAsync(new EntityCallback<ConnectycubeUser>() {
+            @Override
+            public void onSuccess(ConnectycubeUser user, Bundle args) {
+
+                Log.d("User",usertwo.getFullName());
+            }
+
+            @Override
+            public void onError(ResponseException error) {
+
+            }
+        });
 
     }
 
