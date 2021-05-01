@@ -17,6 +17,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.chat.ConnectycubeRoster;
+import com.connectycube.chat.listeners.SubscriptionListener;
+import com.connectycube.users.model.ConnectycubeUser;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,9 +43,13 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private ConnectycubeUser connectycubeUser;
     private FriendAdapt friendAdapt;
     private List<FriendModel> friendModelList;
     private GeneralFactory generalFactory;
+    private int userId = 0;
+    private ConnectycubeRoster chatRoster;
+    private final int userID = 4134562;
     public FriendsFragment() {
         // Required empty public constructor
     }
@@ -77,11 +87,40 @@ public class FriendsFragment extends Fragment {
         friendModelList.add(0,friendAdder);
         friendAdapt = new FriendAdapt(friendModelList,getActivity());
 
+        SubscriptionListener subscriptionListener = new SubscriptionListener() {
+            @Override
+            public void subscriptionRequested(int userId) {
+
+            }
+        };
+
+
 
         friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
             @Override
             public void friendResponder(int position) {
                 if(position == 0){
+                    userId = SessionManager.getSessionManager(getActivity()).getConnectyUser();
+                    Log.d("userId",""+userId);
+                    chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
+
+                    if(userId != -1){
+                        if (chatRoster.contains(userID)) {
+                            try {
+                                chatRoster.subscribe(userID);
+                                Toast.makeText(getActivity(),"Request sent to ",Toast.LENGTH_SHORT)
+                                        .show();
+                            } catch (Exception e) {
+                                Log.d("Error",e.getMessage());
+                            }
+                        } else {
+                            try {
+                                chatRoster.createEntry(userID, null);
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    }
                     Log.d("AddFriend","You clicked Add");
                 }else{
                     Log.d("Chat","Move to Chat");

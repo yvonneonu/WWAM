@@ -111,41 +111,6 @@ public class Login extends AppCompatActivity {
         Log.d("show", "show");
 
 
-
-        RosterListener rosterListener = new RosterListener() {
-            @Override
-            public void entriesDeleted(Collection<Integer> userIds) {
-
-            }
-
-            @Override
-            public void entriesAdded(Collection<Integer> userIds) {
-
-            }
-
-            @Override
-            public void entriesUpdated(Collection<Integer> userIds) {
-
-            }
-
-            @Override
-            public void presenceChanged(ConnectycubePresence presence) {
-
-            }
-        };
-
-
-        SubscriptionListener subscriptionListener = new SubscriptionListener() {
-            @Override
-            public void subscriptionRequested(int userId) {
-
-            }
-        };
-
-          chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
-//        chatRoster.addRosterListener(rosterListener);
-
-
         logm.setOnClickListener(v -> {
             //user = editEmail.getText().toString();
             Email = editEmail.getText().toString();
@@ -168,8 +133,9 @@ public class Login extends AppCompatActivity {
                 ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
                     public void onSuccess(ConnectycubeUser userj, Bundle args) {
-
-
+                        SessionManager.getSessionManager(Login.this).setConnectyUser(userj);
+                        int id = SessionManager.getSessionManager(Login.this).getConnectyUser();
+                        Log.d("idLogin",""+id);
                         Log.d("doraaa", ""+userj.getId());
                         Log.d("doraaa", ""+userj.getLogin());
                         Log.d("doraaa", ""+userj.getEmail());
@@ -211,9 +177,8 @@ public class Login extends AppCompatActivity {
 
                 if (response.isSuccessful()){
                     loginToken = response.body().getToken();
+                    SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
                     Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
-
-
                     Log.d("LoginTOken",loginToken);
                   //  Intent intent = new Intent(Login.this, Profile.class);
                     //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
