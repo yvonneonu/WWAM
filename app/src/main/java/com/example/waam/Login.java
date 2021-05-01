@@ -97,8 +97,6 @@ public class Login extends AppCompatActivity {
         ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
 
 
-
-
        //String loginsToken = ConnectycubeSessionManager.getInstance().getToken();
         //loginToken = ConnectycubeSessionManager.getInstance().getToken();
         Log.d("show", "show");
@@ -121,9 +119,10 @@ public class Login extends AppCompatActivity {
             }else {
 
                 final ConnectycubeUser user = new ConnectycubeUser();
-                user.setId(4134562);
-                user.setLogin("bamidele");
-                user.setPassword("12345678");
+               // user.setId(4152184);
+             //   user.setLogin("Grace");
+                user.setEmail(Email);
+                user.setPassword(Password);
 
                 ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
@@ -148,15 +147,10 @@ public class Login extends AppCompatActivity {
 
 
                loginUser(loginRequest);
-
-
             }
         });
 
     }
-
-
-
 
 
 
