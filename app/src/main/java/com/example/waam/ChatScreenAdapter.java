@@ -1,7 +1,8 @@
 package com.example.waam;
 
 import android.content.Context;
-import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.connectycube.chat.ConnectycubeRestChatService;
+import com.connectycube.chat.model.ConnectycubeChatDialog;
+import com.connectycube.chat.model.ConnectycubeDialogType;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -23,6 +30,12 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private String senderId;
     private String recieverId;
 
+    ArrayList<Integer> occupantIds = new ArrayList<Integer>();
+
+
+    ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
+
+
     public ChatScreenAdapter(List<Chat> chatHolder, Context context) {
         this.listOfChats = chatHolder;
         this.context = context;
@@ -32,6 +45,25 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+
+        occupantIds.add(4134562);
+
+        dialog.setType(ConnectycubeDialogType.PRIVATE);
+        dialog.setOccupantsIds(occupantIds);
+
+        ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
+            @Override
+            public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
+
+                Log.d("tea", ""+createdDialog.getOccupants());
+            }
+
+            @Override
+            public void onError(ResponseException exception) {
+
+            }
+        });
 
         View view;
         if (viewType == RIGHT){

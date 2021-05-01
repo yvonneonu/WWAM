@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.chat.ConnectycubeRestChatService;
+import com.connectycube.chat.model.ConnectycubeChatDialog;
+import com.connectycube.chat.model.ConnectycubeDialogType;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
+
+import org.jivesoftware.smack.ConnectionListener;
+import org.jivesoftware.smack.XMPPConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +42,7 @@ public class MessagesFragment extends Fragment {
     private RecyclerView recyclerView2;
 
    private String DEFAULT_SPAN_COUNT = "2";
+
 
     private FriendAdapter friendAdapter;
     private ChatAdapter chatAdapter;
@@ -50,6 +62,8 @@ public class MessagesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
 
     public MessagesFragment() {
         // Required empty public constructor
@@ -95,6 +109,8 @@ public class MessagesFragment extends Fragment {
         addImagenText();
         addChatText();
         groupImage();
+
+
         fragment = view.findViewById(R.id.frameLayout);
         recyclerView = view.findViewById(R.id.recyclerView2);
         recyclerView1 = view.findViewById(R.id.recyclerView4);
@@ -121,6 +137,8 @@ public class MessagesFragment extends Fragment {
         //recyclerView2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
 
+
+
         chatAdapter.ChatMethod(new ChatAdapter.OnChatListener() {
             @Override
             public void OnChatClick(int position) {
@@ -144,6 +162,49 @@ public class MessagesFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        ConnectionListener connectionListener = new ConnectionListener() {
+            @Override
+            public void connected(XMPPConnection connection) {
+
+                Log.d("great", ""+connection.isConnected());
+            }
+
+            @Override
+            public void authenticated(XMPPConnection xmppConnection, boolean b) {
+                Log.d("from", ""+xmppConnection.isAuthenticated());
+            }
+
+
+            @Override
+            public void connectionClosed() {
+
+            }
+
+            @Override
+            public void connectionClosedOnError(Exception e) {
+
+                Log.d("hurse", ""+e.getMessage());
+            }
+
+            @Override
+            public void reconnectingIn(int seconds) {
+
+            }
+
+            @Override
+            public void reconnectionSuccessful() {
+
+            }
+
+            @Override
+            public void reconnectionFailed(Exception e) {
+
+            }
+        };
+
+        ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);
+
 
         assert activity != null;
 
