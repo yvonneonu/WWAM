@@ -133,12 +133,9 @@ public class ProfileFragment extends Fragment {
         Button friendRequest = view.findViewById(R.id.button11);
         textView = dialog.findViewById(R.id.textView70);
 
-        friendRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setText("You have sucessfully sent this user a \n friend request");
-                dialog.show();
-            }
+        friendRequest.setOnClickListener(v -> {
+            textView.setText("You have sucessfully sent this user a \n friend request");
+            dialog.show();
         });
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
