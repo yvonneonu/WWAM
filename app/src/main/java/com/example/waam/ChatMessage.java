@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.connectycube.chat.model.ConnectycubeChatDialog;
+
 import java.util.List;
 
 public class ChatMessage extends AppCompatActivity {
@@ -27,8 +29,6 @@ public class ChatMessage extends AppCompatActivity {
         recyclerView.setAdapter(chatScreenAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
-        // Provide chat connection configuration
 
 
 

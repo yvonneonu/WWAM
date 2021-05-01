@@ -104,7 +104,10 @@ public class Login extends AppCompatActivity {
 
 
 
-        logm.setOnClickListener(v -> {
+
+
+
+                logm.setOnClickListener(v -> {
             //user = editEmail.getText().toString();
             Email = editEmail.getText().toString();
             Password = editPass.getText().toString();
@@ -123,6 +126,25 @@ public class Login extends AppCompatActivity {
              //   user.setLogin("Grace");
                 user.setEmail(Email);
                 user.setPassword(Password);
+
+
+
+                user.setId(4152184);
+                user.setPassword("12345678");
+                chatService.login(user, new EntityCallback() {
+
+
+                    @Override
+                    public void onSuccess(Object o, Bundle bundle) {
+
+                    }
+
+                    @Override
+                    public void onError(ResponseException errors) {
+
+                    }
+                });
+
 
                 ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
@@ -256,6 +278,7 @@ public class Login extends AppCompatActivity {
         }
 
     }
+
 
 
 

@@ -1,7 +1,6 @@
 package com.example.waam;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.chat.ConnectycubeRoster;
+import com.connectycube.chat.listeners.SubscriptionListener;
+import com.connectycube.chat.model.ConnectycubeChatDialog;
+import com.connectycube.chat.model.ConnectycubeChatMessage;
 
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private final Context context;
     private String senderId;
     private String recieverId;
+    ConnectycubeChatDialog privateDialog;
+
 
     public ChatScreenAdapter(List<Chat> chatHolder, Context context) {
         this.listOfChats = chatHolder;
@@ -32,6 +37,8 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+
 
         View view;
         if (viewType == RIGHT){
@@ -45,11 +52,55 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        final Chat chat = listOfChats.get(position);
-        if(chat.getSenderId().equals(senderId)){
-            Senderview  senderView = (Senderview) holder;
-            senderView.textView.setText(chat.getMessage());
-        }else{
+
+
+        SubscriptionListener subscriptionListener = new SubscriptionListener() {
+            @Override
+            public void subscriptionRequested(int userId) {
+
+            }
+        };
+
+// Do this after success Chat login
+        ConnectycubeRoster chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
+        ///chatRoster.addRosterListener(rosterListener);
+        //chatRoster.
+
+
+        //final Chat chat = listOfChats.get(position);
+       // if(chat.getSenderId().equals(senderId)){
+         //   Senderview  senderView = (Senderview) holder;
+          //  senderView.textView.setText(chat.getMessage());
+
+
+                 ConnectycubeChatDialog privateDialog = new ConnectycubeChatDialog();
+
+                ConnectycubeChatMessage chatMessage = new ConnectycubeChatMessage();
+                chatMessage.setBody("How are you today?");
+                chatMessage.setSaveToHistory(true);
+
+               // privateDialog.sendMessage(chatMessage);
+           // catch (SmackException.NotConnectedException | InterruptedException e) {
+
+           // }
+
+           /* privateDialog.addMessageListener(new ChatDialogMessageListener() {
+                @Override
+                public void processMessage(String dialogId, ConnectycubeChatMessage message, Integer senderId) {
+
+                }
+
+                @Override
+                public void processError(String s, ChatException e, ConnectycubeChatMessage connectycubeChatMessage, Integer integer) {
+
+                }
+
+            });*/
+
+            // Provide chat connection configuration
+
+
+       /* }else{
 
             final ReceiverView receiverView = (ReceiverView) holder;
             receiverView.textView.setText(chat.getMessage());
@@ -57,9 +108,9 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .asBitmap()
                     .load(R.drawable.profile_img_user)
                     .circleCrop()
-                    .into(receiverView.imageView);
+                    .into(receiverView.imageView);*/
 
-        }
+       // }
        /* if(chat.getSenderId().equals(user.getUid())){
             SenderView senderView = (SenderView) holder;
             senderView.textView.setText(chat.getMessage());
