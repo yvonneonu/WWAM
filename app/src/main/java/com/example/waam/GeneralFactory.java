@@ -33,7 +33,9 @@ public class GeneralFactory {
     private static final String WAAMBASE = "waamuser_base";
     private List<FriendModel> friendModelList;
     private final FirebaseDatabase firebaseDatabase;
+    private List<Chat> chatContainer;
     private List<Chat> chatList;
+    private List<WaamUser> allWaamUsers;
     private List<AgentModel> agentModelList;
     private List<WaamUser> allFriends;
 
@@ -199,7 +201,7 @@ public class GeneralFactory {
     }
 
 
-    public void signUp(final String email, final String password, final Context context, final ProgressBar bar,  WaamUser waamUser){
+    public void signUpForBase(final String email, final String password, final Context context, final ProgressBar bar,  WaamUser waamUser){
         bar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -207,6 +209,8 @@ public class GeneralFactory {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             bar.setVisibility(View.GONE);
+                            //This is where the uid of the user is set
+                            waamUser.setUid(mAuth.getUid());
                             Toast.makeText(context, "You have signed up", Toast.LENGTH_LONG).show();
                             //This is where we set the values we want our users to have
                             String userId = mAuth.getCurrentUser().getUid();
@@ -337,6 +341,61 @@ public class GeneralFactory {
 
     }
 
+
+    public void loadMessages(final FireBaseMessages fireBaseMessages, final String receiverId){
+        chatContainer = new ArrayList<>();
+        final String senderId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("SenderId",senderId);
+        DatabaseReference databaseChats = FirebaseDatabase.getInstance().getReference("CHAT");
+        databaseChats.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chatContainer.clear();
+                Log.d("FirebaseMessages","I am in ondatachanged");
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Chat chat = dataSnapshot.getValue(Chat.class);
+                    Log.d("SenderId",chat.getSenderId()+"="+senderId);
+                    Log.d("ReceiverId",chat.getReceiverId()+"="+receiverId);
+                    if(chat.getSenderId().equals(senderId) && chat.getReceiverId().equals(receiverId)
+                            || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)){
+                        Log.d("FirebaseMessages","I am in the loop and passed the conditions");
+                        chatContainer.add(chat);
+                    }
+                }
+                Log.d("FirebaseMessages",""+chatContainer.size());
+                fireBaseMessages.firebaseMessages(chatContainer);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void fetchAllUser(FetchFriends fetchAllWaamUsers){
+        allWaamUsers = new ArrayList<>();
+        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
+        mDatebaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                allWaamUsers.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    WaamUser user = dataSnapshot.getValue(WaamUser.class);
+                        allWaamUsers.add(user);
+                }
+                fetchAllWaamUsers.friendsFetcher(allFriends);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
     public interface FetchFriends{
         void friendsFetcher(List<WaamUser> friends);
     }
@@ -347,5 +406,10 @@ public class GeneralFactory {
 
     public interface SpecificUser{
         void loadSpecUse(WaamUser user);
+    }
+
+
+    public interface FireBaseMessages{
+        void firebaseMessages(List<Chat> chatCont);
     }
 }

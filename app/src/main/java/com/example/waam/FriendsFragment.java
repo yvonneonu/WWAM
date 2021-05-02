@@ -52,7 +52,6 @@ public class FriendsFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FriendAdapt friendAdapt;
     private List<WaamUser> friendModelList;
-    private GeneralFactory generalFactory;
     private int userId = 0;
     private ConnectycubeRoster chatRoster;
     private  SubscriptionListener subscriptionListener;
@@ -88,7 +87,7 @@ public class FriendsFragment extends Fragment {
         }
         boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
         setHasOptionsMenu(true);
-        generalFactory = GeneralFactory.getGeneralFactory();
+        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory();
         String branchName = FirebaseAuth.getInstance().getUid();
         generalFactory.loadFriends(branchName, new GeneralFactory.FetchFriends() {
             @Override
@@ -100,30 +99,9 @@ public class FriendsFragment extends Fragment {
         WaamUser friendAdder = new WaamUser();
         friendModelList.add(0,friendAdder);
         friendAdapt = new FriendAdapt(friendModelList,getActivity());
-        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
-        ConnectycubeSessionParameters sessionParameters = ConnectycubeSessionManager.getInstance().getSessionParameters();
-        int param = sessionParameters.getUserId();
-        String access = sessionParameters.getAccessToken();
-        Log.d("Param",""+param);
-        Log.d("Signed",""+true);
-        Gson gson = new Gson();
-        String json = gson.toJson(sessionParameters);
-        Log.d("Session",json);
+
         userId = SessionManager.getSessionManager(getActivity()).getConnectyUser();
         //user is logged in
-
-        if(isSignedIn){
-            chatRoster = chatService.getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
-            subscriptionListener = new SubscriptionListener() {
-                @Override
-                public void subscriptionRequested(int userId) {
-
-                }
-            };
-        }
-
-
-
         Log.d("Subscription",""+subscriptionListener);
 
         friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
@@ -133,7 +111,6 @@ public class FriendsFragment extends Fragment {
 
                     Log.d("userId",""+userId);
 
-                    Log.d("ChatService",""+chatService);
                     Log.d("Roaster",""+chatRoster);
 
                         if (chatRoster.contains(userID)) {

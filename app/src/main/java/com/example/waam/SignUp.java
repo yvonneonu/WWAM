@@ -168,7 +168,7 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
 
                     //Register users on firebase......
-                    GeneralFactory.getGeneralFactory().signUp(waamUser.getEmail(), waamUser.getPassword(),SignUp.this,progressBar, waamUser);
+                    GeneralFactory.getGeneralFactory().signUpForBase(waamUser.getEmail(), waamUser.getPassword(),SignUp.this,progressBar, waamUser);
                     Intent intent = new Intent(SignUp.this, Verification1.class);
                     intent.putExtra("token", response.body().getToken());
                     intent.putExtra("name", name.getText().toString());

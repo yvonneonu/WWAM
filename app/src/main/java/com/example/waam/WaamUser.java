@@ -9,7 +9,8 @@ public class WaamUser {
     private String birth_date;
     private String password;
     private String password_confirmation;
-    private int Image;
+    private int image;
+    private String uid;
 
 
 
@@ -93,6 +94,18 @@ public class WaamUser {
 
 
     public int getImage() {
-        return Image;
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

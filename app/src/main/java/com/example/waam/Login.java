@@ -153,9 +153,8 @@ public class Login extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest("email", "password");
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
-                GeneralFactory.getGeneralFactory().loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword());
+                GeneralFactory.getGeneralFactory().loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),Login.this);
                 loginUser(loginRequest);
-
 
             }
         });
