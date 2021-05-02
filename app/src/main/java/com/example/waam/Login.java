@@ -145,7 +145,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onError(ResponseException error) {
 
-                        Log.d("error", ""+error.getMessage());
+                        Log.d("ConnectyCuberror", ""+error.getMessage());
                     }
                 });
                 LoginRequest loginRequest = new LoginRequest("email", "password");

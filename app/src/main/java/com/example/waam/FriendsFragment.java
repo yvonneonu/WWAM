@@ -19,10 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.connectycube.auth.session.ConnectycubeSessionManager;
+import com.connectycube.auth.session.ConnectycubeSessionParameters;
 import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.ConnectycubeRoster;
 import com.connectycube.chat.listeners.SubscriptionListener;
 import com.connectycube.users.model.ConnectycubeUser;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Objects;
@@ -49,6 +52,7 @@ public class FriendsFragment extends Fragment {
     private GeneralFactory generalFactory;
     private int userId = 0;
     private ConnectycubeRoster chatRoster;
+    private  SubscriptionListener subscriptionListener;
     private final int userID = 4134562;
     public FriendsFragment() {
         // Required empty public constructor
@@ -79,6 +83,7 @@ public class FriendsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
         setHasOptionsMenu(true);
         generalFactory = GeneralFactory.getGeneralFactory();
         friendModelList = generalFactory.getFriendModelList();
@@ -86,25 +91,42 @@ public class FriendsFragment extends Fragment {
         FriendModel friendAdder = new FriendModel("Add Friend","250+ Nearby",addFriend);
         friendModelList.add(0,friendAdder);
         friendAdapt = new FriendAdapt(friendModelList,getActivity());
+        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
+        ConnectycubeSessionParameters sessionParameters = ConnectycubeSessionManager.getInstance().getSessionParameters();
+        int param = sessionParameters.getUserId();
+        String access = sessionParameters.getAccessToken();
+        Log.d("Param",""+param);
+        Log.d("Signed",""+true);
+        Gson gson = new Gson();
+        String json = gson.toJson(sessionParameters);
+        Log.d("Session",json);
+        userId = SessionManager.getSessionManager(getActivity()).getConnectyUser();
+        //user is logged in
 
-        SubscriptionListener subscriptionListener = new SubscriptionListener() {
-            @Override
-            public void subscriptionRequested(int userId) {
+        if(isSignedIn){
+            chatRoster = chatService.getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
+            subscriptionListener = new SubscriptionListener() {
+                @Override
+                public void subscriptionRequested(int userId) {
 
-            }
-        };
+                }
+            };
+        }
 
 
+
+        Log.d("Subscription",""+subscriptionListener);
 
         friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
             @Override
             public void friendResponder(int position) {
                 if(position == 0){
-                    userId = SessionManager.getSessionManager(getActivity()).getConnectyUser();
-                    Log.d("userId",""+userId);
-                    chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
 
-                    if(userId != -1){
+                    Log.d("userId",""+userId);
+
+                    Log.d("ChatService",""+chatService);
+                    Log.d("Roaster",""+chatRoster);
+
                         if (chatRoster.contains(userID)) {
                             try {
                                 chatRoster.subscribe(userID);
@@ -120,7 +142,7 @@ public class FriendsFragment extends Fragment {
 
                             }
                         }
-                    }
+
                     Log.d("AddFriend","You clicked Add");
                 }else{
                     Log.d("Chat","Move to Chat");
