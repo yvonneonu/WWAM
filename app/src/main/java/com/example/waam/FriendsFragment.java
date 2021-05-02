@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.connectycube.auth.session.ConnectycubeSessionManager;
 import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.ConnectycubeRestChatService;
 import com.connectycube.chat.ConnectycubeRoster;
@@ -29,6 +30,9 @@ import com.connectycube.core.Consts;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.core.request.RequestGetBuilder;
+import com.connectycube.users.ConnectycubeUsers;
+import com.connectycube.users.model.ConnectycubeAddressBookContact;
+import com.connectycube.users.model.ConnectycubeAddressBookResponse;
 import com.connectycube.users.model.ConnectycubeUser;
 
 import java.util.ArrayList;
@@ -45,6 +49,13 @@ public class FriendsFragment extends Fragment {
 
     ArrayList<Integer> occupantIds = new ArrayList<Integer>();
 
+    boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
+    String UDID = null;
+    boolean force = true;
+
+
+   // String UDID = null;
+    boolean isCompact = true;
     private ConnectycubeChatService chatService;
     int userID = 4134562;
     ConnectycubeChatDialog privateDialog;
@@ -58,8 +69,8 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-   int id;
-    String pasword;
+  // int id;
+   // String pasword;
     private FriendAdapt friendAdapt;
     private List<FriendModel> friendModelList;
     private GeneralFactory generalFactory;
@@ -89,134 +100,30 @@ public class FriendsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        id = getActivity().getIntent().getIntExtra("id", id);
+       // id = getActivity().getIntent().getIntExtra("id1", id);
+      //  Log.d("ME", ""+id);
 
-        pasword = getActivity().getIntent().getStringExtra("password");
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        setHasOptionsMenu(true);
-        generalFactory = GeneralFactory.getGeneralFactory();
-        friendModelList = generalFactory.getFriendModelList();
-        int addFriend = R.drawable.add_new_friend_icon;
-        FriendModel friendAdder = new FriendModel("Add Friend","250+ Nearby",addFriend);
-        friendModelList.add(0,friendAdder);
-        friendAdapt = new FriendAdapt(friendModelList,getActivity());
-
-
-        friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
-            @Override
-            public void friendResponder(int position) {
-                if(position == 0){
-                    final ConnectycubeUser user = new ConnectycubeUser();
-                    // user.setId(4152184);
-
-                    user.setId(id);
-                    user.setPassword(pasword);
-                    chatService.login(user, new EntityCallback() {
-
-
-                        @Override
-                        public void onSuccess(Object o, Bundle bundle) {
-
-                        }
-
-                        @Override
-                        public void onError(ResponseException errors) {
-
-                        }
-                    });
-
-                    if (chatRoster.contains(userID)) {
-                        try {
-                            chatRoster.subscribe(userID);
-                        } catch (Exception e) {
-
-                        }
-                    } else {
-                        try {
-                            chatRoster.createEntry(userID, null);
-                        } catch (Exception e) {
-
-                        }
-                    }
-
-                    Log.d("AddFriend","You clicked Add");
-                }else{
-                    Log.d("Chat","Move to Chat");
-                }
-            }
-        });
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.friendsmenu, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
-        final SearchView searchView = (SearchView) searchItem.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                Log.d("TAG", "QueryTextSubmit: " + s);
-
-                return true;
-            }
-            @Override
-            public boolean onQueryTextChange(String s) {
-                friendAdapt.getFilter().filter(s);
-                Log.d("TAG", "QueryTextChange: " + s);
-                return false;
-            }
-        });
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int search = R.id.menu_item_search;
-        final int invite = R.id.inv;
-        switch (item.getItemId()){
-            case search:
-                break;
-            case invite:
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, "Join me to use the wwam app");
-                i.putExtra(Intent.EXTRA_SUBJECT, "Share with");
-                i = Intent.createChooser(i,"Send to a friend");
-                startActivity(i);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment\
         occupantIds.add(4134562);
         ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
         dialog.setType(ConnectycubeDialogType.PRIVATE);
         dialog.setOccupantsIds(occupantIds);
 
 //or just use DialogUtils
-//ConnectycubeChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);
+
+        //  ConnectycubeChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);
 
         ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
             @Override
             public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
 
+                Log.d("show", "show"+createdDialog.getOccupants());
+
             }
 
             @Override
             public void onError(ResponseException exception) {
+
+                Log.d("show", "show"+exception.getMessage());
 
             }
         });
@@ -284,21 +191,192 @@ public class FriendsFragment extends Fragment {
         SubscriptionListener subscriptionListener = new SubscriptionListener() {
             @Override
             public void subscriptionRequested(int userId) {
+                Log.d("list", ""+userId);
 
             }
         };
 
 // Do this after success Chat login
-        chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
+        ConnectycubeRoster chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
+
+        userID = 4134562;
+
+        ArrayList<ConnectycubeAddressBookContact> contactsGlobal = new ArrayList<>();
+
+        ConnectycubeAddressBookContact contact = new ConnectycubeAddressBookContact();
+        contact.setPhone("13656516112");
+        contact.setName("Bob Bobson");
+
+        contactsGlobal.add(contact);
+
+        ConnectycubeUsers.uploadAddressBook(contactsGlobal, UDID, force).performAsync(new EntityCallback<ConnectycubeAddressBookResponse>() {
+            @Override
+            public void onSuccess(ConnectycubeAddressBookResponse result, Bundle params) {
+
+                Log.d("ADD", ""+result.getCreatedCount());
+            }
+
+            @Override
+            public void onError(ResponseException responseException) {
+
+                Log.d("err", ""+responseException.getMessage());
+            }
+        });
+
+        /*if (chatRoster.contains(userID)) {
+            Log.d("KUU",""+userID);
+            try {
+                chatRoster.subscribe(userID);
+            } catch (Exception e) {
+
+                Log.d("KUU",""+e.getMessage());
+            }
+        } else {
+            try {
+                chatRoster.createEntry(userID, null);
+            } catch (Exception e) {
+                Log.d("KU",""+e.getMessage());
+
+            }
+        }*/
+
+        ConnectycubeUsers.getRegisteredUsersFromAddressBook(UDID, isCompact).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+            @Override
+            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle params) {
+
+            }
+
+            @Override
+            public void onError(ResponseException responseException) {
+
+            }
+        });
+        //createEntry(userID, null);
 //        chatRoster.addRosterListener(rosterListener);
 
-        //Collection<ConnectycubeRosterEntry> entries = chatRoster.getEntries();
 //        Collection<ConnectycubeRosterEntry> entries = chatRoster.getEntries();
-        //сhatRoster.//getEntries();
+        //pasword = getActivity().getIntent().getStringExtra("password");
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+        setHasOptionsMenu(true);
+        generalFactory = GeneralFactory.getGeneralFactory();
+        friendModelList = generalFactory.getFriendModelList();
+        int addFriend = R.drawable.add_new_friend_icon;
+        FriendModel friendAdder = new FriendModel("Add Friend","250+ Nearby",addFriend);
+        friendModelList.add(0,friendAdder);
+        friendAdapt = new FriendAdapt(friendModelList,getActivity());
+
+                friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
+            @Override
+            public void friendResponder(int position) {
+                if(position == 0){
+
+                    int userID = 4134562;
+
+                    ArrayList<ConnectycubeAddressBookContact> contactsGlobal = new ArrayList<>();
+
+                    ConnectycubeAddressBookContact contact = new ConnectycubeAddressBookContact();
+                    contact.setPhone("13656516112");
+                    contact.setName("Bob Bobson");
+
+                    contactsGlobal.add(contact);
+
+                    ConnectycubeUsers.uploadAddressBook(contactsGlobal, UDID, force).performAsync(new EntityCallback<ConnectycubeAddressBookResponse>() {
+                        @Override
+                        public void onSuccess(ConnectycubeAddressBookResponse result, Bundle params) {
+
+                            Log.d("ADD", ""+result.getCreatedCount());
+                        }
+
+                        @Override
+                        public void onError(ResponseException responseException) {
+
+                            Log.d("err", ""+responseException.getMessage());
+                        }
+                    });
+
+                  /*  if (chatRoster.contains(userID)) {
+                        Log.d("KUU",""+userID);
+                        try {
+                            chatRoster.subscribe(userID);
+                        } catch (Exception e) {
+
+                            Log.d("KUU",""+e.getMessage());
+                        }
+                    } else {
+                        try {
+                            chatRoster.createEntry(userID, null);
+                        } catch (Exception e) {
+                            Log.d("KU",""+e.getMessage());
+
+                        }
+                    }*/
+
+                    Log.d("AddFriend","You clicked Add");
+                }else{
+                    Log.d("Chat","Move to Chat");
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.friendsmenu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.d("TAG", "QueryTextSubmit: " + s);
+
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                friendAdapt.getFilter().filter(s);
+                Log.d("TAG", "QueryTextChange: " + s);
+                return false;
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final int search = R.id.menu_item_search;
+        final int invite = R.id.inv;
+        switch (item.getItemId()){
+            case search:
+                break;
+            case invite:
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, "Join me to use the wwam app");
+                i.putExtra(Intent.EXTRA_SUBJECT, "Share with");
+                i = Intent.createChooser(i,"Send to a friend");
+                startActivity(i);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment\
 
 
 
-                View view = inflater.inflate(R.layout.fragment_friends, container, false);
+        View view = inflater.inflate(R.layout.fragment_friends, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.friends_recycler);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         recyclerView.setAdapter(friendAdapt);

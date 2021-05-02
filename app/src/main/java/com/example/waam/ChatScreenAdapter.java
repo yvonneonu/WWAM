@@ -69,14 +69,16 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         //final Chat chat = listOfChats.get(position);
        // if(chat.getSenderId().equals(senderId)){
-         //   Senderview  senderView = (Senderview) holder;
-          //  senderView.textView.setText(chat.getMessage());
+
 
 
                  ConnectycubeChatDialog privateDialog = new ConnectycubeChatDialog();
 
                 ConnectycubeChatMessage chatMessage = new ConnectycubeChatMessage();
-                chatMessage.setBody("How are you today?");
+     //   Senderview  senderView = (Senderview) holder;
+    //    senderView.textView.setText(chatMessage.getId());
+
+              chatMessage.setBody("How are you today?");
                 chatMessage.setSaveToHistory(true);
 
                // privateDialog.sendMessage(chatMessage);

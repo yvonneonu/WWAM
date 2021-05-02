@@ -42,6 +42,11 @@ public class Login extends AppCompatActivity {
     String Password;
     String password;
     int id;
+   // int id1;
+   String UDID = null;
+    boolean force = true;
+    //int id4;
+    String pasword;
     private ConnectycubeChatService chatService;
 
     boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
@@ -104,12 +109,56 @@ public class Login extends AppCompatActivity {
         Log.d("show", "show");
 
 
+       /* ConnectionListener connectionListener = new ConnectionListener() {
+            @Override
+            public void connected(XMPPConnection connection) {
+
+                Log.d("show", "show"+connection.isConnected());
+
+            }
+
+            @Override
+            public void authenticated(XMPPConnection xmppConnection, boolean b) {
+                Log.d("show", "show"+b);
+
+            }
 
 
+            @Override
+            public void connectionClosed() {
+                Log.d("show", "showmore");
+
+            }
+
+            @Override
+            public void connectionClosedOnError(Exception e) {
+                Log.d("show", "show"+e.getMessage());
+
+            }
+
+            @Override
+            public void reconnectingIn(int seconds) {
+                Log.d("show", "show"+seconds);
+
+            }
+
+            @Override
+            public void reconnectionSuccessful() {
+                Log.d("show", "here");
+
+            }
+
+            @Override
+            public void reconnectionFailed(Exception e) {
+                Log.d("show", ""+e.getMessage());
+
+            }
+        };
+
+        ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);*/
 
 
-
-                logm.setOnClickListener(v -> {
+        logm.setOnClickListener(v -> {
             //user = editEmail.getText().toString();
             Email = editEmail.getText().toString();
             Password = editPass.getText().toString();
@@ -128,6 +177,27 @@ public class Login extends AppCompatActivity {
              //   user.setLogin("Grace");
                 user.setEmail(Email);
                 user.setPassword(Password);
+
+
+               // final ConnectycubeUser user1 = new ConnectycubeUser();
+                // user.setId(4152184);
+
+                user.setId(4152184);
+                user.setPassword("435");
+                chatService.login(user, new EntityCallback() {
+
+
+                    @Override
+                    public void onSuccess(Object o, Bundle bundle) {
+
+                    }
+
+                    @Override
+                    public void onError(ResponseException errors) {
+
+                    }
+                });
+
 
 
 
@@ -201,6 +271,7 @@ public class Login extends AppCompatActivity {
                   //  Intent intent = new Intent(Login.this,finalProfile.class);
                     intent.putExtra("toking",loginToken);
                     intent.putExtra("id", id);
+                    //intent.putExtra(String.valueOf(id1), id);
                     intent.putExtra("password", password);
                     startActivity(intent);
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
