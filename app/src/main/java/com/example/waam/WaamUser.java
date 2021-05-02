@@ -1,6 +1,6 @@
 package com.example.waam;
 
-public class RegisterRequest {
+public class WaamUser {
     private String fullname;
     private String email;
     private String zipcode;
@@ -9,10 +9,14 @@ public class RegisterRequest {
     private String birth_date;
     private String password;
     private String password_confirmation;
+    private int Image;
 
 
 
-    public RegisterRequest(String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password) {
+    public WaamUser(){
+
+    };
+    public WaamUser(String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password) {
         this.fullname = fullname;
         this.email = email;
         this.zipcode = zipcode;
@@ -88,5 +92,7 @@ public class RegisterRequest {
     }
 
 
-
+    public int getImage() {
+        return Image;
+    }
 }

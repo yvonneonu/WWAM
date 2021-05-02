@@ -125,16 +125,17 @@ public class Login extends AppCompatActivity {
 
             }else {
 
-                final ConnectycubeUser user = new ConnectycubeUser();
+                /*final ConnectycubeUser user = new ConnectycubeUser();
                 user.setId(4134562);
                 user.setLogin("bamidele");
                 user.setPassword("12345678");
 
-                ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
+                /*ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
                     public void onSuccess(ConnectycubeUser userj, Bundle args) {
                         SessionManager.getSessionManager(Login.this).setConnectyUser(userj);
                         int id = SessionManager.getSessionManager(Login.this).getConnectyUser();
+
                         Log.d("idLogin",""+id);
                         Log.d("doraaa", ""+userj.getId());
                         Log.d("doraaa", ""+userj.getLogin());
@@ -147,14 +148,13 @@ public class Login extends AppCompatActivity {
 
                         Log.d("ConnectyCuberror", ""+error.getMessage());
                     }
-                });
+                });*/
+
                 LoginRequest loginRequest = new LoginRequest("email", "password");
-              //  loginRequest.se
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
-
-
-               loginUser(loginRequest);
+                GeneralFactory.getGeneralFactory().loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword());
+                loginUser(loginRequest);
 
 
             }

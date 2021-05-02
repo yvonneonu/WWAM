@@ -48,6 +48,7 @@ public class SignUp extends AppCompatActivity {
     private Button update;
     UserService userService;
     private CardView cardView1;
+    private ProgressBar progressBar;
     private EditText name, email, zip, password, confrim;
     //ConstraintLayout constraintLayou;
     String chose = "";
@@ -109,7 +110,7 @@ public class SignUp extends AppCompatActivity {
         update.setText(getTodaysDate());
 
 
-        final ProgressBar progressBar = new ProgressBar(SignUp.this);
+        progressBar= new ProgressBar(SignUp.this);
 
         move.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,8 +156,8 @@ public class SignUp extends AppCompatActivity {
         return makeDateString(day, month, year);
     }
 
-    public void requestUser(RegisterRequest registerRequest) {
-        Call<RegisterResponse> registerResponseCall = ApiClient.getService().registerUsers(registerRequest);
+    public void requestUser(WaamUser waamUser) {
+        Call<RegisterResponse> registerResponseCall = ApiClient.getService().registerUsers(waamUser);
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
@@ -166,6 +167,8 @@ public class SignUp extends AppCompatActivity {
                     String message = "Successful";
                     Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
 
+                    //Register users on firebase......
+                    GeneralFactory.getGeneralFactory().signUp(waamUser.getEmail(), waamUser.getPassword(),SignUp.this,progressBar, waamUser);
                     Intent intent = new Intent(SignUp.this, Verification1.class);
                     intent.putExtra("token", response.body().getToken());
                     intent.putExtra("name", name.getText().toString());
@@ -322,7 +325,7 @@ public class SignUp extends AppCompatActivity {
         }
 
 
-            RegisterRequest registerRequest = new RegisterRequest("name", "email", "zipcode", "gender", "seeking", "date", "pass");
+            WaamUser waamUser = new WaamUser("name", "email", "zipcode", "gender", "seeking", "date", "pass");
 
             Fullname = name.getText().toString();
             Email = email.getText().toString();
@@ -385,15 +388,15 @@ public class SignUp extends AppCompatActivity {
                 });
                 Log.d("meemmemememe", ""+user);
 
-                registerRequest.setFullname(Fullname);
-                registerRequest.setEmail(Email);
-                registerRequest.setZipcode(Zip);
-                registerRequest.setBirth_date(Update);
-                registerRequest.setPassword(Passwor);
-                registerRequest.setPassword_confirmation(Confirm);
-                registerRequest.setGender(chose);
-                registerRequest.setSeeking(interest);
-                requestUser(registerRequest);
+                waamUser.setFullname(Fullname);
+                waamUser.setEmail(Email);
+                waamUser.setZipcode(Zip);
+                waamUser.setBirth_date(Update);
+                waamUser.setPassword(Passwor);
+                waamUser.setPassword_confirmation(Confirm);
+                waamUser.setGender(chose);
+                waamUser.setSeeking(interest);
+                requestUser(waamUser);
 
 
             }

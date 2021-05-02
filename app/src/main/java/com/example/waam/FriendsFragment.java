@@ -25,6 +25,9 @@ import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.ConnectycubeRoster;
 import com.connectycube.chat.listeners.SubscriptionListener;
 import com.connectycube.users.model.ConnectycubeUser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -46,9 +49,9 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ConnectycubeUser connectycubeUser;
+    private FirebaseAuth firebaseAuth;
     private FriendAdapt friendAdapt;
-    private List<FriendModel> friendModelList;
+    private List<WaamUser> friendModelList;
     private GeneralFactory generalFactory;
     private int userId = 0;
     private ConnectycubeRoster chatRoster;
@@ -86,9 +89,15 @@ public class FriendsFragment extends Fragment {
         boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
         setHasOptionsMenu(true);
         generalFactory = GeneralFactory.getGeneralFactory();
-        friendModelList = generalFactory.getFriendModelList();
+        String branchName = FirebaseAuth.getInstance().getUid();
+        generalFactory.loadFriends(branchName, new GeneralFactory.FetchFriends() {
+            @Override
+            public void friendsFetcher(List<WaamUser> friends) {
+                friendModelList = friends;
+            }
+        });
         int addFriend = R.drawable.add_new_friend_icon;
-        FriendModel friendAdder = new FriendModel("Add Friend","250+ Nearby",addFriend);
+        WaamUser friendAdder = new WaamUser();
         friendModelList.add(0,friendAdder);
         friendAdapt = new FriendAdapt(friendModelList,getActivity());
         ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();

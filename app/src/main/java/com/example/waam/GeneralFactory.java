@@ -1,7 +1,24 @@
 package com.example.waam;
 
 import android.content.Context;
-import android.content.res.AssetManager;
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,11 +27,15 @@ import java.util.List;
 public class GeneralFactory {
     private static GeneralFactory generalFactory;
     private final List<EventModel> eventModelList;
+    private final FirebaseAuth mAuth;
     private EventModel[] eventModelsArrays;
     private final List<Location> locationList;
+    private static final String WAAMBASE = "waamuser_base";
     private List<FriendModel> friendModelList;
+    private final FirebaseDatabase firebaseDatabase;
     private List<Chat> chatList;
     private List<AgentModel> agentModelList;
+    private List<WaamUser> allFriends;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -59,9 +80,11 @@ public class GeneralFactory {
     private GeneralFactory(){
         eventModelList = new ArrayList<>();
         locationList = new ArrayList<>();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         friendModelList = new ArrayList<>();
         chatList = new ArrayList<>();
         agentModelList =  new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance();
     }
 
 
@@ -173,5 +196,91 @@ public class GeneralFactory {
         for (int i = 0; i < display.length; i++){
             agentModelList.add(new AgentModel(display[i], name[i], rating[i], rating2[i]));
         }
+    }
+
+
+    public void signUp(final String email, final String password, final Context context, final ProgressBar bar,  WaamUser waamUser){
+        bar.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            bar.setVisibility(View.GONE);
+                            Toast.makeText(context, "You have signed up", Toast.LENGTH_LONG).show();
+                            //This is where we set the values we want our users to have
+                            String userId = mAuth.getCurrentUser().getUid();
+                            DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
+                            mDatebaseReference.child(userId)
+                                    .setValue(waamUser)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Log.d("Registeration","Registeration was succesful");
+                                            }else{
+                                                Log.d("Registeration","Registeration was not succesful");
+                                            }
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.d("Registration",e.getMessage());
+                                        Toast.makeText(context,"error"+e.getMessage(),Toast.LENGTH_LONG).show();
+                                        bar.setVisibility(View.GONE);
+                                    });
+                        }
+                    }
+                });
+    }
+
+    public void loginToFireBase(String email, String password,Context context){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnCompleteListener(task -> Log.d("Login","Login was succesfull"));
+    }
+
+
+    public void addToFriend(String friendId, String branch){
+
+    }
+
+
+    public void loadFriends(String branch,FetchFriends fetchFriends){
+        allFriends = new ArrayList<>();
+        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
+        mDatebaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                allFriends.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    WaamUser user = dataSnapshot.getValue(WaamUser.class);
+                    allFriends.add(user);
+                }
+
+                fetchFriends.friendsFetcher(allFriends);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void logOut(Context context){
+        mAuth.signOut();
+        Intent intent = new Intent(context, Login.class);
+        context.startActivity(intent);
+    }
+
+    public interface FetchFriends{
+        void friendsFetcher(List<WaamUser> friends);
     }
 }

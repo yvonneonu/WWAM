@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "299192676420",
+    "project_id": "waam-96a1b",
+    "storage_bucket": "waam-96a1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299192676420:android:4b7598a539f533bc300c11",
+        "android_client_info": {
+          "package_name": "com.example.waam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299192676420-beicfhs17ml1mh2bh9lnm0340s89l5e6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6euJVoxt4NdBlqEfmFAjC4ckIh7NKjXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299192676420-beicfhs17ml1mh2bh9lnm0340s89l5e6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

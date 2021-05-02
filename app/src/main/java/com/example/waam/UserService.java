@@ -26,7 +26,7 @@ public interface UserService {
     Call<LoginResponse>loginUser(@Body LoginRequest loginRequest);
 
     @POST("api/register")
-    Call<RegisterResponse> registerUsers(@Body RegisterRequest registerRequest);
+    Call<RegisterResponse> registerUsers(@Body WaamUser waamUser);
 
 
     @POST("api/otp-request")
