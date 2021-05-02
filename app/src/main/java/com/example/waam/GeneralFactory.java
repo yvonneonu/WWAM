@@ -246,7 +246,23 @@ public class GeneralFactory {
     }
 
 
-    public void addToFriend(String friendId, String branch){
+    public void addToFriend(WaamUser waamUser, String branch, Context context){
+        DatabaseReference mDatabaseReference = firebaseDatabase.getReference(branch);
+        String newsId = mDatabaseReference.push().getKey();
+        mDatabaseReference.child(newsId).setValue(waamUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context,"Succesfully added",Toast.LENGTH_LONG).show();
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Failure",e.getMessage());
+                    }
+                });
 
     }
 
@@ -264,7 +280,6 @@ public class GeneralFactory {
                 }
 
                 fetchFriends.friendsFetcher(allFriends);
-
             }
 
             @Override
@@ -274,13 +289,63 @@ public class GeneralFactory {
         });
     }
 
+
+    public void sendMessage(final String message, final String receiverId, final Context context){
+        if(!message.equals("")){
+            String sender = mAuth.getCurrentUser().getUid();
+            DatabaseReference reference = firebaseDatabase.getReference("CHAT");
+            String chatId = reference.push().getKey();
+            Chat chat = new Chat(message,chatId,sender,receiverId);
+            reference.child(chatId).setValue(chat)
+                    .addOnFailureListener(e -> Toast.makeText(context,"Message cant be sent",Toast.LENGTH_LONG).show())
+                    .addOnCompleteListener(task -> {
+                        if(task.isSuccessful()){
+                            Toast.makeText(context,"Message was sent",Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }else{
+            Toast.makeText(context,"Message cant be sent",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
     public void logOut(Context context){
         mAuth.signOut();
         Intent intent = new Intent(context, Login.class);
         context.startActivity(intent);
     }
 
+
+
+
+    public void loadSpecUser(String userdId, final SpecificUser userCallback){
+        DatabaseReference databaseSpecUser = FirebaseDatabase.getInstance().getReference(WAAMBASE);
+        databaseSpecUser.child(userdId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                WaamUser user = snapshot.getValue(WaamUser.class);
+                userCallback.loadSpecUse(user);
+                Log.d("Userc",""+user);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
     public interface FetchFriends{
         void friendsFetcher(List<WaamUser> friends);
+    }
+
+    public interface FireBaseCallbackUser {
+        void fireBaseUser(WaamUser basuser);
+    }
+
+    public interface SpecificUser{
+        void loadSpecUse(WaamUser user);
     }
 }
