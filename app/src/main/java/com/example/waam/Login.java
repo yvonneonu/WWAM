@@ -40,6 +40,8 @@ public class Login extends AppCompatActivity {
     private EditText editEmail;
     String Email;
     String Password;
+    String password;
+    int id;
     private ConnectycubeChatService chatService;
 
     boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
@@ -52,7 +54,7 @@ public class Login extends AppCompatActivity {
 //
 
 
-  int b = 4152184;
+ // int b = 4152184;
 
 
 
@@ -129,7 +131,7 @@ public class Login extends AppCompatActivity {
 
 
 
-                user.setId(4152184);
+             /*   user.setId(4152184);
                 user.setPassword("12345678");
                 chatService.login(user, new EntityCallback() {
 
@@ -143,12 +145,15 @@ public class Login extends AppCompatActivity {
                     public void onError(ResponseException errors) {
 
                     }
-                });
+                });*/
 
 
                 ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
                     public void onSuccess(ConnectycubeUser userj, Bundle args) {
+
+                         id = user.getId();
+                         password = user.getPassword().toString();
 
                         Log.d("doraaa", ""+userj.getId());
                         Log.d("doraaa", ""+userj.getLogin());
@@ -188,12 +193,15 @@ public class Login extends AppCompatActivity {
                     loginToken = response.body().getToken();
                     Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
 
-
+                    //Log.d(int, id);
                     Log.d("LoginTOken",loginToken);
+
                   //  Intent intent = new Intent(Login.this, Profile.class);
                     //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
                   //  Intent intent = new Intent(Login.this,finalProfile.class);
                     intent.putExtra("toking",loginToken);
+                    intent.putExtra("id", id);
+                    intent.putExtra("password", password);
                     startActivity(intent);
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
                     finish();

@@ -29,6 +29,7 @@ import com.connectycube.core.Consts;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.core.request.RequestGetBuilder;
+import com.connectycube.users.model.ConnectycubeUser;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,6 +45,7 @@ public class FriendsFragment extends Fragment {
 
     ArrayList<Integer> occupantIds = new ArrayList<Integer>();
 
+    private ConnectycubeChatService chatService;
     int userID = 4134562;
     ConnectycubeChatDialog privateDialog;
     // TODO: Rename parameter arguments, choose names that match
@@ -56,6 +58,8 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+   int id;
+    String pasword;
     private FriendAdapt friendAdapt;
     private List<FriendModel> friendModelList;
     private GeneralFactory generalFactory;
@@ -85,6 +89,9 @@ public class FriendsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = getActivity().getIntent().getIntExtra("id", id);
+
+        pasword = getActivity().getIntent().getStringExtra("password");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -102,8 +109,24 @@ public class FriendsFragment extends Fragment {
             @Override
             public void friendResponder(int position) {
                 if(position == 0){
+                    final ConnectycubeUser user = new ConnectycubeUser();
+                    // user.setId(4152184);
+
+                    user.setId(id);
+                    user.setPassword(pasword);
+                    chatService.login(user, new EntityCallback() {
 
 
+                        @Override
+                        public void onSuccess(Object o, Bundle bundle) {
+
+                        }
+
+                        @Override
+                        public void onError(ResponseException errors) {
+
+                        }
+                    });
 
                     if (chatRoster.contains(userID)) {
                         try {
