@@ -64,7 +64,7 @@ public class AgentFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        generalFactory = GeneralFactory.getGeneralFactory();
+        generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         agentModelList = generalFactory.getAgentModelList();
 
         agentAdapter = new AgentAdapter(agentModelList,getActivity());

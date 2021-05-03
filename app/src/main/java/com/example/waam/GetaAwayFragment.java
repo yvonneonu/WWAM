@@ -58,7 +58,7 @@ public class GetaAwayFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory();
+        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
 
         eventModels = generalFactory.getEventModelList();
 

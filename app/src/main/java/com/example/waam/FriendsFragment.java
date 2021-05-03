@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -85,54 +86,25 @@ public class FriendsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
         setHasOptionsMenu(true);
-        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory();
+        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid();
-        generalFactory.loadFriends(branchName, new GeneralFactory.FetchFriends() {
-            @Override
-            public void friendsFetcher(List<WaamUser> friends) {
-                friendModelList = friends;
-            }
-        });
+        generalFactory.loadFriends(branchName, friends -> friendModelList = friends);
         int addFriend = R.drawable.add_new_friend_icon;
-        WaamUser friendAdder = new WaamUser();
+        WaamUser friendAdder = new WaamUser("Add Friends",addFriend);
+        friendModelList = new ArrayList<>();
         friendModelList.add(0,friendAdder);
         friendAdapt = new FriendAdapt(friendModelList,getActivity());
-
-        userId = SessionManager.getSessionManager(getActivity()).getConnectyUser();
+        //userId = SessionManager.getSessionManager(getActivity()).getConnectyUser();
         //user is logged in
         Log.d("Subscription",""+subscriptionListener);
 
-        friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
-            @Override
-            public void friendResponder(int position) {
-                if(position == 0){
-
-                    Log.d("userId",""+userId);
-
-                    Log.d("Roaster",""+chatRoster);
-
-                        if (chatRoster.contains(userID)) {
-                            try {
-                                chatRoster.subscribe(userID);
-                                Toast.makeText(getActivity(),"Request sent to ",Toast.LENGTH_SHORT)
-                                        .show();
-                            } catch (Exception e) {
-                                Log.d("Error",e.getMessage());
-                            }
-                        } else {
-                            try {
-                                chatRoster.createEntry(userID, null);
-                            } catch (Exception e) {
-
-                            }
-                        }
-
-                    Log.d("AddFriend","You clicked Add");
-                }else{
-                    Log.d("Chat","Move to Chat");
-                }
+        friendAdapt.friendMover(position -> {
+            if(position == 0){
+                Intent intent = new Intent(getActivity(),AllUsersActivity.class);
+                startActivity(intent);
+            }else{
+                Log.d("Chat","Move to Chat");
             }
         });
     }

@@ -17,6 +17,13 @@ public class WaamUser {
     public WaamUser(){
 
     };
+
+
+    public WaamUser(String fullname, int image){
+        this.fullname = fullname;
+        this.image = image;
+
+    }
     public WaamUser(String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password) {
         this.fullname = fullname;
         this.email = email;

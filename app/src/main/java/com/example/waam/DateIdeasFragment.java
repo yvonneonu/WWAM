@@ -64,7 +64,7 @@ public class DateIdeasFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        generalFactory = GeneralFactory.getGeneralFactory();
+        generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         eventModels = generalFactory.getEventModelList();
         eventAdapter = new EventAdapter(eventModels,getActivity());
 

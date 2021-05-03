@@ -24,7 +24,7 @@ public class ChatMessage extends AppCompatActivity {
         setContentView(R.layout.activity_chat_message);
         String receiverId = getIntent().getStringExtra("receiversId");
         ImageButton imageButtonSender = findViewById(R.id.imageButton);
-        generalFactoryInstance = GeneralFactory.getGeneralFactory();
+        generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         generalFactoryInstance.loadMessages(chatCont -> {
             chats = chatCont;
             chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
@@ -32,7 +32,7 @@ public class ChatMessage extends AppCompatActivity {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
             recyclerView.setAdapter(chatScreenAdapter);
             recyclerView.setLayoutManager(linearLayoutManager);
-        },receiverId);
+        },receiverId,ChatMessage.this);
 
         imageButtonSender.setOnClickListener(v -> {
             EditText editText = v.findViewById(R.id.edtMess);
