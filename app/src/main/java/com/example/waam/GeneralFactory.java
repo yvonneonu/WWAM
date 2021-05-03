@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ktx.Firebase;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -381,8 +382,11 @@ public class GeneralFactory {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     WaamUser user = dataSnapshot.getValue(WaamUser.class);
                         allWaamUsers.add(user);
+                        Gson gson = new Gson();
+                        Log.d("WaamUser",gson.toJson(gson));
                 }
-                fetchAllWaamUsers.friendsFetcher(allFriends);
+                fetchAllWaamUsers.friendsFetcher(allWaamUsers);
+                Log.d("AllUsers",""+allWaamUsers.size());
 
             }
 

@@ -33,7 +33,7 @@ public class AllUsersActivity extends AppCompatActivity {
             public void friendsFetcher(List<WaamUser> friends) {
                 friendModelList = friends;
 
-                if(friendModelList.size() > 1){
+                if(friendModelList.size() > 0){
                     friendAdapt = new FriendAdapt(friendModelList,AllUsersActivity.this);
                     bar.setVisibility(View.GONE);
 
