@@ -18,6 +18,7 @@ public class ChatMessage extends AppCompatActivity {
     private ChatScreenAdapter chatScreenAdapter;
     private List<Chat> chats;
 
+    private GeneralFactory generalFactoryInstance;
 
 
     @Override
