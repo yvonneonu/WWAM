@@ -22,23 +22,52 @@ public class ChatMessage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_message);
-        String receiverId = getIntent().getStringExtra("receiversId");
         ImageButton imageButtonSender = findViewById(R.id.imageButton);
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
-        generalFactoryInstance.loadMessages(chatCont -> {
-            chats = chatCont;
-            chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
-            recyclerView = findViewById(R.id.recyclerView);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
-            recyclerView.setAdapter(chatScreenAdapter);
-            recyclerView.setLayoutManager(linearLayoutManager);
-        },receiverId,ChatMessage.this);
+        EditText editText = findViewById(R.id.edtMess);
+        WaamUser contactlist =  (WaamUser) getIntent().getSerializableExtra("WaamUserFromChatList");
+        WaamUser userFriends = (WaamUser) getIntent().getSerializableExtra("WaamUserFromFriends");
+        if(userFriends != null){
+            String receiverId = userFriends.getUid();
+            generalFactoryInstance.loadMessages(chatCont -> {
+                chats = chatCont;
+                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
+                recyclerView = findViewById(R.id.recyclerView);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
+                recyclerView.setAdapter(chatScreenAdapter);
+                recyclerView.setLayoutManager(linearLayoutManager);
+            },receiverId,ChatMessage.this);
 
-        imageButtonSender.setOnClickListener(v -> {
-            EditText editText = v.findViewById(R.id.edtMess);
-            String messages = editText.toString().trim();
-           generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
-        });
+
+            imageButtonSender.setOnClickListener(v -> {
+                String messages = editText.getText().toString().trim();
+                generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
+            });
+
+
+        }else{
+            String receiverId = contactlist.getUid();
+            generalFactoryInstance.loadMessages(chatCont -> {
+                chats = chatCont;
+                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
+                recyclerView = findViewById(R.id.recyclerView);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
+                recyclerView.setAdapter(chatScreenAdapter);
+                recyclerView.setLayoutManager(linearLayoutManager);
+            },receiverId,ChatMessage.this);
+
+            imageButtonSender.setOnClickListener(v -> {
+
+                String messages = editText.toString().trim();
+                generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
+            });
+        }
+
+
+
+
+
+
     }
 
     public void goback(View view) {

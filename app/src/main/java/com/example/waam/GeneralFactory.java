@@ -381,13 +381,14 @@ public class GeneralFactory {
                 allWaamUsers.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     WaamUser user = dataSnapshot.getValue(WaamUser.class);
+                    if(!user.getUid().equals(mAuth.getUid())){
                         allWaamUsers.add(user);
                         Gson gson = new Gson();
                         Log.d("WaamUser",gson.toJson(gson));
+                    }
                 }
                 fetchAllWaamUsers.friendsFetcher(allWaamUsers);
                 Log.d("AllUsers",""+allWaamUsers.size());
-
             }
 
             @Override

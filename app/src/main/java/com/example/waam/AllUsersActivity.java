@@ -1,6 +1,8 @@
 package com.example.waam;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +21,7 @@ public class AllUsersActivity extends AppCompatActivity {
     private GeneralFactory generalFactoryInstance;
     private ProgressBar bar;
     private TextView textView;
+    public static final String FRIENDS = "friends";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,12 @@ public class AllUsersActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.friends_recycler);
         textView = findViewById(R.id.textView99);
         bar = findViewById(R.id.progressBarng);
+        Toolbar toolbar = findViewById(R.id.include);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Add Friends");
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
         generalFactoryInstance.fetchAllUser(new GeneralFactory.FetchFriends() {
             @Override
             public void friendsFetcher(List<WaamUser> friends) {
@@ -47,9 +56,8 @@ public class AllUsersActivity extends AppCompatActivity {
                         public void friendResponder(int position) {
                             WaamUser user = friendModelList.get(position);
                             if(friendAdapt != null && FirebaseAuth.getInstance().getCurrentUser() != null){
-                                String branch = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                String branch = FirebaseAuth.getInstance().getCurrentUser().getUid()+FRIENDS;
                                 generalFactoryInstance.addToFriend(user,branch);
-
                             }
 
                         }

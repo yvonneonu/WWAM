@@ -10,6 +10,9 @@ public class Chat implements Serializable {
     private String senderEmoji;
     private String receiverEmoji;
 
+    public Chat(){
+
+    }
     public Chat(String message, String chatId, String senderId, String receiverId) {
         this.message = message;
         this.chatId = chatId;

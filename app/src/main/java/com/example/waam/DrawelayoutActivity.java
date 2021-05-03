@@ -178,8 +178,6 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 }

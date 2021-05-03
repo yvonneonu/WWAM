@@ -52,6 +52,14 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if(chat.getSenderId().equals(user.getUid())){
                 Senderview senderView = (Senderview) holder;
                 senderView.textView.setText(chat.getMessage());
+                Glide.with(context)
+                        .asBitmap()
+                        .load(R.drawable.profile_img_user)
+                        .into(senderView.imageView);
+                Glide.with(context)
+                        .asBitmap()
+                        .load(R.drawable.like_save_icon)
+                        .into(senderView.emoji);
             }else{
                 final ReceiverView receiverView = (ReceiverView) holder;
                 receiverView.textView.setText(chat.getMessage());
@@ -61,10 +69,25 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         .circleCrop()
                         .into(receiverView.imageView);
 
+                Glide.with(context)
+                        .asBitmap()
+                        .load(R.drawable.like_save_icon)
+                        .into(receiverView.emojiButton);
             }
 
         }
 
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        if(listOfChats.get(position).getSenderId().equals(user.getUid())){
+            return RIGHT;
+        }
+        return LEFT;
 
     }
 

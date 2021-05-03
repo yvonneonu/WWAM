@@ -1,6 +1,8 @@
 package com.example.waam;
 
-public class WaamUser {
+import java.io.Serializable;
+
+public class WaamUser implements Serializable {
     private String fullname;
     private String email;
     private String zipcode;
