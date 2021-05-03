@@ -144,6 +144,7 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         return listOfChats.size();
+//        return listOfChats.size();
     }
 
 
