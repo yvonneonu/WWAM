@@ -13,7 +13,10 @@ import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.IncomingMessagesManager;
 import com.connectycube.chat.exception.ChatException;
 import com.connectycube.chat.listeners.ChatDialogMessageListener;
+import com.connectycube.chat.model.ConnectycubeChatDialog;
 import com.connectycube.chat.model.ConnectycubeChatMessage;
+
+import org.jivesoftware.smack.SmackException;
 
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class ChatMessage extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ChatScreenAdapter chatScreenAdapter;
     private List<Chat> chats;
+    ConnectycubeChatDialog privateDialog;
     private GeneralFactory generalFactoryInstance;
 
 
@@ -41,13 +45,46 @@ public class ChatMessage extends AppCompatActivity {
 
 
         imageButtonSender.setOnClickListener(v -> {
+
             EditText editText = v.findViewById(R.id.edtMess);
-            String messages = editText.toString().trim();
+
+            String message = editText.toString().trim();
+            try {
+                privateDialog = new ConnectycubeChatDialog();
+
+                ConnectycubeChatMessage chatMessage = new ConnectycubeChatMessage();
+                chatMessage.setBody("How are you today?");
+                chatMessage.setSaveToHistory(true);
+
+                privateDialog.sendMessage(message);
+              //  privateDialog.sendMessage(chatMessage);
+              //  privateDialog.sendEncryptedMessage(chatMessage);
+                privateDialog.sendMessage(chatMessage);
+            } catch (SmackException.NotConnectedException | InterruptedException e) {
+
+            }
+
+            privateDialog.addMessageListener(new ChatDialogMessageListener() {
+                @Override
+                public void processMessage(String dialogId, ConnectycubeChatMessage message, Integer senderId) {
+
+                }
+
+                @Override
+                public void processError(String dialogId, ChatException exception, ConnectycubeChatMessage message, Integer senderId) {
+
+                }
+            });
+
 
             ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
             IncomingMessagesManager incomingMessagesManager = chatService.getIncomingMessagesManager();
+                    //chatService.getIncomingMessagesManager();
 
-            messages = chatService.getIncomingMessagesManager("vguy");
+         // chatService = editText.toString().trim();
+
+            //messages = chatService.getIncomingMessagesManager();
+            //messages = chatService.getIncomingMessagesManager("vguy");
             incomingMessagesManager.addDialogMessageListener(new ChatDialogMessageListener() {
                 @Override
                 public void processMessage(String dialogId, ConnectycubeChatMessage message, Integer senderId) {
