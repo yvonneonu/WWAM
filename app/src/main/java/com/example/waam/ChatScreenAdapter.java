@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.connectycube.chat.ConnectycubeRestChatService;
 import com.connectycube.chat.model.ConnectycubeChatDialog;
 import com.connectycube.chat.model.ConnectycubeDialogType;
@@ -55,6 +56,8 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
 
+        final Chat chat = listOfChats.get(position);
+
 
         ArrayList<Integer> occupantIds = new ArrayList<Integer>();
         occupantIds.add(4134562);
@@ -62,6 +65,28 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
         dialog.setType(ConnectycubeDialogType.PRIVATE);
         dialog.setOccupantsIds(occupantIds);
+
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(dialog != null){
+
+            if(chat.getSenderId().equals(dialog.getDialogId())){
+                Senderview senderView = (Senderview) holder;
+                senderView.textView.setText(chat.getMessage());
+            }else{
+                final ReceiverView receiverView = (ReceiverView) holder;
+                receiverView.textView.setText(chat.getMessage());
+                Glide.with(context)
+                        .asBitmap()
+                        .placeholder(R.drawable.profile_img_user)
+                        .circleCrop()
+                        .load(receiverView.imageView)
+                        .into(receiverView.imageView);
+
+            }
+
+        }
+
+
 
 //or just use DialogUtils
 //ConnectycubeChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);
