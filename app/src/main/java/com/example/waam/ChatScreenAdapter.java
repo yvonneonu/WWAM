@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.connectycube.chat.ConnectycubeChatService;
-import com.connectycube.chat.ConnectycubeRoster;
-import com.connectycube.chat.listeners.RosterListener;
-import com.connectycube.chat.listeners.SubscriptionListener;
+import com.connectycube.chat.ConnectycubeRestChatService;
 import com.connectycube.chat.model.ConnectycubeChatDialog;
-import com.connectycube.chat.model.ConnectycubeChatMessage;
-import com.connectycube.chat.model.ConnectycubePresence;
+import com.connectycube.chat.model.ConnectycubeDialogType;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -56,73 +55,30 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
 
-        RosterListener rosterListener = new RosterListener() {
+
+        ArrayList<Integer> occupantIds = new ArrayList<Integer>();
+        occupantIds.add(4134562);
+
+        ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
+        dialog.setType(ConnectycubeDialogType.PRIVATE);
+        dialog.setOccupantsIds(occupantIds);
+
+//or just use DialogUtils
+//ConnectycubeChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);
+
+        ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
             @Override
-            public void entriesDeleted(Collection<Integer> userIds) {
+            public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
 
             }
 
             @Override
-            public void entriesAdded(Collection<Integer> userIds) {
+            public void onError(ResponseException exception) {
 
             }
+        });
 
-            @Override
-            public void entriesUpdated(Collection<Integer> userIds) {
-
-            }
-
-            @Override
-            public void presenceChanged(ConnectycubePresence presence) {
-
-            }
-        };
-
-        SubscriptionListener subscriptionListener = new SubscriptionListener() {
-            @Override
-            public void subscriptionRequested(int userId) {
-
-            }
-        };
-
-// Do this after success Chat login
-        ConnectycubeRoster chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
-//        chatRoster.addRosterListener(rosterListener);
-
-
-        //final Chat chat = listOfChats.get(position);
-       // if(chat.getSenderId().equals(senderId)){
-
-
-
-                 ConnectycubeChatDialog privateDialog = new ConnectycubeChatDialog();
-
-                ConnectycubeChatMessage chatMessage = new ConnectycubeChatMessage();
-     //   Senderview  senderView = (Senderview) holder;
-    //    senderView.textView.setText(chatMessage.getId());
-
-              chatMessage.setBody("How are you today?");
-                chatMessage.setSaveToHistory(true);
-
-               // privateDialog.sendMessage(chatMessage);
-           // catch (SmackException.NotConnectedException | InterruptedException e) {
-
-           // }
-
-           /* privateDialog.addMessageListener(new ChatDialogMessageListener() {
-                @Override
-                public void processMessage(String dialogId, ConnectycubeChatMessage message, Integer senderId) {
-
-                }
-
-                @Override
-                public void processError(String s, ChatException e, ConnectycubeChatMessage connectycubeChatMessage, Integer integer) {
-
-                }
-
-            });*/
-
-            // Provide chat connection configuration
+        // Provide chat connection configuration
 
 
        /* }else{

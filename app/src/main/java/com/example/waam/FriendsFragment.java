@@ -19,25 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.connectycube.auth.session.ConnectycubeSessionManager;
 import com.connectycube.chat.ConnectycubeChatService;
-import com.connectycube.chat.ConnectycubeRestChatService;
 import com.connectycube.chat.ConnectycubeRoster;
-import com.connectycube.chat.listeners.RosterListener;
-import com.connectycube.chat.listeners.SubscriptionListener;
 import com.connectycube.chat.model.ConnectycubeChatDialog;
-import com.connectycube.chat.model.ConnectycubeDialogType;
-import com.connectycube.chat.model.ConnectycubePresence;
-import com.connectycube.core.Consts;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.core.request.PagedRequestBuilder;
-import com.connectycube.core.request.RequestGetBuilder;
 import com.connectycube.users.ConnectycubeUsers;
-import com.connectycube.users.model.ConnectycubeAddressBookContact;
-import com.connectycube.users.model.ConnectycubeAddressBookResponse;
 import com.connectycube.users.model.ConnectycubeUser;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -106,162 +96,7 @@ public class FriendsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // id = getActivity().getIntent().getIntExtra("id1", id);
-      //  Log.d("ME", ""+id);
 
-        pagedRequestBuilder.setPage(1);
-        pagedRequestBuilder.setPerPage(50);
-        occupantIds.add(4134562);
-        ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
-        dialog.setType(ConnectycubeDialogType.PRIVATE);
-        dialog.setOccupantsIds(occupantIds);
-
-//or just use DialogUtils
-
-        //  ConnectycubeChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);
-
-        ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
-            @Override
-            public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
-
-                Log.d("show", "show"+createdDialog.getOccupants());
-
-            }
-
-            @Override
-            public void onError(ResponseException exception) {
-
-                Log.d("show", "show"+exception.getMessage());
-
-            }
-        });
-
-        RequestGetBuilder requestBuilder = new RequestGetBuilder();
-        requestBuilder.setLimit(50);
-        requestBuilder.setSkip(100);
-//requestBuilder.sortAsc(Consts.DIALOG_LAST_MESSAGE_DATE_SENT_FIELD_NAME);
-
-        ConnectycubeRestChatService.getChatDialogs((ConnectycubeDialogType)null, requestBuilder).performAsync(new EntityCallback<ArrayList<ConnectycubeChatDialog>>() {
-            @Override
-            public void onSuccess(ArrayList<ConnectycubeChatDialog> dialogs, Bundle params) {
-                int totalEntries = params.getInt(Consts.TOTAL_ENTRIES);
-                Log.d("meee", ""+totalEntries);
-            }
-
-            @Override
-            public void onError(ResponseException exception) {
-
-            }
-        });
-
-        ConnectycubeChatDialog dialog1 = new ConnectycubeChatDialog();
-        dialog1.setDialogId("5356c64ab35c12bd3b108a41");
-        dialog1.setName("Hawaii party");
-        dialog1.setPhoto("https://new_photo_url"); // or it can be an ID to some file in Storage module
-        dialog1.setDescription("New dialog description");
-
-        ConnectycubeRestChatService.updateChatDialog(dialog1, null).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
-            @Override
-            public void onSuccess(ConnectycubeChatDialog updatedDialog, Bundle bundle) {
-Log.d("HEY", ""+updatedDialog.getDialogId());
-            }
-
-            @Override
-            public void onError(ResponseException error) {
-
-            }
-        });
-
-
-
-        ConnectycubeUsers.getRegisteredUsersFromAddressBook(UDID, isCompact).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
-            @Override
-            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle params) {
-
-            }
-
-            @Override
-            public void onError(ResponseException responseException) {
-
-            }
-        });
-
-        RosterListener rosterListener = new RosterListener() {
-            @Override
-            public void entriesDeleted(Collection<Integer> userIds) {
-
-                Log.d("address", ""+userIds.toString());
-            }
-
-            @Override
-            public void entriesAdded(Collection<Integer> userIds) {
-
-            }
-
-            @Override
-            public void entriesUpdated(Collection<Integer> userIds) {
-
-            }
-
-            @Override
-            public void presenceChanged(ConnectycubePresence presence) {
-
-            }
-        };
-
-        SubscriptionListener subscriptionListener = new SubscriptionListener() {
-            @Override
-            public void subscriptionRequested(int userId) {
-                Log.d("list1", ""+userId);
-
-            }
-        };
-
-
-        chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.manual, subscriptionListener);
-// Do this after success Chat login
-       // chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
-//        Log.d("hyyy", ""+chatRoster.toString());
-
-       /// Collection<ConnectycubeRosterEntry> entries = chatRoster.getEntries();
-
-        /// chatRoster.getEntry(userID);
-//        chatRoster.addRosterListener(rosterListener);
-       // userID = 4134562;
-
-        /*if (chatRoster.contains(userID)) {
-            Log.d("KUU",""+userID);
-            try {
-                chatRoster.subscribe(userID);
-            } catch (Exception e) {
-
-                Log.d("KUU",""+e.getMessage());
-            }
-        } else {
-            try {
-                chatRoster.createEntry(userID, null);
-            } catch (Exception e) {
-                Log.d("KU",""+e.getMessage());
-
-            }
-        }*/
-
-        ConnectycubeUsers.getRegisteredUsersFromAddressBook(UDID, isCompact).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
-            @Override
-            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle params) {
-
-            }
-
-            @Override
-            public void onError(ResponseException responseException) {
-
-            }
-        });
-        //createEntry(userID, null);
-//        chatRoster.addRosterListener(rosterListener);
-
-//        Collection<ConnectycubeRosterEntry> entries = chatRoster.getEntries();
-        //pasword = getActivity().getIntent().getStringExtra("password");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -277,93 +112,41 @@ Log.d("HEY", ""+updatedDialog.getDialogId());
                 friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
             @Override
             public void friendResponder(int position) {
-                if(position == 0){
+               // if(position == 0){
 
-                    List<Integer> usersIds = new ArrayList<>();
-                    usersIds.add(4134562);
-                    usersIds.add(4155439);
+                PagedRequestBuilder pagedRequestBuilder = new PagedRequestBuilder();
+                pagedRequestBuilder.setPage(1);
+                pagedRequestBuilder.setPerPage(50);
 
-                    Bundle params = new Bundle();
+                List<Integer> usersIds = new ArrayList<>();
+                usersIds.add(4134562);
+                usersIds.add(4155439);
 
-                    ConnectycubeUsers.getUsersByIDs(usersIds, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
-                        @Override
-                        public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle args) {
+                Bundle params = new Bundle();
 
-                            Log.d("your", ""+users.toString());
-                        }
+                ConnectycubeUsers.getUsersByIDs(usersIds, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+                    @Override
+                    public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle args) {
 
-                        @Override
-                        public void onError(ResponseException error) {
-                            Log.d("rr", ""+error.getMessage());
+                        Log.d("writr", users.toString());
+                    }
 
-                        }
-                    });
+                    @Override
+                    public void onError(ResponseException error) {
 
-                    ConnectycubeUsers.getUserByLogin("bamidele").performAsync(new EntityCallback<ConnectycubeUser>() {
-                        @Override
-                        public void onSuccess(ConnectycubeUser user, Bundle args) {
-
-                        }
-
-                        @Override
-                        public void onError(ResponseException error) {
-
-                        }
-                    });
+                        Log.d("error",error.getMessage());
+                    }
+                });
 
 
-                    int userID = 4134562;
-
-                    ArrayList<ConnectycubeAddressBookContact> contactsGlobal = new ArrayList<>();
-
-                    ConnectycubeAddressBookContact contact = new ConnectycubeAddressBookContact();
-                    contact.setPhone("13656516112");
-                    contact.setName("Bob Bobson");
-
-                    contactsGlobal.add(contact);
-
-                    ConnectycubeUsers.uploadAddressBook(contactsGlobal, UDID, force).performAsync(new EntityCallback<ConnectycubeAddressBookResponse>() {
-                        @Override
-                        public void onSuccess(ConnectycubeAddressBookResponse result, Bundle params) {
-
-                            Log.d("ADD1", ""+result.getCreatedCount());
-                        }
-
-                        @Override
-                        public void onError(ResponseException responseException) {
-
-                            Log.d("err", ""+responseException.getMessage());
-                        }
-                    });
-
-
-                 /* if (chatRoster.contains(userID)) {
-                        Log.d("KUU",""+userID);
-                        try {
-                            chatRoster.subscribe(userID);
-                        } catch (Exception e) {
-
-                            Log.d("KUU",""+e.getMessage());
-                        }
-                    } else {
-                        try {
-                            chatRoster.createEntry(userID, null);
-                        } catch (Exception e) {
-                            Log.d("KU",""+e.getMessage());
-
-                        }
-                    }*/
-
-                    Log.d("AddFriend","You clicked Add");
-                }else{
-                    Log.d("Chat","Move to Chat");
-                }
+                   // Log.d("AddFriend","You clicked Add");
+                //}else{
+                  //  Log.d("Chat","Move to Chat");
+               // }
             }
         });
     }
 
-
-    // SubscriptionListener
 
 
     @Override
