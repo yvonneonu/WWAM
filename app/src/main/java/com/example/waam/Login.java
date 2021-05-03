@@ -19,8 +19,14 @@ import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
 import com.connectycube.core.exception.ResponseException;
+import com.connectycube.core.request.PagedRequestBuilder;
 import com.connectycube.users.ConnectycubeUsers;
+import com.connectycube.users.model.ConnectycubeAddressBookContact;
+import com.connectycube.users.model.ConnectycubeAddressBookResponse;
 import com.connectycube.users.model.ConnectycubeUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -35,6 +41,7 @@ public class Login extends AppCompatActivity {
     private ImageView logm;
     private TextView text;
     private TextView pressback;
+    PagedRequestBuilder pagedRequestBuilder = new PagedRequestBuilder();
     String loginToken;
     private EditText editPass;
     private EditText editEmail;
@@ -42,7 +49,9 @@ public class Login extends AppCompatActivity {
     String Password;
     String password;
     int id;
-   // int id1;
+    boolean isCompact = true;
+
+    // int id1;
    String UDID = null;
     boolean force = true;
     //int id4;
@@ -76,6 +85,8 @@ public class Login extends AppCompatActivity {
         ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
         ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
+        pagedRequestBuilder.setPage(1);
+        pagedRequestBuilder.setPerPage(50);
 
         ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
         chatService = ConnectycubeChatService.getInstance();
@@ -157,6 +168,61 @@ public class Login extends AppCompatActivity {
 
         ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);*/
 
+        List<Integer> usersIds = new ArrayList<>();
+        usersIds.add(4134562);
+        usersIds.add(4155439);
+
+        Bundle params = new Bundle();
+
+        ConnectycubeUsers.getUsersByIDs(usersIds, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+            @Override
+            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle args) {
+
+                Log.d("hereeee", ""+users.toString());
+            }
+
+            @Override
+            public void onError(ResponseException error) {
+
+            }
+        });
+
+        ArrayList<ConnectycubeAddressBookContact> contactsGlobal = new ArrayList<>();
+
+        ConnectycubeAddressBookContact contact = new ConnectycubeAddressBookContact();
+        contact.setPhone("13656516112");
+        contact.setName("Bob Bobson");
+
+        contactsGlobal.add(contact);
+
+        ConnectycubeUsers.uploadAddressBook(contactsGlobal, UDID, force).performAsync(new EntityCallback<ConnectycubeAddressBookResponse>() {
+            @Override
+            public void onSuccess(ConnectycubeAddressBookResponse result, Bundle params) {
+
+                Log.d("tt", ""+result.toString());
+            }
+
+            @Override
+            public void onError(ResponseException responseException) {
+
+                Log.d("ff", ""+responseException.getMessage());
+            }
+        });
+
+
+        ConnectycubeUsers.getRegisteredUsersFromAddressBook(UDID, isCompact).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+            @Override
+            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle params) {
+
+                Log.d("dd", ""+users.toString());
+            }
+
+            @Override
+            public void onError(ResponseException responseException) {
+
+                Log.d("gg", ""+responseException.getMessage());
+            }
+        });
 
         logm.setOnClickListener(v -> {
             //user = editEmail.getText().toString();
@@ -171,6 +237,7 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
 
             }else {
+
 
                 final ConnectycubeUser user = new ConnectycubeUser();
                // user.setId(4152184);

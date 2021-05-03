@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.ConnectycubeRoster;
+import com.connectycube.chat.listeners.RosterListener;
 import com.connectycube.chat.listeners.SubscriptionListener;
 import com.connectycube.chat.model.ConnectycubeChatDialog;
 import com.connectycube.chat.model.ConnectycubeChatMessage;
+import com.connectycube.chat.model.ConnectycubePresence;
 
+import java.util.Collection;
 import java.util.List;
 
 public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -53,6 +56,27 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
 
+        RosterListener rosterListener = new RosterListener() {
+            @Override
+            public void entriesDeleted(Collection<Integer> userIds) {
+
+            }
+
+            @Override
+            public void entriesAdded(Collection<Integer> userIds) {
+
+            }
+
+            @Override
+            public void entriesUpdated(Collection<Integer> userIds) {
+
+            }
+
+            @Override
+            public void presenceChanged(ConnectycubePresence presence) {
+
+            }
+        };
 
         SubscriptionListener subscriptionListener = new SubscriptionListener() {
             @Override
@@ -63,8 +87,7 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 // Do this after success Chat login
         ConnectycubeRoster chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
-        ///chatRoster.addRosterListener(rosterListener);
-        //chatRoster.
+//        chatRoster.addRosterListener(rosterListener);
 
 
         //final Chat chat = listOfChats.get(position);

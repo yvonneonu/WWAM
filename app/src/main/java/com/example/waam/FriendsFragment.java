@@ -29,6 +29,7 @@ import com.connectycube.chat.model.ConnectycubePresence;
 import com.connectycube.core.Consts;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.exception.ResponseException;
+import com.connectycube.core.request.PagedRequestBuilder;
 import com.connectycube.core.request.RequestGetBuilder;
 import com.connectycube.users.ConnectycubeUsers;
 import com.connectycube.users.model.ConnectycubeAddressBookContact;
@@ -47,15 +48,20 @@ import java.util.Objects;
  */
 public class FriendsFragment extends Fragment {
 
+    ConnectycubeRoster chatRoster;
+    PagedRequestBuilder pagedRequestBuilder = new PagedRequestBuilder();
     ArrayList<Integer> occupantIds = new ArrayList<Integer>();
 
     boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
     String UDID = null;
     boolean force = true;
 
-
+    String[] by = { "agvd", "wef"};
    // String UDID = null;
     boolean isCompact = true;
+
+   // String UDID = null;
+   // boolean isCompact = true;
     private ConnectycubeChatService chatService;
     int userID = 4134562;
     ConnectycubeChatDialog privateDialog;
@@ -64,7 +70,7 @@ public class FriendsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    ConnectycubeRoster chatRoster;
+   // ConnectycubeRoster chatRoster;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -103,6 +109,8 @@ public class FriendsFragment extends Fragment {
        // id = getActivity().getIntent().getIntExtra("id1", id);
       //  Log.d("ME", ""+id);
 
+        pagedRequestBuilder.setPage(1);
+        pagedRequestBuilder.setPerPage(50);
         occupantIds.add(4134562);
         ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
         dialog.setType(ConnectycubeDialogType.PRIVATE);
@@ -137,6 +145,7 @@ public class FriendsFragment extends Fragment {
             @Override
             public void onSuccess(ArrayList<ConnectycubeChatDialog> dialogs, Bundle params) {
                 int totalEntries = params.getInt(Consts.TOTAL_ENTRIES);
+                Log.d("meee", ""+totalEntries);
             }
 
             @Override
@@ -154,7 +163,7 @@ public class FriendsFragment extends Fragment {
         ConnectycubeRestChatService.updateChatDialog(dialog1, null).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
             @Override
             public void onSuccess(ConnectycubeChatDialog updatedDialog, Bundle bundle) {
-
+Log.d("HEY", ""+updatedDialog.getDialogId());
             }
 
             @Override
@@ -165,11 +174,23 @@ public class FriendsFragment extends Fragment {
 
 
 
+        ConnectycubeUsers.getRegisteredUsersFromAddressBook(UDID, isCompact).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+            @Override
+            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle params) {
+
+            }
+
+            @Override
+            public void onError(ResponseException responseException) {
+
+            }
+        });
 
         RosterListener rosterListener = new RosterListener() {
             @Override
             public void entriesDeleted(Collection<Integer> userIds) {
 
+                Log.d("address", ""+userIds.toString());
             }
 
             @Override
@@ -191,37 +212,22 @@ public class FriendsFragment extends Fragment {
         SubscriptionListener subscriptionListener = new SubscriptionListener() {
             @Override
             public void subscriptionRequested(int userId) {
-                Log.d("list", ""+userId);
+                Log.d("list1", ""+userId);
 
             }
         };
 
+
+        chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.manual, subscriptionListener);
 // Do this after success Chat login
-        ConnectycubeRoster chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
+       // chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
+//        Log.d("hyyy", ""+chatRoster.toString());
 
-        userID = 4134562;
+       /// Collection<ConnectycubeRosterEntry> entries = chatRoster.getEntries();
 
-        ArrayList<ConnectycubeAddressBookContact> contactsGlobal = new ArrayList<>();
-
-        ConnectycubeAddressBookContact contact = new ConnectycubeAddressBookContact();
-        contact.setPhone("13656516112");
-        contact.setName("Bob Bobson");
-
-        contactsGlobal.add(contact);
-
-        ConnectycubeUsers.uploadAddressBook(contactsGlobal, UDID, force).performAsync(new EntityCallback<ConnectycubeAddressBookResponse>() {
-            @Override
-            public void onSuccess(ConnectycubeAddressBookResponse result, Bundle params) {
-
-                Log.d("ADD", ""+result.getCreatedCount());
-            }
-
-            @Override
-            public void onError(ResponseException responseException) {
-
-                Log.d("err", ""+responseException.getMessage());
-            }
-        });
+        /// chatRoster.getEntry(userID);
+//        chatRoster.addRosterListener(rosterListener);
+       // userID = 4134562;
 
         /*if (chatRoster.contains(userID)) {
             Log.d("KUU",""+userID);
@@ -273,6 +279,39 @@ public class FriendsFragment extends Fragment {
             public void friendResponder(int position) {
                 if(position == 0){
 
+                    List<Integer> usersIds = new ArrayList<>();
+                    usersIds.add(4134562);
+                    usersIds.add(4155439);
+
+                    Bundle params = new Bundle();
+
+                    ConnectycubeUsers.getUsersByIDs(usersIds, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+                        @Override
+                        public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle args) {
+
+                            Log.d("your", ""+users.toString());
+                        }
+
+                        @Override
+                        public void onError(ResponseException error) {
+                            Log.d("rr", ""+error.getMessage());
+
+                        }
+                    });
+
+                    ConnectycubeUsers.getUserByLogin("bamidele").performAsync(new EntityCallback<ConnectycubeUser>() {
+                        @Override
+                        public void onSuccess(ConnectycubeUser user, Bundle args) {
+
+                        }
+
+                        @Override
+                        public void onError(ResponseException error) {
+
+                        }
+                    });
+
+
                     int userID = 4134562;
 
                     ArrayList<ConnectycubeAddressBookContact> contactsGlobal = new ArrayList<>();
@@ -287,7 +326,7 @@ public class FriendsFragment extends Fragment {
                         @Override
                         public void onSuccess(ConnectycubeAddressBookResponse result, Bundle params) {
 
-                            Log.d("ADD", ""+result.getCreatedCount());
+                            Log.d("ADD1", ""+result.getCreatedCount());
                         }
 
                         @Override
@@ -297,7 +336,8 @@ public class FriendsFragment extends Fragment {
                         }
                     });
 
-                  /*  if (chatRoster.contains(userID)) {
+
+                 /* if (chatRoster.contains(userID)) {
                         Log.d("KUU",""+userID);
                         try {
                             chatRoster.subscribe(userID);
@@ -321,6 +361,9 @@ public class FriendsFragment extends Fragment {
             }
         });
     }
+
+
+    // SubscriptionListener
 
 
     @Override

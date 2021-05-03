@@ -31,7 +31,11 @@ import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.users.ConnectycubeUsers;
+import com.connectycube.users.model.ConnectycubeAddressBookContact;
+import com.connectycube.users.model.ConnectycubeAddressBookResponse;
 import com.connectycube.users.model.ConnectycubeUser;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,7 +57,9 @@ public class SignUp extends AppCompatActivity {
     String chose = "";
     String interest = "";
     String Fullname;
-
+    String UDID = null;
+    boolean force = true;
+    ArrayList<ConnectycubeAddressBookContact> contactsGlobal = new ArrayList<>();
     private ConnectycubeChatService chatService;
 
     static final String APP_ID = "4663";
@@ -367,6 +373,42 @@ public class SignUp extends AppCompatActivity {
                 user.setFullName(Fullname);
                 user.setPhone("47802323143");
                 user.setWebsite("https://dozensofdreams.com");
+
+                ConnectycubeAddressBookContact contact = new ConnectycubeAddressBookContact();
+                contact.setPhone("08100642038");
+                contact.setName("ada");
+
+
+                contactsGlobal.add(contact);
+
+                ConnectycubeUsers.uploadAddressBook(contactsGlobal, UDID, force).performAsync(new EntityCallback<ConnectycubeAddressBookResponse>() {
+                    @Override
+                    public void onSuccess(ConnectycubeAddressBookResponse result, Bundle params) {
+
+                        Log.d("addree", ""+result.getCreatedCount());
+                    }
+
+                    @Override
+                    public void onError(ResponseException responseException) {
+
+                        Log.d("errrrr", ""+responseException.getMessage());
+                    }
+                });
+
+                String UDID = null;
+
+                ConnectycubeUsers.getAddressBook(UDID).performAsync(new EntityCallback<ArrayList<ConnectycubeAddressBookContact>>() {
+                    @Override
+                    public void onSuccess(ArrayList<ConnectycubeAddressBookContact> uploadedContacts, Bundle params) {
+
+                        Log.d("pleasw", ""+uploadedContacts.toString());
+                    }
+
+                    @Override
+                    public void onError(ResponseException responseException) {
+
+                    }
+                });
 
                 String token = ConnectycubeSessionManager.getInstance().getToken();
 
