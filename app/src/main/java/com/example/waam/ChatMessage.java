@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +32,11 @@ public class ChatMessage extends AppCompatActivity {
         // Provide chat connection configuration
 
 
+        imageButtonSender.setOnClickListener(v -> {
+            EditText editText = v.findViewById(R.id.edtMess);
+            String messages = editText.toString().trim();
+            generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
+        });
 
     }
 
