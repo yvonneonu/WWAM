@@ -46,7 +46,7 @@ public class ChatMessage extends AppCompatActivity {
 
         imageButtonSender.setOnClickListener(v -> {
 
-            EditText editText = v.findViewById(R.id.edtMess);
+            EditText editText = findViewById(R.id.edtMess);
 
             String message = editText.toString().trim();
             try {
@@ -56,7 +56,7 @@ public class ChatMessage extends AppCompatActivity {
                 chatMessage.setBody("How are you today?");
                 chatMessage.setSaveToHistory(true);
 
-                privateDialog.sendMessage(message);
+//                privateDialog.sendMessage(message);
               //  privateDialog.sendMessage(chatMessage);
               //  privateDialog.sendEncryptedMessage(chatMessage);
                 privateDialog.sendMessage(chatMessage);
