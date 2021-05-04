@@ -153,8 +153,8 @@ public class Login extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest("email", "password");
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
-                GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword());
-                loginUser(loginRequest);
+                GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest);
+                //loginUser(loginRequest);
 
             }
         });
@@ -166,7 +166,7 @@ public class Login extends AppCompatActivity {
 
 
 
-    public void loginUser(LoginRequest loginRequest){
+    /*public void loginUser(LoginRequest loginRequest){
 
         Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
 
@@ -176,7 +176,7 @@ public class Login extends AppCompatActivity {
 
                 if (response.isSuccessful()){
                     loginToken = response.body().getToken();
-                    SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
+                    //SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
                     Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
                     Log.d("LoginTOken",loginToken);
                   //  Intent intent = new Intent(Login.this, Profile.class);
@@ -202,7 +202,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
    private void Themain() {
         Intent intent = new Intent(Login.this, MainActivity.class);

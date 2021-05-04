@@ -94,15 +94,16 @@ public class FriendsFragment extends Fragment {
         String branchName = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
         int addFriend = R.drawable.add_new_friend_icon;
         WaamUser friendAdder = new WaamUser("Add Friends",addFriend);
+        Log.d("FriendsFrag","fragie");
+
         generalFactory.loadFriends(branchName, friends -> {
-            progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
             friendModelList = friends;
+            progressBar.setVisibility(View.GONE);
             friendModelList.add(0,friendAdder);
             friendAdapt = new FriendAdapt(friendModelList,getActivity());
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
             recyclerView.setAdapter(friendAdapt);
-
             friendAdapt.friendMover(position -> {
 
                 if(position == 0){

@@ -26,6 +26,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class GeneralFactory {
     private static GeneralFactory generalFactory;
     private final List<EventModel> eventModelList;
@@ -222,7 +226,7 @@ public class GeneralFactory {
                 });
     }
 
-    public void loginToFireBase(String email, String password){
+    public void loginToFireBase(String email, String password,LoginRequest loginRequest){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -231,7 +235,12 @@ public class GeneralFactory {
 
                     }
                 })
-                .addOnCompleteListener(task -> Log.d("Login","Login was succesfull"));
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        loginUser(loginRequest);
+                    }
+                    Log.d("Login","Login was succesfull");
+                });
     }
 
 
@@ -270,17 +279,20 @@ public class GeneralFactory {
                     }
 
                     fetchFriends.friendsFetcher(allFriends);
+                    Log.d("Allfriends",""+allFriends.size());
+
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                    Log.d("Cancel",error.getMessage());
                 }
             });
         }else{
             Toast.makeText(context,"Branch is null",Toast.LENGTH_SHORT)
                     .show();
-            return;
+
         }
 
     }
@@ -370,6 +382,44 @@ public class GeneralFactory {
             return;
         }
 
+    }
+
+    public void loginUser(LoginRequest loginRequest){
+
+        Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
+
+        loginResponseCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                if (response.isSuccessful()){
+                    String loginToken = response.body().getToken();
+                    //SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
+                    Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
+                    Log.d("LoginTOken",loginToken);
+                    //  Intent intent = new Intent(Login.this, Profile.class);
+                    //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
+                    //  Intent intent = new Intent(Login.this,finalProfile.class);
+                    intent.putExtra("toking",loginToken);
+                    context.startActivity(intent);
+                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
+
+
+                }else {
+                    String message = "An error occured please try again";
+                    Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Email or Password mismatch!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                //String message = t.getLocalizedMessage();
+                Toast.makeText(context, t.getMessage(),Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     public void fetchAllUser(FetchFriends fetchAllWaamUsers){
