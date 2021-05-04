@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,6 +97,7 @@ public class FriendsFragment extends Fragment {
         WaamUser friendAdder = new WaamUser("Add Friends",addFriend);
         Log.d("FriendsFrag","fragie");
 
+
         generalFactory.loadFriends(branchName, friends -> {
             recyclerView.setVisibility(View.VISIBLE);
             friendModelList = friends;
@@ -182,10 +184,22 @@ public class FriendsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
         recyclerView = view.findViewById(R.id.friends_recycler);
         progressBar = view.findViewById(R.id.progressBaring);
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swiperefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Friends");
         return view;
+    }
+
+    private void refreshData() {
+        Log.d("Pulldown","Working");
     }
 
 

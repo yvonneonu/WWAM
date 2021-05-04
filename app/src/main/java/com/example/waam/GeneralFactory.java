@@ -238,8 +238,10 @@ public class GeneralFactory {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         loginUser(loginRequest);
+                    }else{
+                        Log.d("Login","Login was succesfull");
                     }
-                    Log.d("Login","Login was succesfull");
+
                 });
     }
 
@@ -403,7 +405,6 @@ public class GeneralFactory {
                     intent.putExtra("toking",loginToken);
                     context.startActivity(intent);
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
-
 
                 }else {
                     String message = "An error occured please try again";
