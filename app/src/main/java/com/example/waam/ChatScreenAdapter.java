@@ -67,6 +67,7 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         .asBitmap()
                         .placeholder(R.drawable.profile_img_user)
                         .circleCrop()
+                        .load(R.drawable.profile_img_user)
                         .into(receiverView.imageView);
 
                 Glide.with(context)
