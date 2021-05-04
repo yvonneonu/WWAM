@@ -36,6 +36,7 @@ public class ChatMessage extends AppCompatActivity {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
                 recyclerView.setAdapter(chatScreenAdapter);
                 recyclerView.setLayoutManager(linearLayoutManager);
+                linearLayoutManager.setStackFromEnd(true);
             },receiverId,ChatMessage.this);
 
 
