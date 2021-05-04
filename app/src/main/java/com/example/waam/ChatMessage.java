@@ -42,6 +42,7 @@ public class ChatMessage extends AppCompatActivity {
             imageButtonSender.setOnClickListener(v -> {
                 String messages = editText.getText().toString().trim();
                 generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
+                editText.setText("");
             });
 
 
