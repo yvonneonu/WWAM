@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class ChatMessage extends AppCompatActivity {
@@ -16,7 +16,44 @@ public class ChatMessage extends AppCompatActivity {
     private ChatScreenAdapter chatScreenAdapter;
     private List<Chat> chats;
     private GeneralFactory generalFactoryInstance;
+    private WaamUser userFriends;
+    private WaamUser contactlist;
+    private TextView textViewStatus;
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(userFriends!= null){
+            generalFactoryInstance.checkOnlineStatus("online", userFriends);
+        }else{
+            generalFactoryInstance.checkOnlineStatus("online", contactlist);
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String timeStamp = String.valueOf(System.currentTimeMillis());
+        if(userFriends!= null){
+            generalFactoryInstance.checkOnlineStatus(timeStamp, userFriends);
+        }else{
+            generalFactoryInstance.checkOnlineStatus(timeStamp, contactlist);
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(userFriends!= null){
+            generalFactoryInstance.checkOnlineStatus("online", userFriends);
+        }else{
+            generalFactoryInstance.checkOnlineStatus("online", contactlist);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +62,13 @@ public class ChatMessage extends AppCompatActivity {
         ImageButton imageButtonSender = findViewById(R.id.imageButton);
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         EditText editText = findViewById(R.id.edtMess);
-        WaamUser contactlist =  (WaamUser) getIntent().getSerializableExtra("WaamUserFromChatList");
-        WaamUser userFriends = (WaamUser) getIntent().getSerializableExtra("WaamUserFromFriends");
+        textViewStatus = findViewById(R.id.status);
+        contactlist =  (WaamUser) getIntent().getSerializableExtra("WaamUserFromChatList");
+        userFriends = (WaamUser) getIntent().getSerializableExtra("WaamUserFromFriends");
         if(userFriends != null){
             String receiverId = userFriends.getUid();
+
+            textViewStatus.setText(userFriends.getOnlineStatus());
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
                 chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
@@ -38,7 +78,6 @@ public class ChatMessage extends AppCompatActivity {
                 recyclerView.setLayoutManager(linearLayoutManager);
                 linearLayoutManager.setStackFromEnd(true);
             },receiverId,ChatMessage.this);
-
 
             imageButtonSender.setOnClickListener(v -> {
                 String messages = editText.getText().toString().trim();
@@ -64,6 +103,7 @@ public class ChatMessage extends AppCompatActivity {
                 generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
             });
         }
+
 
 
 
