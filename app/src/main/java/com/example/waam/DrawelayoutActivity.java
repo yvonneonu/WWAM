@@ -45,9 +45,9 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         toggle.syncState();
 
         Log.d("TAG","in activity null");
-        Fragment fragment;
+        Fragment fragmenting;
         if(clicked){
-            fragment = new MessagesFragment();
+            fragmenting = new MessagesFragment();
             bottomNavigationView.getMenu().getItem(1).setChecked(true);
 
             //onNavigationItemSelected(fragment);
@@ -62,14 +62,13 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
           // bottomNavigationView.onScreenStateChanged(0);
 
         }else{
-            fragment = new ExploreFragment();
+            fragmenting = new ExploreFragment();
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragmentcontainer,fragment);
+        ft.add(R.id.fragmentcontainer,fragmenting);
         ft.addToBackStack(null);
         ft.commit();
-
 
         /*Fragment fragment1 = new MessagesFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -145,22 +144,10 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 break;
         }
         if(fragment != null){
-            if(fragment == new AgentFragment()){
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentcontainer,fragment);
-                ft.addToBackStack(null);
-                ft.commit();
-            }else{
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentcontainer,fragment);
-                ft.commit();
-                drawer.closeDrawer(GravityCompat.START);
-            }
-
-            /*FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentcontainer,fragment);
             ft.commit();
-            drawer.closeDrawer(GravityCompat.START);*/
+            drawer.closeDrawer(GravityCompat.START);
             return true;
         }else{
             Log.d("TAG","is null");
