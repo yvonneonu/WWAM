@@ -13,6 +13,7 @@ public class WaamUser implements Serializable {
     private String password_confirmation;
     private int image;
     private String uid;
+    private String onlineStatus;
 
 
 
@@ -116,5 +117,13 @@ public class WaamUser implements Serializable {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getOnlineStatus() {
+        return onlineStatus;
+    }
+
+    public void setOnlineStatus(String onlineStatus) {
+        this.onlineStatus = onlineStatus;
     }
 }

@@ -24,7 +24,9 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -316,6 +318,15 @@ public class GeneralFactory {
         }else{
             Toast.makeText(context,"Message cant be sent",Toast.LENGTH_LONG).show();
         }
+
+    }
+
+
+    public void checkOnlineStatus(String status,WaamUser waamUser){
+        String userId = mAuth.getCurrentUser().getUid();
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference(WAAMBASE).child(userId);
+        waamUser.setOnlineStatus(status);
+        database.setValue(waamUser);
 
     }
 
