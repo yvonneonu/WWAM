@@ -47,6 +47,8 @@ public class GeneralFactory {
     private List<AgentModel> agentModelList;
     private List<WaamUser> allFriends;
     private Context context;
+    private ValueEventListener valueEventListener;
+    private DatabaseReference userForSeen;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -168,17 +170,6 @@ public class GeneralFactory {
         return locationList;
     }
 
-
-    public void makeWaamUser(){
-
-        for(int i = 0 ; i < frimage.length ; i++){
-            friendModelList.add(new FriendModel(firstname[i],lastname[i],frimage[i]));
-        }
-    }
-
-
-
-
     public List<AgentModel> getAgentModelList() {
         agentModelList.clear();
         addAgent();
@@ -195,48 +186,39 @@ public class GeneralFactory {
     public void signUpForBase(final String email, final String password, final ProgressBar bar,  WaamUser waamUser){
         bar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            bar.setVisibility(View.GONE);
-                            //This is where the uid of the user is set
-                            waamUser.setUid(mAuth.getUid());
-                            Toast.makeText(context, "You have signed up", Toast.LENGTH_LONG).show();
-                            //This is where we set the values we want our users to have
-                            String userId = mAuth.getCurrentUser().getUid();
-                            DatabaseReference mDatebaseReference = FirebaseDatabase.getInstance().getReference(WAAMBASE);
-                            mDatebaseReference.child(userId)
-                                    .setValue(waamUser)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Log.d("Registeration","Registeration was succesful");
-                                            }else{
-                                                Log.d("Registeration","Registeration was not succesful");
-                                            }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        bar.setVisibility(View.GONE);
+                        //This is where the uid of the user is set
+                        waamUser.setUid(mAuth.getUid());
+                        Toast.makeText(context, "You have signed up", Toast.LENGTH_LONG).show();
+                        //This is where we set the values we want our users to have
+                        String userId = mAuth.getCurrentUser().getUid();
+                        DatabaseReference mDatebaseReference = FirebaseDatabase.getInstance().getReference(WAAMBASE);
+                        mDatebaseReference.child(userId)
+                                .setValue(waamUser)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Log.d("Registeration","Registeration was succesful");
+                                        }else{
+                                            Log.d("Registeration","Registeration was not succesful");
                                         }
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Log.d("Registration",e.getMessage());
-                                        Toast.makeText(context,"error"+e.getMessage(),Toast.LENGTH_LONG).show();
-                                        bar.setVisibility(View.GONE);
-                                    });
-                        }
+                                    }
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.d("Registration",e.getMessage());
+                                    Toast.makeText(context,"error"+e.getMessage(),Toast.LENGTH_LONG).show();
+                                    bar.setVisibility(View.GONE);
+                                });
                     }
                 });
     }
 
     public void loginToFireBase(String email, String password,LoginRequest loginRequest){
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
-
-                    }
-                })
+                .addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         loginUser(loginRequest);
@@ -259,12 +241,7 @@ public class GeneralFactory {
                 }
             }
         })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("Failure",e.getMessage());
-                    }
-                });
+                .addOnFailureListener(e -> Log.d("Failure",e.getMessage()));
 
     }
 
@@ -305,9 +282,12 @@ public class GeneralFactory {
     public void sendMessage(final String message, final String receiverId, final Context context){
         if(!message.equals("")){
             String sender = mAuth.getCurrentUser().getUid();
+            String timeStamp = String.valueOf(System.currentTimeMillis());
             DatabaseReference reference = firebaseDatabase.getReference("CHAT");
             String chatId = reference.push().getKey();
             Chat chat = new Chat(message,chatId,sender,receiverId);
+            chat.setTimeStamp(timeStamp);
+            chat.setIsSeen(false);
             reference.child(chatId).setValue(chat)
                     .addOnFailureListener(e -> Toast.makeText(context,"Message cant be sent",Toast.LENGTH_LONG).show())
                     .addOnCompleteListener(task -> {
@@ -322,12 +302,35 @@ public class GeneralFactory {
     }
 
 
-    public void checkOnlineStatus(String status,WaamUser waamUser){
+    public void setOnlineStatus(String status){
         String userId = mAuth.getCurrentUser().getUid();
         DatabaseReference database = FirebaseDatabase.getInstance().getReference(WAAMBASE).child(userId);
-        waamUser.setOnlineStatus(status);
-        database.setValue(waamUser);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("onlineStatus",status);
+        database.updateChildren(hashMap);
+    }
 
+    public void seenMessage(String senderId, String receiverId){
+        userForSeen = firebaseDatabase.getReference("CHAT");
+        valueEventListener = userForSeen.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    Chat chat = ds.getValue(Chat.class);
+                    if(chat.getReceiverId().equals(senderId) && chat.getSenderId().equals(receiverId)){
+                        chat.setIsSeen(true);
+                        Map<String,Object> map = new HashMap<>();
+                        map.put("isSeen",true);
+                        userForSeen.child(chat.getChatId()).updateChildren(map);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void logOut(Context context){

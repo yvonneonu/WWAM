@@ -24,11 +24,7 @@ public class ChatMessage extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(userFriends!= null){
-            generalFactoryInstance.checkOnlineStatus("online", userFriends);
-        }else{
-            generalFactoryInstance.checkOnlineStatus("online", contactlist);
-        }
+        generalFactoryInstance.setOnlineStatus("online");
 
     }
 
@@ -36,23 +32,14 @@ public class ChatMessage extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         String timeStamp = String.valueOf(System.currentTimeMillis());
-        if(userFriends!= null){
-            generalFactoryInstance.checkOnlineStatus(timeStamp, userFriends);
-        }else{
-            generalFactoryInstance.checkOnlineStatus(timeStamp, contactlist);
-        }
+        generalFactoryInstance.setOnlineStatus(timeStamp);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        if(userFriends!= null){
-            generalFactoryInstance.checkOnlineStatus("online", userFriends);
-        }else{
-            generalFactoryInstance.checkOnlineStatus("online", contactlist);
-        }
+        generalFactoryInstance.setOnlineStatus("online");
     }
 
     @Override
@@ -67,8 +54,12 @@ public class ChatMessage extends AppCompatActivity {
         userFriends = (WaamUser) getIntent().getSerializableExtra("WaamUserFromFriends");
         if(userFriends != null){
             String receiverId = userFriends.getUid();
+            if(userFriends.getOnlineStatus().equals("online")){
+                textViewStatus.setText("online");
+            }else{
+                textViewStatus.setText(userFriends.getTimeStamp());
+            }
 
-            textViewStatus.setText(userFriends.getOnlineStatus());
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
                 chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
@@ -88,8 +79,15 @@ public class ChatMessage extends AppCompatActivity {
 
         }else{
             String receiverId = contactlist.getUid();
+
+            if(contactlist.getOnlineStatus().equals("online")){
+                textViewStatus.setText("online");
+            }else{
+                textViewStatus.setText(contactlist.getTimeStamp());
+            }
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
+                textViewStatus.setText(contactlist.getOnlineStatus());
                 chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
                 recyclerView = findViewById(R.id.recyclerView);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
@@ -98,7 +96,6 @@ public class ChatMessage extends AppCompatActivity {
             },receiverId,ChatMessage.this);
 
             imageButtonSender.setOnClickListener(v -> {
-
                 String messages = editText.toString().trim();
                 generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
             });

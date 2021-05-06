@@ -14,6 +14,8 @@ public class WaamUser implements Serializable {
     private int image;
     private String uid;
     private String onlineStatus;
+    private String timeStamp;
+    private String imageUrl;
 
 
 
@@ -35,6 +37,7 @@ public class WaamUser implements Serializable {
         this.seeking = seeking;
         this.birth_date = birth_date;
         this.password = password;
+        imageUrl = "https://images.unsplash.com/photo-1620252460192-929ab4e92f1c?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
 
     }
 
@@ -125,5 +128,13 @@ public class WaamUser implements Serializable {
 
     public void setOnlineStatus(String onlineStatus) {
         this.onlineStatus = onlineStatus;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }
