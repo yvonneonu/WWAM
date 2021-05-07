@@ -15,6 +15,15 @@ public class WaamUser implements Serializable {
     private String uid;
     private String onlineStatus;
     private String timeStamp;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     private String imageUrl;
 
 

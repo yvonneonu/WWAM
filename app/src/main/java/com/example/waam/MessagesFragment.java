@@ -46,17 +46,14 @@ public class MessagesFragment extends Fragment {
    private String DEFAULT_SPAN_COUNT = "2";
 
     private FriendAdapter friendAdapter;
-    private ChatAdapter chatAdapter;
+    //private ChatAdapter chatAdapter;
+    private RecentChatsAdapt recentChatsAdapt;
+    private List<WaamUser> waamUserList;
     private CustomAdapter customAdapter;
 
     private List<ModelImages> imageList = new ArrayList<>();
     private List<ModelChat> chatList = new ArrayList<>();
     private List<itemModel> arrayList = new ArrayList<>();
-
-    private final String APP_ID  = "4646";
-    private final String AUTH_KEY = "LgQ83jMWXugtEJy";
-    private final String AUTH_SECRET  = "Ar2sVW5e7bpqe8e";
-    private final String ACCOUNT_KEY = "bjDayBi-fZ2MRx3JK8Mq";
 
     FrameLayout fragment;
     // TODO: Rename parameter arguments, choose names that match
@@ -100,95 +97,6 @@ public class MessagesFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        ConnectycubeSettings.getInstance().init(getActivity(), APP_ID, AUTH_KEY, AUTH_SECRET);
-        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
-        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
-
-        final ConnectycubeUser user = new ConnectycubeUser();
-        user.setId(4103566);
-        user.setPassword("12345678");
-
-        user.setLogin("chantale");
-        chatService.login(user, new EntityCallback() {
-            @Override
-            public void onSuccess(Object o, Bundle bundle) {
-                Log.d("Login", "Was succesful");
-                Log.d("Connecty",""+user);
-            }
-
-            @Override
-            public void onError(ResponseException errors) {
-
-            }
-        });
-
-
-        ConnectionListener connectionListener = new ConnectionListener() {
-            @Override
-            public void connected(XMPPConnection connection) {
-
-            }
-
-            @Override
-            public void authenticated(XMPPConnection xmppConnection, boolean b) {
-
-            }
-
-
-            @Override
-            public void connectionClosed() {
-
-            }
-
-            @Override
-            public void connectionClosedOnError(Exception e) {
-
-            }
-
-            @Override
-            public void reconnectingIn(int seconds) {
-
-            }
-
-            @Override
-            public void reconnectionSuccessful() {
-
-            }
-
-            @Override
-            public void reconnectionFailed(Exception e) {
-
-            }
-        };
-
-        ConnectycubeChatService.getInstance().addConnectionListener(connectionListener);
-
-
-        final ConnectycubeUser usertwo = new ConnectycubeUser("marvin18", "supersecurepwd");
-        usertwo.setLogin("marvin18");
-        usertwo.setPassword("supersecurepwd");
-        usertwo.setEmail("awesomeman@gmail.com");
-        usertwo.setFullName("Marvin Simon");
-        usertwo.setPhone("47802323143");
-        usertwo.setWebsite("https://dozensofdreams.com");
-        StringifyArrayList<String> tags = new StringifyArrayList<>();
-        tags.add("iphone");
-        tags.add("apple");
-        usertwo.setTags(tags);
-
-        ConnectycubeUsers.signUp(usertwo).performAsync(new EntityCallback<ConnectycubeUser>() {
-            @Override
-            public void onSuccess(ConnectycubeUser user, Bundle args) {
-
-                Log.d("User",usertwo.getFullName());
-            }
-
-            @Override
-            public void onError(ResponseException error) {
-
-            }
-        });
 
     }
 
@@ -209,7 +117,7 @@ public class MessagesFragment extends Fragment {
         recyclerView2 = view.findViewById(R.id.recyclerView5);
 
         friendAdapter  = new FriendAdapter(imageList,getActivity());
-        chatAdapter = new ChatAdapter(chatList,getActivity());
+        recentChatsAdapt = new RecentChatsAdapt(waamUserList,getActivity());
         customAdapter = new CustomAdapter(arrayList,getActivity());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -220,7 +128,7 @@ public class MessagesFragment extends Fragment {
 
 
         recyclerView.setAdapter(friendAdapter);
-        recyclerView1.setAdapter(chatAdapter);
+        recyclerView1.setAdapter(recentChatsAdapt);
         recyclerView2.setAdapter(customAdapter);
 
         recyclerView.setLayoutManager((layoutManager));
@@ -228,14 +136,21 @@ public class MessagesFragment extends Fragment {
         recyclerView2.setLayoutManager(linearLayoutManager3);
         //recyclerView2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-
-        chatAdapter.ChatMethod(new ChatAdapter.OnChatListener() {
+        recentChatsAdapt.chatMethod(new RecentChatsAdapt.OnChatListener() {
             @Override
             public void OnChatClick(int position) {
                 Intent intent = new Intent(getActivity(), ChatMessage.class);
                 startActivity(intent);
             }
         });
+
+        /*chatAdapter.ChatMethod(new ChatAdapter.OnChatListener() {
+            @Override
+            public void OnChatClick(int position) {
+                Intent intent = new Intent(getActivity(), ChatMessage.class);
+                startActivity(intent);
+            }
+        });*/
 
         customAdapter.CusomMethod(new CustomAdapter.OnCustomListener() {
             @Override

@@ -283,6 +283,9 @@ public class GeneralFactory {
     }
 
 
+
+
+
     public void sendMessage(final String message, final String receiverId, final Context context){
         if(!message.equals("")){
             String sender = mAuth.getCurrentUser().getUid();
