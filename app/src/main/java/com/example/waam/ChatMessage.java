@@ -16,7 +16,6 @@ public class ChatMessage extends AppCompatActivity {
     private ChatScreenAdapter chatScreenAdapter;
     private List<Chat> chats;
     private GeneralFactory generalFactoryInstance;
-    private WaamUser userFriends;
     private WaamUser contactlist;
     private TextView textViewStatus;
 
@@ -31,8 +30,8 @@ public class ChatMessage extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        String timeStamp = String.valueOf(System.currentTimeMillis());
-        generalFactoryInstance.setOnlineStatus(timeStamp);
+        generalFactoryInstance.setOnlineStatus("offline");
+        generalFactoryInstance.setTimeStamp();
     }
 
 
@@ -40,6 +39,20 @@ public class ChatMessage extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         generalFactoryInstance.setOnlineStatus("online");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        generalFactoryInstance.setOnlineStatus("offline");
+        generalFactoryInstance.setTimeStamp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        generalFactoryInstance.setOnlineStatus("offline");
+        generalFactoryInstance.setTimeStamp();
     }
 
     @Override
@@ -51,11 +64,11 @@ public class ChatMessage extends AppCompatActivity {
         EditText editText = findViewById(R.id.edtMess);
         textViewStatus = findViewById(R.id.status);
         contactlist =  (WaamUser) getIntent().getSerializableExtra("WaamUserFromChatList");
-        userFriends = (WaamUser) getIntent().getSerializableExtra("WaamUserFromFriends");
+        WaamUser userFriends = (WaamUser) getIntent().getSerializableExtra("WaamUserFromFriends");
         if(userFriends != null){
             String receiverId = userFriends.getUid();
             if(userFriends.getOnlineStatus().equals("online")){
-                textViewStatus.setText("online");
+                textViewStatus.setText(R.string.ONLNE);
             }else{
                 textViewStatus.setText(userFriends.getTimeStamp());
             }

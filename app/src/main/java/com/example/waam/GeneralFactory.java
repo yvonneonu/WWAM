@@ -22,8 +22,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ktx.Firebase;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -307,6 +311,18 @@ public class GeneralFactory {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference(WAAMBASE).child(userId);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("onlineStatus",status);
+        database.updateChildren(hashMap);
+    }
+
+
+    public void setTimeStamp(){
+        String userId = mAuth.getCurrentUser().getUid();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        String dateToString = formatter.format(date);
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference(WAAMBASE).child(userId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("timeStamp",dateToString);
         database.updateChildren(hashMap);
     }
 
