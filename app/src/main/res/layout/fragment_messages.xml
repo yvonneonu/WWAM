@@ -54,10 +54,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView52">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView4"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp">
+
+                <TextView
+                    android:id="@+id/textView102"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="You have not chated wit anyone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+            </FrameLayout>
+
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView

@@ -53,6 +53,8 @@ public class GeneralFactory {
     private Context context;
     private ValueEventListener valueEventListener;
     private DatabaseReference userForSeen;
+    private ArrayList<WaamUser> contactedUser;
+    private List<String> usersStringId;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -483,9 +485,77 @@ public class GeneralFactory {
     }
 
 
+    public void loadContact(FetchFriends fetchContacts){
+        contactedUser = new ArrayList<>();
+        usersStringId = new ArrayList<>();
+        String userId = FirebaseAuth.getInstance().getUid();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("CHAT");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usersStringId.clear();
+                for(DataSnapshot data : snapshot.getChildren()){
+                    Chat chat = data.getValue(Chat.class);
+                    if(chat.getReceiverId().equals(userId)){
+                        usersStringId.add(chat.getSenderId());
+                    }
+
+                    if(chat.getSenderId().equals(userId)){
+                        usersStringId.add(chat.getReceiverId());
+                    }
+
+                }
+
+                DatabaseReference usersBaseReference = firebaseDatabase.getReference(WAAMBASE);
+                usersBaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        contactedUser.clear();
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            WaamUser user = dataSnapshot.getValue(WaamUser.class);
+                            for(String id : usersStringId){
+
+                                if(user.getUid().equals(id)){
+                                    if(contactedUser.size() > 0){
+                                        for(int i = 0 ; i < contactedUser.size() ; i++){
+                                            String useroneid = contactedUser.get(i).getUid();
+                                            if(!user.getUid().equals(useroneid) ){
+                                                Log.d("Intense",user.getUid());
+                                                Log.d("Intense","I am a break");
+                                                contactedUser.add(user);
+                                            }
+                                        }
+                                    }else{
+                                        contactedUser.add(user);
+                                    }
+                                }
+                            }
+                        }
+
+                        fetchContacts.friendsFetcher(contactedUser);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
     public interface FetchFriends{
         void friendsFetcher(List<WaamUser> friends);
     }
+
 
     public interface FireBaseCallbackUser {
         void fireBaseUser(WaamUser basuser);

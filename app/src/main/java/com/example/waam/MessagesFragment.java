@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ public class MessagesFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
     private RecyclerView recyclerView2;
+    private LinearLayoutManager layoutManager1;
 
    private String DEFAULT_SPAN_COUNT = "2";
 
@@ -50,7 +52,9 @@ public class MessagesFragment extends Fragment {
     private RecentChatsAdapt recentChatsAdapt;
     private List<WaamUser> waamUserList;
     private CustomAdapter customAdapter;
+    private TextView textView;
 
+    private GeneralFactory generalFactory;
     private List<ModelImages> imageList = new ArrayList<>();
     private List<ModelChat> chatList = new ArrayList<>();
     private List<itemModel> arrayList = new ArrayList<>();
@@ -97,6 +101,35 @@ public class MessagesFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        setHasOptionsMenu(true);
+        generalFactory = GeneralFactory.getGeneralFactory(getActivity());
+
+
+
+        generalFactory.loadContact(new GeneralFactory.FetchFriends() {
+            @Override
+            public void friendsFetcher(List<WaamUser> friends) {
+                waamUserList = friends;
+                recentChatsAdapt = new RecentChatsAdapt(waamUserList,getActivity());
+                if(waamUserList.size() != 0){
+                    //if error should happen here it could be because of this views which are possibly null
+                    recyclerView1.setVisibility(View.VISIBLE);
+                    textView.setVisibility(View.GONE);
+                    recyclerView1.setAdapter(recentChatsAdapt);
+                    recyclerView1.setLayoutManager(layoutManager1);
+                }else{
+                    //No Recent Chat
+                }
+
+                recentChatsAdapt.chatMethod(new RecentChatsAdapt.OnChatListener() {
+                    @Override
+                    public void OnChatClick(int position) {
+                        Intent intent = new Intent(getActivity(), ChatMessage.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
 
     }
 
@@ -107,7 +140,7 @@ public class MessagesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        setHasOptionsMenu(true);
+
         addImagenText();
         addChatText();
         groupImage();
@@ -115,34 +148,18 @@ public class MessagesFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView2);
         recyclerView1 = view.findViewById(R.id.recyclerView4);
         recyclerView2 = view.findViewById(R.id.recyclerView5);
+        textView = view.findViewById(R.id.textView102);
+
 
         friendAdapter  = new FriendAdapter(imageList,getActivity());
-        recentChatsAdapt = new RecentChatsAdapt(waamUserList,getActivity());
         customAdapter = new CustomAdapter(arrayList,getActivity());
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-       // GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), GridLayoutManager.DEFAULT_SPAN_COUNT);
+        layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
-
-
         recyclerView.setAdapter(friendAdapter);
-        recyclerView1.setAdapter(recentChatsAdapt);
         recyclerView2.setAdapter(customAdapter);
-
         recyclerView.setLayoutManager((layoutManager));
-        recyclerView1.setLayoutManager(layoutManager1);
         recyclerView2.setLayoutManager(linearLayoutManager3);
-        //recyclerView2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
-        recentChatsAdapt.chatMethod(new RecentChatsAdapt.OnChatListener() {
-            @Override
-            public void OnChatClick(int position) {
-                Intent intent = new Intent(getActivity(), ChatMessage.class);
-                startActivity(intent);
-            }
-        });
 
         /*chatAdapter.ChatMethod(new ChatAdapter.OnChatListener() {
             @Override
