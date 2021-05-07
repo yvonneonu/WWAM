@@ -485,6 +485,12 @@ public class GeneralFactory {
     }
 
 
+    public void loadNewFriends(String branch){
+
+
+    }
+
+
     public void loadContact(FetchFriends fetchContacts){
         contactedUser = new ArrayList<>();
         usersStringId = new ArrayList<>();

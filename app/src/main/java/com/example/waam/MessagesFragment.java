@@ -106,29 +106,26 @@ public class MessagesFragment extends Fragment {
 
 
 
-        generalFactory.loadContact(new GeneralFactory.FetchFriends() {
-            @Override
-            public void friendsFetcher(List<WaamUser> friends) {
-                waamUserList = friends;
-                recentChatsAdapt = new RecentChatsAdapt(waamUserList,getActivity());
-                if(waamUserList.size() != 0){
-                    //if error should happen here it could be because of this views which are possibly null
-                    recyclerView1.setVisibility(View.VISIBLE);
-                    textView.setVisibility(View.GONE);
-                    recyclerView1.setAdapter(recentChatsAdapt);
-                    recyclerView1.setLayoutManager(layoutManager1);
-                }else{
-                    //No Recent Chat
-                }
-
-                recentChatsAdapt.chatMethod(new RecentChatsAdapt.OnChatListener() {
-                    @Override
-                    public void OnChatClick(int position) {
-                        Intent intent = new Intent(getActivity(), ChatMessage.class);
-                        startActivity(intent);
-                    }
-                });
+        generalFactory.loadContact(friends -> {
+            waamUserList = friends;
+            recentChatsAdapt = new RecentChatsAdapt(waamUserList,getActivity());
+            if(waamUserList.size() != 0){
+                //if error should happen here it could be because of this views which are possibly null
+                recyclerView1.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.GONE);
+                recyclerView1.setAdapter(recentChatsAdapt);
+                recyclerView1.setLayoutManager(layoutManager1);
+            }else{
+                //No Recent Chat
+                textView.setVisibility(View.VISIBLE);
+                recyclerView1.setVisibility(View.GONE);
+                textView.setText("You have no chat history");
             }
+
+            recentChatsAdapt.chatMethod(position -> {
+                Intent intent = new Intent(getActivity(), ChatMessage.class);
+                startActivity(intent);
+            });
         });
 
     }
