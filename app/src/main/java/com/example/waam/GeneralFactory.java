@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,11 +48,12 @@ public class GeneralFactory {
     private List<FriendModel> friendModelList;
     private final FirebaseDatabase firebaseDatabase;
     private List<Chat> chatContainer;
+    private List<WaamUser> newFriends;
     private List<Chat> chatList;
     private List<WaamUser> allWaamUsers;
     private List<AgentModel> agentModelList;
     private List<WaamUser> allFriends;
-    private Context context;
+    private final Context context;
     private ValueEventListener valueEventListener;
     private DatabaseReference userForSeen;
     private ArrayList<WaamUser> contactedUser;
@@ -236,15 +239,48 @@ public class GeneralFactory {
     }
 
 
+    public void loadNewFriends(String branch,ProgressBar bar,TextView textView, FetchFriends friends){
+        List<WaamUser> newFriends = new ArrayList<>();
+        if(branch != null){
+            DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
+            mDatebaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    newFriends.clear();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
+                        Long dateNow = System.currentTimeMillis();
+                        assert friendAlgo != null;
+                        if((dateNow - friendAlgo.getDateAdded()) <= 30 ){
+                            WaamUser waamUser = friendAlgo.getWaamUser();
+                            newFriends.add(waamUser);
+                        }
+                    }
+
+                    friends.friendsFetcher(newFriends);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    bar.setVisibility(View.GONE);
+                    textView.setText(error.getMessage());
+                }
+            });
+        }
+
+    }
+
     public void addToFriend(WaamUser waamUser, String branch){
         DatabaseReference mDatabaseReference = firebaseDatabase.getReference(branch);
         String newsId = mDatabaseReference.push().getKey();
-        mDatabaseReference.child(newsId).setValue(waamUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(context,"Succesfully added",Toast.LENGTH_LONG).show();
-                }
+        Long dateAdded = System.currentTimeMillis();
+        FriendAlgo friendAlgo = new FriendAlgo();
+        friendAlgo.setDateAdded(dateAdded);
+        friendAlgo.setWaamUser(waamUser);
+        assert newsId != null;
+        mDatabaseReference.child(newsId).setValue(friendAlgo).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                Toast.makeText(context,"Succesfully added",Toast.LENGTH_LONG).show();
             }
         })
                 .addOnFailureListener(e -> Log.d("Failure",e.getMessage()));
@@ -261,7 +297,9 @@ public class GeneralFactory {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     allFriends.clear();
                     for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        WaamUser user = dataSnapshot.getValue(WaamUser.class);
+                        FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
+                        assert friendAlgo != null;
+                        WaamUser user = friendAlgo.getWaamUser();
                         allFriends.add(user);
                     }
 
@@ -290,13 +328,14 @@ public class GeneralFactory {
 
     public void sendMessage(final String message, final String receiverId, final Context context){
         if(!message.equals("")){
-            String sender = mAuth.getCurrentUser().getUid();
+            String sender = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
             String timeStamp = String.valueOf(System.currentTimeMillis());
             DatabaseReference reference = firebaseDatabase.getReference("CHAT");
             String chatId = reference.push().getKey();
             Chat chat = new Chat(message,chatId,sender,receiverId);
             chat.setTimeStamp(timeStamp);
             chat.setIsSeen(false);
+            assert chatId != null;
             reference.child(chatId).setValue(chat)
                     .addOnFailureListener(e -> Toast.makeText(context,"Message cant be sent",Toast.LENGTH_LONG).show())
                     .addOnCompleteListener(task -> {
@@ -485,13 +524,8 @@ public class GeneralFactory {
     }
 
 
-    public void loadNewFriends(String branch){
 
-
-    }
-
-
-    public void loadContact(FetchFriends fetchContacts){
+    public void loadContact(ProgressBar bar,TextView textView,FetchFriends fetchContacts){
         contactedUser = new ArrayList<>();
         usersStringId = new ArrayList<>();
         String userId = FirebaseAuth.getInstance().getUid();
@@ -544,6 +578,9 @@ public class GeneralFactory {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        bar.setVisibility(View.GONE);
+                        textView.setVisibility(View.VISIBLE);
+                        textView.setText(error.getMessage());
 
                     }
                 });

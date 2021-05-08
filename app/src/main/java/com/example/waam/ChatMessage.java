@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ChatMessage extends AppCompatActivity {
+    public static final String NEW_FRIENDS = "com.example.waam.WaamUserFromChatList";
+    public static final String FRIENDS = "com.example.waam.WaamUserFromFriends";
     private RecyclerView recyclerView;
     private ChatScreenAdapter chatScreenAdapter;
     private List<Chat> chats;
@@ -63,8 +65,10 @@ public class ChatMessage extends AppCompatActivity {
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         EditText editText = findViewById(R.id.edtMess);
         textViewStatus = findViewById(R.id.status);
-        contactlist =  (WaamUser) getIntent().getSerializableExtra("WaamUserFromChatList");
-        WaamUser userFriends = (WaamUser) getIntent().getSerializableExtra("WaamUserFromFriends");
+        contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
+        WaamUser userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
+
+
         if(userFriends != null){
             String receiverId = userFriends.getUid();
             if(userFriends.getOnlineStatus().equals("online")){
@@ -73,6 +77,8 @@ public class ChatMessage extends AppCompatActivity {
                 textViewStatus.setText(userFriends.getTimeStamp());
             }
 
+
+            //This loads message on the activity
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
                 chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
@@ -92,12 +98,13 @@ public class ChatMessage extends AppCompatActivity {
 
         }else{
             String receiverId = contactlist.getUid();
-
             if(contactlist.getOnlineStatus().equals("online")){
                 textViewStatus.setText("online");
             }else{
                 textViewStatus.setText(contactlist.getTimeStamp());
             }
+
+            //This loads message on the activity
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
                 textViewStatus.setText(contactlist.getOnlineStatus());

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import com.connectycube.core.exception.ResponseException;
 import com.connectycube.core.helper.StringifyArrayList;
 import com.connectycube.users.ConnectycubeUsers;
 import com.connectycube.users.model.ConnectycubeUser;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.XMPPConnection;
@@ -43,7 +45,10 @@ public class MessagesFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
     private RecyclerView recyclerView2;
+    private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManager1;
+    private ProgressBar barone;
+    private ProgressBar bartwo;
 
    private String DEFAULT_SPAN_COUNT = "2";
 
@@ -52,37 +57,26 @@ public class MessagesFragment extends Fragment {
     private RecentChatsAdapt recentChatsAdapt;
     private List<WaamUser> waamUserList;
     private CustomAdapter customAdapter;
+    private List<WaamUser> newFriends;
     private TextView textView;
+    private TextView textViewNewFriends;
 
-    private GeneralFactory generalFactory;
-    private List<ModelImages> imageList = new ArrayList<>();
-    private List<ModelChat> chatList = new ArrayList<>();
+    //private List<ModelImages> imageList = new ArrayList<>();
+    //private List<ModelChat> chatList = new ArrayList<>();
     private List<itemModel> arrayList = new ArrayList<>();
 
     FrameLayout fragment;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
 
     public MessagesFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MessagesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MessagesFragment newInstance(String param1, String param2) {
         MessagesFragment fragment = new MessagesFragment();
         Bundle args = new Bundle();
@@ -96,30 +90,53 @@ public class MessagesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
         setHasOptionsMenu(true);
-        generalFactory = GeneralFactory.getGeneralFactory(getActivity());
+        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
+        String branchName = FirebaseAuth.getInstance().getUid()+"FRIENDS";
+        generalFactory.loadNewFriends(branchName, barone,textViewNewFriends, friends -> {
+            newFriends = friends;
+            if(newFriends.size() != 0){
+                friendAdapter  = new FriendAdapter(newFriends,getActivity());
+                recyclerView.setAdapter(friendAdapter);
+                recyclerView.setLayoutManager((layoutManager));
+                textViewNewFriends.setVisibility(View.GONE);
+                barone.setVisibility(View.GONE);
+            }else {
+                recyclerView.setVisibility(View.GONE);
+                barone.setVisibility(View.GONE);
+                textViewNewFriends.setVisibility(View.VISIBLE);
+                textViewNewFriends.setText("You have no new friends");
+                //You have no new friends;
+            }
 
 
 
-        generalFactory.loadContact(friends -> {
+            friendAdapter.onFriendMethod(position -> {
+                WaamUser user = newFriends.get(position);
+                Intent intent = new Intent(getActivity(), ChatMessage.class);
+                intent.putExtra("",user);
+                startActivity(intent);
+            });
+
+        });
+
+        generalFactory.loadContact(bartwo,textView,friends -> {
             waamUserList = friends;
             recentChatsAdapt = new RecentChatsAdapt(waamUserList,getActivity());
             if(waamUserList.size() != 0){
                 //if error should happen here it could be because of this views which are possibly null
                 recyclerView1.setVisibility(View.VISIBLE);
                 textView.setVisibility(View.GONE);
+                bartwo.setVisibility(View.GONE);
                 recyclerView1.setAdapter(recentChatsAdapt);
                 recyclerView1.setLayoutManager(layoutManager1);
             }else{
                 //No Recent Chat
+                bartwo.setVisibility(View.GONE);
                 textView.setVisibility(View.VISIBLE);
                 recyclerView1.setVisibility(View.GONE);
-                textView.setText("You have no chat history");
+                textView.setText(R.string.nochathistory);
             }
 
             recentChatsAdapt.chatMethod(position -> {
@@ -137,50 +154,28 @@ public class MessagesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-
-        addImagenText();
-        addChatText();
         groupImage();
         fragment = view.findViewById(R.id.frameLayout);
         recyclerView = view.findViewById(R.id.recyclerView2);
         recyclerView1 = view.findViewById(R.id.recyclerView4);
         recyclerView2 = view.findViewById(R.id.recyclerView5);
         textView = view.findViewById(R.id.textView102);
+        textViewNewFriends = view.findViewById(R.id.textView103);
+        barone = view.findViewById(R.id.progressBarnewFriend);
+        bartwo = view.findViewById(R.id.progressBarContact);
 
-
-        friendAdapter  = new FriendAdapter(imageList,getActivity());
         customAdapter = new CustomAdapter(arrayList,getActivity());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setAdapter(friendAdapter);
         recyclerView2.setAdapter(customAdapter);
-        recyclerView.setLayoutManager((layoutManager));
         recyclerView2.setLayoutManager(linearLayoutManager3);
 
-        /*chatAdapter.ChatMethod(new ChatAdapter.OnChatListener() {
-            @Override
-            public void OnChatClick(int position) {
-                Intent intent = new Intent(getActivity(), ChatMessage.class);
-                startActivity(intent);
-            }
-        });*/
-
-        customAdapter.CusomMethod(new CustomAdapter.OnCustomListener() {
-            @Override
-            public void OnCustomClick(int positon) {
-                Intent intent = new Intent(getActivity(), ChatMessage.class);
-                startActivity(intent);
-            }
+        customAdapter.CusomMethod(positon -> {
+            Intent intent = new Intent(getActivity(), ChatMessage.class);
+            startActivity(intent);
         });
 
-        friendAdapter.OnFriendMethod(new FriendAdapter.OnfriendListener() {
-            @Override
-            public void OnFriendClick(int poaition) {
-                Intent intent = new Intent(getActivity(), ChatMessage.class);
-                startActivity(intent);
-            }
-        });
 
         assert activity != null;
 
@@ -218,51 +213,8 @@ public class MessagesFragment extends Fragment {
         }
     }
 
-    private void addChatText() {
-        int[] display = {
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user,
-                R.drawable.group_img_2,
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user
 
-        };
 
-        String[] dispChat = {"Ebuka Obi", "Blessing Obi", "Brown White", "Alexander White", "Chris Paul", "Peter Mac", "LordBroke huhge"
-
-        };
-        String[] message = {"Hey, how are you today?", "Hey, how are you today?", "Hey, how are you today?", "Hey, how are you today?", "Hey, how are you today?",
-                "Hey, how are you today?", "Hey, how are you today?"
-
-        };
-        String[] time = {"1:30 PM", "2:00 PM", "12:30 PM", "3:30 PM", "9:30 AM", "12:30 PM", "10:30 PM"
-
-        };
-        for (int i = 0; i < display.length; i++){
-           chatList.add(new ModelChat(display[i], dispChat[i], message[i], time[i]));
-
-        }
-    }
-
-    private void addImagenText() {
-        int[] image = {R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user,
-                R.drawable.group_img_2,
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user
-        };
-
-        String[] name = {"Adrea", "Dorathy", "Kiyomi", "David", "Don", "Kira","Alicia"};
-
-        for (int i = 0; i < image.length ; i++) {
-            imageList.add(new ModelImages(image[i], name[i]));
-        }
-
-    }
 
 
     @Override
