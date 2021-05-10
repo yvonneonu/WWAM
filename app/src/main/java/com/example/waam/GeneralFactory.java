@@ -58,6 +58,7 @@ public class GeneralFactory {
     private DatabaseReference userForSeen;
     private ArrayList<WaamUser> contactedUser;
     private List<String> usersStringId;
+    private String theMessage;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -460,6 +461,44 @@ public class GeneralFactory {
 
     }
 
+
+    public void loadLastMessage(String senderId, String receiverId,TextView last_msg){
+        theMessage = "default";
+        DatabaseReference databaseChats = FirebaseDatabase.getInstance().getReference("CHAT");
+        databaseChats.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Chat chat = dataSnapshot.getValue(Chat.class);
+                    if(chat != null){
+                        if(chat.getSenderId().equals(senderId) && chat.getReceiverId().equals(receiverId)
+                                || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)){
+                           //This keeps loading the message and keeps changing it till the last message
+                            theMessage = chat.getMessage();
+
+                        }
+                    }
+
+
+                }
+
+                if ("default".equals(theMessage)) {
+                    last_msg.setText("No message");
+                } else {
+                    last_msg.setText("default");
+                }
+                theMessage = "default";
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
     public void loginUser(LoginRequest loginRequest){
 
         Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
@@ -595,14 +634,12 @@ public class GeneralFactory {
     }
 
 
+
+
     public interface FetchFriends{
         void friendsFetcher(List<WaamUser> friends);
     }
 
-
-    public interface FireBaseCallbackUser {
-        void fireBaseUser(WaamUser basuser);
-    }
 
     public interface SpecificUser{
         void loadSpecUse(WaamUser user);

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.RecentView> {
     List<WaamUser> waamUserList;
     Context context;
+    GeneralFactory generalFactory;
     HashMap<String, String> lastMessage;
     private OnChatListener onChatListener;
 
@@ -25,6 +27,7 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
         this.waamUserList = waamUserList;
         this.context = context;
         lastMessage = new HashMap<>();
+        generalFactory = GeneralFactory.getGeneralFactory(context);
     }
 
     @NonNull
@@ -43,6 +46,8 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
         String message = lastMessage.get(userId);
         holder.fullName.setText(fullNam);
 
+        String senderId = FirebaseAuth.getInstance().getUid();
+        String receiverId = waamUser.getUid();
 
         Glide.with(context)
                 .asBitmap()
@@ -52,12 +57,7 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
                 .into(holder.imageView);
 
 
-        if(message != null || message.equals("")){
-            holder.lastMess.setVisibility(View.GONE);
-        }else{
-            holder.lastMess.setVisibility(View.VISIBLE);
-            holder.lastMess.setText(message);
-        }
+        generalFactory.loadLastMessage(senderId,receiverId,holder.lastMess);
 
 
         if(waamUser.getOnlineStatus().equals("online")){

@@ -50,13 +50,12 @@ public class MessagesFragment extends Fragment {
     private ProgressBar barone;
     private ProgressBar bartwo;
 
-   private String DEFAULT_SPAN_COUNT = "2";
+   //private String DEFAULT_SPAN_COUNT = "2";
 
     private FriendAdapter friendAdapter;
     //private ChatAdapter chatAdapter;
     private RecentChatsAdapt recentChatsAdapt;
     private List<WaamUser> waamUserList;
-    private CustomAdapter customAdapter;
     private List<WaamUser> newFriends;
     private TextView textView;
     private TextView textViewNewFriends;
@@ -164,7 +163,7 @@ public class MessagesFragment extends Fragment {
         barone = view.findViewById(R.id.progressBarnewFriend);
         bartwo = view.findViewById(R.id.progressBarContact);
 
-        customAdapter = new CustomAdapter(arrayList,getActivity());
+        CustomAdapter customAdapter = new CustomAdapter(arrayList, getActivity());
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
