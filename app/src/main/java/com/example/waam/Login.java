@@ -78,8 +78,8 @@ public class Login extends AppCompatActivity {
         ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
 
-        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-        chatService = ConnectycubeChatService.getInstance();
+        //ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
+        //chatService = ConnectycubeChatService.getInstance();
 
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);

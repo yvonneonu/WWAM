@@ -19,6 +19,7 @@ public class ChatMessage extends AppCompatActivity {
     private List<Chat> chats;
     private GeneralFactory generalFactoryInstance;
     private WaamUser contactlist;
+    private WaamUser userFriends;
     private TextView textViewStatus;
 
 
@@ -66,7 +67,7 @@ public class ChatMessage extends AppCompatActivity {
         EditText editText = findViewById(R.id.edtMess);
         textViewStatus = findViewById(R.id.status);
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
-        WaamUser userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
+        userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
 
 
         if(userFriends != null){

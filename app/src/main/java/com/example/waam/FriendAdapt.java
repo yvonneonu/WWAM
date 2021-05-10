@@ -42,7 +42,8 @@ public class FriendAdapt extends RecyclerView.Adapter<FriendAdapt.FriendHolder> 
         holder.lastname.setText(friendModel.getFullname());
         Glide.with(context)
                 .asBitmap()
-                .load(friendModel.getImage())
+                .circleCrop()
+                .load(friendModel.getImageUrl())
                 .into(holder.imageView);
 
     }

@@ -114,7 +114,7 @@ public class FriendsFragment extends Fragment {
                 }else{
                     WaamUser user = friendModelList.get(position);
                     Intent intent = new Intent(getActivity(),ChatMessage.class);
-                    intent.putExtra("WaamUserFromFriends",user);
+                    intent.putExtra(ChatMessage.FRIENDS,user);
                     startActivity(intent);
                 }
             });
