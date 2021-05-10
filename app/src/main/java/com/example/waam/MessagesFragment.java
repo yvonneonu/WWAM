@@ -95,8 +95,8 @@ public class MessagesFragment extends Fragment {
         String branchName = FirebaseAuth.getInstance().getUid()+"FRIENDS";
         generalFactory.loadNewFriends(branchName, barone,textViewNewFriends, friends -> {
             newFriends = friends;
+            friendAdapter  = new FriendAdapter(newFriends,getActivity());
             if(newFriends.size() != 0){
-                friendAdapter  = new FriendAdapter(newFriends,getActivity());
                 recyclerView.setAdapter(friendAdapter);
                 recyclerView.setLayoutManager((layoutManager));
                 textViewNewFriends.setVisibility(View.GONE);
