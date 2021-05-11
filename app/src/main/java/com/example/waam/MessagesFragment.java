@@ -145,10 +145,11 @@ public class MessagesFragment extends Fragment {
 
             recentChatsAdapt.chatMethod(position -> {
                 Intent intent = new Intent(getActivity(), ChatMessage.class);
-                Log.d("Position",""+friends.size());
-                WaamUser user = newFriends.get(position);
-                intent.putExtra(ChatMessage.NEW_FRIENDS,user);
-                Log.d("NEW Friends",user.getUid());
+                Log.d("index",""+position);
+                Log.d("Sizeoooo",""+waamUserList.size());
+                //WaamUser user = newFriends.get(position);
+                intent.putExtra(ChatMessage.NEW_FRIENDS,friends.get(position));
+                //Log.d("NEW Friends",user.getUid());
                 startActivity(intent);
             });
         });

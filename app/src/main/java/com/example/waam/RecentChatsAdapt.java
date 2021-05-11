@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
     public void onBindViewHolder(@NonNull RecentView holder, int position) {
 
         WaamUser waamUser = waamUserList.get(position);
+        Log.d("sernam",""+position);
         String fullNam = waamUser.getFullname();
         String userId = waamUser.getUid();
         String message = lastMessage.get(userId);
@@ -89,9 +91,10 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
 
             itemView.setOnClickListener(v -> {
                 if(onChatListener != null ){
-                    int position = getAdapterPosition();
-                    if(position != RecyclerView.NO_POSITION){
-                        onChatListener.OnChatClick(position);
+                    int pos = getAdapterPosition();
+                    Log.d("Adapter",""+pos);
+                    if(pos != RecyclerView.NO_POSITION){
+                        onChatListener.OnChatClick(pos);
                     }
                 }
             });
