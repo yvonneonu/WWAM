@@ -93,6 +93,8 @@ public class MessagesFragment extends Fragment {
         setHasOptionsMenu(true);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+"FRIENDS";
+
+
         generalFactory.loadNewFriends(branchName, barone,textViewNewFriends, friends -> {
             newFriends = friends;
             friendAdapter  = new FriendAdapter(newFriends,getActivity());
@@ -115,6 +117,7 @@ public class MessagesFragment extends Fragment {
                 WaamUser user = newFriends.get(position);
                 Intent intent = new Intent(getActivity(), ChatMessage.class);
                 intent.putExtra("",user);
+                Log.d("Here",user.getUid());
                 startActivity(intent);
             });
 
@@ -123,6 +126,8 @@ public class MessagesFragment extends Fragment {
         generalFactory.loadContact(bartwo,textView,friends -> {
             waamUserList = friends;
             recentChatsAdapt = new RecentChatsAdapt(waamUserList,getActivity());
+            int si = waamUserList.size();
+            Log.d("Sizeooo",""+si);
             if(waamUserList.size() != 0){
                 //if error should happen here it could be because of this views which are possibly null
                 recyclerView1.setVisibility(View.VISIBLE);
@@ -140,6 +145,10 @@ public class MessagesFragment extends Fragment {
 
             recentChatsAdapt.chatMethod(position -> {
                 Intent intent = new Intent(getActivity(), ChatMessage.class);
+                Log.d("Position",""+friends.size());
+                WaamUser user = newFriends.get(position);
+                intent.putExtra(ChatMessage.NEW_FRIENDS,user);
+                Log.d("NEW Friends",user.getUid());
                 startActivity(intent);
             });
         });

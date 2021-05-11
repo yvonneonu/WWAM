@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -99,6 +100,7 @@ public class ChatMessage extends AppCompatActivity {
 
         }else{
             String receiverId = contactlist.getUid();
+            Log.d("Chatlist",contactlist.getUid());
             if(contactlist.getOnlineStatus().equals("online")){
                 textViewStatus.setText("online");
             }else{

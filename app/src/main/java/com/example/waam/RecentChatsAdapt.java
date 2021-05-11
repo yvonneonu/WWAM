@@ -21,7 +21,7 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
     Context context;
     GeneralFactory generalFactory;
     HashMap<String, String> lastMessage;
-    private OnChatListener onChatListener;
+    OnChatListener onChatListener;
 
     public RecentChatsAdapt(List<WaamUser> waamUserList, Context context) {
         this.waamUserList = waamUserList;
@@ -49,6 +49,7 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
         String senderId = FirebaseAuth.getInstance().getUid();
         String receiverId = waamUser.getUid();
 
+
         Glide.with(context)
                 .asBitmap()
                 .centerCrop()
@@ -67,6 +68,9 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
         }
     }
 
+    public void chatMethod(OnChatListener onChatListener){
+        this.onChatListener = onChatListener;
+    }
     @Override
     public int getItemCount() {
         return waamUserList.size();
@@ -99,7 +103,5 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
         void OnChatClick(int position);
     }
 
-    public void chatMethod(OnChatListener onChatListener){
-        this.onChatListener = onChatListener;
-    }
+
 }

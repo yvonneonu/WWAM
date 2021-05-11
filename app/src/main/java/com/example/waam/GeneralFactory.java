@@ -606,11 +606,13 @@ public class GeneralFactory {
                                             }
                                         }
                                     }else{
+                                        Log.d("Useme",user.getUid());
                                         contactedUser.add(user);
                                     }
                                 }
                             }
                         }
+
 
                         fetchContacts.friendsFetcher(contactedUser);
                     }
