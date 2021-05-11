@@ -44,17 +44,14 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
         WaamUser waamUser = waamUserList.get(position);
         Log.d("sernam",""+position);
         String fullNam = waamUser.getFullname();
-        String userId = waamUser.getUid();
-        String message = lastMessage.get(userId);
         holder.fullName.setText(fullNam);
 
         String senderId = FirebaseAuth.getInstance().getUid();
         String receiverId = waamUser.getUid();
 
-
         Glide.with(context)
                 .asBitmap()
-                .centerCrop()
+                .circleCrop()
                 .placeholder(R.drawable.profile_img_user)
                 .load(waamUser.getImageUrl())
                 .into(holder.imageView);

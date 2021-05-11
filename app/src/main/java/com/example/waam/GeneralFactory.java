@@ -475,19 +475,12 @@ public class GeneralFactory {
                                 || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)){
                            //This keeps loading the message and keeps changing it till the last message
                             theMessage = chat.getMessage();
-
+                            last_msg.setText(theMessage);
                         }
                     }
 
 
                 }
-
-                if ("default".equals(theMessage)) {
-                    last_msg.setText("No message");
-                } else {
-                    last_msg.setText("default");
-                }
-                theMessage = "default";
 
             }
 
