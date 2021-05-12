@@ -115,12 +115,14 @@ public class ChatMessage extends AppCompatActivity {
                 recyclerView = findViewById(R.id.recyclerView);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
                 recyclerView.setAdapter(chatScreenAdapter);
+                linearLayoutManager.setStackFromEnd(true);
                 recyclerView.setLayoutManager(linearLayoutManager);
             },receiverId,ChatMessage.this);
 
             imageButtonSender.setOnClickListener(v -> {
-                String messages = editText.toString().trim();
+                String messages = editText.getText().toString().trim();
                 generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
+                editText.setText("");
             });
         }
 
