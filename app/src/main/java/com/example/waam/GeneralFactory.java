@@ -278,16 +278,65 @@ public class GeneralFactory {
         FriendAlgo friendAlgo = new FriendAlgo();
         friendAlgo.setDateAdded(dateAdded);
         friendAlgo.setWaamUser(waamUser);
-        assert newsId != null;
-        mDatabaseReference.child(newsId).setValue(friendAlgo).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                Toast.makeText(context,"Succesfully added",Toast.LENGTH_LONG).show();
+
+        loadFriendForCheck(branch, new FriendChecker() {
+            @Override
+            public boolean friendCheck(List<WaamUser> userList) {
+                for(WaamUser user : userList){
+                    if(user.getUid().equals(waamUser.getUid())){
+                        Toast.makeText(context,"You are already friends with"+user.getFullname(),Toast.LENGTH_SHORT)
+                                .show();
+                        return true;
+                    }
+                }
+                assert newsId != null;
+                mDatabaseReference.child(newsId).setValue(friendAlgo).addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        Toast.makeText(context,"Succesfully added",Toast.LENGTH_LONG).show();
+                    }
+                })
+                        .addOnFailureListener(e -> Log.d("Failure",e.getMessage()));
+                return false;
             }
-        })
-                .addOnFailureListener(e -> Log.d("Failure",e.getMessage()));
+        });
+
+
 
     }
 
+    public void loadFriendForCheck(String branch,FriendChecker fetchFriends){
+        allFriends = new ArrayList<>();
+        if(branch != null){
+            DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
+            mDatebaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    allFriends.clear();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
+                        assert friendAlgo != null;
+                        WaamUser user = friendAlgo.getWaamUser();
+                        allFriends.add(user);
+                    }
+
+                    fetchFriends.friendCheck(allFriends);
+                    Log.d("Allfriends",""+allFriends.size());
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                    Log.d("Cancel",error.getMessage());
+                }
+            });
+        }else{
+            Toast.makeText(context,"Branch is null",Toast.LENGTH_SHORT)
+                    .show();
+
+        }
+
+    }
 
     public void loadFriends(String branch,FetchFriends fetchFriends){
         allFriends = new ArrayList<>();
@@ -643,5 +692,9 @@ public class GeneralFactory {
 
     public interface FireBaseMessages{
         void firebaseMessages(List<Chat> chatCont);
+    }
+
+    public interface FriendChecker{
+        boolean friendCheck(List<WaamUser> userList);
     }
 }
