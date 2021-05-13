@@ -5,11 +5,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class ChatMessage extends AppCompatActivity {
@@ -22,6 +26,7 @@ public class ChatMessage extends AppCompatActivity {
     private WaamUser contactlist;
     private WaamUser userFriends;
     private TextView textViewStatus;
+    private ImageView displayPic;
 
 
     @Override
@@ -67,12 +72,18 @@ public class ChatMessage extends AppCompatActivity {
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         EditText editText = findViewById(R.id.edtMess);
         textViewStatus = findViewById(R.id.status);
+        displayPic = findViewById(R.id.imagetool);
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
 
 
         if(userFriends != null){
             String receiverId = userFriends.getUid();
+            Glide.with(this)
+                    .asBitmap()
+                    .circleCrop()
+                    .load(userFriends.getImageUrl())
+                    .into(displayPic);
             if(userFriends.getOnlineStatus().equals("online")){
                 textViewStatus.setText(R.string.ONLNE);
             }else{
@@ -100,6 +111,11 @@ public class ChatMessage extends AppCompatActivity {
 
         }else{
             String receiverId = contactlist.getUid();
+            Glide.with(this)
+                    .asBitmap()
+                    .circleCrop()
+                    .load(contactlist.getImageUrl())
+                    .into(displayPic);
             Log.d("Chatlist",contactlist.getUid());
             if(contactlist.getOnlineStatus().equals("online")){
                 textViewStatus.setText("online");
@@ -115,12 +131,14 @@ public class ChatMessage extends AppCompatActivity {
                 recyclerView = findViewById(R.id.recyclerView);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
                 recyclerView.setAdapter(chatScreenAdapter);
+                linearLayoutManager.setStackFromEnd(true);
                 recyclerView.setLayoutManager(linearLayoutManager);
             },receiverId,ChatMessage.this);
 
             imageButtonSender.setOnClickListener(v -> {
-                String messages = editText.toString().trim();
+                String messages = editText.getText().toString().trim();
                 generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
+                editText.setText("");
             });
         }
 
