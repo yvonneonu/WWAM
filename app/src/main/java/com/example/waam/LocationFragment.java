@@ -75,7 +75,7 @@ public class LocationFragment extends Fragment {
         }
 
         setHasOptionsMenu(true);
-        generalFactory = GeneralFactory.getGeneralFactory();
+        generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         locationConatiner = generalFactory.getLocationList();
         locationAdapter = new LocationAdapter(locationConatiner,getActivity());
 

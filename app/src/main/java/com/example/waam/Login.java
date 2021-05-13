@@ -16,14 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.connectycube.auth.session.ConnectycubeSessionManager;
 import com.connectycube.auth.session.ConnectycubeSettings;
 import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.chat.ConnectycubeRoster;
+import com.connectycube.chat.listeners.RosterListener;
+import com.connectycube.chat.listeners.SubscriptionListener;
+import com.connectycube.chat.model.ConnectycubePresence;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.users.ConnectycubeUsers;
 import com.connectycube.users.model.ConnectycubeUser;
 
-import org.jivesoftware.smack.ConnectionListener;
-import org.jivesoftware.smack.XMPPConnection;
+import java.util.Collection;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -38,11 +41,11 @@ public class Login extends AppCompatActivity {
     private ImageView logm;
     private TextView text;
     private TextView pressback;
-    String loginToken;
+    private String loginToken;
     private EditText editPass;
     private EditText editEmail;
-    String Email;
-    String Password;
+    private String Email;
+    private String Password;
     private ConnectycubeChatService chatService;
 
     boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
@@ -52,6 +55,8 @@ public class Login extends AppCompatActivity {
     static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
     static final String AUTH_SECRET = "yhuExsebKPu8F8S";
     static final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
+
+    private ConnectycubeRoster chatRoster;
 //
 
 
@@ -73,8 +78,8 @@ public class Login extends AppCompatActivity {
         ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
 
-        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-        chatService = ConnectycubeChatService.getInstance();
+        //ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
+        //chatService = ConnectycubeChatService.getInstance();
 
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);
@@ -100,11 +105,10 @@ public class Login extends AppCompatActivity {
         ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
 
 
+
        //String loginsToken = ConnectycubeSessionManager.getInstance().getToken();
         //loginToken = ConnectycubeSessionManager.getInstance().getToken();
         Log.d("show", "show");
-
-
 
 
         logm.setOnClickListener(v -> {
@@ -121,16 +125,18 @@ public class Login extends AppCompatActivity {
 
             }else {
 
-                final ConnectycubeUser user = new ConnectycubeUser();
-               // user.setId(4152184);
-             //   user.setLogin("Grace");
-                user.setEmail(Email);
-                user.setPassword(Password);
+                /*final ConnectycubeUser user = new ConnectycubeUser();
+                user.setId(4134562);
+                user.setLogin("bamidele");
+                user.setPassword("12345678");
 
-                ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
+                /*ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
                     public void onSuccess(ConnectycubeUser userj, Bundle args) {
+                        SessionManager.getSessionManager(Login.this).setConnectyUser(userj);
+                        int id = SessionManager.getSessionManager(Login.this).getConnectyUser();
 
+                        Log.d("idLogin",""+id);
                         Log.d("doraaa", ""+userj.getId());
                         Log.d("doraaa", ""+userj.getLogin());
                         Log.d("doraaa", ""+userj.getEmail());
@@ -140,16 +146,16 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onError(ResponseException error) {
 
-                        Log.d("error", ""+error.getMessage());
+                        Log.d("ConnectyCuberror", ""+error.getMessage());
                     }
-                });
+                });*/
+
                 LoginRequest loginRequest = new LoginRequest("email", "password");
-              //  loginRequest.se
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
+                GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest);
+                //loginUser(loginRequest);
 
-
-               loginUser(loginRequest);
             }
         });
 
@@ -157,7 +163,10 @@ public class Login extends AppCompatActivity {
 
 
 
-    public void loginUser(LoginRequest loginRequest){
+
+
+
+    /*public void loginUser(LoginRequest loginRequest){
 
         Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
 
@@ -167,9 +176,8 @@ public class Login extends AppCompatActivity {
 
                 if (response.isSuccessful()){
                     loginToken = response.body().getToken();
+                    //SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
                     Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
-
-
                     Log.d("LoginTOken",loginToken);
                   //  Intent intent = new Intent(Login.this, Profile.class);
                     //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
@@ -194,7 +202,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
    private void Themain() {
         Intent intent = new Intent(Login.this, MainActivity.class);

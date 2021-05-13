@@ -7,9 +7,14 @@ public class Chat implements Serializable {
     private String chatId;
     private String senderId;
     private String receiverId;
-    private String senderEmoji;
-    private String receiverEmoji;
+    private String timeStamp;
+    private boolean isSeen;
+    private String lastSeen;
 
+
+    public Chat(){
+
+    }
     public Chat(String message, String chatId, String senderId, String receiverId) {
         this.message = message;
         this.chatId = chatId;
@@ -47,5 +52,29 @@ public class Chat implements Serializable {
 
     public void setReceiverId(String receiverId) {
         this.receiverId = receiverId;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public boolean getIsSeen() {
+        return isSeen;
+    }
+
+    public void setIsSeen(boolean isSeen) {
+        this.isSeen = isSeen;
+    }
+
+    public String getLastSeen() {
+        return lastSeen;
+    }
+
+    public void setLastSeen(String lastSeen) {
+        this.lastSeen = lastSeen;
     }
 }

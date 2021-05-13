@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.waam">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
@@ -28,9 +30,11 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Unfriend"></activity>
-        <activity android:name=".DailyMatch"></activity>
-        <activity android:name=".AgentProfile"></activity>
+        <activity android:name=".AllUsersActivity"
+            android:parentActivityName=".DrawelayoutActivity"/>
+        <activity android:name=".Unfriend" />
+        <activity android:name=".DailyMatch" />
+        <activity android:name=".AgentProfile" />
         <activity android:name=".ChatMessage" />
         <activity android:name=".SearcMessage" />
         <activity android:name=".DiscoverEvent" />
@@ -44,9 +48,7 @@
         <activity android:name=".CompleteProfile" />
         <activity android:name=".LocationDetectActivity" />
         <activity android:name=".Profile" />
-        <activity android:name=".DrawelayoutActivity">
-
-        </activity>
+        <activity android:name=".DrawelayoutActivity"></activity>
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />

@@ -32,4 +32,6 @@
     <string name="supporting_text">supporting text</string>
     <string name="search">search</string>
     <string name="clear_search">clearsearch</string>
+    <string name="ONLNE">online</string>
+    <string name="nochathistory">You have no chat history</string>
 </resources>

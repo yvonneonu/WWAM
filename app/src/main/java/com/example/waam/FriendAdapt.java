@@ -18,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendAdapt extends RecyclerView.Adapter<FriendAdapt.FriendHolder> implements Filterable {
-    private final List<FriendModel> friendsContainer;
+    private final List<WaamUser> friendsContainer;
     private final Context context;
-    private final List<FriendModel> FullfriendModelList;
+    private final List<WaamUser> FullfriendModelList;
     private FriendAptListener friendAptListener;
-    public FriendAdapt(List<FriendModel> friendsContainer, Context context) {
+    public FriendAdapt(List<WaamUser> friendsContainer, Context context) {
         this.friendsContainer = friendsContainer;
         FullfriendModelList = new ArrayList<>(friendsContainer);
         this.context = context;
@@ -37,12 +37,13 @@ public class FriendAdapt extends RecyclerView.Adapter<FriendAdapt.FriendHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull FriendHolder holder, int position) {
-        FriendModel friendModel = friendsContainer.get(position);
-        holder.firstname.setText(friendModel.getFirstname());
-        holder.lastname.setText(friendModel.getLastname());
+        WaamUser friendModel = friendsContainer.get(position);
+        holder.firstname.setText(friendModel.getFullname());
+        holder.lastname.setText(friendModel.getFullname());
         Glide.with(context)
                 .asBitmap()
-                .load(friendModel.getImage())
+                .circleCrop()
+                .load(friendModel.getImageUrl())
                 .into(holder.imageView);
 
     }
@@ -67,16 +68,16 @@ public class FriendAdapt extends RecyclerView.Adapter<FriendAdapt.FriendHolder> 
     private final Filter friendsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<FriendModel> filteredFriendList = new ArrayList<>();
+            List<WaamUser> filteredFriendList = new ArrayList<>();
 
             if(constraint == null || constraint.length() == 0 ){
                 filteredFriendList.addAll(FullfriendModelList);
             }else{
                 String filteredPattern = constraint.toString().toLowerCase().trim();
 
-                for(FriendModel friendModel : FullfriendModelList){
-                    if(friendModel.getFirstname().toLowerCase().contains(filteredPattern)
-                            || friendModel.getLastname().toLowerCase().contains(filteredPattern)){
+                for(WaamUser friendModel : FullfriendModelList){
+                    if(friendModel.getFullname().toLowerCase().contains(filteredPattern)
+                            || friendModel.getFullname().toLowerCase().contains(filteredPattern)){
                         filteredFriendList.add(friendModel);
                     }
                 }

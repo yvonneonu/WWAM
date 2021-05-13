@@ -1,8 +1,7 @@
 package com.example.waam;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,106 +12,83 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.connectycube.chat.ConnectycubeRestChatService;
-import com.connectycube.chat.model.ConnectycubeChatDialog;
-import com.connectycube.chat.model.ConnectycubeDialogType;
-import com.connectycube.core.EntityCallback;
-import com.connectycube.core.exception.ResponseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private static  final int RIGHT = 1;
     private static  final int LEFT = 0;
     private final List<Chat> listOfChats;
     private final Context context;
-    private String senderId;
-    private String recieverId;
-
-    ArrayList<Integer> occupantIds = new ArrayList<Integer>();
-
-
-    ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
-
 
     public ChatScreenAdapter(List<Chat> chatHolder, Context context) {
-        this.listOfChats = chatHolder;
+        listOfChats = chatHolder;
         this.context = context;
-        senderId = "yvonne";
+
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-
-        occupantIds.add(4134562);
-
-        dialog.setType(ConnectycubeDialogType.PRIVATE);
-        dialog.setOccupantsIds(occupantIds);
-
-        ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
-            @Override
-            public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
-
-                Log.d("tea", ""+createdDialog.getOccupants());
-            }
-
-            @Override
-            public void onError(ResponseException exception) {
-
-            }
-        });
-
         View view;
-        if (viewType == RIGHT){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sendersview, parent, false);
+        if(viewType == RIGHT){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sendersview,parent,false);
             return new Senderview(view);
         }
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.receiversview, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.receiversview,parent,false);
         return new ReceiverView(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
         final Chat chat = listOfChats.get(position);
-        if(chat.getSenderId().equals(senderId)){
-            Senderview  senderView = (Senderview) holder;
-            senderView.textView.setText(chat.getMessage());
-        }else{
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
 
-            final ReceiverView receiverView = (ReceiverView) holder;
-            receiverView.textView.setText(chat.getMessage());
-            Glide.with(context)
-                    .asBitmap()
-                    .load(R.drawable.profile_img_user)
-                    .circleCrop()
-                    .into(receiverView.imageView);
+            if(chat.getSenderId().equals(user.getUid())){
+                Senderview senderView = (Senderview) holder;
+                senderView.textView.setText(chat.getMessage());
+                Glide.with(context)
+                        .asBitmap()
+                        .load(R.drawable.profile_img_user)
+                        .into(senderView.imageView);
+                Glide.with(context)
+                        .asBitmap()
+                        .load(R.drawable.like_save_icon)
+                        .into(senderView.emoji);
+            }else{
+                final ReceiverView receiverView = (ReceiverView) holder;
+                receiverView.textView.setText(chat.getMessage());
+                Glide.with(context)
+                        .asBitmap()
+                        .placeholder(R.drawable.profile_img_user)
+                        .circleCrop()
+                        .load(R.drawable.profile_img_user)
+                        .into(receiverView.imageView);
+
+                Glide.with(context)
+                        .asBitmap()
+                        .load(R.drawable.like_save_icon)
+                        .into(receiverView.emojiButton);
+            }
 
         }
-       /* if(chat.getSenderId().equals(user.getUid())){
-            SenderView senderView = (SenderView) holder;
-            senderView.textView.setText(chat.getMessage());
-        }else{
-            final ReceiverView receiverView = (ReceiverView) holder;
-            receiverView.txt.setText(chat.getMessage());
-            String receiverpic = chat.getSenderId();
-            AgroAppRepo.getInstanceOfAgroApp().loadSpecUser(receiverpic, new AgroAppRepo.SpecificUser() {
-                @Override
-                public void loadSpecUse(User user) {
-                    Glide.with(context)
-                            .asBitmap()
-                            .placeholder(R.drawable.doctor)
-                            .circleCrop()
-                            .load(Uri.parse(user.getImage()))
-                            .into(receiverView.imageView);
-                }
-            });*/
 
 
+    }
 
+    @Override
+    public int getItemViewType(int position) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        if(listOfChats.get(position).getSenderId().equals(user.getUid())){
+            return RIGHT;
+        }
+        return LEFT;
 
     }
 
@@ -120,7 +96,6 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public int getItemCount() {
         return listOfChats.size();
     }
-
 
 
     public static class Senderview extends RecyclerView.ViewHolder{

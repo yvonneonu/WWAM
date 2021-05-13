@@ -55,7 +55,7 @@ public class EventFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory();
+        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         eventModels = generalFactory.getEventModelList();
         eventAdapter = new EventAdapter(eventModels,getActivity());
         eventAdapter.setOnTouch(position -> Toast.makeText(getActivity(),"Mean face "+eventModels.get(position),Toast.LENGTH_SHORT).show());

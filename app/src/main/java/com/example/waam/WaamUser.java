@@ -1,6 +1,8 @@
 package com.example.waam;
 
-public class RegisterRequest {
+import java.io.Serializable;
+
+public class WaamUser implements Serializable {
     private String fullname;
     private String email;
     private String zipcode;
@@ -9,10 +11,34 @@ public class RegisterRequest {
     private String birth_date;
     private String password;
     private String password_confirmation;
+    private int image;
+    private String uid;
+    private String onlineStatus;
+    private String timeStamp;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String imageUrl;
 
 
 
-    public RegisterRequest(String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password) {
+    public WaamUser(){
+
+    };
+
+
+    public WaamUser(String fullname, int image){
+        this.fullname = fullname;
+        this.image = image;
+
+    }
+    public WaamUser(String fullname, String email, String zipcode, String gender, String seeking, String birth_date, String password) {
         this.fullname = fullname;
         this.email = email;
         this.zipcode = zipcode;
@@ -20,6 +46,8 @@ public class RegisterRequest {
         this.seeking = seeking;
         this.birth_date = birth_date;
         this.password = password;
+        onlineStatus = "offline";
+        imageUrl = "https://images.unsplash.com/photo-1620252460192-929ab4e92f1c?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
 
     }
 
@@ -88,5 +116,35 @@ public class RegisterRequest {
     }
 
 
+    public int getImage() {
+        return image;
+    }
 
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getOnlineStatus() {
+        return onlineStatus;
+    }
+
+    public void setOnlineStatus(String onlineStatus) {
+        this.onlineStatus = onlineStatus;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 }

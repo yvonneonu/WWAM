@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +18,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.connectycube.auth.session.ConnectycubeSessionManager;
+import com.connectycube.auth.session.ConnectycubeSessionParameters;
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.chat.ConnectycubeRoster;
+import com.connectycube.chat.listeners.SubscriptionListener;
+import com.connectycube.users.model.ConnectycubeUser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,9 +52,15 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private FirebaseAuth firebaseAuth;
     private FriendAdapt friendAdapt;
-    private List<FriendModel> friendModelList;
-    private GeneralFactory generalFactory;
+    private List<WaamUser> friendModelList;
+    private int userId = 0;
+    private ConnectycubeRoster chatRoster;
+    private  SubscriptionListener subscriptionListener;
+    private final int userID = 4134562;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
     public FriendsFragment() {
         // Required empty public constructor
     }
@@ -70,24 +91,43 @@ public class FriendsFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         setHasOptionsMenu(true);
-        generalFactory = GeneralFactory.getGeneralFactory();
-        friendModelList = generalFactory.getFriendModelList();
+        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
+        String branchName = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
         int addFriend = R.drawable.add_new_friend_icon;
-        FriendModel friendAdder = new FriendModel("Add Friend","250+ Nearby",addFriend);
-        friendModelList.add(0,friendAdder);
-        friendAdapt = new FriendAdapt(friendModelList,getActivity());
+        WaamUser friendAdder = new WaamUser("Add Friends",addFriend);
+        Log.d("FriendsFrag","fragie");
 
 
-        friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
-            @Override
-            public void friendResponder(int position) {
+        generalFactory.loadFriends(branchName, friends -> {
+            recyclerView.setVisibility(View.VISIBLE);
+            friendModelList = friends;
+            progressBar.setVisibility(View.GONE);
+            friendModelList.add(0,friendAdder);
+            friendAdapt = new FriendAdapt(friendModelList,getActivity());
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+            recyclerView.setAdapter(friendAdapt);
+            friendAdapt.friendMover(position -> {
+
                 if(position == 0){
-                    Log.d("AddFriend","You clicked Add");
+                    Intent intent = new Intent(getActivity(),AllUsersActivity.class);
+                    startActivity(intent);
                 }else{
-                    Log.d("Chat","Move to Chat");
+                    WaamUser user = friendModelList.get(position);
+                    Intent intent = new Intent(getActivity(),ChatMessage.class);
+                    intent.putExtra(ChatMessage.FRIENDS,user);
+                    startActivity(intent);
                 }
-            }
+            });
         });
+
+
+
+
+        //userId = SessionManager.getSessionManager(getActivity()).getConnectyUser();
+        //user is logged in
+        Log.d("Subscription",""+subscriptionListener);
+
+
     }
 
 
@@ -142,13 +182,24 @@ public class FriendsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.friends_recycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        recyclerView.setAdapter(friendAdapt);
+        recyclerView = view.findViewById(R.id.friends_recycler);
+        progressBar = view.findViewById(R.id.progressBaring);
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swiperefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Friends");
         return view;
+    }
+
+    private void refreshData() {
+        Log.d("Pulldown","Working");
     }
 
 
