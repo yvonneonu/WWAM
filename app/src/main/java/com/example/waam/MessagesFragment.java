@@ -19,18 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.connectycube.auth.session.ConnectycubeSettings;
-import com.connectycube.chat.ConnectycubeChatService;
-import com.connectycube.core.EntityCallback;
-import com.connectycube.core.LogLevel;
-import com.connectycube.core.exception.ResponseException;
-import com.connectycube.core.helper.StringifyArrayList;
-import com.connectycube.users.ConnectycubeUsers;
-import com.connectycube.users.model.ConnectycubeUser;
 import com.google.firebase.auth.FirebaseAuth;
-
-import org.jivesoftware.smack.ConnectionListener;
-import org.jivesoftware.smack.XMPPConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,7 +135,7 @@ public class MessagesFragment extends Fragment {
             recentChatsAdapt.chatMethod(position -> {
                 Intent intent = new Intent(getActivity(), ChatMessage.class);
                 Log.d("index",""+position);
-                Log.d("Sizeoooo",""+waamUserList.size());
+//                Log.d("Sizeoooo",""+waamUserList.size());
                 //WaamUser user = newFriends.get(position);
                 intent.putExtra(ChatMessage.NEW_FRIENDS,friends.get(position));
                 //Log.d("NEW Friends",user.getUid());

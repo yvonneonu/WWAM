@@ -11,21 +11,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -329,6 +324,7 @@ public class GeneralFactory {
 
     public void sendMessage(final String message, final String receiverId, final Context context){
         if(!message.equals("")){
+
             String sender = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
             String timeStamp = String.valueOf(System.currentTimeMillis());
             DatabaseReference reference = firebaseDatabase.getReference("CHAT");
