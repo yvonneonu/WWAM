@@ -30,7 +30,6 @@ public class ChatMessage extends AppCompatActivity {
     private WaamUser userFriends;
     private TextView textViewStatus;
     private ImageView displayPic;
-    private String myId = FirebaseAuth.getInstance().getUid();
 
     @Override
     protected void onStart() {
@@ -78,12 +77,13 @@ public class ChatMessage extends AppCompatActivity {
         displayPic = findViewById(R.id.imagetool);
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
-
+        String myId = FirebaseAuth.getInstance().getUid();
 
         if(userFriends != null){
             String receiverId = userFriends.getUid();
-            if(receiverId.equals("myId")){
-                textViewStatus.setText("typing...");
+            String userImage = userFriends.getImageUrl();
+            if(receiverId.equals(myId)){
+                textViewStatus.setText(R.string.typing);
             }
             Glide.with(this)
                     .asBitmap()
@@ -100,7 +100,7 @@ public class ChatMessage extends AppCompatActivity {
             //This loads message on the activity
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
-                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
+                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this,userImage);
                 recyclerView = findViewById(R.id.recyclerView);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
                 recyclerView.setAdapter(chatScreenAdapter);
@@ -139,9 +139,8 @@ public class ChatMessage extends AppCompatActivity {
 
         }else{
             String receiverId = contactlist.getUid();
-            String myId = FirebaseAuth.getInstance().getUid();
             if(receiverId.equals(myId)){
-                textViewStatus.setText("typing...");
+                textViewStatus.setText(R.string.typing);
             }
             Glide.with(this)
                     .asBitmap()
@@ -159,7 +158,7 @@ public class ChatMessage extends AppCompatActivity {
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
                 textViewStatus.setText(contactlist.getOnlineStatus());
-                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
+                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this,contactlist.getImageUrl());
                 recyclerView = findViewById(R.id.recyclerView);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
                 recyclerView.setAdapter(chatScreenAdapter);

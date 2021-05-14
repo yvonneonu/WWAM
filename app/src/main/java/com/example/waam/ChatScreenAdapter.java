@@ -23,10 +23,12 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static  final int LEFT = 0;
     private final List<Chat> listOfChats;
     private final Context context;
+    private final String receiversPic;
 
-    public ChatScreenAdapter(List<Chat> chatHolder, Context context) {
+    public ChatScreenAdapter(List<Chat> chatHolder, Context context, String receiversPic) {
         listOfChats = chatHolder;
         this.context = context;
+        this.receiversPic = receiversPic;
 
     }
 
@@ -52,10 +54,7 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if(chat.getSenderId().equals(user.getUid())){
                 Senderview senderView = (Senderview) holder;
                 senderView.textView.setText(chat.getMessage());
-                Glide.with(context)
-                        .asBitmap()
-                        .load(R.drawable.profile_img_user)
-                        .into(senderView.imageView);
+
                 Glide.with(context)
                         .asBitmap()
                         .load(R.drawable.like_save_icon)
@@ -67,7 +66,7 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         .asBitmap()
                         .placeholder(R.drawable.profile_img_user)
                         .circleCrop()
-                        .load(R.drawable.profile_img_user)
+                        .load(receiversPic)
                         .into(receiverView.imageView);
 
                 Glide.with(context)

@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -55,10 +56,7 @@ public class FriendsFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FriendAdapt friendAdapt;
     private List<WaamUser> friendModelList;
-    private int userId = 0;
-    private ConnectycubeRoster chatRoster;
-    private  SubscriptionListener subscriptionListener;
-    private final int userID = 4134562;
+
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     public FriendsFragment() {
@@ -83,6 +81,7 @@ public class FriendsFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,30 +92,21 @@ public class FriendsFragment extends Fragment {
         setHasOptionsMenu(true);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
-        int addFriend = R.drawable.add_new_friend_icon;
-        WaamUser friendAdder = new WaamUser("Add Friends",addFriend);
         Log.d("FriendsFrag","fragie");
-
 
         generalFactory.loadFriends(branchName, friends -> {
             recyclerView.setVisibility(View.VISIBLE);
             friendModelList = friends;
             progressBar.setVisibility(View.GONE);
-            friendModelList.add(0,friendAdder);
             friendAdapt = new FriendAdapt(friendModelList,getActivity());
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
             recyclerView.setAdapter(friendAdapt);
             friendAdapt.friendMover(position -> {
-
-                if(position == 0){
-                    Intent intent = new Intent(getActivity(),AllUsersActivity.class);
-                    startActivity(intent);
-                }else{
                     WaamUser user = friendModelList.get(position);
                     Intent intent = new Intent(getActivity(),ChatMessage.class);
                     intent.putExtra(ChatMessage.FRIENDS,user);
                     startActivity(intent);
-                }
+
             });
         });
 
@@ -124,8 +114,7 @@ public class FriendsFragment extends Fragment {
 
 
         //userId = SessionManager.getSessionManager(getActivity()).getConnectyUser();
-        //user is logged in
-        Log.d("Subscription",""+subscriptionListener);
+
 
 
     }
@@ -184,12 +173,21 @@ public class FriendsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
         recyclerView = view.findViewById(R.id.friends_recycler);
         progressBar = view.findViewById(R.id.progressBaring);
+        ImageView imageView = view.findViewById(R.id.imageView40);
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swiperefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshData(); // your code
                 pullToRefresh.setRefreshing(false);
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AllUsersActivity.class);
+                startActivity(intent);
             }
         });
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -199,7 +197,6 @@ public class FriendsFragment extends Fragment {
     }
 
     private void refreshData() {
-        Log.d("Pulldown","Working");
     }
 
 

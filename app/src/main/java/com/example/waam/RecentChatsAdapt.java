@@ -38,6 +38,11 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
         return new RecentView(view,onChatListener);
     }
 
+
+    private String firstHundred(String s,int n){
+        return s.substring(0, Math.min(s.length(), n));
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecentView holder, int position) {
 
@@ -55,6 +60,7 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
                 .placeholder(R.drawable.profile_img_user)
                 .load(waamUser.getImageUrl())
                 .into(holder.imageView);
+
 
 
         generalFactory.loadLastMessage(senderId,receiverId,holder.lastMess);
