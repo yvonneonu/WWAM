@@ -22,6 +22,7 @@ public class FriendAdapt extends RecyclerView.Adapter<FriendAdapt.FriendHolder> 
     private final Context context;
     private final List<WaamUser> FullfriendModelList;
     private FriendAptListener friendAptListener;
+
     public FriendAdapt(List<WaamUser> friendsContainer, Context context) {
         this.friendsContainer = friendsContainer;
         FullfriendModelList = new ArrayList<>(friendsContainer);

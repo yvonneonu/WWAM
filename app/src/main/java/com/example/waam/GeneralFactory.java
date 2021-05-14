@@ -40,13 +40,10 @@ public class GeneralFactory {
     private EventModel[] eventModelsArrays;
     private final List<Location> locationList;
     private static final String WAAMBASE = "waamuser_base";
-    private List<FriendModel> friendModelList;
     private final FirebaseDatabase firebaseDatabase;
     private List<Chat> chatContainer;
-    private List<WaamUser> newFriends;
-    private List<Chat> chatList;
     private List<WaamUser> allWaamUsers;
-    private List<AgentModel> agentModelList;
+    private final List<AgentModel> agentModelList;
     private List<WaamUser> allFriends;
     private final Context context;
     private ValueEventListener valueEventListener;
@@ -62,33 +59,9 @@ public class GeneralFactory {
             R.drawable.event_img,
             R.drawable.city_img,
             R.drawable.discover_featured_img,
-            R.drawable.event_img};
-    private final int[] frimage = new int[]{
-            R.drawable.friend_profie,
-            R.drawable.friend_profie_2,
-            R.drawable.friend_profie_3,
-            R.drawable.friend_profie_4,
-            R.drawable.friend_profie_5,
-            R.drawable.friend_profie_6,
+            R.drawable.event_img
     };
 
-    private final String[] firstname = new String[]{
-            "John",
-            "Stephen",
-            "Thomas",
-            "Albert",
-            "Charles",
-            "Bamidele",
-    };
-
-    private final String[] lastname = new String[]{
-            "Doe",
-            "Hawkings",
-            "Edison",
-            "Einstein",
-            "Darwin",
-            "Omonayin",
-    };
 
 
 
@@ -96,8 +69,6 @@ public class GeneralFactory {
         eventModelList = new ArrayList<>();
         locationList = new ArrayList<>();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        friendModelList = new ArrayList<>();
-        chatList = new ArrayList<>();
         agentModelList =  new ArrayList<>();
         this.context = context;
         mAuth = FirebaseAuth.getInstance();
@@ -123,19 +94,7 @@ public class GeneralFactory {
 
     };
 
-    int[] display1 = {
-            R.drawable.agent_6_img,
-            R.drawable.agent_5_img,
-            R.drawable.agent_4_img,
-            R.drawable.agent_3_img,
-            R.drawable.agent_2_img,
-            R.drawable.agent_1_img,
-            R.drawable.agent_6_img
-    };
-    String[] name1 = {"LordBroke Saint", "Brown White", "Ebuka Obi", "Blessing Peter", "Peter Mac", "Alexander Helger", "Chris Paul"};
 
-    String[] rating1 = {"4.5", "3.0", "3.2", "4.1", "3.1", "6.0", "4.8"};
-    String[] rating3 = {"(102 Ratings)", "(105 Ratings)", "(103 Ratings)", "(109 Ratings)", "(150 Ratings)", "(101 Ratings)", "(115 Ratings)"};
     public static GeneralFactory getGeneralFactory(Context context){
         if(generalFactory == null){
             generalFactory = new GeneralFactory(context);
@@ -276,12 +235,12 @@ public class GeneralFactory {
 
         loadFriendForCheck(branch, new FriendChecker() {
             @Override
-            public boolean friendCheck(List<WaamUser> userList) {
+            public void friendCheck(List<WaamUser> userList) {
                 for(WaamUser user : userList){
                     if(user.getUid().equals(waamUser.getUid())){
                         Toast.makeText(context,"You are already friends with"+user.getFullname(),Toast.LENGTH_SHORT)
                                 .show();
-                        return true;
+                        return;
                     }
                 }
                 assert newsId != null;
@@ -291,7 +250,6 @@ public class GeneralFactory {
                     }
                 })
                         .addOnFailureListener(e -> Log.d("Failure",e.getMessage()));
-                return false;
             }
         });
 
@@ -632,14 +590,11 @@ public class GeneralFactory {
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                             WaamUser user = dataSnapshot.getValue(WaamUser.class);
                             for(String id : usersStringId){
-
                                 if(user.getUid().equals(id)){
                                     if(contactedUser.size() > 0){
                                         for(int i = 0 ; i < contactedUser.size() ; i++){
                                             String useroneid = contactedUser.get(i).getUid();
                                             if(!user.getUid().equals(useroneid) ){
-                                                Log.d("Intense",user.getUid());
-                                                Log.d("Intense","I am a break");
                                                 contactedUser.add(user);
                                             }
                                         }
@@ -674,6 +629,15 @@ public class GeneralFactory {
     }
 
 
+    public void checkTypingStatus(String receiverId){
+        String myId = mAuth.getUid();
+        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE).child(myId);
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("typingTo",receiverId);
+        mDatebaseReference.updateChildren(hashMap);
+    }
+
+
 
 
     public interface FetchFriends{
@@ -691,6 +655,6 @@ public class GeneralFactory {
     }
 
     public interface FriendChecker{
-        boolean friendCheck(List<WaamUser> userList);
+        void friendCheck(List<WaamUser> userList);
     }
 }
