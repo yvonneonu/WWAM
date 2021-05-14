@@ -10,12 +10,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -82,9 +88,19 @@ public class ChatMessage extends AppCompatActivity {
         if(userFriends != null){
             String receiverId = userFriends.getUid();
             String userImage = userFriends.getImageUrl();
-            if(receiverId.equals(myId)){
-                textViewStatus.setText(R.string.typing);
-            }
+
+            generalFactoryInstance.loadSpecUser(receiverId, user -> {
+                if(user != null){
+                    Log.d("LoadSpec",""+user);
+                    if(user.getTypingTo().equals(myId)) textViewStatus.setText(R.string.typing);
+                    else if(user.getOnlineStatus().equals("online")) textViewStatus.setText(R.string.online);
+                    else textViewStatus.setText(user.getTimeStamp());
+                }else{
+                    Log.d("LoadSpec","User is null sorry");
+                }
+
+            });
+
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()
@@ -139,9 +155,19 @@ public class ChatMessage extends AppCompatActivity {
 
         }else{
             String receiverId = contactlist.getUid();
-            if(receiverId.equals(myId)){
-                textViewStatus.setText(R.string.typing);
-            }
+
+            generalFactoryInstance.loadSpecUser(receiverId, user -> {
+                if(user != null){
+                    Log.d("LoadSpec",""+user);
+                    if(user.getTypingTo().equals(myId)) textViewStatus.setText(R.string.typing);
+                    else if(user.getOnlineStatus().equals("online")) textViewStatus.setText(R.string.online);
+                    else textViewStatus.setText(user.getTimeStamp());
+                }else{
+                    Log.d("LoadSpec","User is null sorry");
+                }
+
+            });
+
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()

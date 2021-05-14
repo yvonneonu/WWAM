@@ -477,13 +477,15 @@ public class GeneralFactory {
                                 || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)){
                            //This keeps loading the message and keeps changing it till the last message
                             theMessage = chat.getMessage();
-                            last_msg.setText(theMessage);
                         }
                     }
 
 
                 }
 
+                //Still trying.....
+                String finalMess = firstHundred(theMessage,30);
+                last_msg.setText(finalMess);
             }
 
             @Override
@@ -493,6 +495,9 @@ public class GeneralFactory {
         });
     }
 
+    private String firstHundred(String s,int n){
+        return s.substring(0, Math.min(s.length(), n));
+    }
 
     public void loginUser(LoginRequest loginRequest){
 
