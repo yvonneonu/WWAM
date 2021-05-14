@@ -1,6 +1,8 @@
 package com.example.waam;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -27,7 +30,6 @@ public class ChatMessage extends AppCompatActivity {
     private WaamUser userFriends;
     private TextView textViewStatus;
     private ImageView displayPic;
-
 
     @Override
     protected void onStart() {
@@ -75,10 +77,14 @@ public class ChatMessage extends AppCompatActivity {
         displayPic = findViewById(R.id.imagetool);
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
-
+        String myId = FirebaseAuth.getInstance().getUid();
 
         if(userFriends != null){
             String receiverId = userFriends.getUid();
+            String userImage = userFriends.getImageUrl();
+            if(receiverId.equals(myId)){
+                textViewStatus.setText(R.string.typing);
+            }
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()
@@ -94,7 +100,7 @@ public class ChatMessage extends AppCompatActivity {
             //This loads message on the activity
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
-                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
+                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this,userImage);
                 recyclerView = findViewById(R.id.recyclerView);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
                 recyclerView.setAdapter(chatScreenAdapter);
@@ -108,9 +114,34 @@ public class ChatMessage extends AppCompatActivity {
                 editText.setText("");
             });
 
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if(s.toString().trim().length() == 0){
+                        generalFactoryInstance.checkTypingStatus("noOne");
+                    }else{
+                        generalFactoryInstance.checkTypingStatus(userFriends.getUid());
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
 
         }else{
             String receiverId = contactlist.getUid();
+            if(receiverId.equals(myId)){
+                textViewStatus.setText(R.string.typing);
+            }
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()
@@ -127,7 +158,7 @@ public class ChatMessage extends AppCompatActivity {
             generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
                 textViewStatus.setText(contactlist.getOnlineStatus());
-                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
+                chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this,contactlist.getImageUrl());
                 recyclerView = findViewById(R.id.recyclerView);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
                 recyclerView.setAdapter(chatScreenAdapter);
@@ -139,6 +170,28 @@ public class ChatMessage extends AppCompatActivity {
                 String messages = editText.getText().toString().trim();
                 generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
                 editText.setText("");
+            });
+
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if(s.toString().trim().length() == 0){
+                        generalFactoryInstance.checkTypingStatus("noone");
+                    }else {
+                        generalFactoryInstance.checkTypingStatus(contactlist.getUid());
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
             });
         }
 
