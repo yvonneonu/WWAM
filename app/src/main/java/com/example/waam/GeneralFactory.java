@@ -331,6 +331,7 @@ public class GeneralFactory {
 
     public void sendMessage(final String message, final String receiverId, final Context context){
         if(!message.equals("")){
+
             String sender = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
             String timeStamp = String.valueOf(System.currentTimeMillis());
             DatabaseReference reference = firebaseDatabase.getReference("CHAT");
