@@ -1,6 +1,8 @@
 package com.example.waam;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -27,7 +30,7 @@ public class ChatMessage extends AppCompatActivity {
     private WaamUser userFriends;
     private TextView textViewStatus;
     private ImageView displayPic;
-
+    private String myId = FirebaseAuth.getInstance().getUid();
 
     @Override
     protected void onStart() {
@@ -79,6 +82,9 @@ public class ChatMessage extends AppCompatActivity {
 
         if(userFriends != null){
             String receiverId = userFriends.getUid();
+            if(receiverId.equals("myId")){
+                textViewStatus.setText("typing...");
+            }
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()
@@ -108,9 +114,35 @@ public class ChatMessage extends AppCompatActivity {
                 editText.setText("");
             });
 
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if(s.toString().trim().length() == 0){
+                        generalFactoryInstance.checkTypingStatus("noOne");
+                    }else{
+                        generalFactoryInstance.checkTypingStatus(userFriends.getUid());
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
 
         }else{
             String receiverId = contactlist.getUid();
+            String myId = FirebaseAuth.getInstance().getUid();
+            if(receiverId.equals(myId)){
+                textViewStatus.setText("typing...");
+            }
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()
@@ -139,6 +171,28 @@ public class ChatMessage extends AppCompatActivity {
                 String messages = editText.getText().toString().trim();
                 generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
                 editText.setText("");
+            });
+
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if(s.toString().trim().length() == 0){
+                        generalFactoryInstance.checkTypingStatus("noone");
+                    }else {
+                        generalFactoryInstance.checkTypingStatus(contactlist.getUid());
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
             });
         }
 

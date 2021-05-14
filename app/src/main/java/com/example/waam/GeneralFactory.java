@@ -11,21 +11,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -281,12 +276,12 @@ public class GeneralFactory {
 
         loadFriendForCheck(branch, new FriendChecker() {
             @Override
-            public boolean friendCheck(List<WaamUser> userList) {
+            public void friendCheck(List<WaamUser> userList) {
                 for(WaamUser user : userList){
                     if(user.getUid().equals(waamUser.getUid())){
                         Toast.makeText(context,"You are already friends with"+user.getFullname(),Toast.LENGTH_SHORT)
                                 .show();
-                        return true;
+                        return;
                     }
                 }
                 assert newsId != null;
@@ -296,7 +291,6 @@ public class GeneralFactory {
                     }
                 })
                         .addOnFailureListener(e -> Log.d("Failure",e.getMessage()));
-                return false;
             }
         });
 
@@ -636,14 +630,11 @@ public class GeneralFactory {
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                             WaamUser user = dataSnapshot.getValue(WaamUser.class);
                             for(String id : usersStringId){
-
                                 if(user.getUid().equals(id)){
                                     if(contactedUser.size() > 0){
                                         for(int i = 0 ; i < contactedUser.size() ; i++){
                                             String useroneid = contactedUser.get(i).getUid();
                                             if(!user.getUid().equals(useroneid) ){
-                                                Log.d("Intense",user.getUid());
-                                                Log.d("Intense","I am a break");
                                                 contactedUser.add(user);
                                             }
                                         }
@@ -678,6 +669,15 @@ public class GeneralFactory {
     }
 
 
+    public void checkTypingStatus(String receiverId){
+        String myId = mAuth.getUid();
+        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE).child(myId);
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("typingTo",receiverId);
+        mDatebaseReference.updateChildren(hashMap);
+    }
+
+
 
 
     public interface FetchFriends{
@@ -695,6 +695,6 @@ public class GeneralFactory {
     }
 
     public interface FriendChecker{
-        boolean friendCheck(List<WaamUser> userList);
+        void friendCheck(List<WaamUser> userList);
     }
 }
