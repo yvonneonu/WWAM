@@ -35,7 +35,6 @@ public class ChatMessage extends AppCompatActivity {
     private WaamUser contactlist;
     private WaamUser userFriends;
     private TextView textViewStatus;
-    private ImageView displayPic;
 
     @Override
     protected void onStart() {
@@ -80,7 +79,7 @@ public class ChatMessage extends AppCompatActivity {
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         EditText editText = findViewById(R.id.edtMess);
         textViewStatus = findViewById(R.id.status);
-        displayPic = findViewById(R.id.imagetool);
+        ImageView displayPic = findViewById(R.id.imagetool);
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
         String myId = FirebaseAuth.getInstance().getUid();
