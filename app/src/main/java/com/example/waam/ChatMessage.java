@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,6 +30,7 @@ public class ChatMessage extends AppCompatActivity {
     private WaamUser contactlist;
     private WaamUser userFriends;
     private TextView textViewStatus;
+    private ImageView videoButton;
 
     @Override
     protected void onStart() {
@@ -74,6 +76,7 @@ public class ChatMessage extends AppCompatActivity {
         EditText editText = findViewById(R.id.edtMess);
         textViewStatus = findViewById(R.id.status);
         ImageView displayPic = findViewById(R.id.imagetool);
+        videoButton = findViewById(R.id.Video);
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
         String myId = FirebaseAuth.getInstance().getUid();
@@ -146,6 +149,16 @@ public class ChatMessage extends AppCompatActivity {
                 }
             });
 
+            videoButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
+                    callingIntent.putExtra("user_contact", userFriends);
+                    startActivity(callingIntent);
+                }
+            });
+
+
 
         }else{
             String receiverId = contactlist.getUid();
@@ -211,6 +224,16 @@ public class ChatMessage extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s) {
 
+                }
+            });
+
+
+            videoButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
+                    callingIntent.putExtra("user_contact", contactlist);
+                    startActivity(callingIntent);
                 }
             });
         }
