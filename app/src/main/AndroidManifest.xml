@@ -28,8 +28,10 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".AllUsersActivity"
-            android:parentActivityName=".DrawelayoutActivity"/>
+        <activity android:name=".CallingActivity"></activity>
+        <activity
+            android:name=".AllUsersActivity"
+            android:parentActivityName=".DrawelayoutActivity" />
         <activity android:name=".Unfriend" />
         <activity android:name=".DailyMatch" />
         <activity android:name=".AgentProfile" />
@@ -46,7 +48,7 @@
         <activity android:name=".CompleteProfile" />
         <activity android:name=".LocationDetectActivity" />
         <activity android:name=".Profile" />
-        <activity android:name=".DrawelayoutActivity"></activity>
+        <activity android:name=".DrawelayoutActivity" />
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />
@@ -56,7 +58,7 @@
         <activity android:name=".passw" />
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
         <activity android:name=".Interest" />
         <activity android:name=".ViewPager">
             <intent-filter>

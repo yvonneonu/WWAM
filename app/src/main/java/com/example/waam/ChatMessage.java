@@ -1,10 +1,12 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class ChatMessage extends AppCompatActivity {
     private WaamUser contactlist;
     private WaamUser userFriends;
     private TextView textViewStatus;
+    private ImageView videoButton;
 
 
     @Override
@@ -67,6 +70,7 @@ public class ChatMessage extends AppCompatActivity {
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         EditText editText = findViewById(R.id.edtMess);
         textViewStatus = findViewById(R.id.status);
+        videoButton = findViewById(R.id.Video);
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
 
@@ -126,9 +130,15 @@ public class ChatMessage extends AppCompatActivity {
 
 
 
-
-
-
+        videoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
+                callingIntent.putExtra("caller_id", userFriends);
+                callingIntent.putExtra("contact_id", contactlist);
+                startActivity(callingIntent);
+            }
+        });
 
     }
 
