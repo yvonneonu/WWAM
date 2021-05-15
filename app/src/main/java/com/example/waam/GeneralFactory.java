@@ -48,7 +48,7 @@ public class GeneralFactory {
     private final Context context;
     private ValueEventListener valueEventListener;
     private DatabaseReference userForSeen;
-    private ArrayList<WaamUser> contactedUser;
+    private List<WaamUser> contactedUser;
     private List<String> usersStringId;
     private String theMessage;
 
@@ -613,8 +613,10 @@ public class GeneralFactory {
                             }
                         }
 
-
                         Log.d("ContactedUser",""+contactedUser.size());
+                        for(int i = 0 ; i < contactedUser.size(); i ++){
+                            Log.d("throwable",contactedUser.get(i).getUid());
+                        }
                         fetchContacts.friendsFetcher(contactedUser);
                     }
 
