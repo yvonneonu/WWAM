@@ -37,7 +37,7 @@ public class CallingActivity extends AppCompatActivity {
         senderUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
        // reciverUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        reciverUserId = getIntent().getExtras().get("caller_id").toString();
+        reciverUserId = getIntent().getExtras().get("callerid").toString();
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         nameContact = findViewById(R.id.name_calling);

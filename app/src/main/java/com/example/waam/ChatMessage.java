@@ -134,7 +134,7 @@ public class ChatMessage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
-                callingIntent.putExtra("caller_id", userFriends);
+                callingIntent.putExtra("callerid", userFriends);
                 callingIntent.putExtra("contact_id", contactlist);
                 startActivity(callingIntent);
             }
