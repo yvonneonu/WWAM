@@ -413,7 +413,7 @@ public class GeneralFactory {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 WaamUser user = snapshot.getValue(WaamUser.class);
                 userCallback.loadSpecUse(user);
-                Log.d("Userc",""+user);
+                Log.d("Userc",""+user.getTypingTo());
             }
 
             @Override
@@ -596,10 +596,12 @@ public class GeneralFactory {
                             WaamUser user = dataSnapshot.getValue(WaamUser.class);
                             for(String id : usersStringId){
                                 if(user.getUid().equals(id)){
-                                    if(contactedUser.size() > 0){
+                                    if(contactedUser.size() != 0){
                                         for(int i = 0 ; i < contactedUser.size() ; i++){
                                             String useroneid = contactedUser.get(i).getUid();
-                                            if(!user.getUid().equals(useroneid) ){
+
+                                            if(!user.getUid().equals(useroneid)){
+                                                Log.d("UserIdvalue",useroneid+" and "+user.getUid()+" are not the same");
                                                 contactedUser.add(user);
                                             }
                                         }
@@ -612,6 +614,7 @@ public class GeneralFactory {
                         }
 
 
+                        Log.d("ContactedUser",""+contactedUser.size());
                         fetchContacts.friendsFetcher(contactedUser);
                     }
 

@@ -94,6 +94,7 @@ public class ChatMessage extends AppCompatActivity {
                     if(user.getTypingTo().equals(myId)) textViewStatus.setText(R.string.typing);
                     else if(user.getOnlineStatus().equals("online")) textViewStatus.setText(R.string.online);
                     else textViewStatus.setText(user.getTimeStamp());
+                    Log.d("TextView",textViewStatus.getText().toString());
                 }else{
                     Log.d("LoadSpec","User is null sorry");
                 }

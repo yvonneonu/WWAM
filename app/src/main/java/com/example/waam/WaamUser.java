@@ -48,6 +48,7 @@ public class WaamUser implements Serializable {
         this.birth_date = birth_date;
         this.password = password;
         onlineStatus = "offline";
+        typingTo = "noone";
         imageUrl = "https://images.unsplash.com/photo-1620252460192-929ab4e92f1c?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
 
     }
