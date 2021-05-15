@@ -102,6 +102,16 @@ public class ChatMessage extends AppCompatActivity {
             });
 
 
+             videoButton.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
+                     callingIntent.putExtra("user_contact", userFriends);
+                     startActivity(callingIntent);
+                 }
+             });
+
+
         }else{
             String receiverId = contactlist.getUid();
             Log.d("Chatlist",contactlist.getUid());
@@ -134,7 +144,6 @@ public class ChatMessage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
-                callingIntent.putExtra("callerid", userFriends);
                 callingIntent.putExtra("contact_id", contactlist);
                 startActivity(callingIntent);
             }

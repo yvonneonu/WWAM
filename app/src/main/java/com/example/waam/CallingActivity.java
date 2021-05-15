@@ -19,13 +19,9 @@ public class CallingActivity extends AppCompatActivity {
     private TextView nameContact;
     private ImageView profileImage;
     private ImageView cancelCallBtn, makeCallBtn;
-    private WaamUser userFriends;
+    private WaamUser userFriends,contactlist;
+    private GeneralFactory generalFactory;
 
-
-    private String reciverUserId = "", receiverUserImage= "", receiverUserName="";
-
-
-    private String senderUserId = "", senderUserImage= "", senderUserName="";
 
     private DatabaseReference userRef;
 
@@ -33,50 +29,35 @@ public class CallingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calling2);
-
-        senderUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-       // reciverUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        reciverUserId = getIntent().getExtras().get("callerid").toString();
-        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
+        //reciverUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userFriends = (WaamUser) getIntent().getSerializableExtra("user_contact");
+        contactlist = (WaamUser) getIntent().getSerializableExtra("contact_id");
         nameContact = findViewById(R.id.name_calling);
         profileImage = findViewById(R.id.profile_image_calling);
         cancelCallBtn = findViewById(R.id.cancel_call);
         makeCallBtn = findViewById(R.id.make_call);
-        
-        getAndUserProfileInfo();
+
+
+        generalFactory = GeneralFactory.getGeneralFactory(CallingActivity.this);
+
+        if(userFriends != null){
+           nameContact.setText(userFriends.getFullname());
+           Glide.with(this)
+                   .asBitmap()
+                   .load(userFriends.getImageUrl())
+                   .into(profileImage);
+        }else{
+            nameContact.setText(contactlist.getFullname());
+            Glide.with(this)
+                    .asBitmap()
+                    .load(contactlist.getImageUrl())
+                    .into(profileImage);
+        }
+
+
     }
 
-    private void getAndUserProfileInfo() {
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.child(reciverUserId).exists()){
-                    receiverUserImage = dataSnapshot.child(reciverUserId).child("image").getValue().toString();
-                    receiverUserName = dataSnapshot.child(reciverUserId).child("name").getValue().toString();
-                    nameContact.setText(receiverUserName);
-
-                    Glide.with(CallingActivity.this)
-                            .asBitmap()
-                            .circleCrop()
-                            .load(receiverUserImage)
-                            .into(profileImage);
-
-                }
-                if (dataSnapshot.child(senderUserId).exists()){
-                    senderUserImage = dataSnapshot.child(senderUserId).child("image").getValue().toString();
-                    senderUserName = dataSnapshot.child(senderUserId).child("name").getValue().toString();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
     @Override
     protected void onStart() {
