@@ -66,8 +66,7 @@ public class CallingActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        userRef.child(receiverUserId)
-
+        /*userRef.child(receiverUserId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -106,6 +105,6 @@ public class CallingActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                })
+                });*/
     }
 }
