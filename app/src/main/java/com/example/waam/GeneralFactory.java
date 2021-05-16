@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import io.agora.rtc.RtcEngine;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,6 +52,7 @@ public class GeneralFactory {
     private List<WaamUser> contactedUser;
     private List<String> usersStringId;
     private String theMessage;
+    private RtcEngine mRtcEngine;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -195,6 +197,7 @@ public class GeneralFactory {
 
 
     public void loadNewFriends(String branch,ProgressBar bar,TextView textView, FetchFriends friends){
+
         List<WaamUser> newFriends = new ArrayList<>();
         if(branch != null){
             DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
@@ -646,7 +649,6 @@ public class GeneralFactory {
         hashMap.put("typingTo",receiverId);
         mDatebaseReference.updateChildren(hashMap);
     }
-
 
 
 
