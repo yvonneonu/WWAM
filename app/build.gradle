@@ -90,4 +90,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
     implementation 'com.google.firebase:firebase-database-ktx'
 
+    //Agora RTC SDK for video call
+    implementation 'io.agora.rtc:full-sdk:3.0.1'
+
 }
