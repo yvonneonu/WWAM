@@ -17,6 +17,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,15 +49,16 @@ public class SignUp extends AppCompatActivity {
     private ImageView move;
     private Button update;
     UserService userService;
-    private CardView cardView1;
     private ProgressBar progressBar;
-    private EditText name, email, zip, password, confrim;
+
     //ConstraintLayout constraintLayou;
     String chose = "";
     String interest = "";
-    String Fullname;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
+    private String relationship;
 
-    private ConnectycubeChatService chatService;
+    //private ConnectycubeChatService chatService;
 
     static final String APP_ID = "4663";
     static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
@@ -85,55 +88,76 @@ public class SignUp extends AppCompatActivity {
 
 
         ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-        chatService = ConnectycubeChatService.getInstance();
         initDatePicker();
 
-        cardView1 = findViewById(R.id.cardview);
         seekingman = findViewById(R.id.seekman);
         save = findViewById(R.id.editText3);
         wantwoman = findViewById(R.id.seekwoman);
         mangender = findViewById(R.id.mangend);
         womangender = findViewById(R.id.womangend);
         update = findViewById(R.id.forgetpass);
-        zip = findViewById(R.id.editText4);
         lologin = findViewById(R.id.gologin);
         textView = findViewById(R.id.textView);
         back = findViewById(R.id.backto);
         move = findViewById(R.id.logo);
-        name = findViewById(R.id.editText8);
+        radioGroup = findViewById(R.id.radioGroup1);
         constraintLayout = findViewById(R.id.notshow);
-        email = findViewById(R.id.editText2);
-        password = findViewById(R.id.editText);
-        confrim = findViewById(R.id.editText88);
+
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
         update.setText(getTodaysDate());
 
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.radio0:
+                        int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                        // find the radiobutton by returned id
+                        radioButton = (RadioButton) findViewById(selectedId);
+                        break;
+                    case R.id.radio1:
+                        // do operations specific to this selection
+                        break;
+                    case R.id.radio2:
+                        // do operations specific to this selection
+                        break;
+                }
+            }
+        });
         progressBar= new ProgressBar(SignUp.this);
 
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isNetworkAvailableAndConnected()){
-                    register();
-                    cardView1.setVisibility(View.VISIBLE);
-                    constraintLayout.setVisibility(View.INVISIBLE);
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                radioButton = findViewById(selectedId);
+                interest = radioButton.getText().toString();
+                Intent intent = new Intent(SignUp.this,SignUpSecond.class);
+                intent.putExtra("",interest);
+                intent.putExtra("gender",chose);
+                intent.putExtra("",relationship);
+                startActivity(intent);
+                /*if (isNetworkAvailableAndConnected()){
+                    //register();
+                    //constraintLayout.setVisibility(View.INVISIBLE);
                     //textView.setVisibility(View.VISIBLE);
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                            // constraintLayou.setVisibility(View.GONE);
-                            cardView1.setVisibility(View.GONE);
-                            constraintLayout.setVisibility(View.VISIBLE);
+                           // constraintLayout.setVisibility(View.VISIBLE);
                            // textView.setVisibility(View.VISIBLE);
                         }
                     }, 5000);
                 }
                 else {
                     Toast.makeText(SignUp.this, "No Internet Connection", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
     }
@@ -171,7 +195,6 @@ public class SignUp extends AppCompatActivity {
                     GeneralFactory.getGeneralFactory(SignUp.this).signUpForBase(waamUser.getEmail(), waamUser.getPassword(),progressBar, waamUser);
                     Intent intent = new Intent(SignUp.this, Verification1.class);
                     intent.putExtra("token", response.body().getToken());
-                    intent.putExtra("name", name.getText().toString());
                     startActivity(intent);
                    // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                    // intent.putExtra("profilepics", imageUri);
@@ -199,6 +222,12 @@ public class SignUp extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    public void addListenerOnButton() {
+
+
     }
 
     private void Signinhere() {
@@ -316,7 +345,7 @@ public class SignUp extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void register() {
+    /*private void register() {
 
 
         Log.d("UserService",""+userService);
@@ -403,5 +432,5 @@ public class SignUp extends AppCompatActivity {
 
 
 
-        }
+        }*/
 }

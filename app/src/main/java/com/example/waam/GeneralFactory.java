@@ -52,7 +52,6 @@ public class GeneralFactory {
     private List<WaamUser> contactedUser;
     private List<String> usersStringId;
     private String theMessage;
-    private RtcEngine mRtcEngine;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
