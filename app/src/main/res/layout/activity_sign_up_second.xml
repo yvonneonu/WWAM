@@ -176,7 +176,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="82dp"
                 android:background="@android:color/transparent"
                 android:drawablePadding="15dp"
                 android:gravity="center_vertical"
@@ -188,13 +187,12 @@
                 android:textColorHint="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewb"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewb"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewe"
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
-                android:id="@+id/forgetpass"
+                android:id="@+id/dateofbirth"
                 style="?android:spinnerStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -206,6 +204,7 @@
                 android:onClick="openDatePicker"
                 android:textColorHint="@color/offwhite"
                 android:textSize="10sp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/editText3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/editText3"

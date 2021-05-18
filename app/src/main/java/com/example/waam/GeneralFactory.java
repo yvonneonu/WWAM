@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -147,7 +148,7 @@ public class GeneralFactory {
     }
 
 
-    public void signUpForBase(final String email, final String password, final ProgressBar bar,  WaamUser waamUser){
+    public void signUpForBase(final String email, final String password, final CardView bar,  WaamUser waamUser){
         bar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(task -> {
@@ -649,7 +650,7 @@ public class GeneralFactory {
     }
 
 
-    public void requestUser(WaamUser waamUser,ProgressBar progressBar) {
+    public void requestUser(WaamUser waamUser, CardView progressBar) {
         Call<RegisterResponse> registerResponseCall = ApiClient.getService().registerUsers(waamUser);
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
@@ -691,6 +692,11 @@ public class GeneralFactory {
 
             }
         });
+    }
+
+    public boolean validateName(String fnames){
+        String[] names = fnames.split(" ");
+        return names.length >= 2;
     }
 
 

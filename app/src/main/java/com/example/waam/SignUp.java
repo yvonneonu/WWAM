@@ -41,25 +41,25 @@ import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
 
-    //private DatePickerDialog datePickerDialog;
-    private TextView lologin;
-    private TextView back, mangender, womangender, seekingman, wantwoman;
+    private TextView mangender;
+    private TextView womangender;
+    private TextView seekingman;
+    private TextView wantwoman;
     //private String realGender, realInterest;
     private ImageView move;
     //private Button update;
     //private ProgressBar progressBar;
 
     //ConstraintLayout constraintLayou;
-    String chose = "";
-    String interest = "";
+    private String chose;
+    private String interest;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private String relationship;
-
-
-    ConstraintLayout constraintLayout;
-
-    private static String token;
+    public static final String INTEREST = "interest";
+    public static final String GENDER = "interest";
+    public static final String RELATION = "interest";
+    public static String token;
     //final String url_Register = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
 
     @Override
@@ -74,11 +74,12 @@ public class SignUp extends AppCompatActivity {
         mangender = findViewById(R.id.mangend);
         womangender = findViewById(R.id.womangend);
         //update = findViewById(R.id.forgetpass);
-        lologin = findViewById(R.id.gologin);
-        back = findViewById(R.id.backto);
+        //private DatePickerDialog datePickerDialog;
+        TextView lologin = findViewById(R.id.gologin);
+        TextView back = findViewById(R.id.backto);
         move = findViewById(R.id.logo);
         radioGroup = findViewById(R.id.radioGroup1);
-        constraintLayout = findViewById(R.id.notshow);
+        ConstraintLayout constraintLayout = findViewById(R.id.notshow);
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
         //update.setText(getTodaysDate());
@@ -92,11 +93,14 @@ public class SignUp extends AppCompatActivity {
               int selectedId = radioGroup.getCheckedRadioButtonId();
               radioButton = findViewById(selectedId);
               relationship = radioButton.getText().toString();
+              Log.d("Relay",relationship);
               if(!TextUtils.isEmpty(relationship)){
                   Intent intent = new Intent(SignUp.this,SignUpSecond.class);
-                  intent.putExtra("interest",interest);
-                  intent.putExtra("gender",chose);
-                  intent.putExtra("relationship",relationship);
+                  Bundle bundle = new Bundle();
+                  bundle.putString(INTEREST, interest);
+                  bundle.putString(GENDER,chose);
+                  bundle.putString(RELATION,relationship);
+                  intent.putExtras(bundle);
                   startActivity(intent);
               }else{
                   Log.d("Relationship","Please select the relationship you want");
@@ -104,34 +108,10 @@ public class SignUp extends AppCompatActivity {
 
             }
 
-            /*if (isNetworkAvailableAndConnected()){
-                register();
-                //constraintLayout.setVisibility(View.INVISIBLE);
-                //textView.setVisibility(View.VISIBLE);
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                       // constraintLayou.setVisibility(View.GONE);
-                       // constraintLayout.setVisibility(View.VISIBLE);
-                       // textView.setVisibility(View.VISIBLE);
-                    }
-                }, 5000);
-            }
-            else {
-                Toast.makeText(SignUp.this, "No Internet Connection", Toast.LENGTH_LONG).show();
-            }*/
         });
     }
 
-    private boolean isNetworkAvailableAndConnected() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        boolean isNetworkAvailable = cm.getActiveNetworkInfo() != null;
-        boolean isNetworkConnected = isNetworkAvailable &&
-                cm.getActiveNetworkInfo().isConnected();
-        return isNetworkConnected;
-    }
+
 
     private String getTodaysDate() {
         java.util.Calendar c = java.util.Calendar.getInstance();

@@ -12,6 +12,7 @@ public class WaamUser implements Serializable {
     private String password;
     private String password_confirmation;
     private int image;
+    private String relationship;
     private String uid;
     private String onlineStatus;
     private String timeStamp;
@@ -156,5 +157,13 @@ public class WaamUser implements Serializable {
 
     public void setTypingTo(String typingTo) {
         this.typingTo = typingTo;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
     }
 }

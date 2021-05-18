@@ -73,7 +73,7 @@ public class Login extends AppCompatActivity {
         Log.d("TAG", "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
 
         logm = findViewById(R.id.button);
-        text = findViewById(R.id.forgetpass);
+        text = findViewById(R.id.dateofbirth);
 
         editEmail = findViewById(R.id.editText2);
         editPass = findViewById(R.id.editText4);
