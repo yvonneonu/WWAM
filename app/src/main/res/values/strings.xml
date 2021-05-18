@@ -9,6 +9,8 @@
     <string name="text_location_permission">Recommendation will be presented based on your location</string>
     <string name="ok">Allow</string>
     <string name="cancel">Deny</string>
+    <string name="agora_app_id">3a07f4cacf914d7e8c185cfc57f3f73e></string>
+    <string name="agora_access_token">006b88e7fe917734f2ba7c356df6a380392IAA2iWaFQi9obvdxBw48sSkyvPv2/YAV7hlVB0jfYBJFKOIVUyEAAAAAEAD4YHXYTEekYAEAAQBMR6Rg</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_Discover_fragment">Hello blank fragment</string>
     <string name="open">open</string>
