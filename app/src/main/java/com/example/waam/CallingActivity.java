@@ -12,31 +12,24 @@ import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import com.bumptech.glide.Glide;
 
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;
 import io.agora.rtc.video.VideoEncoderConfiguration;
 
-public class CallingActivity extends AppCompatActivity {
-    private TextView nameContact;
-    private ImageView profileImage;
-    private ImageView cancelCallBtn, makeCallBtn;
-    private WaamUser userFriends, contactlist;
-    private GeneralFactory generalFactory;
 
+public class CallingActivity extends AppCompatActivity {
     private static final String TAG = CallingActivity.class.getSimpleName();
 
     private static final int PERMISSION_REQ_ID = 22;
+
+    // Permission WRITE_EXTERNAL_STORAGE is not mandatory
+    // for Agora RTC SDK, just in case if you wanna save
+    // logs to external sdcard.
     private static final String[] REQUESTED_PERMISSIONS = {
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.CAMERA
@@ -56,7 +49,7 @@ public class CallingActivity extends AppCompatActivity {
     private ImageView mSwitchCameraBtn;
 
     // Customized logger view
-    private LoggerRecyclerView mLogView;
+    private ImageView mLogView;
 
     /**
      * Event handler registered into RTC engine for RTC callbacks.
@@ -164,8 +157,6 @@ public class CallingActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,18 +166,6 @@ public class CallingActivity extends AppCompatActivity {
         contactlist = (WaamUser) getIntent().getSerializableExtra("contact_id");
         nameContact = findViewById(R.id.name_calling);
         profileImage = findViewById(R.id.profile_image_calling);
-        //  cancelCallBtn = findViewById(R.id.cancel_call);
-        //  makeCallBtn = findViewById(R.id.make_call);
-
-
-        /*if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
-                checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID) &&
-                checkSelfPermission(REQUESTED_PERMISSIONS[2], PERMISSION_REQ_ID)) {
-            initAgoraEngineAndJoinChannel();
-        }*/
-
-
-//        setupVideoProfile();
         initUI();
 
         // Ask for permissions at runtime.
@@ -197,25 +176,6 @@ public class CallingActivity extends AppCompatActivity {
                 checkSelfPermission(REQUESTED_PERMISSIONS[2], PERMISSION_REQ_ID)) {
             initEngineAndJoinChannel();
         }
-
-
-        generalFactory = GeneralFactory.getGeneralFactory(CallingActivity.this);
-
-        if (userFriends != null) {
-            nameContact.setText(userFriends.getFullname());
-            Glide.with(this)
-                    .asBitmap()
-                    .load(userFriends.getImageUrl())
-                    .into(profileImage);
-        } else {
-            nameContact.setText(contactlist.getFullname());
-            Glide.with(this)
-                    .asBitmap()
-                    .load(contactlist.getImageUrl())
-                    .into(profileImage);
-        }
-
-
     }
 
     private void initUI() {
@@ -346,6 +306,7 @@ public class CallingActivity extends AppCompatActivity {
         }
         /*
           Destroys the RtcEngine instance and releases all resources used by the Agora SDK.
+
           This method is useful for apps that occasionally make voice or video calls,
           to free up resources for other operations when not making calls.
          */
@@ -433,5 +394,4 @@ public class CallingActivity extends AppCompatActivity {
         switchView(mLocalVideo);
         switchView(mRemoteVideo);
     }
-
 }

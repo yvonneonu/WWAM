@@ -7,102 +7,89 @@
     android:layout_height="match_parent"
     tools:context=".CallingActivity">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/remote_video_view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white" >
+        android:background="@color/offwhite">
 
-    </FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/icon_padding">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_baseline_person_24" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/icon_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/local_video_view_container"
-        android:layout_width="160dp"
-        android:layout_height="284dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/name_calling"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="20"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
+        android:background="@color/black"
+        android:onClick="onLocalContainerClick">
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_baseline_person_24"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/profile_image_calling"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_person_24" />
+    </FrameLayout>
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:onClick="onLocalVideoMuteClicked"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_baseline_videocam_off_24" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:onClick="onLocalAudioMuteClicked"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_baseline_mic_off_24" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:onClick="onSwitchCameraClicked"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_baseline_videocam_24" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:onClick="onEncCallClicked"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_baseline_cancel_24" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/control_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:layout_alignParentBottom="true">
 
+        <ImageView
+            android:id="@+id/btn_call"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:onClick="onCallClicked"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_cancel_24" />
 
+        <ImageView
+            android:id="@+id/btn_switch_camera"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
 
+            android:layout_toEndOf="@id/btn_call"
+            android:layout_toRightOf="@id/btn_call"
+            android:onClick="onSwitchCameraClicked"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_videocam_off_24" />
 
+        <ImageView
+            android:id="@+id/btn_mute"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/btn_call"
+            android:layout_toLeftOf="@id/btn_call"
+            android:onClick="onLocalAudioMuteClicked"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_mic_off_24" />
+    </RelativeLayout>
 
-
-        <TextView
-            android:id="@+id/statsDisplay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>
