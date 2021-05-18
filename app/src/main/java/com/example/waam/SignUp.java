@@ -41,13 +41,13 @@ import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
 
-    private DatePickerDialog datePickerDialog;
+    //private DatePickerDialog datePickerDialog;
     private TextView lologin;
     private TextView back, mangender, womangender, seekingman, wantwoman;
-    private String realGender, realInterest;
+    //private String realGender, realInterest;
     private ImageView move;
-    private Button update;
-    private ProgressBar progressBar;
+    //private Button update;
+    //private ProgressBar progressBar;
 
     //ConstraintLayout constraintLayou;
     String chose = "";
@@ -73,58 +73,54 @@ public class SignUp extends AppCompatActivity {
         wantwoman = findViewById(R.id.seekwoman);
         mangender = findViewById(R.id.mangend);
         womangender = findViewById(R.id.womangend);
-        update = findViewById(R.id.forgetpass);
+        //update = findViewById(R.id.forgetpass);
         lologin = findViewById(R.id.gologin);
         back = findViewById(R.id.backto);
         move = findViewById(R.id.logo);
         radioGroup = findViewById(R.id.radioGroup1);
         constraintLayout = findViewById(R.id.notshow);
-
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
-        update.setText(getTodaysDate());
+        //update.setText(getTodaysDate());
 
 
-        move.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        move.setOnClickListener(v -> {
 
-              if(TextUtils.isEmpty(chose) || TextUtils.isEmpty(interest)){
-                  Log.d("Empty","Gender or interest cannot be null");
-                }else{
-                  int selectedId = radioGroup.getCheckedRadioButtonId();
-                  radioButton = findViewById(selectedId);
-                  relationship = radioButton.getText().toString();
-                  if(!TextUtils.isEmpty(relationship)){
-                      Intent intent = new Intent(SignUp.this,SignUpSecond.class);
-                      intent.putExtra("interest",interest);
-                      intent.putExtra("gender",chose);
-                      intent.putExtra("relationship",relationship);
-                      startActivity(intent);
-                  }else{
-                      Log.d("Relationship","Please select the relationship you want");
-                  }
+          if(TextUtils.isEmpty(chose) || TextUtils.isEmpty(interest)){
+              Log.d("Empty","Gender or interest cannot be null");
+            }else{
+              int selectedId = radioGroup.getCheckedRadioButtonId();
+              radioButton = findViewById(selectedId);
+              relationship = radioButton.getText().toString();
+              if(!TextUtils.isEmpty(relationship)){
+                  Intent intent = new Intent(SignUp.this,SignUpSecond.class);
+                  intent.putExtra("interest",interest);
+                  intent.putExtra("gender",chose);
+                  intent.putExtra("relationship",relationship);
+                  startActivity(intent);
+              }else{
+                  Log.d("Relationship","Please select the relationship you want");
+              }
 
-                }
-
-                /*if (isNetworkAvailableAndConnected()){
-                    register();
-                    //constraintLayout.setVisibility(View.INVISIBLE);
-                    //textView.setVisibility(View.VISIBLE);
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                           // constraintLayou.setVisibility(View.GONE);
-                           // constraintLayout.setVisibility(View.VISIBLE);
-                           // textView.setVisibility(View.VISIBLE);
-                        }
-                    }, 5000);
-                }
-                else {
-                    Toast.makeText(SignUp.this, "No Internet Connection", Toast.LENGTH_LONG).show();
-                }*/
             }
+
+            /*if (isNetworkAvailableAndConnected()){
+                register();
+                //constraintLayout.setVisibility(View.INVISIBLE);
+                //textView.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                       // constraintLayou.setVisibility(View.GONE);
+                       // constraintLayout.setVisibility(View.VISIBLE);
+                       // textView.setVisibility(View.VISIBLE);
+                    }
+                }, 5000);
+            }
+            else {
+                Toast.makeText(SignUp.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+            }*/
         });
     }
 
@@ -146,7 +142,7 @@ public class SignUp extends AppCompatActivity {
         return makeDateString(day, month, year);
     }
 
-    public void requestUser(WaamUser waamUser) {
+    /*public void requestUser(WaamUser waamUser) {
         Call<RegisterResponse> registerResponseCall = ApiClient.getService().registerUsers(waamUser);
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
@@ -188,7 +184,7 @@ public class SignUp extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 
     private void Signinhere() {
@@ -209,7 +205,7 @@ public class SignUp extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
                 String date = makeDateString(dayOfMonth, month, year);
-                update.setText(date);
+                //update.setText(date);
             }
         };
         java.util.Calendar c = java.util.Calendar.getInstance();
@@ -219,8 +215,8 @@ public class SignUp extends AppCompatActivity {
 
         int styles = AlertDialog.THEME_HOLO_LIGHT;
 
-        datePickerDialog = new DatePickerDialog(this, styles, dateSetListener, year, month, day);
-        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        //datePickerDialog = new DatePickerDialog(this, styles, dateSetListener, year, month, day);
+        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
 
     }
 
@@ -302,9 +298,9 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    public void openDatePicker(View view) {
+    /*public void openDatePicker(View view) {
         datePickerDialog.show();
-    }
+    }*/
 
     /*private void register() {
 
