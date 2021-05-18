@@ -47,7 +47,6 @@ public class SignUp extends AppCompatActivity {
     private String realGender, realInterest;
     private ImageView move;
     private Button update;
-    UserService userService;
     private ProgressBar progressBar;
 
     //ConstraintLayout constraintLayou;
@@ -56,9 +55,6 @@ public class SignUp extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private String relationship;
-
-    //private ConnectycubeChatService chatService;
-//
 
 
     ConstraintLayout constraintLayout;
@@ -88,22 +84,31 @@ public class SignUp extends AppCompatActivity {
         back.setOnClickListener(v -> Signback());
         update.setText(getTodaysDate());
 
-        progressBar= new ProgressBar(SignUp.this);
 
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                radioButton = findViewById(selectedId);
-                relationship = radioButton.getText().toString();
-                Intent intent = new Intent(SignUp.this,SignUpSecond.class);
-                intent.putExtra("interest",interest);
-                intent.putExtra("gender",chose);
-                intent.putExtra("relationship",relationship);
-                startActivity(intent);
+              if(TextUtils.isEmpty(chose) || TextUtils.isEmpty(interest)){
+                  Log.d("Empty","Gender or interest cannot be null");
+                }else{
+                  int selectedId = radioGroup.getCheckedRadioButtonId();
+                  radioButton = findViewById(selectedId);
+                  relationship = radioButton.getText().toString();
+                  if(!TextUtils.isEmpty(relationship)){
+                      Intent intent = new Intent(SignUp.this,SignUpSecond.class);
+                      intent.putExtra("interest",interest);
+                      intent.putExtra("gender",chose);
+                      intent.putExtra("relationship",relationship);
+                      startActivity(intent);
+                  }else{
+                      Log.d("Relationship","Please select the relationship you want");
+                  }
+
+                }
+
                 /*if (isNetworkAvailableAndConnected()){
-                    //register();
+                    register();
                     //constraintLayout.setVisibility(View.INVISIBLE);
                     //textView.setVisibility(View.VISIBLE);
                     Handler handler = new Handler();
