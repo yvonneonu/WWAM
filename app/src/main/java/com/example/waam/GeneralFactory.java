@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import io.agora.rtc.RtcEngine;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,7 +51,6 @@ public class GeneralFactory {
     private List<WaamUser> contactedUser;
     private List<String> usersStringId;
     private String theMessage;
-    private RtcEngine mRtcEngine;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -648,6 +646,51 @@ public class GeneralFactory {
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("typingTo",receiverId);
         mDatebaseReference.updateChildren(hashMap);
+    }
+
+
+    public void requestUser(WaamUser waamUser,ProgressBar progressBar) {
+        Call<RegisterResponse> registerResponseCall = ApiClient.getService().registerUsers(waamUser);
+        registerResponseCall.enqueue(new Callback<RegisterResponse>() {
+            @Override
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                if (response.isSuccessful()) {
+                    //response.body().getToken();
+                    //response.body();
+                    String message = "Successful";
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+                    //Register users on firebase......
+                    signUpForBase(waamUser.getEmail(), waamUser.getPassword(),progressBar, waamUser);
+                    Intent intent = new Intent(context, Verification1.class);
+                    intent.putExtra("token", response.body().getToken());
+                    context.startActivity(intent);
+                    // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
+                    // intent.putExtra("profilepics", imageUri);
+                    //context.finish();
+                } else {
+                    response.errorBody();
+                    // Toast.makeText(SignUp.this,response.body().getErrors(),Toast.LENGTH_LONG).show();
+                    // response.body();
+                    // Toast.makeText(SignUp.this, (CharSequence) response.body(), Toast.LENGTH_LONG).show();
+                    //response.errorBody();
+                    // response.errorBody();
+
+                    String message = "The email has already been taken";
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+                    // String message = "An error occured please try again";
+                    //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                String message = "The email has already been taken";
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
 
