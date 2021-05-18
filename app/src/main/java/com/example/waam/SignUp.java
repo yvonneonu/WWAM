@@ -43,8 +43,7 @@ public class SignUp extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
     private TextView lologin;
-    String numberToPass = "1";
-    private TextView back, mangender, womangender, seekingman, save, wantwoman, textView;
+    private TextView back, mangender, womangender, seekingman, wantwoman;
     private String realGender, realInterest;
     private ImageView move;
     private Button update;
@@ -59,17 +58,8 @@ public class SignUp extends AppCompatActivity {
     private String relationship;
 
     //private ConnectycubeChatService chatService;
-
-    static final String APP_ID = "4663";
-    static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
-    static final String AUTH_SECRET = "yhuExsebKPu8F8S";
-    static final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
 //
 
-
-
-    String Passwor;
-    String Email;
 
     ConstraintLayout constraintLayout;
 
@@ -81,23 +71,14 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
-        ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
-        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
-
-
-        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
         initDatePicker();
 
         seekingman = findViewById(R.id.seekman);
-        save = findViewById(R.id.editText3);
         wantwoman = findViewById(R.id.seekwoman);
         mangender = findViewById(R.id.mangend);
         womangender = findViewById(R.id.womangend);
         update = findViewById(R.id.forgetpass);
         lologin = findViewById(R.id.gologin);
-        textView = findViewById(R.id.textView);
         back = findViewById(R.id.backto);
         move = findViewById(R.id.logo);
         radioGroup = findViewById(R.id.radioGroup1);
@@ -107,26 +88,6 @@ public class SignUp extends AppCompatActivity {
         back.setOnClickListener(v -> Signback());
         update.setText(getTodaysDate());
 
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch(checkedId){
-                    case R.id.radio0:
-                        int selectedId = radioGroup.getCheckedRadioButtonId();
-
-                        // find the radiobutton by returned id
-                        radioButton = (RadioButton) findViewById(selectedId);
-                        break;
-                    case R.id.radio1:
-                        // do operations specific to this selection
-                        break;
-                    case R.id.radio2:
-                        // do operations specific to this selection
-                        break;
-                }
-            }
-        });
         progressBar= new ProgressBar(SignUp.this);
 
         move.setOnClickListener(new View.OnClickListener() {
@@ -135,11 +96,11 @@ public class SignUp extends AppCompatActivity {
 
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(selectedId);
-                interest = radioButton.getText().toString();
+                relationship = radioButton.getText().toString();
                 Intent intent = new Intent(SignUp.this,SignUpSecond.class);
-                intent.putExtra("",interest);
+                intent.putExtra("interest",interest);
                 intent.putExtra("gender",chose);
-                intent.putExtra("",relationship);
+                intent.putExtra("relationship",relationship);
                 startActivity(intent);
                 /*if (isNetworkAvailableAndConnected()){
                     //register();
@@ -224,11 +185,6 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
-
-    public void addListenerOnButton() {
-
-
-    }
 
     private void Signinhere() {
         Intent intent = new Intent(SignUp.this, Login.class);
