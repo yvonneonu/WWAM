@@ -14,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
@@ -26,6 +29,13 @@ public class CallingActivity extends AppCompatActivity {
     private static final String TAG = CallingActivity.class.getSimpleName();
 
     private static final int PERMISSION_REQ_ID = 22;
+
+    private ImageView nameContact;
+    private ImageView btn_call;
+    private ImageView cancelCallBtn, makeCallBtn;
+    private WaamUser userFriends, contactlist;
+    private GeneralFactory generalFactory;
+    RelativeLayout mRemoteContainer;
 
     // Permission WRITE_EXTERNAL_STORAGE is not mandatory
     // for Agora RTC SDK, just in case if you wanna save
@@ -40,7 +50,7 @@ public class CallingActivity extends AppCompatActivity {
     private boolean mMuted;
 
     private FrameLayout mLocalContainer;
-    private RelativeLayout mRemoteContainer;
+
     private VideoCanvas mLocalVideo;
     private VideoCanvas mRemoteVideo;
 
@@ -71,7 +81,7 @@ public class CallingActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mLogView.logI("Join channel success, uid: " + (uid & 0xFFFFFFFFL));
+                   // mLogView.logI("Join channel success, uid: " + (uid & 0xFFFFFFFFL));
                 }
             });
         }
@@ -81,7 +91,7 @@ public class CallingActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mLogView.logI("First remote video decoded, uid: " + (uid & 0xFFFFFFFFL));
+                   // mLogView.logI("First remote video decoded, uid: " + (uid & 0xFFFFFFFFL));
                     setupRemoteVideo(uid);
                 }
             });
@@ -114,7 +124,7 @@ public class CallingActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mLogView.logI("User offline, uid: " + (uid & 0xFFFFFFFFL));
+                   // mLogView.logI("User offline, uid: " + (uid & 0xFFFFFFFFL));
                     onRemoteUserLeft(uid);
                 }
             });
@@ -164,18 +174,18 @@ public class CallingActivity extends AppCompatActivity {
         //reciverUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         userFriends = (WaamUser) getIntent().getSerializableExtra("user_contact");
         contactlist = (WaamUser) getIntent().getSerializableExtra("contact_id");
-        nameContact = findViewById(R.id.name_calling);
-        profileImage = findViewById(R.id.profile_image_calling);
+        nameContact = findViewById(R.id.log_recycler_view);
+        btn_call = findViewById(R.id.btn_call);
         initUI();
 
         // Ask for permissions at runtime.
         // This is just an example set of permissions. Other permissions
         // may be needed, and please refer to our online documents.
-        if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
-                checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID) &&
+/*        if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
+//                checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID) &&
                 checkSelfPermission(REQUESTED_PERMISSIONS[2], PERMISSION_REQ_ID)) {
             initEngineAndJoinChannel();
-        }
+        }*/
     }
 
     private void initUI() {
@@ -193,9 +203,9 @@ public class CallingActivity extends AppCompatActivity {
     }
 
     private void showSampleLogs() {
-        mLogView.logI("Welcome to Agora 1v1 video call");
-        mLogView.logW("You will see custom logs here");
-        mLogView.logE("You can also use this to show errors");
+       // mLogView.logI("Welcome to Agora 1v1 video call");
+       // mLogView.logW("You will see custom logs here");
+      //  mLogView.logE("You can also use this to show errors");
     }
 
     private boolean checkSelfPermission(String permission, int requestCode) {
@@ -321,7 +331,7 @@ public class CallingActivity extends AppCompatActivity {
         mMuted = !mMuted;
         // Stops/Resumes sending the local audio stream.
         mRtcEngine.muteLocalAudioStream(mMuted);
-        int res = mMuted ? R.drawable.btn_mute : R.drawable.btn_unmute;
+        int res = mMuted ? R.drawable.ic_baseline_mic_off_24 : R.drawable.ic_baseline_mic_off_24;
         mMuteBtn.setImageResource(res);
     }
 
@@ -334,11 +344,11 @@ public class CallingActivity extends AppCompatActivity {
         if (mCallEnd) {
             startCall();
             mCallEnd = false;
-            mCallBtn.setImageResource(R.drawable.btn_endcall);
+            mCallBtn.setImageResource(R.drawable.ic_baseline_cancel_24);
         } else {
             endCall();
             mCallEnd = true;
-            mCallBtn.setImageResource(R.drawable.btn_startcall);
+            mCallBtn.setImageResource(R.drawable.ic_baseline_mic_off_24);
         }
 
         showButtons(!mCallEnd);

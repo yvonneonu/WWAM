@@ -98,7 +98,6 @@ dependencies {
 
     //Agora RTC SDK for video call
 
-    implementation project(path: ':logger')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
