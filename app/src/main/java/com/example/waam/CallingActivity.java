@@ -2,11 +2,13 @@ package com.example.waam;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -31,49 +33,137 @@ public class CallingActivity extends AppCompatActivity {
     private ImageView cancelCallBtn, makeCallBtn;
     private WaamUser userFriends, contactlist;
     private GeneralFactory generalFactory;
-    RelativeLayout mRemoteContainer;
 
-
-    String token= "006b88e7fe917734f2ba7c356df6a380392IAA2iWaFQi9obvdxBw48sSkyvPv2/YAV7hlVB0jfYBJFKOIVUyEAAAAAEAD4YHXYTEekYAEAAQBMR6Rg";
-    private static final String LOG_TAG = CallingActivity.class.getSimpleName();
+    private static final String TAG = CallingActivity.class.getSimpleName();
 
     private static final int PERMISSION_REQ_ID = 22;
-
-    // permission WRITE_EXTERNAL_STORAGE is not mandatory for Agora RTC SDK, just incase if you wanna save logs to external sdcard
-    private static final String[] REQUESTED_PERMISSIONS = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private static final String[] REQUESTED_PERMISSIONS = {
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.CAMERA
+    };
 
     private RtcEngine mRtcEngine;
+    private boolean mCallEnd;
+    private boolean mMuted;
+
+    private FrameLayout mLocalContainer;
+    private RelativeLayout mRemoteContainer;
+    private VideoCanvas mLocalVideo;
+    private VideoCanvas mRemoteVideo;
+
+    private ImageView mCallBtn;
+    private ImageView mMuteBtn;
+    private ImageView mSwitchCameraBtn;
+
+    // Customized logger view
+    private LoggerRecyclerView mLogView;
+
+    /**
+     * Event handler registered into RTC engine for RTC callbacks.
+     * Note that UI operations needs to be in UI thread because RTC
+     * engine deals with the events in a separate thread.
+     */
     private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
+        /**
+         * Occurs when the local user joins a specified channel.
+         * The channel name assignment is based on channelName specified in the joinChannel method.
+         * If the uid is not specified when joinChannel is called, the server automatically assigns a uid.
+         *
+         * @param channel Channel name.
+         * @param uid User ID.
+         * @param elapsed Time elapsed (ms) from the user calling joinChannel until this callback is triggered.
+         */
         @Override
-        public void onFirstRemoteVideoDecoded(final int uid, int width, int height, int elapsed) {
+        public void onJoinChannelSuccess(String channel, final int uid, int elapsed) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    mLogView.logI("Join channel success, uid: " + (uid & 0xFFFFFFFFL));
+                }
+            });
+        }
+
+        @Override
+        public void onUserJoined(final int uid, int elapsed) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mLogView.logI("First remote video decoded, uid: " + (uid & 0xFFFFFFFFL));
                     setupRemoteVideo(uid);
                 }
             });
         }
 
+        /**
+         * Occurs when a remote user (Communication)/host (Live Broadcast) leaves the channel.
+         *
+         * There are two reasons for users to become offline:
+         *
+         *     Leave the channel: When the user/host leaves the channel, the user/host sends a
+         *     goodbye message. When this message is received, the SDK determines that the
+         *     user/host leaves the channel.
+         *
+         *     Drop offline: When no data packet of the user or host is received for a certain
+         *     period of time (20 seconds for the communication profile, and more for the live
+         *     broadcast profile), the SDK assumes that the user/host drops offline. A poor
+         *     network connection may lead to false detections, so we recommend using the
+         *     Agora RTM SDK for reliable offline detection.
+         *
+         * @param uid ID of the user or host who leaves the channel or goes offline.
+         * @param reason Reason why the user goes offline:
+         *
+         *     USER_OFFLINE_QUIT(0): The user left the current channel.
+         *     USER_OFFLINE_DROPPED(1): The SDK timed out and the user dropped offline because no data packet was received within a certain period of time. If a user quits the call and the message is not passed to the SDK (due to an unreliable channel), the SDK assumes the user dropped offline.
+         *     USER_OFFLINE_BECOME_AUDIENCE(2): (Live broadcast only.) The client role switched from the host to the audience.
+         */
         @Override
-        public void onUserOffline(int uid, int reason) {
+        public void onUserOffline(final int uid, int reason) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    onRemoteUserLeft();
-                }
-            });
-        }
-
-        @Override
-        public void onUserMuteVideo(final int uid, final boolean muted) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    onRemoteUserVideoMuted(uid, muted);
+                    mLogView.logI("User offline, uid: " + (uid & 0xFFFFFFFFL));
+                    onRemoteUserLeft(uid);
                 }
             });
         }
     };
+
+    private void setupRemoteVideo(int uid) {
+        ViewGroup parent = mRemoteContainer;
+        if (parent.indexOfChild(mLocalVideo.view) > -1) {
+            parent = mLocalContainer;
+        }
+
+        // Only one remote video view is available for this
+        // tutorial. Here we check if there exists a surface
+        // view tagged as this uid.
+        if (mRemoteVideo != null) {
+            return;
+        }
+
+        /*
+          Creates the video renderer view.
+          CreateRendererView returns the SurfaceView type. The operation and layout of the view
+          are managed by the app, and the Agora SDK renders the view provided by the app.
+          The video display view must be created using this method instead of directly
+          calling SurfaceView.
+         */
+        SurfaceView view = RtcEngine.CreateRendererView(getBaseContext());
+        view.setZOrderMediaOverlay(parent == mLocalContainer);
+        parent.addView(view);
+        mRemoteVideo = new VideoCanvas(view, VideoCanvas.RENDER_MODE_HIDDEN, uid);
+        // Initializes the video view of a remote user.
+        mRtcEngine.setupRemoteVideo(mRemoteVideo);
+    }
+
+    private void onRemoteUserLeft(int uid) {
+        if (mRemoteVideo != null && mRemoteVideo.uid == uid) {
+            removeFromParent(mRemoteVideo);
+            // Destroys remote view
+            mRemoteVideo = null;
+        }
+    }
+
 
 
     @Override
@@ -97,11 +187,15 @@ public class CallingActivity extends AppCompatActivity {
 
 
 //        setupVideoProfile();
-       if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
+        initUI();
+
+        // Ask for permissions at runtime.
+        // This is just an example set of permissions. Other permissions
+        // may be needed, and please refer to our online documents.
+        if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
                 checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID) &&
                 checkSelfPermission(REQUESTED_PERMISSIONS[2], PERMISSION_REQ_ID)) {
-            initAgoraEngineAndJoinChannel();
-
+            initEngineAndJoinChannel();
         }
 
 
@@ -124,50 +218,56 @@ public class CallingActivity extends AppCompatActivity {
 
     }
 
-    private void initAgoraEngineAndJoinChannel() {
-        initializeAgoraEngine();
-        setupVideoProfile();
-        setupLocalVideo();
-        joinChannel();
+    private void initUI() {
+        mLocalContainer = findViewById(R.id.local_video_view_container);
+        mRemoteContainer = findViewById(R.id.remote_video_view_container);
+
+        mCallBtn = findViewById(R.id.btn_call);
+        mMuteBtn = findViewById(R.id.btn_mute);
+        mSwitchCameraBtn = findViewById(R.id.btn_switch_camera);
+
+        mLogView = findViewById(R.id.log_recycler_view);
+
+        // Sample logs are optional.
+        showSampleLogs();
     }
 
-
+    private void showSampleLogs() {
+        mLogView.logI("Welcome to Agora 1v1 video call");
+        mLogView.logW("You will see custom logs here");
+        mLogView.logE("You can also use this to show errors");
+    }
 
     private boolean checkSelfPermission(String permission, int requestCode) {
-        Log.i(LOG_TAG, "checkSelfPermission " + permission + " " + requestCode);
-        if (ContextCompat.checkSelfPermission(this,
-                permission)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this,
-                    REQUESTED_PERMISSIONS,
-                    requestCode);
+        if (ContextCompat.checkSelfPermission(this, permission) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, REQUESTED_PERMISSIONS, requestCode);
             return false;
         }
+
         return true;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[], @NonNull int[] grantResults) {
-        Log.i(LOG_TAG, "onRequestPermissionsResult " + grantResults[0] + " " + requestCode);
-
-        switch (requestCode) {
-            case PERMISSION_REQ_ID: {
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED || grantResults[1] != PackageManager.PERMISSION_GRANTED || grantResults[2] != PackageManager.PERMISSION_GRANTED) {
-                    showLongToast("Need permissions " + Manifest.permission.RECORD_AUDIO + "/" + Manifest.permission.CAMERA + "/" + Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                    finish();
-                    break;
-                }
-
-                initAgoraEngineAndJoinChannel();
-                break;
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQ_ID) {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
+                    grantResults[1] != PackageManager.PERMISSION_GRANTED ||
+                    grantResults[2] != PackageManager.PERMISSION_GRANTED) {
+                showLongToast("Need permissions " + Manifest.permission.RECORD_AUDIO +
+                        "/" + Manifest.permission.CAMERA);
+                finish();
+                return;
             }
+
+            // Here we continue only if all permissions are granted.
+            // The permissions can also be granted in the system settings manually.
+            initEngineAndJoinChannel();
         }
     }
 
-
-    private final void showLongToast(final String msg) {
+    private void showLongToast(final String msg) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -176,246 +276,162 @@ public class CallingActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        //leaveChannel();
-        RtcEngine.destroy();
-        mRtcEngine = null;
+    private void initEngineAndJoinChannel() {
+        // This is our usual steps for joining
+        // a channel and starting a call.
+        initializeEngine();
+        setupVideoConfig();
+        setupLocalVideo();
+        joinChannel();
     }
 
-  /*  public void onCallRated(View view) {
-        String description = ((EditText) findViewById(R.id.rateMessage)).getText().toString();
-        int rating = ((SeekBar) findViewById(R.id.rateNumber)).getProgress() + 1;
-
-        Log.i(LOG_TAG, "Description: " + description);
-        Log.i(LOG_TAG, "Rating: " + rating);
-
-        String callId = mRtcEngine.getCallId();
-        int result = mRtcEngine.rate(callId, rating, description);
-
-        if (result == 0) {
-            showLongToast("Successfully rated the call!");
-        } else {
-            showLongToast("Failed to rate the call!");
-        }
-
-        Log.i(LOG_TAG, "Success: " + result);
-    }*/
-
-    public void onLocalVideoMuteClicked(View view) {
-        ImageView iv = (ImageView) view;
-        if (iv.isSelected()) {
-            iv.setSelected(false);
-            iv.clearColorFilter();
-        } else {
-            iv.setSelected(true);
-            iv.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.MULTIPLY);
-        }
-
-        mRtcEngine.muteLocalVideoStream(iv.isSelected());
-
-        FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
-        SurfaceView surfaceView = (SurfaceView) container.getChildAt(0);
-        surfaceView.setZOrderMediaOverlay(!iv.isSelected());
-        surfaceView.setVisibility(iv.isSelected() ? View.GONE : View.VISIBLE);
-    }
-
-    public void onLocalAudioMuteClicked(View view) {
-        ImageView iv = (ImageView) view;
-        if (iv.isSelected()) {
-            iv.setSelected(false);
-            iv.clearColorFilter();
-        } else {
-            iv.setSelected(true);
-            iv.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.MULTIPLY);
-        }
-
-        mRtcEngine.muteLocalAudioStream(iv.isSelected());
-    }
-
-    public void onSwitchCameraClicked(View view) {
-        mRtcEngine.switchCamera();
-    }
-
-
-
-    public void onEncCallClicked(View view) {
-        finish();
-    }
-
-    private int mTxQuality = -1, mRxQuality = -1;
-    private IRtcEngineEventHandler.RemoteAudioStats mAudioStats;
-    private IRtcEngineEventHandler.RemoteVideoStats mVideoStats;
-
-    private String qualityStringFromQualityNumber(int number) {
-        switch (number) {
-            case IRtcEngineEventHandler.Quality.EXCELLENT:
-                return "Excellent 👌";
-            case IRtcEngineEventHandler.Quality.GOOD:
-                return "Good 🙂";
-            case IRtcEngineEventHandler.Quality.POOR:
-                return "Poor 🙁";
-            case IRtcEngineEventHandler.Quality.BAD:
-                return "Bad 😢";
-            case IRtcEngineEventHandler.Quality.VBAD:
-                return "Very Bad 🤮";
-            case IRtcEngineEventHandler.Quality.DOWN:
-                return "Network Down";
-            default:
-                return "Unknown";
-        }
-    }
-
-    private void updateStatsDisplay() {
-        TextView statsDisplay = (TextView) findViewById(R.id.statsDisplay);
-
-        int audioQuality = mAudioStats == null ? IRtcEngineEventHandler.Quality.UNKNOWN : mAudioStats.quality;
-        int videoBitrate = mVideoStats == null ? 0 : mVideoStats.receivedBitrate;
-
-        String stats = "Transmission: " + qualityStringFromQualityNumber(mTxQuality) + "\n" +
-                "Receiving: " + qualityStringFromQualityNumber(mRxQuality) + "\n" +
-                "Audio: " + qualityStringFromQualityNumber(audioQuality) + "\n" +
-                "Video Bitrate: " + videoBitrate + "Kbps";
-        statsDisplay.setText(stats);
-    }
-
-    private void initializeAgoraEngine() {
+    private void initializeEngine() {
         try {
             mRtcEngine = RtcEngine.create(getBaseContext(), getString(R.string.agora_app_id), mRtcEventHandler);
-            mRtcEngine.addHandler(new IRtcEngineEventHandler() {
-                @Override
-                public void onNetworkQuality(int uid, int txQuality, int rxQuality) {
-                   CallingActivity.this.mTxQuality = txQuality;
-                    CallingActivity.this.mRxQuality = txQuality;
-                    updateStatsDisplay();
-                }
-
-                @Override
-                public void onRemoteAudioStats(RemoteAudioStats stats) {
-                    mAudioStats = stats;
-                    updateStatsDisplay();
-                }
-
-                @Override
-                public void onRemoteVideoStats(RemoteVideoStats stats) {
-                    mVideoStats = stats;
-                    updateStatsDisplay();
-                }
-            });
         } catch (Exception e) {
-            Log.e(LOG_TAG, Log.getStackTraceString(e));
-
+            Log.e(TAG, Log.getStackTraceString(e));
             throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));
         }
     }
 
-    private void setupVideoProfile() {
+    private void setupVideoConfig() {
+        // In simple use cases, we only need to enable video capturing
+        // and rendering once at the initialization step.
+        // Note: audio recording and playing is enabled by default.
         mRtcEngine.enableVideo();
 
-//      mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_360P, false); // Earlier than 2.3.0
-        mRtcEngine.setVideoEncoderConfiguration(new VideoEncoderConfiguration(VideoEncoderConfiguration.VD_640x360, VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
+        // Please go to this page for detailed explanation
+        // https://docs.agora.io/en/Video/API%20Reference/java/classio_1_1agora_1_1rtc_1_1_rtc_engine.html#af5f4de754e2c1f493096641c5c5c1d8f
+        mRtcEngine.setVideoEncoderConfiguration(new VideoEncoderConfiguration(
+                VideoEncoderConfiguration.VD_640x360,
+                VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
                 VideoEncoderConfiguration.STANDARD_BITRATE,
                 VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT));
     }
 
     private void setupLocalVideo() {
-        FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-        surfaceView.setZOrderMediaOverlay(true);
-        container.addView(surfaceView);
-        mRtcEngine.setupLocalVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_FIT, 0));
+        // This is used to set a local preview.
+        // The steps setting local and remote view are very similar.
+        // But note that if the local user do not have a uid or do
+        // not care what the uid is, he can set his uid as ZERO.
+        // Our server will assign one and return the uid via the event
+        // handler callback function (onJoinChannelSuccess) after
+        // joining the channel successfully.
+        SurfaceView view = RtcEngine.CreateRendererView(getBaseContext());
+        view.setZOrderMediaOverlay(true);
+        mLocalContainer.addView(view);
+        // Initializes the local video view.
+        // RENDER_MODE_HIDDEN: Uniformly scale the video until it fills the visible boundaries. One dimension of the video may have clipped contents.
+        mLocalVideo = new VideoCanvas(view, VideoCanvas.RENDER_MODE_HIDDEN, 0);
+        mRtcEngine.setupLocalVideo(mLocalVideo);
     }
 
     private void joinChannel() {
-        mRtcEngine.joinChannel(null, "demoChannel1", "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
+        // 1. Users can only see each other after they join the
+        // same channel successfully using the same app id.
+        // 2. One token is only valid for the channel name that
+        // you use to generate this token.
+        String token = getString(R.string.agora_access_token);
+        if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
+            token = null; // default, no token
+        }
+        mRtcEngine.joinChannel(token, "demoChannel1", "Extra Optional Data", 0);
     }
 
-    private void setupRemoteVideo(int uid) {
-        FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
-
-        if (container.getChildCount() >= 1) {
-            return;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (!mCallEnd) {
+            leaveChannel();
         }
-
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-        container.addView(surfaceView);
-        mRtcEngine.setupRemoteVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_FIT, uid));
-
-        surfaceView.setTag(uid); // for mark purpose
-       // View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
-       // tipMsg.setVisibility(View.GONE);
+        /*
+          Destroys the RtcEngine instance and releases all resources used by the Agora SDK.
+          This method is useful for apps that occasionally make voice or video calls,
+          to free up resources for other operations when not making calls.
+         */
+        RtcEngine.destroy();
     }
 
     private void leaveChannel() {
         mRtcEngine.leaveChannel();
     }
 
-    private void onRemoteUserLeft() {
-        FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
-        container.removeAllViews();
-
-       // View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
-      //  tipMsg.setVisibility(View.VISIBLE);
+    public void onLocalAudioMuteClicked(View view) {
+        mMuted = !mMuted;
+        // Stops/Resumes sending the local audio stream.
+        mRtcEngine.muteLocalAudioStream(mMuted);
+        int res = mMuted ? R.drawable.btn_mute : R.drawable.btn_unmute;
+        mMuteBtn.setImageResource(res);
     }
 
-    private void onRemoteUserVideoMuted(int uid, boolean muted) {
-        FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
+    public void onSwitchCameraClicked(View view) {
+        // Switches between front and rear cameras.
+        mRtcEngine.switchCamera();
+    }
 
-        SurfaceView surfaceView = (SurfaceView) container.getChildAt(0);
+    public void onCallClicked(View view) {
+        if (mCallEnd) {
+            startCall();
+            mCallEnd = false;
+            mCallBtn.setImageResource(R.drawable.btn_endcall);
+        } else {
+            endCall();
+            mCallEnd = true;
+            mCallBtn.setImageResource(R.drawable.btn_startcall);
+        }
 
-        Object tag = surfaceView.getTag();
-        if (tag != null && (Integer) tag == uid) {
-            surfaceView.setVisibility(muted ? View.GONE : View.VISIBLE);
+        showButtons(!mCallEnd);
+    }
+
+    private void startCall() {
+        setupLocalVideo();
+        joinChannel();
+    }
+
+    private void endCall() {
+        removeFromParent(mLocalVideo);
+        mLocalVideo = null;
+        removeFromParent(mRemoteVideo);
+        mRemoteVideo = null;
+        leaveChannel();
+    }
+
+    private void showButtons(boolean show) {
+        int visibility = show ? View.VISIBLE : View.GONE;
+        mMuteBtn.setVisibility(visibility);
+        mSwitchCameraBtn.setVisibility(visibility);
+    }
+
+    private ViewGroup removeFromParent(VideoCanvas canvas) {
+        if (canvas != null) {
+            ViewParent parent = canvas.view.getParent();
+            if (parent != null) {
+                ViewGroup group = (ViewGroup) parent;
+                group.removeView(canvas.view);
+                return group;
+            }
+        }
+        return null;
+    }
+
+    private void switchView(VideoCanvas canvas) {
+        ViewGroup parent = removeFromParent(canvas);
+        if (parent == mLocalContainer) {
+            if (canvas.view instanceof SurfaceView) {
+                ((SurfaceView) canvas.view).setZOrderMediaOverlay(false);
+            }
+            mRemoteContainer.addView(canvas.view);
+        } else if (parent == mRemoteContainer) {
+            if (canvas.view instanceof SurfaceView) {
+                ((SurfaceView) canvas.view).setZOrderMediaOverlay(true);
+            }
+            mLocalContainer.addView(canvas.view);
         }
     }
 
+    public void onLocalContainerClick(View view) {
+        switchView(mLocalVideo);
+        switchView(mRemoteVideo);
+    }
 
-
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-        userRef.child(receiverUserId)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (!dataSnapshot.hasChild("Calling") && !dataSnapshot.hasChild("Ringing")){
-                            final HashMap<String, Object> callingInfo = new HashMap<>();
-
-                            callingInfo.put("uid",senderUserId);
-                            callingInfo.put("name",senderUserName);
-                            callingInfo.put("image", senderUserImage);
-                            callingInfo.put("calling", receiverUserId);
-
-                            userRef.child(senderUserId)
-                                    .child("Calling")
-                                    .updateChildren(callingInfo)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                final HashMap<String, Object> ringingInfo = new HashMap<>();
-
-                                                ringingInfo.put("uid",receiverUserId);
-                                                ringingInfo.put("name",receiverUserName);
-                                                ringingInfo.put("image", receiverUserImage);
-                                                ringingInfo.put("ringing", senderUserId);
-
-                                                userRef.child(receiverUserId)
-                                                        .child("Ringing")
-                                                        .updateChildren(ringingInfo);
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }*/
-
-  }
+}
