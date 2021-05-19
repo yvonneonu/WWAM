@@ -39,9 +39,7 @@ public class RecentChatsAdapt extends RecyclerView.Adapter<RecentChatsAdapt.Rece
     }
 
 
-    private String firstHundred(String s,int n){
-        return s.substring(0, Math.min(s.length(), n));
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull RecentView holder, int position) {

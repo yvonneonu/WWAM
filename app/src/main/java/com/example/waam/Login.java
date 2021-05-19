@@ -17,24 +17,11 @@ import com.connectycube.auth.session.ConnectycubeSessionManager;
 import com.connectycube.auth.session.ConnectycubeSettings;
 import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.ConnectycubeRoster;
-import com.connectycube.chat.listeners.RosterListener;
-import com.connectycube.chat.listeners.SubscriptionListener;
-import com.connectycube.chat.model.ConnectycubePresence;
-import com.connectycube.core.EntityCallback;
-import com.connectycube.core.LogLevel;
-import com.connectycube.core.exception.ResponseException;
-import com.connectycube.users.ConnectycubeUsers;
-import com.connectycube.users.model.ConnectycubeUser;
-
-import java.util.Collection;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
     private TextView signup;
@@ -86,7 +73,7 @@ public class Login extends AppCompatActivity {
         Log.d("TAG", "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
 
         logm = findViewById(R.id.button);
-        text = findViewById(R.id.forgetpass);
+        text = findViewById(R.id.dateofbirth);
 
         editEmail = findViewById(R.id.editText2);
         editPass = findViewById(R.id.editText4);
@@ -98,11 +85,11 @@ public class Login extends AppCompatActivity {
       //  logm.setOnClickListener(v -> Themain());
 
 
-        ConnectycubeChatService.ConfigurationBuilder chatServiceConfigurationBuilder = new ConnectycubeChatService.ConfigurationBuilder();
-        chatServiceConfigurationBuilder.setSocketTimeout(60);
-        chatServiceConfigurationBuilder.setKeepAlive(true);
-        chatServiceConfigurationBuilder.setUseTls(true); //By default TLS is disabled.
-        ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
+     //   ConnectycubeChatService.ConfigurationBuilder chatServiceConfigurationBuilder = new ConnectycubeChatService.ConfigurationBuilder();
+      //  chatServiceConfigurationBuilder.setSocketTimeout(60);
+      //  chatServiceConfigurationBuilder.setKeepAlive(true);
+     //   chatServiceConfigurationBuilder.setUseTls(true); //By default TLS is disabled.
+//        ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
 
 
 

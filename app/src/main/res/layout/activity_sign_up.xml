@@ -4,27 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/friendsbg"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/friendsbg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/backto"
@@ -53,25 +42,40 @@
             app:layout_constraintStart_toStartOf="@+id/backto"
             app:layout_constraintTop_toTopOf="@+id/backto"
             app:layout_constraintVertical_bias="0.0" />
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
             android:id="@+id/notshow"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <ImageView
+                android:id="@+id/imageView41"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="335dp"
+                android:layout_marginStart="24dp"
                 android:text="I'm a"
                 android:textColor="@color/white"
                 android:textSize="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView41" />
 
             <TextView
 
@@ -106,14 +110,14 @@
                 app:layout_constraintTop_toTopOf="@+id/mangend" />
 
             <TextView
-            android:id="@+id/editText5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Seeking a"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/mangend"
-            app:layout_constraintTop_toBottomOf="@+id/mangend" />
+                android:id="@+id/editText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Seeking a"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/mangend"
+                app:layout_constraintTop_toBottomOf="@+id/mangend" />
 
             <TextView
                 android:id="@+id/seekman"
@@ -145,304 +149,37 @@
                 app:layout_constraintStart_toEndOf="@+id/seekman"
                 app:layout_constraintTop_toTopOf="@+id/seekman" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="15dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/name_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/editText8"
-                app:layout_constraintStart_toStartOf="@+id/seekman"
-                app:layout_constraintTop_toTopOf="@+id/editText8" />
-
-            <EditText
-                android:id="@+id/editText8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="15dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="15dp"
-                android:gravity="center_vertical"
-                android:hint="Full Name"
-                android:inputType="textPersonName"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="15dp"
-                app:layout_constraintBottom_toTopOf="@+id/view"
-                app:layout_constraintStart_toStartOf="@+id/seekman"
-                app:layout_constraintTop_toBottomOf="@+id/seekwoman" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:background="#c0c0c0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/editText8" />
-
-            <ImageView
-                android:id="@+id/imageViewe"
-                android:layout_width="15dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/email_icon"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewb"
-                app:layout_constraintStart_toStartOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="15dp"
-                android:gravity="center_vertical"
-                android:hint="Email Address"
-                android:inputType="textEmailAddress"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="15dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewe"
-                app:layout_constraintStart_toEndOf="@+id/imageViewe"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <View
-                android:id="@+id/view1"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:background="#c0c0c0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imageViewe"
-                app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
-            <ImageView
-                android:id="@+id/imageViewb"
-                android:layout_width="15dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/birthday_icon"
-                app:layout_constraintBottom_toTopOf="@+id/view4"
-                app:layout_constraintStart_toStartOf="@+id/imageViewe"
-                app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
             <TextView
-                android:id="@+id/editText3"
+                android:id="@+id/textView105"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="82dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="15dp"
-                android:gravity="center_vertical"
-                android:hint="Birthday"
-                android:inputType="date"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewb"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageViewb"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewe"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <Button
-                android:id="@+id/forgetpass"
-                style="?android:spinnerStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="@android:color/transparent"
-                android:hint="January 1, 1991"
-                android:onClick="openDatePicker"
-                android:textColorHint="@color/offwhite"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/editText3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText3"
-                app:layout_constraintVertical_bias="0.277" />
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:background="#c0c0c0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imageViewb"
-                app:layout_constraintTop_toBottomOf="@+id/editText3" />
-
-        <ImageView
-            android:id="@+id/imageViewc"
-            android:layout_width="15dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/location_icon"
-            app:layout_constraintStart_toStartOf="@+id/imageViewb"
-            app:layout_constraintTop_toBottomOf="@+id/view4" />
-
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@android:color/transparent"
-            android:drawablePadding="15dp"
-            android:gravity="center_vertical"
-            android:hint="Zip/Postal Code"
-            android:inputType="number"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewc"
-            app:layout_constraintStart_toEndOf="@+id/imageViewc"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewb"
-            app:layout_constraintVertical_bias="1.0" />
-
-            <View
-                android:id="@+id/view5"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:background="#c0c0c0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imageViewc"
-                app:layout_constraintTop_toBottomOf="@+id/editText4" />
-
-        <ImageView
-            android:id="@+id/imageViewd"
-            android:layout_width="15dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/password_icon"
-            app:layout_constraintStart_toStartOf="@+id/imageViewc"
-            app:layout_constraintTop_toBottomOf="@+id/view5" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@android:color/transparent"
-            android:drawablePadding="15dp"
-            android:gravity="center_vertical"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="15dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewd"
-            app:layout_constraintStart_toEndOf="@+id/imageViewd"
-            app:layout_constraintTop_toTopOf="@+id/imageViewd"
-            app:layout_constraintVertical_bias="1.0"
-            tools:visibility="visible" />
-
-            <View
-                android:id="@+id/view6"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:background="#c0c0c0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imageViewd"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-        <ImageView
-            android:id="@+id/imageViewco"
-            android:layout_width="15dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/password_icon"
-            app:layout_constraintStart_toStartOf="@+id/imageViewd"
-            app:layout_constraintTop_toBottomOf="@+id/view6" />
-
-        <EditText
-            android:id="@+id/editText88"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@android:color/transparent"
-            android:drawablePadding="15dp"
-            android:gravity="center_vertical"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewco"
-            app:layout_constraintStart_toEndOf="@+id/imageViewco"
-            app:layout_constraintTop_toTopOf="@+id/imageViewco"
-            app:layout_constraintVertical_bias="0.0" />
-
-            <View
-                android:id="@+id/view8"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:background="#c0c0c0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imageViewco"
-                app:layout_constraintTop_toBottomOf="@+id/editText88" />
-
-            <TextView
-                android:id="@+id/textVieww"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:text="By continuing you agree to receive emails from WhereWeAllMeet.
 You can withdraw consent at any time."
                 android:textColor="@color/offwhite"
                 android:textSize="13dp"
                 android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="@+id/view8"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/view8"
-                app:layout_constraintTop_toBottomOf="@+id/view8" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seekman" />
+
+            <TextView
+                android:id="@+id/textVieww"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="33dp"
+                android:text="By continuing you agree to receive emails from WhereWeAllMeet.
+You can withdraw consent at any time."
+                android:textColor="@color/offwhite"
+                android:textSize="13dp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup1" />
 
             <ImageView
                 android:id="@+id/logo"
@@ -455,8 +192,7 @@ You can withdraw consent at any time."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.384"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textVieww"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:layout_constraintTop_toBottomOf="@+id/textVieww" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -469,42 +205,63 @@ You can withdraw consent at any time."
                 app:layout_constraintStart_toStartOf="@+id/logo"
                 app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-        <TextView
-            android:id="@+id/gologin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:text="Login"
-            android:textColor="@color/offblue"
-            app:layout_constraintBottom_toBottomOf="@+id/textView15"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toTopOf="@+id/textView15" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:cardCornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/background">
-
-
-            <ProgressBar
+            <TextView
+                android:id="@+id/gologin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                tools:layout_editor_absoluteX="189dp"
-                tools:layout_editor_absoluteY="508dp" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="Login"
+                android:textColor="@color/offblue"
+                app:layout_constraintBottom_toBottomOf="@+id/textView15"
+                app:layout_constraintStart_toEndOf="@+id/textView15"
+                app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView105">
+
+
+                <RadioButton
+                    android:id="@+id/radio0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Friendship"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dating"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Socializing"
+                    android:textColor="@color/white" />
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
 
 
 </ScrollView>

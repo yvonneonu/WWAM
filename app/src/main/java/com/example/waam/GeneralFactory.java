@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,7 +49,7 @@ public class GeneralFactory {
     private final Context context;
     private ValueEventListener valueEventListener;
     private DatabaseReference userForSeen;
-    private ArrayList<WaamUser> contactedUser;
+    private List<WaamUser> contactedUser;
     private List<String> usersStringId;
     private String theMessage;
 
@@ -147,7 +148,7 @@ public class GeneralFactory {
     }
 
 
-    public void signUpForBase(final String email, final String password, final ProgressBar bar,  WaamUser waamUser){
+    public void signUpForBase(final String email, final String password, final CardView bar,  WaamUser waamUser){
         bar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(task -> {
@@ -195,6 +196,7 @@ public class GeneralFactory {
 
 
     public void loadNewFriends(String branch,ProgressBar bar,TextView textView, FetchFriends friends){
+
         List<WaamUser> newFriends = new ArrayList<>();
         if(branch != null){
             DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
@@ -413,7 +415,7 @@ public class GeneralFactory {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 WaamUser user = snapshot.getValue(WaamUser.class);
                 userCallback.loadSpecUse(user);
-                Log.d("Userc",""+user);
+                Log.d("Userc",""+user.getTypingTo());
             }
 
             @Override
@@ -478,13 +480,15 @@ public class GeneralFactory {
                                 || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)){
                            //This keeps loading the message and keeps changing it till the last message
                             theMessage = chat.getMessage();
-                            last_msg.setText(theMessage);
                         }
                     }
 
 
                 }
 
+                //Still trying.....
+                String finalMess = firstHundred(theMessage,30);
+                last_msg.setText(finalMess);
             }
 
             @Override
@@ -494,6 +498,9 @@ public class GeneralFactory {
         });
     }
 
+    private String firstHundred(String s,int n){
+        return s.substring(0, Math.min(s.length(), n));
+    }
 
     public void loginUser(LoginRequest loginRequest){
 
@@ -591,10 +598,12 @@ public class GeneralFactory {
                             WaamUser user = dataSnapshot.getValue(WaamUser.class);
                             for(String id : usersStringId){
                                 if(user.getUid().equals(id)){
-                                    if(contactedUser.size() > 0){
+                                    if(contactedUser.size() != 0){
                                         for(int i = 0 ; i < contactedUser.size() ; i++){
                                             String useroneid = contactedUser.get(i).getUid();
-                                            if(!user.getUid().equals(useroneid) ){
+
+                                            if(!user.getUid().equals(useroneid)){
+                                                Log.d("UserIdvalue",useroneid+" and "+user.getUid()+" are not the same");
                                                 contactedUser.add(user);
                                             }
                                         }
@@ -606,7 +615,10 @@ public class GeneralFactory {
                             }
                         }
 
-
+                        Log.d("ContactedUser",""+contactedUser.size());
+                        for(int i = 0 ; i < contactedUser.size(); i ++){
+                            Log.d("throwable",contactedUser.get(i).getUid());
+                        }
                         fetchContacts.friendsFetcher(contactedUser);
                     }
 
@@ -637,6 +649,55 @@ public class GeneralFactory {
         mDatebaseReference.updateChildren(hashMap);
     }
 
+
+    public void requestUser(WaamUser waamUser, CardView progressBar) {
+        Call<RegisterResponse> registerResponseCall = ApiClient.getService().registerUsers(waamUser);
+        registerResponseCall.enqueue(new Callback<RegisterResponse>() {
+            @Override
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                if (response.isSuccessful()) {
+                    //response.body().getToken();
+                    //response.body();
+                    String message = "Successful";
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+                    //Register users on firebase......
+                    signUpForBase(waamUser.getEmail(), waamUser.getPassword(),progressBar, waamUser);
+                    Intent intent = new Intent(context, Verification1.class);
+                    intent.putExtra("token", response.body().getToken());
+                    context.startActivity(intent);
+                    // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
+                    // intent.putExtra("profilepics", imageUri);
+                    //context.finish();
+                } else {
+                    response.errorBody();
+                    // Toast.makeText(SignUp.this,response.body().getErrors(),Toast.LENGTH_LONG).show();
+                    // response.body();
+                    // Toast.makeText(SignUp.this, (CharSequence) response.body(), Toast.LENGTH_LONG).show();
+                    //response.errorBody();
+                    // response.errorBody();
+
+                    String message = "The email has already been taken";
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+                    // String message = "An error occured please try again";
+                    //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                String message = "The email has already been taken";
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    public boolean validateName(String fnames){
+        String[] names = fnames.split(" ");
+        return names.length >= 2;
+    }
 
 
 

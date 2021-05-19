@@ -17,6 +17,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,38 +41,25 @@ import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
 
-    private DatePickerDialog datePickerDialog;
-    private TextView lologin;
-    String numberToPass = "1";
-    private TextView back, mangender, womangender, seekingman, save, wantwoman, textView;
-    private String realGender, realInterest;
+    private TextView mangender;
+    private TextView womangender;
+    private TextView seekingman;
+    private TextView wantwoman;
+    //private String realGender, realInterest;
     private ImageView move;
-    private Button update;
-    UserService userService;
-    private CardView cardView1;
-    private ProgressBar progressBar;
-    private EditText name, email, zip, password, confrim;
+    //private Button update;
+    //private ProgressBar progressBar;
+
     //ConstraintLayout constraintLayou;
-    String chose = "";
-    String interest = "";
-    String Fullname;
-
-    private ConnectycubeChatService chatService;
-
-    static final String APP_ID = "4663";
-    static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
-    static final String AUTH_SECRET = "yhuExsebKPu8F8S";
-    static final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
-//
-
-
-
-    String Passwor;
-    String Email;
-
-    ConstraintLayout constraintLayout;
-
-    private static String token;
+    private String chose;
+    private String interest;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
+    private String relationship;
+    public static final String INTEREST = "interest";
+    public static final String GENDER = "interest";
+    public static final String RELATION = "interest";
+    public static String token;
     //final String url_Register = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
 
     @Override
@@ -78,74 +67,51 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
-        ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
-        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
-
-
-        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-        chatService = ConnectycubeChatService.getInstance();
         initDatePicker();
 
-        cardView1 = findViewById(R.id.cardview);
         seekingman = findViewById(R.id.seekman);
-        save = findViewById(R.id.editText3);
         wantwoman = findViewById(R.id.seekwoman);
         mangender = findViewById(R.id.mangend);
         womangender = findViewById(R.id.womangend);
-        update = findViewById(R.id.forgetpass);
-        zip = findViewById(R.id.editText4);
-        lologin = findViewById(R.id.gologin);
-        textView = findViewById(R.id.textView);
-        back = findViewById(R.id.backto);
+        //update = findViewById(R.id.forgetpass);
+        //private DatePickerDialog datePickerDialog;
+        TextView lologin = findViewById(R.id.gologin);
+        TextView back = findViewById(R.id.backto);
         move = findViewById(R.id.logo);
-        name = findViewById(R.id.editText8);
-        constraintLayout = findViewById(R.id.notshow);
-        email = findViewById(R.id.editText2);
-        password = findViewById(R.id.editText);
-        confrim = findViewById(R.id.editText88);
+        radioGroup = findViewById(R.id.radioGroup1);
+        ConstraintLayout constraintLayout = findViewById(R.id.notshow);
         lologin.setOnClickListener(v -> Signinhere());
         back.setOnClickListener(v -> Signback());
-        update.setText(getTodaysDate());
+        //update.setText(getTodaysDate());
 
 
-        progressBar= new ProgressBar(SignUp.this);
+        move.setOnClickListener(v -> {
 
-        move.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNetworkAvailableAndConnected()){
-                    register();
-                    cardView1.setVisibility(View.VISIBLE);
-                    constraintLayout.setVisibility(View.INVISIBLE);
-                    //textView.setVisibility(View.VISIBLE);
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                           // constraintLayou.setVisibility(View.GONE);
-                            cardView1.setVisibility(View.GONE);
-                            constraintLayout.setVisibility(View.VISIBLE);
-                           // textView.setVisibility(View.VISIBLE);
-                        }
-                    }, 5000);
-                }
-                else {
-                    Toast.makeText(SignUp.this, "No Internet Connection", Toast.LENGTH_LONG).show();
-                }
+          if(TextUtils.isEmpty(chose) || TextUtils.isEmpty(interest)){
+              Log.d("Empty","Gender or interest cannot be null");
+            }else{
+              int selectedId = radioGroup.getCheckedRadioButtonId();
+              radioButton = findViewById(selectedId);
+              relationship = radioButton.getText().toString();
+              Log.d("Relay",relationship);
+              if(!TextUtils.isEmpty(relationship)){
+                  Intent intent = new Intent(SignUp.this,SignUpSecond.class);
+                  Bundle bundle = new Bundle();
+                  bundle.putString(INTEREST, interest);
+                  bundle.putString(GENDER,chose);
+                  bundle.putString(RELATION,relationship);
+                  intent.putExtras(bundle);
+                  startActivity(intent);
+              }else{
+                  Log.d("Relationship","Please select the relationship you want");
+              }
+
             }
+
         });
     }
 
-    private boolean isNetworkAvailableAndConnected() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        boolean isNetworkAvailable = cm.getActiveNetworkInfo() != null;
-        boolean isNetworkConnected = isNetworkAvailable &&
-                cm.getActiveNetworkInfo().isConnected();
-        return isNetworkConnected;
-    }
+
 
     private String getTodaysDate() {
         java.util.Calendar c = java.util.Calendar.getInstance();
@@ -156,7 +122,7 @@ public class SignUp extends AppCompatActivity {
         return makeDateString(day, month, year);
     }
 
-    public void requestUser(WaamUser waamUser) {
+    /*public void requestUser(WaamUser waamUser) {
         Call<RegisterResponse> registerResponseCall = ApiClient.getService().registerUsers(waamUser);
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
@@ -171,7 +137,6 @@ public class SignUp extends AppCompatActivity {
                     GeneralFactory.getGeneralFactory(SignUp.this).signUpForBase(waamUser.getEmail(), waamUser.getPassword(),progressBar, waamUser);
                     Intent intent = new Intent(SignUp.this, Verification1.class);
                     intent.putExtra("token", response.body().getToken());
-                    intent.putExtra("name", name.getText().toString());
                     startActivity(intent);
                    // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                    // intent.putExtra("profilepics", imageUri);
@@ -199,7 +164,8 @@ public class SignUp extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
+
 
     private void Signinhere() {
         Intent intent = new Intent(SignUp.this, Login.class);
@@ -219,7 +185,7 @@ public class SignUp extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
                 String date = makeDateString(dayOfMonth, month, year);
-                update.setText(date);
+                //update.setText(date);
             }
         };
         java.util.Calendar c = java.util.Calendar.getInstance();
@@ -229,8 +195,8 @@ public class SignUp extends AppCompatActivity {
 
         int styles = AlertDialog.THEME_HOLO_LIGHT;
 
-        datePickerDialog = new DatePickerDialog(this, styles, dateSetListener, year, month, day);
-        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        //datePickerDialog = new DatePickerDialog(this, styles, dateSetListener, year, month, day);
+        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
 
     }
 
@@ -312,11 +278,11 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    public void openDatePicker(View view) {
+    /*public void openDatePicker(View view) {
         datePickerDialog.show();
-    }
+    }*/
 
-    private void register() {
+    /*private void register() {
 
 
         Log.d("UserService",""+userService);
@@ -403,5 +369,5 @@ public class SignUp extends AppCompatActivity {
 
 
 
-        }
+        }*/
 }

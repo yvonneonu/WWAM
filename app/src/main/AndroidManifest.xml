@@ -3,16 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.waam">
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -30,8 +36,11 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".AllUsersActivity"
-            android:parentActivityName=".DrawelayoutActivity"/>
+        <activity android:name=".SignUpSecond"></activity>
+        <activity android:name=".CallingActivity" />
+        <activity
+            android:name=".AllUsersActivity"
+            android:parentActivityName=".DrawelayoutActivity" />
         <activity android:name=".Unfriend" />
         <activity android:name=".DailyMatch" />
         <activity android:name=".AgentProfile" />
@@ -48,7 +57,7 @@
         <activity android:name=".CompleteProfile" />
         <activity android:name=".LocationDetectActivity" />
         <activity android:name=".Profile" />
-        <activity android:name=".DrawelayoutActivity"></activity>
+        <activity android:name=".DrawelayoutActivity" />
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />
@@ -58,7 +67,7 @@
         <activity android:name=".passw" />
         <activity android:name=".Another" />
         <activity android:name=".SignUp" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
         <activity android:name=".Interest" />
         <activity android:name=".ViewPager">
             <intent-filter>

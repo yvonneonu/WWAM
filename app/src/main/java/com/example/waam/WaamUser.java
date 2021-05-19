@@ -12,6 +12,7 @@ public class WaamUser implements Serializable {
     private String password;
     private String password_confirmation;
     private int image;
+    private String relationship;
     private String uid;
     private String onlineStatus;
     private String timeStamp;
@@ -48,6 +49,7 @@ public class WaamUser implements Serializable {
         this.birth_date = birth_date;
         this.password = password;
         onlineStatus = "offline";
+        typingTo = "noone";
         imageUrl = "https://images.unsplash.com/photo-1620252460192-929ab4e92f1c?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
 
     }
@@ -155,5 +157,13 @@ public class WaamUser implements Serializable {
 
     public void setTypingTo(String typingTo) {
         this.typingTo = typingTo;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
     }
 }
