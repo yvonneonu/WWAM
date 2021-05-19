@@ -193,6 +193,16 @@ public class GeneralFactory {
 
                 });
     }
+    public void changePassword(String email, emailAddress getEmailAddress){
+        mAuth.sendPasswordResetEmail(email).addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        enterEmail(getEmailAddress, email);
+                    }else {
+                        Log.d("ResetPassword", "Password sent successfully");
+                    }
+                });
+    }
 
 
     public void loadNewFriends(String branch,ProgressBar bar,TextView textView, FetchFriends friends){
@@ -498,8 +508,43 @@ public class GeneralFactory {
         });
     }
 
+    public void capturEmail(String email){
+
+
+        Intent getLink = new Intent(context, passw.class);
+
+        getLink.putExtra("email", email);
+        context.startActivity(getLink);
+    }
     private String firstHundred(String s,int n){
         return s.substring(0, Math.min(s.length(), n));
+    }
+
+    public void enterEmail(emailAddress getemailAddress, String email){
+        Call<EmailResponse> emailResponseCall = ApiClient.getService().emailLink(getemailAddress);
+
+        emailResponseCall.enqueue(new Callback<EmailResponse>() {
+            @Override
+            public void onResponse(Call<EmailResponse> call, Response<EmailResponse> response) {
+                if (response.isSuccessful()){
+                    String link = response.body().getMessage();
+
+                    Intent getLink = new Intent(context, passw.class);
+                    Log.d("emailLink",""+link);
+                    getLink.putExtra("email",email);
+                    context.startActivity(getLink);
+                } else {
+                    String message = "An error occured";
+                    Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Please try again!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EmailResponse> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void loginUser(LoginRequest loginRequest){

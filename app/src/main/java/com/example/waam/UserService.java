@@ -25,6 +25,9 @@ public interface UserService {
     @POST("api/login")
     Call<LoginResponse>loginUser(@Body LoginRequest loginRequest);
 
+    @POST("api/forgot-password")
+    Call<EmailResponse>emailLink(@Body emailAddress getEmailAddress);
+
     @POST("api/register")
     Call<RegisterResponse> registerUsers(@Body WaamUser waamUser);
 
