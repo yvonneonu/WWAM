@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Interest extends AppCompatActivity {
 
@@ -23,6 +27,8 @@ public class Interest extends AppCompatActivity {
     String MoviesorVideos = "";
     String MusicConcerts = "";
     String Winetesting = "";
+    private Button saveInterest;
+    private List<String> interest;
    // String Fullname;
 
     @Override
@@ -30,6 +36,7 @@ public class Interest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
 
+        interest = new ArrayList<>();
 
 
         String imageUri = getIntent().getStringExtra("profilepics");
@@ -56,6 +63,9 @@ public class Interest extends AppCompatActivity {
         sevenText = findViewById(R.id.textView8);
         eightRadio = findViewById(R.id.radioButton9);
         eightText = findViewById(R.id.textView9);
+        saveInterest = findViewById(R.id.button4);
+
+
 
 
         wipe.setOnClickListener(new View.OnClickListener() {
@@ -77,92 +87,134 @@ public class Interest extends AppCompatActivity {
         });
     }
 
-    public void dinning_out(View view) {
-        if (view.getId() == zeroRadio.getId()) {
-            //zeroRadio.setBackgroundResource(R.drawable.selectedbubble);
-            Dinninout = zeroText.getText().toString();
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.radioButton:
+                if (checked){
+                    Dinninout = zeroText.getText().toString();
+                    interest.add(Dinninout);
+                    Log.d("DIning", ""+Dinninout);
+                }
+                else {
+                    interest.remove(Dinninout);
+                   // Dinninout = "";
+                    Log.d("non",""+Dinninout);
+                }
+                break;
 
-        }else {
-           // zeroRadio.setBackgroundResource(R.drawable.flag_transparent);
-            Dinninout = "";
+            case R.id.radioButton1:
+                if (checked){
+                    Travel = oneText.getText().toString();
+                    interest.add(Travel);
+                    Log.d("DIning", ""+Travel);
+                }
+                else{
+                    interest.remove(Travel);
+
+                    //Travel = "";
+                }
+                break;
+
+            case R.id.radioButton2:
+                if (checked){
+                    Sport = twoText.getText().toString();
+                    interest.add(Sport);
+
+                    Log.d("text", "show "+Sport);
+                }
+                else{
+                    interest.remove(Sport);
+
+                    //Sport = "";
+                }
+                break;
+
+            case R.id.radioButton3:
+                if (checked){
+                    NightclubsorDancing = threeText.getText().toString();
+                    interest.add(NightclubsorDancing);
+
+                }else {
+                    interest.remove(NightclubsorDancing);
+
+                    // NightclubsorDancing = "";
+                }
+                break;
+
+            case R.id.radioButton4:
+                if (checked){
+                    CoffeeConversation = fourText.getText().toString();
+                    interest.add(CoffeeConversation);
+
+                }else {
+                   // CoffeeConversation = "";
+                    interest.remove(CoffeeConversation);
+
+                }
+                break;
+
+            case R.id.radioButton5:
+                if (checked){
+                    MusicandArt = fiveText.getText().toString();
+                    interest.add(MusicandArt);
+
+                }else {
+                    //MusicandArt = "";
+                    interest.remove(MusicandArt);
+
+                }
+                break;
+
+            case R.id.radioButton6:
+                if (checked){
+                    MoviesorVideos = sixText.getText().toString();
+                    interest.add(MoviesorVideos);
+
+                }else {
+                    //MoviesorVideos = "";
+                    interest.remove(MoviesorVideos);
+
+                }
+                break;
+
+            case R.id.radioButton8:
+                if (checked){
+                    MusicConcerts = sevenText.getText().toString();
+                    interest.add(MusicConcerts);
+
+                }else {
+                  //  MusicConcerts = "";
+                    interest.remove(MusicConcerts);
+
+                }
+                break;
+            case R.id.radioButton9:
+                if (checked){
+                    Winetesting = eightText.getText().toString();
+                    interest.add(Winetesting);
+
+                }else {
+                    //Winetesting = "";
+                    interest.remove(Winetesting);
+
+                }
+                break;
+
+
         }
-    }
-
-    public void travel(View view) {
-        if (view.getId() == oneRadio.getId()) {
-          //  oneRadio.setBackgroundResource(R.drawable.selectedbubble);
-            Travel = oneText.getText().toString();
-
-        } else {
-           // oneRadio.setBackgroundResource(R.drawable.flag_transparent);
-            Travel = "";
-        }
-    }
-
-    public void sport(View view) {
-        if (view.getId() == twoRadio.getId()) {
-            //twoRadio.setBackgroundColor(Color.YELLOW);
-            //setBackgroundTintMode(R.color.yellow);
-           // Log.d("text", "showtext "+sport);
-            Sport = twoText.getText().toString();
-            Log.d("text", "show "+Sport);
-
-        } else {
-
-            Sport = "";
-            Log.d("text", "sho "+Sport);
+        saveInterest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // onCheckboxClicked(view);
+                for (String inter: interest){
+                    Log.d("display", inter);
+                }
+                Log.d("interest", ""+interest);
 
 
-        }
-    }
-
-    public void nightclubs(View view) {
-        if (view.getId() == threeRadio.getId()){
-            NightclubsorDancing = threeText.getText().toString();
-        }else {
-            NightclubsorDancing = "";
-        }
-
-    }
-
-    public void coffeeconversation(View view) {
-        if (view.getId() == fourRadio.getId()){
-            CoffeeConversation = fourText.getText().toString();
-        }else {
-            CoffeeConversation = "";
-        }
-    }
-
-    public void museumart(View view) {
-        if (view.getId() == fiveRadio.getId()){
-            MusicandArt = fiveText.getText().toString();
-        }else {
-           MusicandArt = "";
-        }
-    }
-
-    public void moviesorVideos(View view) {
-        if (view.getId() == sixRadio.getId()){
-            MoviesorVideos = sixText.getText().toString();
-        }else {
-           MoviesorVideos = "";
-        }
-    }
-
-    public void musicconcept(View view) {
-        if (view.getId() == sevenRadio.getId()){
-          MusicConcerts = sevenText.getText().toString();
-        }else {
-           MusicConcerts = "";
-        }
-
-    }
-
-    public void winetesting(View view) {
-        if (view.getId() == eightRadio.getId()){
-            Winetesting = eightText.getText().toString();
-        }else {
-         Winetesting = "";
-        }
+            }
+        });
     }
 }
