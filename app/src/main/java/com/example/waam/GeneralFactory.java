@@ -557,8 +557,8 @@ public class GeneralFactory {
 
                 if (response.isSuccessful()){
                     String loginToken = response.body().getToken();
-                    //SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
                     Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
+                    SharedPref.getInstance(context).setStoredToken(context,loginToken);
                     Log.d("LoginTOken",loginToken);
                     //  Intent intent = new Intent(Login.this, Profile.class);
                     //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
