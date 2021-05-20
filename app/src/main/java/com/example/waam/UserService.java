@@ -1,5 +1,7 @@
 package com.example.waam;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,6 +20,8 @@ public interface UserService {
    // @GET ("profile")
     //Call<profileresponse> responseuser(@Body profilerequest profilerequest);
 
+    @POST("api/interestuser")
+    Call<InterestResponds>interest(@Body List<InterestRequest> interestRequest);
 
     @PATCH("api/profile")
     Call<GetImage>getimage(@Body GetImageResponse getImageResponse, @Header("Authorization") String token);

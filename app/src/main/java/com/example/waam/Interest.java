@@ -29,6 +29,7 @@ public class Interest extends AppCompatActivity {
     String Winetesting = "";
     private Button saveInterest;
     private List<String> interest;
+    private List<InterestRequest> interestRequestList;
    // String Fullname;
 
     @Override
@@ -38,6 +39,8 @@ public class Interest extends AppCompatActivity {
 
         interest = new ArrayList<>();
 
+
+        interestRequestList = new ArrayList<>();
 
         String imageUri = getIntent().getStringExtra("profilepics");
 //        Log.d("ImageUriIN",imageUri);
@@ -93,10 +96,12 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                     Dinninout = zeroText.getText().toString();
                     interest.add(Dinninout);
+                    interestRequestList.add(new InterestRequest(Dinninout));
                     Log.d("DIning", ""+Dinninout);
                 }
                 else {
                     interest.remove(Dinninout);
+                    interestRequestList.remove(new InterestRequest(Dinninout));
                    // Dinninout = "";
                     Log.d("non",""+Dinninout);
                 }
@@ -106,10 +111,12 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                     Travel = oneText.getText().toString();
                     interest.add(Travel);
+                    interestRequestList.add(new InterestRequest(Travel));
                     Log.d("DIning", ""+Travel);
                 }
                 else{
                     interest.remove(Travel);
+                    interestRequestList.remove(new InterestRequest(Travel));
 
                     //Travel = "";
                 }
@@ -118,12 +125,14 @@ public class Interest extends AppCompatActivity {
             case R.id.radioButton2:
                 if (checked){
                     Sport = twoText.getText().toString();
+                    interestRequestList.add(new InterestRequest(Sport));
                     interest.add(Sport);
 
                     Log.d("text", "show "+Sport);
                 }
                 else{
                     interest.remove(Sport);
+                    interestRequestList.remove(new InterestRequest(Sport));
 
                     //Sport = "";
                 }
@@ -133,9 +142,11 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                     NightclubsorDancing = threeText.getText().toString();
                     interest.add(NightclubsorDancing);
+                    interestRequestList.add(new InterestRequest(NightclubsorDancing));
 
                 }else {
                     interest.remove(NightclubsorDancing);
+                    interestRequestList.remove(new InterestRequest(NightclubsorDancing));
 
                     // NightclubsorDancing = "";
                 }
@@ -145,10 +156,12 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                     CoffeeConversation = fourText.getText().toString();
                     interest.add(CoffeeConversation);
+                    interestRequestList.add(new InterestRequest(CoffeeConversation));
 
                 }else {
                    // CoffeeConversation = "";
                     interest.remove(CoffeeConversation);
+                    interestRequestList.remove(new InterestRequest(CoffeeConversation));
 
                 }
                 break;
@@ -157,10 +170,12 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                     MusicandArt = fiveText.getText().toString();
                     interest.add(MusicandArt);
+                    interestRequestList.add(new InterestRequest(MusicandArt));
 
                 }else {
                     //MusicandArt = "";
                     interest.remove(MusicandArt);
+                    interestRequestList.remove(new InterestRequest(MusicandArt));
 
                 }
                 break;
@@ -169,10 +184,12 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                     MoviesorVideos = sixText.getText().toString();
                     interest.add(MoviesorVideos);
+                    interestRequestList.add(new InterestRequest(MoviesorVideos));
 
                 }else {
                     //MoviesorVideos = "";
                     interest.remove(MoviesorVideos);
+                    interestRequestList.remove(new InterestRequest(MoviesorVideos));
 
                 }
                 break;
@@ -181,10 +198,12 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                     MusicConcerts = sevenText.getText().toString();
                     interest.add(MusicConcerts);
+                    interestRequestList.add(new InterestRequest(MusicConcerts));
 
                 }else {
                   //  MusicConcerts = "";
                     interest.remove(MusicConcerts);
+                    interestRequestList.remove(new InterestRequest(MusicConcerts));
 
                 }
                 break;
@@ -192,10 +211,12 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                     Winetesting = eightText.getText().toString();
                     interest.add(Winetesting);
+                    interestRequestList.add(new InterestRequest(Winetesting));
 
                 }else {
                     //Winetesting = "";
                     interest.remove(Winetesting);
+                    interestRequestList.remove(new InterestRequest(Winetesting));
 
                 }
                 break;
@@ -209,7 +230,9 @@ public class Interest extends AppCompatActivity {
                 for (String inter: interest){
                     Log.d("display", inter);
                 }
-                Log.d("interest", ""+interest);
+                for (InterestRequest interestRequest: interestRequestList){
+                    Log.d("Request", interestRequest.getInterest_id());
+                }
 
 
             }
