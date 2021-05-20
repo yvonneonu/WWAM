@@ -66,8 +66,6 @@ public class Interest extends AppCompatActivity {
         saveInterest = findViewById(R.id.button4);
 
 
-
-
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
