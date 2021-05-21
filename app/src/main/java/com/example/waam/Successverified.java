@@ -24,6 +24,8 @@ public class Successverified extends AppCompatActivity {
             public void run() {
                 Intent home = new Intent(Successverified.this, LocationDetectActivity.class);
                 home.putExtra("name", Fullname);
+                Log.d("TAG", ""+Fullname);
+
                 if (token != null){
                     home.putExtra("bearer", token);
                 }

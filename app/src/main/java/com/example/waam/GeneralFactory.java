@@ -709,7 +709,9 @@ public class GeneralFactory {
                     //Register users on firebase......
                     signUpForBase(waamUser.getEmail(), waamUser.getPassword(),progressBar, waamUser);
                     Intent intent = new Intent(context, Verification1.class);
+                    intent.putExtra("name", response.body().getFullname());
                     intent.putExtra("token", response.body().getToken());
+                        Log.d("me",""+response.body().getFullname());
                     context.startActivity(intent);
                     // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                     // intent.putExtra("profilepics", imageUri);

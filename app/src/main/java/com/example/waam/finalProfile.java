@@ -20,7 +20,7 @@ import java.util.List;
 
 public class finalProfile extends AppCompatActivity {
 
-    private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext;
+    private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext, namme;
     private ImageView image;
     private String spinn,spinn2, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
     private boolean textVisible;
@@ -38,6 +38,7 @@ public class finalProfile extends AppCompatActivity {
    // private int count10;
     Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok, drink, sala;
 
+    WaamUser waamUser = new WaamUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,7 @@ public class finalProfile extends AppCompatActivity {
       //  String imageUri = getIntent().getStringExtra("getProfilePics");
 
 //        Log.d("Complete",imageUri);
-        String Fullname = getIntent().getStringExtra("nameprofile");
+        String Fullname = getIntent().getStringExtra("name");
       //  String tired = getIntent().getStringExtra("everytoken");
 
 
@@ -65,6 +66,7 @@ public class finalProfile extends AppCompatActivity {
         count = 0;
         count1 = 0;
         textView = findViewById(R.id.textView);
+        namme = findViewById(R.id.textView19);
         careerText = findViewById(R.id.textView26);
         ethnictext = findViewById(R.id.textView3);
         faithtext = findViewById(R.id.textView4);
@@ -91,6 +93,9 @@ public class finalProfile extends AppCompatActivity {
         //String toks = getIntent().getStringExtra("token");
         //Log.d("sorry", "iknowyouaretired "+token);
 
+
+        //namme.setText(Fullname);
+        Log.d("TAG", ""+Fullname);
 
         List<String> names = new ArrayList<>();
      //   textView.setText(spinn);

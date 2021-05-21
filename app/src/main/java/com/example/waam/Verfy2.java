@@ -47,6 +47,7 @@ public class Verfy2 extends AppCompatActivity {
 
         if (bundle != null) {
             bearer = bundle.getString("token");
+            Fullname = bundle.getString("name");
 
         }
 
@@ -62,7 +63,7 @@ public class Verfy2 extends AppCompatActivity {
         six = findViewById(R.id.editText13);
 
         String phonenumber = getIntent().getStringExtra("number");
-        String Fullname = getIntent().getStringExtra("name");
+       // Fullname = getIntent().getStringExtra("name");
         shownum.setText(phonenumber);
         final StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -85,7 +86,10 @@ public class Verfy2 extends AppCompatActivity {
 
                 bundle.putString("phonenumber", phonenumber);
                 bundle.putString("bearer", token);
-               // bundle.putString("name", Fullname);
+                bundle.putString("name", Fullname);
+                Log.d("TAG", ""+Fullname);
+
+                // bundle.putString("name", Fullname);
 
                 otpresend();
             }
@@ -190,6 +194,8 @@ public class Verfy2 extends AppCompatActivity {
                 intent.putExtra("tokenbearer", bearer);
                 Log.d("TAG", "TOKENSHOW2 " +bearer);
                 intent.putExtra("name", Fullname);
+                Log.d("TAG", ""+Fullname);
+
 
                 startActivity(intent);
                 //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));

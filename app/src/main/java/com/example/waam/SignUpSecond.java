@@ -1,8 +1,5 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.icu.util.Calendar;
@@ -18,6 +15,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class SignUpSecond extends AppCompatActivity {
 

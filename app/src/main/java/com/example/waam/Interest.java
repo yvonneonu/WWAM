@@ -39,6 +39,7 @@ public class Interest extends AppCompatActivity {
     private List<InterestRequest> interestRequestList;
    private String message;
    private String token;
+   private String Fullname;
    //private String tok;
 
 
@@ -56,7 +57,7 @@ public class Interest extends AppCompatActivity {
 
         String imageUri = getIntent().getStringExtra("profilepics");
 //        Log.d("ImageUriIN",imageUri);
-        String Fullname = getIntent().getStringExtra("name");
+        Fullname = getIntent().getStringExtra("name");
         token = getIntent().getStringExtra("mytoken");
         Log.d("display", token);
 
@@ -90,13 +91,17 @@ public class Interest extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Interest.this, CompleteProfile.class);
 
-                intent.putExtra("nameprofile", Fullname);
+               // intent.putExtra("nameprofile", Fullname);
+
                 if (token != null){
                     intent.putExtra("token", token);
                 }
                 if (imageUri != null){
                     intent.putExtra("getProfilePics", imageUri);
                 }
+                intent.putExtra("name", Fullname);
+
+                Log.d("TAG", ""+Fullname);
 
                 Log.d("TAG", "TOKENSHOW6 " +token);
                 startActivity(intent);
@@ -268,6 +273,9 @@ public class Interest extends AppCompatActivity {
                     Intent nextActivity = new Intent(Interest.this, CompleteProfile.class);
                     if (token != null){
                         nextActivity.putExtra("token", token);
+                        nextActivity.putExtra("name", Fullname);
+                        Log.d("TAG", ""+Fullname);
+
                         startActivity(nextActivity);
                     }
                 }else {

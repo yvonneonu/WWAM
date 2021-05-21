@@ -50,6 +50,8 @@ public class LocationDetectActivity extends AppCompatActivity implements Locatio
                     Toast.makeText(LocationDetectActivity.this,"Permission already granted",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LocationDetectActivity.this, Profile.class);
                     intent.putExtra("name", Fullname);
+                    Log.d("TAG", ""+Fullname);
+
                     if (token != null){
                         intent.putExtra("alltoken", token);
                     }
