@@ -34,6 +34,7 @@ public class finalProfile extends AppCompatActivity {
     private int count7;
     private int count8;
     private int count9;
+    private String token;
    // private int count10;
     Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok, drink, sala;
 
@@ -42,6 +43,7 @@ public class finalProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_profile);
 
+        token = getIntent().getStringExtra("everytoken");
       //  String imageUri = getIntent().getStringExtra("getProfilePics");
 
 //        Log.d("Complete",imageUri);
@@ -85,7 +87,7 @@ public class finalProfile extends AppCompatActivity {
         drink = findViewById(R.id.drink);
         sala = findViewById(R.id.salary);
 
-        String token = getIntent().getStringExtra("everytoken");
+
         //String toks = getIntent().getStringExtra("token");
         //Log.d("sorry", "iknowyouaretired "+token);
 

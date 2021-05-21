@@ -39,7 +39,7 @@ public class Profile extends AppCompatActivity {
 
     UserService userService;
     String tokinfromLogin;
-    private String token;
+   // private String token;
     ImageView imageView;
     TextView textView, gallery, wipe;
     Button upload;
@@ -61,6 +61,8 @@ public class Profile extends AppCompatActivity {
         String Fullname = getIntent().getStringExtra("name");
       bigTokeng = getIntent().getStringExtra("alltoken");
 
+        //token = SharedPref.getInstance(this).getStoredToken(this);
+       // Log.d("showtoken", token);
         tokinfromLogin = getIntent().getStringExtra("toking");
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
@@ -119,12 +121,21 @@ public class Profile extends AppCompatActivity {
     }
 
     private void Hereapi() {
-        GetImageResponse getImageResponse = new GetImageResponse("picture");
-        Log.d("ImageUrl",imageUri.toString());
-        getImageResponse.setPicture(imageUri.toString());
-        requestPicture(getImageResponse);
-       // userService.
-       // Call<GetImage> getImageCall = ApiClient.getService().getimage()
+        if (imageUri != null){
+            GetImageResponse getImageResponse = new GetImageResponse("picture");
+//        Log.d("ImageUrl",imageUri.toString());
+            getImageResponse.setPicture(imageUri.toString());
+            requestPicture(getImageResponse);
+            Log.d("imageshow", ""+imageUri.toString());
+            // userService.
+            // Call<GetImage> getImageCall = ApiClient.getService().getimage()
+        }else {
+            String message = "Pick a photo";
+            Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+            //Log.d("imageshow", ""+r);
+           // Log.d("Body",new Gson().toJson(response.body()));
+        }
+
 
     }
     private void requestPicture(GetImageResponse getImageResponse){

@@ -21,7 +21,7 @@ public interface UserService {
     //Call<profileresponse> responseuser(@Body profilerequest profilerequest);
 
     @POST("api/interestuser")
-    Call<InterestResponds>interest(@Body List<InterestRequest> interestRequest);
+    Call<InterestResponds>interest(@Body List<InterestRequest> interestRequest, @Header("Authorization") String toke);
 
     @PATCH("api/profile")
     Call<GetImage>getimage(@Body GetImageResponse getImageResponse, @Header("Authorization") String token);
