@@ -98,16 +98,16 @@ public class SignUpSecond extends AppCompatActivity {
 
         WaamUser waamUser = new WaamUser("name", "email", "zipcode", "gender", "seeking", "date", "pass");
 
-        String Fullname = name.getText().toString();
+        String fullname = name.getText().toString();
         String Email = email.getText().toString();
         String Zip = zip.getText().toString();
         String Update = update.getText().toString();
         String Passwor = password.getText().toString();
         String Confirm = confrim.getText().toString();
-        if(Fullname.isEmpty()) {
+        if(fullname.isEmpty()) {
             name.setError("Full Name is required");
             name.requestFocus();
-        }else if(!generalFactory.validateName(Fullname)){
+        }else if(!generalFactory.validateName(fullname)){
             name.setError("Pls submit full name");
             name.requestFocus();
         }
@@ -139,7 +139,8 @@ public class SignUpSecond extends AppCompatActivity {
         } else {
 
             //Log.d("meemmemememe", ""+user);
-            waamUser.setFullname(Fullname);
+            SharedPref.getInstance(this).setStoredName(SharedPref.FULLNAME,fullname);
+            waamUser.setFullname(fullname);
             waamUser.setEmail(Email);
             waamUser.setZipcode(Zip);
             waamUser.setBirth_date(Update);

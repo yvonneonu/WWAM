@@ -6,12 +6,12 @@ import android.content.SharedPreferences;
 
 public class SharedPref {
 
-    private static final String TOKEN = "";
-    private static final String FULLNAME = "";
+    public static final String TOKEN = "token";
+    public static final String FULLNAME = "full_name";
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
     private SharedPref(Context context){
-       sharedPref = context.getSharedPreferences("name", Context.MODE_PRIVATE);
+       sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
     }
 
     public static SharedPref getInstance(Context context){
@@ -19,23 +19,23 @@ public class SharedPref {
         return  pref;
     }
 
-    public  String getStoredToken(Context context) {
+    public  String getStoredToken() {
         return sharedPref.getString(TOKEN, null);
     }
 
 
-    public void setStoredToken(Context context, String token) {
+    public void setStoredToken(String key, String token) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("key", "Value");
+        editor.putString(key, token);
         editor.apply();
 
     }
-    public  String getStoredName(Context context) {
+    public  String getStoredName() {
         return sharedPref.getString(FULLNAME, null);
     }
-    public void setStoredName(Context context, String name) {
+    public void setStoredName(String key, String value) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("key", "Value");
+        editor.putString(key, value);
         editor.apply();
 
     }
