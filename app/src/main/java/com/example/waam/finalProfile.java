@@ -66,7 +66,7 @@ public class finalProfile extends AppCompatActivity {
         count = 0;
         count1 = 0;
         textView = findViewById(R.id.textView);
-       // namme = findViewById(R.id.textView19);
+        namme = findViewById(R.id.textView19);
         careerText = findViewById(R.id.textView26);
         ethnictext = findViewById(R.id.textView3);
         faithtext = findViewById(R.id.textView4);
@@ -108,6 +108,7 @@ public class finalProfile extends AppCompatActivity {
         names.add("Juliet");
         names.add("Maria");
 
+        namme.setText(SharedPref.getInstance(this).getStoredName());
         careerSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
