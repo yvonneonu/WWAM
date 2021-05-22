@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 
 public class CompleteProfile extends AppCompatActivity {
     private ImageView firstImage, secondImage,thirdImage, fourthImage, fivethImage, sixthImage, seventhImage, eightImage, ninethImage, photo, gallerysave;;
-    private TextView wipe, name;
+    private TextView wipe;
     private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight, profile;
 
     @Override
@@ -48,7 +48,7 @@ public class CompleteProfile extends AppCompatActivity {
         imageseveth = findViewById(R.id.image7);
         imageeight = findViewById(R.id.image8);
         wipe = findViewById(R.id.swipe);
-        name = findViewById(R.id.textView19);
+       // name = findViewById(R.id.textView19);
 
 
         if (imageUri != null) {
@@ -58,7 +58,7 @@ public class CompleteProfile extends AppCompatActivity {
                     .load(Uri.parse(imageUri))
                     .into(profile);
         }
-        name.setText(Fullname);
+       // name.setText(Fullname);
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override

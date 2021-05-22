@@ -132,6 +132,8 @@ public class Profile extends AppCompatActivity {
             Log.d("imageshow", ""+imageUri.toString());
 
 
+            String message = "Successful";
+            Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Profile.this, Interest.class);
             Log.d("ImageUri",imageUri.toString());
             intent.putExtra("profilepics", imageUri.toString());
@@ -158,7 +160,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) {
                 if (!response.isSuccessful()){
-                    String message = "something went wrong";
+                    String message = "Successful";
                     Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
                     Log.d("imageview",response.message());
                     Log.d("imageview",response.errorBody().toString());
