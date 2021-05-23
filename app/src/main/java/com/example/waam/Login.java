@@ -17,7 +17,10 @@ import com.connectycube.auth.session.ConnectycubeSessionManager;
 import com.connectycube.auth.session.ConnectycubeSettings;
 import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.ConnectycubeRoster;
+import com.example.waam.rtm.AGApplication;
+import com.example.waam.rtm.ChatManager;
 
+import io.agora.rtm.RtmClient;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -33,10 +36,7 @@ public class Login extends AppCompatActivity {
     private EditText editEmail;
     private String Email;
     private String Password;
-    private ConnectycubeChatService chatService;
-
-    boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
-
+    private RtmClient mRtmClient;
 
     static final String APP_ID = "4663";
     static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
@@ -78,11 +78,15 @@ public class Login extends AppCompatActivity {
         editEmail = findViewById(R.id.editText2);
         editPass = findViewById(R.id.editText4);
 
+//I stopped here tahnk you
+        ChatManager mChatManager = AGApplication.the().getChatManager();
+        mRtmClient = mChatManager.getRtmClient();
+
 
         pressback.setOnClickListener(v -> GoBack());
         text.setOnClickListener(v -> AnotherActivity());
         signup.setOnClickListener(v -> SignUnpage());
-      //  logm.setOnClickListener(v -> Themain());
+      //  logm.setOnClckListener(v -> Themain());
 
 
      //   ConnectycubeChatService.ConfigurationBuilder chatServiceConfigurationBuilder = new ConnectycubeChatService.ConfigurationBuilder();
@@ -111,36 +115,10 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
 
             }else {
-
-                /*final ConnectycubeUser user = new ConnectycubeUser();
-                user.setId(4134562);
-                user.setLogin("bamidele");
-                user.setPassword("12345678");
-
-                /*ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
-                    @Override
-                    public void onSuccess(ConnectycubeUser userj, Bundle args) {
-                        SessionManager.getSessionManager(Login.this).setConnectyUser(userj);
-                        int id = SessionManager.getSessionManager(Login.this).getConnectyUser();
-
-                        Log.d("idLogin",""+id);
-                        Log.d("doraaa", ""+userj.getId());
-                        Log.d("doraaa", ""+userj.getLogin());
-                        Log.d("doraaa", ""+userj.getEmail());
-                        Log.d("doraa",userj.getFullName());
-                    }
-
-                    @Override
-                    public void onError(ResponseException error) {
-
-                        Log.d("ConnectyCuberror", ""+error.getMessage());
-                    }
-                });*/
-
                 LoginRequest loginRequest = new LoginRequest("email", "password");
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
-                GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest);
+                GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
                 //loginUser(loginRequest);
 
             }

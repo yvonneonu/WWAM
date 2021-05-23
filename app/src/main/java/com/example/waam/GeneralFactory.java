@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
+import com.example.waam.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +32,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import io.agora.rtm.ErrorInfo;
+import io.agora.rtm.RtmClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,6 +56,7 @@ public class GeneralFactory {
     private List<WaamUser> contactedUser;
     private List<String> usersStringId;
     private String theMessage;
+    private FirebaseAuth acct;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -181,12 +186,12 @@ public class GeneralFactory {
                 });
     }
 
-    public void loginToFireBase(String email, String password,LoginRequest loginRequest){
+    public void loginToFireBase(String email, String password,LoginRequest loginRequest,RtmClient rtmClient){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        loginUser(loginRequest);
+                        loginUser(loginRequest,rtmClient);
                     }else{
                         Log.d("Login","Login was succesfull");
                     }
@@ -502,7 +507,7 @@ public class GeneralFactory {
         return s.substring(0, Math.min(s.length(), n));
     }
 
-    public void loginUser(LoginRequest loginRequest){
+    public void loginUser(LoginRequest loginRequest, RtmClient rtmClient){
 
         Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
 
@@ -511,15 +516,41 @@ public class GeneralFactory {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()){
-                    String loginToken = response.body().getToken();
-                    //SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
-                    Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
-                    Log.d("LoginTOken",loginToken);
-                    //  Intent intent = new Intent(Login.this, Profile.class);
-                    //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
-                    //  Intent intent = new Intent(Login.this,finalProfile.class);
-                    intent.putExtra("toking",loginToken);
-                    context.startActivity(intent);
+
+                    //This gets the user logged in
+                    acct = FirebaseAuth.getInstance();
+                    final User user = new User(acct.getUid());
+                    //this line mighth not work because it requires you to get the data of the person that logged in with google
+                    //However if the Login was succesful i believe the response should include the name of the person who logged in
+                    user.setFireDisplayName(user.getFireDisplayName());
+
+                    rtmClient.login(null, user.getFireDisplayName(), new io.agora.rtm.ResultCallback<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String loginToken = response.body().getToken();
+                                    Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
+                                    intent.putExtra("user", user);
+                                    Log.d("LoginToken",loginToken);
+                                    intent.putExtra("toking",loginToken);
+                                    context.startActivity(intent);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFailure(final ErrorInfo errorInfo) {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, context.getResources().getString(R.string.failed) + " " + errorInfo.getErrorDescription(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    });
+
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
 
                 }else {
@@ -668,7 +699,7 @@ public class GeneralFactory {
                     context.startActivity(intent);
                     // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                     // intent.putExtra("profilepics", imageUri);
-                    //context.finish();
+                    ((Activity) context).finish();
                 } else {
                     response.errorBody();
                     // Toast.makeText(SignUp.this,response.body().getErrors(),Toast.LENGTH_LONG).show();
