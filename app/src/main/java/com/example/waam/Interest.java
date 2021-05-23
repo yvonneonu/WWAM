@@ -40,6 +40,7 @@ public class Interest extends AppCompatActivity {
    private String message;
    private String token;
    private String Fullname;
+    String imageUri;
    //private String tok;
 
 
@@ -55,7 +56,7 @@ public class Interest extends AppCompatActivity {
 
         interestRequestList = new ArrayList<>();
 
-        String imageUri = getIntent().getStringExtra("profilepics");
+        imageUri = getIntent().getStringExtra("profilepics");
 //        Log.d("ImageUriIN",imageUri);
         Fullname = getIntent().getStringExtra("name");
         token = getIntent().getStringExtra("mytoken");
@@ -123,7 +124,7 @@ public class Interest extends AppCompatActivity {
                     Log.d("DIning", ""+Dinninout);
                 }
                 else {
-                    interest.remove(Dinninout);
+              //      interest.remove(Dinninout);
                     interestRequestList.remove(new InterestRequest(Dinninout));
                    // Dinninout = "";
                     Log.d("non",""+Dinninout);
@@ -138,7 +139,7 @@ public class Interest extends AppCompatActivity {
                     Log.d("DIning", ""+Travel);
                 }
                 else{
-                    interest.remove(Travel);
+//                    interest.remove(Travel);
                     interestRequestList.remove(new InterestRequest(Travel));
 
                     //Travel = "";
@@ -154,7 +155,7 @@ public class Interest extends AppCompatActivity {
                     Log.d("text", "show "+Sport);
                 }
                 else{
-                    interest.remove(Sport);
+                  //  interest.remove(Sport);
                     interestRequestList.remove(new InterestRequest(Sport));
 
                     //Sport = "";
@@ -168,7 +169,7 @@ public class Interest extends AppCompatActivity {
                     interestRequestList.add(new InterestRequest(NightclubsorDancing));
 
                 }else {
-                    interest.remove(NightclubsorDancing);
+                   // interest.remove(NightclubsorDancing);
                     interestRequestList.remove(new InterestRequest(NightclubsorDancing));
 
                     // NightclubsorDancing = "";
@@ -183,7 +184,7 @@ public class Interest extends AppCompatActivity {
 
                 }else {
                    // CoffeeConversation = "";
-                    interest.remove(CoffeeConversation);
+                   // interest.remove(CoffeeConversation);
                     interestRequestList.remove(new InterestRequest(CoffeeConversation));
 
                 }
@@ -197,7 +198,7 @@ public class Interest extends AppCompatActivity {
 
                 }else {
                     //MusicandArt = "";
-                    interest.remove(MusicandArt);
+                  //  interest.remove(MusicandArt);
                     interestRequestList.remove(new InterestRequest(MusicandArt));
 
                 }
@@ -211,7 +212,7 @@ public class Interest extends AppCompatActivity {
 
                 }else {
                     //MoviesorVideos = "";
-                    interest.remove(MoviesorVideos);
+                   // interest.remove(MoviesorVideos);
                     interestRequestList.remove(new InterestRequest(MoviesorVideos));
 
                 }
@@ -225,7 +226,7 @@ public class Interest extends AppCompatActivity {
 
                 }else {
                   //  MusicConcerts = "";
-                    interest.remove(MusicConcerts);
+                 //   interest.remove(MusicConcerts);
                     interestRequestList.remove(new InterestRequest(MusicConcerts));
 
                 }
@@ -238,7 +239,7 @@ public class Interest extends AppCompatActivity {
 
                 }else {
                     //Winetesting = "";
-                    interest.remove(Winetesting);
+                 //   interest.remove(Winetesting);
                     interestRequestList.remove(new InterestRequest(Winetesting));
 
                 }
@@ -270,10 +271,14 @@ public class Interest extends AppCompatActivity {
             public void onResponse(Call<InterestResponds> call, Response<InterestResponds> response) {
                 if (response.isSuccessful()){
                     message = response.body().getMessage();
+                    String message = "Successful";
+                    Toast.makeText(Interest.this, message, Toast.LENGTH_LONG).show();
                     Intent nextActivity = new Intent(Interest.this, CompleteProfile.class);
                     if (token != null){
                         nextActivity.putExtra("token", token);
                         nextActivity.putExtra("name", Fullname);
+                        nextActivity.putExtra("getProfilePics", imageUri);
+
                         Log.d("TAG", ""+Fullname);
 
                         startActivity(nextActivity);

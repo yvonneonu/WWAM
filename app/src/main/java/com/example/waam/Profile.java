@@ -125,7 +125,7 @@ public class Profile extends AppCompatActivity {
 
     private void Hereapi() {
         if (imageUri != null){
-            GetImageResponse getImageResponse = new GetImageResponse("picture");
+            GetImageResponse getImageResponse = new GetImageResponse("");
 //        Log.d("ImageUrl",imageUri.toString());
             getImageResponse.setPicture(imageUri.toString());
             requestPicture(getImageResponse);

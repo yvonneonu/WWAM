@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ public class finalProfile extends AppCompatActivity {
 
     private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext, namme;
     private ImageView image;
-    private String spinn,spinn2, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
+    private String spinn, spinn2, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
     private boolean textVisible;
     private int count;
     private int count1;
@@ -35,25 +36,28 @@ public class finalProfile extends AppCompatActivity {
     private int count8;
     private int count9;
     private String token;
-   // private int count10;
+    private Button saveNCon;
+   // private int spinn;
+    // private int count10;
+    String imageUri;
     Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok, drink, sala;
 
     WaamUser waamUser = new WaamUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_profile);
 
         token = getIntent().getStringExtra("everytoken");
-      //  String imageUri = getIntent().getStringExtra("getProfilePics");
+        //  String imageUri = getIntent().getStringExtra("getProfilePics");
 
 //        Log.d("Complete",imageUri);
         String Fullname = getIntent().getStringExtra("name");
-      //  String tired = getIntent().getStringExtra("everytoken");
+        //  String tired = getIntent().getStringExtra("everytoken");
 
 
-
-        String imageUri = getIntent().getStringExtra("image");
+        imageUri = getIntent().getStringExtra("image");
         image = findViewById(R.id.imageView12);
         if (imageUri != null) {
             Glide.with(this)
@@ -65,6 +69,7 @@ public class finalProfile extends AppCompatActivity {
 
         count = 0;
         count1 = 0;
+        saveNCon = findViewById(R.id.button6);
         textView = findViewById(R.id.textView);
         namme = findViewById(R.id.textView19);
         careerText = findViewById(R.id.textView26);
@@ -95,10 +100,10 @@ public class finalProfile extends AppCompatActivity {
 
 
         //namme.setText(Fullname);
-        Log.d("TAG", ""+Fullname);
+        Log.d("TAG", "" + Fullname);
 
         List<String> names = new ArrayList<>();
-     //   textView.setText(spinn);
+        //   textView.setText(spinn);
 
         names.add("Cynthia");
         names.add("Cyndy");
@@ -114,8 +119,8 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count++;
-                Log.d("InCareer","Running");
-                Log.d("InCareer",""+count);
+                Log.d("InCareer", "Running");
+                Log.d("InCareer", "" + count);
                 if (count > 1) careerText.setText(careerSpin.getSelectedItem().toString());
             }
 
@@ -129,7 +134,7 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count1++;
-                if(count1 > 1) textView.setText(spinner.getSelectedItem().toString());
+                if (count1 > 1) textView.setText(spinner.getSelectedItem().toString());
 
             }
 
@@ -140,11 +145,20 @@ public class finalProfile extends AppCompatActivity {
         });
 
 
+     /*   saveNCon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("Clicked", "Yes i am");
+                Hereapi();
+            }
+        });*/
+
         body.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count2++;
-                if (count2> 1) bod.setText(body.getSelectedItem().toString());
+                if (count2 > 1) bod.setText(body.getSelectedItem().toString());
 
             }
 
@@ -159,7 +173,7 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count3++;
-                if (count3> 1)ethnictext.setText(ethni.getSelectedItem().toString());
+                if (count3 > 1) ethnictext.setText(ethni.getSelectedItem().toString());
 
             }
 
@@ -173,7 +187,8 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count4++;
-                if(count4> 1)faithtext.setText(fait.getSelectedItem().toString()); ;
+                if (count4 > 1) faithtext.setText(fait.getSelectedItem().toString());
+                ;
             }
 
             @Override
@@ -187,7 +202,8 @@ public class finalProfile extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count5++;
 
-                if(count5> 1)politictext.setText(polit.getSelectedItem().toString()); ;
+                if (count5 > 1) politictext.setText(polit.getSelectedItem().toString());
+                ;
 
             }
 
@@ -201,7 +217,7 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count6++;
-                if(count6> 1)childrentext.setText(childre.getSelectedItem().toString());
+                if (count6 > 1) childrentext.setText(childre.getSelectedItem().toString());
 
             }
 
@@ -215,7 +231,7 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count7++;
-                if (count7> 1)smoketext.setText(smok.getSelectedItem().toString());
+                if (count7 > 1) smoketext.setText(smok.getSelectedItem().toString());
             }
 
             @Override
@@ -228,7 +244,7 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count8++;
-                if (count8> 1)drinktext.setText(drink.getSelectedItem().toString());
+                if (count8 > 1) drinktext.setText(drink.getSelectedItem().toString());
             }
 
             @Override
@@ -241,7 +257,7 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count9++;
-                if (count9> 1)salatext.setText(sala.getSelectedItem().toString());
+                if (count9 > 1) salatext.setText(sala.getSelectedItem().toString());
             }
 
             @Override
@@ -254,24 +270,23 @@ public class finalProfile extends AppCompatActivity {
         swipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (textView.toString().isEmpty() ){
+                if (textView.toString().isEmpty()) {
                     textView.setError("Choose your Career");
                     //||
                     textView.requestFocus();
-                  //  Toast.makeText()
-                }else if (textView.toString().isEmpty()){
+                    //  Toast.makeText()
+                } else if (textView.toString().isEmpty()) {
 
-                }else{
+                } else {
                     Intent intent = new Intent(finalProfile.this, LookingFor.class);
                     if (imageUri != null) {
                         intent.putExtra("images", imageUri);
                     }
-                    if (token != null){
+                    if (token != null) {
                         intent.putExtra("token", token);
                     }
-                    Log.d("TAG", "TOKENSHOW7 " +token);
+                    Log.d("TAG", "TOKENSHOW7 " + token);
                     startActivity(intent);
-
 
 
                 }
@@ -299,7 +314,7 @@ public class finalProfile extends AppCompatActivity {
                 spinn = spinner.getSelectedItem().toString();
 
             }
-        },token);
+        }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchBody(new FetchSpinnerValues.BodyTypeListener() {
             @Override
@@ -318,42 +333,42 @@ public class finalProfile extends AppCompatActivity {
             spinehnic = ethni.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchFaith(userFaith ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchFaith(userFaith -> {
             ArrayAdapter<String> userFaithAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userFaith);
             userFaithAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             fait.setAdapter(userFaithAdapter);
             spinfaith = fait.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchPolitics(userPolitics ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchPolitics(userPolitics -> {
             ArrayAdapter<String> userPoliticsAdapetr = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userPolitics);
             userPoliticsAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             polit.setAdapter(userPoliticsAdapetr);
             spinPolitics = polit.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchChildren(userChildren ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchChildren(userChildren -> {
             ArrayAdapter<String> userChildrenAdapetr = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userChildren);
             userChildrenAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             childre.setAdapter(userChildrenAdapetr);
             spinChildren = childre.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchSmoke(userSmoke ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchSmoke(userSmoke -> {
             ArrayAdapter<String> userSmokeAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSmoke);
             userSmokeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             smok.setAdapter(userSmokeAdapter);
             spinSmoke = smok.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchDrink(userDrink ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchDrink(userDrink -> {
             ArrayAdapter<String> userDrinkAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userDrink);
             userDrinkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             drink.setAdapter(userDrinkAdapter);
             spinDrink = drink.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchSalay(userSalary ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchSalay(userSalary -> {
             ArrayAdapter<String> userSalaryAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSalary);
             userSalaryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             sala.setAdapter(userSalaryAdapter);
@@ -362,9 +377,83 @@ public class finalProfile extends AppCompatActivity {
     }
 
 
+  /*  private void Hereapi() {
+        if (imageUri != null) {
+            GetImageResponse getImageResponse = new GetImageResponse("", "", 1, 2, 3, 4, 5,
+                    6, 7, 8, 9);
+//        Log.d("ImageUrl",imageUri.toString());
+            getImageResponse.setPicture(imageUri.toString());
+            getImageResponse.setCareer(spinn2);
+            getImageResponse.setEducation_id(Integer.parseInt(spinn));
+            getImageResponse.setBody_type_id(Integer.parseInt(ret));
+            getImageResponse.setEthnicity_id(Integer.parseInt(spinehnic));
+            getImageResponse.setFaith_id(Integer.parseInt(spinfaith));
+            getImageResponse.setPolitics_id(Integer.parseInt(spinPolitics));
+            getImageResponse.setChildren_id(Integer.parseInt(spinChildren));
+            getImageResponse.setSmoke_id(Integer.parseInt(spinSmoke));
+            getImageResponse.setDrink_id(Integer.parseInt(spinDrink));
+            //getImageResponse.setIncome_id(spinsala);
+            getImageResponse.setIncome_id(Integer.parseInt(spinsala));
 
 
 
+            requestPicture(getImageResponse);
+            Log.d("imageshow", "" + imageUri.toString());
+            Log.d("imageshow", "" + spinsala);
+
+
+
+            String message = "Successful";
+            Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(finalProfile.this, LookingFor.class);
+            Log.d("ImageUri", imageUri.toString());
+            intent.putExtra("profilepics", imageUri.toString());
+            //intent.putExtra("name", Fullname);
+            // Log.d("TAG", ""+Fullname);
+
+            intent.putExtra("mytoken", token);
+            Log.d("TAG", "TOKENSHOW5 " + token);
+            startActivity(intent);
+            // userService.
+            // Call<GetImage> getImageCall = ApiClient.getService().getimage()
+        } else {
+            String message = "Select details about me";
+            Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
+            //Log.d("imageshow", ""+r);
+            // Log.d("Body",new Gson().toJson(response.body()));
+        }
+
+
+    }
+
+    private void requestPicture(GetImageResponse getImageResponse) {
+        Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer " + token);
+        getImageCall.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (!response.isSuccessful()) {
+                    String message = "Successful";
+                    Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
+                    Log.d("imageview", response.message());
+                    Log.d("imageview", response.errorBody().toString());
+                    return;
+                }
+
+
+                String message = "Successful";
+                Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
+                Log.d("Body", new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+                Log.d("no image", t.getMessage());
+            }
+        });
+
+
+    }*/
 }
 
 
