@@ -1,8 +1,8 @@
 package com.example.waam;
 
-public class SpinnerResponse {
+public class SpinnerRequest {
     private String career;
-    private int education_id;
+    private int exercise_id;
     private int body_type_id;
     private int ethnicity_id;
     private int faith_id;
@@ -12,9 +12,9 @@ public class SpinnerResponse {
     private int drink_id;
     private int income_id;
 
-    public SpinnerResponse(String career, int education_id, int body_type_id, int ethnicity_id, int faith_id, int politics_id, int children_id, int smoke_id, int drink_id, int income_id) {
+    public SpinnerRequest(String career, int exercise_id, int body_type_id, int ethnicity_id, int faith_id, int politics_id, int children_id, int smoke_id, int drink_id, int income_id) {
         this.career = career;
-        this.education_id = education_id;
+        this.exercise_id = exercise_id;
         this.body_type_id = body_type_id;
         this.ethnicity_id = ethnicity_id;
         this.faith_id = faith_id;
@@ -33,12 +33,12 @@ public class SpinnerResponse {
         this.career = career;
     }
 
-    public int getEducation_id() {
-        return education_id;
+    public int getExercise_id() {
+        return exercise_id;
     }
 
-    public void setEducation_id(int education_id) {
-        this.education_id = education_id;
+    public void setExercise_id(int exercise_id) {
+        this.exercise_id = exercise_id;
     }
 
     public int getBody_type_id() {

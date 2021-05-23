@@ -10,19 +10,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class finalProfile extends AppCompatActivity {
 
     private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext, namme;
     private ImageView image;
-    private String spinn,spinn2, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
+    private String  spinn2;
     private boolean textVisible;
     private int count;
     private int count1;
@@ -35,7 +41,9 @@ public class finalProfile extends AppCompatActivity {
     private int count8;
     private int count9;
     private String token;
+    private int spinn, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
    // private int count10;
+   String imageUri;
     Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok, drink, sala;
 
     WaamUser waamUser = new WaamUser();
@@ -53,7 +61,7 @@ public class finalProfile extends AppCompatActivity {
 
 
 
-        String imageUri = getIntent().getStringExtra("image");
+        imageUri = getIntent().getStringExtra("image");
         image = findViewById(R.id.imageView12);
         if (imageUri != null) {
             Glide.with(this)
@@ -296,7 +304,7 @@ public class finalProfile extends AppCompatActivity {
                 ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
                 qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(qualificationAdapter);
-                spinn = spinner.getSelectedItem().toString();
+                spinn = (int) spinner.getSelectedItem();
 
             }
         },token);
@@ -307,7 +315,7 @@ public class finalProfile extends AppCompatActivity {
                 ArrayAdapter<String> userBodyAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userBody);
                 userBodyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 body.setAdapter(userBodyAdapter);
-                ret = body.getSelectedItem().toString();
+                ret = (int) body.getSelectedItem();
             }
         }, token);
 
@@ -315,55 +323,127 @@ public class finalProfile extends AppCompatActivity {
             ArrayAdapter<String> userEhtnicityAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userEthnicity);
             userEhtnicityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             ethni.setAdapter(userEhtnicityAdapter);
-            spinehnic = ethni.getSelectedItem().toString();
+            spinehnic = (int) ethni.getSelectedItem();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchFaith(userFaith ->  {
             ArrayAdapter<String> userFaithAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userFaith);
             userFaithAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             fait.setAdapter(userFaithAdapter);
-            spinfaith = fait.getSelectedItem().toString();
+            spinfaith = (int) fait.getSelectedItem();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchPolitics(userPolitics ->  {
             ArrayAdapter<String> userPoliticsAdapetr = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userPolitics);
             userPoliticsAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             polit.setAdapter(userPoliticsAdapetr);
-            spinPolitics = polit.getSelectedItem().toString();
+            spinPolitics = (int) polit.getSelectedItem();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchChildren(userChildren ->  {
             ArrayAdapter<String> userChildrenAdapetr = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userChildren);
             userChildrenAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             childre.setAdapter(userChildrenAdapetr);
-            spinChildren = childre.getSelectedItem().toString();
+            spinChildren = (int) childre.getSelectedItem();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchSmoke(userSmoke ->  {
             ArrayAdapter<String> userSmokeAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSmoke);
             userSmokeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             smok.setAdapter(userSmokeAdapter);
-            spinSmoke = smok.getSelectedItem().toString();
+            spinSmoke = (int) smok.getSelectedItem();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchDrink(userDrink ->  {
             ArrayAdapter<String> userDrinkAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userDrink);
             userDrinkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             drink.setAdapter(userDrinkAdapter);
-            spinDrink = drink.getSelectedItem().toString();
+            spinDrink = (int) drink.getSelectedItem();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchSalay(userSalary ->  {
             ArrayAdapter<String> userSalaryAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSalary);
             userSalaryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             sala.setAdapter(userSalaryAdapter);
-            spinsala = sala.getSelectedItem().toString();
+            spinsala = (int) sala.getSelectedItem();
         }, token);
     }
 
 
+    private void Hereapi() {
+        if (imageUri != null) {
+            SpinnerResponse getSpinnerResponse = new SpinnerResponse( "", 1, 2, 3, 4, 5,
+                    6, 7, 8, 9);
+//        Log.d("ImageUrl",imageUri.toString());
+            getSpinnerResponse.setCareer(spinn2);
+            getSpinnerResponse.setEducation_id(spinn);
+            getSpinnerResponse.setBody_type_id(ret);
+            getSpinnerResponse.setEthnicity_id(spinehnic);
+            getSpinnerResponse.setFaith_id(spinfaith);
+            getSpinnerResponse.setPolitics_id(spinPolitics);
+            getSpinnerResponse.setChildren_id(spinChildren);
+            getSpinnerResponse.setSmoke_id(spinSmoke);
+            getSpinnerResponse.setDrink_id(spinDrink);
+            getSpinnerResponse.setIncome_id(spinsala);
+            requestDetails(getSpinnerResponse);
 
 
+           // Log.d("imageshow", "" + imageUri.toString());
+            Log.d("imageshow", "" + spinsala);
+
+
+
+            String message = "Successful";
+            Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(finalProfile.this, LookingFor.class);
+            Log.d("ImageUri", imageUri.toString());
+            intent.putExtra("profilepics", imageUri.toString());
+            //intent.putExtra("name", Fullname);
+            // Log.d("TAG", ""+Fullname);
+
+            intent.putExtra("mytoken", token);
+            Log.d("TAG", "TOKENSHOW5 " + token);
+            startActivity(intent);
+            // userService.
+            // Call<GetImage> getImageCall = ApiClient.getService().getimage()
+        } else {
+            String message = "Select details about me";
+            Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
+            //Log.d("imageshow", ""+r);
+            // Log.d("Body",new Gson().toJson(response.body()));
+        }
+
+
+    }
+
+    private void requestDetails(SpinnerResponse spinnerResponse) {
+        Call<SpinnerRequest> getSpinnerCall = ApiClient.getService().getSpinner(spinnerResponse, "Bearer " + token);
+        getSpinnerCall.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (!response.isSuccessful()) {
+                    String message = "Successful";
+                    Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
+                    Log.d("imageview", response.message());
+                    Log.d("imageview", response.errorBody().toString());
+                    return;
+                }
+
+
+                String message = "Successful";
+                Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
+                Log.d("Body", new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+                Log.d("No Details Selected", t.getMessage());
+            }
+        });
+
+
+    }
 
 }
 
