@@ -276,6 +276,7 @@ public class Interest extends AppCompatActivity {
                     Intent nextActivity = new Intent(Interest.this, CompleteProfile.class);
                     if (token != null){
                         nextActivity.putExtra("token", token);
+                        nextActivity.putExtra("getProfilePics", imageUri);
                         nextActivity.putExtra("name", Fullname);
                         nextActivity.putExtra("getProfilePics", imageUri);
 
