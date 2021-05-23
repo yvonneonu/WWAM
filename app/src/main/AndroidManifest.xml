@@ -36,7 +36,8 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".SignUpSecond"></activity>
+        <activity android:name=".VideoCallActivity"></activity>
+        <activity android:name=".SignUpSecond" />
         <activity android:name=".CallingActivity" />
         <activity
             android:name=".AllUsersActivity"

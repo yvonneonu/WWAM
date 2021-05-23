@@ -23,6 +23,7 @@ import java.util.List;
 public class ChatMessage extends AppCompatActivity {
     public static final String NEW_FRIENDS = "com.example.waam.WaamUserFromChatList";
     public static final String FRIENDS = "com.example.waam.WaamUserFromFriends";
+    public static final String INTENT_EXTRA_IS_PEER_MODE = "VideoChat";
     private RecyclerView recyclerView;
     private ChatScreenAdapter chatScreenAdapter;
     private List<Chat> chats;

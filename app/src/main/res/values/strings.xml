@@ -5,6 +5,8 @@
     <string name="Gateways">Find New Gateways with every swipe</string>
     <string name="Events">Find New Events with every swipe</string>
     <string name="Dating">Find New Dating with every swipe</string>
+    <string name="frame_rate_value_with_unit">%d fps</string>
+    <string name="bit_rate_value_with_unit">%d kbps</string>
     <string name="title_location_permission">Allow WAMM To Access Your location</string>
     <string name="text_location_permission">Recommendation will be presented based on your location</string>
     <string name="ok">Allow</string>
