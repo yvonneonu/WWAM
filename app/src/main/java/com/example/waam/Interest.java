@@ -40,6 +40,7 @@ public class Interest extends AppCompatActivity {
    private String message;
    private String token;
    private String Fullname;
+    String imageUri;
    //private String tok;
 
 
@@ -55,7 +56,7 @@ public class Interest extends AppCompatActivity {
 
         interestRequestList = new ArrayList<>();
 
-        String imageUri = getIntent().getStringExtra("profilepics");
+        imageUri = getIntent().getStringExtra("profilepics");
 //        Log.d("ImageUriIN",imageUri);
         Fullname = getIntent().getStringExtra("name");
         token = getIntent().getStringExtra("mytoken");
@@ -273,6 +274,7 @@ public class Interest extends AppCompatActivity {
                     Intent nextActivity = new Intent(Interest.this, CompleteProfile.class);
                     if (token != null){
                         nextActivity.putExtra("token", token);
+                        nextActivity.putExtra("getProfilePics", imageUri);
                         nextActivity.putExtra("name", Fullname);
                         Log.d("TAG", ""+Fullname);
 

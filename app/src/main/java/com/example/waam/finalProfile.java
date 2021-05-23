@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ public class finalProfile extends AppCompatActivity {
 
     private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext, namme;
     private ImageView image;
-    private String  spinn2;
+    private String  spinn2, spinn, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
     private boolean textVisible;
     private int count;
     private int count1;
@@ -41,7 +42,8 @@ public class finalProfile extends AppCompatActivity {
     private int count8;
     private int count9;
     private String token;
-    private int spinn, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
+    private Button saveDetails;
+    private int zero, first, second, third, fourth, five, six, seven, eight, night;
    // private int count10;
    String imageUri;
     Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok, drink, sala;
@@ -83,6 +85,7 @@ public class finalProfile extends AppCompatActivity {
         smoketext = findViewById(R.id.textView7);
         drinktext = findViewById(R.id.textView8);
         salatext = findViewById(R.id.textView9);
+        saveDetails = findViewById(R.id.button6);
 
 
         spinner = findViewById(R.id.one);
@@ -117,6 +120,14 @@ public class finalProfile extends AppCompatActivity {
         names.add("Maria");
 
         namme.setText(SharedPref.getInstance(this).getStoredName());
+
+        saveDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Hereapi();
+                Log.d("bfei", "jabhbchj");
+            }
+        });
         careerSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -124,6 +135,7 @@ public class finalProfile extends AppCompatActivity {
                 count++;
                 Log.d("InCareer","Running");
                 Log.d("InCareer",""+count);
+
                 if (count > 1) careerText.setText(careerSpin.getSelectedItem().toString());
             }
 
@@ -138,6 +150,8 @@ public class finalProfile extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count1++;
                 if(count1 > 1) textView.setText(spinner.getSelectedItem().toString());
+
+                zero = 0;
 
             }
 
@@ -154,6 +168,8 @@ public class finalProfile extends AppCompatActivity {
                 count2++;
                 if (count2> 1) bod.setText(body.getSelectedItem().toString());
 
+                first = 0;
+
             }
 
             @Override
@@ -168,6 +184,7 @@ public class finalProfile extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count3++;
                 if (count3> 1)ethnictext.setText(ethni.getSelectedItem().toString());
+                second = 0;
 
             }
 
@@ -181,7 +198,8 @@ public class finalProfile extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count4++;
-                if(count4> 1)faithtext.setText(fait.getSelectedItem().toString()); ;
+                if(count4> 1)faithtext.setText(fait.getSelectedItem().toString());
+                third = 0;
             }
 
             @Override
@@ -195,7 +213,8 @@ public class finalProfile extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count5++;
 
-                if(count5> 1)politictext.setText(polit.getSelectedItem().toString()); ;
+                if(count5> 1)politictext.setText(polit.getSelectedItem().toString());
+                fourth = 0;
 
             }
 
@@ -211,6 +230,7 @@ public class finalProfile extends AppCompatActivity {
                 count6++;
                 if(count6> 1)childrentext.setText(childre.getSelectedItem().toString());
 
+                five = 0;
             }
 
             @Override
@@ -224,6 +244,7 @@ public class finalProfile extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count7++;
                 if (count7> 1)smoketext.setText(smok.getSelectedItem().toString());
+                six = 0;
             }
 
             @Override
@@ -237,6 +258,7 @@ public class finalProfile extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count8++;
                 if (count8> 1)drinktext.setText(drink.getSelectedItem().toString());
+                seven = 0;
             }
 
             @Override
@@ -250,6 +272,7 @@ public class finalProfile extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count9++;
                 if (count9> 1)salatext.setText(sala.getSelectedItem().toString());
+                eight = 0;
             }
 
             @Override
@@ -304,7 +327,7 @@ public class finalProfile extends AppCompatActivity {
                 ArrayAdapter<String> qualificationAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, qualification);
                 qualificationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(qualificationAdapter);
-                spinn = (int) spinner.getSelectedItem();
+                spinn = spinner.getSelectedItem().toString();
 
             }
         },token);
@@ -315,7 +338,7 @@ public class finalProfile extends AppCompatActivity {
                 ArrayAdapter<String> userBodyAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userBody);
                 userBodyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 body.setAdapter(userBodyAdapter);
-                ret = (int) body.getSelectedItem();
+                ret = body.getSelectedItem().toString();
             }
         }, token);
 
@@ -323,49 +346,49 @@ public class finalProfile extends AppCompatActivity {
             ArrayAdapter<String> userEhtnicityAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userEthnicity);
             userEhtnicityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             ethni.setAdapter(userEhtnicityAdapter);
-            spinehnic = (int) ethni.getSelectedItem();
+            spinehnic = ethni.getSelectedItem().toString();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchFaith(userFaith ->  {
             ArrayAdapter<String> userFaithAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userFaith);
             userFaithAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             fait.setAdapter(userFaithAdapter);
-            spinfaith = (int) fait.getSelectedItem();
+            spinfaith = fait.getSelectedItem().toString();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchPolitics(userPolitics ->  {
             ArrayAdapter<String> userPoliticsAdapetr = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userPolitics);
             userPoliticsAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             polit.setAdapter(userPoliticsAdapetr);
-            spinPolitics = (int) polit.getSelectedItem();
+            spinPolitics = polit.getSelectedItem().toString();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchChildren(userChildren ->  {
             ArrayAdapter<String> userChildrenAdapetr = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userChildren);
             userChildrenAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             childre.setAdapter(userChildrenAdapetr);
-            spinChildren = (int) childre.getSelectedItem();
+            spinChildren = childre.getSelectedItem().toString();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchSmoke(userSmoke ->  {
             ArrayAdapter<String> userSmokeAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSmoke);
             userSmokeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             smok.setAdapter(userSmokeAdapter);
-            spinSmoke = (int) smok.getSelectedItem();
+            spinSmoke = smok.getSelectedItem().toString();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchDrink(userDrink ->  {
             ArrayAdapter<String> userDrinkAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userDrink);
             userDrinkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             drink.setAdapter(userDrinkAdapter);
-            spinDrink = (int) drink.getSelectedItem();
+            spinDrink = drink.getSelectedItem().toString();
         }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchSalay(userSalary ->  {
             ArrayAdapter<String> userSalaryAdapter = new ArrayAdapter<String>(finalProfile.this, android.R.layout.simple_spinner_item, userSalary);
             userSalaryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             sala.setAdapter(userSalaryAdapter);
-            spinsala = (int) sala.getSelectedItem();
+            spinsala = sala.getSelectedItem().toString();
         }, token);
     }
 
@@ -376,15 +399,15 @@ public class finalProfile extends AppCompatActivity {
                     6, 7, 8, 9);
 //        Log.d("ImageUrl",imageUri.toString());
             getSpinnerResponse.setCareer(spinn2);
-            getSpinnerResponse.setEducation_id(spinn);
-            getSpinnerResponse.setBody_type_id(ret);
-            getSpinnerResponse.setEthnicity_id(spinehnic);
-            getSpinnerResponse.setFaith_id(spinfaith);
-            getSpinnerResponse.setPolitics_id(spinPolitics);
-            getSpinnerResponse.setChildren_id(spinChildren);
-            getSpinnerResponse.setSmoke_id(spinSmoke);
-            getSpinnerResponse.setDrink_id(spinDrink);
-            getSpinnerResponse.setIncome_id(spinsala);
+            getSpinnerResponse.setEducation_id(zero);
+            getSpinnerResponse.setBody_type_id(first);
+            getSpinnerResponse.setEthnicity_id(second);
+            getSpinnerResponse.setFaith_id(third);
+            getSpinnerResponse.setPolitics_id(fourth);
+            getSpinnerResponse.setChildren_id(five);
+            getSpinnerResponse.setSmoke_id(six);
+            getSpinnerResponse.setDrink_id(seven);
+            getSpinnerResponse.setIncome_id(eight);
             requestDetails(getSpinnerResponse);
 
 
@@ -401,7 +424,7 @@ public class finalProfile extends AppCompatActivity {
             //intent.putExtra("name", Fullname);
             // Log.d("TAG", ""+Fullname);
 
-            intent.putExtra("mytoken", token);
+            intent.putExtra("token", token);
             Log.d("TAG", "TOKENSHOW5 " + token);
             startActivity(intent);
             // userService.
