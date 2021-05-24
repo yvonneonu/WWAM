@@ -519,12 +519,13 @@ public class GeneralFactory {
 
                     //This gets the user logged in
                     acct = FirebaseAuth.getInstance();
+                    //this is where the instance of you the user is created
                     final User user = new User(acct.getUid());
                     //this line mighth not work because it requires you to get the data of the person that logged in with google
                     //However if the Login was succesful i believe the response should include the name of the person who logged in
-                    user.setFireDisplayName(user.getFireDisplayName());
+                    user.setFireDisplayName(acct.getUid());
 
-                    rtmClient.login(null, user.getFireDisplayName(), new io.agora.rtm.ResultCallback<Void>() {
+                    rtmClient.login(null,acct.getUid(), new io.agora.rtm.ResultCallback<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             ((Activity) context).runOnUiThread(new Runnable() {
@@ -532,7 +533,7 @@ public class GeneralFactory {
                                 public void run() {
                                     String loginToken = response.body().getToken();
                                     Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
-                                    intent.putExtra("user", user);
+                                    intent.putExtra(VideoCallActivity.AGOREUSER, user);
                                     Log.d("LoginToken",loginToken);
                                     intent.putExtra("toking",loginToken);
                                     context.startActivity(intent);

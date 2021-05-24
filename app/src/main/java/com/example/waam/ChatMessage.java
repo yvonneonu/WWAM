@@ -93,7 +93,7 @@ public class ChatMessage extends AppCompatActivity {
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
         String myId = FirebaseAuth.getInstance().getUid();
-
+        initUIAndData();
         if(userFriends != null){
             String receiverId = userFriends.getUid();
             String userImage = userFriends.getImageUrl();
@@ -165,9 +165,6 @@ public class ChatMessage extends AppCompatActivity {
             videoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
-                    callingIntent.putExtra("user_contact", userFriends);
-                    startActivity(callingIntent);
                     String myName = user.getFireDisplayName();
                     mTargetName = userFriends.getFullname();
                     if (mTargetName.equals("")) {
@@ -189,7 +186,7 @@ public class ChatMessage extends AppCompatActivity {
                             channelName = mTargetName;
                         }
                         Intent intent = new Intent(ChatMessage.this, VideoCallActivity.class);
-                        intent.putExtra("User", user);
+                        intent.putExtra(VideoCallActivity.AGOREUSER, user);
                         intent.putExtra("Channel", channelName);
                         intent.putExtra(INTENT_EXTRA_IS_PEER_MODE, mIsPeerToPeerMode);
                         intent.putExtra("Actual Target", mTargetName);
@@ -274,6 +271,34 @@ public class ChatMessage extends AppCompatActivity {
                     Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
                     callingIntent.putExtra("user_contact", contactlist);
                     startActivity(callingIntent);
+
+                    String myName = user.getFireDisplayName();
+                    mTargetName = userFriends.getFullname();
+                    if (mTargetName.equals("")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_empty : R.string.channel_name_empty));
+                    } else if (mTargetName.length() >= MAX_INPUT_NAME_LENGTH) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_too_long : R.string.channel_name_too_long));
+                    } else if (mTargetName.startsWith(" ")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_starts_with_space : R.string.channel_name_starts_with_space));
+                    } else if (mTargetName.equals("null")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_literal_null : R.string.channel_name_literal_null));
+                    } else if (mIsPeerToPeerMode && mTargetName.equals(user.getFireDisplayName())) {
+                        showToast(getString(R.string.account_cannot_be_yourself));
+                    } else {
+                        String channelName = "";
+                        if (mIsPeerToPeerMode) {
+                            channelName = myName.compareTo(mTargetName) < 0 ? myName + mTargetName : mTargetName + myName;
+
+                        }else {
+                            channelName = mTargetName;
+                        }
+                        Intent intent = new Intent(ChatMessage.this, VideoCallActivity.class);
+                        intent.putExtra("User", user);
+                        intent.putExtra("Channel", channelName);
+                        intent.putExtra(INTENT_EXTRA_IS_PEER_MODE, mIsPeerToPeerMode);
+                        intent.putExtra("Actual Target", mTargetName);
+                        startActivity(intent);
+                    }
                 }
             });
         }
@@ -283,7 +308,7 @@ public class ChatMessage extends AppCompatActivity {
 
     private void initUIAndData() {
         Intent intent = getIntent();
-        user = intent.getParcelableExtra("user");
+        user = intent.getParcelableExtra( VideoCallActivity.AGOREUSER);
         /*mTitleTextView = findViewById(R.id.selection_title);
         mNameEditText = findViewById(R.id.selection_name);
         RadioGroup modeGroup = findViewById(R.id.mode_radio_group);

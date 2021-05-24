@@ -37,13 +37,13 @@ public class Login extends AppCompatActivity {
     private String Email;
     private String Password;
     private RtmClient mRtmClient;
+    private ChatManager mChatManager;
 
     static final String APP_ID = "4663";
     static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
     static final String AUTH_SECRET = "yhuExsebKPu8F8S";
     static final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
 
-    private ConnectycubeRoster chatRoster;
 //
 
 
@@ -56,17 +56,18 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // getSupportActionBar().hide();
+
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //initcomit();
+//I stopped here thank you
+        mChatManager = AGApplication.the().getChatManager();
+        mRtmClient = mChatManager.getRtmClient();
 
         ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
         ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
 
-        //ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-        //chatService = ConnectycubeChatService.getInstance();
+
 
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);
@@ -78,27 +79,13 @@ public class Login extends AppCompatActivity {
         editEmail = findViewById(R.id.editText2);
         editPass = findViewById(R.id.editText4);
 
-//I stopped here tahnk you
-        ChatManager mChatManager = AGApplication.the().getChatManager();
-        mRtmClient = mChatManager.getRtmClient();
+
 
 
         pressback.setOnClickListener(v -> GoBack());
         text.setOnClickListener(v -> AnotherActivity());
         signup.setOnClickListener(v -> SignUnpage());
-      //  logm.setOnClckListener(v -> Themain());
 
-
-     //   ConnectycubeChatService.ConfigurationBuilder chatServiceConfigurationBuilder = new ConnectycubeChatService.ConfigurationBuilder();
-      //  chatServiceConfigurationBuilder.setSocketTimeout(60);
-      //  chatServiceConfigurationBuilder.setKeepAlive(true);
-     //   chatServiceConfigurationBuilder.setUseTls(true); //By default TLS is disabled.
-//        ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
-
-
-
-       //String loginsToken = ConnectycubeSessionManager.getInstance().getToken();
-        //loginToken = ConnectycubeSessionManager.getInstance().getToken();
         Log.d("show", "show");
 
 
@@ -126,48 +113,6 @@ public class Login extends AppCompatActivity {
 
     }
 
-
-
-
-
-
-    /*public void loginUser(LoginRequest loginRequest){
-
-        Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
-
-        loginResponseCall.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-
-                if (response.isSuccessful()){
-                    loginToken = response.body().getToken();
-                    //SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
-                    Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
-                    Log.d("LoginTOken",loginToken);
-                  //  Intent intent = new Intent(Login.this, Profile.class);
-                    //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
-                  //  Intent intent = new Intent(Login.this,finalProfile.class);
-                    intent.putExtra("toking",loginToken);
-                    startActivity(intent);
-                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
-                    finish();
-
-                }else {
-                    String message = "An error occured please try again";
-                    Toast.makeText(Login.this,message,Toast.LENGTH_LONG).show();
-                    Toast.makeText(Login.this,"Email or Password mismatch!", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-                //String message = t.getLocalizedMessage();
-                Toast.makeText(Login.this, t.getMessage(),Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }*/
 
    private void Themain() {
         Intent intent = new Intent(Login.this, MainActivity.class);

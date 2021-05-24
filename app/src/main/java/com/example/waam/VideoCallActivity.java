@@ -42,6 +42,7 @@ public class VideoCallActivity extends AppCompatActivity {
 
     private String channelName;
     private static final String TAG = VideoCallActivity.class.getName();
+    public static final String AGOREUSER = "agorauser";
     public int mLayoutType = LAYOUT_TYPE_DEFAULT;
     private static final int PERMISSION_REQ_ID = 22;
     RtcEngine mRtcEngine;
