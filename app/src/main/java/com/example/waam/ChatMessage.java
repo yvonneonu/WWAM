@@ -29,7 +29,7 @@ public class ChatMessage extends AppCompatActivity {
     public static final String FRIENDS = "com.example.waam.WaamUserFromFriends";
     public static final String INTENT_EXTRA_IS_PEER_MODE = "videoChat";
 
-    private User user;
+    //private User user;
     private TextView mTitleTextView;
     private TextView mChatButton, mCallButton;
     private EditText mNameEditText;
@@ -93,7 +93,7 @@ public class ChatMessage extends AppCompatActivity {
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
         String myId = FirebaseAuth.getInstance().getUid();
-        initUIAndData();
+        //initUIAndData();
         if(userFriends != null){
             String receiverId = userFriends.getUid();
             String userImage = userFriends.getImageUrl();
@@ -162,7 +162,7 @@ public class ChatMessage extends AppCompatActivity {
                 }
             });
 
-            videoButton.setOnClickListener(new View.OnClickListener() {
+            /*videoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String myName = user.getFireDisplayName();
@@ -193,7 +193,7 @@ public class ChatMessage extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
-            });
+            });*/
 
 
 
@@ -265,7 +265,7 @@ public class ChatMessage extends AppCompatActivity {
             });
 
 
-            videoButton.setOnClickListener(new View.OnClickListener() {
+            /*videoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
@@ -300,15 +300,15 @@ public class ChatMessage extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
-            });
+            });*/
         }
 
     }
 
 
-    private void initUIAndData() {
+    /*private void initUIAndData() {
         Intent intent = getIntent();
-        user = intent.getParcelableExtra( VideoCallActivity.AGOREUSER);
+        //user = intent.getParcelableExtra( VideoCallActivity.AGOREUSER);
         /*mTitleTextView = findViewById(R.id.selection_title);
         mNameEditText = findViewById(R.id.selection_name);
         RadioGroup modeGroup = findViewById(R.id.mode_radio_group);
@@ -336,8 +336,8 @@ public class ChatMessage extends AppCompatActivity {
 
 
         RadioButton peerMode = findViewById(R.id.peer_radio_button);
-        peerMode.setChecked(true);*/
-    }
+        peerMode.setChecked(true);
+    }*/
 
     private void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();

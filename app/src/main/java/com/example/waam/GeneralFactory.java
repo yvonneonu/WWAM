@@ -185,13 +185,25 @@ public class GeneralFactory {
                     }
                 });
     }
-
     public void loginToFireBase(String email, String password,LoginRequest loginRequest,RtmClient rtmClient){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         loginUser(loginRequest,rtmClient);
+                    }else{
+                        Log.d("Login","Login was succesfull");
+                    }
+
+                });
+    }
+
+    public void loginToFireBase(String email, String password,LoginRequest loginRequest){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        loginUser(loginRequest);
                     }else{
                         Log.d("Login","Login was succesfull");
                     }
@@ -570,6 +582,45 @@ public class GeneralFactory {
             }
         });
     }
+
+
+    public void loginUser(LoginRequest loginRequest){
+
+        Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
+
+        loginResponseCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                if (response.isSuccessful()){
+
+                    String loginToken = response.body().getToken();
+                    Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
+                    Log.d("LoginToken",loginToken);
+                    intent.putExtra("toking",loginToken);
+                    context.startActivity(intent);
+                    //This gets the user logged in
+                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
+
+                }else {
+                    String message = "An error occured please try again";
+                    Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Email or Password mismatch!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                //String message = t.getLocalizedMessage();
+                Toast.makeText(context, t.getMessage(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+
+
 
     public void fetchAllUser(FetchFriends fetchAllWaamUsers){
         allWaamUsers = new ArrayList<>();

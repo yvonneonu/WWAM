@@ -60,8 +60,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //I stopped here thank you
-        mChatManager = AGApplication.the().getChatManager();
-        mRtmClient = mChatManager.getRtmClient();
+       // mChatManager = AGApplication.the().getChatManager();
+        //mRtmClient = mChatManager.getRtmClient();
 
         ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
         ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
@@ -80,8 +80,6 @@ public class Login extends AppCompatActivity {
         editPass = findViewById(R.id.editText4);
 
 
-
-
         pressback.setOnClickListener(v -> GoBack());
         text.setOnClickListener(v -> AnotherActivity());
         signup.setOnClickListener(v -> SignUnpage());
@@ -96,7 +94,6 @@ public class Login extends AppCompatActivity {
 
             new loginAut().execute(Email, Password);
 
-
             if (TextUtils.isEmpty(editEmail.getText().toString()) || TextUtils.isEmpty(editPass.getText().toString())){
                 String message = "All inputs required";
                 Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
@@ -105,7 +102,8 @@ public class Login extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest("email", "password");
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
-                GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
+                GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest);
+                //GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
                 //loginUser(loginRequest);
 
             }
