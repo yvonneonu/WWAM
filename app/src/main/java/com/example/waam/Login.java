@@ -11,19 +11,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.connectycube.auth.session.ConnectycubeSessionManager;
 import com.connectycube.auth.session.ConnectycubeSettings;
 import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.ConnectycubeRoster;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private TextView signup;
     private ImageView logm;
     private TextView text;
@@ -33,6 +38,8 @@ public class Login extends AppCompatActivity {
     private EditText editEmail;
     private String Email;
     private String Password;
+    GoogleApiClient mGoogleApiClient;
+
     private ConnectycubeChatService chatService;
 
     boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
@@ -61,6 +68,13 @@ public class Login extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //initcomit();
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
         ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
@@ -212,6 +226,11 @@ public class Login extends AppCompatActivity {
     private void GoBack() {
         Intent intent = new Intent(Login.this, ViewPager.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        //statusTextView.setText("Connection Failed: " + connectionResult);
     }
 
     private class loginAut extends AsyncTask<String, Void, String>{

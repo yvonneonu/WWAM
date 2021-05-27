@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -226,4 +227,8 @@ public class SignUpSecond extends AppCompatActivity {
         return makeDateString(day, month, year);
     }
 
+    public void login(View view) {
+        Intent intent = new Intent(SignUpSecond.this, Login.class);
+        startActivity(intent);
+    }
 }
