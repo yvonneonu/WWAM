@@ -29,6 +29,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         String token = getIntent().getStringExtra("toking");
+        WaamUser friendsProfile = (WaamUser) getIntent().getSerializableExtra("PutProfile");
         boolean clicked = getIntent().getBooleanExtra("clicked",false);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -61,7 +62,11 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
          // bottomNavigationView.setSelectedItemId(R.id.messages);
           // bottomNavigationView.onScreenStateChanged(0);
 
-        }else{
+            //
+        }else if( friendsProfile != null){
+           fragmenting = ProfileFragment.newInstance(friendsProfile);
+        } //Show the user that is logged in;
+        else{
             fragmenting = new ExploreFragment();
         }
 
