@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 import java.util.Random;
@@ -40,10 +41,10 @@ public class ProfileFragment extends Fragment {
     private Dialog dialog;
     private WaamUser user;
     private View view;
-    private WaamUser friendPro;
     private ImageView imageView;
     private TextView textView;
     private boolean[] boolcont;
+    private FirebaseAuth mAuth;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,17 +72,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if(getArguments() != null){
             user = (WaamUser) getArguments().getSerializable(PUT_PROFILE);
-            if( user != null){
-
-
-
-            }else{
-
-                Log.d("Here", "I am here in others");
-            }
         }
+
         setHasOptionsMenu(true);
         boolcont = new boolean[]{true,false};
 
@@ -146,10 +140,28 @@ public class ProfileFragment extends Fragment {
         Button friendRequest = view.findViewById(R.id.button11);
         textView = dialog.findViewById(R.id.textView70);
         imageView = view.findViewById(R.id.imageView31);
-        Glide.with(this)
-                .asBitmap()
-                .load(user.getImageUrl())
-                .into(imageView);
+
+        if(user != null){
+            Glide.with(this)
+                    .asBitmap()
+                    .load(user.getImageUrl())
+                    .into(imageView);
+        }else{
+            mAuth = FirebaseAuth.getInstance();
+            String uid = mAuth.getUid();
+            friendRequest.setVisibility(View.GONE);
+            GeneralFactory.getGeneralFactory(getActivity()).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                @Override
+                public void loadSpecUse(WaamUser userpro) {
+                    Glide.with(getActivity())
+                            .asBitmap()
+                            .load(userpro.getImageUrl())
+                            .into(imageView);
+                }
+            });
+        }
+
+
 
         friendRequest.setOnClickListener(v -> {
             textView.setText("You have sucessfully sent this user a \n friend request");
