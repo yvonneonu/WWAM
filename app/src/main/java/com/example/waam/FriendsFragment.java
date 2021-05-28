@@ -53,7 +53,6 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private FirebaseAuth firebaseAuth;
     private FriendAdapt friendAdapt;
     private List<WaamUser> friendModelList;
 

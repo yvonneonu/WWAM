@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,9 +98,11 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 break;
             case interest:
                 fragment = new InterestFragment();
+                Log.d("Interest","Showing off");
                 break;
             case friends:
                 fragment = new FriendsFragment();
+                Log.d("Friends","Showing off");
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
