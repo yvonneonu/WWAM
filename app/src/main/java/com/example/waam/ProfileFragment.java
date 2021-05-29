@@ -2,12 +2,6 @@ package com.example.waam;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,7 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 import java.util.Random;
@@ -33,9 +36,15 @@ public class ProfileFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String PUT_PROFILE = "PutProfile";
     private Dialog dialog;
+    private WaamUser user;
+    private View view;
+    private ImageView imageView;
     private TextView textView;
     private boolean[] boolcont;
+    private FirebaseAuth mAuth;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -49,16 +58,13 @@ public class ProfileFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
+    public static ProfileFragment newInstance(WaamUser waamUser) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(PUT_PROFILE, waamUser);
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,17 +72,19 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        if(getArguments() != null){
+            user = (WaamUser) getArguments().getSerializable(PUT_PROFILE);
         }
+
         setHasOptionsMenu(true);
         boolcont = new boolean[]{true,false};
+
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.friendrequestdialog);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().getAttributes().windowAnimations = R.style.animations ;
         Button button = dialog.findViewById(R.id.close);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +92,7 @@ public class ProfileFragment extends Fragment {
                 dialog.dismiss();
             }
         });
+
 
     }
 
@@ -129,9 +138,35 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
         Button friendRequest = view.findViewById(R.id.button11);
         textView = dialog.findViewById(R.id.textView70);
+        imageView = view.findViewById(R.id.imageView31);
+
+        if(user != null){
+            Glide.with(this)
+                    .asBitmap()
+                    .load(user.getImageUrl())
+                    .into(imageView);
+        }else{
+            mAuth = FirebaseAuth.getInstance();
+            String uid = mAuth.getUid();
+            friendRequest.setVisibility(View.GONE);
+            GeneralFactory.getGeneralFactory(getActivity()).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                @Override
+                public void loadSpecUse(WaamUser userpro) {
+                    if(isAdded()){
+                        Glide.with(getActivity())
+                                .asBitmap()
+                                .load(userpro.getImageUrl())
+                                .into(imageView);
+                    }
+
+                }
+            });
+        }
+
+
 
         friendRequest.setOnClickListener(v -> {
             textView.setText("You have sucessfully sent this user a \n friend request");
@@ -141,6 +176,7 @@ public class ProfileFragment extends Fragment {
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
         HorizontalScrollView horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
+
         horizontalScrollView.setHorizontalScrollBarEnabled(false);
         return  view;
 

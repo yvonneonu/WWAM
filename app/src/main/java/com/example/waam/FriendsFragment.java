@@ -53,7 +53,6 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private FirebaseAuth firebaseAuth;
     private FriendAdapt friendAdapt;
     private List<WaamUser> friendModelList;
 
@@ -92,7 +91,7 @@ public class FriendsFragment extends Fragment {
         setHasOptionsMenu(true);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
-        Log.d("FriendsFrag","fragie");
+        Log.d("FrendsFragment","fragie");
 
         generalFactory.loadFriends(branchName, friends -> {
             recyclerView.setVisibility(View.VISIBLE);

@@ -15,9 +15,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DiscoverDrawerLayerout extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer1;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         Toolbar toolbar2 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar2);
 
+        mAuth = FirebaseAuth.getInstance();
         NavigationView navigationView1 = findViewById(R.id.nav_view);
         navigationView1.setNavigationItemSelectedListener(this);
 
@@ -67,6 +70,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 break;
 
             case R.id.discover:
+
                 fragment = new DiscoverFragment();
                 item.setIcon(R.drawable.lowernav_explore_icon_active);
                 break;
@@ -82,6 +86,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 break;
 
             case R.id.profile:
+
                 fragment = new ProfileFragment();
                 item.setIcon(R.drawable.lowernav_profile_icon_active);
                 break;

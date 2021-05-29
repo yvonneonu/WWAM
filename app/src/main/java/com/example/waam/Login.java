@@ -11,24 +11,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.connectycube.auth.session.ConnectycubeSessionManager;
 import com.connectycube.auth.session.ConnectycubeSettings;
 import com.connectycube.chat.ConnectycubeChatService;
 import com.connectycube.chat.ConnectycubeRoster;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.example.waam.rtm.AGApplication;
+import com.example.waam.rtm.ChatManager;
 
+import io.agora.rtm.RtmClient;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class Login extends AppCompatActivity {
     private TextView signup;
     private ImageView logm;
     private TextView text;
@@ -38,19 +36,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private EditText editEmail;
     private String Email;
     private String Password;
-    GoogleApiClient mGoogleApiClient;
-
-    private ConnectycubeChatService chatService;
-
-    boolean isSignedIn = ConnectycubeSessionManager.getInstance().getSessionParameters() != null;
-
+    private RtmClient mRtmClient;
+    private ChatManager mChatManager;
 
     static final String APP_ID = "4663";
     static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
     static final String AUTH_SECRET = "yhuExsebKPu8F8S";
     static final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
 
-    private ConnectycubeRoster chatRoster;
 //
 
 
@@ -63,24 +56,18 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // getSupportActionBar().hide();
+
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //initcomit();
+//I stopped here thank you
+       // mChatManager = AGApplication.the().getChatManager();
+        //mRtmClient = mChatManager.getRtmClient();
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
         ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
         ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
 
-        //ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
-        //chatService = ConnectycubeChatService.getInstance();
+
 
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);
@@ -96,19 +83,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         pressback.setOnClickListener(v -> GoBack());
         text.setOnClickListener(v -> AnotherActivity());
         signup.setOnClickListener(v -> SignUnpage());
-      //  logm.setOnClickListener(v -> Themain());
 
-
-     //   ConnectycubeChatService.ConfigurationBuilder chatServiceConfigurationBuilder = new ConnectycubeChatService.ConfigurationBuilder();
-      //  chatServiceConfigurationBuilder.setSocketTimeout(60);
-      //  chatServiceConfigurationBuilder.setKeepAlive(true);
-     //   chatServiceConfigurationBuilder.setUseTls(true); //By default TLS is disabled.
-//        ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
-
-
-
-       //String loginsToken = ConnectycubeSessionManager.getInstance().getToken();
-        //loginToken = ConnectycubeSessionManager.getInstance().getToken();
         Log.d("show", "show");
 
 
@@ -119,42 +94,16 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
             new loginAut().execute(Email, Password);
 
-
             if (TextUtils.isEmpty(editEmail.getText().toString()) || TextUtils.isEmpty(editPass.getText().toString())){
                 String message = "All inputs required";
                 Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
 
             }else {
-
-                /*final ConnectycubeUser user = new ConnectycubeUser();
-                user.setId(4134562);
-                user.setLogin("bamidele");
-                user.setPassword("12345678");
-
-                /*ConnectycubeUsers.signIn(user).performAsync(new EntityCallback<ConnectycubeUser>() {
-                    @Override
-                    public void onSuccess(ConnectycubeUser userj, Bundle args) {
-                        SessionManager.getSessionManager(Login.this).setConnectyUser(userj);
-                        int id = SessionManager.getSessionManager(Login.this).getConnectyUser();
-
-                        Log.d("idLogin",""+id);
-                        Log.d("doraaa", ""+userj.getId());
-                        Log.d("doraaa", ""+userj.getLogin());
-                        Log.d("doraaa", ""+userj.getEmail());
-                        Log.d("doraa",userj.getFullName());
-                    }
-
-                    @Override
-                    public void onError(ResponseException error) {
-
-                        Log.d("ConnectyCuberror", ""+error.getMessage());
-                    }
-                });*/
-
                 LoginRequest loginRequest = new LoginRequest("email", "password");
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
                 GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest);
+                //GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
                 //loginUser(loginRequest);
 
             }
@@ -162,48 +111,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
     }
 
-
-
-
-
-
-    /*public void loginUser(LoginRequest loginRequest){
-
-        Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
-
-        loginResponseCall.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-
-                if (response.isSuccessful()){
-                    loginToken = response.body().getToken();
-                    //SessionManager.getSessionManager(Login.this).setTOKEN(loginToken);
-                    Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
-                    Log.d("LoginTOken",loginToken);
-                  //  Intent intent = new Intent(Login.this, Profile.class);
-                    //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
-                  //  Intent intent = new Intent(Login.this,finalProfile.class);
-                    intent.putExtra("toking",loginToken);
-                    startActivity(intent);
-                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
-                    finish();
-
-                }else {
-                    String message = "An error occured please try again";
-                    Toast.makeText(Login.this,message,Toast.LENGTH_LONG).show();
-                    Toast.makeText(Login.this,"Email or Password mismatch!", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-                //String message = t.getLocalizedMessage();
-                Toast.makeText(Login.this, t.getMessage(),Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }*/
 
    private void Themain() {
         Intent intent = new Intent(Login.this, MainActivity.class);
@@ -226,11 +133,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private void GoBack() {
         Intent intent = new Intent(Login.this, ViewPager.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        //statusTextView.setText("Connection Failed: " + connectionResult);
     }
 
     private class loginAut extends AsyncTask<String, Void, String>{

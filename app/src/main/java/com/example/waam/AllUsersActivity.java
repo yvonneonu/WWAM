@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -57,7 +58,10 @@ public class AllUsersActivity extends AppCompatActivity {
                             WaamUser user = friendModelList.get(position);
                             if(friendAdapt != null && FirebaseAuth.getInstance().getCurrentUser() != null){
                                 String branch = FirebaseAuth.getInstance().getCurrentUser().getUid()+FRIENDS;
-                                generalFactoryInstance.addToFriend(user,branch);
+                                //generalFactoryInstance.addToFriend(user,branch);
+                                Intent intent = new Intent(AllUsersActivity.this, DrawelayoutActivity.class);
+                                intent.putExtra(ProfileFragment.PUT_PROFILE,user);
+                                startActivity(intent);
                             }
 
                         }

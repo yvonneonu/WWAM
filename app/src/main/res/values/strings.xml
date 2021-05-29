@@ -5,11 +5,13 @@
     <string name="Gateways">Find New Gateways with every swipe</string>
     <string name="Events">Find New Events with every swipe</string>
     <string name="Dating">Find New Dating with every swipe</string>
+    <string name="frame_rate_value_with_unit">%d fps</string>
+    <string name="bit_rate_value_with_unit">%d kbps</string>
     <string name="title_location_permission">Allow WAMM To Access Your location</string>
     <string name="text_location_permission">Recommendation will be presented based on your location</string>
     <string name="ok">Allow</string>
     <string name="cancel">Deny</string>
-    <string name="agora_app_id">3a07f4cacf914d7e8c185cfc57f3f73e></string>
+    <string name="agora_app_id">b88e7fe917734f2ba7c356df6a380392</string>
     <string name="agora_access_token">006b88e7fe917734f2ba7c356df6a380392IAA2iWaFQi9obvdxBw48sSkyvPv2/YAV7hlVB0jfYBJFKOIVUyEAAAAAEAD4YHXYTEekYAEAAQBMR6Rg</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_Discover_fragment">Hello blank fragment</string>
@@ -38,4 +40,14 @@
     <string name="nochathistory">You have no chat history</string>
     <string name="typing">typing...</string>
     <string name="online">online</string>
+    <string name="account_empty">account is empty</string>
+    <string name="channel_name_empty">channel name does not exist</string>
+    <string name="account_literal_null">account literal null</string>
+    <string name="account_too_long">account too long</string>
+    <string name="channel_name_too_long">channel too long</string>
+    <string name="account_cannot_be_yourself">account cannot yourself</string>
+    <string name="channel_name_literal_null">channel name literal</string>
+    <string name="account_starts_with_space">account start with space</string>
+    <string name="channel_name_starts_with_space">channel name start with space</string>
+    <string name="failed">something terrible happened</string>
 </resources>

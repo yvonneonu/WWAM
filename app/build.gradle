@@ -91,8 +91,10 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.github.worker8:radiogroupplus:1.0.1'
+
     implementation 'com.stripe:stripe-android:15.1.0'
-   
+    
+    implementation 'io.agora.rtm:rtm-sdk:1.4.1'
     implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation platform('com.google.firebase:firebase-bom:26.3.0')

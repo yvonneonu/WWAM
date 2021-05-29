@@ -88,6 +88,7 @@ public class CallingActivity extends AppCompatActivity {
         //  cancelCallBtn = findViewById(R.id.cancel_call);
         //  makeCallBtn = findViewById(R.id.make_call);
 
+      //  mRtcEngine = RtcEngine.
 
         /*if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
                 checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID) &&

@@ -9,13 +9,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.waam.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -23,6 +27,14 @@ import java.util.List;
 public class ChatMessage extends AppCompatActivity {
     public static final String NEW_FRIENDS = "com.example.waam.WaamUserFromChatList";
     public static final String FRIENDS = "com.example.waam.WaamUserFromFriends";
+    public static final String INTENT_EXTRA_IS_PEER_MODE = "videoChat";
+
+    //private User user;
+    private TextView mTitleTextView;
+    private TextView mChatButton, mCallButton;
+    private EditText mNameEditText;
+    private boolean mIsPeerToPeerMode = true;
+    private String mTargetName;
     private RecyclerView recyclerView;
     private ChatScreenAdapter chatScreenAdapter;
     private List<Chat> chats;
@@ -31,6 +43,7 @@ public class ChatMessage extends AppCompatActivity {
     private WaamUser userFriends;
     private TextView textViewStatus;
     private ImageView videoButton;
+    public static final int MAX_INPUT_NAME_LENGTH = 64;
 
     @Override
     protected void onStart() {
@@ -80,7 +93,7 @@ public class ChatMessage extends AppCompatActivity {
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
         String myId = FirebaseAuth.getInstance().getUid();
-
+        //initUIAndData();
         if(userFriends != null){
             String receiverId = userFriends.getUid();
             String userImage = userFriends.getImageUrl();
@@ -149,14 +162,38 @@ public class ChatMessage extends AppCompatActivity {
                 }
             });
 
-            videoButton.setOnClickListener(new View.OnClickListener() {
+            /*videoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
-                    callingIntent.putExtra("user_contact", userFriends);
-                    startActivity(callingIntent);
+                    String myName = user.getFireDisplayName();
+                    mTargetName = userFriends.getFullname();
+                    if (mTargetName.equals("")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_empty : R.string.channel_name_empty));
+                    } else if (mTargetName.length() >= MAX_INPUT_NAME_LENGTH) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_too_long : R.string.channel_name_too_long));
+                    } else if (mTargetName.startsWith(" ")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_starts_with_space : R.string.channel_name_starts_with_space));
+                    } else if (mTargetName.equals("null")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_literal_null : R.string.channel_name_literal_null));
+                    } else if (mIsPeerToPeerMode && mTargetName.equals(user.getFireDisplayName())) {
+                        showToast(getString(R.string.account_cannot_be_yourself));
+                    } else {
+                        String channelName = "";
+                        if (mIsPeerToPeerMode) {
+                            channelName = myName.compareTo(mTargetName) < 0 ? myName + mTargetName : mTargetName + myName;
+
+                        }else {
+                            channelName = mTargetName;
+                        }
+                        Intent intent = new Intent(ChatMessage.this, VideoCallActivity.class);
+                        intent.putExtra(VideoCallActivity.AGOREUSER, user);
+                        intent.putExtra("Channel", channelName);
+                        intent.putExtra(INTENT_EXTRA_IS_PEER_MODE, mIsPeerToPeerMode);
+                        intent.putExtra("Actual Target", mTargetName);
+                        startActivity(intent);
+                    }
                 }
-            });
+            });*/
 
 
 
@@ -228,24 +265,83 @@ public class ChatMessage extends AppCompatActivity {
             });
 
 
-            videoButton.setOnClickListener(new View.OnClickListener() {
+            /*videoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent callingIntent = new Intent(ChatMessage.this, CallingActivity.class);
                     callingIntent.putExtra("user_contact", contactlist);
                     startActivity(callingIntent);
+
+                    String myName = user.getFireDisplayName();
+                    mTargetName = userFriends.getFullname();
+                    if (mTargetName.equals("")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_empty : R.string.channel_name_empty));
+                    } else if (mTargetName.length() >= MAX_INPUT_NAME_LENGTH) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_too_long : R.string.channel_name_too_long));
+                    } else if (mTargetName.startsWith(" ")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_starts_with_space : R.string.channel_name_starts_with_space));
+                    } else if (mTargetName.equals("null")) {
+                        showToast(getString(mIsPeerToPeerMode ? R.string.account_literal_null : R.string.channel_name_literal_null));
+                    } else if (mIsPeerToPeerMode && mTargetName.equals(user.getFireDisplayName())) {
+                        showToast(getString(R.string.account_cannot_be_yourself));
+                    } else {
+                        String channelName = "";
+                        if (mIsPeerToPeerMode) {
+                            channelName = myName.compareTo(mTargetName) < 0 ? myName + mTargetName : mTargetName + myName;
+
+                        }else {
+                            channelName = mTargetName;
+                        }
+                        Intent intent = new Intent(ChatMessage.this, VideoCallActivity.class);
+                        intent.putExtra("User", user);
+                        intent.putExtra("Channel", channelName);
+                        intent.putExtra(INTENT_EXTRA_IS_PEER_MODE, mIsPeerToPeerMode);
+                        intent.putExtra("Actual Target", mTargetName);
+                        startActivity(intent);
+                    }
                 }
-            });
+            });*/
         }
-
-
-
-
-
-
 
     }
 
+
+    /*private void initUIAndData() {
+        Intent intent = getIntent();
+        //user = intent.getParcelableExtra( VideoCallActivity.AGOREUSER);
+        /*mTitleTextView = findViewById(R.id.selection_title);
+        mNameEditText = findViewById(R.id.selection_name);
+        RadioGroup modeGroup = findViewById(R.id.mode_radio_group);
+        modeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.peer_radio_button:
+                        mIsPeerToPeerMode = true;
+                        mTitleTextView.setText(getString(R.string.title_peer));
+                        mChatButton.setText(getString(R.string.btn_chat));
+                        mNameEditText.setHint(getString(R.string.hint_friend));
+                        break;
+                    case R.id.selection_tab_channel:
+                        mIsPeerToPeerMode = false;
+                        mTitleTextView.setText(getString(R.string.title_channel));
+                        mChatButton.setText(getString(R.string.btn_join));
+                        mNameEditText.setHint(getString(R.string.hint_channel));
+                        break;
+                }
+            }
+        }
+
+        );
+
+
+        RadioButton peerMode = findViewById(R.id.peer_radio_button);
+        peerMode.setChecked(true);
+    }*/
+
+    private void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
     public void goback(View view) {
         finish();
     }
