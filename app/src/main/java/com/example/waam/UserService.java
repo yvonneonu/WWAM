@@ -20,6 +20,8 @@ public interface UserService {
    // @GET("api/profile")
    // Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
 
+    @POST("api//friendrequest")
+    Call<FriendRequestModel>getFriendRequest(@Body FriendResponseModel getFriendRequest, @Header("Authorization") String token);
 
     @PATCH("api/profile")
     Call<GetImage>getimage(@Body GetImageResponse getImageResponse, @Header("Authorization") String token);

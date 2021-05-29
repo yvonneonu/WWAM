@@ -4,40 +4,20 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import com.connectycube.auth.session.ConnectycubeSessionManager;
-import com.connectycube.auth.session.ConnectycubeSettings;
-import com.connectycube.chat.ConnectycubeChatService;
-import com.connectycube.core.EntityCallback;
-import com.connectycube.core.LogLevel;
-import com.connectycube.core.exception.ResponseException;
-import com.connectycube.users.ConnectycubeUsers;
-import com.connectycube.users.model.ConnectycubeUser;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
 
@@ -55,7 +35,7 @@ public class SignUp extends AppCompatActivity {
     private String interest;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
-    private String relationship;
+    private String relationship = "";
     public static final String INTEREST = "interest";
     public static final String GENDER = "interest";
     public static final String RELATION = "interest";
@@ -92,11 +72,14 @@ public class SignUp extends AppCompatActivity {
             }else{
               int selectedId = radioGroup.getCheckedRadioButtonId();
               radioButton = findViewById(selectedId);
-              relationship = radioButton.getText().toString();
-              Log.d("Relay",relationship);
+              if (radioButton != null){
+                  relationship = radioButton.getText().toString();
+              }
+
               if(!TextUtils.isEmpty(relationship)){
                   Intent intent = new Intent(SignUp.this,SignUpSecond.class);
                   Bundle bundle = new Bundle();
+                  Log.d("Relay",relationship);
                   bundle.putString(INTEREST, interest);
                   bundle.putString(GENDER,chose);
                   bundle.putString(RELATION,relationship);
@@ -104,6 +87,9 @@ public class SignUp extends AppCompatActivity {
                   startActivity(intent);
               }else{
                   Log.d("Relationship","Please select the relationship you want");
+                  Log.d("Relay",relationship);
+                  String message = "Select an option";
+                  Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
               }
 
             }

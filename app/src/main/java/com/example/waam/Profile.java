@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -15,16 +16,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,12 +60,20 @@ public class Profile extends AppCompatActivity {
     private Uri photouri;
     private Intent data;
     private String profilePics;
+    FirebaseStorage storage;
+    StorageReference storageReference;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         String Fullname = getIntent().getStringExtra("name");
       bigTokeng = getIntent().getStringExtra("alltoken");
@@ -113,6 +130,53 @@ public class Profile extends AppCompatActivity {
 
                 Log.d("Clicked","Yes i am");
                 Hereapi();
+
+                ProgressDialog progressDialog
+                        = new ProgressDialog(Profile.this);
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+
+                StorageReference ref
+                        = storageReference
+                        .child(
+                                "jpeg"
+                                        + UUID.randomUUID().toString());
+                ref.putFile(imageUri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                progressDialog.dismiss();
+
+                                Toast
+                                        .makeText(Profile.this,
+                                                "Image Uploaded!!",
+                                                Toast.LENGTH_SHORT)
+                                        .show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        progressDialog.dismiss();
+
+                        Toast
+                                .makeText(Profile.this,
+                                        "Failed " + e.getMessage(),
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress
+                                = (100.0
+                                * taskSnapshot.getBytesTransferred()
+                                / taskSnapshot.getTotalByteCount());
+                        progressDialog.setMessage(
+                                "Uploaded "
+                                        + (int)progress + "%");
+                    }
+                });
             }
         });
 
@@ -123,6 +187,7 @@ public class Profile extends AppCompatActivity {
         Log.d("ImageUrl",imageUri.toString());
         getImageResponse.setPicture(imageUri.toString());
         requestPicture(getImageResponse);
+
        // userService.
        // Call<GetImage> getImageCall = ApiClient.getService().getimage()
 
@@ -195,6 +260,11 @@ public class Profile extends AppCompatActivity {
                 photouri = FileProvider.getUriForFile(Profile.this, "com.example.android.fileprovider", photoFile);
                 takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photouri);
                 startActivityForResult(takePicture, PICTURE_TAKEN);
+
+
+
+
+
             }
 
             // Continue only if the File was successfully created

@@ -25,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 import java.util.Random;
 
+import retrofit2.Call;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProfileFragment#newInstance} factory method to
@@ -96,6 +98,10 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    private void friendRequest(FriendResponseModel friendResponseModel){
+        Call<FriendRequestModel> friendRequestModelCall = ApiClient.getService().getFriendRequest(friendResponseModel, "Bearer "+bigTokeng)
+
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -140,6 +146,12 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         Button friendRequest = view.findViewById(R.id.button11);
+        friendRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         textView = dialog.findViewById(R.id.textView70);
         imageView = view.findViewById(R.id.imageView31);
 
