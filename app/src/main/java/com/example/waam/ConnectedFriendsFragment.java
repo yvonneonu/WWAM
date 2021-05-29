@@ -101,7 +101,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 Log.d("Interest","Showing off");
                 break;
             case friends:
-                fragment = new FriendsFragment();
+                fragment = new FrendChannelFragment();
                 Log.d("Friends","Showing off");
                 break;
             default:

@@ -153,10 +153,13 @@ public class ProfileFragment extends Fragment {
             GeneralFactory.getGeneralFactory(getActivity()).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
                 @Override
                 public void loadSpecUse(WaamUser userpro) {
-                    Glide.with(getActivity())
-                            .asBitmap()
-                            .load(userpro.getImageUrl())
-                            .into(imageView);
+                    if(isAdded()){
+                        Glide.with(getActivity())
+                                .asBitmap()
+                                .load(userpro.getImageUrl())
+                                .into(imageView);
+                    }
+
                 }
             });
         }

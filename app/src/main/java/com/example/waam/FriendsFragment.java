@@ -91,7 +91,7 @@ public class FriendsFragment extends Fragment {
         setHasOptionsMenu(true);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
-        Log.d("FriendsFrag","fragie");
+        Log.d("FrendsFragment","fragie");
 
         generalFactory.loadFriends(branchName, friends -> {
             recyclerView.setVisibility(View.VISIBLE);
