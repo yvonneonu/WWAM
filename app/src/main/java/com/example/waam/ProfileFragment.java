@@ -2,12 +2,6 @@ package com.example.waam;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +13,11 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +44,7 @@ public class ProfileFragment extends Fragment {
     private TextView textView;
     private boolean[] boolcont;
     private FirebaseAuth mAuth;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -85,12 +85,14 @@ public class ProfileFragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations = R.style.animations ;
         Button button = dialog.findViewById(R.id.close);
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
+
 
     }
 
@@ -174,6 +176,7 @@ public class ProfileFragment extends Fragment {
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
         HorizontalScrollView horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
+
         horizontalScrollView.setHorizontalScrollBarEnabled(false);
         return  view;
 
