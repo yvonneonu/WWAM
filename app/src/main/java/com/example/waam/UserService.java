@@ -1,5 +1,7 @@
 package com.example.waam;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
@@ -20,7 +22,12 @@ public interface UserService {
    // @GET("api/profile")
    // Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
 
-    @PATCH()
+    @POST("api/interestuser")
+    Call<InterestResponds>interest(@Body List<InterestRequest> interestResponds, @Header("Authorization") String token);
+
+    @POST("api/friendrequest")
+    Call<FriendRequestModel> getFriendRequest(@Body FriendResponseModel friendRequestModel, @Header("Authorization") String token);
+    @PATCH("api/profile")
     Call<SpinnerRequest> getSpinner(@Body SpinnerResponse getSpinner, @Header("Authorization") String token);
 
     @PATCH("api/profile")
