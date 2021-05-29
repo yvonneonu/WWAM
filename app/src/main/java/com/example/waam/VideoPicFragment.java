@@ -3,6 +3,7 @@ package com.example.waam;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -72,13 +73,15 @@ public class VideoPicFragment extends Fragment {
                 if(isAdded()){
                     if(videoPicModels.size() > 0){
                         videoPicAdapter = new VideoPicAdapter(videoPicModels,getActivity());
+                        recyclerView.setAdapter(videoPicAdapter);
+                        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                         bar.setVisibility(View.GONE);
                     }else{
                         //you have no media uploaded...
+                        String message = "There are no media";
                         bar.setVisibility(View.GONE);
-                        textView.setText("There are no Media");
+                        textView.setText(message);
                     }
-
 
                 }
             }
