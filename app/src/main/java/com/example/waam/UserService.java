@@ -2,7 +2,6 @@ package com.example.waam;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -10,13 +9,16 @@ import retrofit2.http.POST;
 public interface UserService {
 
 
-    @GET("user")
-    Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
+ //   @GET("user")
+    //Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
     //@GET("api/connectycubeverify")
    // Call<>
    // @GET ("profile")
     //Call<profileresponse> responseuser(@Body profilerequest profilerequest);
+
+   // @GET("api/profile")
+   // Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
 
 
     @PATCH("api/profile")
