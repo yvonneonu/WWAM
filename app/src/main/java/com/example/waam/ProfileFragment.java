@@ -99,7 +99,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void friendRequest(FriendResponseModel friendResponseModel){
-        Call<FriendRequestModel> friendRequestModelCall = ApiClient.getService().getFriendRequest(friendResponseModel, "Bearer "+bigTokeng)
+        Call<FriendRequestModel> friendRequestModelCall = ApiClient.getService().getFriendRequest(friendResponseModel, "Bearer "+bigTokeng);
 
     }
 

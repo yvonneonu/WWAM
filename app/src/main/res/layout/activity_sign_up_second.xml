@@ -378,11 +378,11 @@
 
             <TextView
                 android:id="@+id/gologin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="27dp"
+                android:layout_height="11dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
                 android:text="Login"
+                android:onClick="login"
                 android:textColor="@color/offblue"
                 app:layout_constraintBottom_toBottomOf="@+id/textView15"
                 app:layout_constraintStart_toEndOf="@+id/textView15"

@@ -41,7 +41,9 @@ public class Splash extends AppCompatActivity {
                 }
 
                 home.putExtra("name", Fullname);
-               startActivity(home);
+                Log.d("TAG", ""+Fullname);
+
+                startActivity(home);
                finish();
             }
         },SPLASH_TIME_OUT);

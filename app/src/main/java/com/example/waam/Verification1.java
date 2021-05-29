@@ -41,6 +41,7 @@ public class Verification1 extends AppCompatActivity {
 
         if (bundle != null)
         token = bundle.getString("token");
+        Fullname = bundle.getString("name");
 
 
         ccp = findViewById(R.id.ccp);
@@ -93,6 +94,8 @@ public class Verification1 extends AppCompatActivity {
                    Log.d("TAG", "TOKENSHOW1 " +token);
                    bundle.putString("name", Fullname);
 
+
+                  Log.d("TAG", ""+Fullname);
                    Intent mainactivity = new Intent(Verification1.this, Splash.class);
                    mainactivity.putExtras(bundle);
 

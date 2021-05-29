@@ -23,12 +23,15 @@
         android:title="Friends"/>
     <item
         android:id="@+id/notification"
+
         android:title="Notifications"/>
     <item
         android:id="@+id/setting"
+        android:icon="@drawable/sidemenu_icon_notification"
         android:title="Settings"/>
     <item
         android:id="@+id/help"
+        android:icon="@drawable/sidebar_icon_help"
         android:title="Help"/>
 
 

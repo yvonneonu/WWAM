@@ -58,7 +58,10 @@
         <activity android:name=".Matchfriends" />
         <activity android:name=".CompleteProfile" />
         <activity android:name=".LocationDetectActivity" />
-        <activity android:name=".Profile" />
+        <activity android:name=".Profile" >
+
+
+        </activity>
         <activity android:name=".DrawelayoutActivity" />
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
@@ -67,11 +70,17 @@
         <activity android:name=".Verification1" />
         <activity android:name=".MainActivity" />
         <activity android:name=".passw" />
-        <activity android:name=".Another" />
+        <activity android:name=".Another" >
+
+        </activity>
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
-        <activity android:name=".Interest" />
+        <activity android:name=".Interest" >
+
+        </activity>
         <activity android:name=".ViewPager">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

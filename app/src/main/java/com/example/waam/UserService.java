@@ -1,7 +1,10 @@
 package com.example.waam;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -9,25 +12,30 @@ import retrofit2.http.POST;
 public interface UserService {
 
 
- //   @GET("user")
-    //Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
+    @GET("user")
+    Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
     //@GET("api/connectycubeverify")
    // Call<>
    // @GET ("profile")
     //Call<profileresponse> responseuser(@Body profilerequest profilerequest);
 
-   // @GET("api/profile")
-   // Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
-
     @POST("api//friendrequest")
     Call<FriendRequestModel>getFriendRequest(@Body FriendResponseModel getFriendRequest, @Header("Authorization") String token);
+    @POST("api/interestuser")
+    Call<InterestResponds>interest(@Body List<InterestRequest> interestRequest, @Header("Authorization") String toke);
 
     @PATCH("api/profile")
     Call<GetImage>getimage(@Body GetImageResponse getImageResponse, @Header("Authorization") String token);
 
+    @PATCH("api/profile")
+    Call<SpinnerRequest>getSpinner(@Body SpinnerResponse getSpinnerResponse, @Header("Authorization") String token);
+
     @POST("api/login")
     Call<LoginResponse>loginUser(@Body LoginRequest loginRequest);
+
+    @POST("api/forgot-password")
+    Call<EmailResponse>emailLink(@Body emailAddress getEmailAddress);
 
     @POST("api/register")
     Call<RegisterResponse> registerUsers(@Body WaamUser waamUser);

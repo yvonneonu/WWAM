@@ -17,7 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
  */
 public class FindMtchBlankFragment extends Fragment {
     private TextView textView, eventText;
-
+  // private machModelAdapter machModelAdapter1;
+  // List<matchModel> matchModels = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,9 +58,14 @@ public class FindMtchBlankFragment extends Fragment {
 
             mParam2 = getArguments().getString(ARG_PARAM2);
 
+
         }
+      //  machModelAdapter1 = new machModelAdapter(matchModels,getActivity());
+
         Fragment fragment = new DrawerMatchFragment();
+//        eventText.setBackgroundColor(Color.BLUE);
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        //eventText.setBackgroundColor(Color.BLUE);
         ft.replace(R.id.frame,fragment);
         ft.commit();
 
@@ -72,6 +78,8 @@ public class FindMtchBlankFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_find_mtch_blank, container, false);
         textView = view.findViewById(R.id.mangend);
         eventText = view.findViewById(R.id.event);
+
+        textView.setBackgroundColor(Color.BLUE);
 
         eventText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +95,7 @@ public class FindMtchBlankFragment extends Fragment {
                 }
             }
         });
+
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override

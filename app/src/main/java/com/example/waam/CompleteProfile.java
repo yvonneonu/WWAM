@@ -18,14 +18,16 @@ public class CompleteProfile extends AppCompatActivity {
     private TextView wipe, name;
     private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight, profile;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_profile);
         String imageUri = getIntent().getStringExtra("getProfilePics");
 
+
 //        Log.d("Complete",imageUri);
-        String Fullname = getIntent().getStringExtra("nameprofile");
+        String Fullname = getIntent().getStringExtra("name");
         String tired = getIntent().getStringExtra("token");
 
         firstImage = findViewById(R.id.imageView0);
@@ -58,8 +60,9 @@ public class CompleteProfile extends AppCompatActivity {
                     .load(Uri.parse(imageUri))
                     .into(profile);
         }
-
        // name.setText(Fullname);
+        name.setText(SharedPref.getInstance(this).getStoredName());
+
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,6 +273,9 @@ public class CompleteProfile extends AppCompatActivity {
                 if (tired != null){
                     intent.putExtra("everytoken", tired);
                 }
+
+                intent.putExtra("name", Fullname);
+                Log.d("TAG", ""+Fullname);
 
                 Log.d("TAG", "TOKENSHOW7 " +tired);
                 startActivity(intent);

@@ -1,10 +1,8 @@
 package com.example.waam;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -18,6 +16,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class SignUpSecond extends AppCompatActivity {
 
@@ -98,16 +99,16 @@ public class SignUpSecond extends AppCompatActivity {
 
         WaamUser waamUser = new WaamUser("name", "email", "zipcode", "gender", "seeking", "date", "pass");
 
-        String Fullname = name.getText().toString();
+        String fullname = name.getText().toString();
         String Email = email.getText().toString();
         String Zip = zip.getText().toString();
         String Update = update.getText().toString();
         String Passwor = password.getText().toString();
         String Confirm = confrim.getText().toString();
-        if(Fullname.isEmpty()) {
+        if(fullname.isEmpty()) {
             name.setError("Full Name is required");
             name.requestFocus();
-        }else if(!generalFactory.validateName(Fullname)){
+        }else if(!generalFactory.validateName(fullname)){
             name.setError("Pls submit full name");
             name.requestFocus();
         }
@@ -139,7 +140,8 @@ public class SignUpSecond extends AppCompatActivity {
         } else {
 
             //Log.d("meemmemememe", ""+user);
-            waamUser.setFullname(Fullname);
+            SharedPref.getInstance(this).setStoredName(SharedPref.FULLNAME,fullname);
+            waamUser.setFullname(fullname);
             waamUser.setEmail(Email);
             waamUser.setZipcode(Zip);
             waamUser.setBirth_date(Update);
@@ -225,4 +227,8 @@ public class SignUpSecond extends AppCompatActivity {
         return makeDateString(day, month, year);
     }
 
+    public void login(View view) {
+        Intent intent = new Intent(SignUpSecond.this, Login.class);
+        startActivity(intent);
+    }
 }

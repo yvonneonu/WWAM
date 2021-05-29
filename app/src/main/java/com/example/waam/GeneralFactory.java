@@ -1,6 +1,5 @@
 package com.example.waam;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
-import com.example.waam.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,8 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import io.agora.rtm.ErrorInfo;
-import io.agora.rtm.RtmClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +52,6 @@ public class GeneralFactory {
     private List<WaamUser> contactedUser;
     private List<String> usersStringId;
     private String theMessage;
-    private FirebaseAuth acct;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -185,18 +180,6 @@ public class GeneralFactory {
                     }
                 });
     }
-    public void loginToFireBase(String email, String password,LoginRequest loginRequest,RtmClient rtmClient){
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
-                .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        loginUser(loginRequest,rtmClient);
-                    }else{
-                        Log.d("Login","Login was succesfull");
-                    }
-
-                });
-    }
 
     public void loginToFireBase(String email, String password,LoginRequest loginRequest){
         mAuth.signInWithEmailAndPassword(email, password)
@@ -208,6 +191,16 @@ public class GeneralFactory {
                         Log.d("Login","Login was succesfull");
                     }
 
+                });
+    }
+    public void changePassword(String email, emailAddress getEmailAddress){
+        mAuth.sendPasswordResetEmail(email).addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        enterEmail(getEmailAddress, email);
+                    }else {
+                        Log.d("ResetPassword", "Password sent successfully");
+                    }
                 });
     }
 
@@ -515,74 +508,44 @@ public class GeneralFactory {
         });
     }
 
+    public void capturEmail(String email){
+
+
+        Intent getLink = new Intent(context, passw.class);
+
+        getLink.putExtra("email", email);
+        context.startActivity(getLink);
+    }
     private String firstHundred(String s,int n){
         return s.substring(0, Math.min(s.length(), n));
     }
 
-    public void loginUser(LoginRequest loginRequest, RtmClient rtmClient){
+    public void enterEmail(emailAddress getemailAddress, String email){
+        Call<EmailResponse> emailResponseCall = ApiClient.getService().emailLink(getemailAddress);
 
-        Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
-
-        loginResponseCall.enqueue(new Callback<LoginResponse>() {
+        emailResponseCall.enqueue(new Callback<EmailResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-
+            public void onResponse(Call<EmailResponse> call, Response<EmailResponse> response) {
                 if (response.isSuccessful()){
+                    String link = response.body().getMessage();
 
-                    //This gets the user logged in
-                    acct = FirebaseAuth.getInstance();
-                    //this is where the instance of you the user is created
-                    final User user = new User(acct.getUid());
-                    //this line mighth not work because it requires you to get the data of the person that logged in with google
-                    //However if the Login was succesful i believe the response should include the name of the person who logged in
-                    user.setFireDisplayName(acct.getUid());
-
-                    rtmClient.login(null,acct.getUid(), new io.agora.rtm.ResultCallback<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            ((Activity) context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    String loginToken = response.body().getToken();
-                                    Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
-                                    intent.putExtra(VideoCallActivity.AGOREUSER, user);
-                                    Log.d("LoginToken",loginToken);
-                                    intent.putExtra("toking",loginToken);
-                                    context.startActivity(intent);
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onFailure(final ErrorInfo errorInfo) {
-                            ((Activity) context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(context, context.getResources().getString(R.string.failed) + " " + errorInfo.getErrorDescription(), Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-                    });
-
-                    //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
-
-                }else {
-                    String message = "An error occured please try again";
+                    Intent getLink = new Intent(context, passw.class);
+                    Log.d("emailLink",""+link);
+                    getLink.putExtra("email",email);
+                    context.startActivity(getLink);
+                } else {
+                    String message = "An error occured";
                     Toast.makeText(context,message,Toast.LENGTH_LONG).show();
-                    Toast.makeText(context,"Email or Password mismatch!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Please try again!", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-                //String message = t.getLocalizedMessage();
+            public void onFailure(Call<EmailResponse> call, Throwable t) {
                 Toast.makeText(context, t.getMessage(),Toast.LENGTH_LONG).show();
-
             }
         });
     }
-
 
     public void loginUser(LoginRequest loginRequest){
 
@@ -593,13 +556,15 @@ public class GeneralFactory {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()){
-
                     String loginToken = response.body().getToken();
                     Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
-                    Log.d("LoginToken",loginToken);
+                    SharedPref.getInstance(context).setStoredToken("toks",loginToken);
+                    Log.d("LoginTOken",loginToken);
+                    //  Intent intent = new Intent(Login.this, Profile.class);
+                    //Intent intent = new Intent(Login.this, DrawelayoutActivity.class);
+                    //  Intent intent = new Intent(Login.this,finalProfile.class);
                     intent.putExtra("toking",loginToken);
                     context.startActivity(intent);
-                    //This gets the user logged in
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
 
                 }else {
@@ -618,9 +583,6 @@ public class GeneralFactory {
             }
         });
     }
-
-
-
 
     public void fetchAllUser(FetchFriends fetchAllWaamUsers){
         allWaamUsers = new ArrayList<>();
@@ -747,11 +709,13 @@ public class GeneralFactory {
                     //Register users on firebase......
                     signUpForBase(waamUser.getEmail(), waamUser.getPassword(),progressBar, waamUser);
                     Intent intent = new Intent(context, Verification1.class);
+                    intent.putExtra("name", response.body().getFullname());
                     intent.putExtra("token", response.body().getToken());
+                        Log.d("me",""+response.body().getFullname());
                     context.startActivity(intent);
                     // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                     // intent.putExtra("profilepics", imageUri);
-                    ((Activity) context).finish();
+                    //context.finish();
                 } else {
                     response.errorBody();
                     // Toast.makeText(SignUp.this,response.body().getErrors(),Toast.LENGTH_LONG).show();
