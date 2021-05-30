@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -70,9 +71,9 @@ public class VideoPicFragment extends Fragment {
         generalFactory.loadVidPic("", new GeneralFactory.LoadVidPic() {
             @Override
             public void loadVidpic(List<VideoPicModel> videoPicModels) {
+                videoPicAdapter = new VideoPicAdapter(videoPicModels,getActivity());
                 if(isAdded()){
                     if(videoPicModels.size() > 0){
-                        videoPicAdapter = new VideoPicAdapter(videoPicModels,getActivity());
                         recyclerView.setAdapter(videoPicAdapter);
                         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                         bar.setVisibility(View.GONE);
@@ -84,6 +85,17 @@ public class VideoPicFragment extends Fragment {
                     }
 
                 }
+
+                videoPicAdapter.showPicVid(new VideoPicAdapter.MediaListener() {
+                    @Override
+                    public void mediaListener(int position) {
+                        Intent intent = new Intent();
+                        intent.putExtra("videoPicModels",videoPicModels.get(position));
+                        startActivity(intent);
+
+                    }
+                });
+
             }
         });
     }

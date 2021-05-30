@@ -1,6 +1,8 @@
 package com.example.waam;
 
-public class VideoPicModel {
+import java.io.Serializable;
+
+public class VideoPicModel implements Serializable {
     boolean isVideo;
     String videoPicUrl;
 

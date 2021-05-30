@@ -22,6 +22,7 @@ public class VideoPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final Context context;
     private static  final int VIDEO = 1;
     private static  final int PICTURE = 0;
+    private MediaListener mediaListener;
 
     public VideoPicAdapter(List<VideoPicModel> videoPicList, Context context) {
         this.videoPicList = videoPicList;
@@ -34,10 +35,15 @@ public class VideoPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         View view ;
         if(viewType == VIDEO){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.videoview, parent, false);
-            return new VideoPicAdapter.VideoHolder(view);
+            return new VideoPicAdapter.VideoHolder(view,mediaListener);
         }
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.picview,parent,false);
-        return new VideoPicAdapter.PicHolder(view);
+        return new VideoPicAdapter.PicHolder(view,mediaListener);
+    }
+
+
+    public void showPicVid(MediaListener mediaListener){
+        this.mediaListener = mediaListener;
     }
 
     @Override
@@ -87,19 +93,44 @@ public class VideoPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public static class VideoHolder extends RecyclerView.ViewHolder {
         VideoView videoView;
-        public VideoHolder(@NonNull View itemView) {
+        public VideoHolder(@NonNull View itemView, MediaListener mediaListener) {
             super(itemView);
             videoView = itemView.findViewById(R.id.videoView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mediaListener != null){
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            mediaListener.mediaListener(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 
     public static class PicHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        public PicHolder(@NonNull View itemView) {
+        public PicHolder(@NonNull View itemView, MediaListener mediaListener) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView43);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mediaListener != null){
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            mediaListener.mediaListener(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 
+    public interface MediaListener{
+        void mediaListener(int position);
+    }
 
 }
