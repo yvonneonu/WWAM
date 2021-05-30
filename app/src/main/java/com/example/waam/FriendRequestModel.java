@@ -1,8 +1,8 @@
 package com.example.waam;
 
 public class FriendRequestModel {
-    private String sender_id;
-     private String receiver_id;
+   public String sender_id;
+   public String receiver_id;
 
     public String getSender_id() {
         return sender_id;

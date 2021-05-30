@@ -1,7 +1,6 @@
 package com.example.waam;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,8 +51,10 @@ public class ProfileFragment extends Fragment {
     private boolean[] boolcont;
     private FirebaseAuth mAuth;
     private String token;
-    Context context;
-    FriendResponseModel friendResponseModel;
+
+    private String sender = "1";
+    private String receiver = "2";
+
 
 
     // TODO: Rename and change types of parameters
@@ -95,7 +96,11 @@ public class ProfileFragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations = R.style.animations ;
         Button button = dialog.findViewById(R.id.close);
 
-        token = SharedPref.getInstance(context).getStoredToken();
+       token = SharedPref.getInstance(getActivity()).getStoredToken();
+
+
+      Log.d("tok", ""+token);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,36 +109,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
-    }
-
-           // namme.setText(SharedPref.getInstance(this).getStoredName());
-
-
-
-    private void friendRequest(FriendResponseModel friendResponseModel){
-        Call<FriendRequestModel> friendRequestModelCall = ApiClient.getService().getFriendRequest(friendResponseModel, "Bearer "+token);
-        friendRequestModelCall.enqueue(new Callback<FriendRequestModel>() {
-            @Override
-            public void onResponse(Call<FriendRequestModel> call, Response<FriendRequestModel> response) {
-                if (!response.isSuccessful()){
-                    String message = "Successful";
-                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                    Log.d("request",response.message());
-                    Log.d("request",response.errorBody().toString());
-                    return;
-                }
-                String message = "Successful";
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                Log.d("Body",new Gson().toJson(response.body()));
-            }
-
-            @Override
-            public void onFailure(Call<FriendRequestModel> call, Throwable t) {
-                Log.d("no image",t.getMessage());
-
-            }
-        });
 
     }
 
@@ -182,13 +157,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         Button friendRequest = view.findViewById(R.id.button11);
-        friendRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                friendRequest(friendResponseModel);
-            }
-        });
         textView = dialog.findViewById(R.id.textView70);
         imageView = view.findViewById(R.id.imageView31);
 
@@ -201,6 +170,8 @@ public class ProfileFragment extends Fragment {
             mAuth = FirebaseAuth.getInstance();
             String uid = mAuth.getUid();
             friendRequest.setVisibility(View.GONE);
+
+
             GeneralFactory.getGeneralFactory(getActivity()).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
                 @Override
                 public void loadSpecUse(WaamUser userpro) {
@@ -217,7 +188,12 @@ public class ProfileFragment extends Fragment {
 
 
 
+
         friendRequest.setOnClickListener(v -> {
+            FriendRequestModel requestModel = new FriendRequestModel(sender, receiver);
+            requestModel.setSender_id(sender);
+            requestModel.setReceiver_id(receiver);
+            friendRequest1(requestModel);
             textView.setText("You have sucessfully sent this user a \n friend request");
             dialog.show();
         });
@@ -229,5 +205,30 @@ public class ProfileFragment extends Fragment {
         horizontalScrollView.setHorizontalScrollBarEnabled(false);
         return  view;
 
+    }
+
+    private void friendRequest1(FriendRequestModel friendResponseModel) {
+        Call<FriendResponseModel> friendRequestModelCall = ApiClient.getService().getFriendRequest(friendResponseModel, "Bearer "+token);
+        friendRequestModelCall.enqueue(new Callback<FriendResponseModel>() {
+            @Override
+            public void onResponse(Call<FriendResponseModel> call, Response<FriendResponseModel> response) {
+                if (!response.isSuccessful()){
+                    String message = "Request not sent";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("request",response.message());
+                    Log.d("request",response.errorBody().toString());
+                    return;
+                }
+                String message = "Successful";
+                Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                Log.d("Body",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<FriendResponseModel> call, Throwable t) {
+                Log.d("no image",t.getMessage());
+
+            }
+        });
     }
 }

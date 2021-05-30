@@ -11,7 +11,8 @@ public class SharedPref {
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
     private SharedPref(Context context){
-       sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+        sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+
     }
 
     public static SharedPref getInstance(Context context){

@@ -29,7 +29,8 @@ public interface UserService {
     Call<InterestResponds>interest(@Body List<InterestRequest> interestResponds, @Header("Authorization") String token);
 
     @POST("api/friendrequest")
-    Call<FriendRequestModel> getFriendRequest(@Body FriendResponseModel friendRequestModel, @Header("Authorization") String token);
+    Call<FriendResponseModel> getFriendRequest(@Body FriendRequestModel friendRequestModel, @Header("Authorization") String token);
+
     @PATCH("api/profile")
     Call<SpinnerRequest> getSpinner(@Body SpinnerResponse getSpinner, @Header("Authorization") String token);
 

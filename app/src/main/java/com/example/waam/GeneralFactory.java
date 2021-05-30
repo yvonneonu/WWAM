@@ -632,7 +632,13 @@ public class GeneralFactory {
 
                 if (response.isSuccessful()){
 
+
+                    assert response.body() != null;
                     String loginToken = response.body().getToken();
+                    SharedPref.getInstance(context).setStoredToken(SharedPref.TOKEN, loginToken);
+
+
+                    Log.d("show", loginToken);
                     Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
                     Log.d("LoginToken",loginToken);
                     intent.putExtra("toking",loginToken);
