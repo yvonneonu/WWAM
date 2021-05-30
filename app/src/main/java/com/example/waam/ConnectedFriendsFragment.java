@@ -91,6 +91,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         Fragment fragment ;
         switch (v.getId()){
             case vid:
+                // i stopped here planning on sending waam user to the video fragment
+                //fragment = VideoPicFragment.newInstance();
                 fragment = new VideoPicFragment();
                 break;
             case aboutsef:

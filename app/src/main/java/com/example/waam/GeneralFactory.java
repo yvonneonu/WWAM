@@ -55,6 +55,7 @@ public class GeneralFactory {
     private DatabaseReference userForSeen;
     private List<WaamUser> contactedUser;
     private List<String> usersStringId;
+    private List<VideoPicModel> videoPicModelList;
     private String theMessage;
     private FirebaseAuth acct;
 
@@ -484,6 +485,34 @@ public class GeneralFactory {
     }
 
 
+    public void uploadPicOrVid(){
+        //
+    }
+
+
+    public void loadVidPic(String branch,LoadVidPic loadVidPic){
+        videoPicModelList = new ArrayList<>();
+        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
+        mDatebaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                videoPicModelList.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    VideoPicModel videoPicModel = dataSnapshot.getValue(VideoPicModel.class);
+                    videoPicModelList.add(videoPicModel);
+                }
+
+                loadVidPic.loadVidpic(videoPicModelList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("VideoModel","An error occurred");
+            }
+        });
+
+    }
+
     public void loadLastMessage(String senderId, String receiverId,TextView last_msg){
         theMessage = "default";
         DatabaseReference databaseChats = FirebaseDatabase.getInstance().getReference("CHAT");
@@ -800,5 +829,9 @@ public class GeneralFactory {
 
     public interface FriendChecker{
         void friendCheck(List<WaamUser> userList);
+    }
+
+    public interface LoadVidPic{
+        void loadVidpic(List<VideoPicModel> videoPicModels);
     }
 }
