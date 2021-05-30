@@ -4,6 +4,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -19,8 +20,11 @@ public interface UserService {
    // @GET ("profile")
     //Call<profileresponse> responseuser(@Body profilerequest profilerequest);
 
-   // @GET("api/profile")
+   //@GET("api/profile")
    // Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
+
+    @GET("api/userinterest")
+    Call<List<DispalyInterest>>display(@Header("Authorization")String token);
 
     @POST("api/forgot-password")
     Call<EmailResponse>emailLink(@Body emailAddress getEmailAddress);
