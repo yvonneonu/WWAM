@@ -212,6 +212,17 @@ public class GeneralFactory {
     }
 
 
+    public void changePassword(String email, emailAddress getEmailAddress){
+        mAuth.sendPasswordResetEmail(email).addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        enterEmail(getEmailAddress, email);
+                    }else {
+                        Log.d("ResetPassword", "Password sent successfully");
+                    }
+                });
+    }
+
     public void loadNewFriends(String branch,ProgressBar bar,TextView textView, FetchFriends friends){
 
         List<WaamUser> newFriends = new ArrayList<>();
