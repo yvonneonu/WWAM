@@ -1,14 +1,18 @@
 package com.example.waam;
 
+import android.content.ContentResolver;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +21,8 @@ public class CompleteProfile extends AppCompatActivity {
     private ImageView firstImage, secondImage,thirdImage, fourthImage, fivethImage, sixthImage, seventhImage, eightImage, ninethImage, photo, gallerysave;;
     private TextView wipe, name;
     private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight, profile;
+    private static final int IMAGEREQUEST = 1;
+    private static final int VIDEOREQUEST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -253,6 +259,7 @@ public class CompleteProfile extends AppCompatActivity {
                         ninethImage.setVisibility(View.GONE);
                         LinearLayout linearLayout = findViewById(R.id.linearLayout8);
                         linearLayout.setVisibility(View.GONE);
+                        GeneralFactory.getGeneralFactory(CompleteProfile.this).uploadPicOrVid(getFileExtension(uri),uri);
                         bottomSheet.dismiss();
                     }
                 });
@@ -277,4 +284,15 @@ public class CompleteProfile extends AppCompatActivity {
         });
 
     }
+
+    private String getFileExtension(Uri uri){
+        // This was just a test
+        ContextWrapper rapper = new ContextWrapper(this);
+        ContentResolver resolver = rapper.getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(resolver.getType(uri));
+    }
+
+
+
 }

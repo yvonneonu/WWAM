@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link VideoPicFragment#newInstance} factory method to
+ * o
  * create an instance of this fragment.
  */
 public class VideoPicFragment extends Fragment {
@@ -28,17 +28,14 @@ public class VideoPicFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
     private VideoPicAdapter videoPicAdapter;
-    private GeneralFactory generalFactory;
+    private final WaamUser waamUser;
     private ProgressBar bar;
     private TextView textView;
-    private static final String VIDEOWAAM = "videoPicFragmentWaam";
-    private static final String VIDEO = "video";
+    private static final String VIDEOPIC = "videopic";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public VideoPicFragment() {
+    public VideoPicFragment(WaamUser waamUser) {
+        this.waamUser = waamUser;
         // Required empty public constructor
     }
 
@@ -49,24 +46,20 @@ public class VideoPicFragment extends Fragment {
      * @return A new instance of fragment VideoPicFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static VideoPicFragment newInstance(WaamUser waamUser) {
+  /*  public static VideoPicFragment newInstance(WaamUser waamUser) {
         VideoPicFragment fragment = new VideoPicFragment();
         Bundle args = new Bundle();
         args.putSerializable(VIDEOWAAM,waamUser);
         fragment.setArguments(args);
         return fragment;
-    }
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
-        String path = "userid"+VIDEO;
-        generalFactory = GeneralFactory.getGeneralFactory(getActivity());
+        String path = waamUser.getUid()+VIDEOPIC;
+        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
 
         generalFactory.loadVidPic(path, new GeneralFactory.LoadVidPic() {
             @Override
