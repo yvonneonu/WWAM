@@ -31,6 +31,7 @@ public class VideoPicFragment extends Fragment {
     private GeneralFactory generalFactory;
     private ProgressBar bar;
     private TextView textView;
+    private static final String VIDEOWAAM = "videoPicFragmentWaam";
     private static final String VIDEO = "video";
 
     // TODO: Rename and change types of parameters
@@ -45,16 +46,13 @@ public class VideoPicFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment VideoPicFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static VideoPicFragment newInstance(String param1, String param2) {
+    public static VideoPicFragment newInstance(WaamUser waamUser) {
         VideoPicFragment fragment = new VideoPicFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(VIDEOWAAM,waamUser);
         fragment.setArguments(args);
         return fragment;
     }
