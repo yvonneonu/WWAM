@@ -12,6 +12,36 @@ import retrofit2.http.POST;
 public interface UserService {
 
 
+    @GET("api/education/2")
+    Call<RecordModel> getEducation1(@Header("Authorization")String token);
+
+    @GET("api/occupation/2")
+    Call<OcupationRecordModel> getOccupation1(@Header("Authorization")String token);
+
+    @GET("api/bodytype")
+    Call<BodyTypeRecordModel> getBody1 (@Header("Authorization")String token);
+
+    @GET("api/ethnicity")
+    Call<EthnicityRecordmodel> getEthnicity1 (@Header("Authorization")String token);
+
+    @GET("api/faith")
+    Call<FaithRecordModel> getFaith1 (@Header("Authorization")String token);
+
+    @GET("api/politics/2")
+    Call<PoliticsRecordModel> getPolitics1 (@Header("Authorization")String token);
+
+    @GET("api/children/2")
+    Call<ChildrenRecordModel> getChildren1 (@Header("Authorization")String token);
+
+    @GET("api/smoke")
+    Call<SmokeRecordModel> getSmoke1 (@Header("Authorization")String token);
+
+    @GET("api/drink")
+    Call<DrinkRecordModel> getDrink1 (@Header("Authorization")String token);
+
+    @GET("api/income")
+    Call<SalaryRecordModel> getSalary1 (@Header("Authorization")String token);
+
  //   @GET("user")
     //Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 

@@ -23,8 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -52,18 +50,15 @@ public class ProfileFragment extends Fragment {
     private WaamUser user;
     private View view;
     private ImageView imageView;
-    private TextView textView;
+    private TextView textView, career, education, children, politics;
     private boolean[] boolcont;
     private FirebaseAuth mAuth;
     private String token;
-    private TextView[] arrayOfText;
-    private ImageView[] arrayOfImage;
-    private LocationAdapter interestAdapter;
-    DatabaseReference FriendRequestRef, UserRef;
+
+
 
     private String sender = "1";
     private String receiver = "2";
-    private String CURRENT_STATE;
 
 
     private RecyclerView recyclerView;
@@ -143,13 +138,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (user != null){
-            mAuth = FirebaseAuth.getInstance();
-            sender = mAuth.getCurrentUser().getUid();
-            UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-           receiver = user.getUid();
-            // receiver = mAuth.getUid();
-            FriendRequestRef = FirebaseDatabase.getInstance().getReference().child("FriendRequest");
 
             final int message = R.id.message;
             final int chatbu = R.id.bubble;
@@ -188,7 +177,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
-        //showDispay();
+        career = view.findViewById(R.id.textView75);
         recyclerView = view.findViewById(R.id.recyclerView6);
 
 
@@ -196,10 +185,16 @@ public class ProfileFragment extends Fragment {
 
         textView = dialog.findViewById(R.id.textView70);
         imageView = view.findViewById(R.id.imageView31);
+        education = view.findViewById(R.id.testtt);
+        children = view.findViewById(R.id.chil);
+        politics = view.findViewById(R.id.polit);
 
 
-        displayRequest();
-
+        displayInterest();
+        occupationShow();
+        educationShow();
+        childrenShow();
+        politicsShow();
 
 
         if(user != null){
@@ -288,7 +283,136 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-    private void displayRequest(){
+    private void occupationShow(){
+        Call<OcupationRecordModel> ocupationRecordModelCall = ApiClient.getService().getOccupation1("Bearer "+token);
+        ocupationRecordModelCall.enqueue(new Callback<OcupationRecordModel>() {
+            @Override
+            public void onResponse(Call<OcupationRecordModel> call, Response<OcupationRecordModel> response) {
+                if (!response.isSuccessful()){
+                    String message = "No Display";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("display",response.message());
+                    Log.d("display",response.errorBody().toString());
+                    return;
+                }
+
+                String log = response.body().toString();
+                Log.d("take", log);
+
+               OcupationRecordModel ocupationRecordModel = response.body();
+               ocupationRecordModel.getOccupationRecords();
+
+
+               career.setText(ocupationRecordModel.getOccupationRecords().get(0).getName());
+
+                Log.d("carer",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<OcupationRecordModel> call, Throwable t) {
+
+                Log.d("no career",t.getMessage());
+            }
+        });
+    }
+
+    private void educationShow(){
+        Call<RecordModel> recordModelCall = ApiClient.getService().getEducation1("Bearer "+token);
+        recordModelCall.enqueue(new Callback<RecordModel>() {
+            @Override
+            public void onResponse(Call<RecordModel> call, Response<RecordModel> response) {
+                if (!response.isSuccessful()){
+                    String message = "No Display";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("display",response.message());
+                    Log.d("display",response.errorBody().toString());
+                    return;
+                }
+
+                String log = response.body().toString();
+                Log.d("take", log);
+
+                RecordModel recordModel = response.body();
+                recordModel.getModel();
+
+                //education.setText(recordModel.getModel().get(0).getName());
+
+                Log.d("carer",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<RecordModel> call, Throwable t) {
+                Log.d("no career",t.getMessage());
+
+            }
+        });
+    }
+
+    private void childrenShow(){
+        Call<ChildrenRecordModel> childrenRecordModelCall = ApiClient.getService().getChildren1("Bearer "+token);
+        childrenRecordModelCall.enqueue(new Callback<ChildrenRecordModel>() {
+            @Override
+            public void onResponse(Call<ChildrenRecordModel> call, Response<ChildrenRecordModel> response) {
+                if (!response.isSuccessful()){
+                    String message = "No Display";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("display",response.message());
+                    Log.d("display",response.errorBody().toString());
+                    return;
+                }
+
+                String log = response.body().toString();
+                Log.d("take", log);
+               ChildrenRecordModel childrenRecordModel = response.body();
+
+               childrenRecordModel.getChildrenRecords();
+
+                children.setText(childrenRecordModel.getChildrenRecords().get(0).getName());
+
+                Log.d("carer",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<ChildrenRecordModel> call, Throwable t) {
+
+                Log.d("no career",t.getMessage());
+            }
+        });
+    }
+
+    private void politicsShow(){
+        Call<PoliticsRecordModel> politicsRecordModelCall = ApiClient.getService().getPolitics1("Bearer "+token);
+        politicsRecordModelCall.enqueue(new Callback<PoliticsRecordModel>() {
+            @Override
+            public void onResponse(Call<PoliticsRecordModel> call, Response<PoliticsRecordModel> response) {
+                if (!response.isSuccessful()){
+                    String message = "No Display";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("display",response.message());
+                    Log.d("display",response.errorBody().toString());
+                    return;
+                }
+
+                String log = response.body().toString();
+                Log.d("take", log);
+                PoliticsRecordModel politicsRecordModel = response.body();
+                politicsRecordModel.getPoliticsModel();
+
+                politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
+
+                Log.d("carer",new Gson().toJson(response.body()));
+
+            }
+
+            @Override
+            public void onFailure(Call<PoliticsRecordModel> call, Throwable t) {
+
+                Log.d("no career",t.getMessage());
+
+            }
+        });
+    }
+    private void displayInterest(){
         Call<List<DispalyInterest>> displayCall = ApiClient.getService().display("Bearer "+token);
         displayCall.enqueue(new Callback<List<DispalyInterest>>() {
             @Override

@@ -193,6 +193,7 @@
                         app:drawableStartCompat="@drawable/aboutmeiconeducation" />
 
                     <TextView
+                        android:id="@+id/testtt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -247,6 +248,7 @@
                         app:drawableStartCompat="@drawable/aboutmeiconchildren" />
 
                     <TextView
+                        android:id="@+id/chil"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -304,6 +306,7 @@
                         app:drawableStartCompat="@drawable/aboutmeiconpolitics" />
 
                     <TextView
+                        android:id="@+id/polit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
