@@ -71,7 +71,7 @@ public class GeneralFactory {
     private FirebaseAuth acct;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private StorageTask mUploads;
+    private StorageTask<UploadTask.TaskSnapshot> mUploads;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -536,23 +536,21 @@ public class GeneralFactory {
 
                 mUploads = fileref.putFile(uri);
 
-                Task<Uri> uriTask = mUploads.continueWithTask(new Continuation<UploadTask.TaskSnapshot,Task<Uri>>(){
-
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if(!task.isSuccessful()){
-                            throw task.getException();
-                        }
-                        return fileref.getDownloadUrl();
+                Task<Uri> uriTask = mUploads.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
                     }
+                    return fileref.getDownloadUrl();
                 })
                         .addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
                                 if(task.isSuccessful()){
                                     Uri downloadUrl =  task.getResult();
+                                    String uploadId = mDatabaseRef.push().getKey();
                                     videoPicModel.setVideo(true);
                                     videoPicModel.setVideoPicUrl(downloadUrl.toString());
+                                    mDatabaseRef.child(uploadId).setValue(videoPicModel);
                                 }
                             }
                         });
