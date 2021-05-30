@@ -51,6 +51,7 @@ public class Profile extends AppCompatActivity {
     private Uri photouri;
     private Intent data;
     private String profilePics;
+    String Fullname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        String Fullname = getIntent().getStringExtra("name");
+        Fullname = getIntent().getStringExtra("name");
       bigTokeng = getIntent().getStringExtra("alltoken");
 
         tokinfromLogin = getIntent().getStringExtra("toking");
@@ -123,7 +124,15 @@ public class Profile extends AppCompatActivity {
         Log.d("ImageUrl",imageUri.toString());
         getImageResponse.setPicture(imageUri.toString());
         requestPicture(getImageResponse);
-       // userService.
+        Intent intent = new Intent(Profile.this, Interest.class);
+
+        Log.d("ImageUri",imageUri.toString());
+        intent.putExtra("profilepics", imageUri.toString());
+        intent.putExtra("name", Fullname);
+        intent.putExtra("mytoken", bigTokeng);
+        Log.d("TAG", "TOKENSHOW5 " +bigTokeng);
+        startActivity(intent);
+        // userService.
        // Call<GetImage> getImageCall = ApiClient.getService().getimage()
 
     }
