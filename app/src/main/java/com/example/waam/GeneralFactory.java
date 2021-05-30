@@ -222,6 +222,33 @@ public class GeneralFactory {
                     }
                 });
     }
+    public void enterEmail(emailAddress getemailAddress, String email){
+        Call<EmailResponse> emailResponseCall = ApiClient.getService().emailLink(getemailAddress);
+
+        emailResponseCall.enqueue(new Callback<EmailResponse>() {
+            @Override
+            public void onResponse(Call<EmailResponse> call, Response<EmailResponse> response) {
+                if (response.isSuccessful()){
+                    String link = response.body().getMessage();
+
+                    Intent getLink = new Intent(context, passw.class);
+                    Log.d("emailLink",""+link);
+                    getLink.putExtra("email",email);
+                    context.startActivity(getLink);
+                } else {
+                    String message = "An error occured";
+                    Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Please try again!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EmailResponse> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     public void loadNewFriends(String branch,ProgressBar bar,TextView textView, FetchFriends friends){
 
