@@ -31,6 +31,7 @@ public class VideoPicFragment extends Fragment {
     private GeneralFactory generalFactory;
     private ProgressBar bar;
     private TextView textView;
+    private static final String VIDEO = "video";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,9 +67,10 @@ public class VideoPicFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        String path = "userid"+VIDEO;
         generalFactory = GeneralFactory.getGeneralFactory(getActivity());
 
-        generalFactory.loadVidPic("", new GeneralFactory.LoadVidPic() {
+        generalFactory.loadVidPic(path, new GeneralFactory.LoadVidPic() {
             @Override
             public void loadVidpic(List<VideoPicModel> videoPicModels) {
                 videoPicAdapter = new VideoPicAdapter(videoPicModels,getActivity());

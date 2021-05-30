@@ -485,6 +485,11 @@ public class GeneralFactory {
     }
 
 
+    public void uploadPicOrVid(){
+        //
+    }
+
+
     public void loadVidPic(String branch,LoadVidPic loadVidPic){
         videoPicModelList = new ArrayList<>();
         DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
@@ -496,6 +501,8 @@ public class GeneralFactory {
                     VideoPicModel videoPicModel = dataSnapshot.getValue(VideoPicModel.class);
                     videoPicModelList.add(videoPicModel);
                 }
+
+                loadVidPic.loadVidpic(videoPicModelList);
             }
 
             @Override
