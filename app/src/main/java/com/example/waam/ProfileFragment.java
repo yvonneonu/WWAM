@@ -123,30 +123,35 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int message = R.id.message;
-        final int chatbu = R.id.bubble;
-        switch (item.getItemId()){
+        if (user != null){
+            final int message = R.id.message;
+            final int chatbu = R.id.bubble;
+            switch (item.getItemId()){
 
-            case message:
-                Random rand = new Random();
-                int n = rand.nextInt(2);
-                if(boolcont[n]){
-                    Log.d("Connected","Both of you are friends");
-                    Fragment fragment = new ConnectedFriendsFragment();
-                    FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.fragmentcontainer,fragment)
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .addToBackStack(null)
-                            .commit();
-                }else{
-                    textView.setText("You must be friends with this user to \n access the chat feature");
-                    dialog.show();
-                }
-                break;
-            case chatbu:
-                break;
+                case message:
+                    Random rand = new Random();
+                    int n = rand.nextInt(2);
+                    if(boolcont[n]){
+                        Log.d("Connected","Both of you are friends");
+                        Fragment fragment = new ConnectedFriendsFragment();
+                        FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragmentcontainer,fragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null)
+                                .commit();
+                    }else{
+                        textView.setText("You must be friends with this user to \n access the chat feature");
+                        dialog.show();
+                    }
+                    break;
+                case chatbu:
+                    break;
 
+            }
+        }else {
+            item.setVisible(false);
         }
+
 
         return super.onOptionsItemSelected(item);
     }
