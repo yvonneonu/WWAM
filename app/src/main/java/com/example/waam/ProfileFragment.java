@@ -367,7 +367,7 @@ public class ProfileFragment extends Fragment {
 
                childrenRecordModel.getChildrenRecords();
 
-                children.setText(childrenRecordModel.getChildrenRecords().get(0).getName());
+//                children.setText(childrenRecordModel.getChildrenRecords().get(0).getName());
 
                 Log.d("carer",new Gson().toJson(response.body()));
             }
@@ -398,7 +398,7 @@ public class ProfileFragment extends Fragment {
                 PoliticsRecordModel politicsRecordModel = response.body();
                 politicsRecordModel.getPoliticsModel();
 
-                politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
+               // politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
 
                 Log.d("carer",new Gson().toJson(response.body()));
 
