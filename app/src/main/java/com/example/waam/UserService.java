@@ -22,6 +22,9 @@ public interface UserService {
    // @GET("api/profile")
    // Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
 
+    @POST("api/forgot-password")
+    Call<EmailResponse>emailLink(@Body emailAddress getEmailAddress);
+
     @POST("api/interestuser")
     Call<InterestResponds>interest(@Body List<InterestRequest> interestResponds, @Header("Authorization") String token);
 
