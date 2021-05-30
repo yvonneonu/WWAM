@@ -117,7 +117,6 @@ public class ProfileFragment extends Fragment {
        token = SharedPref.getInstance(getActivity()).getStoredToken();
 
 
-        displayRequest();
 
       Log.d("tok", ""+token);
 
@@ -198,6 +197,8 @@ public class ProfileFragment extends Fragment {
         textView = dialog.findViewById(R.id.textView70);
         imageView = view.findViewById(R.id.imageView31);
 
+
+        displayRequest();
 
 
 
