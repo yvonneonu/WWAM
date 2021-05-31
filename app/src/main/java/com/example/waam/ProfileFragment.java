@@ -113,9 +113,9 @@ public class ProfileFragment extends Fragment {
             case message:
                 Random rand = new Random();
                 int n = rand.nextInt(2);
-                if(boolcont[n]){
+                if(boolcont[n] && user != null){
                     Log.d("Connected","Both of you are friends");
-                    Fragment fragment = new ConnectedFriendsFragment();
+                    Fragment fragment = new ConnectedFriendsFragment(user);
                     FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.fragmentcontainer,fragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

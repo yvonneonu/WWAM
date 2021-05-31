@@ -1,6 +1,8 @@
 package com.example.waam;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -10,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.storage.StorageTask;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -49,9 +53,9 @@ public class Profile extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     private Uri photouri;
+
     private Intent data;
     private String profilePics;
-    String Fullname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +63,8 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Fullname = getIntent().getStringExtra("name");
-      bigTokeng = getIntent().getStringExtra("alltoken");
+        String Fullname = getIntent().getStringExtra("name");
+        bigTokeng = getIntent().getStringExtra("alltoken");
 
         tokinfromLogin = getIntent().getStringExtra("toking");
         textView = findViewById(R.id.captureImage);
@@ -124,18 +128,18 @@ public class Profile extends AppCompatActivity {
         Log.d("ImageUrl",imageUri.toString());
         getImageResponse.setPicture(imageUri.toString());
         requestPicture(getImageResponse);
-        Intent intent = new Intent(Profile.this, Interest.class);
 
-        Log.d("ImageUri",imageUri.toString());
-        intent.putExtra("profilepics", imageUri.toString());
-        intent.putExtra("name", Fullname);
-        intent.putExtra("mytoken", bigTokeng);
-        Log.d("TAG", "TOKENSHOW5 " +bigTokeng);
-        startActivity(intent);
-        // userService.
-       // Call<GetImage> getImageCall = ApiClient.getService().getimage()
 
     }
+
+    private String getFileExtension(Uri uri){
+        // This was just a test
+        ContextWrapper rapper = new ContextWrapper(this);
+        ContentResolver resolver = rapper.getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(resolver.getType(uri));
+    }
+
     private void requestPicture(GetImageResponse getImageResponse){
         Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer "+bigTokeng);
         getImageCall.enqueue(new Callback() {
@@ -146,13 +150,17 @@ public class Profile extends AppCompatActivity {
                     Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
                     Log.d("imageview",response.message());
                     Log.d("imageview",response.errorBody().toString());
-                    return;
+                }else{
+
+                    GeneralFactory.getGeneralFactory(Profile.this)
+                            .uploadProfilePicToFireBase(getFileExtension(imageUri),imageUri);
+                    String message = "Successful";
+                    Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                    Log.d("Body",new Gson().toJson(response.body()));
                 }
 
 
-                String message = "Successful";
-                Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
-                Log.d("Body",new Gson().toJson(response.body()));
+
             }
 
             @Override
