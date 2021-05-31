@@ -24,7 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.storage.StorageTask;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -115,7 +114,9 @@ public class Profile extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (imageUri != null){
 
+                }
                 Log.d("Clicked","Yes i am");
                 Hereapi();
             }
@@ -125,7 +126,7 @@ public class Profile extends AppCompatActivity {
 
     private void Hereapi() {
         GetImageResponse getImageResponse = new GetImageResponse("picture");
-        Log.d("ImageUrl",imageUri.toString());
+//        Log.d("ImageUrl",imageUri.toString());
         getImageResponse.setPicture(imageUri.toString());
         requestPicture(getImageResponse);
 
