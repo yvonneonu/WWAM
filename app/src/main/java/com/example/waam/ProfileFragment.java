@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     private WaamUser user;
     private View view;
     private ImageView imageView;
-    private TextView textView, career, education, children, politics;
+    private TextView textView, career, education, children, politics, bodyType, faith, ehnity;
     private boolean[] boolcont;
     private FirebaseAuth mAuth;
     private String token;
@@ -187,6 +187,9 @@ public class ProfileFragment extends Fragment {
         education = view.findViewById(R.id.testtt);
         children = view.findViewById(R.id.chil);
         politics = view.findViewById(R.id.polit);
+        bodyType = view.findViewById(R.id.body1);
+        faith = view.findViewById(R.id.faith3);
+        ehnity = view.findViewById(R.id.ehnity1);
 
 
         displayInterest();
@@ -194,6 +197,10 @@ public class ProfileFragment extends Fragment {
         educationShow();
         childrenShow();
         politicsShow();
+        bodyShow();
+        faithShow();
+        ethnicity();
+
 
 
         if(user != null){
@@ -209,9 +216,11 @@ public class ProfileFragment extends Fragment {
             friendRequest.setVisibility(View.GONE);
 
 
+
             GeneralFactory.getGeneralFactory(getActivity()).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
                 @Override
                 public void loadSpecUse(WaamUser userpro) {
+
                     if(isAdded()){
                         Glide.with(getActivity())
                                 .asBitmap()
@@ -222,6 +231,7 @@ public class ProfileFragment extends Fragment {
                     }
 
                 }
+
             });
         }
 
@@ -379,6 +389,106 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    private void ethnicity(){
+        Call<EthnicityRecordmodel> ethnicityRecordmodelCall = ApiClient.getService().getEthnicity1("Bearer "+token);
+        ethnicityRecordmodelCall.enqueue(new Callback<EthnicityRecordmodel>() {
+            @Override
+            public void onResponse(Call<EthnicityRecordmodel> call, Response<EthnicityRecordmodel> response) {
+
+                if (!response.isSuccessful()){
+                    String message = "No Display";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("display",response.message());
+                    Log.d("display",response.errorBody().toString());
+                    return;
+                }
+
+                String log = response.body().toString();
+                Log.d("take", log);
+                EthnicityRecordmodel ethnicityRecordmodel = response.body();
+                ethnicityRecordmodel.getEtnicrecords();
+
+
+
+                //ehnity.setText(ethnicityRecordmodel.getEtnicrecords().get(0).getName());
+
+
+
+                Log.d("carer",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<EthnicityRecordmodel> call, Throwable t) {
+
+                Log.d("no career",t.getMessage());
+
+            }
+        });
+    }
+    private void faithShow(){
+        Call<FaithRecordModel> faithRecordModelCall = ApiClient.getService().getFaith1("Bearer "+token);
+        faithRecordModelCall.enqueue(new Callback<FaithRecordModel>() {
+            @Override
+            public void onResponse(Call<FaithRecordModel> call, Response<FaithRecordModel> response) {
+                if (!response.isSuccessful()){
+                    String message = "No Display";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("display",response.message());
+                    Log.d("display",response.errorBody().toString());
+                    return;
+                }
+
+                String log = response.body().toString();
+                Log.d("take", log);
+                FaithRecordModel faithRecordModel = response.body();
+                faithRecordModel.getFaithRecords();
+
+
+              //  faith.setText(faithRecordModel.getFaithRecords().get(0).getName());
+
+
+                Log.d("carer",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<FaithRecordModel> call, Throwable t) {
+
+                Log.d("no career",t.getMessage());
+            }
+        });
+    }
+
+    private void bodyShow(){
+        Call<BodyTypeRecordModel> bodyTypeRecordModelCall = ApiClient.getService().getBody1("Bearer "+token);
+        bodyTypeRecordModelCall.enqueue(new Callback<BodyTypeRecordModel>() {
+            @Override
+            public void onResponse(Call<BodyTypeRecordModel> call, Response<BodyTypeRecordModel> response) {
+                if (!response.isSuccessful()){
+                    String message = "No Display";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("display",response.message());
+                    Log.d("display",response.errorBody().toString());
+                    return;
+                }
+
+                String log = response.body().toString();
+                Log.d("take", log);
+               BodyTypeRecordModel bodyTypeRecordModel = response.body();
+                bodyTypeRecordModel.getBodyTypeRecord();
+
+               // bodyType.setText(bodyTypeRecordModel.getBodyTypeRecord().get(0).getName());
+
+
+                Log.d("carer",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<BodyTypeRecordModel> call, Throwable t) {
+
+                Log.d("no career",t.getMessage());
+            }
+        });
+    }
     private void politicsShow(){
         Call<PoliticsRecordModel> politicsRecordModelCall = ApiClient.getService().getPolitics1("Bearer "+token);
         politicsRecordModelCall.enqueue(new Callback<PoliticsRecordModel>() {

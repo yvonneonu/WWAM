@@ -220,6 +220,7 @@
                         app:drawableStartCompat="@drawable/aboutmeiconbodytype" />
 
                     <TextView
+                        android:id="@+id/body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -277,10 +278,11 @@
                         app:drawableStartCompat="@drawable/aboutmeiconfaith" />
 
                     <TextView
+                        android:id="@+id/faith3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="No Comment" />
+                        android:text="Christain" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -335,6 +337,7 @@
                         app:drawableStartCompat="@drawable/aboutmeiconethnicity" />
 
                     <TextView
+                        android:id="@+id/ehnity1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"

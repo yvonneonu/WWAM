@@ -18,13 +18,13 @@ public interface UserService {
     @GET("api/occupation/2")
     Call<OcupationRecordModel> getOccupation1(@Header("Authorization")String token);
 
-    @GET("api/bodytype")
+    @GET("api/bodytype/2")
     Call<BodyTypeRecordModel> getBody1 (@Header("Authorization")String token);
 
-    @GET("api/ethnicity")
+    @GET("api/ethnicity/2")
     Call<EthnicityRecordmodel> getEthnicity1 (@Header("Authorization")String token);
 
-    @GET("api/faith")
+    @GET("api/faith/2")
     Call<FaithRecordModel> getFaith1 (@Header("Authorization")String token);
 
     @GET("api/politics/2")
