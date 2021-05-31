@@ -52,6 +52,7 @@ public class Profile extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     private Uri photouri;
+    String Fullname;
 
     private Intent data;
     private String profilePics;
@@ -62,7 +63,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        String Fullname = getIntent().getStringExtra("name");
+        Fullname = getIntent().getStringExtra("name");
         bigTokeng = getIntent().getStringExtra("alltoken");
 
         tokinfromLogin = getIntent().getStringExtra("toking");
@@ -114,9 +115,7 @@ public class Profile extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (imageUri != null){
 
-                }
                 Log.d("Clicked","Yes i am");
                 Hereapi();
             }
@@ -125,10 +124,34 @@ public class Profile extends AppCompatActivity {
     }
 
     private void Hereapi() {
-        GetImageResponse getImageResponse = new GetImageResponse("picture");
+        if (imageUri != null){
+            GetImageResponse getImageResponse = new GetImageResponse("");
 //        Log.d("ImageUrl",imageUri.toString());
-        getImageResponse.setPicture(imageUri.toString());
-        requestPicture(getImageResponse);
+            getImageResponse.setPicture(imageUri.toString());
+            requestPicture(getImageResponse);
+            Log.d("imageshow", ""+imageUri.toString());
+
+
+            String message = "Successful";
+            Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Profile.this, Interest.class);
+            Log.d("ImageUri",imageUri.toString());
+            intent.putExtra("profilepics", imageUri.toString());
+            intent.putExtra("name", Fullname);
+            Log.d("TAG", ""+Fullname);
+
+            intent.putExtra("mytoken", bigTokeng);
+            Log.d("TAG", "TOKENSHOW5 " +bigTokeng);
+            startActivity(intent);
+            // userService.
+            // Call<GetImage> getImageCall = ApiClient.getService().getimage()
+        }else {
+            String message = "Pick a photo";
+            Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+            //Log.d("imageshow", ""+r);
+            // Log.d("Body",new Gson().toJson(response.body()));
+        }
+
 
 
     }
