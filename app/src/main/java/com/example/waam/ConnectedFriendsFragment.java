@@ -13,7 +13,6 @@ import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ConnectedFriendsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ConnectedFriendsFragment extends Fragment implements View.OnClickListener {
@@ -22,32 +21,25 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private WaamUser waamUser;
+    private static final String REQUEST = "connectedFriends";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public ConnectedFriendsFragment() {
-        // Required empty public constructor
+    public ConnectedFriendsFragment(WaamUser waamUser) {
+        this.waamUser = waamUser;
+
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ConnectedFriendsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ConnectedFriendsFragment newInstance(String param1, String param2) {
-        ConnectedFriendsFragment fragment = new ConnectedFriendsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +48,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Fragment fr =new VideoPicFragment();
+        Fragment fr =new VideoPicFragment(waamUser);
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.add(R.id.profileframe,fr)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -91,18 +83,18 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         Fragment fragment ;
         switch (v.getId()){
             case vid:
-                fragment = new VideoPicFragment();
+                // i stopped here planning on sending waam user to the video fragment
+                //fragment = VideoPicFragment.newInstance();
+                fragment = new VideoPicFragment(waamUser);
                 break;
             case aboutsef:
                 fragment = new AboutMeFragment();
                 break;
             case interest:
                 fragment = new InterestFragment();
-                Log.d("Interest","Showing off");
                 break;
             case friends:
                 fragment = new FrendChannelFragment();
-                Log.d("Friends","Showing off");
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());

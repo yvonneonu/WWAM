@@ -17,6 +17,7 @@ public class WaamUser implements Serializable {
     private String onlineStatus;
     private String timeStamp;
     private String typingTo;
+    private String imageUrl;
 
     public String getImageUrl() {
         return imageUrl;
@@ -26,7 +27,7 @@ public class WaamUser implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    private String imageUrl;
+
 
 
 

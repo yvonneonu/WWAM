@@ -3,6 +3,8 @@ package com.example.waam;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -13,7 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
 import com.example.waam.model.User;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +26,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +46,8 @@ import io.agora.rtm.RtmClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.google.firebase.database.FirebaseDatabase.*;
 
 public class GeneralFactory {
     private static GeneralFactory generalFactory;
@@ -55,8 +66,12 @@ public class GeneralFactory {
     private DatabaseReference userForSeen;
     private List<WaamUser> contactedUser;
     private List<String> usersStringId;
+    private List<VideoPicModel> videoPicModelList;
     private String theMessage;
     private FirebaseAuth acct;
+    private StorageReference mStorageRef;
+    private DatabaseReference mDatabaseRef;
+    private StorageTask mUploads;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -74,7 +89,7 @@ public class GeneralFactory {
     private GeneralFactory(Context context){
         eventModelList = new ArrayList<>();
         locationList = new ArrayList<>();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = getInstance();
         agentModelList =  new ArrayList<>();
         this.context = context;
         mAuth = FirebaseAuth.getInstance();
@@ -164,7 +179,7 @@ public class GeneralFactory {
                         Toast.makeText(context, "You have signed up", Toast.LENGTH_LONG).show();
                         //This is where we set the values we want our users to have
                         String userId = mAuth.getCurrentUser().getUid();
-                        DatabaseReference mDatebaseReference = FirebaseDatabase.getInstance().getReference(WAAMBASE);
+                        DatabaseReference mDatebaseReference = getInstance().getReference(WAAMBASE);
                         mDatebaseReference.child(userId)
                                 .setValue(waamUser)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -413,7 +428,7 @@ public class GeneralFactory {
 
     public void setOnlineStatus(String status){
         String userId = mAuth.getCurrentUser().getUid();
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference(WAAMBASE).child(userId);
+        DatabaseReference database = getInstance().getReference(WAAMBASE).child(userId);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("onlineStatus",status);
         database.updateChildren(hashMap);
@@ -425,7 +440,7 @@ public class GeneralFactory {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         String dateToString = formatter.format(date);
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference(WAAMBASE).child(userId);
+        DatabaseReference database = getInstance().getReference(WAAMBASE).child(userId);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("timeStamp",dateToString);
         database.updateChildren(hashMap);
@@ -464,7 +479,7 @@ public class GeneralFactory {
 
 
     public void loadSpecUser(String userdId, final SpecificUser userCallback){
-        DatabaseReference databaseSpecUser = FirebaseDatabase.getInstance().getReference(WAAMBASE);
+        DatabaseReference databaseSpecUser = getInstance().getReference(WAAMBASE);
         databaseSpecUser.child(userdId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -488,7 +503,7 @@ public class GeneralFactory {
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             final String senderId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             Log.d("SenderId",senderId);
-            DatabaseReference databaseChats = FirebaseDatabase.getInstance().getReference("CHAT");
+            DatabaseReference databaseChats = getInstance().getReference("CHAT");
             databaseChats.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -522,9 +537,99 @@ public class GeneralFactory {
     }
 
 
+    public void uploadPicOrVid(String filetype, Uri uri){
+        String uid = FirebaseAuth.getInstance().getUid();
+        String path = uid+"VideoPic";
+        mStorageRef = FirebaseStorage.getInstance().getReference("VIDEO_PIC").child(path);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("VIDEO_PIC").child(path);
+
+        if(uri != null){
+            final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
+            VideoPicModel videoPicModel = new VideoPicModel();
+            if(filetype.equals("jpg")){
+                mUploads = fileref.putFile(uri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        String uploadId = mDatabaseRef.push().getKey();
+                        fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                videoPicModel.setVideo(false);
+                                videoPicModel.setVideoPicUrl(uri.toString());
+                                mDatabaseRef.child(uploadId).setValue(videoPicModel);
+                            }
+                        });
+
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+            }else{
+
+                mUploads = fileref.putFile(uri);
+
+                Task<Uri> uriTask = mUploads.continueWithTask(new Continuation<UploadTask.TaskSnapshot,Task<Uri>>(){
+
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if(!task.isSuccessful()){
+                            throw task.getException();
+                        }
+                        return fileref.getDownloadUrl();
+                    }
+                })
+                        .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if(task.isSuccessful()){
+                                    Uri downloadUrl =  task.getResult();
+                                    videoPicModel.setVideo(true);
+                                    videoPicModel.setVideoPicUrl(downloadUrl.toString());
+                                }
+                            }
+                        });
+
+            }
+
+
+
+        }
+
+    }
+
+
+    public void loadVidPic(String branch,LoadVidPic loadVidPic){
+        videoPicModelList = new ArrayList<>();
+        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
+        mDatebaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                videoPicModelList.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    VideoPicModel videoPicModel = dataSnapshot.getValue(VideoPicModel.class);
+                    videoPicModelList.add(videoPicModel);
+                }
+
+                loadVidPic.loadVidpic(videoPicModelList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("VideoModel","An error occurred");
+            }
+        });
+
+    }
+
     public void loadLastMessage(String senderId, String receiverId,TextView last_msg){
         theMessage = "default";
-        DatabaseReference databaseChats = FirebaseDatabase.getInstance().getReference("CHAT");
+        DatabaseReference databaseChats = getInstance().getReference("CHAT");
         databaseChats.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -665,6 +770,57 @@ public class GeneralFactory {
 
 
 
+
+    public void uploadProfilePicToFireBase(String filextension, Uri uri){
+        mStorageRef = FirebaseStorage.getInstance().getReference("goods");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("goods");
+        final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filextension);
+
+        //bar.setProgress(0);
+         mUploads = fileref.putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Handler hand = new Handler();
+                        hand.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                //bar.setProgress(0);
+                            }
+                        }, 500);
+
+                        fileref.getDownloadUrl()
+                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        String uid = FirebaseAuth.getInstance().getUid();
+                                        loadSpecUser(uid, new SpecificUser() {
+                                            @Override
+                                            public void loadSpecUse(WaamUser user) {
+                                                String link = uri.toString();
+                                                Map<String, Object> hashMap = new HashMap<>();
+                                                hashMap.put("imageUrl", link);
+                                                mDatabaseRef.updateChildren(hashMap);
+                                            }
+                                        });
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
 
     public void fetchAllUser(FetchFriends fetchAllWaamUsers){
         allWaamUsers = new ArrayList<>();
@@ -844,5 +1000,9 @@ public class GeneralFactory {
 
     public interface FriendChecker{
         void friendCheck(List<WaamUser> userList);
+    }
+
+    public interface LoadVidPic{
+        void loadVidpic(List<VideoPicModel> videoPicModels);
     }
 }

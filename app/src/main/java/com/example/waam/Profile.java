@@ -1,6 +1,8 @@
 package com.example.waam;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -10,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,7 +42,7 @@ public class Profile extends AppCompatActivity {
 
     UserService userService;
     String tokinfromLogin;
-   // private String token;
+    private String token;
     ImageView imageView;
     TextView textView, gallery, wipe;
     Button upload;
@@ -49,9 +52,10 @@ public class Profile extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     private Uri photouri;
+    String Fullname;
+
     private Intent data;
     private String profilePics;
-    private String Fullname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +64,8 @@ public class Profile extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Fullname = getIntent().getStringExtra("name");
-      bigTokeng = getIntent().getStringExtra("alltoken");
+        bigTokeng = getIntent().getStringExtra("alltoken");
 
-        //token = SharedPref.getInstance(this).getStoredToken(this);
-       // Log.d("showtoken", token);
         tokinfromLogin = getIntent().getStringExtra("toking");
         textView = findViewById(R.id.captureImage);
         imageView = findViewById(R.id.imageView);
@@ -100,8 +102,6 @@ public class Profile extends AppCompatActivity {
                     Log.d("ImageUri",imageUri.toString());
                     intent.putExtra("profilepics", imageUri.toString());
                     intent.putExtra("name", Fullname);
-                    Log.d("TAG", ""+Fullname);
-
                     intent.putExtra("mytoken", bigTokeng);
                     Log.d("TAG", "TOKENSHOW5 " +bigTokeng);
                     startActivity(intent);
@@ -149,34 +149,48 @@ public class Profile extends AppCompatActivity {
             String message = "Pick a photo";
             Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
             //Log.d("imageshow", ""+r);
-           // Log.d("Body",new Gson().toJson(response.body()));
+            // Log.d("Body",new Gson().toJson(response.body()));
         }
 
 
+
     }
+
+    private String getFileExtension(Uri uri){
+        // This was just a test
+        ContextWrapper rapper = new ContextWrapper(this);
+        ContentResolver resolver = rapper.getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(resolver.getType(uri));
+    }
+
     private void requestPicture(GetImageResponse getImageResponse){
         Call<GetImage> getImageCall = ApiClient.getService().getimage(getImageResponse, "Bearer "+bigTokeng);
         getImageCall.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 if (!response.isSuccessful()){
-                    String message = "Successful";
+                    String message = "something went wrong";
                     Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
                     Log.d("imageview",response.message());
                     Log.d("imageview",response.errorBody().toString());
-                    return;
+                }else{
+
+                    GeneralFactory.getGeneralFactory(Profile.this)
+                            .uploadProfilePicToFireBase(getFileExtension(imageUri),imageUri);
+                    String message = "Successful";
+                    Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
+                    Log.d("Body",new Gson().toJson(response.body()));
                 }
 
 
-                String message = "Successful";
-                Toast.makeText(Profile.this, message, Toast.LENGTH_LONG).show();
-                Log.d("Body",new Gson().toJson(response.body()));
+
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
 
-                Log.d("no image",t.getMessage());
+                Log.d("noimage",t.getMessage());
             }
         });
 

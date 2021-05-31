@@ -2,11 +2,8 @@ package com.example.waam;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,17 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -38,18 +30,10 @@ import java.io.IOException;
 
 public class BottomSheet extends BottomSheetDialogFragment {
     private static final int VILLAGEPEOPLE = 1;
-    //picture picture;
-    String pathFile;
-    private int requestCode;
-    private int resultCode;
-    Button wipe;
-    private static final int PICK_IMAGE = 100;
-    Uri imageUri;
-    private Intent data;
+    private static final int PICK_IMAGE_VIDEO = 100;
     private Uri photouri;
     private SelectedImage imageListener;
-    private String noit;
-    private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private static final int MY_CAMERA_REQUEST_CODE = 200;
 
 
 
@@ -110,7 +94,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
             photoFile = createPhotoFile();
             if (photoFile != null) {
                 Log.d("Dispatch","Photofile is not null");
-                pathFile = photoFile.getAbsolutePath();
+                String pathFile = photoFile.getAbsolutePath();
                 photouri = FileProvider.getUriForFile(getActivity(), "com.example.android.fileprovider", photoFile);
                 takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photouri);
                 startActivityForResult(takePicture, VILLAGEPEOPLE);
@@ -134,7 +118,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     private void openGallery1() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+        startActivityForResult(gallery, PICK_IMAGE_VIDEO);
         Log.d("tag", "dncnncn");
     }
 
@@ -145,7 +129,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
+        Uri imageUri;
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_VIDEO) {
              imageUri = data.getData();
              if(imageListener != null){
                  imageListener.selectedImageListener(imageUri);
@@ -161,6 +146,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
         }
 
     }
+
+
 
 
     public interface SelectedImage{
