@@ -99,6 +99,7 @@ public class SignUpSecond extends AppCompatActivity {
 
         WaamUser waamUser = new WaamUser("name", "email", "zipcode", "gender", "seeking", "date", "pass");
 
+
         String fullname = name.getText().toString();
         String Email = email.getText().toString();
         String Zip = zip.getText().toString();
@@ -139,6 +140,7 @@ public class SignUpSecond extends AppCompatActivity {
             Toast.makeText(SignUpSecond.this, message, Toast.LENGTH_LONG).show();
         } else {
 
+         //   SharedPref.getInstance(this).setStoredToken(SharedPref.TOKEN, Token);
             //Log.d("meemmemememe", ""+user);
             SharedPref.getInstance(this).setStoredName(SharedPref.FULLNAME,fullname);
             waamUser.setFullname(fullname);
@@ -152,6 +154,7 @@ public class SignUpSecond extends AppCompatActivity {
             waamUser.setRelationship(relationship);
             generalFactory.requestUser(waamUser,progressBar);
             //requestUser(waamUser);
+
 
 
         }

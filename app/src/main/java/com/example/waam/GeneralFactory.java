@@ -939,7 +939,10 @@ public class GeneralFactory {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 if (response.isSuccessful()) {
-                    //response.body().getToken();
+                    assert response.body() != null;
+                    String loginToken = response.body().getToken();
+                    SharedPref.getInstance(context).setStoredToken(SharedPref.TOKEN, loginToken);
+                    Log.d("regu", loginToken);
                     //response.body();
                     String message = "Successful";
                     Toast.makeText(context, message, Toast.LENGTH_LONG).show();
