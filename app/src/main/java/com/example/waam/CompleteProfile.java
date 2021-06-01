@@ -37,7 +37,6 @@ public class CompleteProfile extends AppCompatActivity {
     private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight, profile;
     private static final String PROFILEPIC = "profilePic";
     private static final String VIDEOPIC = "videoPic";
-    private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private StorageTask<UploadTask.TaskSnapshot> mUploads;
     private Task<Uri> uriTask;
@@ -378,7 +377,7 @@ public class CompleteProfile extends AppCompatActivity {
 
     public void uploadPicOrVid(String filetype, Uri uri){
         String uid = FirebaseAuth.getInstance().getUid();
-        mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
 
         if(uri != null){
