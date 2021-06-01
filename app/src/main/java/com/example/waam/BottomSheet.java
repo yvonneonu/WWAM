@@ -24,6 +24,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +36,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private Uri photouri;
     private SelectedImage imageListener;
     private static final int MY_CAMERA_REQUEST_CODE = 200;
-
+    private StorageTask<UploadTask.TaskSnapshot> mUploads;
 
 
     public BottomSheet() {

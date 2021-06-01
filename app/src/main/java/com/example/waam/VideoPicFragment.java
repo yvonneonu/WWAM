@@ -58,7 +58,7 @@ public class VideoPicFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String path = waamUser.getUid()+VIDEOPIC;
+        String path = waamUser.getUid();
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
 
         generalFactory.loadVidPic(path, new GeneralFactory.LoadVidPic() {
