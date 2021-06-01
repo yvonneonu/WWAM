@@ -11,18 +11,36 @@ import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 public class CompleteProfile extends AppCompatActivity {
     private ImageView firstImage, secondImage,thirdImage, fourthImage, fivethImage, sixthImage, seventhImage, eightImage, ninethImage, photo, gallerysave;;
     private TextView wipe, name;
     private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight, profile;
-    private static final int IMAGEREQUEST = 1;
-    private static final int VIDEOREQUEST = 2;
+    private static final String PROFILEPIC = "profilePic";
+    private static final String VIDEOPIC = "videoPic";
+    private DatabaseReference mDatabaseRef;
+    private StorageTask<UploadTask.TaskSnapshot> mUploads;
+    private Task<Uri> uriTask;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +94,22 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(image);
-                        firstImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout);
-                        linearLayout.setVisibility(View.GONE);
-                        bottomSheet.dismiss();
+
+                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                            Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
+                                    .show();
+                        }else {
+                            uploadPicOrVid(getFileExtension(uri),uri);
+                            Glide.with(CompleteProfile.this)
+                                    .asBitmap()
+                                    .load(uri)
+                                    .into(image);
+                            firstImage.setVisibility(View.GONE);
+                            LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                            linearLayout.setVisibility(View.GONE);
+                            bottomSheet.dismiss();
+                        }
+
                     }
                 });
             }
@@ -98,19 +124,27 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(imagefirst);
-                        Log.d("Bed", "mad");
-                        secondImage.setVisibility(View.GONE);
-                        Log.d("Bedy", "mad");
-                        LinearLayout linearLayout1 = findViewById(R.id.linearLayout1);
-                        TextView view1 = findViewById(R.id.text1);
-                        view1.setVisibility(View.GONE);
-                        linearLayout1.setVisibility(View.INVISIBLE);
-                        Log.d("Bedm", "mad");
-                        bottomSheet.dismiss();
+
+                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                            Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
+                                    .show();
+                        }else {
+                            uploadPicOrVid(getFileExtension(uri),uri);
+                            Glide.with(CompleteProfile.this)
+                                    .asBitmap()
+                                    .load(uri)
+                                    .into(imagefirst);
+                            Log.d("Bed", "mad");
+                            secondImage.setVisibility(View.GONE);
+                            Log.d("Bedy", "mad");
+                            LinearLayout linearLayout1 = findViewById(R.id.linearLayout1);
+                            TextView view1 = findViewById(R.id.text1);
+                            view1.setVisibility(View.GONE);
+                            linearLayout1.setVisibility(View.INVISIBLE);
+                            Log.d("Bedm", "mad");
+                            bottomSheet.dismiss();
+                        }
+
                     }
                 });
             }
@@ -124,14 +158,20 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(imagesecond);
-                        thirdImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout2);
-                        linearLayout.setVisibility(View.GONE);
-                        bottomSheet.dismiss();
+                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                            Toast.makeText(CompleteProfile.this,"An upload is ongoiong",Toast.LENGTH_LONG).show();
+                        }else {
+                            uploadPicOrVid(getFileExtension(uri),uri);
+                            Glide.with(CompleteProfile.this)
+                                    .asBitmap()
+                                    .load(uri)
+                                    .into(imagesecond);
+                            thirdImage.setVisibility(View.GONE);
+                            LinearLayout linearLayout = findViewById(R.id.linearLayout2);
+                            linearLayout.setVisibility(View.GONE);
+                            bottomSheet.dismiss();
+                        }
+
                     }
                 });
             }
@@ -145,15 +185,20 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(imagethird);
-                       fourthImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout3);
-                        linearLayout.setVisibility(View.GONE);
-                        bottomSheet.dismiss();
-
+                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                            Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
+                                    .show();
+                        }else {
+                            uploadPicOrVid(getFileExtension(uri), uri);
+                            Glide.with(CompleteProfile.this)
+                                    .asBitmap()
+                                    .load(uri)
+                                    .into(imagethird);
+                            fourthImage.setVisibility(View.GONE);
+                            LinearLayout linearLayout = findViewById(R.id.linearLayout3);
+                            linearLayout.setVisibility(View.GONE);
+                            bottomSheet.dismiss();
+                        }
                     }
                 });
             }
@@ -167,7 +212,13 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
+
+                        if ((mUploads != null && mUploads.isInProgress()) || uriTask != null) {
+                            Toast.makeText(CompleteProfile.this, "An upload is ongoing", Toast.LENGTH_LONG)
+                                    .show();
+                        } else {
+                            uploadPicOrVid(getFileExtension(uri), uri);
+                            Glide.with(CompleteProfile.this)
                                 .asBitmap()
                                 .load(uri)
                                 .into(imagefourth);
@@ -175,6 +226,7 @@ public class CompleteProfile extends AppCompatActivity {
                         LinearLayout linearLayout = findViewById(R.id.linearLayout4);
                         linearLayout.setVisibility(View.GONE);
                         bottomSheet.dismiss();
+                       }
                     }
                 });
             }
@@ -188,14 +240,21 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(imagefifth);
-                        bottomSheet.dismiss();
-                        sixthImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout5);
-                        linearLayout.setVisibility(View.GONE);
+
+                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                            Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
+                                    .show();
+                        }else {
+                            uploadPicOrVid(getFileExtension(uri), uri);
+                            Glide.with(CompleteProfile.this)
+                                    .asBitmap()
+                                    .load(uri)
+                                    .into(imagefifth);
+                            bottomSheet.dismiss();
+                            sixthImage.setVisibility(View.GONE);
+                            LinearLayout linearLayout = findViewById(R.id.linearLayout5);
+                            linearLayout.setVisibility(View.GONE);
+                        }
                     }
                 });
             }
@@ -209,15 +268,21 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(imagesixth);
+                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                            Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
+                                    .show();
+                        }else {
+                            uploadPicOrVid(getFileExtension(uri), uri);
+                            Glide.with(CompleteProfile.this)
+                                    .asBitmap()
+                                    .load(uri)
+                                    .into(imagesixth);
 
-                        seventhImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout6);
-                        linearLayout.setVisibility(View.GONE);
-                        bottomSheet.dismiss();
+                            seventhImage.setVisibility(View.GONE);
+                            LinearLayout linearLayout = findViewById(R.id.linearLayout6);
+                            linearLayout.setVisibility(View.GONE);
+                            bottomSheet.dismiss();
+                        }
                     }
                 });
             }
@@ -231,14 +296,22 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(imageseveth);
-                        eightImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout7);
-                        linearLayout.setVisibility(View.GONE);
-                        bottomSheet.dismiss();
+
+                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                            Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
+                                    .show();
+                        }else {
+                            uploadPicOrVid(getFileExtension(uri),uri);
+                            Glide.with(CompleteProfile.this)
+                                    .asBitmap()
+                                    .load(uri)
+                                    .into(imageseveth);
+                            eightImage.setVisibility(View.GONE);
+                            LinearLayout linearLayout = findViewById(R.id.linearLayout7);
+                            linearLayout.setVisibility(View.GONE);
+                            bottomSheet.dismiss();
+                        }
+
                     }
                 });
             }
@@ -252,15 +325,22 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        Glide.with(CompleteProfile.this)
-                                .asBitmap()
-                                .load(uri)
-                                .into(imageeight);
-                        ninethImage.setVisibility(View.GONE);
-                        LinearLayout linearLayout = findViewById(R.id.linearLayout8);
-                        linearLayout.setVisibility(View.GONE);
-                        GeneralFactory.getGeneralFactory(CompleteProfile.this).uploadPicOrVid(getFileExtension(uri),uri);
-                        bottomSheet.dismiss();
+
+                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                            Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
+                                    .show();
+                        }else {
+                           uploadPicOrVid(getFileExtension(uri),uri);
+                            Glide.with(CompleteProfile.this)
+                                    .asBitmap()
+                                    .load(uri)
+                                    .into(imageeight);
+                            ninethImage.setVisibility(View.GONE);
+                            LinearLayout linearLayout = findViewById(R.id.linearLayout8);
+                            linearLayout.setVisibility(View.GONE);
+                            bottomSheet.dismiss();
+                        }
+
                     }
                 });
             }
@@ -291,6 +371,72 @@ public class CompleteProfile extends AppCompatActivity {
         ContentResolver resolver = rapper.getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(resolver.getType(uri));
+    }
+
+
+
+    public void uploadPicOrVid(String filetype, Uri uri){
+        String uid = FirebaseAuth.getInstance().getUid();
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
+
+        if(uri != null){
+            final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
+            VideoPicModel videoPicModel = new VideoPicModel();
+            if(filetype.equals("jpg")){
+                mUploads = fileref.putFile(uri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                String uploadId = mDatabaseRef.push().getKey();
+                                fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        videoPicModel.setVideo(false);
+                                        videoPicModel.setVideoPicUrl(uri.toString());
+                                        mDatabaseRef.child(uploadId).setValue(videoPicModel);
+
+                                    }
+                                });
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(CompleteProfile.this,e.toString(),Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+            }else{
+
+                mUploads = fileref.putFile(uri);
+
+                 uriTask = mUploads.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+                    return fileref.getDownloadUrl();
+                })
+                        .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if(task.isSuccessful()){
+                                    Uri downloadUrl =  task.getResult();
+                                    String uploadId = mDatabaseRef.push().getKey();
+                                    videoPicModel.setVideo(true);
+                                    videoPicModel.setVideoPicUrl(downloadUrl.toString());
+                                    mDatabaseRef.child(uploadId).setValue(videoPicModel);
+                                }
+                            }
+                        });
+
+            }
+
+
+
+        }
+
     }
 
 
