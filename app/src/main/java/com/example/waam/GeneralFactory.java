@@ -56,6 +56,8 @@ public class GeneralFactory {
     private EventModel[] eventModelsArrays;
     private final List<Location> locationList;
     private static final String WAAMBASE = "waamuser_base";
+    private static final String PROFILEPIC = "profilePic";
+    private static final String VIDEOPIC = "videoPic";
     private final FirebaseDatabase firebaseDatabase;
     private List<Chat> chatContainer;
     private List<WaamUser> allWaamUsers;
@@ -501,9 +503,8 @@ public class GeneralFactory {
 
     public void uploadPicOrVid(String filetype, Uri uri){
         String uid = FirebaseAuth.getInstance().getUid();
-        String path = uid+"VideoPic";
-        mStorageRef = FirebaseStorage.getInstance().getReference("VIDEO_PIC").child(path);
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("VIDEO_PIC").child(path);
+        mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
 
         if(uri != null){
             final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
@@ -563,10 +564,9 @@ public class GeneralFactory {
 
     }
 
-
     public void loadVidPic(String branch,LoadVidPic loadVidPic){
         videoPicModelList = new ArrayList<>();
-        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
+        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(VIDEOPIC).child(branch);
         mDatebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -726,8 +726,8 @@ public class GeneralFactory {
 
 
     public void uploadProfilePicToFireBase(String filextension, Uri uri){
-        mStorageRef = FirebaseStorage.getInstance().getReference("goods");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("goods");
+        mStorageRef = FirebaseStorage.getInstance().getReference(PROFILEPIC);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(WAAMBASE);
         final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filextension);
 
         //bar.setProgress(0);
@@ -754,7 +754,7 @@ public class GeneralFactory {
                                                 String link = uri.toString();
                                                 Map<String, Object> hashMap = new HashMap<>();
                                                 hashMap.put("imageUrl", link);
-                                                mDatabaseRef.updateChildren(hashMap);
+                                                mDatabaseRef.child(user.getUid()).updateChildren(hashMap);
                                             }
                                         });
 
