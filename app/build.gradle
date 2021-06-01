@@ -44,12 +44,6 @@ dependencies {
   // implementation project(':LayoutManagerGroup')
 
 
-   // implementation 'io.agora.rtc:full-sdk:2.9.2'
-    implementation 'io.agora.rtm:rtm-sdk:1.1.0'
-    implementation "com.connectycube:connectycube-android-sdk-chat:1.9.2"
-    implementation "com.connectycube:connectycube-android-sdk-videochat:1.9.2"
-    implementation "com.connectycube:connectycube-android-sdk-storage:1.9.2"
-    implementation "com.connectycube:connectycube-android-sdk-pushnotifications:1.9.2"
 
 
     implementation 'com.google.firebase:firebase-storage:20.0.0'

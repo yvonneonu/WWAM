@@ -2,15 +2,6 @@ package com.example.waam;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,20 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.connectycube.auth.session.ConnectycubeSessionManager;
-import com.connectycube.auth.session.ConnectycubeSessionParameters;
-import com.connectycube.chat.ConnectycubeChatService;
-import com.connectycube.chat.ConnectycubeRoster;
-import com.connectycube.chat.listeners.SubscriptionListener;
-import com.connectycube.users.model.ConnectycubeUser;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

@@ -1,5 +1,15 @@
 package com.example.waam;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.ViewStub;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -7,33 +17,17 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.ViewStub;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.example.waam.layout.GridVideoViewContainer;
 import com.example.waam.layout.SmallVideoViewAdapter;
 import com.example.waam.layout.SmallVideoViewDecoration;
 import com.example.waam.model.User;
-import com.example.waam.model.UserStatusData;
 import com.example.waam.ui.RecyclerItemClickListener;
 import com.example.waam.ui.RtlLinearLayoutManager;
 
 import java.util.HashMap;
 import java.util.Iterator;
 
-import io.agora.rtc.Constants;
-import io.agora.rtc.IRtcEngineEventHandler;
-import io.agora.rtc.RtcEngine;
-import io.agora.rtc.video.VideoCanvas;
+
 
 public class VideoCallActivity extends AppCompatActivity {
 
@@ -45,7 +39,7 @@ public class VideoCallActivity extends AppCompatActivity {
     public static final String AGOREUSER = "agorauser";
     public int mLayoutType = LAYOUT_TYPE_DEFAULT;
     private static final int PERMISSION_REQ_ID = 22;
-    RtcEngine mRtcEngine;
+
     private ImageView mCallBtn, mMuteBtn, mSwitchVoiceBtn;
     private GridVideoViewContainer mGridVideoViewContainer;
     private boolean isCalling = true;
@@ -67,53 +61,6 @@ public class VideoCallActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
-        @Override
-        // Listen for the onJoinChannelSuccess callback.
-        // This callback occurs when the local user successfully joins the channel.
-        public void onJoinChannelSuccess(String channel, final int uid, int elapsed) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(VideoCallActivity.this, "User: " + uid + " join!", Toast.LENGTH_LONG).show();
-                    Log.i("agora", "Join channel success, uid: " + (uid & 0xFFFFFFFFL));
-                    user.setAgoraUid(uid);
-                    SurfaceView localView = mUidsList.remove(0);
-                    mUidsList.put(uid, localView);
-                }
-            });
-        }
-
-        @Override
-        // Listen for the onFirstRemoteVideoDecoded callback.
-        // This callback occurs when the first video frame of a remote user is received and decoded after the remote user successfully joins the channel.
-        // You can call the setupRemoteVideo method in this callback to set up the remote video view.
-        public void onFirstRemoteVideoDecoded(final int uid, int width, int height, int elapsed) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.i("agora", "First remote video decoded, uid: " + (uid & 0xFFFFFFFFL));
-                    setupRemoteVideo(uid);
-                }
-            });
-        }
-
-        @Override
-        // Listen for the onUserOffline callback.
-        // This callback occurs when the remote user leaves the channel or drops offline.
-        public void onUserOffline(final int uid, int reason) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(VideoCallActivity.this, "User: " + uid + " left the room.", Toast.LENGTH_LONG).show();
-                    Log.i("agora", "User offline, uid: " + (uid & 0xFFFFFFFFL));
-                    onRemoteUserLeft(uid);
-                }
-            });
-        }
-    };
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,64 +76,15 @@ public class VideoCallActivity extends AppCompatActivity {
         getExtras();
         initUI();
 
-        if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
-                checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID) &&
-                checkSelfPermission(REQUESTED_PERMISSIONS[2], PERMISSION_REQ_ID)) {
-            initEngineAndJoinChannel();
-        }
+
 
 
     }
 
-    private void initEngineAndJoinChannel() {
-        initializeEngine();
-        setupLocalVideo();
-        joinChannel();
-
-    }
 
 
-    private void setupRemoteVideo(final int uid) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                SurfaceView mRemoteView = RtcEngine.CreateRendererView(getApplicationContext());
 
-                mUidsList.put(uid, mRemoteView);
-                mRemoteView.setZOrderOnTop(true);
-                mRemoteView.setZOrderMediaOverlay(true);
-                mRtcEngine.setupRemoteVideo(new VideoCanvas(mRemoteView, VideoCanvas.RENDER_MODE_HIDDEN, uid));
 
-                switchToDefaultVideoView();
-            }
-        });
-    }
-
-    private void switchToDefaultVideoView() {
-
-        mGridVideoViewContainer.initViewContainer(VideoCallActivity.this, user.getAgoraUid(), mUidsList, mIsLandscape);
-
-        boolean setRemoteUserPriorityFlag = false;
-
-        mLayoutType = LAYOUT_TYPE_DEFAULT;
-
-        int sizeLimit = mUidsList.size();
-        if (sizeLimit > 5) {
-            sizeLimit = 5;
-        }
-
-        for (int i = 0; i < sizeLimit; i++) {
-            int uid = mGridVideoViewContainer.getItem(i).mUid;
-            if (user.getAgoraUid() != uid) {
-                if (!setRemoteUserPriorityFlag) {
-                    setRemoteUserPriorityFlag = true;
-                    mRtcEngine.setRemoteUserPriority(uid, Constants.USER_PRIORITY_HIGH);
-                } else {
-                    mRtcEngine.setRemoteUserPriority(uid, 100);
-                }
-            }
-        }
-    }
 
     private boolean checkSelfPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) !=
@@ -197,59 +95,12 @@ public class VideoCallActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initializeEngine() {
-        try {
-            mRtcEngine = RtcEngine.create(getBaseContext(), getString(R.string.agora_app_id), mRtcEventHandler);
-        } catch (Exception e) {
-            Log.e(TAG, Log.getStackTraceString(e));
-            throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));
-        }
-    }
 
-    private void setupLocalVideo(){
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mRtcEngine.enableVideo();
-                mRtcEngine.enableInEarMonitoring(true);
-                mRtcEngine.setInEarMonitoringVolume(80);
 
-                SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-                mRtcEngine.setupLocalVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_HIDDEN, 0));
-                surfaceView.setZOrderOnTop(false);
-                surfaceView.setZOrderMediaOverlay(false);
 
-                mUidsList.put(0, surfaceView);
 
-                mGridVideoViewContainer.initViewContainer(VideoCallActivity.this, 0, mUidsList, mIsLandscape);
-            }
-        });
-    }
 
-    private void onRemoteUserLeft(int uid) {
-        removeRemoteVideo(uid);
-    }
-
-    private void removeRemoteVideo(final int uid) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Object target = mUidsList.remove(uid);
-                if (target == null) {
-                    return;
-                }
-                switchToDefaultVideoView();
-            }
-        });
-
-    }
-
-    private void joinChannel(){
-            // Join a channel with a token, token can be null.
-            mRtcEngine.joinChannel(null, channelName, "Extra Optional Data", 0);
-
-        }
 
 
     private void initUI() {
@@ -279,18 +130,7 @@ public class VideoCallActivity extends AppCompatActivity {
 
 
     private void onBigVideoViewDoubleClicked(View view, int position) {
-        if (mUidsList.size() < 2) {
-            return;
-        }
 
-        UserStatusData user = mGridVideoViewContainer.getItem(position);
-        int uid = (user.mUid == 0) ? this.user.getAgoraUid() : user.mUid;
-
-        if (mLayoutType == LAYOUT_TYPE_DEFAULT && mUidsList.size() != 1) {
-            switchToSmallVideoView(uid);
-        } else {
-            switchToDefaultVideoView();
-        }
     }
 
 
@@ -354,33 +194,21 @@ public class VideoCallActivity extends AppCompatActivity {
 
             @Override
             public void onItemDoubleClick(View view, int position) {
-                onSmallVideoViewDoubleClicked(view, position);
+
             }
+
+
         }));
 
         recycler.setDrawingCacheEnabled(true);
         recycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
 
-        if (!create) {
-            mSmallVideoViewAdapter.setLocalUid(this.user.getAgoraUid());
-            mSmallVideoViewAdapter.notifyUiChanged(mUidsList, exceptUid, null, null);
-        }
-        for (Integer tempUid : mUidsList.keySet()) {
-            if (this.user.getAgoraUid() != tempUid) {
-                if (tempUid == exceptUid) {
-                    mRtcEngine.setRemoteUserPriority(tempUid, Constants.USER_PRIORITY_HIGH);
-                } else {
-                    mRtcEngine.setRemoteUserPriority(tempUid, 100);
-                }
-            }
-        }
+
         recycler.setVisibility(View.VISIBLE);
         mSmallVideoViewDock.setVisibility(View.VISIBLE);
     }
 
-    private void onSmallVideoViewDoubleClicked(View view, int position) {
-        switchToDefaultVideoView();
-    }
+
 
 
     public void onVideoChatClicked(View view) {
@@ -389,13 +217,7 @@ public class VideoCallActivity extends AppCompatActivity {
     public void onSwitchVoiceClicked(View view) {
     }
 
-    public void onLocalAudioMuteClicked(View view) {
-        mRtcEngine.muteLocalAudioStream(isMuted);
-    }
 
-    public void onSwitchCameraClicked(View view) {
-        mRtcEngine.switchCamera();
-    }
 
     public void onCallClicked(View view) {
     }
@@ -407,9 +229,5 @@ public class VideoCallActivity extends AppCompatActivity {
         mActualTarget = getIntent().getExtras().getString("Actual Target");
     }
 
-    private void setUpLocalVideo(){
-        mRtcEngine.enableVideo();
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-        mRtcEngine.setupLocalVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_HIDDEN, 0));
-    }
+
 }

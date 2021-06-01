@@ -13,11 +13,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.connectycube.auth.session.ConnectycubeSessionManager;
-import com.connectycube.auth.session.ConnectycubeSettings;
-import com.connectycube.chat.ConnectycubeChatService;
-import com.connectycube.chat.ConnectycubeRoster;
-import com.example.waam.rtm.AGApplication;
 import com.example.waam.rtm.ChatManager;
 
 import io.agora.rtm.RtmClient;
@@ -39,16 +34,6 @@ public class Login extends AppCompatActivity {
     private RtmClient mRtmClient;
     private ChatManager mChatManager;
 
-    static final String APP_ID = "4663";
-    static final String AUTH_KEY = "RWV8dBeCsCh6g2a";
-    static final String AUTH_SECRET = "yhuExsebKPu8F8S";
-    static final String ACCOUNT_KEY = "tBL4Vzzzj7fQMfzsHYii";
-
-//
-
-
-  int b = 4152184;
-
 
 
     final String url_Login = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
@@ -63,8 +48,6 @@ public class Login extends AppCompatActivity {
        // mChatManager = AGApplication.the().getChatManager();
         //mRtmClient = mChatManager.getRtmClient();
 
-        ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
-        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
 
 

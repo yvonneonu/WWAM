@@ -20,10 +20,6 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 
-import io.agora.rtc.IRtcEngineEventHandler;
-import io.agora.rtc.RtcEngine;
-import io.agora.rtc.video.VideoCanvas;
-import io.agora.rtc.video.VideoEncoderConfiguration;
 
 public class CallingActivity extends AppCompatActivity {
     private TextView nameContact;
@@ -42,38 +38,7 @@ public class CallingActivity extends AppCompatActivity {
     // permission WRITE_EXTERNAL_STORAGE is not mandatory for Agora RTC SDK, just incase if you wanna save logs to external sdcard
     private static final String[] REQUESTED_PERMISSIONS = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-    private RtcEngine mRtcEngine;
-    private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
-        @Override
-        public void onFirstRemoteVideoDecoded(final int uid, int width, int height, int elapsed) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    setupRemoteVideo(uid);
-                }
-            });
-        }
 
-        @Override
-        public void onUserOffline(int uid, int reason) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    onRemoteUserLeft();
-                }
-            });
-        }
-
-        @Override
-        public void onUserMuteVideo(final int uid, final boolean muted) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    onRemoteUserVideoMuted(uid, muted);
-                }
-            });
-        }
-    };
 
 
     @Override
@@ -181,9 +146,7 @@ public class CallingActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        //leaveChannel();
-        RtcEngine.destroy();
-        mRtcEngine = null;
+
     }
 
   /*  public void onCallRated(View view) {
@@ -215,7 +178,7 @@ public class CallingActivity extends AppCompatActivity {
             iv.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.MULTIPLY);
         }
 
-        mRtcEngine.muteLocalVideoStream(iv.isSelected());
+
 
         FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
         SurfaceView surfaceView = (SurfaceView) container.getChildAt(0);
@@ -233,11 +196,11 @@ public class CallingActivity extends AppCompatActivity {
             iv.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.MULTIPLY);
         }
 
-        mRtcEngine.muteLocalAudioStream(iv.isSelected());
+
     }
 
     public void onSwitchCameraClicked(View view) {
-        mRtcEngine.switchCamera();
+
     }
 
 
@@ -247,90 +210,32 @@ public class CallingActivity extends AppCompatActivity {
     }
 
     private int mTxQuality = -1, mRxQuality = -1;
-    private IRtcEngineEventHandler.RemoteAudioStats mAudioStats;
-    private IRtcEngineEventHandler.RemoteVideoStats mVideoStats;
 
-    private String qualityStringFromQualityNumber(int number) {
-        switch (number) {
-            case IRtcEngineEventHandler.Quality.EXCELLENT:
-                return "Excellent 👌";
-            case IRtcEngineEventHandler.Quality.GOOD:
-                return "Good 🙂";
-            case IRtcEngineEventHandler.Quality.POOR:
-                return "Poor 🙁";
-            case IRtcEngineEventHandler.Quality.BAD:
-                return "Bad 😢";
-            case IRtcEngineEventHandler.Quality.VBAD:
-                return "Very Bad 🤮";
-            case IRtcEngineEventHandler.Quality.DOWN:
-                return "Network Down";
-            default:
-                return "Unknown";
-        }
-    }
+
 
     private void updateStatsDisplay() {
         TextView statsDisplay = (TextView) findViewById(R.id.statsDisplay);
 
-        int audioQuality = mAudioStats == null ? IRtcEngineEventHandler.Quality.UNKNOWN : mAudioStats.quality;
-        int videoBitrate = mVideoStats == null ? 0 : mVideoStats.receivedBitrate;
 
-        String stats = "Transmission: " + qualityStringFromQualityNumber(mTxQuality) + "\n" +
-                "Receiving: " + qualityStringFromQualityNumber(mRxQuality) + "\n" +
-                "Audio: " + qualityStringFromQualityNumber(audioQuality) + "\n" +
-                "Video Bitrate: " + videoBitrate + "Kbps";
-        statsDisplay.setText(stats);
+
+
     }
 
     private void initializeAgoraEngine() {
-        try {
-            mRtcEngine = RtcEngine.create(getBaseContext(), getString(R.string.agora_app_id), mRtcEventHandler);
-            mRtcEngine.addHandler(new IRtcEngineEventHandler() {
-                @Override
-                public void onNetworkQuality(int uid, int txQuality, int rxQuality) {
-                   CallingActivity.this.mTxQuality = txQuality;
-                    CallingActivity.this.mRxQuality = txQuality;
-                    updateStatsDisplay();
-                }
 
-                @Override
-                public void onRemoteAudioStats(RemoteAudioStats stats) {
-                    mAudioStats = stats;
-                    updateStatsDisplay();
-                }
-
-                @Override
-                public void onRemoteVideoStats(RemoteVideoStats stats) {
-                    mVideoStats = stats;
-                    updateStatsDisplay();
-                }
-            });
-        } catch (Exception e) {
-            Log.e(LOG_TAG, Log.getStackTraceString(e));
-
-            throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));
-        }
     }
 
     private void setupVideoProfile() {
-        mRtcEngine.enableVideo();
 
-//      mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_360P, false); // Earlier than 2.3.0
-        mRtcEngine.setVideoEncoderConfiguration(new VideoEncoderConfiguration(VideoEncoderConfiguration.VD_640x360, VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15,
-                VideoEncoderConfiguration.STANDARD_BITRATE,
-                VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT));
     }
 
     private void setupLocalVideo() {
         FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-        surfaceView.setZOrderMediaOverlay(true);
-        container.addView(surfaceView);
-        mRtcEngine.setupLocalVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_FIT, 0));
+
     }
 
     private void joinChannel() {
-        mRtcEngine.joinChannel(null, "demoChannel1", "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
+
     }
 
     private void setupRemoteVideo(int uid) {
@@ -340,17 +245,12 @@ public class CallingActivity extends AppCompatActivity {
             return;
         }
 
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-        container.addView(surfaceView);
-        mRtcEngine.setupRemoteVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_FIT, uid));
 
-        surfaceView.setTag(uid); // for mark purpose
-       // View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
-       // tipMsg.setVisibility(View.GONE);
+
     }
 
     private void leaveChannel() {
-        mRtcEngine.leaveChannel();
+
     }
 
     private void onRemoteUserLeft() {
