@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
+import com.bumptech.glide.Glide;
 import com.example.waam.model.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -501,7 +503,7 @@ public class GeneralFactory {
     }
 
 
-    public void uploadPicOrVid(String filetype, Uri uri){
+    public void uploadPicOrVid(String filetype, Uri uri,StorageTask<UploadTask.TaskSnapshot> mUploads){
         String uid = FirebaseAuth.getInstance().getUid();
         mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
@@ -521,6 +523,7 @@ public class GeneralFactory {
                                 videoPicModel.setVideo(false);
                                 videoPicModel.setVideoPicUrl(uri.toString());
                                 mDatabaseRef.child(uploadId).setValue(videoPicModel);
+
                             }
                         });
 
