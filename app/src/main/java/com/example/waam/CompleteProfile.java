@@ -10,6 +10,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class CompleteProfile extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     private StorageTask<UploadTask.TaskSnapshot> mUploads;
     private Task<Uri> uriTask;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -73,6 +75,7 @@ public class CompleteProfile extends AppCompatActivity {
         imageeight = findViewById(R.id.image8);
         wipe = findViewById(R.id.swipe);
         name = findViewById(R.id.textView19);
+        progressBar = findViewById(R.id.progressBar4);
 
 
         if (imageUri != null) {
@@ -379,6 +382,7 @@ public class CompleteProfile extends AppCompatActivity {
         String uid = FirebaseAuth.getInstance().getUid();
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
+        progressBar.setVisibility(View.VISIBLE);
 
         if(uri != null){
             final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
@@ -395,7 +399,7 @@ public class CompleteProfile extends AppCompatActivity {
                                         videoPicModel.setVideo(false);
                                         videoPicModel.setVideoPicUrl(uri.toString());
                                         mDatabaseRef.child(uploadId).setValue(videoPicModel);
-
+                                        progressBar.setVisibility(View.GONE);
                                     }
                                 });
 
@@ -404,6 +408,7 @@ public class CompleteProfile extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(CompleteProfile.this,e.toString(),Toast.LENGTH_LONG).show();
                             }
                         });
@@ -412,7 +417,7 @@ public class CompleteProfile extends AppCompatActivity {
 
                 mUploads = fileref.putFile(uri);
 
-                 uriTask = mUploads.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                uriTask = mUploads.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
                     if(!task.isSuccessful()){
                         throw task.getException();
                     }
@@ -427,7 +432,14 @@ public class CompleteProfile extends AppCompatActivity {
                                     videoPicModel.setVideo(true);
                                     videoPicModel.setVideoPicUrl(downloadUrl.toString());
                                     mDatabaseRef.child(uploadId).setValue(videoPicModel);
+                                    progressBar.setVisibility(View.GONE);
                                 }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressBar.setVisibility(View.GONE);
                             }
                         });
 
@@ -435,6 +447,8 @@ public class CompleteProfile extends AppCompatActivity {
 
 
 
+        }else{
+            Log.d("CompleteProfile","No image or video was selected");
         }
 
     }
