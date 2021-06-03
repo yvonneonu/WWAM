@@ -387,7 +387,8 @@ public class CompleteProfile extends AppCompatActivity {
         if (uri != null) {
             final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
             VideoPicModel videoPicModel = new VideoPicModel();
-            if (filetype.equals("jpg")) {
+
+            if (filetype.equals("jpg") || filetype.equals("jpeg") || filetype.equals("png") ) {
                 mUploads = fileref.putFile(uri)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
