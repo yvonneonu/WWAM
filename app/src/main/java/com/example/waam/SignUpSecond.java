@@ -23,11 +23,11 @@ public class SignUpSecond extends AppCompatActivity {
 
     private GeneralFactory generalFactory;
     private CardView progressBar;
-    private EditText name,email,zip,password,confrim;
+    private EditText name, email, zip, password, confrim;
     private Button update;
     private String gender;
-    private String  interest;
-    private String relationship ;
+    private String interest;
+    private String relationship;
     private DatePickerDialog datePickerDialog;
     private UserService userService;
 
@@ -57,7 +57,7 @@ public class SignUpSecond extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isNetworkAvailableAndConnected()){
+                if (isNetworkAvailableAndConnected()) {
                     register();
                     //constraintLayout.setVisibility(View.INVISIBLE);
                     //textView.setVisibility(View.VISIBLE);
@@ -70,8 +70,7 @@ public class SignUpSecond extends AppCompatActivity {
                             // textView.setVisibility(View.VISIBLE);
                         }
                     }, 5000);
-                }
-                else {
+                } else {
                     Toast.makeText(SignUpSecond.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
             }
@@ -91,7 +90,7 @@ public class SignUpSecond extends AppCompatActivity {
 
     private void register() {
 
-        Log.d("UserService",""+userService);
+        Log.d("UserService", "" + userService);
         if (userService == null) {
             userService = new ApiClient().getService();
         }
@@ -104,35 +103,34 @@ public class SignUpSecond extends AppCompatActivity {
         String Update = update.getText().toString();
         String Passwor = password.getText().toString();
         String Confirm = confrim.getText().toString();
-        if(Fullname.isEmpty()) {
+        if (Fullname.isEmpty()) {
             name.setError("Full Name is required");
             name.requestFocus();
-        }else if(!generalFactory.validateName(Fullname)){
+        } else if (!generalFactory.validateName(Fullname)) {
             name.setError("Pls submit full name");
             name.requestFocus();
-        }
-        else if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
             email.setError("Enter a Valid email");
             email.requestFocus();
 
-        }else if (Zip.isEmpty()) {
+        } else if (Zip.isEmpty()) {
             zip.setError("Zip Code is required");
             zip.requestFocus();
         } else if (Update.isEmpty()) {
             update.setError("Birthday Date is required");
             update.requestFocus();
-        }else if (!Passwor.equals(Confirm)) {
+        } else if (!Passwor.equals(Confirm)) {
             confrim.setError("Wrong Password");
             confrim.requestFocus();
-        }else if (gender.isEmpty()) {
+        } else if (gender.isEmpty()) {
             Toast.makeText(SignUpSecond.this, "Choose your gender", Toast.LENGTH_LONG).show();
-        }else if (interest.isEmpty()) {
+        } else if (interest.isEmpty()) {
             Toast.makeText(SignUpSecond.this, "Choose your gender", Toast.LENGTH_LONG).show();
-        }else if (Passwor.length() < 6) {
+        } else if (Passwor.length() < 6) {
             // password.setError("Password should be at aleast 6 character long");
             password.requestFocus();
 
-        }else if (TextUtils.isEmpty(name.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(zip.getText().toString()) || TextUtils.isEmpty(update.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
+        } else if (TextUtils.isEmpty(name.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(zip.getText().toString()) || TextUtils.isEmpty(update.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
                 TextUtils.isEmpty(confrim.getText().toString())) {
             String message = "All inputs required";
             Toast.makeText(SignUpSecond.this, message, Toast.LENGTH_LONG).show();
@@ -148,12 +146,11 @@ public class SignUpSecond extends AppCompatActivity {
             waamUser.setGender(gender);
             waamUser.setSeeking(interest);
             waamUser.setRelationship(relationship);
-            generalFactory.requestUser(waamUser,progressBar);
+            generalFactory.requestUser(waamUser, progressBar);
             //requestUser(waamUser);
 
 
         }
-
 
 
     }
