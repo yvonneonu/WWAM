@@ -13,14 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.connectycube.auth.session.ConnectycubeSessionManager;
-import com.connectycube.auth.session.ConnectycubeSettings;
-import com.connectycube.chat.ConnectycubeChatService;
-import com.connectycube.chat.ConnectycubeRoster;
-import com.example.waam.rtm.AGApplication;
 import com.example.waam.rtm.ChatManager;
 
-import io.agora.rtm.RtmClient;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -36,7 +30,7 @@ public class Login extends AppCompatActivity {
     private EditText editEmail;
     private String Email;
     private String Password;
-    private RtmClient mRtmClient;
+    //private RtmClient mRtmClient;
     private ChatManager mChatManager;
 
     static final String APP_ID = "4663";
@@ -63,8 +57,8 @@ public class Login extends AppCompatActivity {
        // mChatManager = AGApplication.the().getChatManager();
         //mRtmClient = mChatManager.getRtmClient();
 
-        ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
-        ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
+       // ConnectycubeSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
+        //ConnectycubeSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
 
 
