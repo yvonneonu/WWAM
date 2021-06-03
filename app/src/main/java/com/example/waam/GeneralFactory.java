@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
-import com.bumptech.glide.Glide;
-import com.example.waam.model.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,13 +40,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import io.agora.rtm.ErrorInfo;
-import io.agora.rtm.RtmClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.google.firebase.database.FirebaseDatabase.*;
+import static com.google.firebase.database.FirebaseDatabase.getInstance;
 
 public class GeneralFactory {
     private static GeneralFactory generalFactory;
@@ -204,7 +199,7 @@ public class GeneralFactory {
                     }
                 });
     }
-    public void loginToFireBase(String email, String password,LoginRequest loginRequest,RtmClient rtmClient){
+    /*public void loginToFireBase(String email, String password,LoginRequest loginRequest,RtmClient rtmClient){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
                 .addOnCompleteListener(task -> {
@@ -215,7 +210,7 @@ public class GeneralFactory {
                     }
 
                 });
-    }
+    }*/
 
     public void loginToFireBase(String email, String password,LoginRequest loginRequest){
         mAuth.signInWithEmailAndPassword(email, password)
@@ -663,7 +658,7 @@ public class GeneralFactory {
         return s.substring(0, Math.min(s.length(), n));
     }
 
-    public void loginUser(LoginRequest loginRequest, RtmClient rtmClient){
+   /* public void loginUser(LoginRequest loginRequest, RtmClient rtmClient){
 
         Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
 
@@ -679,9 +674,9 @@ public class GeneralFactory {
                     final User user = new User(acct.getUid());
                     //this line mighth not work because it requires you to get the data of the person that logged in with google
                     //However if the Login was succesful i believe the response should include the name of the person who logged in
-                    user.setFireDisplayName(acct.getUid());
+                    user.setFireDisplayName(acct.getUid());*/
 
-                    rtmClient.login(null,acct.getUid(), new io.agora.rtm.ResultCallback<Void>() {
+                   /* rtmClient.login(null,acct.getUid(), new io.agora.rtm.ResultCallback<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             ((Activity) context).runOnUiThread(new Runnable() {
@@ -725,7 +720,7 @@ public class GeneralFactory {
 
             }
         });
-    }
+    }*/
 
 
     public void loginUser(LoginRequest loginRequest){

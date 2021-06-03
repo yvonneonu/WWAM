@@ -39,7 +39,7 @@ public class AudioPlayer {
 
                 try {
                     mPlayer.setDataSource(mContext,
-                            Uri.parse("android.resource://" + mContext.getPackageName() + "/" + R.raw.phone_loud1));
+                            Uri.parse("android.resource://" + mContext.getPackageName() + "/" + R.raw.song));
                     mPlayer.prepare();
                 } catch (IOException e) {
                     Log.e(LOG_TAG, "Could not setup media player for ringtone");
@@ -79,7 +79,7 @@ public class AudioPlayer {
     }
 
     private static AudioTrack createProgressTone(Context context) throws IOException {
-        AssetFileDescriptor fd = context.getResources().openRawResourceFd(R.raw.progress_tone);
+        AssetFileDescriptor fd = context.getResources().openRawResourceFd(R.raw.song);
         int length = (int) fd.getLength();
 
         AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_VOICE_CALL, SAMPLE_RATE,

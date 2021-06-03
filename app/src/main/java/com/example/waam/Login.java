@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.waam.rtm.ChatManager;
 import com.sinch.android.rtc.SinchError;
 
 import okhttp3.FormBody;
@@ -32,7 +31,7 @@ public class Login extends BaseActivity implements  SinchService.StartFailedList
     private String Password;
     private ProgressDialog mSpinner;
 
-    private ChatManager mChatManager;
+
 
 
 
