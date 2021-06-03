@@ -98,7 +98,7 @@ public class CompleteProfile extends AppCompatActivity {
                     @Override
                     public void selectedImageListener(Uri uri) {
 
-                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                        if(mUploads != null  || uriTask != null){
                             Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
                                     .show();
                         }else {
@@ -128,7 +128,7 @@ public class CompleteProfile extends AppCompatActivity {
                     @Override
                     public void selectedImageListener(Uri uri) {
 
-                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                        if(mUploads != null  || uriTask != null){
                             Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
                                     .show();
                         }else {
@@ -161,7 +161,7 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                        if(mUploads != null || uriTask != null){
                             Toast.makeText(CompleteProfile.this,"An upload is ongoiong",Toast.LENGTH_LONG).show();
                         }else {
                             uploadPicOrVid(getFileExtension(uri),uri);
@@ -188,7 +188,7 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                        if(mUploads != null || uriTask != null){
                             Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
                                     .show();
                         }else {
@@ -216,7 +216,7 @@ public class CompleteProfile extends AppCompatActivity {
                     @Override
                     public void selectedImageListener(Uri uri) {
 
-                        if ((mUploads != null && mUploads.isInProgress()) || uriTask != null) {
+                        if (mUploads != null || uriTask != null) {
                             Toast.makeText(CompleteProfile.this, "An upload is ongoing", Toast.LENGTH_LONG)
                                     .show();
                         } else {
@@ -244,7 +244,7 @@ public class CompleteProfile extends AppCompatActivity {
                     @Override
                     public void selectedImageListener(Uri uri) {
 
-                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                        if(mUploads != null  || uriTask != null){
                             Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
                                     .show();
                         }else {
@@ -271,7 +271,7 @@ public class CompleteProfile extends AppCompatActivity {
                 bottomSheet.onSelectedImageListener(new BottomSheet.SelectedImage() {
                     @Override
                     public void selectedImageListener(Uri uri) {
-                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                        if(mUploads != null  || uriTask != null){
                             Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
                                     .show();
                         }else {
@@ -300,7 +300,7 @@ public class CompleteProfile extends AppCompatActivity {
                     @Override
                     public void selectedImageListener(Uri uri) {
 
-                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                        if(mUploads != null  || uriTask != null){
                             Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
                                     .show();
                         }else {
@@ -329,7 +329,7 @@ public class CompleteProfile extends AppCompatActivity {
                     @Override
                     public void selectedImageListener(Uri uri) {
 
-                        if((mUploads != null && mUploads.isInProgress()) || uriTask != null){
+                        if(mUploads != null  || uriTask != null){
                             Toast.makeText(CompleteProfile.this,"An upload is ongoing",Toast.LENGTH_LONG)
                                     .show();
                         }else {
