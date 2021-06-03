@@ -93,9 +93,11 @@ public class VideoPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public static class VideoHolder extends RecyclerView.ViewHolder {
         VideoView videoView;
+        ImageView imageView;
         public VideoHolder(@NonNull View itemView, MediaListener mediaListener) {
             super(itemView);
             videoView = itemView.findViewById(R.id.videoView);
+            imageView = itemView.findViewById(R.id.imageView44);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

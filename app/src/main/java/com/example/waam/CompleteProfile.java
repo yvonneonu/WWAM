@@ -400,6 +400,8 @@ public class CompleteProfile extends AppCompatActivity {
                                         videoPicModel.setVideoPicUrl(uri.toString());
                                         mDatabaseRef.child(uploadId).setValue(videoPicModel);
                                         progressBar.setVisibility(View.GONE);
+                                        //This might crash it;
+                                        mUploads = null;
                                     }
                                 });
 
@@ -410,14 +412,13 @@ public class CompleteProfile extends AppCompatActivity {
                             public void onFailure(@NonNull Exception e) {
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(CompleteProfile.this,e.toString(),Toast.LENGTH_LONG).show();
+                                //This might crash it;
+                                mUploads = null;
                             }
                         });
 
             }else{
-
-                mUploads = fileref.putFile(uri);
-
-                uriTask = mUploads.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                uriTask = fileref.putFile(uri).continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
                     if(!task.isSuccessful()){
                         throw task.getException();
                     }
@@ -433,6 +434,8 @@ public class CompleteProfile extends AppCompatActivity {
                                     videoPicModel.setVideoPicUrl(downloadUrl.toString());
                                     mDatabaseRef.child(uploadId).setValue(videoPicModel);
                                     progressBar.setVisibility(View.GONE);
+                                    //This might crash it;
+                                    uriTask = null;
                                 }
                             }
                         })
@@ -440,6 +443,8 @@ public class CompleteProfile extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 progressBar.setVisibility(View.GONE);
+                                //This might crash it;
+                                uriTask = null;
                             }
                         });
 
