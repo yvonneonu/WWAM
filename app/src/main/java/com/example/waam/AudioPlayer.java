@@ -79,7 +79,7 @@ public class AudioPlayer {
     }
 
     private static AudioTrack createProgressTone(Context context) throws IOException {
-        AssetFileDescriptor fd = context.getResources().openRawResourceFd(R.raw.song);
+        AssetFileDescriptor fd = context.getResources().openRawResourceFd(R.raw.fromd);
         int length = (int) fd.getLength();
 
         AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_VOICE_CALL, SAMPLE_RATE,

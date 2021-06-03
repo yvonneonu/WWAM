@@ -1,8 +1,10 @@
 package com.example.waam;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +39,7 @@ public class Login extends BaseActivity implements  SinchService.StartFailedList
 
     final String url_Login = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +52,9 @@ public class Login extends BaseActivity implements  SinchService.StartFailedList
         //mRtmClient = mChatManager.getRtmClient();
 
 
-
-
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_PHONE_STATE},100);
+        }
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);
         Log.d("TAG", "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
@@ -81,18 +84,21 @@ public class Login extends BaseActivity implements  SinchService.StartFailedList
                 String message = "All inputs required";
                 Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
 
-            }
-            if (!Email.equals(getSinchServiceInterface().getUserName())) {
-                getSinchServiceInterface().stopClient();
-            }
-            if (!getSinchServiceInterface().isStarted()){
-                getSinchServiceInterface().startClient(Email);
-                showSpinner();
 
             }else {
                 LoginRequest loginRequest = new LoginRequest("email", "password");
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
+                if (!Email.equals(getSinchServiceInterface().getUserName())) {
+                    getSinchServiceInterface().stopClient();
+
+                }
+                if (!getSinchServiceInterface().isStarted()){
+                    getSinchServiceInterface().startClient(Email);
+                    Log.d("chek", Email);
+                    showSpinner();
+                    }
+
                 GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest);
                 //GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
                 //loginUser(loginRequest);

@@ -25,7 +25,7 @@
         android:required="true" />
 
     <application
-        android:name=".rtm.AGApplication"
+
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -37,6 +37,9 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+
+        <activity android:name=".CallScreenActivity" />
+
 
         <activity android:name=".VideoCallActivity" />
         <activity android:name=".SignUpSecond" />

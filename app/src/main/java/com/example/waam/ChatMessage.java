@@ -324,15 +324,26 @@ public class ChatMessage extends BaseActivity implements SinchService.StartFaile
     };
 
     private void callButtonClicked() {
-        String receiverId = userFriends.getUid();
+        if (contactlist != null){
+            String receiverId = contactlist.getEmail();
+            //getUid();
 
 
-        Call call = getSinchServiceInterface().callUserVideo(receiverId);
-        String callId = call.getCallId();
+            Call call = getSinchServiceInterface().callUserVideo(receiverId);
+            String callId = call.getCallId();
 
-        Intent mainActivity = new Intent(ChatMessage.this, CallScreenActivity.class);
-        mainActivity.putExtra(SinchService.CALL_ID, callId);
-        startActivity(mainActivity);
+            Log.d("chek", callId);
+
+            Intent mainActivity = new Intent(ChatMessage.this, CallScreenActivity.class);
+            mainActivity.putExtra(SinchService.CALL_ID, callId);
+            startActivity(mainActivity);
+            Log.d("chek", ""+SinchService.CALL_ID);
+        }
+
+
+
+
+
     }
 
 
