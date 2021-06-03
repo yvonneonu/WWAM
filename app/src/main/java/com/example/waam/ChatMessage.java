@@ -9,22 +9,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.waam.model.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.sinch.android.rtc.SinchError;
+import com.sinch.android.rtc.calling.Call;
 
 import java.util.List;
 
-public class ChatMessage extends AppCompatActivity {
+public class ChatMessage extends BaseActivity implements SinchService.StartFailedListener {
     public static final String NEW_FRIENDS = "com.example.waam.WaamUserFromChatList";
     public static final String FRIENDS = "com.example.waam.WaamUserFromFriends";
     public static final String INTENT_EXTRA_IS_PEER_MODE = "videoChat";
@@ -44,6 +42,7 @@ public class ChatMessage extends AppCompatActivity {
     private TextView textViewStatus;
     private ImageView videoButton;
     public static final int MAX_INPUT_NAME_LENGTH = 64;
+
 
     @Override
     protected void onStart() {
@@ -90,6 +89,7 @@ public class ChatMessage extends AppCompatActivity {
         textViewStatus = findViewById(R.id.status);
         ImageView displayPic = findViewById(R.id.imagetool);
         videoButton = findViewById(R.id.Video);
+        videoButton.setOnClickListener(buttonClickListener);
         contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
         userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
         String myId = FirebaseAuth.getInstance().getUid();
@@ -303,7 +303,38 @@ public class ChatMessage extends AppCompatActivity {
             });*/
         }
 
+
+
     }
+
+    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.Video:
+                    callButtonClicked();
+                    break;
+
+               /* case R.id.stopButton:
+                    stopButtonClicked();
+                    break;*/
+
+            }
+        }
+    };
+
+    private void callButtonClicked() {
+        String receiverId = userFriends.getUid();
+
+
+        Call call = getSinchServiceInterface().callUserVideo(receiverId);
+        String callId = call.getCallId();
+
+        Intent mainActivity = new Intent(ChatMessage.this, CallScreenActivity.class);
+        mainActivity.putExtra(SinchService.CALL_ID, callId);
+        startActivity(mainActivity);
+    }
+
 
 
     /*private void initUIAndData() {
@@ -345,4 +376,23 @@ public class ChatMessage extends AppCompatActivity {
     public void goback(View view) {
         finish();
     }
+
+    @Override
+    public void onStartFailed(SinchError error) {
+        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onStarted() {
+
+      //  openPlaceCallActivity();
+    }
+
+    private void openPlaceCallActivity() {
+
+    }
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,17 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.waam.rtm.ChatManager;
+import com.sinch.android.rtc.SinchError;
 
-import io.agora.rtm.RtmClient;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class Login extends AppCompatActivity {
+public class Login extends BaseActivity implements  SinchService.StartFailedListener{
     private TextView signup;
     private ImageView logm;
     private TextView text;
@@ -31,7 +30,8 @@ public class Login extends AppCompatActivity {
     private EditText editEmail;
     private String Email;
     private String Password;
-    private RtmClient mRtmClient;
+    private ProgressDialog mSpinner;
+
     private ChatManager mChatManager;
 
 
@@ -43,6 +43,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //I stopped here thank you
        // mChatManager = AGApplication.the().getChatManager();
@@ -77,9 +78,17 @@ public class Login extends AppCompatActivity {
 
             new loginAut().execute(Email, Password);
 
-            if (TextUtils.isEmpty(editEmail.getText().toString()) || TextUtils.isEmpty(editPass.getText().toString())){
+            if (TextUtils.isEmpty(editEmail.getText().toString()) || TextUtils.isEmpty(editPass.getText().toString())) {
                 String message = "All inputs required";
                 Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
+
+            }
+            if (!Email.equals(getSinchServiceInterface().getUserName())) {
+                getSinchServiceInterface().stopClient();
+            }
+            if (!getSinchServiceInterface().isStarted()){
+                getSinchServiceInterface().startClient(Email);
+                showSpinner();
 
             }else {
                 LoginRequest loginRequest = new LoginRequest("email", "password");
@@ -94,8 +103,15 @@ public class Login extends AppCompatActivity {
 
     }
 
+    private void showSpinner() {
+        mSpinner = new ProgressDialog(this);
+        mSpinner.setTitle("Logging in");
+        mSpinner.setMessage("Please wait...");
+        mSpinner.show();
+    }
 
-   private void Themain() {
+
+    private void Themain() {
         Intent intent = new Intent(Login.this, MainActivity.class);
         startActivity(intent);
         // finish();
@@ -116,6 +132,39 @@ public class Login extends AppCompatActivity {
     private void GoBack() {
         Intent intent = new Intent(Login.this, ViewPager.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onStartFailed(SinchError error) {
+        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
+        if (mSpinner != null) {
+            mSpinner.dismiss();
+        }
+    }
+
+    @Override
+    public void onStarted() {
+       // openPlaceCallActivity();
+
+    }
+
+    @Override
+    protected void onServiceConnected() {
+        logm.setEnabled(true);
+        getSinchServiceInterface().setStartListener(this);
+
+    }
+
+    @Override
+    protected void onPause() {
+        if (mSpinner != null) {
+            mSpinner.dismiss();
+        }
+        super.onPause();
+    }
+
+    private void openPlaceCallActivity() {
+
     }
 
     private class loginAut extends AsyncTask<String, Void, String>{

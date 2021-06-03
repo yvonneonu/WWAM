@@ -37,12 +37,17 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".VideoCallActivity"></activity>
+
+        <activity android:name=".VideoCallActivity" />
         <activity android:name=".SignUpSecond" />
         <activity android:name=".CallingActivity" />
         <activity
             android:name=".AllUsersActivity"
             android:parentActivityName=".DrawelayoutActivity" />
+
+        <service android:name=".SinchService" />
+        <activity android:name=".IncomingCallScreenActivity"></activity>
+
         <activity android:name=".Unfriend" />
         <activity android:name=".DailyMatch" />
         <activity android:name=".AgentProfile" />
@@ -58,10 +63,7 @@
         <activity android:name=".Matchfriends" />
         <activity android:name=".CompleteProfile" />
         <activity android:name=".LocationDetectActivity" />
-        <activity android:name=".Profile" >
-
-
-        </activity>
+        <activity android:name=".Profile"></activity>
         <activity android:name=".DrawelayoutActivity" />
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
@@ -70,17 +72,11 @@
         <activity android:name=".Verification1" />
         <activity android:name=".MainActivity" />
         <activity android:name=".passw" />
-        <activity android:name=".Another" >
-
-        </activity>
+        <activity android:name=".Another"></activity>
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
-        <activity android:name=".Interest" >
-
-        </activity>
+        <activity android:name=".Interest"></activity>
         <activity android:name=".ViewPager">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
