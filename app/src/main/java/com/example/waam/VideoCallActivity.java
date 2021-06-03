@@ -17,10 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.waam.layout.GridVideoViewContainer;
-import com.example.waam.layout.SmallVideoViewAdapter;
-import com.example.waam.layout.SmallVideoViewDecoration;
-import com.example.waam.model.User;
+
 import com.example.waam.ui.RecyclerItemClickListener;
 import com.example.waam.ui.RtlLinearLayoutManager;
 
@@ -41,17 +38,17 @@ public class VideoCallActivity extends AppCompatActivity {
     private static final int PERMISSION_REQ_ID = 22;
 
     private ImageView mCallBtn, mMuteBtn, mSwitchVoiceBtn;
-    private GridVideoViewContainer mGridVideoViewContainer;
+    //private GridVideoViewContainer mGridVideoViewContainer;
     private boolean isCalling = true;
     private boolean isMuted = false;
     private boolean isVoiceChanged = false;
     private boolean mIsLandscape = false;
     private RelativeLayout mSmallVideoViewDock;
-    private SmallVideoViewAdapter mSmallVideoViewAdapter;
+   // private SmallVideoViewAdapter mSmallVideoViewAdapter;
     private boolean mIsPeerToPeerMode = true;
     private String mActualTarget;
     private WaamUser waamUser;
-    private User user;
+   // private User user;
 
     private final HashMap<Integer, SurfaceView> mUidsList = new HashMap<>();
 
@@ -108,8 +105,8 @@ public class VideoCallActivity extends AppCompatActivity {
         mMuteBtn = findViewById(R.id.audio_mute_audio_unmute_btn);
         mSwitchVoiceBtn = findViewById(R.id.switch_voice_btn);
 
-        mGridVideoViewContainer = findViewById(R.id.grid_video_view_container);
-        mGridVideoViewContainer.setItemEventHandler(new RecyclerItemClickListener.OnItemClickListener() {
+        //mGridVideoViewContainer = findViewById(R.id.grid_video_view_container);
+      /*  mGridVideoViewContainer.setItemEventHandler(new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 //can add single click listener logic
@@ -124,7 +121,7 @@ public class VideoCallActivity extends AppCompatActivity {
             public void onItemDoubleClick(View view, int position) {
                 onBigVideoViewDoubleClicked(view, position);
             }
-        });
+        });*/
     }
 
 
@@ -147,7 +144,7 @@ public class VideoCallActivity extends AppCompatActivity {
         mUidsList.get(bigBgUid).setZOrderOnTop(false);
         mUidsList.get(bigBgUid).setZOrderMediaOverlay(false);
 
-        mGridVideoViewContainer.initViewContainer(this, bigBgUid, slice, mIsLandscape);
+       // mGridVideoViewContainer.initViewContainer(this, bigBgUid, slice, mIsLandscape);
 
         bindToSmallVideoView(bigBgUid);
 
@@ -167,11 +164,11 @@ public class VideoCallActivity extends AppCompatActivity {
 
         boolean create = false;
 
-        if (mSmallVideoViewAdapter == null) {
+       // if (mSmallVideoViewAdapter == null) {
             create = true;
-            mSmallVideoViewAdapter = new SmallVideoViewAdapter(this, this.user.getAgoraUid(), exceptUid, mUidsList);
-            mSmallVideoViewAdapter.setHasStableIds(true);
-        }
+           // mSmallVideoViewAdapter = new SmallVideoViewAdapter(this, this.user.getAgoraUid(), exceptUid, mUidsList);
+           // mSmallVideoViewAdapter.setHasStableIds(true);
+       // }
         recycler.setHasFixedSize(true);
 
         if (twoWayVideoCall) {
@@ -179,8 +176,8 @@ public class VideoCallActivity extends AppCompatActivity {
         } else {
             recycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         }
-        recycler.addItemDecoration(new SmallVideoViewDecoration());
-        recycler.setAdapter(mSmallVideoViewAdapter);
+      //  recycler.addItemDecoration(new SmallVideoViewDecoration());
+       // recycler.setAdapter(mSmallVideoViewAdapter);
         recycler.addOnItemTouchListener(new RecyclerItemClickListener(getBaseContext(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

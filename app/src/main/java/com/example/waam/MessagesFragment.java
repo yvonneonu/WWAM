@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.waam.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -82,7 +81,7 @@ public class MessagesFragment extends Fragment {
         setHasOptionsMenu(true);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+"FRIENDS";
-        User userReal = getActivity().getIntent().getParcelableExtra(VideoCallActivity.AGOREUSER);
+      //  User userReal = getActivity().getIntent().getParcelableExtra(VideoCallActivity.AGOREUSER);
 
         generalFactory.loadNewFriends(branchName, barone,textViewNewFriends, friends -> {
             newFriends = friends;
@@ -106,7 +105,7 @@ public class MessagesFragment extends Fragment {
                 WaamUser user = newFriends.get(position);
                 Intent intent = new Intent(getActivity(), ChatMessage.class);
                 intent.putExtra("",user);
-                intent.putExtra(VideoCallActivity.AGOREUSER,userReal);
+               // intent.putExtra(VideoCallActivity.AGOREUSER,userReal);
                 Log.d("Here",user.getUid());
                 startActivity(intent);
             });
@@ -135,7 +134,7 @@ public class MessagesFragment extends Fragment {
 
             recentChatsAdapt.chatMethod(position -> {
                 Intent intent = new Intent(getActivity(), ChatMessage.class);
-                intent.putExtra("agorauser",userReal);
+               // intent.putExtra("agorauser",userReal);
                 intent.putExtra(ChatMessage.NEW_FRIENDS,friends.get(position));
                 startActivity(intent);
             });
