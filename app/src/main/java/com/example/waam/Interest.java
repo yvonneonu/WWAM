@@ -87,9 +87,10 @@ public class Interest extends AppCompatActivity {
         saveInterest = findViewById(R.id.button4);
 
 
-        wipe.setOnClickListener(new View.OnClickListener() {
+       /* wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (interestRequestList != null){
                     Intent intent = new Intent(Interest.this, CompleteProfile.class);
 
@@ -113,7 +114,7 @@ public class Interest extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
     }
 
 
@@ -253,6 +254,25 @@ public class Interest extends AppCompatActivity {
 
 
         }
+        wipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (interestRequestList != null){
+                    for (String inter: interest){
+                        Log.d("display", inter);
+                    }
+                    for (InterestRequest interestRequest: interestRequestList){
+                        Log.d("Request", String.valueOf(interestRequest.getInterest_id()));
+                        saveInterest(interestRequestList);
+
+                    }
+
+                } else {
+                    String message = "Select Interest of choice";
+                    Toast.makeText(Interest.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         saveInterest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -306,7 +326,7 @@ public class Interest extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<InterestResponds> call, Throwable t) {
-                Toast.makeText(Interest.this, t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(Interest.this, "please select an interest", Toast.LENGTH_LONG).show();
 
             }
         });
