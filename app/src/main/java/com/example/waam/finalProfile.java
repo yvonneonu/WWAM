@@ -472,6 +472,36 @@ public class finalProfile extends AppCompatActivity {
     }
 
 }
+  /*swipe = findViewById(R.id.textView34);
+          swipe.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+        if (textView.toString().isEmpty()) {
+        textView.setError("Choose your Career");
+        //||
+        textView.requestFocus();
+        //  Toast.makeText()
+        } else if (textView.toString().isEmpty()) {
+
+        } else {
+        String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
+
+        GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+@Override
+public void loadSpecUse(WaamUser user) {
+        Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
+        // if (imageUri != null) {
+        intent.putExtra("images", imageUri);
+        intent.putExtra("toking", token);
+        intent.putExtra("WaamUser", user);
+        startActivity(intent);
+        }
+        });
+
+        //}
+        }
+        }
+        });*/
 
 
 

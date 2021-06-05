@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,9 +27,9 @@ import retrofit2.Response;
 
 public class LookingFor extends AppCompatActivity {
 
-    private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext;
+    private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext, namme;
     private ImageView image;
-    private String spinn, spinn2, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
+    private String  spinn2, spinn, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
     private boolean textVisible;
     private int count;
     private int count1;
@@ -40,9 +41,14 @@ public class LookingFor extends AppCompatActivity {
     private int count7;
     private int count8;
     private int count9;
-    String token;
+    private String token;
+    private Button saveDetails;
+    private int zero, first, second, third, fourth, five, six, seven, eight, night;
     // private int count10;
+    String imageUri;
     Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok, drink, sala;
+
+    WaamUser waamUser = new WaamUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,7 @@ public class LookingFor extends AppCompatActivity {
         smoketext = findViewById(R.id.textView7);
         drinktext = findViewById(R.id.textView8);
         salatext = findViewById(R.id.textView9);
+        saveDetails = findViewById(R.id.button6);
 
 
         spinner = findViewById(R.id.one);
@@ -101,6 +108,27 @@ public class LookingFor extends AppCompatActivity {
         names.add("Hailey");
         names.add("Juliet");
         names.add("Maria");
+
+        saveDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Hereapi();
+                Log.d("bfei", "jabhbchj");
+                String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
+
+                GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                    @Override
+                    public void loadSpecUse(WaamUser user) {
+                        Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
+                        // if (imageUri != null) {
+                        intent.putExtra("images", imageUri);
+                        intent.putExtra("toking", token);
+                        intent.putExtra("WaamUser", user);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
 
         careerSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -249,32 +277,46 @@ public class LookingFor extends AppCompatActivity {
         swipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (textView.toString().isEmpty()) {
+              /*  if (textView.toString().isEmpty() ){
                     textView.setError("Choose your Career");
                     //||
                     textView.requestFocus();
-                    //  Toast.makeText()
-                } else if (textView.toString().isEmpty()) {
+                  //  Toast.makeText()
+                }else if (textView.toString().isEmpty()){*/
 
-                } else {
-                    String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
+                // }else{
+                Hereapi();
+                Log.d("bfei", "jabhbchj");
 
-                    GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
-                        @Override
-                        public void loadSpecUse(WaamUser user) {
-                            Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
-                            // if (imageUri != null) {
-                            intent.putExtra("images", imageUri);
-                            intent.putExtra("toking", token);
-                            intent.putExtra("WaamUser", user);
-                            startActivity(intent);
-                        }
-                    });
+                String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
 
-                    //}
-                }
+                GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                    @Override
+                    public void loadSpecUse(WaamUser user) {
+                        Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
+                        // if (imageUri != null) {
+                        intent.putExtra("images", imageUri);
+                        intent.putExtra("toking", token);
+                        intent.putExtra("WaamUser", user);
+                        startActivity(intent);
+                    }
+                });
+                   /* Intent intent = new Intent(finalProfile.this, LookingFor.class);
+                    if (imageUri != null) {
+                        intent.putExtra("images", imageUri);
+                    }
+                    if (token != null){
+                        intent.putExtra("token", token);
+                    }
+                    Log.d("TAG", "TOKENSHOW7 " +token);
+                    startActivity(intent);*/
+
+
+
+                // }
             }
         });
+
 
         FetchSpinnerValues.getSpinnerValues().fetchOccupation(new FetchSpinnerValues.OccupationListener() {
             @Override
@@ -359,6 +401,53 @@ public class LookingFor extends AppCompatActivity {
         }, token);
     }
 
+
+    private void Hereapi() {
+        if (imageUri != null) {
+            SpinnerResponse getSpinnerResponse = new SpinnerResponse( "", 1, 2, 3, 4, 5,
+                    6, 7, 8, 9);
+//        Log.d("ImageUrl",imageUri.toString());
+            getSpinnerResponse.setCareer(spinn2);
+            getSpinnerResponse.setEducation_id(zero);
+            getSpinnerResponse.setBody_type_id(first);
+            getSpinnerResponse.setEthnicity_id(second);
+            getSpinnerResponse.setFaith_id(third);
+            getSpinnerResponse.setPolitics_id(fourth);
+            getSpinnerResponse.setChildren_id(five);
+            getSpinnerResponse.setSmoke_id(six);
+            getSpinnerResponse.setDrink_id(seven);
+            getSpinnerResponse.setIncome_id(eight);
+            requestDetails(getSpinnerResponse);
+
+
+            // Log.d("imageshow", "" + imageUri.toString());
+            Log.d("imageshow", "" + spinsala);
+
+
+
+            String message = "Successful";
+            Toast.makeText(LookingFor.this, message, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(LookingFor.this, LookingFor.class);
+            if (imageUri != null) {
+                intent.putExtra("images", imageUri);
+            }
+            if (token != null){
+                intent.putExtra("token", token);
+            }
+            Log.d("TAG", "TOKENSHOW7 " +token);
+            startActivity(intent);
+
+
+            // Call<GetImage> getImageCall = ApiClient.getService().getimage()
+        } else {
+            String message = "Select details about me";
+            Toast.makeText(LookingFor.this, message, Toast.LENGTH_LONG).show();
+            //Log.d("imageshow", ""+r);
+            // Log.d("Body",new Gson().toJson(response.body()));
+        }
+
+
+    }
 
 
     private void requestDetails(SpinnerResponse spinnerResponse) {

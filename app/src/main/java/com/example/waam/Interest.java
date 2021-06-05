@@ -316,6 +316,7 @@ public class Interest extends AppCompatActivity {
 
                         Log.d("TAG", ""+Fullname);
 
+                        
                         startActivity(nextActivity);
                     }
                 }else {
