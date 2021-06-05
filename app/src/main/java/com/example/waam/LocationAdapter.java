@@ -15,25 +15,27 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationHolder>{
+public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationHolder> {
 
     private final List<Location> locationList;
     private final Context context;
     private LocationListener locationListener;
-    public LocationAdapter(List<Location> locationList, Context context){
+
+    public LocationAdapter(List<Location> locationList, Context context) {
         this.locationList = locationList;
         this.context = context;
     }
+
     @NonNull
     @Override
     public LocationHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.locationspec,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.locationspec, parent, false);
 
         return new LocationHolder(view);
     }
 
 
-    public void onLocationListener(LocationListener locationListener){
+    public void onLocationListener(LocationListener locationListener) {
         this.locationListener = locationListener;
     }
 
@@ -58,6 +60,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
         private final ImageView imageView;
         private final TextView textView;
+
         public LocationHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
@@ -65,20 +68,18 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
             LinearLayout linearLayout = itemView.findViewById(R.id.lin);
 
             linearLayout.setOnClickListener(v -> {
-                if(locationListener != null){
+                if (locationListener != null) {
                     int position = getAdapterPosition();
-                    if(position != RecyclerView.NO_POSITION){
+                    if (position != RecyclerView.NO_POSITION) {
                         locationListener.selectLocation(position);
                     }
                 }
             });
 
-
-
         }
     }
 
-    interface LocationListener{
+    interface LocationListener {
         void selectLocation(int pos);
     }
 }
