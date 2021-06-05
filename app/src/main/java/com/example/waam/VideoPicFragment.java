@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class VideoPicFragment extends Fragment {
             @Override
             public void loadVidpic(List<VideoPicModel> videoPicModels) {
                 videoPicAdapter = new VideoPicAdapter(videoPicModels,getActivity());
+                Log.d("loadpic","inside pic");
                 if(isAdded()){
                     if(videoPicModels.size() > 0){
                         recyclerView.setAdapter(videoPicAdapter);
