@@ -63,7 +63,7 @@ public class VideoPicFragment extends Fragment {
         Log.d("userId",path);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
 
-        generalFactory.loadVidPic(path, new GeneralFactory.LoadVidPic() {
+        /*generalFactory.loadVidPic(path, new GeneralFactory.LoadVidPic() {
             @Override
             public void loadVidpic(List<VideoPicModel> videoPicModels) {
                 videoPicAdapter = new VideoPicAdapter(videoPicModels,getActivity());
@@ -96,7 +96,7 @@ public class VideoPicFragment extends Fragment {
                 });
 
             }
-        });
+        });*/
     }
 
     @Override
