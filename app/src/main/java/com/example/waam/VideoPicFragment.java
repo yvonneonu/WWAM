@@ -80,6 +80,8 @@ public class VideoPicFragment extends Fragment {
                         textView.setText(message);
                     }
 
+                }else{
+                    Log.d("Problem","Not added yet");
                 }
 
                 videoPicAdapter.showPicVid(new VideoPicAdapter.MediaListener() {
