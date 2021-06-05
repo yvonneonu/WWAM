@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -69,7 +70,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         ImageView profilePic = view.findViewById(R.id.imageView32);
         ImageView interest = view.findViewById(R.id.interest);
         ImageView friends = view.findViewById(R.id.friends);
-
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        assert activity != null;
+        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
         videopic.setOnClickListener(this);
         aboutsef.setOnClickListener(this);
         interest.setOnClickListener(this);
