@@ -170,7 +170,7 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
             if (!getSinchServiceInterface().isStarted()){
                 getSinchServiceInterface().startClient(Email);
                 Log.d("chek", Email);
-                showSpinner();
+
             }
 
             generalFactory.requestUser(waamUser,progressBar);
@@ -205,12 +205,12 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
 
     }
 
-    private void showSpinner() {
+   /* private void showSpinner() {
         mSpinner = new ProgressDialog(this);
         mSpinner.setTitle("Logging in");
         mSpinner.setMessage("Please wait...");
         mSpinner.show();
-    }
+    }*/
     private String getMonthFormat(int month) {
         if (month == 1)
             return "01";
@@ -265,9 +265,9 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
     @Override
     public void onStartFailed(SinchError error) {
         Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
-        if (mSpinner != null) {
-            mSpinner.dismiss();
-        }
+       // if (mSpinner != null) {
+         //   mSpinner.dismiss();
+        //}
     }
 
     @Override
@@ -281,11 +281,11 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
 
     }
 
-    @Override
+   /* @Override
     protected void onPause() {
         if (mSpinner != null) {
             mSpinner.dismiss();
         }
         super.onPause();
-    }
+    }*/
 }
