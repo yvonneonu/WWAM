@@ -8,6 +8,8 @@ public class SharedPref {
 
     public static final String TOKEN = "token";
     public static final String FULLNAME = "full_name";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
     private SharedPref(Context context){
@@ -39,6 +41,25 @@ public class SharedPref {
         editor.putString(key, value);
         editor.apply();
 
+    }
+    public void setStoredEmail(String key, String email){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, email);
+        editor.apply();
+    }
+
+    public String getStoredEmail(){
+        return sharedPref.getString(EMAIL, null);
+    }
+
+    public void setStoredPassword(String key, String password){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, password);
+        editor.apply();
+    }
+
+    public String getStoredPassword(){
+        return sharedPref.getString(PASSWORD, null);
     }
 
 

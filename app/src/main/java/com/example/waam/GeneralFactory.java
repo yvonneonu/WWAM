@@ -169,6 +169,8 @@ public class GeneralFactory {
 
     public void signUpForBase(final String email, final String password, final CardView bar,  WaamUser waamUser){
         bar.setVisibility(View.VISIBLE);
+        SharedPref.getInstance(context).setStoredEmail("email",email);
+        SharedPref.getInstance(context).setStoredPassword("password",password);
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

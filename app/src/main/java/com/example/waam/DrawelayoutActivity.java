@@ -68,6 +68,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         } //Show the user that is logged in;
         else{
             fragmenting = new ExploreFragment();
+           // GeneralFactory.getGeneralFactory(this).loadSpecUser();
+           // fragmenting = new VideoPicFragment();
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

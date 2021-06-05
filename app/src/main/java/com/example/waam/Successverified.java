@@ -16,6 +16,7 @@ public class Successverified extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_successverified);
+        WaamUser user = (WaamUser) getIntent().getSerializableExtra("WaamUser");
         String Fullname = getIntent().getStringExtra("name");
         String token = getIntent().getStringExtra("tokenbearer");
 
@@ -26,6 +27,7 @@ public class Successverified extends AppCompatActivity {
                 home.putExtra("name", Fullname);
                 Log.d("TAG", ""+Fullname);
 
+                home.putExtra("WaamUser",user);
                 if (token != null){
                     home.putExtra("bearer", token);
                 }

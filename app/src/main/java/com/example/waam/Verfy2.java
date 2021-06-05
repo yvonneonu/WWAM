@@ -11,7 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -185,21 +191,48 @@ public class Verfy2 extends AppCompatActivity {
             if (response.isSuccessful()) {
                 // response.body().getToken();
 
+                String email = SharedPref.getInstance(Verfy2.this).getStoredEmail();
+                String pass = SharedPref.getInstance(Verfy2.this).getStoredPassword();
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+
+                            String uid = FirebaseAuth.getInstance().getUid();
+
+                                GeneralFactory.getGeneralFactory(Verfy2.this)
+                                        .loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                                            @Override
+                                            public void loadSpecUse(WaamUser user) {
+                                                String message = "Successful";
+                                                Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
+
+                                                Intent intent = new Intent(Verfy2.this, Successverified.class);
+                                                intent.putExtra("token", response.body().getOtp());
+                                                intent.putExtra("tokenbearer", bearer);
+                                                Log.d("TAG", "TOKENSHOW2 " +bearer);
+                                                intent.putExtra("name", Fullname);
+                                                Log.d("TAG", ""+Fullname);
+
+                                                intent.putExtra("WaamUser",user);
+
+
+                                                startActivity(intent);
+                                                //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
+                                                finish();
+                                            }
+                                        });
+
+
+
+                        }else {
+                            Log.d("failed", "input otp");
+                        }
+                    }
+                });
+
                 //response.body();
-                String message = "Successful";
-                Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(Verfy2.this, Successverified.class);
-                intent.putExtra("token", response.body().getOtp());
-                intent.putExtra("tokenbearer", bearer);
-                Log.d("TAG", "TOKENSHOW2 " +bearer);
-                intent.putExtra("name", Fullname);
-                Log.d("TAG", ""+Fullname);
-
-
-                startActivity(intent);
-                //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
-                finish();
             } else {
                 response.body();
                 //response.errorBody();
