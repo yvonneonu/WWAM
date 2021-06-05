@@ -6,11 +6,9 @@
     android:layout_height="wrap_content">
 
 
-
-
     <VideoView
         android:id="@+id/videoView"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
