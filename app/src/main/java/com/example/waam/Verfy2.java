@@ -199,31 +199,19 @@ public class Verfy2 extends AppCompatActivity {
                         if (task.isSuccessful()){
 
                             String uid = FirebaseAuth.getInstance().getUid();
+                            String message = "Successful";
+                            Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
 
-                                GeneralFactory.getGeneralFactory(Verfy2.this)
-                                        .loadSpecUser(uid, new GeneralFactory.SpecificUser() {
-                                            @Override
-                                            public void loadSpecUse(WaamUser user) {
-                                                String message = "Successful";
-                                                Toast.makeText(Verfy2.this, message, Toast.LENGTH_LONG).show();
-
-                                                Intent intent = new Intent(Verfy2.this, Successverified.class);
-                                                intent.putExtra("token", response.body().getOtp());
-                                                intent.putExtra("tokenbearer", bearer);
-                                                Log.d("TAG", "TOKENSHOW2 " +bearer);
-                                                intent.putExtra("name", Fullname);
-                                                Log.d("TAG", ""+Fullname);
-
-                                                intent.putExtra("WaamUser",user);
-
-
-                                                startActivity(intent);
-                                                //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
-                                                finish();
-                                            }
-                                        });
-
-
+                            Intent intent = new Intent(Verfy2.this, Successverified.class);
+                            intent.putExtra("token", response.body().getOtp());
+                            intent.putExtra("tokenbearer", bearer);
+                            Log.d("TAG", "TOKENSHOW2 " +bearer);
+                            intent.putExtra("name", Fullname);
+                            SharedPref.getInstance(Verfy2.this).setStoredUid(SharedPref.UID,uid);
+                            Log.d("TAG", ""+Fullname);
+                            startActivity(intent);
+                            //startActivity(new Intent(Verfy2.this, Successverified.class).putExtra("token", response.body().getOtp()));
+                            finish();
 
                         }else {
                             Log.d("failed", "input otp");

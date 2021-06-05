@@ -30,6 +30,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         setSupportActionBar(toolbar);
         String token = getIntent().getStringExtra("toking");
         WaamUser friendsProfile = (WaamUser) getIntent().getSerializableExtra("PutProfile");
+        WaamUser videopicfragm = (WaamUser) getIntent().getSerializableExtra("WaamUser");
         boolean clicked = getIntent().getBooleanExtra("clicked",false);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -65,11 +66,13 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             //
         }else if( friendsProfile != null){
            fragmenting = ProfileFragment.newInstance(friendsProfile);
-        } //Show the user that is logged in;
+        } else if(videopicfragm != null){
+            fragmenting = new ConnectedFriendsFragment(videopicfragm);
+        }
         else{
             fragmenting = new ExploreFragment();
            // GeneralFactory.getGeneralFactory(this).loadSpecUser();
-           // fragmenting = new VideoPicFragment();
+
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

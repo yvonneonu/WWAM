@@ -10,6 +10,7 @@ public class SharedPref {
     public static final String FULLNAME = "full_name";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
+    public static  final  String UID = "uid";
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
     private SharedPref(Context context){
@@ -57,12 +58,20 @@ public class SharedPref {
         editor.putString(key, password);
         editor.apply();
     }
-
     public String getStoredPassword(){
         return sharedPref.getString(PASSWORD, null);
     }
 
 
+    public void setStoredUid(String key,String uid){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, uid);
+        editor.apply();
+    }
+
+    public String getStoredUid(){
+        return  sharedPref.getString(UID,null);
+    }
 
 
 

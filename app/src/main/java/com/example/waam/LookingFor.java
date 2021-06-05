@@ -247,11 +247,20 @@ public class LookingFor extends AppCompatActivity {
                 }else if (textView.toString().isEmpty()){
 
                 }else{
-                    Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
-                   // if (imageUri != null) {
-                        intent.putExtra("images", imageUri);
-                        intent.putExtra("toking",token);
-                        startActivity(intent);
+                    String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
+
+                    GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                        @Override
+                        public void loadSpecUse(WaamUser user) {
+                            Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
+                            // if (imageUri != null) {
+                            intent.putExtra("images", imageUri);
+                            intent.putExtra("toking",token);
+                            intent.putExtra("WaamUser",user);
+                            startActivity(intent);
+                        }
+                    });
+
                     //}
                 }
             }
