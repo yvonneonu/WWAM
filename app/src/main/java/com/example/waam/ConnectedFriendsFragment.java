@@ -13,6 +13,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
@@ -23,8 +25,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private WaamUser waamUser;
-    private ImageView profilePic;
+    private final WaamUser waamUser;
     private static final String REQUEST = "connectedFriends";
 
     // TODO: Rename and change types of parameters
@@ -65,7 +66,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_connected_friends, container, false);
         ImageView videopic = view.findViewById(R.id.videopic);
         ImageView aboutsef = view.findViewById(R.id.aboutsef);
-        profilePic = view.findViewById(R.id.imageView32);
+        ImageView profilePic = view.findViewById(R.id.imageView32);
         ImageView interest = view.findViewById(R.id.interest);
         ImageView friends = view.findViewById(R.id.friends);
 
@@ -74,7 +75,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         interest.setOnClickListener(this);
         friends.setOnClickListener(this);
 
-        Glide.with(getActivity())
+        Glide.with(Objects.requireNonNull(getActivity()))
                 .asBitmap()
                 .fitCenter()
                 .load(waamUser.getImageUrl())
