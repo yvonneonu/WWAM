@@ -285,15 +285,17 @@ public class finalProfile extends AppCompatActivity {
         swipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (textView.toString().isEmpty() ){
+              /*  if (textView.toString().isEmpty() ){
                     textView.setError("Choose your Career");
                     //||
                     textView.requestFocus();
                   //  Toast.makeText()
-                }else if (textView.toString().isEmpty()){
+                }else if (textView.toString().isEmpty()){*/
 
-                }else{
-                    Intent intent = new Intent(finalProfile.this, LookingFor.class);
+               // }else{
+                    Hereapi();
+                    Log.d("bfei", "jabhbchj");
+                   /* Intent intent = new Intent(finalProfile.this, LookingFor.class);
                     if (imageUri != null) {
                         intent.putExtra("images", imageUri);
                     }
@@ -301,11 +303,11 @@ public class finalProfile extends AppCompatActivity {
                         intent.putExtra("token", token);
                     }
                     Log.d("TAG", "TOKENSHOW7 " +token);
-                    startActivity(intent);
+                    startActivity(intent);*/
 
 
 
-                }
+               // }
             }
         });
 
@@ -419,15 +421,16 @@ public class finalProfile extends AppCompatActivity {
             String message = "Successful";
             Toast.makeText(finalProfile.this, message, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(finalProfile.this, LookingFor.class);
-            Log.d("ImageUri", imageUri.toString());
-            intent.putExtra("profilepics", imageUri.toString());
-            //intent.putExtra("name", Fullname);
-            // Log.d("TAG", ""+Fullname);
-
-            intent.putExtra("token", token);
-            Log.d("TAG", "TOKENSHOW5 " + token);
+            if (imageUri != null) {
+                intent.putExtra("images", imageUri);
+            }
+            if (token != null){
+                intent.putExtra("token", token);
+            }
+            Log.d("TAG", "TOKENSHOW7 " +token);
             startActivity(intent);
-            // userService.
+
+
             // Call<GetImage> getImageCall = ApiClient.getService().getimage()
         } else {
             String message = "Select details about me";

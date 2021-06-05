@@ -90,22 +90,28 @@ public class Interest extends AppCompatActivity {
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Interest.this, CompleteProfile.class);
+                if (interestRequestList != null){
+                    Intent intent = new Intent(Interest.this, CompleteProfile.class);
 
-               // intent.putExtra("nameprofile", Fullname);
+                    // intent.putExtra("nameprofile", Fullname);
 
-                if (token != null){
-                    intent.putExtra("token", token);
+                    if (token != null){
+                        intent.putExtra("token", token);
+                    }
+                    if (imageUri != null){
+                        intent.putExtra("getProfilePics", imageUri);
+                    }
+                    intent.putExtra("name", Fullname);
+
+                    Log.d("TAG", ""+Fullname);
+
+                    Log.d("TAG", "TOKENSHOW6 " +token);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(Interest.this, "please select an Interest of Choice", Toast.LENGTH_LONG).show();
+                    Log.d("Swip", "wipe");
                 }
-                if (imageUri != null){
-                    intent.putExtra("getProfilePics", imageUri);
-                }
-                intent.putExtra("name", Fullname);
 
-                Log.d("TAG", ""+Fullname);
-
-                Log.d("TAG", "TOKENSHOW6 " +token);
-                startActivity(intent);
             }
         });
     }
@@ -250,15 +256,23 @@ public class Interest extends AppCompatActivity {
         saveInterest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // onCheckboxClicked(view);
-                for (String inter: interest){
-                    Log.d("display", inter);
-                }
-                for (InterestRequest interestRequest: interestRequestList){
-                    Log.d("Request", String.valueOf(interestRequest.getInterest_id()));
-                    saveInterest(interestRequestList);
+                if (interestRequestList != null){
+                    for (String inter: interest){
+                        Log.d("display", inter);
+                    }
+                    for (InterestRequest interestRequest: interestRequestList){
+                        Log.d("Request", String.valueOf(interestRequest.getInterest_id()));
+                        saveInterest(interestRequestList);
 
-                }
+                    }
+
+                } else {
+                String message = "Select Interest of choice";
+                Toast.makeText(Interest.this, message, Toast.LENGTH_LONG).show();
+                //Log.d("imageshow", ""+r);
+                // Log.d("Body",new Gson().toJson(response.body()));
+            }
+               // onCheckboxClicked(view);
 
             }
         });

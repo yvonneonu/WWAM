@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -42,6 +43,7 @@ public class CompleteProfile extends AppCompatActivity {
     private StorageTask<UploadTask.TaskSnapshot> mUploads;
     private Task<Uri> uriTask;
     private ProgressBar progressBar;
+    private Button save;
 
 
     @Override
@@ -76,6 +78,7 @@ public class CompleteProfile extends AppCompatActivity {
         wipe = findViewById(R.id.swipe);
         name = findViewById(R.id.textView19);
         progressBar = findViewById(R.id.progressBar4);
+        save = findViewById(R.id.button5);
 
 
         if (imageUri != null) {
@@ -351,22 +354,51 @@ public class CompleteProfile extends AppCompatActivity {
             }
         });
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageUri != null){
+                    Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
+                    if (imageUri != null) {
+                        intent.putExtra("image", imageUri.toString());
+                    }
+
+                    if (tired != null) {
+                        intent.putExtra("everytoken", tired);
+                    }
+
+                    intent.putExtra("name", Fullname);
+                    Log.d("TAG", ""+Fullname);
+                    Log.d("TAG", "TOKENSHOW7 " + tired);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(CompleteProfile.this, "Please Upload An Image", Toast.LENGTH_LONG).show();
+                    Log.d("Swip", "wipe");
+                }
+            }
+        });
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
-                if (imageUri != null) {
-                    intent.putExtra("image", imageUri.toString());
+                if (imageUri != null){
+                    Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
+                    if (imageUri != null) {
+                        intent.putExtra("image", imageUri.toString());
+                    }
+
+                    if (tired != null) {
+                        intent.putExtra("everytoken", tired);
+                    }
+
+                    intent.putExtra("name", Fullname);
+                    Log.d("TAG", ""+Fullname);
+                    Log.d("TAG", "TOKENSHOW7 " + tired);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(CompleteProfile.this, "Please Upload An Image", Toast.LENGTH_LONG).show();
+                    Log.d("Swip", "wipe");
                 }
 
-                if (tired != null) {
-                    intent.putExtra("everytoken", tired);
-                }
-
-                intent.putExtra("name", Fullname);
-                Log.d("TAG", ""+Fullname);
-                Log.d("TAG", "TOKENSHOW7 " + tired);
-                startActivity(intent);
             }
         });
 
