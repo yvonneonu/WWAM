@@ -70,11 +70,14 @@ public class VideoPicFragment extends Fragment {
                 Log.d("loadpic","inside pic");
                 if(isAdded()){
                     if(videoPicModels.size() > 0){
+                        recyclerView.setVisibility(View.VISIBLE);
+                        Log.d("Size",""+videoPicModels.size());
                         recyclerView.setAdapter(videoPicAdapter);
                         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                         bar.setVisibility(View.GONE);
                     }else{
                         //you have no media uploaded...
+                        recyclerView.setVisibility(View.GONE);
                         String message = "There are no media";
                         bar.setVisibility(View.GONE);
                         textView.setText(message);
