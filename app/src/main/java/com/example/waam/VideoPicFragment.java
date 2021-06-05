@@ -83,6 +83,7 @@ public class VideoPicFragment extends Fragment {
                     if(videoPicModels.size() > 0){
                         recyclerView.setVisibility(View.VISIBLE);
                         Log.d("Size",""+videoPicModels.size());
+                        Log.d("Size",videoPicModels.get(0).getVideoPicUrl());
                         recyclerView.setAdapter(videoPicAdapter);
                         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                         bar.setVisibility(View.GONE);

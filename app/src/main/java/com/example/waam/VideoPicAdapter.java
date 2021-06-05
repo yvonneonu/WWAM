@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,7 @@ public class VideoPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         }else{
             PicHolder picHolder = (PicHolder) holder;
+            Log.d("Damn","Y dis shit");
             Glide.with(context)
                     .asBitmap()
                     .load(videoPicModel.getVideoPicUrl())
