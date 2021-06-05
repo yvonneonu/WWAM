@@ -47,6 +47,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
         Fragment fr = new VideoPicFragment(waamUser);
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.add(R.id.profileframe, fr)
