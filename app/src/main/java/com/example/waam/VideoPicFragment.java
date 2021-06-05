@@ -32,6 +32,7 @@ public class VideoPicFragment extends Fragment {
     private final WaamUser waamUser;
     private ProgressBar bar;
     private TextView textView;
+    private GeneralFactory generalFactory;
     private static final String VIDEOPIC = "videopic";
 
 
@@ -58,11 +59,21 @@ public class VideoPicFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        generalFactory = GeneralFactory.getGeneralFactory(getActivity());
 
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_video_pic, container, false);
+        recyclerView = view.findViewById(R.id.vidpicrecycler);
+        textView = view.findViewById(R.id.textView106);
+        bar = view.findViewById(R.id.progressBar3);
         String path = waamUser.getUid();
         Log.d("userId",path);
-        GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
-
         generalFactory.loadVidPic(path, new GeneralFactory.LoadVidPic() {
             @Override
             public void loadVidpic(List<VideoPicModel> videoPicModels) {
@@ -100,16 +111,6 @@ public class VideoPicFragment extends Fragment {
 
             }
         });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_video_pic, container, false);
-        recyclerView = view.findViewById(R.id.vidpicrecycler);
-        textView = view.findViewById(R.id.textView106);
-        bar = view.findViewById(R.id.progressBar3);
         return view;
     }
 
