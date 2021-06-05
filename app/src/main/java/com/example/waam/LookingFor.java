@@ -427,7 +427,7 @@ public class LookingFor extends AppCompatActivity {
 
             String message = "Successful";
             Toast.makeText(LookingFor.this, message, Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(LookingFor.this, LookingFor.class);
+            Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
             if (imageUri != null) {
                 intent.putExtra("images", imageUri);
             }

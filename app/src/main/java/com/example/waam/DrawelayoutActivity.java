@@ -68,6 +68,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             fragmenting = ProfileFragment.newInstance(friendsProfile);
         } else if (videopicfragm != null) {
             fragmenting = new ConnectedFriendsFragment(videopicfragm);
+          //  bottomNavigationView.getMenu().getItem(2).setChecked(true);
         } else {
             fragmenting = new ExploreFragment();
             // GeneralFactory.getGeneralFactory(this).loadSpecUser();
