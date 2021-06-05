@@ -10,13 +10,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LookingFor extends AppCompatActivity {
 
@@ -34,6 +40,7 @@ public class LookingFor extends AppCompatActivity {
     private int count7;
     private int count8;
     private int count9;
+    String token;
     // private int count10;
     Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok, drink, sala;
 
@@ -78,7 +85,8 @@ public class LookingFor extends AppCompatActivity {
         drink = findViewById(R.id.drink);
         sala = findViewById(R.id.salary);
 
-        String token = getIntent().getStringExtra("token");
+
+        token = getIntent().getStringExtra("token");
         //String toks = getIntent().getStringExtra("token");
         //Log.d("sorry", "iknowyouaretired "+token);
 
@@ -351,6 +359,36 @@ public class LookingFor extends AppCompatActivity {
         }, token);
     }
 
+
+
+    private void requestDetails(SpinnerResponse spinnerResponse) {
+        Call<SpinnerRequest> getSpinnerCall = ApiClient.getService().getSpinner(spinnerResponse, "Bearer " + token);
+        getSpinnerCall.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (!response.isSuccessful()) {
+                    String message = "Successful";
+                    Toast.makeText(LookingFor.this, message, Toast.LENGTH_LONG).show();
+                    Log.d("imageview", response.message());
+                    Log.d("imageview", response.errorBody().toString());
+                    return;
+                }
+
+
+                String message = "Successful";
+                Toast.makeText(LookingFor.this, message, Toast.LENGTH_LONG).show();
+                Log.d("Body", new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+                Log.d("No Details Selected", t.getMessage());
+            }
+        });
+
+
+    }
 
 }
 
