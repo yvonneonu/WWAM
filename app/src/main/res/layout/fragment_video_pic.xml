@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:visibility="visible"
     tools:context=".VideoPicFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,7 +12,7 @@
         android:id="@+id/vidpicrecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/textView106"
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="You have no media"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/progressBar3"
