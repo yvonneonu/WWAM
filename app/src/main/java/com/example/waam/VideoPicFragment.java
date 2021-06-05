@@ -78,6 +78,7 @@ public class VideoPicFragment extends Fragment {
                         String message = "There are no media";
                         bar.setVisibility(View.GONE);
                         textView.setText(message);
+                        Log.d("ElseVidpic","I am here running");
                     }
 
                 }else{
