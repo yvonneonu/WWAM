@@ -10,20 +10,21 @@ public class SharedPref {
     public static final String FULLNAME = "full_name";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
-    public static  final  String UID = "uid";
+    public static final String UID = "uid";
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
-    private SharedPref(Context context){
+
+    private SharedPref(Context context) {
         sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
 
     }
 
-    public static SharedPref getInstance(Context context){
-        if( pref == null) pref =  new SharedPref(context);
-        return  pref;
+    public static SharedPref getInstance(Context context) {
+        if (pref == null) pref = new SharedPref(context);
+        return pref;
     }
 
-    public  String getStoredToken() {
+    public String getStoredToken() {
         return sharedPref.getString(TOKEN, null);
     }
 
@@ -34,50 +35,48 @@ public class SharedPref {
         editor.apply();
 
     }
-    public  String getStoredName() {
+
+    public String getStoredName() {
         return sharedPref.getString(FULLNAME, null);
     }
+
     public void setStoredName(String key, String value) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, value);
         editor.apply();
 
     }
-    public void setStoredEmail(String key, String email){
+
+    public void setStoredEmail(String key, String email) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, email);
         editor.apply();
     }
 
-    public String getStoredEmail(){
+    public String getStoredEmail() {
         return sharedPref.getString(EMAIL, null);
     }
 
-    public void setStoredPassword(String key, String password){
+    public void setStoredPassword(String key, String password) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, password);
         editor.apply();
     }
-    public String getStoredPassword(){
+
+    public String getStoredPassword() {
         return sharedPref.getString(PASSWORD, null);
     }
 
 
-    public void setStoredUid(String key,String uid){
+    public void setStoredUid(String key, String uid) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, uid);
         editor.apply();
     }
 
-    public String getStoredUid(){
-        return  sharedPref.getString(UID,null);
+    public String getStoredUid() {
+        return sharedPref.getString(UID, null);
     }
-
-
-
-
-
-
 
 
 }

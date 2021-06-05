@@ -40,7 +40,6 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
      * @return A new instance of fragment ConnectedFriendsFragment.
      */
     // TODO: Rename and change types and number of parameters
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +47,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Fragment fr =new VideoPicFragment(waamUser);
+        Fragment fr = new VideoPicFragment(waamUser);
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.add(R.id.profileframe,fr)
+        ft.add(R.id.profileframe, fr)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }
@@ -76,12 +75,12 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         final int vid = R.id.videopic;
-        final  int aboutsef = R.id.aboutsef;
+        final int aboutsef = R.id.aboutsef;
         final int interest = R.id.interest;
         final int friends = R.id.friends;
         final int profileFrame = R.id.profileframe;
-        Fragment fragment ;
-        switch (v.getId()){
+        Fragment fragment;
+        switch (v.getId()) {
             case vid:
                 // i stopped here planning on sending waam user to the video fragment
                 //fragment = VideoPicFragment.newInstance();
@@ -99,9 +98,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
-        if(fragment != null){
+        if (fragment != null) {
             getChildFragmentManager().beginTransaction()
-                    .replace(profileFrame,fragment)
+                    .replace(profileFrame, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }

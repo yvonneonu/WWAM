@@ -22,7 +22,7 @@ public class LookingFor extends AppCompatActivity {
 
     private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext;
     private ImageView image;
-    private String spinn,spinn2, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
+    private String spinn, spinn2, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
     private boolean textVisible;
     private int count;
     private int count1;
@@ -99,8 +99,8 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count++;
-                Log.d("InCareer","Running");
-                Log.d("InCareer",""+count);
+                Log.d("InCareer", "Running");
+                Log.d("InCareer", "" + count);
                 if (count > 1) careerText.setText(careerSpin.getSelectedItem().toString());
             }
 
@@ -114,7 +114,7 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count1++;
-                if(count1 > 1) textView.setText(spinner.getSelectedItem().toString());
+                if (count1 > 1) textView.setText(spinner.getSelectedItem().toString());
 
             }
 
@@ -129,7 +129,7 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count2++;
-                if (count2> 1) bod.setText(body.getSelectedItem().toString());
+                if (count2 > 1) bod.setText(body.getSelectedItem().toString());
 
             }
 
@@ -144,7 +144,7 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count3++;
-                if (count3> 1)ethnictext.setText(ethni.getSelectedItem().toString());
+                if (count3 > 1) ethnictext.setText(ethni.getSelectedItem().toString());
 
             }
 
@@ -158,7 +158,8 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count4++;
-                if(count4> 1)faithtext.setText(fait.getSelectedItem().toString()); ;
+                if (count4 > 1) faithtext.setText(fait.getSelectedItem().toString());
+                ;
             }
 
             @Override
@@ -172,7 +173,8 @@ public class LookingFor extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count5++;
 
-                if(count5> 1)politictext.setText(polit.getSelectedItem().toString()); ;
+                if (count5 > 1) politictext.setText(polit.getSelectedItem().toString());
+                ;
 
             }
 
@@ -186,7 +188,7 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count6++;
-                if(count6> 1)childrentext.setText(childre.getSelectedItem().toString());
+                if (count6 > 1) childrentext.setText(childre.getSelectedItem().toString());
 
             }
 
@@ -200,7 +202,7 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count7++;
-                if (count7> 1)smoketext.setText(smok.getSelectedItem().toString());
+                if (count7 > 1) smoketext.setText(smok.getSelectedItem().toString());
             }
 
             @Override
@@ -213,7 +215,7 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count8++;
-                if (count8> 1)drinktext.setText(drink.getSelectedItem().toString());
+                if (count8 > 1) drinktext.setText(drink.getSelectedItem().toString());
             }
 
             @Override
@@ -226,7 +228,7 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count9++;
-                if (count9> 1)salatext.setText(sala.getSelectedItem().toString());
+                if (count9 > 1) salatext.setText(sala.getSelectedItem().toString());
             }
 
             @Override
@@ -239,14 +241,14 @@ public class LookingFor extends AppCompatActivity {
         swipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (textView.toString().isEmpty() ){
+                if (textView.toString().isEmpty()) {
                     textView.setError("Choose your Career");
                     //||
                     textView.requestFocus();
                     //  Toast.makeText()
-                }else if (textView.toString().isEmpty()){
+                } else if (textView.toString().isEmpty()) {
 
-                }else{
+                } else {
                     String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
 
                     GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
@@ -255,8 +257,8 @@ public class LookingFor extends AppCompatActivity {
                             Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
                             // if (imageUri != null) {
                             intent.putExtra("images", imageUri);
-                            intent.putExtra("toking",token);
-                            intent.putExtra("WaamUser",user);
+                            intent.putExtra("toking", token);
+                            intent.putExtra("WaamUser", user);
                             startActivity(intent);
                         }
                     });
@@ -287,7 +289,7 @@ public class LookingFor extends AppCompatActivity {
                 spinn = spinner.getSelectedItem().toString();
 
             }
-        },token);
+        }, token);
 
         FetchSpinnerValues.getSpinnerValues().fetchBody(new FetchSpinnerValues.BodyTypeListener() {
             @Override
@@ -306,51 +308,48 @@ public class LookingFor extends AppCompatActivity {
             spinehnic = ethni.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchFaith(userFaith ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchFaith(userFaith -> {
             ArrayAdapter<String> userFaithAdapter = new ArrayAdapter<String>(LookingFor.this, android.R.layout.simple_spinner_item, userFaith);
             userFaithAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             fait.setAdapter(userFaithAdapter);
             spinfaith = fait.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchPolitics(userPolitics ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchPolitics(userPolitics -> {
             ArrayAdapter<String> userPoliticsAdapetr = new ArrayAdapter<String>(LookingFor.this, android.R.layout.simple_spinner_item, userPolitics);
             userPoliticsAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             polit.setAdapter(userPoliticsAdapetr);
             spinPolitics = polit.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchChildren(userChildren ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchChildren(userChildren -> {
             ArrayAdapter<String> userChildrenAdapetr = new ArrayAdapter<String>(LookingFor.this, android.R.layout.simple_spinner_item, userChildren);
             userChildrenAdapetr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             childre.setAdapter(userChildrenAdapetr);
             spinChildren = childre.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchSmoke(userSmoke ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchSmoke(userSmoke -> {
             ArrayAdapter<String> userSmokeAdapter = new ArrayAdapter<String>(LookingFor.this, android.R.layout.simple_spinner_item, userSmoke);
             userSmokeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             smok.setAdapter(userSmokeAdapter);
             spinSmoke = smok.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchDrink(userDrink ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchDrink(userDrink -> {
             ArrayAdapter<String> userDrinkAdapter = new ArrayAdapter<String>(LookingFor.this, android.R.layout.simple_spinner_item, userDrink);
             userDrinkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             drink.setAdapter(userDrinkAdapter);
             spinDrink = drink.getSelectedItem().toString();
         }, token);
 
-        FetchSpinnerValues.getSpinnerValues().fetchSalay(userSalary ->  {
+        FetchSpinnerValues.getSpinnerValues().fetchSalay(userSalary -> {
             ArrayAdapter<String> userSalaryAdapter = new ArrayAdapter<String>(LookingFor.this, android.R.layout.simple_spinner_item, userSalary);
             userSalaryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             sala.setAdapter(userSalaryAdapter);
             spinsala = sala.getSelectedItem().toString();
         }, token);
     }
-
-
-
 
 
 }

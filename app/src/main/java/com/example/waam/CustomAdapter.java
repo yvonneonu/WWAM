@@ -15,16 +15,17 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder>{
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder> {
     Context context;
     List<itemModel> arrayList;
     OnCustomListener onCustomListener;
 
-    public CustomAdapter(List<itemModel> arrayList, Context context){
+    public CustomAdapter(List<itemModel> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
 
     }
+
     @NonNull
     @Override
     public CustomAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +45,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
                 .into(holder.image);
         Glide.with(context)
                 .asBitmap()
-                 .circleCrop()
+                .circleCrop()
                 .load(arrayList.get(position).getImage())
                 //.centerCrop()
                 .into(holder.download);
@@ -56,7 +57,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
     }
 
 
-    public class Viewholder extends RecyclerView.ViewHolder{
+    public class Viewholder extends RecyclerView.ViewHolder {
         ImageView image, download;
         TextView UserTile, MessageChat, UserTime;
         ConstraintLayout constraintLayout;
@@ -73,9 +74,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onCustomListener != null){
+                    if (onCustomListener != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             onCustomListener.OnCustomClick(position);
                         }
                     }
@@ -83,10 +84,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder
             });
         }
     }
-    public interface OnCustomListener{
+
+    public interface OnCustomListener {
         void OnCustomClick(int positon);
     }
-    public void CusomMethod(OnCustomListener onCustomListener){
+
+    public void CusomMethod(OnCustomListener onCustomListener) {
         this.onCustomListener = onCustomListener;
     }
 }
