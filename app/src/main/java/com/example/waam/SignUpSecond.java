@@ -1,10 +1,13 @@
 package com.example.waam;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -17,10 +20,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-public class SignUpSecond extends AppCompatActivity {
+import com.sinch.android.rtc.SinchError;
+
+public class SignUpSecond extends BaseActivity implements  SinchService.StartFailedListener {
 
     private GeneralFactory generalFactory;
     private CardView progressBar;
@@ -31,11 +35,18 @@ public class SignUpSecond extends AppCompatActivity {
     private String relationship ;
     private DatePickerDialog datePickerDialog;
     private UserService userService;
+    private ProgressDialog mSpinner;
+    ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_second);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_PHONE_STATE},100);
+        }
         Bundle bundle = getIntent().getExtras();
 
         initDatePicker();
@@ -51,7 +62,7 @@ public class SignUpSecond extends AppCompatActivity {
         zip = findViewById(R.id.editText4);
         password = findViewById(R.id.editText);
         confrim = findViewById(R.id.editText88);
-        ImageView imageView = findViewById(R.id.logo);
+        imageView = findViewById(R.id.logo);
 
 
         update.setText(getTodaysDate());
@@ -152,6 +163,16 @@ public class SignUpSecond extends AppCompatActivity {
             waamUser.setGender(gender);
             waamUser.setSeeking(interest);
             waamUser.setRelationship(relationship);
+            if (!Email.equals(getSinchServiceInterface().getUserName())) {
+                getSinchServiceInterface().stopClient();
+
+            }
+            if (!getSinchServiceInterface().isStarted()){
+                getSinchServiceInterface().startClient(Email);
+                Log.d("chek", Email);
+                showSpinner();
+            }
+
             generalFactory.requestUser(waamUser,progressBar);
             //requestUser(waamUser);
 
@@ -184,6 +205,12 @@ public class SignUpSecond extends AppCompatActivity {
 
     }
 
+    private void showSpinner() {
+        mSpinner = new ProgressDialog(this);
+        mSpinner.setTitle("Logging in");
+        mSpinner.setMessage("Please wait...");
+        mSpinner.show();
+    }
     private String getMonthFormat(int month) {
         if (month == 1)
             return "01";
@@ -233,5 +260,32 @@ public class SignUpSecond extends AppCompatActivity {
     public void login(View view) {
         Intent intent = new Intent(SignUpSecond.this, Login.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onStartFailed(SinchError error) {
+        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
+        if (mSpinner != null) {
+            mSpinner.dismiss();
+        }
+    }
+
+    @Override
+    public void onStarted() {
+
+    }
+    @Override
+    protected void onServiceConnected() {
+        imageView.setEnabled(true);
+        getSinchServiceInterface().setStartListener(this);
+
+    }
+
+    @Override
+    protected void onPause() {
+        if (mSpinner != null) {
+            mSpinner.dismiss();
+        }
+        super.onPause();
     }
 }
