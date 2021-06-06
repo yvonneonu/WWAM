@@ -41,8 +41,9 @@ public class LookingFor extends AppCompatActivity {
     private int count7;
     private int count8;
     private int count9;
-    private String token;
-    private Button saveDetails;
+    private String token, finalSpinn2;
+
+    private Button saveDetail;
     private int zero, first, second, third, fourth, five, six, seven, eight, night, born;
     // private int count10;
     String imageUri;
@@ -54,6 +55,12 @@ public class LookingFor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_looking_for);
+
+
+        token = SharedPref.getInstance(this).getStoredToken();
+        Log.d("grace", token);
+
+
 
 
         String imageUri = getIntent().getStringExtra("images");
@@ -77,7 +84,7 @@ public class LookingFor extends AppCompatActivity {
         smoketext = findViewById(R.id.textView7);
         drinktext = findViewById(R.id.textView8);
         salatext = findViewById(R.id.textView9);
-        saveDetails = findViewById(R.id.button6);
+        saveDetail = findViewById(R.id.button);
 
 
         spinner = findViewById(R.id.one);
@@ -93,7 +100,6 @@ public class LookingFor extends AppCompatActivity {
         sala = findViewById(R.id.salary);
 
 
-        token = getIntent().getStringExtra("token");
         //String toks = getIntent().getStringExtra("token");
         //Log.d("sorry", "iknowyouaretired "+token);
 
@@ -109,9 +115,10 @@ public class LookingFor extends AppCompatActivity {
         names.add("Juliet");
         names.add("Maria");
 
-        saveDetails.setOnClickListener(new View.OnClickListener() {
+        saveDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Hereapis();
                 Log.d("bfei", "jabhbchj");
 
@@ -126,6 +133,7 @@ public class LookingFor extends AppCompatActivity {
                 Log.d("InCareer", "Running");
                 Log.d("InCareer", "" + count);
                 if (count > 1) careerText.setText(careerSpin.getSelectedItem().toString());
+                night = 1;
             }
 
             @Override
@@ -141,7 +149,7 @@ public class LookingFor extends AppCompatActivity {
                 count1++;
                 if(count1 > 1) textView.setText(spinner.getSelectedItem().toString());
 
-                zero = 0;
+                zero = 1;
 
             }
 
@@ -158,7 +166,7 @@ public class LookingFor extends AppCompatActivity {
                 count2++;
                 if (count2> 1) bod.setText(body.getSelectedItem().toString());
 
-                first = 0;
+                first = 1;
 
             }
 
@@ -174,7 +182,7 @@ public class LookingFor extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count3++;
                 if (count3> 1)ethnictext.setText(ethni.getSelectedItem().toString());
-                second = 0;
+                second = 1;
 
             }
 
@@ -189,7 +197,7 @@ public class LookingFor extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count4++;
                 if(count4> 1)faithtext.setText(fait.getSelectedItem().toString());
-                third = 0;
+                third = 1;
             }
 
             @Override
@@ -204,7 +212,7 @@ public class LookingFor extends AppCompatActivity {
                 count5++;
 
                 if(count5> 1)politictext.setText(polit.getSelectedItem().toString());
-                fourth = 0;
+                fourth = 1;
 
             }
 
@@ -220,7 +228,7 @@ public class LookingFor extends AppCompatActivity {
                 count6++;
                 if(count6> 1)childrentext.setText(childre.getSelectedItem().toString());
 
-                five = 0;
+                five = 1;
             }
 
             @Override
@@ -234,7 +242,7 @@ public class LookingFor extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count7++;
                 if (count7> 1)smoketext.setText(smok.getSelectedItem().toString());
-                six = 0;
+                six = 1;
             }
 
             @Override
@@ -248,7 +256,7 @@ public class LookingFor extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count8++;
                 if (count8> 1)drinktext.setText(drink.getSelectedItem().toString());
-                seven = 0;
+                seven = 1;
             }
 
             @Override
@@ -262,7 +270,7 @@ public class LookingFor extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count9++;
                 if (count9> 1)salatext.setText(sala.getSelectedItem().toString());
-                eight = 0;
+                eight = 1;
             }
 
             @Override
@@ -401,10 +409,12 @@ public class LookingFor extends AppCompatActivity {
 
 
     private void Hereapis() {
-        if (imageUri != null) {
-            SpinnerResponse1 getSpinnerResponse = new SpinnerResponse1( 1, 2, 3, 4, 5,
-                    6, 7, 8, 9);
+        if (imageUri == null) {
+
+            SpinnerResponse1 getSpinnerResponse = new SpinnerResponse1( 1, 2, 3 ,4 , 5,
+                    6, 7, 8, 9, 10);
 //        Log.d("ImageUrl",imageUri.toString());
+
             getSpinnerResponse.setSeeking_occupation_id(zero);
             getSpinnerResponse.setSeeking_education_id(first);
             getSpinnerResponse.setSeeking_body_type_id(second);
@@ -414,7 +424,7 @@ public class LookingFor extends AppCompatActivity {
             getSpinnerResponse.setSeeking_children_id(six);
             getSpinnerResponse.setSeeking_smoke_id(seven);
             getSpinnerResponse.setSeeking_drink_id(eight);
-         //   getSpinnerResponse.setIncome_id(eight);
+            getSpinnerResponse.setSeeking_relationship_status_id(night);
             requestDetail(getSpinnerResponse);
             Log.d("gtft", ""+getSpinnerResponse);
 
@@ -422,7 +432,7 @@ public class LookingFor extends AppCompatActivity {
             // Log.d("imageshow", "" + imageUri.toString());
             Log.d("imageshow", "" + spinsala);
 
-            String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
+           String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
 
             GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
                 @Override

@@ -57,6 +57,7 @@ public class finalProfile extends AppCompatActivity {
         token = getIntent().getStringExtra("everytoken");
       //  String imageUri = getIntent().getStringExtra("getProfilePics");
 
+        token = SharedPref.getInstance(this).getStoredToken();
 //        Log.d("Complete",imageUri);
         String Fullname = getIntent().getStringExtra("name");
       //  String tired = getIntent().getStringExtra("everytoken");
@@ -124,6 +125,7 @@ public class finalProfile extends AppCompatActivity {
         saveDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Hereapi();
                 Log.d("bfei", "jabhbchj");
             }
@@ -293,7 +295,7 @@ public class finalProfile extends AppCompatActivity {
                 }else if (textView.toString().isEmpty()){*/
 
                // }else{
-                    Hereapi();
+                   // Hereapi();
                     Log.d("bfei", "jabhbchj");
                    /* Intent intent = new Intent(finalProfile.this, LookingFor.class);
                     if (imageUri != null) {
@@ -397,9 +399,10 @@ public class finalProfile extends AppCompatActivity {
 
     private void Hereapi() {
         if (imageUri != null) {
-            SpinnerResponse getSpinnerResponse = new SpinnerResponse( "", 1, 2, 3, 4, 5,
-                    6, 7, 8, 9);
-//        Log.d("ImageUrl",imageUri.toString());
+
+            SpinnerResponse getSpinnerResponse = new SpinnerResponse( "", 2, 3, 4, 5,
+                    6, 7, 8, 9, 10);
+
             getSpinnerResponse.setCareer(spinn2);
             getSpinnerResponse.setEducation_id(zero);
             getSpinnerResponse.setBody_type_id(first);

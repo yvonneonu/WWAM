@@ -1,6 +1,7 @@
 package com.example.waam;
 
 public class SpinnerResponse1 {
+
     private int seeking_occupation_id;
     private int seeking_education_id;
     private int seeking_body_type_id;
@@ -12,9 +13,9 @@ public class SpinnerResponse1 {
     private int seeking_children_id;
     private int seeking_smoke_id;
     private int seeking_drink_id;
+    private int seeking_relationship_status_id;
 
-
-    public SpinnerResponse1(int seeking_occupation_id, int seeking_education_id, int seeking_body_type_id, int seeking_ethnicity_id, int seeking_religion_id, int seeking_politics_id, int seeking_children_id, int seeking_smoke_id, int seeking_drink_id) {
+    public SpinnerResponse1(int seeking_occupation_id, int seeking_education_id, int seeking_body_type_id, int seeking_ethnicity_id, int seeking_religion_id, int seeking_politics_id, int seeking_children_id, int seeking_smoke_id, int seeking_drink_id, int seeking_relationship_status_id) {
         this.seeking_occupation_id = seeking_occupation_id;
         this.seeking_education_id = seeking_education_id;
         this.seeking_body_type_id = seeking_body_type_id;
@@ -24,6 +25,7 @@ public class SpinnerResponse1 {
         this.seeking_children_id = seeking_children_id;
         this.seeking_smoke_id = seeking_smoke_id;
         this.seeking_drink_id = seeking_drink_id;
+        this.seeking_relationship_status_id = seeking_relationship_status_id;
     }
 
     public int getSeeking_occupation_id() {
@@ -96,5 +98,13 @@ public class SpinnerResponse1 {
 
     public void setSeeking_drink_id(int seeking_drink_id) {
         this.seeking_drink_id = seeking_drink_id;
+    }
+
+    public int getSeeking_relationship_status_id() {
+        return seeking_relationship_status_id;
+    }
+
+    public void setSeeking_relationship_status_id(int seeking_relationship_status_id) {
+        this.seeking_relationship_status_id = seeking_relationship_status_id;
     }
 }
