@@ -43,7 +43,7 @@ public class LookingFor extends AppCompatActivity {
     private int count9;
     private String token;
     private Button saveDetails;
-    private int zero, first, second, third, fourth, five, six, seven, eight, night;
+    private int zero, first, second, third, fourth, five, six, seven, eight, night, born;
     // private int count10;
     String imageUri;
     Spinner spinner, careerSpin, body, ethni, fait, polit, childre, smok, drink, sala;
@@ -112,21 +112,9 @@ public class LookingFor extends AppCompatActivity {
         saveDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Hereapi();
+                Hereapis();
                 Log.d("bfei", "jabhbchj");
-                String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
 
-                GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
-                    @Override
-                    public void loadSpecUse(WaamUser user) {
-                        Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
-                        // if (imageUri != null) {
-                        intent.putExtra("images", imageUri);
-                        intent.putExtra("toking", token);
-                        intent.putExtra("WaamUser", user);
-                        startActivity(intent);
-                    }
-                });
             }
         });
 
@@ -146,11 +134,14 @@ public class LookingFor extends AppCompatActivity {
             }
         });
 
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count1++;
-                if (count1 > 1) textView.setText(spinner.getSelectedItem().toString());
+                if(count1 > 1) textView.setText(spinner.getSelectedItem().toString());
+
+                zero = 0;
 
             }
 
@@ -165,7 +156,9 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count2++;
-                if (count2 > 1) bod.setText(body.getSelectedItem().toString());
+                if (count2> 1) bod.setText(body.getSelectedItem().toString());
+
+                first = 0;
 
             }
 
@@ -180,7 +173,8 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count3++;
-                if (count3 > 1) ethnictext.setText(ethni.getSelectedItem().toString());
+                if (count3> 1)ethnictext.setText(ethni.getSelectedItem().toString());
+                second = 0;
 
             }
 
@@ -194,8 +188,8 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count4++;
-                if (count4 > 1) faithtext.setText(fait.getSelectedItem().toString());
-                ;
+                if(count4> 1)faithtext.setText(fait.getSelectedItem().toString());
+                third = 0;
             }
 
             @Override
@@ -209,8 +203,8 @@ public class LookingFor extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count5++;
 
-                if (count5 > 1) politictext.setText(polit.getSelectedItem().toString());
-                ;
+                if(count5> 1)politictext.setText(polit.getSelectedItem().toString());
+                fourth = 0;
 
             }
 
@@ -224,8 +218,9 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count6++;
-                if (count6 > 1) childrentext.setText(childre.getSelectedItem().toString());
+                if(count6> 1)childrentext.setText(childre.getSelectedItem().toString());
 
+                five = 0;
             }
 
             @Override
@@ -238,7 +233,8 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count7++;
-                if (count7 > 1) smoketext.setText(smok.getSelectedItem().toString());
+                if (count7> 1)smoketext.setText(smok.getSelectedItem().toString());
+                six = 0;
             }
 
             @Override
@@ -251,7 +247,8 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count8++;
-                if (count8 > 1) drinktext.setText(drink.getSelectedItem().toString());
+                if (count8> 1)drinktext.setText(drink.getSelectedItem().toString());
+                seven = 0;
             }
 
             @Override
@@ -264,7 +261,8 @@ public class LookingFor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 count9++;
-                if (count9 > 1) salatext.setText(sala.getSelectedItem().toString());
+                if (count9> 1)salatext.setText(sala.getSelectedItem().toString());
+                eight = 0;
             }
 
             @Override
@@ -285,10 +283,10 @@ public class LookingFor extends AppCompatActivity {
                 }else if (textView.toString().isEmpty()){*/
 
                 // }else{
-                Hereapi();
+                Hereapis();
                 Log.d("bfei", "jabhbchj");
 
-                String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
+                /*String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
 
                 GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
                     @Override
@@ -301,7 +299,7 @@ public class LookingFor extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-                   /* Intent intent = new Intent(finalProfile.this, LookingFor.class);
+                    Intent intent = new Intent(finalProfile.this, LookingFor.class);
                     if (imageUri != null) {
                         intent.putExtra("images", imageUri);
                     }
@@ -402,28 +400,41 @@ public class LookingFor extends AppCompatActivity {
     }
 
 
-    private void Hereapi() {
+    private void Hereapis() {
         if (imageUri != null) {
-            SpinnerResponse getSpinnerResponse = new SpinnerResponse( "", 1, 2, 3, 4, 5,
+            SpinnerResponse1 getSpinnerResponse = new SpinnerResponse1( 1, 2, 3, 4, 5,
                     6, 7, 8, 9);
 //        Log.d("ImageUrl",imageUri.toString());
-            getSpinnerResponse.setCareer(spinn2);
-            getSpinnerResponse.setEducation_id(zero);
-            getSpinnerResponse.setBody_type_id(first);
-            getSpinnerResponse.setEthnicity_id(second);
-            getSpinnerResponse.setFaith_id(third);
-            getSpinnerResponse.setPolitics_id(fourth);
-            getSpinnerResponse.setChildren_id(five);
-            getSpinnerResponse.setSmoke_id(six);
-            getSpinnerResponse.setDrink_id(seven);
-            getSpinnerResponse.setIncome_id(eight);
-            requestDetails(getSpinnerResponse);
+            getSpinnerResponse.setSeeking_occupation_id(zero);
+            getSpinnerResponse.setSeeking_education_id(first);
+            getSpinnerResponse.setSeeking_body_type_id(second);
+            getSpinnerResponse.setSeeking_ethnicity_id(third);
+            getSpinnerResponse.setSeeking_religion_id(fourth);
+            getSpinnerResponse.setSeeking_politics_id(five);
+            getSpinnerResponse.setSeeking_children_id(six);
+            getSpinnerResponse.setSeeking_smoke_id(seven);
+            getSpinnerResponse.setSeeking_drink_id(eight);
+         //   getSpinnerResponse.setIncome_id(eight);
+            requestDetail(getSpinnerResponse);
+            Log.d("gtft", ""+getSpinnerResponse);
 
 
             // Log.d("imageshow", "" + imageUri.toString());
             Log.d("imageshow", "" + spinsala);
 
+            String uid = SharedPref.getInstance(LookingFor.this).getStoredUid();
 
+            GeneralFactory.getGeneralFactory(LookingFor.this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                @Override
+                public void loadSpecUse(WaamUser user) {
+                    Intent intent = new Intent(LookingFor.this, DrawelayoutActivity.class);
+                    // if (imageUri != null) {
+                    intent.putExtra("images", imageUri);
+                    intent.putExtra("toking", token);
+                    intent.putExtra("WaamUser", user);
+                    startActivity(intent);
+                }
+            });
 
             String message = "Successful";
             Toast.makeText(LookingFor.this, message, Toast.LENGTH_LONG).show();
@@ -450,8 +461,8 @@ public class LookingFor extends AppCompatActivity {
     }
 
 
-    private void requestDetails(SpinnerResponse spinnerResponse) {
-        Call<SpinnerRequest> getSpinnerCall = ApiClient.getService().getSpinner(spinnerResponse, "Bearer " + token);
+    private void requestDetail(SpinnerResponse1 spinnerResponse) {
+        Call<SpinnerRequest1> getSpinnerCall = ApiClient.getService().getSpinner1(spinnerResponse, "Bearer " + token);
         getSpinnerCall.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {

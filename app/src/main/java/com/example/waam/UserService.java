@@ -53,6 +53,12 @@ public interface UserService {
    //@GET("api/profile")
    // Call<EthnicityRecordmodel> getEthnicity (@Header("Authorization")String token);
 
+    @PATCH("api/profile")
+    Call<SpinnerRequest1> getSpinner1(@Body SpinnerResponse1 getSpinner1, @Header("Authorization") String token);
+
+
+
+
     @GET("api/userinterest")
     Call<List<DispalyInterest>>display(@Header("Authorization")String token);
 

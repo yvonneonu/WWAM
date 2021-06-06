@@ -1,18 +1,16 @@
 package com.example.waam;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -99,7 +97,7 @@ public class VideoPicFragment extends Fragment {
                     Log.d("Problem","Not added yet");
                 }
 
-                videoPicAdapter.showPicVid(new VideoPicAdapter.MediaListener() {
+               /* videoPicAdapter.showPicVid(new VideoPicAdapter.MediaListener() {
                     @Override
                     public void mediaListener(int position) {
                         Intent intent = new Intent();
@@ -107,7 +105,7 @@ public class VideoPicFragment extends Fragment {
                         startActivity(intent);
 
                     }
-                });
+                });*/
 
             }
         });
