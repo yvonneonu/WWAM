@@ -209,7 +209,7 @@ public class SlideFragment extends Fragment {
 
                 eventResults = response.body().getEvenRecord();
 
-               // mList = response.body().getEvenRecord();
+                mList = response.body().getEvenRecord();
 
             //    mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
 
@@ -222,10 +222,10 @@ public class SlideFragment extends Fragment {
                // mItemTouchHelper.attachToRecyclerView(mRecyclerView);
                 //mRecyclerView.setLayoutManager(mSlideLayoutManager);
 
-                  for (int i = 0; i < eventResults.size(); i++){
+                  for (int i = 0; i < mList.size(); i++){
                     // SlideBean ben = mList.add(eventResults.get(i).getPhoto());
 
-                     // mList.add(eventResults.get(i).getPhoto().toString().toString())
+                      //mList.add(mList.get(i).getPhoto().toString().toString())
                     // mList.add(eventRecordmodel.getEvenRecord().get(i).getPhoto());
                     // mList.add(eventResults.get(i).getPhoto());
                     //name.add(eventResults.get(i).getPhoto());
