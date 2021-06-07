@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -61,7 +62,7 @@ public class SlideFragment extends Fragment {
         initView(rootView);
 
 
-        initListener();
+        //initListener();
         //eventDispaly();
         return rootView;
     }
@@ -125,34 +126,38 @@ public class SlideFragment extends Fragment {
     }
 
     private void initListener() {
-        mItemTouchHelperCallback.setOnSlideListener(new OnSlideListener() {
-            @Override
-            public void onSliding(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
-                if (direction == ItemConfig.SLIDING_LEFT) {
-                } else if (direction == ItemConfig.SLIDING_RIGHT) {
+        if (mItemTouchHelperCallback != null){
+            mItemTouchHelperCallback.setOnSlideListener(new OnSlideListener() {
+                @Override
+                public void onSliding(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
+                    if (direction == ItemConfig.SLIDING_LEFT) {
+                    } else if (direction == ItemConfig.SLIDING_RIGHT) {
+                    }
                 }
-            }
 
-            @Override
-            public void onSlided(RecyclerView.ViewHolder viewHolder, Object o, int direction) {
-                if (direction == ItemConfig.SLIDED_LEFT) {
-                    mDislikeCount--;
-                    // mSmileView.setDisLike(mDislikeCount);
-                    //  mSmileView.disLikeAnimation();
-                } else if (direction == ItemConfig.SLIDED_RIGHT) {
-                    mLikeCount++;
-                    //mSmileView.setLike(mLikeCount);
-                    // mSmileView.likeAnimation();
+                @Override
+                public void onSlided(RecyclerView.ViewHolder viewHolder, Object o, int direction) {
+                    if (direction == ItemConfig.SLIDED_LEFT) {
+                        mDislikeCount--;
+                        // mSmileView.setDisLike(mDislikeCount);
+                        //  mSmileView.disLikeAnimation();
+                    } else if (direction == ItemConfig.SLIDED_RIGHT) {
+                        mLikeCount++;
+                        //mSmileView.setLike(mLikeCount);
+                        // mSmileView.likeAnimation();
+                    }
+                    int position = viewHolder.getAdapterPosition();
+                    Log.e(TAG, "onSlided--position:" + position);
                 }
-                int position = viewHolder.getAdapterPosition();
-                Log.e(TAG, "onSlided--position:" + position);
-            }
 
-            @Override
-            public void onClear() {
-                addData();
-            }
-        });
+                @Override
+                public void onClear() {
+                    //eventDispaly();
+                    addData();
+                }
+            });
+        }
+
     }
 
     /**
@@ -209,11 +214,13 @@ public class SlideFragment extends Fragment {
 
                 eventResults = response.body().getEvenRecord();
                 mList = response.body().getEvenRecord();
-                mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
                 initListener();
                 mAdapter = new MyAdapter();
                 mRecyclerView.setAdapter(mAdapter);
+
+                mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
                 mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
+
                 mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
                 mItemTouchHelper.attachToRecyclerView(mRecyclerView);
                 mRecyclerView.setLayoutManager(mSlideLayoutManager);
@@ -265,10 +272,21 @@ public class SlideFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             EventResult bean = mList.get(position);
+           /* File path = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES
+            );
+            File file = new File(path, "DemoPicture.jpg");
+            try {
+                path.mkdir();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
+            RequestOptions requestOptions = new RequestOptions();
             // holder.imgBg.setImageResource(bean.getItemBg());
            Glide.with(getActivity())
                     .asBitmap()
                     .load(bean.getPhoto())
+                   .apply(requestOptions)
                     .into(holder.imgBg);
             //holder.imgBg.setImageResource(bean.getmItemBg());
             holder.tvTitle.setText(bean.getTitle());
@@ -277,8 +295,10 @@ public class SlideFragment extends Fragment {
            // holder.firstra.setText(bean.getMfirstrate());
            // holder.secondra.setText(bean.getMsecondrating());
             //holder.strike.setText(bean.getNumberSrike());
+
             //holder.strike.setPaintFlags(holder.strike.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
         }
+
 
         @Override
         public int getItemCount() {
