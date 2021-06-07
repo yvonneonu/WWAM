@@ -114,13 +114,13 @@ public class SlideFragment extends Fragment {
 
         addData();
         eventDispaly();
-         mAdapter = new MyAdapter();
-        mRecyclerView.setAdapter(mAdapter);
-      mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
-        mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
-        mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-         mRecyclerView.setLayoutManager(mSlideLayoutManager);
+         //mAdapter = new MyAdapter();
+        //mRecyclerView.setAdapter(mAdapter);
+      //mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
+        //mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
+        //mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
+        //mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+         //mRecyclerView.setLayoutManager(mSlideLayoutManager);
 
     }
 
@@ -208,19 +208,18 @@ public class SlideFragment extends Fragment {
                 eventRecordmodel.getEvenRecord();
 
                 eventResults = response.body().getEvenRecord();
-
                 mList = response.body().getEvenRecord();
-
-            //    mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
-
+                mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
+                initListener();
+                mAdapter = new MyAdapter();
+                mRecyclerView.setAdapter(mAdapter);
+                mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
+                mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
+                mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+                mRecyclerView.setLayoutManager(mSlideLayoutManager);
                 //eventResults.add()
-                //initListener();
-              //  mAdapter = new MyAdapter();
-               // mRecyclerView.setAdapter(mAdapter);
-                //mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
-               // mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
-               // mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-                //mRecyclerView.setLayoutManager(mSlideLayoutManager);
+
+
 
                   for (int i = 0; i < mList.size(); i++){
                     //  mList.add(new EventResult(i).getPhoto())
