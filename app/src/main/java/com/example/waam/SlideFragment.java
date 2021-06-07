@@ -2,7 +2,6 @@ package com.example.waam;
 
 
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,16 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -37,24 +44,43 @@ public class SlideFragment extends Fragment {
     private ItemTouchHelper mItemTouchHelper;
     private ItemTouchHelperCallback mItemTouchHelperCallback;
     private MyAdapter mAdapter;
-    private  List<SlideBean> mList = new ArrayList<>();
+    private  List<EventResult> mList = new ArrayList<>();
+    private List<EventResult> eventResults;
     private int mLikeCount = 50;
     private int mDislikeCount = 50;
+    String token;
+    View rootView;
+
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_slide, container, false);
+        rootView = inflater.inflate(R.layout.fragment_slide, container, false);
+        token = SharedPref.getInstance(getContext()).getStoredToken();
         initView(rootView);
+
+
         initListener();
+        //eventDispaly();
         return rootView;
     }
+
+  /*  @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        token = SharedPref.getInstance(getContext()).getStoredToken();
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+
+        initListener();
+        eventDispaly();
+    }*/
 
     private void initView(View rootView) {
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         //mSmileView = rootView.findViewById(R.id.smile_view);
 
+        this.rootView = rootView;
         aloow = rootView.findViewById(R.id.allow);
         deny = rootView.findViewById(R.id.deny);
         deny.setOnClickListener(new View.OnClickListener() {
@@ -86,14 +112,15 @@ public class SlideFragment extends Fragment {
         //mSmileView.setLike(mLikeCount);
         //     mSmileView.setDisLike(mDislikeCount);
 
-        mAdapter = new MyAdapter();
-        mRecyclerView.setAdapter(mAdapter);
         addData();
-        mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
+        eventDispaly();
+         mAdapter = new MyAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+      mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
         mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
         mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-        mRecyclerView.setLayoutManager(mSlideLayoutManager);
+         mRecyclerView.setLayoutManager(mSlideLayoutManager);
 
     }
 
@@ -157,10 +184,70 @@ public class SlideFragment extends Fragment {
         String[] seconrate = {"(119 Ratings)", "(309 Ratings)", "(329 Ratings)", "(209 Ratings)", "(165 Ratings)", "(109 Ratings)", "(197 Ratings)"};
 
         for (int i = 0; i < 6; i++) {
-            mList.add(new SlideBean(bgs[i],titles[i],icons[i],says[i], rateon[i], seconrate[i], neededStrike[i]));
+           // mList.add(new EventResult(bgs[i],titles[i],icons[i],says[i], rateon[i], seconrate[i], neededStrike[i]));
         }
     }
 
+
+    private void eventDispaly(){
+        Call<EventRecordmodel> eventRecordmodelCall = ApiClient.getService().getEvent("Bearer "+token);
+        eventRecordmodelCall.enqueue(new Callback<EventRecordmodel>() {
+            @Override
+            public void onResponse(Call<EventRecordmodel> call, Response<EventRecordmodel> response) {
+                if (!response.isSuccessful()){
+                    String message = "No Event";
+                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                    Log.d("event", response.message());
+                    Log.d("event1", response.errorBody().toString());
+                }
+
+                // eventResults = response.body();
+
+
+                EventRecordmodel eventRecordmodel = response.body();
+                eventRecordmodel.getEvenRecord();
+
+                eventResults = response.body().getEvenRecord();
+
+               // mList = response.body().getEvenRecord();
+
+            //    mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
+
+                //eventResults.add()
+                //initListener();
+              //  mAdapter = new MyAdapter();
+               // mRecyclerView.setAdapter(mAdapter);
+                //mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
+               // mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
+               // mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+                //mRecyclerView.setLayoutManager(mSlideLayoutManager);
+
+                  for (int i = 0; i < eventResults.size(); i++){
+                    // SlideBean ben = mList.add(eventResults.get(i).getPhoto());
+
+                     // mList.add(eventResults.get(i).getPhoto().toString().toString())
+                    // mList.add(eventRecordmodel.getEvenRecord().get(i).getPhoto());
+                    // mList.add(eventResults.get(i).getPhoto());
+                    //name.add(eventResults.get(i).getPhoto());
+
+                    // name.add(eventResults.get(i).getTitle());
+                    // name.add(eventResults.get(i).getShort_description());
+
+
+                }
+
+
+
+                Log.d("BodyEvent",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<EventRecordmodel> call, Throwable t) {
+
+                Log.d("no event",t.getMessage());
+            }
+        });
+    }
 
     /**
      * 适配器
@@ -176,16 +263,20 @@ public class SlideFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            SlideBean bean = mList.get(position);
+            EventResult bean = mList.get(position);
             // holder.imgBg.setImageResource(bean.getItemBg());
-            holder.imgBg.setImageResource(bean.getmItemBg());
-            holder.tvTitle.setText(bean.getmTitle());
-            holder.userIcon.setText(bean.getmUserIcon());
-            holder.userSay.setText(bean.getmUserSay());
-            holder.firstra.setText(bean.getMfirstrate());
-            holder.secondra.setText(bean.getMsecondrating());
-            holder.strike.setText(bean.getNumberSrike());
-            holder.strike.setPaintFlags(holder.strike.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+           Glide.with(getActivity())
+                    .asBitmap()
+                    .load(bean.getPhoto())
+                    .into(holder.imgBg);
+            //holder.imgBg.setImageResource(bean.getmItemBg());
+            holder.tvTitle.setText(bean.getTitle());
+            holder.userIcon.setText(bean.getShort_description());
+           // holder.userSay.setText(bean.getmUserSay());
+           // holder.firstra.setText(bean.getMfirstrate());
+           // holder.secondra.setText(bean.getMsecondrating());
+            //holder.strike.setText(bean.getNumberSrike());
+            //holder.strike.setPaintFlags(holder.strike.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         @Override
@@ -208,7 +299,9 @@ public class SlideFragment extends Fragment {
                 firstra = itemView.findViewById(R.id.firs_rating);
                 secondra = itemView.findViewById(R.id.secon_rating);
                 strike = itemView.findViewById(R.id.strike);
+
             }
         }
+
     }
 }

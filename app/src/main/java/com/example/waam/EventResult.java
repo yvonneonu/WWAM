@@ -2,23 +2,23 @@ package com.example.waam;
 
 public class EventResult {
 
-    private int id;
+    private String id;
     private String title;
     private String photo;
     private String short_description;
 
-    public EventResult(int id, String title, String photo, String short_description) {
+    public EventResult(String id, String title, String photo, String short_description) {
         this.id = id;
         this.title = title;
         this.photo = photo;
         this.short_description = short_description;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

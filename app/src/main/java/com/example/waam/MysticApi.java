@@ -6,8 +6,7 @@ import retrofit2.http.Header;
 
 public interface MysticApi {
 
-    @GET("event")
-    Call<EventRecordmodel> getEvent (@Header("Authorization")String token);
+
 
     @GET("education")
     Call<RecordModel> getEducation(@Header("Authorization")String token);

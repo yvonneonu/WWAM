@@ -468,4 +468,6 @@ public class FetchSpinnerValues {
     public interface SalaryListener{
         void onSalaryListerner(List<String> userSalary);
     }
+
+
 }

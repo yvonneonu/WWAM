@@ -42,6 +42,9 @@ public interface UserService {
     @GET("api/income")
     Call<SalaryRecordModel> getSalary1 (@Header("Authorization")String token);
 
+    @GET("api/event")
+    Call<EventRecordmodel> getEvent (@Header("Authorization")String token);
+
  //   @GET("user")
     //Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
