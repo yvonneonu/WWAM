@@ -223,6 +223,8 @@ public class SlideFragment extends Fragment {
                 //mRecyclerView.setLayoutManager(mSlideLayoutManager);
 
                   for (int i = 0; i < mList.size(); i++){
+                    //  mList.add(new EventResult(i).getPhoto())
+                    //  eventResults.add(mList.get(i).getPhoto())
                     // SlideBean ben = mList.add(eventResults.get(i).getPhoto());
 
                       //mList.add(mList.get(i).getPhoto().toString().toString())
