@@ -176,6 +176,7 @@ public class SlideFragment extends Fragment {
                     eventResults.clear();
                     eventResults.addAll(mList);
 
+                    Log.d("hyuh", "help");
 
                 }
             });
