@@ -237,13 +237,13 @@ public class SlideFragment extends Fragment {
 
                 eventResults = response.body().getEvenRecord();
                 mList = response.body().getEvenRecord();
-                initListener();
+
                 mAdapter = new MyAdapter();
                 mRecyclerView.setAdapter(mAdapter);
 
                 mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
                 mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
-
+                initListener();
                 mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
                 mItemTouchHelper.attachToRecyclerView(mRecyclerView);
                 mRecyclerView.setLayoutManager(mSlideLayoutManager);
