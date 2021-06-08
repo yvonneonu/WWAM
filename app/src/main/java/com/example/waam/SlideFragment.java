@@ -81,10 +81,10 @@ public class SlideFragment extends Fragment {
     }*/
 
     private void initView(View rootView) {
+        this.rootView = rootView;
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         //mSmileView = rootView.findViewById(R.id.smile_view);
 
-        this.rootView = rootView;
         aloow = rootView.findViewById(R.id.allow);
         deny = rootView.findViewById(R.id.deny);
         deny.setOnClickListener(new View.OnClickListener() {
@@ -101,16 +101,16 @@ public class SlideFragment extends Fragment {
                 startActivity(intent);
             }
         });
-       /* deny = rootView.findViewById(R.id.deny);
+       // deny = rootView.findViewById(R.id.deny);
 
         deny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-               // initListener();
+               Log.d("Deny","Deny is clicked");
             }
-        });*/
+        });
 
         //deny.seLike(mLikeCount);
         //mSmileView.setLike(mLikeCount);
