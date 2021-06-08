@@ -152,7 +152,7 @@ public class SlideFragment extends Fragment {
 
                 @Override
                 public void onClear() {
-                    //eventDispaly();
+                    eventDispaly();
                     addData();
                 }
             });
@@ -229,6 +229,10 @@ public class SlideFragment extends Fragment {
 
 
                   for (int i = 0; i < mList.size(); i++){
+                      mList.get(i).getPhoto();
+                      mList.get(i).getTitle();
+                      mList.get(i).getShort_description();
+                     // mList.add( new EventResult()getPhoto().toString());
                     //  mList.add(new EventResult(i).getPhoto())
                     //  eventResults.add(mList.get(i).getPhoto())
                     // SlideBean ben = mList.add(eventResults.get(i).getPhoto());
