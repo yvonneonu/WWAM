@@ -176,6 +176,7 @@ public class SlideFragment extends Fragment {
                     eventResults.clear();
                     eventResults.addAll(mList);
 
+
                 }
             });
         }
@@ -341,7 +342,7 @@ public class SlideFragment extends Fragment {
             public ViewHolder(View itemView) {
                 super(itemView);
                 imgBg = itemView.findViewById(R.id.img_bg);
-                userIcon = itemView.findViewById(R.id.img_user);
+                userIcon = itemView.findViewById(R.id.tv_user_say);
                 tvTitle = itemView.findViewById(R.id.tv_title);
                 userSay = itemView.findViewById(R.id.tv_user_say);
 
