@@ -47,6 +47,7 @@ public class SlideFragment extends Fragment {
     private MyAdapter mAdapter;
     private  List<EventResult> mList = new ArrayList<>();
     private List<EventResult> eventResults;
+    private List<EventResult> interestEvent;
     private int mLikeCount = 50;
     private int mDislikeCount = 50;
     String token;
@@ -63,6 +64,7 @@ public class SlideFragment extends Fragment {
 
 
         eventResults = new ArrayList<>();
+        interestEvent = new ArrayList<>();
         //initListener();
         //eventDispaly();
         return rootView;
@@ -131,8 +133,26 @@ public class SlideFragment extends Fragment {
             mItemTouchHelperCallback.setOnSlideListener(new OnSlideListener() {
                 @Override
                 public void onSliding(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
+                    int position = viewHolder.getAdapterPosition();
+                    EventResult eventResult = mList.get(position);
                     if (direction == ItemConfig.SLIDING_LEFT) {
+                        Log.d("LEFT","Slide left");
+                        Log.d(TAG, "LEFT" + eventResult.getTitle());
+
                     } else if (direction == ItemConfig.SLIDING_RIGHT) {
+                        if(interestEvent.size() > 0){
+                            for(int i = 0 ; i < interestEvent.size(); i++){
+                                if(interestEvent.get(i).getId().equals(eventResult.getId())){
+                                    Log.d("Added","Interest already added");
+                                }else{
+                                    interestEvent.add(eventResult);
+                                }
+                            }
+                        }else{
+                            interestEvent.add(eventResult);
+                        }
+                        Log.d("RIGHT","Slide right");
+                        Log.d(TAG, "RIGHT" + eventResult.getTitle());
                     }
                 }
 
@@ -206,6 +226,7 @@ public class SlideFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                     Log.d("event", response.message());
                     Log.d("event1", response.errorBody().toString());
+                    return;
                 }
 
                 // eventResults = response.body();
@@ -230,7 +251,7 @@ public class SlideFragment extends Fragment {
 
 
 
-                  for (int i = 0; i < mList.size(); i++){
+                  /*for (int i = 0; i < mList.size(); i++){
                       mList.get(i).getPhoto();
                       mList.get(i).getTitle();
                       mList.get(i).getShort_description();
@@ -248,7 +269,7 @@ public class SlideFragment extends Fragment {
                     // name.add(eventResults.get(i).getShort_description());
 
 
-                }
+                }*/
 
 
 
