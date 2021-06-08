@@ -62,6 +62,7 @@ public class SlideFragment extends Fragment {
         initView(rootView);
 
 
+        eventResults = new ArrayList<>();
         //initListener();
         //eventDispaly();
         return rootView;
@@ -152,8 +153,9 @@ public class SlideFragment extends Fragment {
 
                 @Override
                 public void onClear() {
-                    eventDispaly();
-                    addData();
+                    eventResults.clear();
+                    eventResults.addAll(mList);
+
                 }
             });
         }
@@ -321,9 +323,9 @@ public class SlideFragment extends Fragment {
                 userIcon = itemView.findViewById(R.id.img_user);
                 tvTitle = itemView.findViewById(R.id.tv_title);
                 userSay = itemView.findViewById(R.id.tv_user_say);
-                firstra = itemView.findViewById(R.id.firs_rating);
+
                 secondra = itemView.findViewById(R.id.secon_rating);
-                strike = itemView.findViewById(R.id.strike);
+
 
             }
         }

@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -41,20 +41,22 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="Vegas to GC West Rim Helicopter"
                 android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/tv_user_say"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_user_say"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="50dp"
                 android:singleLine="true"
                 android:text="Tours whtChamber Access"
                 android:textColor="@color/black"
@@ -62,66 +64,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
-
-            <TextView
-                android:id="@+id/img_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:elevation="3dp"
-                android:text="$389"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_user_say"
-                app:layout_constraintVertical_bias="0.157" />
-
-            <TextView
-                android:id="@+id/strike"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/strike_text"
-                app:layout_constraintBottom_toBottomOf="@+id/img_user"
-                app:layout_constraintStart_toEndOf="@+id/img_user"
-                app:layout_constraintTop_toBottomOf="@+id/tv_user_say" />
-
-            <TextView
-                android:id="@+id/secon_rating"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:text="(109 Ratings)"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_user_say" />
-
-            <TextView
-                android:id="@+id/firs_rating"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="8dp"
-                android:text="4.7"
-                android:textColor="@color/yellow"
-                app:layout_constraintEnd_toStartOf="@+id/imageView20"
-                app:layout_constraintTop_toBottomOf="@+id/tv_user_say" />
-
-            <ImageView
-                android:id="@+id/imageView20"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/itemiconratings"
-                app:layout_constraintBottom_toBottomOf="@+id/secon_rating"
-                app:layout_constraintEnd_toStartOf="@+id/secon_rating"
-                app:layout_constraintTop_toBottomOf="@+id/tv_user_say" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
