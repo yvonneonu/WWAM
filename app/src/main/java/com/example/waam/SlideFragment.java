@@ -381,16 +381,16 @@ public class SlideFragment extends Fragment {
             ImageView imgBg;
             TextView userIcon;
             TextView tvTitle;
-            TextView userSay, firstra, secondra, strike;
+            //TextView userSay, firstra, secondra, strike;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 imgBg = itemView.findViewById(R.id.img_bg);
                 userIcon = itemView.findViewById(R.id.tv_user_say);
                 tvTitle = itemView.findViewById(R.id.tv_title);
-                userSay = itemView.findViewById(R.id.tv_user_say);
 
-                secondra = itemView.findViewById(R.id.secon_rating);
+
+                //secondra = itemView.findViewById(R.id.secon_rating);
 
 
             }
