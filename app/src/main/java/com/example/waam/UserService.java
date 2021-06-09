@@ -46,6 +46,8 @@ public interface UserService {
     Call<EventRecordmodel> getEvent (@Header("Authorization")String token);
 
 
+    @GET("api/userevent/1")
+    Call<UserRecordModel> getUserRecord (@Header("Authorization")String token);
  //   @GET("user")
     //Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
@@ -65,6 +67,8 @@ public interface UserService {
 
     @GET("api/userinterest")
     Call<List<DispalyInterest>>display(@Header("Authorization")String token);
+
+
 
     @POST("api/forgot-password")
     Call<EmailResponse>emailLink(@Body emailAddress getEmailAddress);
