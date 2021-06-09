@@ -45,6 +45,7 @@ public interface UserService {
     @GET("api/event")
     Call<EventRecordmodel> getEvent (@Header("Authorization")String token);
 
+
  //   @GET("user")
     //Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
@@ -79,6 +80,10 @@ public interface UserService {
 
     @PATCH("api/profile")
     Call<GetImage>getimage(@Body GetImageResponse getImageResponse, @Header("Authorization") String token);
+
+    @POST("api/eventuser")
+    Call<EventUserPostResponse> eventUser (@Body EventUserPost eventUserPostResponse, @Header("Authorization") String token);
+
 
     @POST("api/login")
     Call<LoginResponse>loginUser(@Body LoginRequest loginRequest);

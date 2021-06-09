@@ -52,6 +52,8 @@ public class SlideFragment extends Fragment {
     private int mDislikeCount = 50;
     String token;
     View rootView;
+    String id = "1";
+    String event = "1";
 
 
 
@@ -67,6 +69,7 @@ public class SlideFragment extends Fragment {
         interestEvent = new ArrayList<>();
         //initListener();
         //eventDispaly();
+
         return rootView;
     }
 
@@ -137,10 +140,18 @@ public class SlideFragment extends Fragment {
                     EventResult eventResult = mList.get(position);
                     if (direction == ItemConfig.SLIDING_LEFT) {
                         Log.d("LEFT","Slide left");
+
                         Log.d(TAG, "LEFT" + eventResult.getTitle());
 
+
                     } else if (direction == ItemConfig.SLIDING_RIGHT) {
-                        if(interestEvent.size() > 0){
+
+                        display();
+                        EventUserPost eventUserPost = new EventUserPost(id, event);
+                        eventUserPost.getUser_id();
+                        eventUserPost.getEvent_id();
+                        eventUser(eventUserPost);
+                      /*  if(interestEvent.size() > 0){
                             for(int i = 0 ; i < interestEvent.size(); i++){
                                 if(interestEvent.get(i).getId().equals(eventResult.getId())){
                                     Log.d("Added","Interest already added");
@@ -150,7 +161,7 @@ public class SlideFragment extends Fragment {
                             }
                         }else{
                             interestEvent.add(eventResult);
-                        }
+                        }*/
                         Log.d("RIGHT","Slide right");
                         Log.d(TAG, "RIGHT" + eventResult.getTitle());
                     }
@@ -178,6 +189,7 @@ public class SlideFragment extends Fragment {
 
                     Log.d("hyuh", "help");
 
+                    eventDispaly();
                 }
             });
         }
@@ -217,6 +229,37 @@ public class SlideFragment extends Fragment {
         }
     }
 
+    private void display(){
+        EventUserPost eventUserPost = new EventUserPost(id, event);
+        eventUserPost.getUser_id();
+        eventUserPost.getEvent_id();
+        eventUser(eventUserPost);
+    }
+
+    private void eventUser(EventUserPost eventUserPost){
+        Call<EventUserPostResponse> eventUserPostResponseCall = ApiClient.getService().eventUser( eventUserPost, "Bearer "+token);
+        eventUserPostResponseCall.enqueue(new Callback<EventUserPostResponse>() {
+            @Override
+            public void onResponse(Call<EventUserPostResponse> call, Response<EventUserPostResponse> response) {
+                if (!response.isSuccessful()){
+                    String message = "Event not sent";
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.d("Event",response.message());
+                    Log.d("Event",response.errorBody().toString());
+                    return;
+                }
+                String message = "Event Successfully clicked";
+                Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                Log.d("Body",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<EventUserPostResponse> call, Throwable t) {
+
+                Log.d("no image",t.getMessage());
+            }
+        });
+    }
 
     private void eventDispaly(){
         Call<EventRecordmodel> eventRecordmodelCall = ApiClient.getService().getEvent("Bearer "+token);
