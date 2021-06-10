@@ -35,5 +35,9 @@
         android:title="Help"/>
 
 
+    <item
+        android:id="@+id/prof"
+        android:title="Profile"/>
+
 
 </menu>

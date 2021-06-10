@@ -25,12 +25,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <HorizontalScrollView
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/horizontalScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/textView69"
@@ -110,7 +111,7 @@
             </LinearLayout>
 
 
-        </HorizontalScrollView>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             android:id="@+id/textView69"

@@ -16,11 +16,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DrawelayoutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private BottomNavigationView bottomNavigationView;
     private Intent intent;
+    String uid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         boolean clicked = getIntent().getBooleanExtra("clicked", false);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -84,6 +88,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragmentcontainer, fragment1);
         fragmentTransaction.commit();*/
+
     }
 
     @Override
@@ -109,6 +114,18 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             case R.id.membership:
                 fragment = new BecomeAMemberFragment();
                 break;
+
+            case R.id.prof:
+                uid = FirebaseAuth.getInstance().getUid();
+                GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                    @Override
+                    public void loadSpecUse(WaamUser user) {
+
+                        fragment = new ConnectedFriendsFragment(user);
+                        break;
+                    }
+                });
+
 
             case R.id.friend:
                 fragment = new FriendsFragment();
@@ -152,6 +169,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 fragment = new AgentFragment();
                 item.setIcon(R.drawable.lowernav_agent_icon_active);
                 break;
+
         }
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
