@@ -116,16 +116,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 break;
 
             case R.id.prof:
-                uid = FirebaseAuth.getInstance().getUid();
-                GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
-                    @Override
-                    public void loadSpecUse(WaamUser user) {
-
-                        fragment = new ConnectedFriendsFragment(user);
-                        break;
-                    }
-                });
-
+                fragment = new ConnectedFriendsFragment();
+                break;
 
             case R.id.friend:
                 fragment = new FriendsFragment();
