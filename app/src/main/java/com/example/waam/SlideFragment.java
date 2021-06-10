@@ -39,7 +39,6 @@ import retrofit2.Response;
 public class SlideFragment extends Fragment {
     private static final String TAG = "SlideFragment";
     private RecyclerView mRecyclerView;
-    // private SmileView mSmileView;
     private ImageView deny, aloow;
     private SlideLayoutManager mSlideLayoutManager;
     private ItemTouchHelper mItemTouchHelper;
@@ -63,13 +62,8 @@ public class SlideFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_slide, container, false);
         token = SharedPref.getInstance(getContext()).getStoredToken();
         initView(rootView);
-
-
         eventResults = new ArrayList<>();
         interestEvent = new ArrayList<>();
-        //initListener();
-        //eventDispaly();
-
         return rootView;
     }
 
@@ -119,15 +113,8 @@ public class SlideFragment extends Fragment {
         //mSmileView.setLike(mLikeCount);
         //     mSmileView.setDisLike(mDislikeCount);
 
-        addData();
+        //addData();
         eventDispaly();
-         //mAdapter = new MyAdapter();
-        //mRecyclerView.setAdapter(mAdapter);
-      //mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
-        //mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
-        //mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
-        //mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-         //mRecyclerView.setLayoutManager(mSlideLayoutManager);
 
     }
 
@@ -146,10 +133,8 @@ public class SlideFragment extends Fragment {
 
                     } else if (direction == ItemConfig.SLIDING_RIGHT) {
 
-                        display();
-                        EventUserPost eventUserPost = new EventUserPost(id, event);
-                        eventUserPost.getUser_id();
-                        eventUserPost.getEvent_id();
+                        //display();
+                        EventUserPost eventUserPost = new EventUserPost(id, eventResult.getId());
                         eventUser(eventUserPost);
                       /*  if(interestEvent.size() > 0){
                             for(int i = 0 ; i < interestEvent.size(); i++){
@@ -184,10 +169,10 @@ public class SlideFragment extends Fragment {
 
                 @Override
                 public void onClear() {
-                    eventResults.clear();
-                    eventResults.addAll(mList);
+                    //eventResults.clear();
+                    //eventResults.addAll(mList);
 
-                    Log.d("hyuh", "help");
+                    //Log.d("hyuh", "help");
 
                     eventDispaly();
                 }
@@ -199,7 +184,7 @@ public class SlideFragment extends Fragment {
     /**
      * 向集合中添加数据
      */
-    private void addData(){
+    /*private void addData(){
         String[] icons = {"$389","$337", "$675","$389","$389","$389", "$389"};
 
         String[] titles = {"Tours with Chamber Access", "Belief Tours with Chamber Access", "Tours with Chamber Access", "DreamingTours with Chamber Access", "Tours with Chamber Access", "Confidence Tours with Chamber Access"};
@@ -227,14 +212,8 @@ public class SlideFragment extends Fragment {
         for (int i = 0; i < 6; i++) {
            // mList.add(new EventResult(bgs[i],titles[i],icons[i],says[i], rateon[i], seconrate[i], neededStrike[i]));
         }
-    }
+    }*/
 
-    private void display(){
-        EventUserPost eventUserPost = new EventUserPost(id, event);
-        eventUserPost.getUser_id();
-        eventUserPost.getEvent_id();
-        eventUser(eventUserPost);
-    }
 
     private void eventUser(EventUserPost eventUserPost){
         Call<EventUserPostResponse> eventUserPostResponseCall = ApiClient.getService().eventUser( eventUserPost, "Bearer "+token);
@@ -274,47 +253,18 @@ public class SlideFragment extends Fragment {
                     return;
                 }
 
-                // eventResults = response.body();
-
-
-                EventRecordmodel eventRecordmodel = response.body();
-                eventRecordmodel.getEvenRecord();
-
                 eventResults = response.body().getEvenRecord();
                 mList = response.body().getEvenRecord();
 
                 mAdapter = new MyAdapter();
                 mRecyclerView.setAdapter(mAdapter);
 
-                mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
+                mItemTouchHelperCallback = new ItemTouchHelperCallback<>(mRecyclerView.getAdapter(), mList);
                 mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
                 initListener();
                 mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
                 mItemTouchHelper.attachToRecyclerView(mRecyclerView);
                 mRecyclerView.setLayoutManager(mSlideLayoutManager);
-                //eventResults.add()
-
-
-
-                  /*for (int i = 0; i < mList.size(); i++){
-                      mList.get(i).getPhoto();
-                      mList.get(i).getTitle();
-                      mList.get(i).getShort_description();
-                     // mList.add( new EventResult()getPhoto().toString());
-                    //  mList.add(new EventResult(i).getPhoto())
-                    //  eventResults.add(mList.get(i).getPhoto())
-                    // SlideBean ben = mList.add(eventResults.get(i).getPhoto());
-
-                      //mList.add(mList.get(i).getPhoto().toString().toString())
-                    // mList.add(eventRecordmodel.getEvenRecord().get(i).getPhoto());
-                    // mList.add(eventResults.get(i).getPhoto());
-                    //name.add(eventResults.get(i).getPhoto());
-
-                    // name.add(eventResults.get(i).getTitle());
-                    // name.add(eventResults.get(i).getShort_description());
-
-
-                }*/
 
 
 
@@ -344,31 +294,15 @@ public class SlideFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             EventResult bean = mList.get(position);
-           /* File path = Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES
-            );
-            File file = new File(path, "DemoPicture.jpg");
-            try {
-                path.mkdir();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
             RequestOptions requestOptions = new RequestOptions();
-            // holder.imgBg.setImageResource(bean.getItemBg());
            Glide.with(getActivity())
                     .asBitmap()
                     .load(bean.getPhoto())
                    .apply(requestOptions)
                     .into(holder.imgBg);
-            //holder.imgBg.setImageResource(bean.getmItemBg());
             holder.tvTitle.setText(bean.getTitle());
             holder.userIcon.setText(bean.getShort_description());
-           // holder.userSay.setText(bean.getmUserSay());
-           // holder.firstra.setText(bean.getMfirstrate());
-           // holder.secondra.setText(bean.getMsecondrating());
-            //holder.strike.setText(bean.getNumberSrike());
 
-            //holder.strike.setPaintFlags(holder.strike.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
 
@@ -381,16 +315,12 @@ public class SlideFragment extends Fragment {
             ImageView imgBg;
             TextView userIcon;
             TextView tvTitle;
-            //TextView userSay, firstra, secondra, strike;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 imgBg = itemView.findViewById(R.id.img_bg);
                 userIcon = itemView.findViewById(R.id.tv_user_say);
                 tvTitle = itemView.findViewById(R.id.tv_title);
-
-
-                //secondra = itemView.findViewById(R.id.secon_rating);
 
 
             }
