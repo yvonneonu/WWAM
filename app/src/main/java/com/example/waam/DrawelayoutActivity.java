@@ -116,7 +116,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 break;
 
             case R.id.prof:
-                fragment = new ConnectedFriendsFragment();
+                fragment = new ProfileFragment();
                 break;
 
             case R.id.friend:
