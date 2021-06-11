@@ -125,4 +125,5 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
 }
