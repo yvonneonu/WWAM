@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,17 +16,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DrawelayoutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private BottomNavigationView bottomNavigationView;
     private Intent intent;
     String uid;
-    private final WaamUser waamUser;
-
-    public DrawelayoutActivity(WaamUser waamUser) {
-        this.waamUser = waamUser;
-    }
 
 
     @Override
@@ -42,6 +37,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         boolean clicked = getIntent().getBooleanExtra("clicked", false);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -76,7 +72,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             fragmenting = ProfileFragment.newInstance(friendsProfile);
         } else if (videopicfragm != null) {
             fragmenting = new ConnectedFriendsFragment(videopicfragm);
-            //  bottomNavigationView.getMenu().getItem(2).setChecked(true);
+          //  bottomNavigationView.getMenu().getItem(2).setChecked(true);
         } else {
             fragmenting = new ExploreFragment();
             // GeneralFactory.getGeneralFactory(this).loadSpecUser();
@@ -119,21 +115,9 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 fragment = new BecomeAMemberFragment();
                 break;
 
-           /* case R.id.prof:
-                uid = FirebaseAuth.getInstance().getUid();
-                GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
-                    @Override
-                    public void loadSpecUse(WaamUser user) {
-
-                        WaamUser user1 = new WaamUser();
-                        fragment = new ConnectedFriendsFragment(user);
-
-                    }
-                });
-
-                fragment = new VideoPicFragment(waamUser);
-
-                break;*/
+            case R.id.prof:
+                fragment = new ConnectedFriendsFragment();
+                break;
 
             case R.id.friend:
                 fragment = new FriendsFragment();
@@ -202,24 +186,5 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-
-
     }
-
-    public void clickProfile(View view) {
-        Fragment fragment = new ConnectedFriendsFragment(waamUser);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragmentcontainer, fragment);
-       // ft.addToBackStack(null);
-        ft.commit();
-    }
-
-  /*  public void clickProfile(View view) {
-        ConnectedFriendsFragment connectedFriendsFragment = new ConnectedFriendsFragment(waamUser);
-        // R.id.container - the id of a view that will hold your fragment; usually a FrameLayout
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.prof, fragment, connectedFriendsFragment.TAG)
-                .commit();
-    }*/
-
 }

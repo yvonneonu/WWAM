@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -26,7 +27,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private final WaamUser waamUser;
+    private WaamUser waamUser;
     private static final String REQUEST = "connectedFriends";
 
     // TODO: Rename and change types of parameters
@@ -35,6 +36,10 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
 
     public ConnectedFriendsFragment(WaamUser waamUser) {
         this.waamUser = waamUser;
+
+    }
+
+    public ConnectedFriendsFragment(){
 
     }
 
@@ -48,16 +53,34 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        Fragment fr = new VideoPicFragment(waamUser);
-        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.add(R.id.profileframe, fr)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
+        if(waamUser != null){
+            Fragment fr = new VideoPicFragment(waamUser);
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            ft.add(R.id.profileframe, fr)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .commit();
+        }else{
+            String userId = FirebaseAuth.getInstance().getUid();
+            GeneralFactory.getGeneralFactory(getActivity())
+                    .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                        @Override
+                        public void loadSpecUse(WaamUser user) {
+                            Fragment fr = new VideoPicFragment(waamUser);
+                            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                            ft.add(R.id.profileframe, fr)
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                    .commit();
+                        }
+                    });
+        }
+
+
     }
 
     @Override
@@ -78,11 +101,28 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         interest.setOnClickListener(this);
         friends.setOnClickListener(this);
 
-        Glide.with(Objects.requireNonNull(getActivity()))
-                .asBitmap()
-                .fitCenter()
-                .load(waamUser.getImageUrl())
-                .into(profilePic);
+        if(waamUser != null){
+            Glide.with(Objects.requireNonNull(getActivity()))
+                    .asBitmap()
+                    .fitCenter()
+                    .load(waamUser.getImageUrl())
+                    .into(profilePic);
+        }else{
+            String userId = FirebaseAuth.getInstance().getUid();
+            GeneralFactory.getGeneralFactory(getActivity())
+                    .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                        @Override
+                        public void loadSpecUse(WaamUser user) {
+                            Glide.with(Objects.requireNonNull(getActivity()))
+                                    .asBitmap()
+                                    .fitCenter()
+                                    .load(user.getImageUrl())
+                                    .into(profilePic);
+
+                        }
+                    });
+        }
+
 
         return view;
     }
@@ -94,30 +134,56 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         final int interest = R.id.interest;
         final int friends = R.id.friends;
         final int profileFrame = R.id.profileframe;
-        Fragment fragment;
         switch (v.getId()) {
             case vid:
                 // i stopped here planning on sending waam user to the video fragment
                 //fragment = VideoPicFragment.newInstance();
-                fragment = new VideoPicFragment(waamUser);
+                if(waamUser != null){
+                    Fragment fragment = new VideoPicFragment(waamUser);
+                    getChildFragmentManager().beginTransaction()
+                            .replace(profileFrame, fragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+                }else {
+                    String userId = FirebaseAuth.getInstance().getUid();
+                    GeneralFactory.getGeneralFactory(getActivity())
+                            .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                @Override
+                                public void loadSpecUse(WaamUser user) {
+                                    Fragment fragment = new VideoPicFragment(waamUser);
+                                    getChildFragmentManager().beginTransaction()
+                                            .replace(profileFrame, fragment)
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                            .commit();
+                                }
+                            });
+                }
+
                 break;
             case aboutsef:
-                fragment = new AboutMeFragment();
+                Fragment fragmentone = new AboutMeFragment();
+                getChildFragmentManager().beginTransaction()
+                        .replace(profileFrame, fragmentone)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
                 break;
             case interest:
-                fragment = new InterestFragment();
+                Fragment fragmentwo = new InterestFragment();
+                getChildFragmentManager().beginTransaction()
+                        .replace(profileFrame, fragmentwo)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
                 break;
             case friends:
-                fragment = new FrendChannelFragment();
+                Fragment fragmenthree = new FrendChannelFragment();
+                getChildFragmentManager().beginTransaction()
+                        .replace(profileFrame, fragmenthree)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
-        if (fragment != null) {
-            getChildFragmentManager().beginTransaction()
-                    .replace(profileFrame, fragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .commit();
-        }
+
     }
 }
