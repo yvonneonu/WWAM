@@ -39,7 +39,7 @@ import retrofit2.Response;
 public class SlideFragment extends Fragment {
     private static final String TAG = "SlideFragment";
     private RecyclerView mRecyclerView;
-    private ImageView deny, aloow;
+    private ImageView deny, aloow, viewProfilefragment;
     private SlideLayoutManager mSlideLayoutManager;
     private ItemTouchHelper mItemTouchHelper;
     private ItemTouchHelperCallback mItemTouchHelperCallback;
@@ -82,8 +82,16 @@ public class SlideFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         //mSmileView = rootView.findViewById(R.id.smile_view);
 
+        viewProfilefragment = rootView.findViewById(R.id.imageView44);
+
         aloow = rootView.findViewById(R.id.allow);
         deny = rootView.findViewById(R.id.deny);
+        viewProfilefragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         deny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
