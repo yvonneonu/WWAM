@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class DrawelayoutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -70,8 +69,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             //
         } else if (friendsProfile != null) {
             fragmenting = ProfileFragment.newInstance(friendsProfile);
-        } else if (videopicfragm != null) {
-            fragmenting = new ConnectedFriendsFragment(videopicfragm);
+       /* } else if (videopicfragm != null) {
+            fragmenting = new ConnectedFriendsFragment(videopicfragm);*/
           //  bottomNavigationView.getMenu().getItem(2).setChecked(true);
         } else {
             fragmenting = new ExploreFragment();
