@@ -43,7 +43,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         //toolbar2.setNavigationIcon(R.drawable.ic_baseline_lock_24);
 
-        WaamUser waamUser = (WaamUser) getIntent().getSerializableExtra("SlideUser");
+        WaamUser waamUser = (WaamUser) getIntent().getSerializableExtra("YvonneSleep");
         drawer1.addDrawerListener(toggle);
         toggle.syncState();
 

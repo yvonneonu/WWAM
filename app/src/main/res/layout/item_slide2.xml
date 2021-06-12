@@ -15,10 +15,14 @@
         <ImageView
             android:id="@+id/img_bg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
+            android:layout_height="0dp"
             android:layout_above="@+id/rela_bottom"
-            />
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/rela_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/agent_4_img" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rela_bottom"
@@ -26,7 +30,7 @@
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:background="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
@@ -54,8 +58,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/location"
                 android:singleLine="true"
+                android:src="@drawable/location"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
@@ -74,12 +78,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
+            android:id="@+id/view15"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
             android:background="#b2b2b2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
 

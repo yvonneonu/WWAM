@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class SlideFragment1 extends Fragment {
     private List<WaamUser> mList = new ArrayList<>();
     private int mLikeCount = 50;
     private int mDislikeCount = 50;
+    private ImageView show;
+    private int currentPerson ;
 
     @Nullable
     @Override
@@ -37,6 +41,7 @@ public class SlideFragment1 extends Fragment {
                     mList = friends;
                     initView(rootView);
                     initListener();
+
                 });
 
         return rootView;
@@ -50,9 +55,10 @@ public class SlideFragment1 extends Fragment {
         // private SmileView mSmileView;
         ImageView deny1 = rootView.findViewById(R.id.deny);
 
-        ImageView show = rootView.findViewById(R.id.imageView44);
+        show = rootView.findViewById(R.id.imageView44);
 
-        mAdapter = new MyAdapter1();
+        mAdapter = new MyAdapter1(mList);
+        Log.d("warmUser", ""+mList.size());
         mRecyclerView.setAdapter(mAdapter);
         mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
@@ -76,14 +82,19 @@ public class SlideFragment1 extends Fragment {
         });
 
         //This might not work
-        show.setOnClickListener(v -> mAdapter.showPerson(pos -> {
-            Log.d("SliderUser", "BestUser");
-            WaamUser user = mList.get(pos);
-            Intent intent = new Intent(getActivity(), DiscoverDrawerLayerout.class);
-            intent.putExtra("SlideUser",user);
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //Log.d("Mazi","Adaobi is Mazis daughter ");
 
-            startActivity(intent);
-        }));
+                if(mItemTouchHelperCallback != null)
+                {
+
+
+                    Log.d("Mazi","Adaobi is Mazis daughter "+currentPerson);
+                }
+            }
+        });
     }
 
 
@@ -92,7 +103,16 @@ public class SlideFragment1 extends Fragment {
             @Override
             public void onSliding(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
                 if (direction == ItemConfig.SLIDING_LEFT) {
+                    currentPerson = viewHolder.getAdapterPosition();
+                    WaamUser user = mList.get(currentPerson);
+                    Log.d("userDisplay", ""+user.getFullname());
+                    Log.d("currentPosition", ""+currentPerson);
                 } else if (direction == ItemConfig.SLIDING_RIGHT) {
+                    currentPerson = viewHolder.getAdapterPosition();
+                    WaamUser user = mList.get(currentPerson);
+                    Log.d("userDisplay", ""+user.getFullname());
+                    Log.d("currentPositionRight", ""+currentPerson);
+
                 }
             }
 
@@ -149,6 +169,11 @@ public class SlideFragment1 extends Fragment {
 
     private class MyAdapter1 extends RecyclerView.Adapter<MyAdapter1.Viewholder>{
 
+        List<WaamUser> waamUserList;
+
+        public MyAdapter1(List<WaamUser> waamUserList) {
+            this.waamUserList = waamUserList;
+        }
 
         @NonNull
         @Override
@@ -159,25 +184,27 @@ public class SlideFragment1 extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-            WaamUser bean = mList.get(position);
+            WaamUser bean = waamUserList.get(position);
             // holder.imgBg.setImageResource(bean.getItemBg());
-            holder.imgBg.setImageResource(bean.getImage());
+
+            Glide.with(getActivity())
+                    .asBitmap()
+                    .load(bean.getImageUrl())
+                    .into(holder.imgBg);
+            //holder.imgBg.setImageResource(bean.getImage());
             holder.tvTitle.setText(bean.getFullname());
-            holder.img_user.setText(bean.getImageUrl());
+            
 
         }
 
         @Override
         public int getItemCount() {
             //mList.size();
-            return 10;
+            return waamUserList.size();
+
 
         }
 
-
-        public void showPerson(ShowPersonListener showPersonListener){
-            mShowPersonListener = showPersonListener;
-        }
 
         public class Viewholder extends RecyclerView.ViewHolder {
 
@@ -192,12 +219,19 @@ public class SlideFragment1 extends Fragment {
                 img_user = itemView.findViewById(R.id.img_user);
 
 
-                if(mShowPersonListener != null){
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION){
-                        mShowPersonListener.personListener(pos);
+                show.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        WaamUser user = waamUserList.get(getAdapterPosition());
+                        Intent intent = new Intent(getActivity(),DiscoverDrawerLayerout.class);
+                        intent.putExtra("YvonneSleep",user);
+                        startActivity(intent);
                     }
-                }
+                });
+
+
+
+
             }
         }
     }
