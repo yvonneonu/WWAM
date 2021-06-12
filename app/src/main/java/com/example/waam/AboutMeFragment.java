@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,6 +31,8 @@ public class AboutMeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private View view;
     private String token;
+    public static final String PUT_PROFILE = "PutProfile";
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -36,8 +40,10 @@ public class AboutMeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private RecyclerView recyclerView;
+    private WaamUser user;
     private EventDisplayAdapter eventDisplayAdapter;
-    private List<EventResult> eventResults;
+    private List<UserResult> userResults = new ArrayList<>();
+
 
     public AboutMeFragment() {
         // Required empty public constructor
@@ -47,16 +53,15 @@ public class AboutMeFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     *
      * @return A new instance of fragment AboutMeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AboutMeFragment newInstance(String param1, String param2) {
+    public static AboutMeFragment newInstance(WaamUser waamUser) {
         AboutMeFragment fragment = new AboutMeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(PUT_PROFILE, waamUser);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,10 +70,11 @@ public class AboutMeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+            user = (WaamUser) getArguments().getSerializable(PUT_PROFILE );
         }
         token = SharedPref.getInstance(getActivity()).getStoredToken();
+
     }
 
     @Override
@@ -76,16 +82,24 @@ public class AboutMeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_about_me, container, false);
+
         recyclerView = view.findViewById(R.id.horizontalScrollView);
+       // eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
+       // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        //recyclerView.setAdapter(eventDisplayAdapter);
+      //  recyclerView.setLayoutManager(linearLayoutManager);
+
+
+
         UserDisplay();
         return view;
     }
 
     private void UserDisplay(){
-       Call<EventRecordmodel> eventRecordmodelCall = ApiClient.getService().getEvent("Bearer "+token);
-       eventRecordmodelCall.enqueue(new Callback<EventRecordmodel>() {
+       Call<UserRecordModel> userRecordmodelCall = ApiClient.getService().getUserRecord("Bearer "+token);
+       userRecordmodelCall.enqueue(new Callback<UserRecordModel>() {
            @Override
-           public void onResponse(Call<EventRecordmodel> call, Response<EventRecordmodel> response) {
+           public void onResponse(Call<UserRecordModel> call, Response<UserRecordModel> response) {
                if (!response.isSuccessful()) {
                    String message = "No Event";
                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
@@ -95,8 +109,19 @@ public class AboutMeFragment extends Fragment {
                }
                String log = response.body().toString();
                Log.d("take", log);
-               EventRecordmodel eventRecordmodel = response.body();
-               eventRecordmodel.getEvenRecord();
+
+               UserRecordModel userRecordModel = response.body();
+               userRecordModel.getUserResults();
+
+               userResults = response.body().getUserResults();
+
+               eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
+               recyclerView.setAdapter(eventDisplayAdapter);
+
+
+
+
+               recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
                // politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
 
@@ -105,7 +130,7 @@ public class AboutMeFragment extends Fragment {
            }
 
            @Override
-           public void onFailure(Call<EventRecordmodel> call, Throwable t) {
+           public void onFailure(Call<UserRecordModel> call, Throwable t) {
 
                Log.d("no event",t.getMessage());
 

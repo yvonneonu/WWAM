@@ -26,7 +26,7 @@ public class EventDisplayAdapter extends RecyclerView.Adapter<EventDisplayAdapte
     @NonNull
     @Override
     public EventDisplayAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_about_me, parent);
+       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.eventimage, parent);
         return new EventDisplayAdapter.Viewholder(view);
     }
 
@@ -53,8 +53,8 @@ public class EventDisplayAdapter extends RecyclerView.Adapter<EventDisplayAdapte
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.onedisplay);
-            textView = itemView.findViewById(R.id.textEvent);
+            imageView = itemView.findViewById(R.id.image);
+            textView = itemView.findViewById(R.id.name);
         }
     }
 }
