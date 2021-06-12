@@ -20,14 +20,10 @@ import java.util.List;
 
 public class SlideFragment1 extends Fragment {
     private static final String TAG = "SlideFragment1";
-    private RecyclerView mRecyclerView;
-    // private SmileView mSmileView;
-    private ImageView deny1, aloow1;
-    private SlideLayoutManager mSlideLayoutManager;
-    private ItemTouchHelper mItemTouchHelper;
     private ItemTouchHelperCallback mItemTouchHelperCallback;
     private MyAdapter1 mAdapter;
-    private List<SlideBean1> mList = new ArrayList<>();
+    private ShowPersonListener mShowPersonListener;
+    private List<WaamUser> mList = new ArrayList<>();
     private int mLikeCount = 50;
     private int mDislikeCount = 50;
 
@@ -35,17 +31,34 @@ public class SlideFragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_slide1, container, false);
-        initView(rootView);
-        initListener();
+
+        GeneralFactory.getGeneralFactory(getActivity())
+                .fetchAllUser(friends -> {
+                    mList = friends;
+                    initView(rootView);
+                    initListener();
+                });
+
         return rootView;
     }
 
     private void initView(View rootView) {
-        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        RecyclerView mRecyclerView = rootView.findViewById(R.id.recycler_view);
         //mSmileView = rootView.findViewById(R.id.smile_view);
 
-        aloow1 = rootView.findViewById(R.id.allow);
-        deny1 = rootView.findViewById(R.id.deny);
+        ImageView aloow1 = rootView.findViewById(R.id.allow);
+        // private SmileView mSmileView;
+        ImageView deny1 = rootView.findViewById(R.id.deny);
+
+        ImageView show = rootView.findViewById(R.id.imageView44);
+
+        mAdapter = new MyAdapter1();
+        mRecyclerView.setAdapter(mAdapter);
+        mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
+        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
+        SlideLayoutManager mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+        mRecyclerView.setLayoutManager(mSlideLayoutManager);
 
         deny1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +74,14 @@ public class SlideFragment1 extends Fragment {
                 startActivity(intent);
             }
         });
-        mAdapter = new MyAdapter1();
-        mRecyclerView.setAdapter(mAdapter);
-        addData();
-        mItemTouchHelperCallback = new ItemTouchHelperCallback(mRecyclerView.getAdapter(), mList);
-        mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallback);
-        mSlideLayoutManager = new SlideLayoutManager(mRecyclerView, mItemTouchHelper);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-        mRecyclerView.setLayoutManager(mSlideLayoutManager);
+
+        //This might not work
+        show.setOnClickListener(v -> mAdapter.showPerson(pos -> {
+            WaamUser user = mList.get(pos);
+            Intent intent = new Intent();
+            intent.putExtra("SlideUser",user);
+            startActivity(intent);
+        }));
     }
 
 
@@ -125,7 +138,7 @@ public class SlideFragment1 extends Fragment {
         };
 
         for (int i = 0; i < 6; i++) {
-            mList.add(new SlideBean1(bgs[i], titles[i], says[i]));
+            //mList.add(new SlideBean1(bgs[i], titles[i], says[i]));
 
                     //SlideBean1(bgs[i], titles[i], icons[i]));
         }
@@ -133,6 +146,7 @@ public class SlideFragment1 extends Fragment {
 
 
     private class MyAdapter1 extends RecyclerView.Adapter<MyAdapter1.Viewholder>{
+
 
         @NonNull
         @Override
@@ -143,17 +157,24 @@ public class SlideFragment1 extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-            SlideBean1 bean = mList.get(position);
+            WaamUser bean = mList.get(position);
             // holder.imgBg.setImageResource(bean.getItemBg());
             holder.imgBg.setImageResource(bean.getImage());
-            holder.tvTitle.setText(bean.getNameNage());
-            holder.img_user.setText(bean.getLocation());
+            holder.tvTitle.setText(bean.getFullname());
+            holder.img_user.setText(bean.getImageUrl());
 
         }
 
         @Override
         public int getItemCount() {
-            return mList.size();
+            //mList.size();
+            return 10;
+
+        }
+
+
+        public void showPerson(ShowPersonListener showPersonListener){
+            mShowPersonListener = showPersonListener;
         }
 
         public class Viewholder extends RecyclerView.ViewHolder {
@@ -162,14 +183,24 @@ public class SlideFragment1 extends Fragment {
             TextView tvTitle;
             TextView img_user;
 
-
-
             public Viewholder(@NonNull View itemView) {
                 super(itemView);
                 imgBg = itemView.findViewById(R.id.img_bg);
                 tvTitle = itemView.findViewById(R.id.tv_title);
                 img_user = itemView.findViewById(R.id.img_user);
+
+
+                if(mShowPersonListener != null){
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        mShowPersonListener.personListener(pos);
+                    }
+                }
             }
         }
+    }
+
+    interface ShowPersonListener{
+        void personListener(int pos);
     }
 }

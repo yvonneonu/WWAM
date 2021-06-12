@@ -50,7 +50,7 @@ public class Matchfriends extends AppCompatActivity {
 
 
     public void keepswiping(View view) {
-        Intent intent = new Intent(Matchfriends.this, MatchFragment.class);
+        Intent intent = new Intent(Matchfriends.this, MatchActivity.class);
         startActivity(intent);
     }
 

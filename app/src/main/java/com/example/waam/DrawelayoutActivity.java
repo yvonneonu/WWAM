@@ -96,7 +96,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         //updateNavigationBarState();
     }
 
-
+    
     // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
     @Override
     public void onPause() {

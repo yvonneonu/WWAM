@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchFragment extends AppCompatActivity {
+public class MatchActivity extends AppCompatActivity {
 
 
     private static final String TAG = "SeconFragment";
@@ -64,7 +64,7 @@ public class MatchFragment extends AppCompatActivity {
     }
 
     public void backtologin(View view) {
-        Intent intent = new Intent(MatchFragment.this, DiscoverDrawerLayerout.class);
+        Intent intent = new Intent(MatchActivity.this, DiscoverDrawerLayerout.class);
         startActivity(intent);
     }
 }

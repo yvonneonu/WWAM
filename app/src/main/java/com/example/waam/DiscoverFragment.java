@@ -83,7 +83,7 @@ public class DiscoverFragment extends Fragment {
         textView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MatchFragment.class);
+                Intent intent = new Intent(getActivity(), MatchActivity.class);
                 startActivity(intent);
             }
         });

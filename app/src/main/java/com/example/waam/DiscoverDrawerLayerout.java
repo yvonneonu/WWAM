@@ -43,6 +43,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         //toolbar2.setNavigationIcon(R.drawable.ic_baseline_lock_24);
 
+        WaamUser waamUser = (WaamUser) getIntent().getSerializableExtra("SlideUser");
         drawer1.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -50,10 +51,18 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         toolbar2.setLogo(R.drawable.topnavlogo);
         toolbar2.setNavigationIcon(R.drawable.ic_baseline_menu_24);
        //Log.d("TAG", "in activity null");
-       Fragment fragment = new DiscoverFragment();
-       FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-       ft.add(R.id.fragmentcontainer, fragment);
-       ft.commit();
+        Fragment fragment;
+
+        if(waamUser != null){
+            fragment = new ConnectedFriendsFragment(waamUser);
+        }else{
+            fragment = new DiscoverFragment();
+        }
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.fragmentcontainer, fragment);
+        ft.commit();
+
 
 
 
