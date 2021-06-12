@@ -1,16 +1,14 @@
 package com.example.waam;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -161,11 +159,27 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
 
                 break;
             case aboutsef:
-                Fragment fragmentone = new AboutMeFragment();
-                getChildFragmentManager().beginTransaction()
-                        .replace(profileFrame, fragmentone)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .commit();
+
+                if(waamUser != null){
+                    Fragment fragmentone = AboutMeFragment.newInstance(waamUser);
+                    getChildFragmentManager().beginTransaction()
+                            .replace(profileFrame, fragmentone)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+                }else{
+                    String userId = FirebaseAuth.getInstance().getUid();
+                    GeneralFactory.getGeneralFactory(getActivity())
+                            .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                @Override
+                                public void loadSpecUse(WaamUser user) {
+                                    Fragment fragmentone = AboutMeFragment.newInstance(user);
+                                     getChildFragmentManager().beginTransaction()
+                                            .replace(profileFrame, fragmentone)
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                            };
+
+                });
+                }
                 break;
             case interest:
                 Fragment fragmentwo = new InterestFragment();

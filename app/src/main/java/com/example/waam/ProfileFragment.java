@@ -410,7 +410,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-                ehnity.setText(ethnicityRecordmodel.getEtnicrecords().get(0).getName());
+//                ehnity.setText(ethnicityRecordmodel.getEtnicrecords().get(0).getName());
 
 
 

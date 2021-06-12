@@ -84,6 +84,12 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 item.setIcon(R.drawable.lowernav_explore_icon_active);
                 break;
 
+            case R.id.profile:
+                fragment = new ProfileFragment();
+                Log.d("show", "profile not showing");
+                item.setIcon(R.drawable.lowernav_profile_icon_active);
+                break;
+
             case R.id.messages:
                 fragment = new MessagesFragment();
                 item.setIcon(R.drawable.lowernav_messages_icon_active);
@@ -94,11 +100,6 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
                 break;
 
-            case R.id.prof:
-
-                fragment = new ConnectedFriendsFragment();
-                item.setIcon(R.drawable.lowernav_profile_icon_active);
-                break;
 
             case R.id.agent:
                 fragment = new AgentFragment();

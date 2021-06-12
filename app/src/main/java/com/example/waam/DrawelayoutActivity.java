@@ -114,9 +114,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 fragment = new BecomeAMemberFragment();
                 break;
 
-            case R.id.prof:
-                fragment = new ProfileFragment();
-                break;
+
 
             case R.id.friend:
                 fragment = new FriendsFragment();
@@ -153,6 +151,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
 
             case R.id.profile:
                 fragment = new ProfileFragment();
+                Log.d("view", "profile page");
                 item.setIcon(R.drawable.lowernav_profile_icon_active);
                 break;
 
@@ -170,7 +169,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             return true;
         } else {
             Log.d("TAG", "is null");
-            startActivity(intent);
+
 
 
         }

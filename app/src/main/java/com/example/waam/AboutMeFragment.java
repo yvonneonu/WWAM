@@ -84,10 +84,11 @@ public class AboutMeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_about_me, container, false);
 
         recyclerView = view.findViewById(R.id.horizontalScrollView);
-       // eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
+        //eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
        // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         //recyclerView.setAdapter(eventDisplayAdapter);
-      //  recyclerView.setLayoutManager(linearLayoutManager);
+
+       //recyclerView.setLayoutManager(linearLayoutManager);
 
 
 
@@ -96,10 +97,10 @@ public class AboutMeFragment extends Fragment {
     }
 
     private void UserDisplay(){
-       Call<UserRecordModel> userRecordmodelCall = ApiClient.getService().getUserRecord("Bearer "+token);
-       userRecordmodelCall.enqueue(new Callback<UserRecordModel>() {
+       Call<List<UserResult>> userRecordmodelCall = ApiClient.getService().getUserRecord("Bearer "+token);
+       userRecordmodelCall.enqueue(new Callback<List<UserResult>>() {
            @Override
-           public void onResponse(Call<UserRecordModel> call, Response<UserRecordModel> response) {
+           public void onResponse(Call<List<UserResult>> call, Response<List<UserResult>> response) {
                if (!response.isSuccessful()) {
                    String message = "No Event";
                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
@@ -110,16 +111,13 @@ public class AboutMeFragment extends Fragment {
                String log = response.body().toString();
                Log.d("take", log);
 
-               UserRecordModel userRecordModel = response.body();
-               userRecordModel.getUserResults();
 
-               userResults = response.body().getUserResults();
+
+
+               List<UserResult> userResults = response.body();
 
                eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
                recyclerView.setAdapter(eventDisplayAdapter);
-
-
-
 
                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -130,7 +128,7 @@ public class AboutMeFragment extends Fragment {
            }
 
            @Override
-           public void onFailure(Call<UserRecordModel> call, Throwable t) {
+           public void onFailure(Call<List<UserResult>> call, Throwable t) {
 
                Log.d("no event",t.getMessage());
 

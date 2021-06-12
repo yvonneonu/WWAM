@@ -47,7 +47,7 @@ public interface UserService {
 
 
     @GET("api/userevent/1")
-    Call<UserRecordModel> getUserRecord (@Header("Authorization")String token);
+    Call<List<UserResult>> getUserRecord (@Header("Authorization")String token);
  //   @GET("user")
     //Call<RegisterResponse> getautho(@Header("Authorisation") String autokens);
 
