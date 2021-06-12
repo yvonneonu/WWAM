@@ -76,7 +76,6 @@
                         android:id="@+id/imageView33"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/email_icon_dark"
                         app:srcCompat="@drawable/ic_baseline_mail_outline_24" />
 
                     <TextView
@@ -111,14 +110,13 @@
                         android:id="@+id/imageView34"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/email_icon_dark"
                         app:srcCompat="@drawable/ic_baseline_chat_24" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="Send Message"/>
+                        android:text="Chat With Me"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

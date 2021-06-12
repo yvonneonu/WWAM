@@ -3,6 +3,9 @@ package com.example.waam;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +46,31 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         //toggle.setDrawerArrowDrawable(R.drawable.ic_baseline_menu_24, );
 
         //toolbar2.setNavigationIcon(R.drawable.ic_baseline_lock_24);
+
+       // NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView1.getHeaderView(0);
+        ImageView imageView = hView.findViewById(R.id.imageView7);
+        TextView nav_user = (TextView)hView.findViewById(R.id.textView96);
+
+
+        String uid = FirebaseAuth.getInstance().getUid();
+        GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+            @Override
+            public void loadSpecUse(WaamUser user) {
+                Glide.with(DiscoverDrawerLayerout.this)
+                        .asBitmap()
+                        .fitCenter()
+                        .circleCrop()
+                        .load(user.getImageUrl())
+                        .into(imageView);
+
+
+                nav_user.setText(user.getFullname());
+            }
+        });
+
+
+
 
         WaamUser waamUser = (WaamUser) getIntent().getSerializableExtra("YvonneSleep");
         drawer1.addDrawerListener(toggle);

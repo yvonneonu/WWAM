@@ -103,6 +103,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
             Glide.with(Objects.requireNonNull(getActivity()))
                     .asBitmap()
                     .fitCenter()
+                    .circleCrop()
                     .load(waamUser.getImageUrl())
                     .into(profilePic);
         }else{

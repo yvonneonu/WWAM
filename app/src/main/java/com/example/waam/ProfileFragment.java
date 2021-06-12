@@ -207,6 +207,7 @@ public class ProfileFragment extends Fragment {
             Glide.with(this)
                     .asBitmap()
                     .load(user.getImageUrl())
+                    .circleCrop()
                     .into(imageView);
 
 
