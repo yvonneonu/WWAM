@@ -77,9 +77,11 @@ public class SlideFragment1 extends Fragment {
 
         //This might not work
         show.setOnClickListener(v -> mAdapter.showPerson(pos -> {
+            Log.d("SliderUser", "BestUser");
             WaamUser user = mList.get(pos);
-            Intent intent = new Intent();
+            Intent intent = new Intent(getActivity(), DiscoverDrawerLayerout.class);
             intent.putExtra("SlideUser",user);
+
             startActivity(intent);
         }));
     }
