@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -694,6 +693,7 @@ public class GeneralFactory {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+
 
                 //String message = t.getLocalizedMessage();
                 Toast.makeText(context, t.getMessage(),Toast.LENGTH_LONG).show();
