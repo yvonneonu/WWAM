@@ -1,6 +1,8 @@
 package com.example.waam;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -51,6 +53,12 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
 
+        navigationView.setBackgroundColor(getResources().getColor(R.color.blue));
+
+        navigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
+
+
+        navigationView.setItemIconTintList(ColorStateList.valueOf(Color.WHITE));
         View hView =  navigationView.getHeaderView(0);
         ImageView imageView = hView.findViewById(R.id.imageView7);
         TextView nav_user = (TextView)hView.findViewById(R.id.textView96);

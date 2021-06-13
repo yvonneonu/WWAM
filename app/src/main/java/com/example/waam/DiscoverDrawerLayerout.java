@@ -1,5 +1,7 @@
 package com.example.waam;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -41,6 +43,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         drawer1 = findViewById(R.id.drawer1_layout);
+        navigationView1.setBackgroundColor(getResources().getColor(R.color.blue));
+        navigationView1.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer1, toolbar2, R.string.open, R.string.close);
        // toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
         //toggle.setDrawerArrowDrawable(R.drawable.ic_baseline_menu_24, );
