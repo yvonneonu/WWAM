@@ -33,13 +33,13 @@ public interface UserService {
     @GET("api/children/2")
     Call<ChildrenRecordModel> getChildren1 (@Header("Authorization")String token);
 
-    @GET("api/smoke")
+    @GET("api/smoke/2")
     Call<SmokeRecordModel> getSmoke1 (@Header("Authorization")String token);
 
-    @GET("api/drink")
+    @GET("api/drink/2")
     Call<DrinkRecordModel> getDrink1 (@Header("Authorization")String token);
 
-    @GET("api/income")
+    @GET("api/income/2")
     Call<SalaryRecordModel> getSalary1 (@Header("Authorization")String token);
 
     @GET("api/event")

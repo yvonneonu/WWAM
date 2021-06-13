@@ -327,14 +327,14 @@ public class ProfileFragment extends Fragment {
     }
 
     private void educationShow(){
-        Call<RecordModel> recordModelCall = ApiClient.getService().getEducation1("Bearer "+token);
+       Call<RecordModel> recordModelCall = ApiClient.getService().getEducation1("Bearer "+token);
         recordModelCall.enqueue(new Callback<RecordModel>() {
             @Override
             public void onResponse(Call<RecordModel> call, Response<RecordModel> response) {
                 if (!response.isSuccessful()){
                     String message = "No Display";
                     Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-                    Log.d("display",response.message());
+                     Log.d("display",response.message());
                     Log.d("display",response.errorBody().toString());
                     return;
                 }
