@@ -36,6 +36,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private String mParam1;
     private String mParam2;
 
+
     public ConnectedFriendsFragment(WaamUser waamUser) {
         this.waamUser = waamUser;
 

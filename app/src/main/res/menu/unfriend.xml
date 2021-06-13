@@ -4,15 +4,10 @@
     >
 
 
-    <item
-
-        android:id="@+id/message"
-
+    <item android:id="@+id/message"
         android:title="unfriend"
-
-        app:itemTextColor="@color/black"
-
         app:showAsAction="never"
+
          />
 
     <item
