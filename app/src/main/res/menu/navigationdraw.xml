@@ -6,38 +6,38 @@
         android:title="Membership" />
     <item
         android:id="@+id/dailymatch"
+        android:icon="@drawable/sidemenu_icon_matches"
         android:title="Daily Matches"/>
     <item
         android:id="@+id/upcomingevent"
+        android:icon="@drawable/sidemenu_icon_events"
         android:title="Upcoming Events"/>
 
     <item
         android:id="@+id/seewhoview"
+        android:icon="@drawable/icon_view_active"
         android:title="See Who Viewed You"/>
 
     <item
         android:id="@+id/datingagent"
+        android:icon="@drawable/sidemenu_icon_datingagent"
         android:title="Dating Agent"/>
     <item
         android:id="@+id/friend"
+        android:icon="@drawable/aboutmeiconchildren"
         android:title="Friends"/>
     <item
         android:id="@+id/notification"
-
+        android:icon="@drawable/ic_baseline_notifications_24"
         android:title="Notifications"/>
     <item
         android:id="@+id/setting"
-        android:icon="@drawable/sidemenu_icon_notification"
+        android:icon="@drawable/ic_baseline_settings_24"
         android:title="Settings"/>
     <item
         android:id="@+id/help"
         android:icon="@drawable/sidebar_icon_help"
         android:title="Help"/>
-
-
-    <item
-        android:id="@+id/prof"
-        android:title="Profile"/>
 
 
 </menu>

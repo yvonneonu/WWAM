@@ -153,6 +153,7 @@
                     app:drawableStartCompat="@drawable/aboutmeiconeducation" />
 
                 <TextView
+                    android:id="@+id/educ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -179,6 +180,7 @@
                     app:drawableStartCompat="@drawable/aboutmeiconbodytype" />
 
                 <TextView
+                    android:id="@+id/bodytype"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -207,10 +209,11 @@
                     app:drawableStartCompat="@drawable/aboutmeiconchildren" />
 
                 <TextView
+                    android:id="@+id/chil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="One day" />
+                    android:text="Four Children" />
             </LinearLayout>
 
             <LinearLayout
@@ -235,6 +238,7 @@
                     app:drawableStartCompat="@drawable/aboutmeiconfaith" />
 
                 <TextView
+                    android:id="@+id/fauthe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -264,6 +268,7 @@
                     app:drawableStartCompat="@drawable/aboutmeiconpolitics" />
 
                 <TextView
+                    android:id="@+id/poli"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -292,6 +297,7 @@
                     app:drawableStartCompat="@drawable/aboutmeiconethnicity" />
 
                 <TextView
+                    android:id="@+id/ethnicity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
