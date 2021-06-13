@@ -89,6 +89,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         if(waamUser != null){
             fragment = new ConnectedFriendsFragment(waamUser);
+            bottomNavigationView.getMenu().getItem(-0).setChecked(false);
         }else{
             fragment = new DiscoverFragment();
         }
