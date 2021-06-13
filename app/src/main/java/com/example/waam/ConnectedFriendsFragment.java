@@ -232,16 +232,12 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 }else{
                     String userId = FirebaseAuth.getInstance().getUid();
                     GeneralFactory.getGeneralFactory(getActivity())
-                            .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
-                                @Override
-                                public void loadSpecUse(WaamUser user) {
-                                    Fragment fragmentone = AboutMeFragment.newInstance(user);
-                                     getChildFragmentManager().beginTransaction()
-                                            .replace(profileFrame, fragmentone)
-                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                            };
-
-                });
+                            .loadSpecUser(userId, user -> {
+                                Fragment fragmentone = AboutMeFragment.newInstance(user);
+                                 getChildFragmentManager().beginTransaction()
+                                        .replace(profileFrame, fragmentone)
+                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                        });
                 }
                 break;
             case interest:
