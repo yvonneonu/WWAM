@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -124,6 +126,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         ImageView profilePic = view.findViewById(R.id.imageView32);
         ImageView interest = view.findViewById(R.id.interest);
         ImageView friends = view.findViewById(R.id.friends);
+        CardView cardView8 = view.findViewById(R.id.cardView8);
+        CardView cardView7 = view.findViewById(R.id.cardView7);
         Button button = view.findViewById(R.id.button15);
         LinearLayout linlayout = view.findViewById(R.id.linear02);
         FrameLayout frameLayout = view.findViewById(R.id.frameLayout9);
@@ -131,6 +135,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
+        cardView7.setOnClickListener(this);
+        cardView8.setOnClickListener(this);
         videopic.setOnClickListener(this);
         aboutsef.setOnClickListener(this);
         interest.setOnClickListener(this);
@@ -138,12 +144,15 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
 
         if(waamUser != null){
             frameLayout.setVisibility(View.VISIBLE);
+
             Glide.with(Objects.requireNonNull(getActivity()))
                     .asBitmap()
                     .fitCenter()
                     .circleCrop()
                     .load(waamUser.getImageUrl())
                     .into(profilePic);
+
+
           generalFactory.friendChecker(waamUser.getUid(), new GeneralFactory.CheckFriend() {
               @Override
               public void checkIfFriend(boolean isFriend) {
@@ -184,6 +193,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         final int interest = R.id.interest;
         final int friends = R.id.friends;
         final int profileFrame = R.id.profileframe;
+        final int message = R.id.cardView8;
+        final int messageSec = R.id.cardView7;
         switch (v.getId()) {
             case vid:
                 // i stopped here planning on sending waam user to the video fragment
@@ -247,6 +258,16 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit();
                 break;
+
+            case messageSec:
+                if(waamUser != null){
+                    Intent intent = new Intent(getActivity(),ChatMessage.class);
+                    intent.putExtra(ChatMessage.FRIENDS,waamUser);
+                    startActivity(intent);
+                }
+
+                break;
+
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }

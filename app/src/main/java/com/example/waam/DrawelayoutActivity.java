@@ -61,7 +61,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         navigationView.setItemIconTintList(ColorStateList.valueOf(Color.WHITE));
         View hView =  navigationView.getHeaderView(0);
         ImageView imageView = hView.findViewById(R.id.imageView7);
-        TextView nav_user = (TextView)hView.findViewById(R.id.textView96);
+        TextView nav_user = hView.findViewById(R.id.textView96);
 
 
         String uid = FirebaseAuth.getInstance().getUid();

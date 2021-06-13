@@ -39,7 +39,6 @@ import retrofit2.Response;
 public class SlideFragment extends Fragment {
     private static final String TAG = "SlideFragment";
     private RecyclerView mRecyclerView;
-    private ImageView deny, aloow, viewProfilefragment;
     private SlideLayoutManager mSlideLayoutManager;
     private ItemTouchHelper mItemTouchHelper;
     private ItemTouchHelperCallback mItemTouchHelperCallback;
@@ -82,10 +81,10 @@ public class SlideFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         //mSmileView = rootView.findViewById(R.id.smile_view);
 
-        viewProfilefragment = rootView.findViewById(R.id.imageView44);
+        ImageView viewProfilefragment = rootView.findViewById(R.id.imageView44);
 
-        aloow = rootView.findViewById(R.id.allow);
-        deny = rootView.findViewById(R.id.deny);
+        ImageView aloow = rootView.findViewById(R.id.allow);
+        ImageView deny = rootView.findViewById(R.id.deny);
         viewProfilefragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,7 +178,6 @@ public class SlideFragment extends Fragment {
                 public void onClear() {
                     //eventResults.clear();
                     //eventResults.addAll(mList);
-
                     //Log.d("hyuh", "help");
 
                     eventDispaly();
@@ -192,35 +190,6 @@ public class SlideFragment extends Fragment {
     /**
      * 向集合中添加数据
      */
-    /*private void addData(){
-        String[] icons = {"$389","$337", "$675","$389","$389","$389", "$389"};
-
-        String[] titles = {"Tours with Chamber Access", "Belief Tours with Chamber Access", "Tours with Chamber Access", "DreamingTours with Chamber Access", "Tours with Chamber Access", "Confidence Tours with Chamber Access"};
-        String[] says = {
-                "Vega to GC West Rim Helicopter",
-                "Keep on going never give up.",
-                "Vega to GC West Rim Helicopter Tours with Chamber Access",
-                "I can because i think i can.",
-                "Vega to GC West Rim Helicopter Tours with Chamber Access",
-                "Keep on going never give up.",
-                "Whatever is worth doing is worth doing well.",
-        };
-        String[] neededStrike = {"$145", "$213", "$245", "$234", "$244", "$131", "$311"};
-        int[] bgs = {R.drawable.diningout,
-                R.drawable.eventcardimg,
-                R.drawable.nightclubsdancing,
-                R.drawable.travel,
-                R.drawable.coffeeconversation,
-                R.drawable.diningout,
-                R.drawable.discovereventsbox
-        };
-        String[] rateon = {"3.4", "4.6", "8.9", "7.5", "9.3", "7.3", "5.8"};
-        String[] seconrate = {"(119 Ratings)", "(309 Ratings)", "(329 Ratings)", "(209 Ratings)", "(165 Ratings)", "(109 Ratings)", "(197 Ratings)"};
-
-        for (int i = 0; i < 6; i++) {
-           // mList.add(new EventResult(bgs[i],titles[i],icons[i],says[i], rateon[i], seconrate[i], neededStrike[i]));
-        }
-    }*/
 
 
     private void eventUser(EventUserPost eventUserPost){

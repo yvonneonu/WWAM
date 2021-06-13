@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,11 +79,17 @@ public class FrendChannelFragment extends Fragment {
             friendAdapt = new FriendAdapt(friendModelList,getActivity());
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
             recyclerView.setAdapter(friendAdapt);
+
+            //This might crash as we dont understand what is going on.
             friendAdapt.friendMover(position -> {
                 WaamUser user = friendModelList.get(position);
-                Intent intent = new Intent(getActivity(),ChatMessage.class);
-                intent.putExtra(ChatMessage.FRIENDS,user);
-                startActivity(intent);
+                Fragment fragment = new ConnectedFriendsFragment(user);
+                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentcontainer, fragment);
+                ft.commit();
+                //Intent intent = new Intent(getActivity(),ChatMessage.class);
+                //intent.putExtra(ChatMessage.FRIENDS,user);
+                //startActivity(intent);
 
             });
         });
