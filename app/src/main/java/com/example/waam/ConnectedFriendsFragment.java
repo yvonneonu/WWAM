@@ -2,10 +2,14 @@ package com.example.waam;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -52,11 +56,13 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        setHasOptionsMenu(true);
         if(waamUser != null){
             Fragment fr = new VideoPicFragment(waamUser);
             FragmentTransaction ft = getChildFragmentManager().beginTransaction();
@@ -79,6 +85,26 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         }
 
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.unfriend, menu);
+
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.message:
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
