@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class DiscoverDrawerLayerout extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer1;
     private FirebaseAuth mAuth;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         NavigationView navigationView1 = findViewById(R.id.nav_view);
         navigationView1.setNavigationItemSelectedListener(this);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         drawer1 = findViewById(R.id.drawer1_layout);
@@ -110,6 +111,20 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 fragment = new BecomeAMemberFragment();
 
                 break;
+
+
+
+            case R.id.friend:
+                fragment = new FriendsFragment();
+
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                break;
+
+            case R.id.datingagent:
+                fragment = new AgentFragment();
+                bottomNavigationView.getMenu().getItem(4).setChecked(true);
+                break;
+
 
             case R.id.discover:
 
