@@ -88,7 +88,7 @@ public class AboutMeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.horizontalScrollView);
         career = view.findViewById(R.id.textView75);
         education = view.findViewById(R.id.educ);
-        children = view.findViewById(R.id.child);
+        children = view.findViewById(R.id.chil);
         politics = view.findViewById(R.id.poli);
         bodyType = view.findViewById(R.id.bodytype);
         faith = view.findViewById(R.id.fauthe);

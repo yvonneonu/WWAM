@@ -77,7 +77,7 @@ public class InterestFragment extends Fragment {
 
         career = view.findViewById(R.id.textView75);
         education = view.findViewById(R.id.edu);
-        children = view.findViewById(R.id.child);
+        children = view.findViewById(R.id.childi);
         politics = view.findViewById(R.id.poli);
         bodyType = view.findViewById(R.id.bodytype);
         faith = view.findViewById(R.id.fauthe);
