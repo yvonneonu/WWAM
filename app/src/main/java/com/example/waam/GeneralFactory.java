@@ -660,6 +660,62 @@ public class GeneralFactory {
     }*/
 
 
+    public boolean friendChecker(String receiverId, CheckFriend checkFriend){
+        if(mAuth != null){
+            String senderId = mAuth.getUid()+"friends";
+
+            allFriends = new ArrayList<>();
+            if(senderId != null){
+                DatabaseReference mDatebaseReference = firebaseDatabase.getReference(senderId);
+                mDatebaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        allFriends.clear();
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
+                            assert friendAlgo != null;
+                            WaamUser user = friendAlgo.getWaamUser();
+                            if(user.getUid().equals(receiverId)){
+                                checkFriend.checkIfFriend(true);
+                                break;
+                            }
+
+
+                        }
+
+
+                        Log.d("Allfriends",""+allFriends.size());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                        Log.d("Cancel",error.getMessage());
+                    }
+                });
+            }else{
+                Toast.makeText(context,"Branch is null",Toast.LENGTH_SHORT)
+                        .show();
+
+            }
+            loadFriends(senderId, new FetchFriends() {
+                @Override
+                public void friendsFetcher(List<WaamUser> friends) {
+                    for(WaamUser user : friends){
+                        if(user.getUid().equals(receiverId)) {
+
+                        }
+
+                    }
+                }
+            });
+
+        }
+
+        return false;
+    }
+
     public void loginUser(LoginRequest loginRequest){
 
         Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
@@ -942,4 +998,14 @@ public class GeneralFactory {
     public interface LoadVidPic{
         void loadVidpic(List<VideoPicModel> videoPicModels);
     }
+
+    interface CheckFriend{
+        void checkIfFriend(boolean isFriend);
+    }
+
+
+
+
+
+
 }

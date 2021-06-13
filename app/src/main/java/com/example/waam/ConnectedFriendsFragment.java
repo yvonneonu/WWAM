@@ -7,7 +7,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,6 +34,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private WaamUser waamUser;
+    private GeneralFactory generalFactory;
     private static final String REQUEST = "connectedFriends";
 
     // TODO: Rename and change types of parameters
@@ -64,6 +69,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         }
 
         setHasOptionsMenu(true);
+        generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         if(waamUser != null){
             Fragment fr = new VideoPicFragment(waamUser);
             FragmentTransaction ft = getChildFragmentManager().beginTransaction();
@@ -118,6 +124,10 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         ImageView profilePic = view.findViewById(R.id.imageView32);
         ImageView interest = view.findViewById(R.id.interest);
         ImageView friends = view.findViewById(R.id.friends);
+        Button button = view.findViewById(R.id.button15);
+        LinearLayout linlayout = view.findViewById(R.id.linear02);
+        FrameLayout frameLayout = view.findViewById(R.id.frameLayout9);
+
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
@@ -127,13 +137,27 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         friends.setOnClickListener(this);
 
         if(waamUser != null){
+            frameLayout.setVisibility(View.VISIBLE);
             Glide.with(Objects.requireNonNull(getActivity()))
                     .asBitmap()
                     .fitCenter()
                     .circleCrop()
                     .load(waamUser.getImageUrl())
                     .into(profilePic);
+          generalFactory.friendChecker(waamUser.getUid(), new GeneralFactory.CheckFriend() {
+              @Override
+              public void checkIfFriend(boolean isFriend) {
+                  if(isFriend){
+                      linlayout.setVisibility(View.VISIBLE);
+                      button.setVisibility(View.GONE);
+                  }else{
+                      button.setVisibility(View.VISIBLE);
+                      linlayout.setVisibility(View.GONE);
+                  }
+              }
+          });
         }else{
+            frameLayout.setVisibility(View.GONE);
             String userId = FirebaseAuth.getInstance().getUid();
             GeneralFactory.getGeneralFactory(getActivity())
                     .loadSpecUser(userId, new GeneralFactory.SpecificUser() {

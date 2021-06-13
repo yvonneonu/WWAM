@@ -50,8 +50,10 @@ dependencies {
 }
 
 dependencies {
+    implementation 'com.android.support:cardview-v7:28.0.0'
 
-  // implementation project(':LayoutManagerGroup')
+
+    // implementation project(':LayoutManagerGroup')
 
 
 

@@ -7,14 +7,12 @@
     <item android:id="@+id/message"
         android:title="unfriend"
         app:showAsAction="never"
-
+        app:itemTextColor="@color/red"
          />
 
     <item
         android:id="@+id/block"
         app:showAsAction="never"
-
-
         android:title="block"
         app:itemTextColor="@color/black"
         />
