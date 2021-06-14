@@ -660,7 +660,7 @@ public class GeneralFactory {
     }*/
 
 
-    public boolean friendChecker(String receiverId, CheckFriend checkFriend){
+    public void friendChecker(String receiverId, CheckFriend checkFriend){
         if(mAuth != null){
             String senderId = mAuth.getUid()+"friends";
 
@@ -713,7 +713,6 @@ public class GeneralFactory {
 
         }
 
-        return false;
     }
 
     public void loginUser(LoginRequest loginRequest){
