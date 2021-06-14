@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer1_layout"
     android:layout_width="match_parent"
+    tools:openDrawer="left"
+
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,9 +52,11 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
 
-        app:iconTint="#FFFFFF"
         app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:background="@color/blue"
         app:menu="@menu/navigationdraw">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,34 +64,59 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <TextView
+
+            <LinearLayout
                 android:id="@+id/logout"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
+
+                android:layout_marginEnd="8dp"
+
+                android:paddingVertical="5dp"
+
                 android:background="@drawable/logout"
-                android:text="Log out"
+                app:layout_constraintEnd_toStartOf="@+id/upgrade"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal" >
 
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:gravity="center"
+                    android:text="Logout"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    android:textAllCaps="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/upgrade"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:background="@drawable/logout"
-                android:layout_marginStart="16dp"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
+                android:background="@drawable/logout"
 
-                android:text="Upgrade"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/logout"
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal" >
+
+                <TextView
+
+
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:text="Upgrade"
+                    android:textSize="19sp"
+                    android:textAllCaps="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
