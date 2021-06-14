@@ -84,9 +84,11 @@ public class FrendChannelFragment extends Fragment {
             friendAdapt.friendMover(position -> {
                 WaamUser user = friendModelList.get(position);
                 Fragment fragment = new ConnectedFriendsFragment(user);
-                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentcontainer, fragment);
-                ft.commit();
+                if(getActivity() != null){
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragmentcontainer, fragment);
+                    ft.commit();
+                }
                 //Intent intent = new Intent(getActivity(),ChatMessage.class);
                 //intent.putExtra(ChatMessage.FRIENDS,user);
                 //startActivity(intent);
