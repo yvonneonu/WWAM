@@ -60,7 +60,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-storage:20.0.0'
 
-    implementation files('libs/sinch-android-rtc-3.17.6-javadoc.jar')
+    //implementation files('libs/sinch-android-rtc-3.17.6-javadoc.jar')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.DingMouRen:LayoutManagerGroup:1e6f4f96eb'
     implementation 'com.code-troopers.betterpickers:library:3.1.0'
@@ -111,7 +111,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
 
     //Agora RTC SDK for video call
-
+    implementation(name:'sinch-android-rtc', version:'+', ext:'aar')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

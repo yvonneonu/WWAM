@@ -473,6 +473,7 @@ public class GeneralFactory {
         mAuth.signOut();
         Intent intent = new Intent(context, Login.class);
         context.startActivity(intent);
+
     }
 
 

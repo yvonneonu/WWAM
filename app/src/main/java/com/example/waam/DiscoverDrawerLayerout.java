@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
+        LinearLayout linearLayout = findViewById(R.id.logout);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         drawer1 = findViewById(R.id.drawer1_layout);
         navigationView1.setBackgroundColor(getResources().getColor(R.color.blue));
@@ -58,6 +60,13 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         TextView nav_user = (TextView)hView.findViewById(R.id.textView96);
 
 
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GeneralFactory.getGeneralFactory(DiscoverDrawerLayerout.this)
+                        .logOut(DiscoverDrawerLayerout.this);
+            }
+        });
         String uid = FirebaseAuth.getInstance().getUid();
         GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
             @Override

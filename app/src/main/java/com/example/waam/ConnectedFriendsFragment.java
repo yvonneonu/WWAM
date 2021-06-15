@@ -248,13 +248,14 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                         .commit();
                 break;
             case friends:
-                Fragment fragmenthree = new FrendChannelFragment();
+                Fragment fragmenthree = FrendChannelFragment.newInstance(waamUser);
                 getChildFragmentManager().beginTransaction()
                         .replace(profileFrame, fragmenthree)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit();
                 break;
 
+            case message:
             case messageSec:
                 if(waamUser != null){
                     Intent intent = new Intent(getActivity(),ChatMessage.class);
