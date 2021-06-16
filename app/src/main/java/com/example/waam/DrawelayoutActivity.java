@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
+        LinearLayout linearLayout = findViewById(R.id.logout);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -64,6 +65,14 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         TextView nav_user = hView.findViewById(R.id.textView96);
 
 
+
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GeneralFactory.getGeneralFactory(DrawelayoutActivity.this)
+                        .logOut(DrawelayoutActivity.this);
+            }
+        });
         String uid = FirebaseAuth.getInstance().getUid();
         GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
             @Override

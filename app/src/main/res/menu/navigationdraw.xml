@@ -8,7 +8,8 @@
     <item
         android:id="@+id/dailymatch"
         android:icon="@drawable/sidemenu_icon_matches"
-        android:title="Daily Matches"/>
+        android:title="Daily Matches"
+        app:actionLayout="@layout/friend_us"/>
     <item
         android:id="@+id/upcomingevent"
         android:icon="@drawable/sidemenu_icon_events"
@@ -17,12 +18,16 @@
     <item
         android:id="@+id/seewhoview"
         android:icon="@drawable/icon_view_active"
-        android:title="See Who Viewed You"/>
+        android:title="See Who Viewed You"
+        app:actionLayout="@layout/whoview"/>
+
 
     <item
         android:id="@+id/datingagent"
         android:icon="@drawable/sidemenu_icon_datingagent"
-        android:title="Dating Agent"/>
+        android:title="Dating Agent"
+        app:actionLayout="@layout/dating"/>
+
     <item
         android:id="@+id/friend"
         android:icon="@drawable/aboutmeiconchildren"
@@ -30,12 +35,11 @@
         app:actionLayout="@layout/friend_us"/>
 
 
-
-        <item
-            android:title="Notifications"
-            android:id="@+id/notification"
-            android:icon="@drawable/ic_baseline_notifications_24"
-            app:actionLayout="@layout/notification_us"
+    <item
+        android:title="Notifications"
+        android:id="@+id/notification"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        app:actionLayout="@layout/notification_us"
         />
 
     <item
