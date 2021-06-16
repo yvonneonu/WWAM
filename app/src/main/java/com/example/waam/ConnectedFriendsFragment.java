@@ -37,6 +37,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private static final String ARG_PARAM2 = "param2";
     private WaamUser waamUser;
     private GeneralFactory generalFactory;
+    private  Button button;
     private static final String REQUEST = "connectedFriends";
 
     // TODO: Rename and change types of parameters
@@ -128,7 +129,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         ImageView friends = view.findViewById(R.id.friends);
         CardView cardView8 = view.findViewById(R.id.cardView8);
         CardView cardView7 = view.findViewById(R.id.cardView7);
-        Button button = view.findViewById(R.id.button15);
+        button = view.findViewById(R.id.button15);
         LinearLayout linlayout = view.findViewById(R.id.linear02);
         FrameLayout frameLayout = view.findViewById(R.id.frameLayout9);
 
@@ -141,6 +142,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         aboutsef.setOnClickListener(this);
         interest.setOnClickListener(this);
         friends.setOnClickListener(this);
+        button.setOnClickListener(this);
 
         if(waamUser != null){
             frameLayout.setVisibility(View.VISIBLE);
@@ -195,6 +197,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         final int profileFrame = R.id.profileframe;
         final int message = R.id.cardView8;
         final int messageSec = R.id.cardView7;
+        final int sendRequest = R.id.button15;
         switch (v.getId()) {
             case vid:
                 // i stopped here planning on sending waam user to the video fragment
@@ -264,6 +267,13 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 }
 
                 break;
+
+            case sendRequest:
+                if(waamUser != null){
+                    GeneralFactory.getGeneralFactory(getActivity())
+                            .sendFriendRequest(waamUser.getUid(),button);
+
+                }
 
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
