@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,8 +55,10 @@ public class GeneralFactory {
     private static final String WAAMBASE = "waamuser_base";
     private static final String PROFILEPIC = "profilePic";
     private static final String VIDEOPIC = "videoPic";
+    private static final String FRIENDREQUEST = "friendRequestlist";
     private final FirebaseDatabase firebaseDatabase;
     private List<Chat> chatContainer;
+    private List<WaamUser> requestFriendsList;
     private List<WaamUser> allWaamUsers;
     private final List<AgentModel> agentModelList;
     private List<WaamUser> allFriends;
@@ -977,6 +980,53 @@ public class GeneralFactory {
 
 
 
+    public void sendFriendRequest(Button button,WaamUser user){
+        String senderOfRequest = mAuth.getUid();
+        String receiverBranch = user.getUid();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(FRIENDREQUEST)
+                .child(receiverBranch);
+        RequestFriend requestFriend = new RequestFriend(senderOfRequest,user);
+        databaseReference.setValue(requestFriend).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context,"request sent",Toast.LENGTH_LONG).show();
+                    button.setEnabled(false);
+                    button.setText("Awaiting confirmation");
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context,"An error occured",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void loadFriendRequestList(){
+        requestFriendsList = new ArrayList<>();
+        String uid = mAuth.getUid()+"friendRequestList";
+        DatabaseReference mDatabaseReference = firebaseDatabase.getReference().child(FRIENDREQUEST)
+                .child(uid);
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                requestFriendsList.clear();
+                for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                    RequestFriend requestFriend = snapshot1.getValue(RequestFriend.class);
+                    if(!requestFriend.isAccepted()){
+                       requestFriendsList.add(requestFriend.getUser());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context,error.getMessage(), Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+    }
     public interface FetchFriends{
         void friendsFetcher(List<WaamUser> friends);
     }
