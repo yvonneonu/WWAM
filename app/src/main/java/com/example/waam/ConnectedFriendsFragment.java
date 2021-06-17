@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -271,7 +270,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
             case sendRequest:
                 if(waamUser != null){
                     GeneralFactory.getGeneralFactory(getActivity())
-                            .sendFriendRequest(waamUser.getUid(),button);
+                            .sendFriendRequest(button, waamUser);
 
                 }
 

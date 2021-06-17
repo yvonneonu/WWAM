@@ -978,6 +978,28 @@ public class GeneralFactory {
         return names.length >= 2;
     }
 
+    public void sendFriendRequest(WaamUser user){
+        String senderOfRequest = mAuth.getUid();
+        String receiverBranch = user.getUid();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(FRIENDREQUEST)
+                .child(receiverBranch);
+        RequestFriend requestFriend = new RequestFriend(senderOfRequest,user);
+        databaseReference.setValue(requestFriend).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context,"request sent",Toast.LENGTH_LONG).show();
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context,"An error occured",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
 
     public void sendFriendRequest(Button button,WaamUser user){

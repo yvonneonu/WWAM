@@ -193,6 +193,11 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
 
                 break;
 
+            case R.id.upcomingevent:
+                fragment = new FindMtchBlankFragment();
+                break;
+
+
             case R.id.profile:
                 fragment = new ProfileFragment();
                 Log.d("view", "profile page");

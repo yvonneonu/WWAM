@@ -143,6 +143,7 @@ public class SlideFragment extends Fragment {
                         //display();
                         EventUserPost eventUserPost = new EventUserPost(id, eventResult.getId());
                         eventUser(eventUserPost);
+
                       /*  if(interestEvent.size() > 0){
                             for(int i = 0 ; i < interestEvent.size(); i++){
                                 if(interestEvent.get(i).getId().equals(eventResult.getId())){

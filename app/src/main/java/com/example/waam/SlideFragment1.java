@@ -112,6 +112,12 @@ public class SlideFragment1 extends Fragment {
                     WaamUser user = mList.get(currentPerson);
                     Log.d("userDisplay", ""+user.getFullname());
                     Log.d("currentPositionRight", ""+currentPerson);
+                   if (mItemTouchHelperCallback != null){
+                       int position = viewHolder.getAdapterPosition();
+                       WaamUser user1 = mList.get(position);
+                       GeneralFactory.getGeneralFactory(getContext()).sendFriendRequest(user1);
+                       Log.d("friendrequest", ""+user1);
+                   }
 
                 }
             }

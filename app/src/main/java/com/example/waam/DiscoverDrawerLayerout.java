@@ -123,11 +123,29 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 break;
 
 
+            case R.id.dailymatch:
+                fragment = new FindMtchBlankFragment();
+                Bundle arg = new Bundle();
+                arg.putString("match", "event");
+                fragment.setArguments(arg);
+
+                // intent = new Intent(DrawelayoutActivity.this, DailyMatch.class);
+
+                break;
 
             case R.id.friend:
                 fragment = new FriendsFragment();
 
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                break;
+
+            case R.id.upcomingevent:
+                fragment = new FindMtchBlankFragment();
+                Bundle pg = new Bundle();
+                pg.putString("friend", "evnt");
+                fragment.setArguments(pg);
+                Log.d("friend", ""+pg);
+
                 break;
 
             case R.id.datingagent:

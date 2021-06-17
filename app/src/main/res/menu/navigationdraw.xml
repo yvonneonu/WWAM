@@ -13,7 +13,9 @@
     <item
         android:id="@+id/upcomingevent"
         android:icon="@drawable/sidemenu_icon_events"
-        android:title="Upcoming Events"/>
+        android:title="Upcoming Events"
+        app:actionLayout="@layout/event"
+        />
 
     <item
         android:id="@+id/seewhoview"
