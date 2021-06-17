@@ -69,10 +69,8 @@ public class GeneralFactory {
     private List<String> usersStringId;
     private List<VideoPicModel> videoPicModelList;
     private String theMessage;
-    private FirebaseAuth acct;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private StorageTask<UploadTask.TaskSnapshot> mUploads;
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -668,27 +666,24 @@ public class GeneralFactory {
         if(mAuth != null){
             String senderId = mAuth.getUid()+"friends";
 
-            allFriends = new ArrayList<>();
             if(senderId != null){
                 DatabaseReference mDatebaseReference = firebaseDatabase.getReference(senderId);
                 mDatebaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        allFriends.clear();
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                             FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
                             assert friendAlgo != null;
                             WaamUser user = friendAlgo.getWaamUser();
                             if(user.getUid().equals(receiverId)){
                                 checkFriend.checkIfFriend(true);
+                                Log.d("FriendsIndeed","Yea friends ");
                                 break;
                             }
 
 
                         }
 
-
-                        Log.d("Allfriends",""+allFriends.size());
 
                     }
 
@@ -703,17 +698,7 @@ public class GeneralFactory {
                         .show();
 
             }
-            loadFriends(senderId, new FetchFriends() {
-                @Override
-                public void friendsFetcher(List<WaamUser> friends) {
-                    for(WaamUser user : friends){
-                        if(user.getUid().equals(receiverId)) {
 
-                        }
-
-                    }
-                }
-            });
 
         }
 
@@ -770,7 +755,8 @@ public class GeneralFactory {
         final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filextension);
 
         //bar.setProgress(0);
-         mUploads = fileref.putFile(uri)
+        //bar.setProgress(0);
+        StorageTask<UploadTask.TaskSnapshot> mUploads = fileref.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

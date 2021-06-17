@@ -25,7 +25,6 @@
         android:required="true" />
 
     <application
-
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -37,10 +36,8 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
+        <activity android:name=".NotificationActivity"></activity>
         <activity android:name=".CallScreenActivity" />
-
-
         <activity android:name=".VideoCallActivity" />
         <activity android:name=".SignUpSecond" />
         <activity android:name=".CallingActivity" />
@@ -49,8 +46,8 @@
             android:parentActivityName=".DrawelayoutActivity" />
 
         <service android:name=".SinchService" />
-        <activity android:name=".IncomingCallScreenActivity"></activity>
 
+        <activity android:name=".IncomingCallScreenActivity" />
         <activity android:name=".Unfriend" />
         <activity android:name=".DailyMatch" />
         <activity android:name=".AgentProfile" />
@@ -66,7 +63,7 @@
         <activity android:name=".Matchfriends" />
         <activity android:name=".CompleteProfile" />
         <activity android:name=".LocationDetectActivity" />
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Profile" />
         <activity android:name=".DrawelayoutActivity" />
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
@@ -75,10 +72,10 @@
         <activity android:name=".Verification1" />
         <activity android:name=".MainActivity" />
         <activity android:name=".passw" />
-        <activity android:name=".Another"></activity>
+        <activity android:name=".Another" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
-        <activity android:name=".Interest"></activity>
+        <activity android:name=".Interest" />
         <activity android:name=".ViewPager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
