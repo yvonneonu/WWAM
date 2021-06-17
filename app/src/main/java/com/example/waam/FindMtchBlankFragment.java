@@ -66,9 +66,6 @@ public class FindMtchBlankFragment extends Fragment {
 
         Fragment fragment = new DrawerMatchFragment();
 //        eventText.setBackgroundColor(Color.BLUE);
-        if (pb != null){
-            pb.getString("friend", "evnt");
-        }
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         //eventText.setBackgroundColor(Color.BLUE);
