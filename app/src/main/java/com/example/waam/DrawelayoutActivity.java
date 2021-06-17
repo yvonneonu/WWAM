@@ -29,6 +29,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
     private DrawerLayout drawer;
     private BottomNavigationView bottomNavigationView;
     private Intent intent;
+    private FirebaseAuth mAuth;
     String uid;
 
 
@@ -38,6 +39,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         setContentView(R.layout.activity_drawelayout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mAuth = FirebaseAuth.getInstance();
         String token = getIntent().getStringExtra("toking");
         WaamUser friendsProfile = (WaamUser) getIntent().getSerializableExtra("PutProfile");
         WaamUser videopicfragm = (WaamUser) getIntent().getSerializableExtra("WaamUser");
@@ -90,6 +92,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             }
         });
 
+        WaamUser waamUser = (WaamUser) getIntent().getSerializableExtra("YvonneSleep");
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -110,9 +113,11 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             // bottomNavigationView.setSelectedItemId(R.id.messages);
             // bottomNavigationView.onScreenStateChanged(0);
 
+
             //
-        } else if (friendsProfile != null) {
-            fragmenting = ProfileFragment.newInstance(friendsProfile);
+        } else if (waamUser != null) {
+            fragmenting = new ConnectedFriendsFragment(waamUser);
+            bottomNavigationView.getMenu().getItem(-0).setChecked(false);
        /* } else if (videopicfragm != null) {
             fragmenting = new ConnectedFriendsFragment(videopicfragm);*/
           //  bottomNavigationView.getMenu().getItem(2).setChecked(true);
@@ -159,6 +164,12 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 break;
 
 
+            case R.id.dailymatch:
+                fragment = new FindMtchBlankFragment();
+
+                // intent = new Intent(DrawelayoutActivity.this, DailyMatch.class);
+
+                break;
 
             case R.id.friend:
                 fragment = new FriendsFragment();
@@ -166,9 +177,19 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
                 break;
 
+            case R.id.upcomingevent:
+                fragment = new FindMtchBlankFragment();
+                Bundle pg = new Bundle();
+                pg.putBoolean(FindMtchBlankFragment.ARG_PARAM3, true);
+                fragment.setArguments(pg);
+
+                break;
+
             case R.id.datingagent:
                 fragment = new AgentFragment();
+                bottomNavigationView.getMenu().getItem(4).setChecked(true);
                 break;
+
 
             case R.id.explore:
                 fragment = new ExploreFragment();
@@ -186,16 +207,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
                 break;
 
-            case R.id.dailymatch:
-                fragment = new FindMtchBlankFragment();
 
-                // intent = new Intent(DrawelayoutActivity.this, DailyMatch.class);
-
-                break;
-
-            case R.id.upcomingevent:
-                fragment = new FindMtchBlankFragment();
-                break;
 
 
             case R.id.profile:
