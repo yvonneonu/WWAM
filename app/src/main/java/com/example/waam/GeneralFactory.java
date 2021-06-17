@@ -667,17 +667,20 @@ public class GeneralFactory {
             String senderId = mAuth.getUid()+"friends";
 
             if(senderId != null){
+                Log.d("FriendEver","Yea friends ");
                 DatabaseReference mDatebaseReference = firebaseDatabase.getReference(senderId);
                 mDatebaseReference.addValueEventListener(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                             FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
                             assert friendAlgo != null;
                             WaamUser user = friendAlgo.getWaamUser();
+                            Log.d("FriendsIndeed","Yea friends ");
                             if(user.getUid().equals(receiverId)){
                                 checkFriend.checkIfFriend(true);
-                                Log.d("FriendsIndeed","Yea friends ");
+
                                 break;
                             }
 

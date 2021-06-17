@@ -2,7 +2,6 @@ package com.example.waam;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +23,14 @@ public class FindMtchBlankFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String ARG_PARAM3 = "friendEvent";
 
-    Bundle pb = getArguments();
+    private Boolean fromEvent;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public FindMtchBlankFragment() {
         // Required empty public constructor
@@ -55,22 +57,34 @@ public class FindMtchBlankFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fromEvent = false;
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
 
             mParam2 = getArguments().getString(ARG_PARAM2);
-
+            fromEvent = getArguments().getBoolean(ARG_PARAM3,false);
 
         }
       //  machModelAdapter1 = new machModelAdapter(matchModels,getActivity());
 
-        Fragment fragment = new DrawerMatchFragment();
+
+        Fragment fragment;
+
+        if(fromEvent){
+            fragment = new DrawerEventFragment();
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            ft.replace(R.id.frame,fragment);
+            ft.commit();
+        }else{
+            fragment = new DrawerMatchFragment();
 //        eventText.setBackgroundColor(Color.BLUE);
 
-        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        //eventText.setBackgroundColor(Color.BLUE);
-        ft.replace(R.id.frame,fragment);
-        ft.commit();
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            //eventText.setBackgroundColor(Color.BLUE);
+            ft.replace(R.id.frame,fragment);
+            ft.commit();
+        }
+
 
     }
 
@@ -82,7 +96,9 @@ public class FindMtchBlankFragment extends Fragment {
         textView = view.findViewById(R.id.mangend);
         eventText = view.findViewById(R.id.event);
 
-        textView.setBackgroundColor(Color.BLUE);
+        if(fromEvent) eventText.setBackgroundColor(Color.BLUE);
+        else textView.setBackgroundColor(Color.BLUE);
+
 
         eventText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +109,6 @@ public class FindMtchBlankFragment extends Fragment {
                     eventText.setBackgroundColor(Color.BLUE);
                     textView.setBackgroundResource(R.drawable.drawerborder);
 
-                    if (pb != null) {
-                        pb.getString("match", "event");
-                    }
                     Fragment fragment = new DrawerEventFragment();
 
                     FragmentTransaction ft = getChildFragmentManager().beginTransaction();
@@ -116,8 +129,6 @@ public class FindMtchBlankFragment extends Fragment {
                     eventText.setBackgroundResource(R.drawable.drawerborder);
                     Fragment fragment = new DrawerMatchFragment();
 
-                    pb.getString("friend", "evnt");
-                    Log.d("friendssss", ""+pb);
                     FragmentTransaction ft = getChildFragmentManager().beginTransaction();
 
                     ft.replace(R.id.frame,fragment);

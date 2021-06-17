@@ -125,9 +125,6 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
             case R.id.dailymatch:
                 fragment = new FindMtchBlankFragment();
-                Bundle arg = new Bundle();
-                arg.putString("match", "event");
-                fragment.setArguments(arg);
 
                 // intent = new Intent(DrawelayoutActivity.this, DailyMatch.class);
 
@@ -142,9 +139,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
             case R.id.upcomingevent:
                 fragment = new FindMtchBlankFragment();
                 Bundle pg = new Bundle();
-                pg.putString("friend", "evnt");
+                pg.putBoolean(FindMtchBlankFragment.ARG_PARAM3, true);
                 fragment.setArguments(pg);
-                Log.d("friend", ""+pg);
 
                 break;
 

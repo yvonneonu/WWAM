@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -143,6 +145,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         friends.setOnClickListener(this);
         button.setOnClickListener(this);
 
+
+
         if(waamUser != null){
             frameLayout.setVisibility(View.VISIBLE);
 
@@ -154,10 +158,34 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                     .into(profilePic);
 
 
-          generalFactory.friendChecker(waamUser.getUid(), new GeneralFactory.CheckFriend() {
+            String myId = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
+            generalFactory.loadFriends(myId, new GeneralFactory.FetchFriends() {
+                @Override
+                public void friendsFetcher(List<WaamUser> friends) {
+                    Log.d("SizeOfFriend",""+friends.size());
+                    Log.d("IsFriend", ""+waamUser.getUid());
+                    for(WaamUser user : friends){
+
+
+                        Log.d("IAmInFor", ""+waamUser.getUid());
+                        if(user.getUid().equals(waamUser.getUid())){
+                            Log.d("IAmTrue", ""+waamUser.getUid());
+                            linlayout.setVisibility(View.VISIBLE);
+                            button.setVisibility(View.GONE);
+                        }else{
+                            Log.d("IAmFalse", ""+waamUser.getUid());
+                            button.setVisibility(View.VISIBLE);
+                            linlayout.setVisibility(View.GONE);
+                        }
+                    }
+                }
+            });
+         /* generalFactory.friendChecker(waamUser.getUid(), new GeneralFactory.CheckFriend() {
               @Override
               public void checkIfFriend(boolean isFriend) {
+                  Log.d("IsFriend", ""+isFriend);
                   if(isFriend){
+
                       linlayout.setVisibility(View.VISIBLE);
                       button.setVisibility(View.GONE);
                   }else{
@@ -165,7 +193,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                       linlayout.setVisibility(View.GONE);
                   }
               }
-          });
+          });*/
         }else{
             frameLayout.setVisibility(View.GONE);
             String userId = FirebaseAuth.getInstance().getUid();
@@ -268,15 +296,19 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 break;
 
             case sendRequest:
+
                 if(waamUser != null){
                     GeneralFactory.getGeneralFactory(getActivity())
                             .sendFriendRequest(button, waamUser);
 
                 }
+                break;
 
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
 
     }
+
+
 }

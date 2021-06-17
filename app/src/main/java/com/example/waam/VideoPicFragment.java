@@ -27,7 +27,7 @@ public class VideoPicFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
     private VideoPicAdapter videoPicAdapter;
-    private final WaamUser waamUser;
+    private WaamUser waamUser;
     private ProgressBar bar;
     private TextView textView;
     private GeneralFactory generalFactory;
@@ -37,6 +37,10 @@ public class VideoPicFragment extends Fragment {
     public VideoPicFragment(WaamUser waamUser) {
         this.waamUser = waamUser;
         // Required empty public constructor
+    }
+
+    public VideoPicFragment(){
+
     }
 
     /**
