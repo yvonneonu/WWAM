@@ -62,7 +62,7 @@ public class RequestFriendAdapter extends RecyclerView.Adapter<RequestFriendAdap
         TextView name;
         public FriendAdapterHolder(@NonNull View itemView,FriendAdderListener friendAdderListener) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView45);
+            //imageView = itemView.findViewById(R.id.imageView45);
             buttonAccep = itemView.findViewById(R.id.button17);
             buttonDecline = itemView.findViewById(R.id.button16);
             name = itemView.findViewById(R.id.textView108);
