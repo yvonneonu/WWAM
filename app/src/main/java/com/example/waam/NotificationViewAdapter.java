@@ -48,17 +48,19 @@ public class NotificationViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         NotificationActions user = notificationActionsList.get(position);
+        WaamUser waamUseruser = user.getWaamUser();
         String myId = FirebaseAuth.getInstance().getUid();
         if(user.isInvite()){
             FriendInvite invite = (FriendInvite) holder;
+
             Glide.with(context)
                     .asBitmap()
                     .circleCrop()
                     .fitCenter()
-                    .load(user.getImageUrl())
+                    .load(waamUseruser.getImageUrl())
                     .into(invite.imageViewone);
 
-            invite.textView.setText(user.getFullname());
+            invite.textView.setText(waamUseruser.getFullname());
             GeneralFactory.getGeneralFactory(context)
                     .loadSpecUser(myId, new GeneralFactory.SpecificUser() {
                         @Override
@@ -73,17 +75,17 @@ public class NotificationViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     });
         }else if(user.isFriendAccepted()){
             FriendAccepted accepted = (FriendAccepted) holder;
-            accepted.textViewname.setText(user.getFullname());
+            accepted.textViewname.setText(waamUseruser.getFullname());
             Glide.with(context)
                     .asBitmap()
                     .fitCenter()
                     .circleCrop()
-                    .load(user.getImageUrl())
+                    .load(waamUseruser.getImageUrl())
                     .into(accepted.imageView);
         }else if(user.isFriendRequest()){
 
             FriendRequest friendRequest = (FriendRequest) holder;
-            friendRequest.textView.setText(user.getFullname());
+            friendRequest.textView.setText(waamUseruser.getFullname());
 
         }
 

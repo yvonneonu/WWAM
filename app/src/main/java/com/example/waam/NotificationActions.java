@@ -1,9 +1,10 @@
 package com.example.waam;
 
-public class NotificationActions extends WaamUser {
-    boolean invite;
-    boolean friendRequest;
-    boolean friendAccepted;
+public class NotificationActions {
+    private boolean invite;
+    private boolean friendRequest;
+    private boolean friendAccepted;
+    private WaamUser waamUser;
 
     public boolean isInvite() {
         return invite;
@@ -27,5 +28,13 @@ public class NotificationActions extends WaamUser {
 
     public void setFriendAccepted(boolean friendAccepted) {
         this.friendAccepted = friendAccepted;
+    }
+
+    public WaamUser getWaamUser() {
+        return waamUser;
+    }
+
+    public void setWaamUser(WaamUser waamUser) {
+        this.waamUser = waamUser;
     }
 }
