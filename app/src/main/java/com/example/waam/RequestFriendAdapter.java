@@ -65,7 +65,7 @@ public class RequestFriendAdapter extends RecyclerView.Adapter<RequestFriendAdap
             //imageView = itemView.findViewById(R.id.imageView45);
             buttonAccep = itemView.findViewById(R.id.button17);
             buttonDecline = itemView.findViewById(R.id.button16);
-            name = itemView.findViewById(R.id.textView108);
+            name = itemView.findViewById(R.id.textView108name);
 
             buttonAccep.setOnClickListener(new View.OnClickListener() {
                 @Override
