@@ -19,10 +19,12 @@ public class machModelAdapter extends RecyclerView.Adapter<machModelAdapter.View
     List<matchModel> matchModelList;
     Context context;
     onMatchListener onMatchListener;
+    onDotListener onDotListener;
 
     public machModelAdapter(List<matchModel> matchModelList, Context context){
         this.matchModelList = matchModelList;
         this.context = context;
+
 
     }
     @NonNull
@@ -52,7 +54,7 @@ public class machModelAdapter extends RecyclerView.Adapter<machModelAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        ImageView imageView, threeDot;
         TextView textView;
         TextView textView1;
         ConstraintLayout constraintLayout;
@@ -63,6 +65,20 @@ public class machModelAdapter extends RecyclerView.Adapter<machModelAdapter.View
             textView = itemView.findViewById(R.id.textView52);
             textView1 = itemView.findViewById(R.id.textView53);
             constraintLayout = itemView.findViewById(R.id.all1);
+            threeDot = itemView.findViewById(R.id.dot);
+
+            threeDot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onDotListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            onDotListener.OnDotClick(position);
+                        }
+                    }
+
+                }
+            });
 
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,5 +101,11 @@ public class machModelAdapter extends RecyclerView.Adapter<machModelAdapter.View
     public void MatchMethod(onMatchListener onMatchListener){
         this.onMatchListener = onMatchListener;
 
+    }
+    public interface onDotListener{
+        void OnDotClick(int position);
+    }
+    public void DotMethod(onDotListener onDotListener){
+        this.onDotListener = onDotListener;
     }
 }
