@@ -88,6 +88,17 @@ public class DrawerMatchFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler1);
         machModelAdapter = new machModelAdapter(matchModels,getActivity());
 
+        machModelAdapter.DotMethod(new machModelAdapter.onDotListener() {
+            @Override
+            public void OnDotClick(int position) {
+                matchModel match = matchModels.get(position);
+
+                UnfriendBottomsheet bottomsheet = new UnfriendBottomsheet();
+                bottomsheet.show(getFragmentManager(), "TAG");
+                //  bottomsheet.
+            }
+        });
+
         machModelAdapter.MatchMethod(new machModelAdapter.onMatchListener() {
             @Override
             public void OnMatchClick(int position) {

@@ -30,6 +30,7 @@ public class UnfriendBottomsheet extends BottomSheetDialogFragment {
         unfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Unfrien();
                 String message = "This user is no longer in your friend list";
                 Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
             }
@@ -51,5 +52,9 @@ public class UnfriendBottomsheet extends BottomSheetDialogFragment {
         });
 
         return view;
+    }
+
+    private void Unfrien() {
+        //if (CurrentS)
     }
 }
