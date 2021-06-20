@@ -1,33 +1,37 @@
 package com.example.waam;
 
-public class NotificationActions {
-    private boolean invite;
-    private boolean friendRequest;
-    private boolean friendAccepted;
+public abstract class NotificationActions {
+    private String eventType;
+    private String senderId;
+    private String receiverId;
     private WaamUser waamUser;
+    private String notificationId;
+    abstract String getEventType();
 
-    public boolean isInvite() {
-        return invite;
+    abstract void setEventType(String eventType);
+
+    public String getNotificationId() {
+        return notificationId;
     }
 
-    public void setInvite(boolean invite) {
-        this.invite = invite;
+    public void setNotificationId(String notificationId) {
+        this.notificationId = notificationId;
     }
 
-    public boolean isFriendRequest() {
-        return friendRequest;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setFriendRequest(boolean friendRequest) {
-        this.friendRequest = friendRequest;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public boolean isFriendAccepted() {
-        return friendAccepted;
+    public String getReceiverId() {
+        return receiverId;
     }
 
-    public void setFriendAccepted(boolean friendAccepted) {
-        this.friendAccepted = friendAccepted;
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
     }
 
     public WaamUser getWaamUser() {

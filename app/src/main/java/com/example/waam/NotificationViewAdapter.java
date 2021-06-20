@@ -50,7 +50,7 @@ public class NotificationViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         NotificationActions user = notificationActionsList.get(position);
         WaamUser waamUseruser = user.getWaamUser();
         String myId = FirebaseAuth.getInstance().getUid();
-        if(user.isInvite()){
+        if(user.getEventType().equals("friendinvite")){
             FriendInvite invite = (FriendInvite) holder;
 
             Glide.with(context)
@@ -73,7 +73,7 @@ public class NotificationViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                                     .into(invite.imageViewone);
                         }
                     });
-        }else if(user.isFriendAccepted()){
+        }else if(user.getEventType().equals("friendaccepted")){
             FriendAccepted accepted = (FriendAccepted) holder;
             accepted.textViewname.setText(waamUseruser.getFullname());
             Glide.with(context)
@@ -82,7 +82,7 @@ public class NotificationViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     .circleCrop()
                     .load(waamUseruser.getImageUrl())
                     .into(accepted.imageView);
-        }else if(user.isFriendRequest()){
+        }else if(user.getEventType().equals("friendrequest")){
 
             FriendRequest friendRequest = (FriendRequest) holder;
             friendRequest.textView.setText(waamUseruser.getFullname());

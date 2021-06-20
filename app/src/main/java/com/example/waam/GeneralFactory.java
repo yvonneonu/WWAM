@@ -55,10 +55,10 @@ public class GeneralFactory {
     private static final String WAAMBASE = "waamuser_base";
     private static final String PROFILEPIC = "profilePic";
     private static final String VIDEOPIC = "videoPic";
-    private static final String FRIENDREQUEST = "friendRequestlist";
+    private static final String NOTIFICATIONLIST = "Notificationlist";
     private final FirebaseDatabase firebaseDatabase;
     private List<Chat> chatContainer;
-    private List<WaamUser> requestFriendsList;
+    private List<NotificationActions> notificationActionsList;
     private List<WaamUser> allWaamUsers;
     private final List<AgentModel> agentModelList;
     private List<WaamUser> allFriends;
@@ -970,10 +970,17 @@ public class GeneralFactory {
     public void sendFriendRequest(WaamUser user){
         String senderOfRequest = mAuth.getUid();
         String receiverBranch = user.getUid();
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child(FRIENDREQUEST)
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(NOTIFICATIONLIST)
                 .child(receiverBranch);
-        RequestFriend requestFriend = new RequestFriend(senderOfRequest,user);
-        databaseReference.setValue(requestFriend).addOnCompleteListener(new OnCompleteListener<Void>() {
+        //RequestFriend requestFriend = new RequestFriend(senderOfRequest,user);
+        String notificationId = databaseReference.push().getKey();
+        NotificationActions friendRequest = new FriendRequestEvent();
+        friendRequest.setWaamUser(user);
+        friendRequest.setReceiverId(receiverBranch);
+        friendRequest.setSenderId(senderOfRequest);
+        friendRequest.setNotificationId(notificationId);
+        assert notificationId != null;
+        databaseReference.child(notificationId).setValue(friendRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -994,13 +1001,21 @@ public class GeneralFactory {
     public void sendFriendRequest(Button button,WaamUser user){
         String senderOfRequest = mAuth.getUid();
         String receiverBranch = user.getUid();
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child(FRIENDREQUEST)
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(NOTIFICATIONLIST)
                 .child(receiverBranch);
         RequestFriend requestFriend = new RequestFriend(senderOfRequest,user);
-        databaseReference.setValue(requestFriend).addOnCompleteListener(new OnCompleteListener<Void>() {
+        String notificationId = databaseReference.push().getKey();
+        NotificationActions friendRequest = new FriendRequestEvent();
+        friendRequest.setWaamUser(user);
+        friendRequest.setReceiverId(receiverBranch);
+        friendRequest.setSenderId(senderOfRequest);
+        friendRequest.setNotificationId(notificationId);
+
+        databaseReference.child(notificationId).setValue(requestFriend).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
+
                     Toast.makeText(context,"request sent",Toast.LENGTH_LONG).show();
                     button.setEnabled(false);
                     button.setText("Awaiting confirmation");
@@ -1014,20 +1029,18 @@ public class GeneralFactory {
         });
     }
 
-    public void loadFriendRequestList(){
-        requestFriendsList = new ArrayList<>();
+    public void loadNotificationList(){
+        notificationActionsList = new ArrayList<>();
         String uid = mAuth.getUid()+"friendRequestList";
-        DatabaseReference mDatabaseReference = firebaseDatabase.getReference().child(FRIENDREQUEST)
+        DatabaseReference mDatabaseReference = firebaseDatabase.getReference().child(NOTIFICATIONLIST)
                 .child(uid);
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                requestFriendsList.clear();
+                notificationActionsList.clear();
                 for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                    RequestFriend requestFriend = snapshot1.getValue(RequestFriend.class);
-                    if(!requestFriend.isAccepted()){
-                       requestFriendsList.add(requestFriend.getUser());
-                    }
+                    NotificationActions notifications = snapshot1.getValue(NotificationActions.class);
+                    notificationActionsList.add(notifications);
                 }
             }
 

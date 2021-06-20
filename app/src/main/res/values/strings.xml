@@ -50,4 +50,5 @@
     <string name="account_starts_with_space">account start with space</string>
     <string name="channel_name_starts_with_space">channel name start with space</string>
     <string name="failed">something terrible happened</string>
+    <string name="todo">TODO</string>
 </resources>
