@@ -1029,9 +1029,9 @@ public class GeneralFactory {
         });
     }
 
-    public void loadNotificationList(){
+    public void loadNotificationList(NotificationsListener notificationsListener){
         notificationActionsList = new ArrayList<>();
-        String uid = mAuth.getUid()+"friendRequestList";
+        String uid = mAuth.getUid()+NOTIFICATIONLIST;
         DatabaseReference mDatabaseReference = firebaseDatabase.getReference().child(NOTIFICATIONLIST)
                 .child(uid);
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -1042,6 +1042,8 @@ public class GeneralFactory {
                     NotificationActions notifications = snapshot1.getValue(NotificationActions.class);
                     notificationActionsList.add(notifications);
                 }
+
+                notificationsListener.notification(notificationActionsList);
             }
 
             @Override
@@ -1075,6 +1077,11 @@ public class GeneralFactory {
 
     interface CheckFriend{
         void checkIfFriend(boolean isFriend);
+    }
+
+
+    interface NotificationsListener{
+        void notification(List<NotificationActions> notificationActions);
     }
 
 
