@@ -225,7 +225,7 @@ public class ChatMessage extends BaseActivity implements SinchService.StartFaile
             }
 
             //This loads message on the activity
-            generalFactoryInstance.loadMessages(chatCont -> {
+           generalFactoryInstance.loadMessages(chatCont -> {
                 chats = chatCont;
                 textViewStatus.setText(contactlist.getOnlineStatus());
                 chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this,contactlist.getImageUrl());

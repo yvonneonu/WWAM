@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -122,6 +123,9 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
                 break;
 
+            case R.id.notification:
+                Intent intent = new Intent(DiscoverDrawerLayerout.this, NotificationActivity.class);
+                startActivity(intent);
 
             case R.id.dailymatch:
                 fragment = new FindMtchBlankFragment();
@@ -135,6 +139,9 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
                 break;
+
+
+
 
             case R.id.upcomingevent:
                 fragment = new FindMtchBlankFragment();

@@ -1,12 +1,16 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,5 +64,33 @@ public class NotificationNotAllowedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notification_not_allowed, container, false);
+
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Button button = view.findViewById(R.id.button18);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("android.provider.extra.APP_PACKAGE", getContext().getPackageName());
+             //   bundle.putString("android.provider.extra.APP_PACKAGE", getContext().getApplicationInfo().uid);
+
+              Intent intent = new Intent(getActivity(), NotificationListener.class);
+
+
+                Log.d("because i no get money", ""+getContext().getPackageName());
+                getActivity().startService(intent.putExtras(bundle));
+                //getActivity().startService(new Intent(getActivity(), NotificationListener.class));
+
+
+            }
+        });
     }
 }

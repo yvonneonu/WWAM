@@ -163,6 +163,10 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 fragment = new BecomeAMemberFragment();
                 break;
 
+            case R.id.notification:
+                Intent intent = new Intent(DrawelayoutActivity.this, NotificationActivity.class);
+                startActivity(intent);
+
 
             case R.id.dailymatch:
                 fragment = new FindMtchBlankFragment();
