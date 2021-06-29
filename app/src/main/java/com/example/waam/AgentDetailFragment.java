@@ -38,7 +38,7 @@ public class AgentDetailFragment extends Fragment {
         TextView ratingValue = view.findViewById(R.id.textView89);
         TextView readMore = view.findViewById(R.id.textView93);
         readMore.setCompoundDrawablesWithIntrinsicBounds(0, 0,R.drawable.ic_baseline_arrow_drop_down_24, 0);
-        Glide.with(Objects.requireNonNull(getActivity()))
+        Glide.with(requireActivity())
                 .asBitmap()
                 .load(agentModel.getImage())
                 .into(imageone);
