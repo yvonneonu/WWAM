@@ -36,6 +36,7 @@
                 android:layout_marginTop="53dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/profileicon"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
@@ -126,6 +127,25 @@
                         android:src="@drawable/aboutmeiconchildren" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/latest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Latest Matches"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Discover People who are interested in you."
+                android:textColor="@color/offwhite"
+
+                app:layout_constraintTop_toBottomOf="@+id/latest"
+               />
 
             <FrameLayout
                 android:id="@+id/profileframe"
