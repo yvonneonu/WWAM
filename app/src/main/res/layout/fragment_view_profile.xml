@@ -125,6 +125,7 @@
                         android:layout_weight="1"
                         android:clickable="true"
                         android:src="@drawable/aboutmeiconchildren" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -167,13 +168,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView115" />
+
 
             <TextView
 
@@ -216,7 +218,7 @@
 
                 android:id="@+id/recyclerView7"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -224,6 +226,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView117" />
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="20dp"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                app:layout_constraintBottom_toBottomOf="@+id/recyclerView7"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerView7"
+                app:layout_constraintTop_toTopOf="@+id/recyclerView7" />
 
             <TextView
 
@@ -239,6 +252,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView7" />
 
             <TextView
+                android:id="@+id/textView120"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -266,15 +280,39 @@
 
             <androidx.recyclerview.widget.RecyclerView
 
+                android:id="@+id/recyclerView9"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView119" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="20dp"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerView9"
+                app:layout_constraintTop_toBottomOf="@+id/textView119"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="20dp"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                app:layout_constraintBottom_toBottomOf="@+id/recyclerView3"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerView3"
+                app:layout_constraintTop_toTopOf="@+id/recyclerView3" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
