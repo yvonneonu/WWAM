@@ -99,6 +99,8 @@ public class ViewProfile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
+        eventDesign();
+
         textView = view.findViewById(R.id.textView71);
         textView1 = view.findViewById(R.id.arrow_matches);
         imageView = view.findViewById(R.id.imageView);
@@ -141,5 +143,28 @@ public class ViewProfile extends Fragment {
             }
         });
         return view;
+    }
+
+    private void eventDesign() {
+        int[] display = {
+                R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user,
+                R.drawable.group_img_2,
+                R.drawable.topnav_profile,
+
+
+        };
+
+
+
+        String[] rate2 = {"(100)", "(119)", "(200)", "(320)", "(240)",
+
+        };
+
+        for (int i = 0; i < display.length; i++) {
+
+                locationView.add(new Location(display[i], rate2[i]));
+        }
     }
 }
