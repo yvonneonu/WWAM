@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,9 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +32,10 @@ public class ViewProfile extends Fragment {
     private TextView textView, textView1;
     private ImageView imageView;
     private Toolbar toolbar;
+    private RecyclerView recyclerView;
+
+    private ViewProfileAdapter viewProfileAdapter;
+    private List<Location> locationView = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +46,7 @@ public class ViewProfile extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public ViewProfile() {
         // Required empty public constructor
@@ -73,6 +84,14 @@ public class ViewProfile extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.viewprofile, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -81,7 +100,13 @@ public class ViewProfile extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
         textView = view.findViewById(R.id.textView71);
+        textView1 = view.findViewById(R.id.arrow_matches);
         imageView = view.findViewById(R.id.imageView);
+        recyclerView = view.findViewById(R.id.recyclerView3);
+        viewProfileAdapter = new ViewProfileAdapter(locationView, getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setAdapter(viewProfileAdapter);
+        recyclerView.setLayoutManager(linearLayoutManager);
       //  textView1 = view.findViewById(R.id.textrt);
 
        // toolbar = view.findViewById(R.id.toolbar1);
@@ -105,6 +130,14 @@ public class ViewProfile extends Fragment {
                         .into(imageView);
 
                 textView.setText(user.getFullname());
+            }
+        });
+        textView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < 4; i++){
+                   // locationView.add(new Location())
+                }
             }
         });
         return view;
