@@ -115,7 +115,7 @@ public class ViewProfile extends Fragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
 
-        toolbar.setTitle("Dashboard");
+//        toolbar.setTitle("Dashboard");
 
         String uid = FirebaseAuth.getInstance().getUid();
 
