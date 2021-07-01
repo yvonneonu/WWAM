@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.waam.utils.ViewEventAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -33,9 +34,12 @@ public class ViewProfile extends Fragment {
     private ImageView imageView;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
-
     private ViewProfileAdapter viewProfileAdapter;
     private List<Location> locationView = new ArrayList<>();
+
+    private List<Location> eventView = new ArrayList<>();
+    private ViewEventAdapter viewEventAdapter;
+    private RecyclerView recyclerView1;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,6 +103,7 @@ public class ViewProfile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
+        matchDesign();
         eventDesign();
 
         textView = view.findViewById(R.id.textView71);
@@ -110,6 +115,12 @@ public class ViewProfile extends Fragment {
         recyclerView.setAdapter(viewProfileAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
       //  textView1 = view.findViewById(R.id.textrt);
+
+        recyclerView1 = view.findViewById(R.id.recyclerView7);
+        viewEventAdapter = new ViewEventAdapter(eventView, getActivity());
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView1.setAdapter(viewEventAdapter);
+        recyclerView1.setLayoutManager(linearLayoutManager1);
 
        // toolbar = view.findViewById(R.id.toolbar1);
         toolbar = view.findViewById(R.id.toolbar);
@@ -145,7 +156,7 @@ public class ViewProfile extends Fragment {
         return view;
     }
 
-    private void eventDesign() {
+    private void matchDesign() {
         int[] display = {
                 R.drawable.topnav_profile,
                 R.drawable.top_scroll_profile_img,
@@ -165,6 +176,28 @@ public class ViewProfile extends Fragment {
         for (int i = 0; i < display.length; i++) {
 
                 locationView.add(new Location(display[i], rate2[i]));
+        }
+    }
+    private void eventDesign() {
+        int[] display = {
+                R.drawable.topnav_profile,
+                R.drawable.top_scroll_profile_img,
+                R.drawable.profile_img_user,
+                R.drawable.group_img_2,
+                R.drawable.topnav_profile,
+
+
+        };
+
+
+
+        String[] rate2 = {"Ada, 25", "Kemi, 19", "Adora, 20", "Caio, 25", "Aish, 35",
+
+        };
+
+        for (int i = 0; i < display.length; i++) {
+
+            eventView.add(new Location(display[i], rate2[i]));
         }
     }
 }
