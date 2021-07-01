@@ -158,7 +158,7 @@ public class ViewProfile extends Fragment {
 
 
 
-        String[] rate2 = {"(100)", "(119)", "(200)", "(320)", "(240)",
+        String[] rate2 = {"Ada, 25", "Kemi, 19", "Adora, 20", "Caio, 25", "Aish, 35",
 
         };
 
