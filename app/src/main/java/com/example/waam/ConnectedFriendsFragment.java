@@ -150,7 +150,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         if(waamUser != null){
             frameLayout.setVisibility(View.VISIBLE);
 
-            Glide.with(Objects.requireNonNull(getActivity()))
+            Glide.with(requireActivity())
                     .asBitmap()
                     .fitCenter()
                     .circleCrop()
@@ -201,7 +201,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                     .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
                         @Override
                         public void loadSpecUse(WaamUser user) {
-                            Glide.with(Objects.requireNonNull(getActivity()))
+                            Glide.with(requireActivity())
                                     .asBitmap()
                                     .fitCenter()
                                     .load(user.getImageUrl())

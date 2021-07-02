@@ -150,7 +150,7 @@ public class ProfileFragment extends Fragment {
                     if(boolcont[n] && user != null){
                         Log.d("Connected","Both of you are friends");
                         Fragment fragment = new ConnectedFriendsFragment(user);
-                        FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                        FragmentTransaction ft = requireActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.fragmentcontainer,fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .addToBackStack(null)
