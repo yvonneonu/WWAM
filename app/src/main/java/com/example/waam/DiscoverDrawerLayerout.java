@@ -117,6 +117,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
             public void onClick(View v) {
                 Fragment fragment = new ViewProfile();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                bottomNavigationView.setVisibility(View.GONE);
                 ft.replace(R.id.fragmentcontainer,fragment);
                 ft.commit();
                 drawer1.closeDrawer(GravityCompat.START);
@@ -135,7 +136,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         switch (item.getItemId()) {
             case R.id.membership:
                 fragment = new BecomeAMemberFragment();
-
+                bottomNavigationView.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.notification:
@@ -144,14 +145,14 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
             case R.id.dailymatch:
                 fragment = new FindMtchBlankFragment();
-
+                bottomNavigationView.setVisibility(View.VISIBLE);
                 // intent = new Intent(DrawelayoutActivity.this, DailyMatch.class);
 
                 break;
 
             case R.id.friend:
                 fragment = new FriendsFragment();
-
+                bottomNavigationView.setVisibility(View.VISIBLE);
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
                 break;
 
@@ -191,12 +192,14 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
             case R.id.friends:
                 fragment = new FriendsFragment();
+                bottomNavigationView.setVisibility(View.VISIBLE);
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
                 break;
 
 
             case R.id.agent:
                 fragment = new AgentFragment();
+                bottomNavigationView.setVisibility(View.VISIBLE);
                 item.setIcon(R.drawable.lowernav_agent_icon_active);
                 break;
 
