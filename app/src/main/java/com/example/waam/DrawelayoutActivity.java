@@ -67,20 +67,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         TextView nav_user = hView.findViewById(R.id.textView96);
         TextView viewProfile = hView.findViewById(R.id.textView95);
 
-        viewProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Fragment fragment = new ViewProfile();
-
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentcontainer,fragment);
-                drawer.closeDrawer(GravityCompat.START);
-                bottomNavigationView.getMenu().getItem(-0).setChecked(false);
-                ft.commit();
-
-            }
-        });
 
 
 
@@ -153,6 +140,20 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         fragmentTransaction.add(R.id.fragmentcontainer, fragment1);
         fragmentTransaction.commit();*/
 
+        viewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Fragment fragment = new ViewProfile();
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentcontainer,fragment);
+                drawer.closeDrawer(GravityCompat.START);
+                bottomNavigationView.getMenu().getItem(-0).setChecked(false);
+                ft.commit();
+
+            }
+        });
     }
 
     @Override

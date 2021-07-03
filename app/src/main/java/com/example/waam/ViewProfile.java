@@ -72,6 +72,9 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     }
 
 
+    public static void onBackPress(){
+
+    }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -327,6 +330,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
 
         //super.on
        // getFragmentManager().popBackStackImmediate();
+
 
 
       //  getActivity().finish();

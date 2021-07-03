@@ -228,6 +228,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         } else {
             super.onBackPressed();
         }
+
+
     }
 
     @Override
