@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**K
  * A simple {@link Fragment} subclass.
@@ -37,6 +38,7 @@ public class MessagesFragment extends Fragment {
     private LinearLayoutManager layoutManager1;
     private ProgressBar barone;
     private ProgressBar bartwo;
+    private AppCompatActivity activity;
 
    //private String DEFAULT_SPAN_COUNT = "2";
 
@@ -81,7 +83,7 @@ public class MessagesFragment extends Fragment {
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+"FRIENDS";
       //  User userReal = getActivity().getIntent().getParcelableExtra(VideoCallActivity.AGOREUSER);
-
+        activity = (AppCompatActivity) getActivity();
         generalFactory.loadNewFriends(branchName, barone,textViewNewFriends, friends -> {
             newFriends = friends;
             friendAdapter  = new FriendAdapter(newFriends,getActivity());
@@ -147,11 +149,6 @@ public class MessagesFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        assert activity != null;
-        activity.getSupportActionBar();
-        //.setTitle("Messages");
-        //Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
 
         groupImage();
         fragment = view.findViewById(R.id.frameLayout);
@@ -176,11 +173,9 @@ public class MessagesFragment extends Fragment {
         });
 
 
+        assert activity != null;
 
-
-        //setHasOptionsMenu(true);
-//       Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
-
+        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
         return  view;
 
 
@@ -221,9 +216,8 @@ public class MessagesFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
-
-        inflater.inflate(R.menu.searchforchat, menu);
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.searchforchat, menu);
 
     }
 

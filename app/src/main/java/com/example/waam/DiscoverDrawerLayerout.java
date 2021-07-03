@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,13 +39,11 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         setSupportActionBar(toolbar2);
 
         mAuth = FirebaseAuth.getInstance();
-
         NavigationView navigationView1 = findViewById(R.id.nav_view);
         navigationView1.setNavigationItemSelectedListener(this);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-       // getSupportActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
         LinearLayout linearLayout = findViewById(R.id.logout);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         drawer1 = findViewById(R.id.drawer1_layout);
@@ -64,22 +61,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         TextView nav_user = (TextView)hView.findViewById(R.id.textView96);
         TextView viewProfile = hView.findViewById(R.id.textView95);
 
-        viewProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-               // Intent intent = new Intent(DiscoverDrawerLayerout.this, AllViewProfile.class);
-             //   startActivity(intent);
-                Fragment fragment = new ViewProfile();
-
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentcontainerDiscover,fragment);
-                drawer1.closeDrawer(GravityCompat.START);
-                bottomNavigationView.getMenu().getItem(-0).setChecked(false);
-                ft.commit();
-
-            }
-        });
 
 
         linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +94,6 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         drawer1.addDrawerListener(toggle);
         toggle.syncState();
 
-      //  toolbar2.setBackgroundColor(Color.BLUE);
         //toolbar2.setBackgroundColor(getResources().getColor(R.color.black));
         toolbar2.setLogo(R.drawable.topnavlogo);
         toolbar2.setNavigationIcon(R.drawable.ic_baseline_menu_24);
@@ -127,11 +108,23 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragmentcontainerDiscover, fragment);
+        ft.add(R.id.fragmentcontainer, fragment);
         ft.commit();
 
 
+        viewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new ViewProfile();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentcontainer,fragment);
+                ft.commit();
+                drawer1.closeDrawer(GravityCompat.START);
+                bottomNavigationView.getMenu().getItem(-0).setChecked(false);
 
+
+            }
+        });
 
 }
 
@@ -206,11 +199,12 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 fragment = new AgentFragment();
                 item.setIcon(R.drawable.lowernav_agent_icon_active);
                 break;
+
         }
         if (fragment != null) {
             Log.d("TAG", "not null");
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragmentcontainerDiscover, fragment);
+            ft.replace(R.id.fragmentcontainer, fragment);
             ft.commit();
             drawer1.closeDrawer(GravityCompat.START);
             return true;
@@ -236,12 +230,5 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-    }
-
 
 }
