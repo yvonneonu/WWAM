@@ -41,6 +41,10 @@ public class ViewProfile extends Fragment {
     private ViewEventAdapter viewEventAdapter;
     private RecyclerView recyclerView1;
 
+    private RecyclerView recyclerView2;
+    private List<Location> dateIdea = new ArrayList<>();
+    private ViewEventAdapter dateIdeaAdapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -105,6 +109,7 @@ public class ViewProfile extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
         matchDesign();
         eventDesign();
+        dateIdeaDisplay();
 
         textView = view.findViewById(R.id.textView71);
         textView1 = view.findViewById(R.id.arrow_matches);
@@ -123,6 +128,11 @@ public class ViewProfile extends Fragment {
         recyclerView1.setLayoutManager(linearLayoutManager1);
 
        // toolbar = view.findViewById(R.id.toolbar1);
+        recyclerView2 = view.findViewById(R.id.recyclerView9);
+        dateIdeaAdapter = new ViewEventAdapter(dateIdea, getActivity());
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView2.setAdapter(dateIdeaAdapter);
+        recyclerView2.setLayoutManager(linearLayoutManager2);
         toolbar = view.findViewById(R.id.toolbar);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -199,6 +209,30 @@ public class ViewProfile extends Fragment {
         for (int i = 0; i < display.length; i++) {
 
             eventView.add(new Location(display[i], rate2[i]));
+        }
+    }
+
+    private void dateIdeaDisplay() {
+        int[] display = {
+
+
+
+                R.drawable.diningout,
+                R.drawable.coffeeconversation,
+                R.drawable.travel,
+                R.drawable.winetasting,
+                R.drawable.nightclubsdancing,
+        };
+
+
+
+        String[] rate2 = {"Secre Food", "SkyJump at Las", "Las Vegas", "Stratosphere Tower", "By Circle",
+
+        };
+
+        for (int i = 0; i < display.length; i++) {
+
+            dateIdea.add(new Location(display[i], rate2[i]));
         }
     }
 }

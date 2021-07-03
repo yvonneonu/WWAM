@@ -181,6 +181,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView115">
 
 
+
             <androidx.recyclerview.widget.RecyclerView
 
                 android:id="@+id/recyclerView3"
@@ -193,7 +194,22 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView115" />
+                app:layout_constraintTop_toBottomOf="@+id/textView115">
+
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/arrow_matches"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView115"
+                    android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"/>
             </androidx.cardview.widget.CardView>
 
 
@@ -239,6 +255,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView116" />
 
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recyclerView71"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView117">
+
+
             <androidx.recyclerview.widget.RecyclerView
 
                 android:id="@+id/recyclerView7"
@@ -252,16 +281,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView117" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="20dp"
-                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
-                app:layout_constraintBottom_toBottomOf="@+id/recyclerView7"
-                app:layout_constraintEnd_toEndOf="@+id/recyclerView7"
-                app:layout_constraintTop_toTopOf="@+id/recyclerView7" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView117"
+                    android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"/>
+
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
 
@@ -276,7 +309,7 @@
                 android:text="Explore Date Ideas"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView7" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView71" />
 
             <TextView
                 android:id="@+id/textView120"
@@ -292,7 +325,7 @@
                 android:text="See all Date Ideas"
                 android:textColor="@color/blue"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView7" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView71" />
 
             <TextView
 
@@ -311,10 +344,9 @@
 
                 android:id="@+id/recyclerView9"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="230dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -323,27 +355,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="20dp"
                 android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/recyclerView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView119"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <TextView
-                android:id="@+id/arrow_matches"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="20dp"
-                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
-                app:layout_constraintBottom_toBottomOf="@+id/recyclerView31"
-                app:layout_constraintEnd_toEndOf="@+id/recyclerView31"
-                app:layout_constraintTop_toTopOf="@+id/recyclerView31" />
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView119" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
