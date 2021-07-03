@@ -219,6 +219,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
         if (drawer1.isDrawerOpen(GravityCompat.START)) {
             drawer1.closeDrawer(GravityCompat.START);
         } else {
@@ -230,5 +231,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+
+
 
 }

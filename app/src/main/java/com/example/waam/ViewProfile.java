@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -113,6 +111,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
 
     }
 
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
@@ -149,6 +148,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
 
 
 
+        constraintLayout = view.findViewById(R.id.constraintLayout1);
 
         textView = view.findViewById(R.id.textView71);
         textView1 = view.findViewById(R.id.arrow_matches);
@@ -281,6 +281,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         }
     }
 
+
     @Override
     public void onClick(View v) {
         final int tet = R.id.text;
@@ -303,21 +304,35 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                 public void loadSpecUse(WaamUser user) {
 
                                     Fragment fragment = new TextdisplayFragment();
-                                    constraintLayout.setVisibility(View.INVISIBLE);
+                                    constraintLayout.setVisibility(View.GONE);
 
                                     getChildFragmentManager().beginTransaction()
                                             .replace(fram, fragment)
                                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                            .addToBackStack(null)
                                             .commit();
                                 }
                             });
                 }
 
 
+
+                //FragmentManager.OnBackStackChangedListener
                 break;
+
 
         }
 
+       // getActivity().onBackPressed();
+
+        //super.on
+       // getFragmentManager().popBackStackImmediate();
+
+
+      //  getActivity().finish();
     }
+
+
+
 
 }
