@@ -180,18 +180,19 @@ public class ViewProfile extends Fragment {
     }
     private void eventDesign() {
         int[] display = {
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user,
-                R.drawable.group_img_2,
-                R.drawable.topnav_profile,
 
 
+
+                R.drawable.diningout,
+                R.drawable.coffeeconversation,
+                R.drawable.travel,
+                R.drawable.winetasting,
+                R.drawable.nightclubsdancing,
         };
 
 
 
-        String[] rate2 = {"Ada, 25", "Kemi, 19", "Adora, 20", "Caio, 25", "Aish, 35",
+        String[] rate2 = {"Micheal Jackson", "Criss Angel", "One By Circle", "Freak at Planet", "By Circle",
 
         };
 
