@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.waam.utils.ViewEventAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import java.util.List;
 public class ViewProfile extends Fragment implements View.OnClickListener {
     private TextView textView, textView1;
     private ImageView imageView;
-    private Toolbar toolbar;
+    private BottomNavigationView bottomNavigationView;
     private RecyclerView recyclerView;
     private ViewProfileAdapter viewProfileAdapter;
     private List<Location> locationView = new ArrayList<>();
@@ -54,6 +55,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
 
     private FirebaseAuth mAuth;
     // TODO: Rename and change types of parameters
@@ -95,7 +97,13 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
         mAuth = FirebaseAuth.getInstance();
+        if(getActivity() != null){
+            bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+            bottomNavigationView.setVisibility(View.GONE);
+        }
+
 
     }
 
@@ -122,7 +130,8 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         dateIdeaDisplay();
 
         ImageView test = view.findViewById(R.id.text);
-        constraintLayout = view.findViewById(R.id.constraintLayout1);
+
+
 
 
 
@@ -142,15 +151,12 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         recyclerView1.setAdapter(viewEventAdapter);
         recyclerView1.setLayoutManager(linearLayoutManager1);
 
-       // toolbar = view.findViewById(R.id.toolbar1);
         recyclerView2 = view.findViewById(R.id.recyclerView9);
         dateIdeaAdapter = new ViewEventAdapter(dateIdea, getActivity());
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setAdapter(dateIdeaAdapter);
         recyclerView2.setLayoutManager(linearLayoutManager2);
-        toolbar = view.findViewById(R.id.toolbar);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
 
 //        toolbar.setTitle("Dashboard");

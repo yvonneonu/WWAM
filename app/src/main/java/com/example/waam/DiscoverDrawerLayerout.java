@@ -61,20 +61,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         TextView nav_user = (TextView)hView.findViewById(R.id.textView96);
         TextView viewProfile = hView.findViewById(R.id.textView95);
 
-        viewProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Fragment fragment = new ViewProfile();
-
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentcontainer,fragment);
-                drawer1.closeDrawer(GravityCompat.START);
-                bottomNavigationView.getMenu().getItem(-0).setChecked(false);
-                ft.commit();
-
-            }
-        });
 
 
         linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +112,19 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         ft.commit();
 
 
+        viewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new ViewProfile();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentcontainer,fragment);
+                ft.commit();
+                drawer1.closeDrawer(GravityCompat.START);
+                bottomNavigationView.getMenu().getItem(-0).setChecked(false);
 
+
+            }
+        });
 
 }
 
@@ -200,6 +199,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 fragment = new AgentFragment();
                 item.setIcon(R.drawable.lowernav_agent_icon_active);
                 break;
+
         }
         if (fragment != null) {
             Log.d("TAG", "not null");

@@ -38,6 +38,7 @@ public class MessagesFragment extends Fragment {
     private LinearLayoutManager layoutManager1;
     private ProgressBar barone;
     private ProgressBar bartwo;
+    private AppCompatActivity activity;
 
    //private String DEFAULT_SPAN_COUNT = "2";
 
@@ -82,7 +83,7 @@ public class MessagesFragment extends Fragment {
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+"FRIENDS";
       //  User userReal = getActivity().getIntent().getParcelableExtra(VideoCallActivity.AGOREUSER);
-
+        activity = (AppCompatActivity) getActivity();
         generalFactory.loadNewFriends(branchName, barone,textViewNewFriends, friends -> {
             newFriends = friends;
             friendAdapter  = new FriendAdapter(newFriends,getActivity());
@@ -148,7 +149,7 @@ public class MessagesFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
+
         groupImage();
         fragment = view.findViewById(R.id.frameLayout);
         recyclerView = view.findViewById(R.id.recyclerView2);
