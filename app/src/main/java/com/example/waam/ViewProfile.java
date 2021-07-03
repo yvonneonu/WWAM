@@ -13,7 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +31,7 @@ import java.util.List;
  * Use the {@link ViewProfile#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ViewProfile extends Fragment {
+public class ViewProfile extends Fragment implements View.OnClickListener {
     private TextView textView, textView1;
     private ImageView imageView;
     private Toolbar toolbar;
@@ -45,6 +47,9 @@ public class ViewProfile extends Fragment {
     private List<Location> dateIdea = new ArrayList<>();
     private ViewEventAdapter dateIdeaAdapter;
 
+    private WaamUser waamUser;
+    private         ConstraintLayout constraintLayout;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -56,9 +61,14 @@ public class ViewProfile extends Fragment {
     private String mParam2;
 
 
+    public ViewProfile(WaamUser waamUser){
+        this.waamUser = waamUser;
+    }
+
     public ViewProfile() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -110,6 +120,11 @@ public class ViewProfile extends Fragment {
         matchDesign();
         eventDesign();
         dateIdeaDisplay();
+
+        ImageView test = view.findViewById(R.id.text);
+        constraintLayout = view.findViewById(R.id.constraintLayout1);
+
+
 
         textView = view.findViewById(R.id.textView71);
         textView1 = view.findViewById(R.id.arrow_matches);
@@ -163,8 +178,10 @@ public class ViewProfile extends Fragment {
                 }
             }
         });
+        test.setOnClickListener(this);
         return view;
     }
+
 
     private void matchDesign() {
         int[] display = {
@@ -233,6 +250,44 @@ public class ViewProfile extends Fragment {
         for (int i = 0; i < display.length; i++) {
 
             dateIdea.add(new Location(display[i], rate2[i]));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        final int tet = R.id.text;
+        final int fram = R.id.fram1;
+
+        switch (v.getId()){
+            case tet:
+                if (waamUser != null){
+                    Fragment fragment = new TextdisplayFragment();
+                    constraintLayout.setVisibility(View.INVISIBLE);
+                    getChildFragmentManager().beginTransaction()
+                            .replace(fram, fragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+                }else {
+                    String userId = FirebaseAuth.getInstance().getUid();
+                    GeneralFactory.getGeneralFactory(getActivity())
+                            .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                @Override
+                                public void loadSpecUse(WaamUser user) {
+
+                                    Fragment fragment = new TextdisplayFragment();
+                                    constraintLayout.setVisibility(View.INVISIBLE);
+
+                                    getChildFragmentManager().beginTransaction()
+                                            .replace(fram, fragment)
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                            .commit();
+                                }
+                            });
+                }
+
+
+                break;
+
         }
     }
 }
