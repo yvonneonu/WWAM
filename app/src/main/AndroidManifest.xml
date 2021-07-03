@@ -3,10 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.waam">
 
-
-
-    <uses-permission android:name="android:permission.BIND_NOTIFICATION_lISTENER_SERVICE"/>
-
+    <uses-permission android:name="android:permission.BIND_NOTIFICATION_lISTENER_SERVICE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -25,8 +22,6 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
-
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -43,7 +38,8 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".utils.AllViewProfile"></activity>
+        <activity android:name=".NotificationActivity" />
         <activity android:name=".CallScreenActivity" />
         <activity android:name=".VideoCallActivity" />
         <activity android:name=".SignUpSecond" />
@@ -53,7 +49,7 @@
             android:parentActivityName=".DrawelayoutActivity" />
 
         <service android:name=".SinchService" />
-        <service android:name=".NotificationListener"/>
+        <service android:name=".NotificationListener" />
 
         <activity android:name=".IncomingCallScreenActivity" />
         <activity android:name=".Unfriend" />

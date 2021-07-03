@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**K
  * A simple {@link Fragment} subclass.
@@ -149,6 +148,11 @@ public class MessagesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
+        assert activity != null;
+        activity.getSupportActionBar();
+        //.setTitle("Messages");
+        //Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
+
         groupImage();
         fragment = view.findViewById(R.id.frameLayout);
         recyclerView = view.findViewById(R.id.recyclerView2);
@@ -172,9 +176,11 @@ public class MessagesFragment extends Fragment {
         });
 
 
-        assert activity != null;
 
-        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
+
+        //setHasOptionsMenu(true);
+//       Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
+
         return  view;
 
 
@@ -215,8 +221,9 @@ public class MessagesFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
-        super.onCreateOptionsMenu(menu, inflater);
+
         inflater.inflate(R.menu.searchforchat, menu);
+        super.onCreateOptionsMenu(menu, inflater);
 
     }
 

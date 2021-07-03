@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -48,7 +47,10 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     private ViewEventAdapter dateIdeaAdapter;
 
     private WaamUser waamUser;
-    private         ConstraintLayout constraintLayout;
+    private ConstraintLayout constraintLayout;
+    private GeneralFactory generalFactory;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,25 +93,36 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         mAuth = FirebaseAuth.getInstance();
 
+
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+
+        menu.clear();
         inflater.inflate(R.menu.viewprofile, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+       // MenuItem item = menu.findItem(R.id.message);
+        //item.setIcon(R.drawable.lowernav_friends_icon);
+      //super.onCreateOptionsMenu(menu, inflater);
+
     }
 
+
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-
-        return super.onOptionsItemSelected(item);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -117,6 +130,8 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
+
+
         matchDesign();
         eventDesign();
         dateIdeaDisplay();
@@ -129,6 +144,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         textView = view.findViewById(R.id.textView71);
         textView1 = view.findViewById(R.id.arrow_matches);
         imageView = view.findViewById(R.id.imageView);
+
         recyclerView = view.findViewById(R.id.recyclerView3);
         viewProfileAdapter = new ViewProfileAdapter(locationView, getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -179,7 +195,13 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
             }
         });
         test.setOnClickListener(this);
-        return view;
+
+       // assert activity != null;
+
+        setHasOptionsMenu(true);
+//        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
+        return  view;
+
     }
 
 
@@ -262,7 +284,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
             case tet:
                 if (waamUser != null){
                     Fragment fragment = new TextdisplayFragment();
-                    constraintLayout.setVisibility(View.INVISIBLE);
+                  //  constraintLayout.setVisibility(View.INVISIBLE);
                     getChildFragmentManager().beginTransaction()
                             .replace(fram, fragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -289,5 +311,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                 break;
 
         }
+
     }
+
 }

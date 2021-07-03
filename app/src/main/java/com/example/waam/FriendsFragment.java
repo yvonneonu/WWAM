@@ -23,7 +23,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -109,8 +108,9 @@ public class FriendsFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+
         inflater.inflate(R.menu.friendsmenu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
 
         MenuItem searchItem = menu.findItem(R.id.menu_item_search);
         final SearchView searchView = (SearchView) searchItem.getActionView();
@@ -179,7 +179,7 @@ public class FriendsFragment extends Fragment {
         });
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
-        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Friends");
+//        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Friends");
         return view;
     }
 
