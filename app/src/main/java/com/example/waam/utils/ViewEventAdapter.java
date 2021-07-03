@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -47,8 +47,6 @@ public class ViewEventAdapter extends RecyclerView.Adapter<ViewEventAdapter.View
         Glide.with(context)
                 .asBitmap()
               //  .fitCenter(
-
-                //.centerCrop()
                 .load(location.getImage())
                 .into(holder.imageView);
     }
@@ -67,7 +65,7 @@ public class ViewEventAdapter extends RecyclerView.Adapter<ViewEventAdapter.View
 
             imageView = itemView.findViewById(R.id.image1);
             textView = itemView.findViewById(R.id.name1);
-            LinearLayout linearLayout = itemView.findViewById(R.id.lin1);
+            CardView linearLayout = itemView.findViewById(R.id.lin1);
 
             linearLayout.setOnClickListener(v -> {
                 if (eventSearchListener != null) {

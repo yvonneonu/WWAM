@@ -13,7 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +31,7 @@ import java.util.List;
  * Use the {@link ViewProfile#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ViewProfile extends Fragment {
+public class ViewProfile extends Fragment implements View.OnClickListener {
     private TextView textView, textView1;
     private ImageView imageView;
     private Toolbar toolbar;
@@ -40,6 +42,13 @@ public class ViewProfile extends Fragment {
     private List<Location> eventView = new ArrayList<>();
     private ViewEventAdapter viewEventAdapter;
     private RecyclerView recyclerView1;
+
+    private RecyclerView recyclerView2;
+    private List<Location> dateIdea = new ArrayList<>();
+    private ViewEventAdapter dateIdeaAdapter;
+
+    private WaamUser waamUser;
+    private         ConstraintLayout constraintLayout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,9 +61,14 @@ public class ViewProfile extends Fragment {
     private String mParam2;
 
 
+    public ViewProfile(WaamUser waamUser){
+        this.waamUser = waamUser;
+    }
+
     public ViewProfile() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -105,6 +119,12 @@ public class ViewProfile extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
         matchDesign();
         eventDesign();
+        dateIdeaDisplay();
+
+        ImageView test = view.findViewById(R.id.text);
+        constraintLayout = view.findViewById(R.id.constraintLayout1);
+
+
 
         textView = view.findViewById(R.id.textView71);
         textView1 = view.findViewById(R.id.arrow_matches);
@@ -123,6 +143,11 @@ public class ViewProfile extends Fragment {
         recyclerView1.setLayoutManager(linearLayoutManager1);
 
        // toolbar = view.findViewById(R.id.toolbar1);
+        recyclerView2 = view.findViewById(R.id.recyclerView9);
+        dateIdeaAdapter = new ViewEventAdapter(dateIdea, getActivity());
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView2.setAdapter(dateIdeaAdapter);
+        recyclerView2.setLayoutManager(linearLayoutManager2);
         toolbar = view.findViewById(R.id.toolbar);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -153,8 +178,10 @@ public class ViewProfile extends Fragment {
                 }
             }
         });
+        test.setOnClickListener(this);
         return view;
     }
+
 
     private void matchDesign() {
         int[] display = {
@@ -180,24 +207,87 @@ public class ViewProfile extends Fragment {
     }
     private void eventDesign() {
         int[] display = {
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user,
-                R.drawable.group_img_2,
-                R.drawable.topnav_profile,
 
 
+
+                R.drawable.diningout,
+                R.drawable.coffeeconversation,
+                R.drawable.travel,
+                R.drawable.winetasting,
+                R.drawable.nightclubsdancing,
         };
 
 
 
-        String[] rate2 = {"Ada, 25", "Kemi, 19", "Adora, 20", "Caio, 25", "Aish, 35",
+        String[] rate2 = {"Micheal Jackson", "Criss Angel", "One By Circle", "Freak at Planet", "By Circle",
 
         };
 
         for (int i = 0; i < display.length; i++) {
 
             eventView.add(new Location(display[i], rate2[i]));
+        }
+    }
+
+    private void dateIdeaDisplay() {
+        int[] display = {
+
+
+
+                R.drawable.diningout,
+                R.drawable.coffeeconversation,
+                R.drawable.travel,
+                R.drawable.winetasting,
+                R.drawable.nightclubsdancing,
+        };
+
+
+
+        String[] rate2 = {"Secre Food", "SkyJump at Las", "Las Vegas", "Stratosphere Tower", "By Circle",
+
+        };
+
+        for (int i = 0; i < display.length; i++) {
+
+            dateIdea.add(new Location(display[i], rate2[i]));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        final int tet = R.id.text;
+        final int fram = R.id.fram1;
+
+        switch (v.getId()){
+            case tet:
+                if (waamUser != null){
+                    Fragment fragment = new TextdisplayFragment();
+                    constraintLayout.setVisibility(View.INVISIBLE);
+                    getChildFragmentManager().beginTransaction()
+                            .replace(fram, fragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+                }else {
+                    String userId = FirebaseAuth.getInstance().getUid();
+                    GeneralFactory.getGeneralFactory(getActivity())
+                            .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                @Override
+                                public void loadSpecUse(WaamUser user) {
+
+                                    Fragment fragment = new TextdisplayFragment();
+                                    constraintLayout.setVisibility(View.INVISIBLE);
+
+                                    getChildFragmentManager().beginTransaction()
+                                            .replace(fram, fragment)
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                            .commit();
+                                }
+                            });
+                }
+
+
+                break;
+
         }
     }
 }

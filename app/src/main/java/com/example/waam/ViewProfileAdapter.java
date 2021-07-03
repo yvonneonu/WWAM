@@ -66,7 +66,8 @@ public class ViewProfileAdapter extends RecyclerView.Adapter<ViewProfileAdapter.
 
             imageView = itemView.findViewById(R.id.image);
             textView = itemView.findViewById(R.id.name);
-            LinearLayout linearLayout = itemView.findViewById(R.id.lin);
+
+          LinearLayout linearLayout = itemView.findViewById(R.id.lin);
 
             linearLayout.setOnClickListener(v -> {
                 if (searchFriendsListener != null) {
