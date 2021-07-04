@@ -143,14 +143,15 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Fragment fragment = new ViewProfile();
-
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                bottomNavigationView.setVisibility(View.GONE);
                 ft.replace(R.id.fragmentcontainer,fragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
                 bottomNavigationView.getMenu().getItem(-0).setChecked(false);
-                ft.commit();
+
 
             }
         });

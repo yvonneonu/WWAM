@@ -319,7 +319,10 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                             .addToBackStack(null)
 
                                             .commit();
+
+
                                 }
+
                             });
                 }
 

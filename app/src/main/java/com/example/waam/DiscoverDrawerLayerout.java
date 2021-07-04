@@ -119,6 +119,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 bottomNavigationView.setVisibility(View.GONE);
                 ft.replace(R.id.fragmentcontainer,fragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 drawer1.closeDrawer(GravityCompat.START);
                 bottomNavigationView.getMenu().getItem(-0).setChecked(false);
@@ -219,17 +220,13 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         if (drawer1.isDrawerOpen(GravityCompat.START)) {
             drawer1.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
-
-
     }
 
     @Override
