@@ -317,6 +317,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                             .replace(fram, fragment)
                                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                             .addToBackStack(null)
+
                                             .commit();
                                 }
                             });

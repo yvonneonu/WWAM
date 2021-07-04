@@ -108,6 +108,7 @@ public class Login extends BaseActivity implements  SinchService.StartFailedList
         });
 
 
+        ///mSpinner.dismiss();
     }
 
     private void showSpinner() {
