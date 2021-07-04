@@ -109,7 +109,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         if(getActivity() != null){
             bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
-            bottomNavigationView.setVisibility(View.GONE);
+//            bottomNavigationView.setVisibility(View.GONE);
         }
 
 
@@ -326,22 +326,12 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                             });
                 }
 
-
-
-                //FragmentManager.OnBackStackChangedListener
                 break;
 
 
         }
 
-       // getActivity().onBackPressed();
 
-        //super.on
-       // getFragmentManager().popBackStackImmediate();
-
-
-
-      //  getActivity().finish();
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -74,18 +75,7 @@ public class TextdisplayFragment extends Fragment {
         textDisplay = view.findViewById(R.id.addText);
         showText = view.findViewById(R.id.showText);
 
-        textDisplay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getId() == textDisplay.getId()){
-                    Fragment fragment = new ShareTotFragment();
-                    showText.setVisibility(View.GONE);
-                    FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-                    ft.replace(R.id.fram1, fragment);
-
-                }
-            }
-        });
+        //if statemnt needs to be here for the text just like wat we did in event
 
         textPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +87,17 @@ public class TextdisplayFragment extends Fragment {
                     FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frame1, fragment);
                     fragmentTransaction.commit();
+                }
+            }
+        });
+
+        textDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == textDisplay.getId()){
+                    Intent intent = new Intent(getActivity(), ShareTot.class);
+                    startActivity(intent);
+
                 }
             }
         });

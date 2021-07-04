@@ -38,6 +38,7 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".ShareTot"></activity>
         <activity android:name=".NotificationActivity" />
         <activity android:name=".CallScreenActivity" />
         <activity android:name=".VideoCallActivity" />
