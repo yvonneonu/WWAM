@@ -1,11 +1,17 @@
 package com.example.waam;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.waam.utils.TextPostFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -13,6 +19,8 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class TextdisplayFragment extends Fragment {
+    private TextView mediaPost, textPost, textDisplay;
+    ConstraintLayout showText;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +66,41 @@ public class TextdisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_textdisplay, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_textdisplay, container, false);
+
+        mediaPost = view.findViewById(R.id.mediaPost);
+        textPost = view.findViewById(R.id.textPost);
+        textDisplay = view.findViewById(R.id.addText);
+        showText = view.findViewById(R.id.showText);
+
+        textDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == textDisplay.getId()){
+                    Fragment fragment = new ShareTotFragment();
+                    showText.setVisibility(View.GONE);
+                    FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                    ft.replace(R.id.fram1, fragment);
+
+                }
+            }
+        });
+
+        textPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == textPost.getId()){
+                    textPost.setBackgroundColor(Color.BLUE);
+                    mediaPost.setBackgroundResource(R.drawable.drawerborder);
+                    Fragment fragment = new TextPostFragment();
+                    FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame1, fragment);
+                    fragmentTransaction.commit();
+                }
+            }
+        });
+        return view;
     }
+
 }

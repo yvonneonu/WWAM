@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -49,6 +50,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     private ConstraintLayout constraintLayout;
     private GeneralFactory generalFactory;
 
+    private   ImageView test;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -146,7 +148,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         eventDesign();
         dateIdeaDisplay();
 
-        ImageView test = view.findViewById(R.id.text);
+      test = view.findViewById(R.id.text);
 
 
 
@@ -300,6 +302,8 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .commit();
                 }else {
+                    test.setColorFilter(Color.BLUE);
+                    //test.setBackgroundColor(Color.parseColor("#2162FD"));
                     String userId = FirebaseAuth.getInstance().getUid();
                     GeneralFactory.getGeneralFactory(getActivity())
                             .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
