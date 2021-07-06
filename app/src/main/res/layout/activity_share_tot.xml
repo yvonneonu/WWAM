@@ -44,7 +44,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -162,14 +163,87 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <FrameLayout
-                android:id="@+id/fram1"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageView45"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView3">
-            </FrameLayout>
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/textView122"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:text="Share Your Thoughts... Write a new \n amazing Caption!"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView45" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView122" />
+
+            <TextView
+                android:id="@+id/textView123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Enter Your New Text Post "
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/divider2"
+                app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:elevation="4dp"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/divider2"
+                app:layout_constraintStart_toStartOf="@+id/textView123"
+                app:layout_constraintTop_toBottomOf="@+id/textView123">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/filledTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="100">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Share your experience "
+                        android:paddingStart="10dp"
+                        android:paddingEnd="5dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textView124"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keep things short and sweet not up to 100 characters"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView4"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView4" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
