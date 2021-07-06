@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ShareTot extends AppCompatActivity implements View.OnClickListener {
     private ImageView text2, image;
     private ConstraintLayout coonc;
-    private TextView name;
+    private TextView name, resizetext;
 
 
     @Override
@@ -32,6 +33,7 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
         coonc = findViewById(R.id.coonc);
         text2 = findViewById(R.id.text2);
         name = findViewById(R.id.textView71);
+        resizetext = findViewById(R.id.share);
 
         GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
             @Override
@@ -53,6 +55,13 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
       text2.setOnClickListener(this);
         text2.setColorFilter(Color.BLUE);
 
+        resizetext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShareTot.this, textResize.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -77,6 +86,7 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
     public void backtofragment(View view) {
         finish();
     }
+
 
 
 
