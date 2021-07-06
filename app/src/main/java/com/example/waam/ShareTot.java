@@ -19,6 +19,7 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
     private ImageView text2, image;
     private ConstraintLayout coonc;
     private TextView name, resizetext;
+    String text;
 
 
     @Override
@@ -59,6 +60,7 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ShareTot.this, textResize.class);
+                intent.putExtra("typedText", text);
                 startActivity(intent);
             }
         });
