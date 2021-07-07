@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,6 +42,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,21 +55,21 @@ import static com.google.firebase.database.FirebaseDatabase.getInstance;
 
 public class GeneralFactory {
     private static GeneralFactory generalFactory;
-    private final List<EventModel> eventModelList;
-    private final FirebaseAuth mAuth;
+    private List<EventModel> eventModelList;
+    private FirebaseAuth mAuth;
     private EventModel[] eventModelsArrays;
-    private final List<Location> locationList;
+    private List<Location> locationList;
     private static final String WAAMBASE = "waamuser_base";
     private static final String PROFILEPIC = "profilePic";
     private static final String VIDEOPIC = "videoPic";
     private static final String NOTIFICATIONLIST = "Notificationlist";
-    private final FirebaseDatabase firebaseDatabase;
+    private FirebaseDatabase firebaseDatabase;
     private List<Chat> chatContainer;
     private List<NotificationActions> notificationActionsList;
     private List<WaamUser> allWaamUsers;
-    private final List<AgentModel> agentModelList;
+    private List<AgentModel> agentModelList;
     private List<WaamUser> allFriends;
-    private final Context context;
+    private Context context;
     private ValueEventListener valueEventListener;
     private DatabaseReference userForSeen;
     private List<WaamUser> contactedUser;
@@ -71,6 +78,15 @@ public class GeneralFactory {
     private String theMessage;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
+    private PostDao postDao;
+    private LiveData<List<Post>> allPosts;
+
+
+
+    public GeneralFactory(Application application){
+        PostDatabase database = PostDatabase.getPostDatabaseInstance(application);
+        postDao = database.PostDao();
+    }
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -81,6 +97,7 @@ public class GeneralFactory {
             R.drawable.discover_featured_img,
             R.drawable.event_img
     };
+
 
 
 
@@ -1053,6 +1070,54 @@ public class GeneralFactory {
             }
         });
     }
+
+    public void insert (Post post){
+
+    }
+
+    public void updatePost(){
+
+    }
+
+    public void deleteAllNotes(){
+
+    }
+
+    public LiveData<List<Post>> getAllPosts(){
+        return allPosts;
+    }
+
+    private void insertPost(Post post){
+
+        addPosts(post).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<LiveData<List<Post>>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull LiveData<List<Post>> listLiveData) {
+
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
+    }
+
+    //The task we want to add is being added as a parameter to the Single addtask
+    public Single<LiveData<List<Post>>> addPosts(final Post post){
+        return Single.fromCallable(() -> {
+            postDao.insert(post);
+            return allPosts;
+        });
+
+    }
+
     public interface FetchFriends{
         void friendsFetcher(List<WaamUser> friends);
     }
