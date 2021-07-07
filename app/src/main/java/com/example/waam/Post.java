@@ -28,7 +28,7 @@ public class Post {
         return text;
     }
 
-    public Date getDate(){
+   public Date getDate(){
         return date;
     }
 }

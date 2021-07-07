@@ -1,21 +1,81 @@
 package com.example.waam;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class textResize extends AppCompatActivity {
+    TextView textdisplay;
+    SharedPreferences pref;
+    SeekBar font, lineSpacing;
+    private  String str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_resize);
 
-        Intent intent = getIntent();
-        String str = intent.getStringExtra("typedText");
+
+        textdisplay = findViewById(R.id.textView125);
 
 
-        //receiver_msg.setText(str);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null){
+            str = bundle.getString("typedText");
+            //  String str = intent.getStringExtra("typedText");
+
+            textdisplay.setText(str);
+        }else {
+            Log.d("didnt show", ""+str);
+        }
+
+
+        font = findViewById(R.id.seekBar2);
+        lineSpacing = findViewById(R.id.seekBar);
+
+
+        pref = getPreferences(MODE_PRIVATE);
+
+        float fs = pref.getFloat("VALUE", 25);
+
+        font.setProgress((int)fs);
+
+        textdisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, font.getProgress());
+
+        //textdisplay.setTextSize(TypedValue.);
+
+        font.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                textdisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, font.getProgress());
+
+                //textdisplay.setTextSize(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                pref = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor ed = pref.edit();
+                ed.putFloat("VALUE", textdisplay.getTextSize());
+                ed.apply();
+            }
+        });
+
+
+
     }
 }

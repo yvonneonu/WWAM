@@ -3,6 +3,7 @@ package com.example.waam;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,13 +14,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class ShareTot extends AppCompatActivity implements View.OnClickListener {
     private ImageView text2, image;
     private ConstraintLayout coonc;
     private TextView name, resizetext;
-    String text;
+    private TextInputEditText typeText;
+    private String text;
 
 
     @Override
@@ -29,12 +34,16 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
 
         String uid = FirebaseAuth.getInstance().getUid();
         image = findViewById(R.id.imageView);
+        typeText = findViewById(R.id.typeText);
+        String more;
 
 
         coonc = findViewById(R.id.coonc);
         text2 = findViewById(R.id.text2);
         name = findViewById(R.id.textView71);
         resizetext = findViewById(R.id.share);
+
+
 
         GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
             @Override
@@ -51,6 +60,7 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
         });
 
 
+        //text = Objects.requireNonNull(typeText.getText()).toString();
 
 
       text2.setOnClickListener(this);
@@ -59,9 +69,21 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
         resizetext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ShareTot.this, textResize.class);
-                intent.putExtra("typedText", text);
-                startActivity(intent);
+                if (typeText != null){
+                    text = Objects.requireNonNull(typeText.getText()).toString();
+
+                    Intent intent = new Intent(ShareTot.this, textResize.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("typedText", text);
+                    intent.putExtras(bundle);
+                    Log.d("please diplay", text);
+                    startActivity(intent);
+                }
+                else {
+                    Log.d("please diplay", "did not show");
+
+                }
+
             }
         });
 
