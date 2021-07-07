@@ -46,16 +46,41 @@ public class textResize extends AppCompatActivity {
         float fs = pref.getFloat("VALUE", 25);
 
         font.setProgress((int)fs);
+        lineSpacing.setProgress((int)fs);
 
         textdisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, font.getProgress());
 
+
+        textdisplay.setLineSpacing(TypedValue.COMPLEX_UNIT_PX, lineSpacing.getProgress());
         //textdisplay.setTextSize(TypedValue.);
 
+        lineSpacing.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                //textdisplay.setLineSpacing();
+               // textdisplay.setLineSpacing(TypedValue.UnUnitConverter.spToPixels, lineSpacing.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                pref = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor ed = pref.edit();
+                ed.putFloat("VALUE", textdisplay.getTextSize());
+                ed.apply();
+            }
+        });
         font.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
                 textdisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, font.getProgress());
+
 
                 //textdisplay.setTextSize(progress);
             }
