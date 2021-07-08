@@ -9,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,7 +61,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private PostViewModel postViewModel;
 
     private FirebaseAuth mAuth;
     // TODO: Rename and change types of parameters
@@ -112,7 +116,14 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
 //            bottomNavigationView.setVisibility(View.GONE);
         }
 
-
+        postViewModel = new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()).create(PostViewModel.class);
+        postViewModel.getAllPosts().observe(this, new Observer<List<Post>>() {
+            @Override
+            public void onChanged(List<Post> posts) {
+                //update recycler view for the post
+                Toast.makeText(getActivity(),"Method triggered",Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 

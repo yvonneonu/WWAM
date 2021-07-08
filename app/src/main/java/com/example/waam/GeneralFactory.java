@@ -78,15 +78,12 @@ public class GeneralFactory {
     private String theMessage;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private PostDao postDao;
-    private LiveData<List<Post>> allPosts;
 
 
 
-    public GeneralFactory(Application application){
-        PostDatabase database = PostDatabase.getPostDatabaseInstance(application);
-        postDao = database.PostDao();
-    }
+
+
+
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -1071,52 +1068,7 @@ public class GeneralFactory {
         });
     }
 
-    public void insert (Post post){
 
-    }
-
-    public void updatePost(){
-
-    }
-
-    public void deleteAllNotes(){
-
-    }
-
-    public LiveData<List<Post>> getAllPosts(){
-        return allPosts;
-    }
-
-    private void insertPost(Post post){
-
-        addPosts(post).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<LiveData<List<Post>>>() {
-                    @Override
-                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull LiveData<List<Post>> listLiveData) {
-
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
-                    }
-                });
-    }
-
-    //The task we want to add is being added as a parameter to the Single addtask
-    public Single<LiveData<List<Post>>> addPosts(final Post post){
-        return Single.fromCallable(() -> {
-            postDao.insert(post);
-            return allPosts;
-        });
-
-    }
 
     public interface FetchFriends{
         void friendsFetcher(List<WaamUser> friends);

@@ -1,11 +1,14 @@
 package com.example.waam;
 
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import java.util.List;
 
 @Dao
 public interface PostDao {
@@ -22,7 +25,7 @@ public interface PostDao {
     @Query("DELETE FROM Post_table")
     void deleteAllPosts();
 
-    //@Query("SELECT * FROM Post_table ORDER BY date DESC")
-  //  LiveData<List<Post>> getAllNotes();
+    @Query("SELECT * FROM Post_table")
+    LiveData<List<Post>> getAllNotes();
 
 }
