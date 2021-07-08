@@ -50,8 +50,10 @@ public class textResize extends AppCompatActivity {
 
         float fs = pref.getFloat("VALUE", 25);
 
+        float fs1 = pref.getFloat("VALUE", 2);
+
         font.setProgress((int)fs);
-        lineSpacing.setProgress((int)fs);
+        lineSpacing.setProgress((int)fs1);
 
         textdisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, font.getProgress());
 
@@ -59,30 +61,6 @@ public class textResize extends AppCompatActivity {
         textdisplay.setLineSpacing(TypedValue.COMPLEX_UNIT_PX, lineSpacing.getProgress());
         //textdisplay.setTextSize(TypedValue.);
 
-        lineSpacing.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //textdisplay.setLineSpacing();
-                textdisplay.setLineSpacing(TypedValue.COMPLEX_UNIT_PX, lineSpacing.getProgress());
-
-                textdisplay.setLineSpacing(add, mult);
-                // textdisplay.setLineSpacing(TypedValue.UnUnitConverter.spToPixels, lineSpacing.getProgress());
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-                pref = getPreferences(MODE_PRIVATE);
-                SharedPreferences.Editor ed = pref.edit();
-                ed.putFloat("VALUE", textdisplay.getTextSize());
-                ed.apply();
-            }
-        });
         font.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -109,6 +87,32 @@ public class textResize extends AppCompatActivity {
         });
 
 
+
+        lineSpacing.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                //textdisplay.setLineSpacing();
+                //textdisplay.setLineSpacing(TypedValue.COMPLEX_UNIT_PX, lineSpacing.getProgress());
+
+              //  textdisplay.setLineSpacing(progress);
+               // textdisplay.setLineSpacing(fs1, fs);
+                // textdisplay.setLineSpacing(TypedValue.UnUnitConverter.spToPixels, lineSpacing.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                pref = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor ed = pref.edit();
+                ed.putFloat("VALUE", textdisplay.getTextSize());
+                ed.apply();
+            }
+        });
 
     }
 }
