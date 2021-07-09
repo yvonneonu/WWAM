@@ -55,7 +55,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     private WaamUser waamUser;
     private ConstraintLayout constraintLayout;
 
-    private PostAdapter postAdapter;
+
 
     private   ImageView test;
 
@@ -64,7 +64,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private PostViewModel postViewModel;
+
 
     private FirebaseAuth mAuth;
     // TODO: Rename and change types of parameters
@@ -147,7 +147,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
 
-        postAdapter = new PostAdapter();
+
         matchDesign();
         eventDesign();
         dateIdeaDisplay();
@@ -181,21 +181,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         recyclerView31.setAdapter(postAdapter);
         recyclerView31.setLayoutManager(gridLayoutManager);*/
 
-        postViewModel = new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()).create(PostViewModel.class);
-        postViewModel.getAllPosts().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
-            @Override
-            public void onChanged(List<Post> posts) {
-                //update recycler view for the post
-                if(posts.size() < 1){
-                    Toast.makeText(getActivity(),"You have no posts",Toast.LENGTH_LONG).show();
-                    //recyclerView31.setVisibility(View.GONE);
-                }else{
-                    postAdapter.setPost(posts);
-                    //recyclerView31.setVisibility(View.VISIBLE);
-                }
-                Toast.makeText(getActivity(),"Method triggered",Toast.LENGTH_LONG).show();
-            }
-        });
+
 
         recyclerView2 = view.findViewById(R.id.recyclerView9);
         dateIdeaAdapter = new ViewEventAdapter(dateIdea, getActivity());

@@ -63,6 +63,8 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
         //text = Objects.requireNonNull(typeText.getText()).toString();
 
 
+
+
       text2.setOnClickListener(this);
         text2.setColorFilter(Color.BLUE);
 
@@ -106,6 +108,11 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
 
                 break;
         }
+    }
+
+    public void saveText(View text){
+        String tots = typeText.getText().toString();
+
     }
     public void backtofragment(View view) {
         finish();

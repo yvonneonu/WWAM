@@ -21,7 +21,6 @@
         android:gravity="center"
         android:padding="5dp"
         android:text="Media Post"
-
         android:textAllCaps="false"
         android:textColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,18 +106,31 @@
         app:layout_constraintTop_toBottomOf="@+id/constr" />
 
 
-
     <FrameLayout
         android:id="@+id/frame1"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texpost">
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postShow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:listitem="@layout/postview" />
+
+        <TextView
+            android:id="@+id/nopost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="You have no posts"
+            android:visibility="gone" />
 
 
     </FrameLayout>
