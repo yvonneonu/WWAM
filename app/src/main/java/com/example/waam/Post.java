@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 public class Post {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String text;
+    private final String text;
    // private long date;
 
     public Post(String text) {

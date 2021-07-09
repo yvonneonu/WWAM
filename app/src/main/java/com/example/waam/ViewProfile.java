@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,12 +48,14 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView1;
 
     private RecyclerView recyclerView2;
+    //private RecyclerView recyclerView31;
     private List<Location> dateIdea = new ArrayList<>();
     private ViewEventAdapter dateIdeaAdapter;
 
     private WaamUser waamUser;
     private ConstraintLayout constraintLayout;
-    private GeneralFactory generalFactory;
+
+    private PostAdapter postAdapter;
 
     private   ImageView test;
 
@@ -75,11 +78,6 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
 
     public ViewProfile() {
         // Required empty public constructor
-    }
-
-
-    public static void onBackPress(){
-
     }
     /**
      * Use this factory method to create a new instance of
@@ -111,19 +109,14 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         }
         setHasOptionsMenu(true);
         mAuth = FirebaseAuth.getInstance();
+
+
         if(getActivity() != null){
             bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
 //            bottomNavigationView.setVisibility(View.GONE);
         }
 
-        postViewModel = new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()).create(PostViewModel.class);
-        postViewModel.getAllPosts().observe(this, new Observer<List<Post>>() {
-            @Override
-            public void onChanged(List<Post> posts) {
-                //update recycler view for the post
-                Toast.makeText(getActivity(),"Method triggered",Toast.LENGTH_LONG).show();
-            }
-        });
+
 
     }
 
@@ -154,7 +147,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
 
-
+        postAdapter = new PostAdapter();
         matchDesign();
         eventDesign();
         dateIdeaDisplay();
@@ -167,14 +160,14 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         constraintLayout = view.findViewById(R.id.constraintLayout1);
 
         textView = view.findViewById(R.id.textView71);
-        textView1 = view.findViewById(R.id.arrow_matches);
+        //textView1 = view.findViewById(R.id.arrow_matches);
         imageView = view.findViewById(R.id.imageView);
 
         recyclerView = view.findViewById(R.id.recyclerView3);
         viewProfileAdapter = new ViewProfileAdapter(locationView, getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setAdapter(viewProfileAdapter);
-        recyclerView.setLayoutManager(linearLayoutManager);
+       recyclerView.setLayoutManager(linearLayoutManager);
       //  textView1 = view.findViewById(R.id.textrt);
 
         recyclerView1 = view.findViewById(R.id.recyclerView7);
@@ -182,6 +175,27 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setAdapter(viewEventAdapter);
         recyclerView1.setLayoutManager(linearLayoutManager1);
+
+        /*recyclerView31 = view.findViewById(R.id.recyclerView31);
+        GridLayoutManager gridLayoutManager= new GridLayoutManager(getActivity(),2);
+        recyclerView31.setAdapter(postAdapter);
+        recyclerView31.setLayoutManager(gridLayoutManager);*/
+
+        postViewModel = new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()).create(PostViewModel.class);
+        postViewModel.getAllPosts().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
+            @Override
+            public void onChanged(List<Post> posts) {
+                //update recycler view for the post
+                if(posts.size() < 1){
+                    Toast.makeText(getActivity(),"You have no posts",Toast.LENGTH_LONG).show();
+                    //recyclerView31.setVisibility(View.GONE);
+                }else{
+                    postAdapter.setPost(posts);
+                    //recyclerView31.setVisibility(View.VISIBLE);
+                }
+                Toast.makeText(getActivity(),"Method triggered",Toast.LENGTH_LONG).show();
+            }
+        });
 
         recyclerView2 = view.findViewById(R.id.recyclerView9);
         dateIdeaAdapter = new ViewEventAdapter(dateIdea, getActivity());
@@ -208,14 +222,14 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                 textView.setText(user.getFullname());
             }
         });
-        textView1.setOnClickListener(new View.OnClickListener() {
+        /*textView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < 4; i++){
                    // locationView.add(new Location())
                 }
             }
-        });
+        });*/
         test.setOnClickListener(this);
 
        // assert activity != null;
