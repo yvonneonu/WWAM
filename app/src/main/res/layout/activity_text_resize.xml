@@ -30,15 +30,15 @@
             <TextView
                 android:id="@+id/textView125"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
-                android:textStyle="normal"
-
                 android:text="Woke up today thinking that a beach day would be fun"
+
                 android:textColor="@color/white"
-                android:textSize="23sp"
+                android:textSize="18sp"
+                android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
