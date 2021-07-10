@@ -24,18 +24,10 @@ public class textResize extends AppCompatActivity {
 
         textdisplay = findViewById(R.id.textView125);
 
-
-        int lineHeight = textdisplay.getLineHeight();
-        //lineHeight = font * mult + add
-
-        float add = textdisplay.getLineSpacingExtra();          // API 16+
-        float mult = textdisplay.getLineSpacingMultiplier();
-
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null){
             str = bundle.getString("typedText");
-            //  String str = intent.getStringExtra("typedText");
 
             textdisplay.setText(str);
         }else {
@@ -46,19 +38,15 @@ public class textResize extends AppCompatActivity {
         font = findViewById(R.id.seekBar2);
         lineSpacing = findViewById(R.id.seekBar);
 
-
         pref = getPreferences(MODE_PRIVATE);
 
         float fs = pref.getFloat("VALUE", 50);
 
-        float fs1 = pref.getFloat("VALUE", 15);
         float fs2 = pref.getFloat("VALUE", 3);
 
 
         font.setProgress((int)fs);
-        lineSpacing.setProgress((int)fs);
-
-
+        lineSpacing.setProgress((int)fs2);
 
         textdisplay.setTextScaleX(lineSpacing.getProgress());
 
@@ -70,6 +58,7 @@ public class textResize extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
                 textdisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, font.getProgress());
+
 
             }
 

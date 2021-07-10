@@ -16,6 +16,9 @@
 
         app:contentInsetStart="0dp"
         app:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -42,11 +45,13 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,36 +59,40 @@
             android:layout_height="wrap_content">
 
 
-            <ImageView
-                android:id="@+id/background"
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/profileheadbg"
+            <FrameLayout
+                android:id="@+id/frameLayout11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="300dp"
-                android:layout_height="200dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/profileicon"
-                app:layout_constraintBottom_toTopOf="@+id/textView71"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.495"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/background" />
+                <ImageView
+                    android:id="@+id/background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profileheadbg" />
 
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="300dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:paddingBottom="15dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/profileicon"
+                    />
+
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/textView71"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Name"
                 android:textColor="@color/black"
@@ -91,7 +100,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/background" />
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout11" />
 
             <TextView
                 android:id="@+id/textView72"
@@ -168,10 +177,10 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="8dp"
+                android:src="@drawable/ic_baseline_chat_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
-                android:src="@drawable/ic_baseline_chat_24"/>
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
 
             <TextView
                 android:id="@+id/textView122"
@@ -180,9 +189,9 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center_horizontal"
                 android:text="Share Your Thoughts... Write a new \n amazing Caption!"
-                android:textStyle="bold"
-                android:textSize="15sp"
                 android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView45" />
@@ -228,9 +237,9 @@
                     app:counterMaxLength="100">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/typeText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/typeText"
                         android:hint="Share your experience "
                         android:inputType="textAutoCorrect"
                         android:paddingStart="10dp"
@@ -281,8 +290,8 @@
 
             <FrameLayout
                 android:id="@+id/totFram"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/Totshare"
                 app:layout_constraintEnd_toEndOf="parent"
