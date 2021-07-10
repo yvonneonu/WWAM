@@ -16,7 +16,6 @@
 
         app:contentInsetStart="0dp"
         app:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -48,7 +47,6 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tool_bar">
@@ -63,7 +61,7 @@
                 android:id="@+id/frameLayout11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -71,7 +69,7 @@
                 <ImageView
                     android:id="@+id/background"
                     android:layout_width="wrap_content"
-                    android:layout_height="150dp"
+                    android:layout_height="160dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profileheadbg" />
 
@@ -82,8 +80,7 @@
                     android:layout_gravity="center"
                     android:paddingBottom="15dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/profileicon"
-                    />
+                    android:src="@drawable/profileicon" />
 
 
             </FrameLayout>
@@ -264,7 +261,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="60dp"
                 android:background="@color/default_keyboard_indicator_color_dark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -292,7 +288,6 @@
                 android:id="@+id/totFram"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/Totshare"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
