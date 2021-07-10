@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -48,18 +49,21 @@ public class textResize extends AppCompatActivity {
 
         pref = getPreferences(MODE_PRIVATE);
 
-        float fs = pref.getFloat("VALUE", 25);
+        float fs = pref.getFloat("VALUE", 50);
 
-        float fs1 = pref.getFloat("VALUE", 2);
+        float fs1 = pref.getFloat("VALUE", 15);
+        float fs2 = pref.getFloat("VALUE", 3);
+
 
         font.setProgress((int)fs);
-        lineSpacing.setProgress((int)fs1);
+        lineSpacing.setProgress((int)fs);
+
+
+
+        textdisplay.setTextScaleX(lineSpacing.getProgress());
+
 
         textdisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, font.getProgress());
-
-
-        textdisplay.setLineSpacing(TypedValue.COMPLEX_UNIT_PX, lineSpacing.getProgress());
-        //textdisplay.setTextSize(TypedValue.);
 
         font.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -67,8 +71,6 @@ public class textResize extends AppCompatActivity {
 
                 textdisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, font.getProgress());
 
-
-                //textdisplay.setTextSize(progress);
             }
 
             @Override
@@ -91,12 +93,12 @@ public class textResize extends AppCompatActivity {
         lineSpacing.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //textdisplay.setLineSpacing();
-                //textdisplay.setLineSpacing(TypedValue.COMPLEX_UNIT_PX, lineSpacing.getProgress());
 
-              //  textdisplay.setLineSpacing(progress);
-               // textdisplay.setLineSpacing(fs1, fs);
-                // textdisplay.setLineSpacing(TypedValue.UnUnitConverter.spToPixels, lineSpacing.getProgress());
+
+                textdisplay.setTextScaleX(lineSpacing.getProgress());
+
+                Log.d("feg", "yfft");
+
             }
 
             @Override
@@ -109,10 +111,15 @@ public class textResize extends AppCompatActivity {
 
                 pref = getPreferences(MODE_PRIVATE);
                 SharedPreferences.Editor ed = pref.edit();
-                ed.putFloat("VALUE", textdisplay.getTextSize());
+                ed.putFloat("VALUE", textdisplay.getTextScaleX());
+                Log.d("uyg", "fgg");
                 ed.apply();
             }
         });
 
+    }
+
+    public void cancel(View view) {
+        finish();
     }
 }

@@ -56,6 +56,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
 
+        //mAuth = FirebaseAuth.getInstance();
+
         navigationView.setBackgroundColor(getResources().getColor(R.color.blue));
 
         navigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));

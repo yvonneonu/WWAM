@@ -35,6 +35,7 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
                 android:textStyle="normal"
+
                 android:text="Woke up today thinking that a beach day would be fun"
                 android:textColor="@color/white"
                 android:textSize="23sp"
@@ -123,6 +124,7 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/borderblack"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="cancel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seekBar">
 

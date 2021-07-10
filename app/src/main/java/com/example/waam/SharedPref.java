@@ -11,7 +11,7 @@ public class SharedPref {
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String UID = "uid";
-    public static final String VALUE = "50";
+    public static final String VALUE = "100";
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
 
