@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +11,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class textResize extends AppCompatActivity {
-    TextView textdisplay;
-    SharedPreferences pref;
-    SeekBar font, lineSpacing;
-    private  String str;
+    private TextView textdisplay;
+    private SharedPreferences pref;
+    private SeekBar font, lineSpacing;
+    private String str;
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class textResize extends AppCompatActivity {
 
 
         textdisplay = findViewById(R.id.textView125);
+        constraintLayout = findViewById(R.id.textconpost);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -81,14 +85,21 @@ public class textResize extends AppCompatActivity {
         });
 
 
+        constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save(str);
+                Intent intent = new Intent(textResize.this,DiscoverDrawerLayerout.class);
+                intent.putExtra("post",true);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         lineSpacing.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-
                 textdisplay.setTextScaleX(lineSpacing.getProgress());
-
                 Log.d("feg", "yfft");
 
             }
@@ -113,5 +124,12 @@ public class textResize extends AppCompatActivity {
 
     public void cancel(View view) {
         finish();
+    }
+
+    public void save(String text){
+        Post post = new Post(text);
+        PostRepository postRepository = new PostRepository(this.getApplication());
+        postRepository.insertPost(post);
+
     }
 }

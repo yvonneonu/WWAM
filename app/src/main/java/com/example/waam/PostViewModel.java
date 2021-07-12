@@ -23,7 +23,7 @@ public class PostViewModel extends AndroidViewModel {
     }
 
     public void removePost(Post post){
-        postRepository.deleteAllPosts(post);
+        postRepository.deletePost(post);
     }
 
     public void updatePosting(Post post){

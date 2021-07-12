@@ -15,6 +15,7 @@
     <string name="agora_access_token">006b88e7fe917734f2ba7c356df6a380392IAA2iWaFQi9obvdxBw48sSkyvPv2/YAV7hlVB0jfYBJFKOIVUyEAAAAAEAD4YHXYTEekYAEAAQBMR6Rg</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_Discover_fragment">Hello blank fragment</string>
+    <string name="delete">Delete Post</string>
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="publishablekey">pk_test_51ITAgKBgd3O4ny7mXz17kU4QCrp3hQ0CQjpSdjHhXmDkoDYxRVgj9diGYnenw5cCVBigd0iFLv1kZ1LhDaTKlhlh00ZJpFHeVy</string>

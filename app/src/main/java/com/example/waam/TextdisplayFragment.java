@@ -38,10 +38,7 @@ public class TextdisplayFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private PostAdapter postAdapter;
-    private PostViewModel postViewModel;
-    private TextView textView;
-    private RecyclerView recyclerView;
+
 
     public TextdisplayFragment() {
         // Required empty public constructor
@@ -81,38 +78,33 @@ public class TextdisplayFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_textdisplay, container, false);
 
-        textView = view.findViewById(R.id.nopost);
-
         mediaPost = view.findViewById(R.id.mediaPost);
         textPost = view.findViewById(R.id.textPost);
         textDisplay = view.findViewById(R.id.addText);
         showText = view.findViewById(R.id.showText);
-        postAdapter = new PostAdapter();
 
-        recyclerView = view.findViewById(R.id.postShow);
 
-        postViewModel = new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()).create(PostViewModel.class);
-        postViewModel.getAllPosts().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
+        Fragment fragment = new TextPostFragment();
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.textdiscontainer, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+
+
+
+        //if statemnt needs to be here for the text just like wat we did in event
+
+        mediaPost.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(List<Post> posts) {
-                //update recycler view for the post
-                if(posts.size() < 1){
-                    Toast.makeText(getActivity(),"You have no posts",Toast.LENGTH_LONG).show();
-                    recyclerView.setVisibility(View.GONE);
-                    textView.setVisibility(View.VISIBLE);
-                    textView.setText("You have no posts");
-                }else{
-                    postAdapter.setPost(posts);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    textView.setVisibility(View.GONE);
-                    GridLayoutManager gridLayoutManager= new GridLayoutManager(getActivity(),2);
-                    recyclerView.setAdapter(postAdapter);
-                    recyclerView.setLayoutManager(gridLayoutManager);
-                }
-                Toast.makeText(getActivity(),"Method triggered",Toast.LENGTH_LONG).show();
+            public void onClick(View v) {
+                Fragment fragment = new MediaPostFragment();
+                getChildFragmentManager().beginTransaction()
+                        .replace(R.id.textdiscontainer, fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
             }
         });
-        //if statemnt needs to be here for the text just like wat we did in event
+
 
         textPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +114,7 @@ public class TextdisplayFragment extends Fragment {
                     mediaPost.setBackgroundResource(R.drawable.drawerborder);
                     Fragment fragment = new TextPostFragment();
                     FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.frame1, fragment);
+                    fragmentTransaction.replace(R.id.textdiscontainer, fragment);
                     fragmentTransaction.commit();
                 }
             }
@@ -134,7 +126,6 @@ public class TextdisplayFragment extends Fragment {
                 if (v.getId() == textDisplay.getId()){
                     Intent intent = new Intent(getActivity(), ShareTot.class);
                     startActivity(intent);
-
                 }
             }
         });

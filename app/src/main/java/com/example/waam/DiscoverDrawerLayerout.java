@@ -65,6 +65,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         TextView nav_user = (TextView)hView.findViewById(R.id.textView96);
         TextView viewProfile = hView.findViewById(R.id.textView95);
 
+        boolean post = getIntent().getBooleanExtra("post",false);
+
 
 
 
@@ -104,7 +106,9 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
        //Log.d("TAG", "in activity null");
         Fragment fragment;
 
-        if(waamUser != null){
+        if(post){
+            fragment = new ViewProfile(post);
+        } else if(waamUser != null){
             fragment = new ConnectedFriendsFragment(waamUser);
             bottomNavigationView.getMenu().getItem(-0).setChecked(false);
         }else{
