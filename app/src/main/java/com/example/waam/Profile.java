@@ -96,19 +96,12 @@ public class Profile extends AppCompatActivity {
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (imageUri != null){
 
                     Intent intent = new Intent(Profile.this, Interest.class);
-                    Log.d("ImageUri",imageUri.toString());
-                    intent.putExtra("profilepics", imageUri.toString());
-                    intent.putExtra("name", Fullname);
-                    intent.putExtra("mytoken", bigTokeng);
-                    Log.d("TAG", "TOKENSHOW5 " +bigTokeng);
+
                     startActivity(intent);
-                }else {
-                    Toast.makeText(Profile.this, "please select an image", Toast.LENGTH_LONG).show();
-                    Log.d("Swip", "wipe");
-                }
+
+
 
             }
         });

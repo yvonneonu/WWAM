@@ -20,7 +20,7 @@ import retrofit2.Response;
 
 public class Interest extends AppCompatActivity {
 
-    private TextView wipe;
+    private TextView Swipe;
    // private CheckBox zeroRadio, oneRadio, twoRadio, threeRadio, fourRadio, fiveRadio, sixRadio, sevenRadio, eightRadio;
   //  private TextView zeroText, oneText, twoText, threeText, fourText, fiveText, sixText, sevenText, eightText;
 
@@ -59,13 +59,24 @@ public class Interest extends AppCompatActivity {
         imageUri = getIntent().getStringExtra("profilepics");
 //        Log.d("ImageUriIN",imageUri);
         Fullname = getIntent().getStringExtra("name");
-        token = getIntent().getStringExtra("mytoken");
-        Log.d("display", token);
+        //token = getIntent().getStringExtra("mytoken");
+//        Log.d("display", token);
+
+        token = SharedPref.getInstance(this).getStoredToken();
 
 
 
 
-        wipe = findViewById(R.id.swipe);
+
+        Swipe = findViewById(R.id.swipe);
+
+        Swipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Interest.this, CompleteProfile.class);
+                startActivity(intent);
+            }
+        });
        /*zeroRadio = findViewById(R.id.radioButton);
        // zeroText = findViewById(R.id.textView20);
       //  oneRadio = findViewById(R.id.radioButton1);
@@ -254,25 +265,7 @@ public class Interest extends AppCompatActivity {
 
 
         }
-        wipe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (interestRequestList != null){
-                    for (String inter: interest){
-                        Log.d("display", inter);
-                    }
-                    for (InterestRequest interestRequest: interestRequestList){
-                        Log.d("Request", String.valueOf(interestRequest.getInterest_id()));
-                        saveInterest(interestRequestList);
 
-                    }
-
-                } else {
-                    String message = "Select Interest of choice";
-                    Toast.makeText(Interest.this, message, Toast.LENGTH_LONG).show();
-                }
-            }
-        });
         saveInterest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -45,11 +45,14 @@ public class CompleteProfile extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button save;
 
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_profile);
+        mAuth = FirebaseAuth.getInstance();
+
         String imageUri = getIntent().getStringExtra("getProfilePics");
 
 //        Log.d("Complete",imageUri);
@@ -80,18 +83,33 @@ public class CompleteProfile extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar4);
         save = findViewById(R.id.button5);
 
+        String uid = FirebaseAuth.getInstance().getUid();
 
-        if (imageUri != null) {
+
+       /* if (imageUri != null) {
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()
                     .load(Uri.parse(imageUri))
                     .into(profile);
-        }
+        }*/
 
+        GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+            @Override
+            public void loadSpecUse(WaamUser user) {
+                Glide.with(CompleteProfile.this)
+                        .asBitmap()
+                        .fitCenter()
+                        .circleCrop()
+                        .load(user.getImageUrl())
+                        .into(profile);
+
+                name.setText(user.getFullname());
+            }
+        });
         // name.setText(Fullname);
 
-        name.setText(SharedPref.getInstance(this).getStoredName());
+      //  name.setText(SharedPref.getInstance(this).getStoredName());
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -380,24 +398,11 @@ public class CompleteProfile extends AppCompatActivity {
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (imageUri != null){
+
                     Intent intent = new Intent(CompleteProfile.this, finalProfile.class);
-                    if (imageUri != null) {
-                        intent.putExtra("image", imageUri.toString());
-                    }
 
-                    if (tired != null) {
-                        intent.putExtra("everytoken", tired);
-                    }
 
-                    intent.putExtra("name", Fullname);
-                    Log.d("TAG", ""+Fullname);
-                    Log.d("TAG", "TOKENSHOW7 " + tired);
                     startActivity(intent);
-                }else {
-                    Toast.makeText(CompleteProfile.this, "Please Upload An Image", Toast.LENGTH_LONG).show();
-                    Log.d("Swip", "wipe");
-                }
 
             }
         });

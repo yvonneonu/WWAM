@@ -1,7 +1,6 @@
 package com.example.waam;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -60,18 +60,20 @@ public class LookingFor extends AppCompatActivity {
         token = SharedPref.getInstance(this).getStoredToken();
         Log.d("grace", token);
 
+        String uid = FirebaseAuth.getInstance().getUid();
+
 
 
 
         String imageUri = getIntent().getStringExtra("images");
         image = findViewById(R.id.imageView12);
-        if (imageUri != null) {
+       /* if (imageUri != null) {
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()
                     .load(Uri.parse(imageUri))
                     .into(image);
-        }
+        }*/
 
         count = 0;
         count1 = 0;
@@ -98,11 +100,26 @@ public class LookingFor extends AppCompatActivity {
         smok = findViewById(R.id.smoke);
         drink = findViewById(R.id.drink);
         sala = findViewById(R.id.salary);
+        namme = findViewById(R.id.textView19);
 
 
         //String toks = getIntent().getStringExtra("token");
         //Log.d("sorry", "iknowyouaretired "+token);
 
+
+        GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+            @Override
+            public void loadSpecUse(WaamUser user) {
+                Glide.with(LookingFor.this)
+                        .asBitmap()
+                        .fitCenter()
+                        .circleCrop()
+                        .load(user.getImageUrl())
+                        .into(image);
+
+                namme.setText(user.getFullname());
+            }
+        });
 
         List<String> names = new ArrayList<>();
         //   textView.setText(spinn);

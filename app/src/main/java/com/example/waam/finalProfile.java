@@ -1,7 +1,6 @@
 package com.example.waam;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -41,6 +41,8 @@ public class finalProfile extends AppCompatActivity {
     private int count7;
     private int count8;
     private int count9;
+    private FirebaseAuth mAuth;
+
     private String token;
     private Button saveDetails;
     private int zero, first, second, third, fourth, five, six, seven, eight, night;
@@ -57,6 +59,8 @@ public class finalProfile extends AppCompatActivity {
         token = getIntent().getStringExtra("everytoken");
       //  String imageUri = getIntent().getStringExtra("getProfilePics");
 
+        String uid = FirebaseAuth.getInstance().getUid();
+
         token = SharedPref.getInstance(this).getStoredToken();
 //        Log.d("Complete",imageUri);
         String Fullname = getIntent().getStringExtra("name");
@@ -66,13 +70,13 @@ public class finalProfile extends AppCompatActivity {
 
         imageUri = getIntent().getStringExtra("image");
         image = findViewById(R.id.imageView12);
-        if (imageUri != null) {
+       /* if (imageUri != null) {
             Glide.with(this)
                     .asBitmap()
                     .circleCrop()
                     .load(Uri.parse(imageUri))
                     .into(image);
-        }
+        }*/
 
         count = 0;
         count1 = 0;
@@ -120,7 +124,22 @@ public class finalProfile extends AppCompatActivity {
         names.add("Juliet");
         names.add("Maria");
 
-        namme.setText(SharedPref.getInstance(this).getStoredName());
+        GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+            @Override
+            public void loadSpecUse(WaamUser user) {
+                Glide.with(finalProfile.this)
+                        .asBitmap()
+                        .fitCenter()
+                        .circleCrop()
+                        .load(user.getImageUrl())
+                        .into(image);
+
+                namme.setText(user.getFullname());
+            }
+        });
+        // name.setTe
+
+       // namme.setText(SharedPref.getInstance(this).getStoredName());
 
         saveDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -287,29 +306,9 @@ public class finalProfile extends AppCompatActivity {
         swipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  if (textView.toString().isEmpty() ){
-                    textView.setError("Choose your Career");
-                    //||
-                    textView.requestFocus();
-                  //  Toast.makeText()
-                }else if (textView.toString().isEmpty()){*/
+                Intent intent = new Intent(finalProfile.this, LookingFor.class);
 
-               // }else{
-                   // Hereapi();
-                    Log.d("bfei", "jabhbchj");
-                   /* Intent intent = new Intent(finalProfile.this, LookingFor.class);
-                    if (imageUri != null) {
-                        intent.putExtra("images", imageUri);
-                    }
-                    if (token != null){
-                        intent.putExtra("token", token);
-                    }
-                    Log.d("TAG", "TOKENSHOW7 " +token);
-                    startActivity(intent);*/
-
-
-
-               // }
+                startActivity(intent);
             }
         });
 
