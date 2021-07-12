@@ -24,8 +24,17 @@ public class ViewPager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().hide();
+        //getActionBar().hide();
+
         setContentView(R.layout.activity_view_pager);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // getActionBar().hide();
+
+
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         androidx.viewpager.widget.ViewPager viewPager = findViewById(R.id.viewpage1);
         dotslayout = findViewById(R.id.linearLayoutdot);
         signin = findViewById(R.id.signhere);

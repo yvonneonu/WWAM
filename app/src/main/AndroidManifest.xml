@@ -35,7 +35,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="sensorPortrait"
         android:supportsRtl="true"
+
         android:theme="@style/Theme.Waam"
+
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".textResize"></activity>

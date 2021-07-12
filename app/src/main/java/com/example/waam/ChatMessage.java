@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -83,6 +84,14 @@ public class ChatMessage extends BaseActivity implements SinchService.StartFaile
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_message);
+        //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // getActionBar().hide();
+
+        // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         ImageButton imageButtonSender = findViewById(R.id.imageButton);
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         EditText editText = findViewById(R.id.edtMess);
