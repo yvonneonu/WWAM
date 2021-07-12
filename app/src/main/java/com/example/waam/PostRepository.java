@@ -15,6 +15,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class PostRepository {
     private final PostDao postDao;
     private LiveData<List<Post>> allPosts;
+
     public PostRepository(Application application){
         PostDatabase database = PostDatabase.getPostDatabaseInstance(application);
         postDao = database.PostDao();
@@ -51,7 +52,7 @@ public class PostRepository {
         });
 
     }
-    public void deleteAllPosts(Post post){
+    public void deletePost(Post post){
 
         deletePosts(post).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

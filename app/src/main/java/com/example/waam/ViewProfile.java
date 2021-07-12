@@ -31,28 +31,17 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ViewProfile extends Fragment implements View.OnClickListener {
-    private TextView textView, textView1;
+    private TextView textView;
     private ImageView imageView;
     private BottomNavigationView bottomNavigationView;
-    private RecyclerView recyclerView;
-    private ViewProfileAdapter viewProfileAdapter;
-    private List<Location> locationView = new ArrayList<>();
 
-    private List<Location> eventView = new ArrayList<>();
-    private ViewEventAdapter viewEventAdapter;
-    private RecyclerView recyclerView1;
 
-    private RecyclerView recyclerView2;
-    //private RecyclerView recyclerView31;
-    private List<Location> dateIdea = new ArrayList<>();
-    private ViewEventAdapter dateIdeaAdapter;
+    private boolean post;
 
     private WaamUser waamUser;
-    private ConstraintLayout constraintLayout;
 
 
-
-    private   ImageView test;
+    private ImageView test;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -67,13 +56,19 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     private String mParam2;
 
 
-    public ViewProfile(WaamUser waamUser){
+    public ViewProfile(WaamUser waamUser) {
         this.waamUser = waamUser;
     }
 
     public ViewProfile() {
         // Required empty public constructor
     }
+
+    //this constructor is to be used if the post is coming from TextDisplay.
+    public ViewProfile(boolean post) {
+        this.post = post;
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -106,11 +101,10 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
 
 
-        if(getActivity() != null){
+        if (getActivity() != null) {
             bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
 //            bottomNavigationView.setVisibility(View.GONE);
         }
-
 
 
     }
@@ -122,9 +116,9 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         menu.clear();
         inflater.inflate(R.menu.viewprofile, menu);
         super.onCreateOptionsMenu(menu, inflater);
-       // MenuItem item = menu.findItem(R.id.message);
+        // MenuItem item = menu.findItem(R.id.message);
         //item.setIcon(R.drawable.lowernav_friends_icon);
-      //super.onCreateOptionsMenu(menu, inflater);
+        //super.onCreateOptionsMenu(menu, inflater);
 
     }
 
@@ -140,53 +134,28 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_view_profile, container, false);
-
-
-        matchDesign();
-        eventDesign();
-        dateIdeaDisplay();
-
-      test = view.findViewById(R.id.text);
-
-
-
-
-        constraintLayout = view.findViewById(R.id.constraintLayout1);
-
+        View view = inflater.inflate(R.layout.fragment_view_profile, container, false);
         textView = view.findViewById(R.id.textView71);
-        //textView1 = view.findViewById(R.id.arrow_matches);
         imageView = view.findViewById(R.id.imageView);
+        test = view.findViewById(R.id.text);
 
-        recyclerView = view.findViewById(R.id.recyclerView3);
-        viewProfileAdapter = new ViewProfileAdapter(locationView, getActivity());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setAdapter(viewProfileAdapter);
-       recyclerView.setLayoutManager(linearLayoutManager);
-      //  textView1 = view.findViewById(R.id.textrt);
-
-        recyclerView1 = view.findViewById(R.id.recyclerView7);
-        viewEventAdapter = new ViewEventAdapter(eventView, getActivity());
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView1.setAdapter(viewEventAdapter);
-        recyclerView1.setLayoutManager(linearLayoutManager1);
-
-        /*recyclerView31 = view.findViewById(R.id.recyclerView31);
-        GridLayoutManager gridLayoutManager= new GridLayoutManager(getActivity(),2);
-        recyclerView31.setAdapter(postAdapter);
-        recyclerView31.setLayoutManager(gridLayoutManager);*/
-
+        Fragment fragment;
+        //If post is supplied you have to show dis fragment
+        if (post) {
+            fragment = new TextdisplayFragment();
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.containing, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .commit();
+        } else {
+            fragment = new ViewProfileDefaultFragment();
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.containing, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .commit();
+        }
 
 
-        recyclerView2 = view.findViewById(R.id.recyclerView9);
-        dateIdeaAdapter = new ViewEventAdapter(dateIdea, getActivity());
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView2.setAdapter(dateIdeaAdapter);
-        recyclerView2.setLayoutManager(linearLayoutManager2);
-
-
-
-//        toolbar.setTitle("Dashboard");
 
         String uid = FirebaseAuth.getInstance().getUid();
 
@@ -203,93 +172,10 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                 textView.setText(user.getFullname());
             }
         });
-        /*textView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (int i = 0; i < 4; i++){
-                   // locationView.add(new Location())
-                }
-            }
-        });*/
         test.setOnClickListener(this);
-
-       // assert activity != null;
-
         setHasOptionsMenu(true);
-//        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
-        return  view;
+        return view;
 
-    }
-
-
-    private void matchDesign() {
-        int[] display = {
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user,
-                R.drawable.group_img_2,
-                R.drawable.topnav_profile,
-
-
-        };
-
-
-
-        String[] rate2 = {"Ada, 25", "Kemi, 19", "Adora, 20", "Caio, 25", "Aish, 35",
-
-        };
-
-        for (int i = 0; i < display.length; i++) {
-
-                locationView.add(new Location(display[i], rate2[i]));
-        }
-    }
-    private void eventDesign() {
-        int[] display = {
-
-
-
-                R.drawable.diningout,
-                R.drawable.coffeeconversation,
-                R.drawable.travel,
-                R.drawable.winetasting,
-                R.drawable.nightclubsdancing,
-        };
-
-
-
-        String[] rate2 = {"Micheal Jackson", "Criss Angel", "One By Circle", "Freak at Planet", "By Circle",
-
-        };
-
-        for (int i = 0; i < display.length; i++) {
-
-            eventView.add(new Location(display[i], rate2[i]));
-        }
-    }
-
-    private void dateIdeaDisplay() {
-        int[] display = {
-
-
-
-                R.drawable.diningout,
-                R.drawable.coffeeconversation,
-                R.drawable.travel,
-                R.drawable.winetasting,
-                R.drawable.nightclubsdancing,
-        };
-
-
-
-        String[] rate2 = {"Secre Food", "SkyJump at Las", "Las Vegas", "Stratosphere Tower", "By Circle",
-
-        };
-
-        for (int i = 0; i < display.length; i++) {
-
-            dateIdea.add(new Location(display[i], rate2[i]));
-        }
     }
 
 
@@ -298,49 +184,42 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         final int tet = R.id.text;
         final int fram = R.id.fram1;
 
-        switch (v.getId()){
-            case tet:
-                if (waamUser != null){
-                    Fragment fragment = new TextdisplayFragment();
-                  //  constraintLayout.setVisibility(View.INVISIBLE);
-                    getChildFragmentManager().beginTransaction()
-                            .replace(fram, fragment)
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .commit();
-                }else {
-                    test.setColorFilter(Color.BLUE);
-                    //test.setBackgroundColor(Color.parseColor("#2162FD"));
-                    String userId = FirebaseAuth.getInstance().getUid();
-                    GeneralFactory.getGeneralFactory(getActivity())
-                            .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
-                                @Override
-                                public void loadSpecUse(WaamUser user) {
+        if (v.getId() == tet) {
+            if (waamUser != null) {
+                Fragment fragment = new TextdisplayFragment();
+                //  constraintLayout.setVisibility(View.INVISIBLE);
+                getChildFragmentManager().beginTransaction()
+                        .replace(fram, fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
+            } else {
+                test.setColorFilter(Color.BLUE);
+                //test.setBackgroundColor(Color.parseColor("#2162FD"));
+                String userId = FirebaseAuth.getInstance().getUid();
+                GeneralFactory.getGeneralFactory(getActivity())
+                        .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                            @Override
+                            public void loadSpecUse(WaamUser user) {
 
-                                    Fragment fragment = new TextdisplayFragment();
-                                    constraintLayout.setVisibility(View.GONE);
+                                Fragment fragment = new TextdisplayFragment();
+                                //constraintLayout.setVisibility(View.GONE);
 
-                                    getChildFragmentManager().beginTransaction()
-                                            .replace(fram, fragment)
-                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                            .addToBackStack(null)
+                                getChildFragmentManager().beginTransaction()
+                                        .replace(R.id.containing, fragment)
+                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                        .addToBackStack(null)
 
-                                            .commit();
-
-
-                                }
-
-                            });
-                }
-
-                break;
+                                        .commit();
 
 
+                            }
+
+                        });
+            }
         }
 
 
     }
-
-
 
 
 }
