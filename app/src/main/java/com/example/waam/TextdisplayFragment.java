@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,19 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waam.utils.TextPostFragment;
-
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +21,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class TextdisplayFragment extends Fragment {
-    private TextView mediaPost, textPost, textDisplay;
+    private TextView mediaPost, textPost, textDisplay, addImage, showcase;
     ConstraintLayout showText;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -82,6 +76,8 @@ public class TextdisplayFragment extends Fragment {
         textPost = view.findViewById(R.id.textPost);
         textDisplay = view.findViewById(R.id.addText);
         showText = view.findViewById(R.id.showText);
+        addImage = view.findViewById(R.id.textView121);
+        showcase = view.findViewById(R.id.texpost);
 
 
         Fragment fragment = new TextPostFragment();
@@ -95,13 +91,25 @@ public class TextdisplayFragment extends Fragment {
         //if statemnt needs to be here for the text just like wat we did in event
 
         mediaPost.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                Fragment fragment = new MediaPostFragment();
-                getChildFragmentManager().beginTransaction()
-                        .replace(R.id.textdiscontainer, fragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .commit();
+                if (v.getId() == mediaPost.getId()){
+
+                    mediaPost.setBackgroundColor(Color.BLUE);
+                    textPost.setBackgroundResource(R.drawable.drawerborder);
+                    textDisplay.setText("Upload New Image");
+                    addImage.setText("My Media Post");
+                    showcase.setText("Showcase who you are");
+
+                    Fragment fragment = new MediaPostFragment();
+                    getChildFragmentManager().beginTransaction()
+                            .replace(R.id.textdiscontainer, fragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+                }
+
+
             }
         });
 

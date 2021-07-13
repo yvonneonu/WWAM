@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private WaamUser waamUser;
     private GeneralFactory generalFactory;
     private  Button button;
+    private   ImageView videopic, aboutsefl, interests, friend;
     private static final String REQUEST = "connectedFriends";
 
     // TODO: Rename and change types of parameters
@@ -123,11 +125,11 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_connected_friends, container, false);
-        ImageView videopic = view.findViewById(R.id.videopic);
-        ImageView aboutsef = view.findViewById(R.id.aboutsef);
+        videopic = view.findViewById(R.id.videopic);
+        aboutsefl = view.findViewById(R.id.aboutsef);
         ImageView profilePic = view.findViewById(R.id.imageView32);
-        ImageView interest = view.findViewById(R.id.interest);
-        ImageView friends = view.findViewById(R.id.friends);
+        interests = view.findViewById(R.id.interest);
+        friend = view.findViewById(R.id.friends);
         CardView cardView8 = view.findViewById(R.id.cardView8);
         CardView cardView7 = view.findViewById(R.id.cardView7);
         button = view.findViewById(R.id.button15);
@@ -140,9 +142,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         cardView7.setOnClickListener(this);
         cardView8.setOnClickListener(this);
         videopic.setOnClickListener(this);
-        aboutsef.setOnClickListener(this);
-        interest.setOnClickListener(this);
-        friends.setOnClickListener(this);
+        aboutsefl.setOnClickListener(this);
+        interests.setOnClickListener(this);
+        friend.setOnClickListener(this);
         button.setOnClickListener(this);
 
 
@@ -237,6 +239,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                             .commit();
                 }else {
                     String userId = FirebaseAuth.getInstance().getUid();
+                    videopic.setColorFilter(Color.BLUE);
+                    aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    interests.setColorFilter(Color.TRANSPARENT);
                     GeneralFactory.getGeneralFactory(getActivity())
                             .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
                                 @Override
@@ -261,6 +266,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                             .commit();
                 }else{
                     String userId = FirebaseAuth.getInstance().getUid();
+                    aboutsefl.setColorFilter(Color.BLUE);
+                    videopic.setColorFilter(Color.TRANSPARENT);
+                    interests.setColorFilter(Color.TRANSPARENT);
                     GeneralFactory.getGeneralFactory(getActivity())
                             .loadSpecUser(userId, user -> {
                                 Fragment fragmentone = AboutMeFragment.newInstance(user);
@@ -272,6 +280,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 break;
             case interest:
                 Fragment fragmentwo = new InterestFragment();
+                interests.setColorFilter(Color.BLUE);
+                aboutsefl.setColorFilter(Color.TRANSPARENT);
+                videopic.setColorFilter(Color.TRANSPARENT);
                 getChildFragmentManager().beginTransaction()
                         .replace(profileFrame, fragmentwo)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -279,6 +290,10 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 break;
             case friends:
                 Fragment fragmenthree = FrendChannelFragment.newInstance(waamUser);
+                friend.setColorFilter(Color.BLUE);
+                interests.setColorFilter(Color.TRANSPARENT);
+                aboutsefl.setColorFilter(Color.TRANSPARENT);
+                videopic.setColorFilter(Color.TRANSPARENT);
                 getChildFragmentManager().beginTransaction()
                         .replace(profileFrame, fragmenthree)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
