@@ -137,6 +137,18 @@ public class TextdisplayFragment extends Fragment {
                 }
             }
         });
+
+
+
+       /* textDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == textDisplay.getId()){
+                    Intent intent = new Intent(getActivity(), Media.class);
+                    startActivity(intent);
+                }
+            }
+        });*/
         return view;
     }
 

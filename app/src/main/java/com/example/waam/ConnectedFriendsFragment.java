@@ -229,58 +229,73 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         final int sendRequest = R.id.button15;
         switch (v.getId()) {
             case vid:
+                if (v.getId() == videopic.getId()){
+
+                    if(waamUser != null){
+                        videopic.setColorFilter(Color.BLUE);
+                        aboutsefl.setColorFilter(Color.TRANSPARENT);
+                        interests.setColorFilter(Color.TRANSPARENT);
+                        friend.setColorFilter(Color.TRANSPARENT);
+                        Fragment fragment = new VideoPicFragment(waamUser);
+                        getChildFragmentManager().beginTransaction()
+                                .replace(profileFrame, fragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commit();
+                    }else {
+                        // if (v.getId() == )
+                        String userId = FirebaseAuth.getInstance().getUid();
+                        //videopic.setColorFilter(Color.BLUE);
+                        // aboutsefl.setColorFilter(Color.TRANSPARENT);
+                        //interests.setColorFilter(Color.TRANSPARENT);
+                        GeneralFactory.getGeneralFactory(getActivity())
+                                .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                    @Override
+                                    public void loadSpecUse(WaamUser user) {
+                                        Fragment fragment = new VideoPicFragment(waamUser);
+                                        getChildFragmentManager().beginTransaction()
+                                                .replace(profileFrame, fragment)
+                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                                .commit();
+                                    }
+                                });
+                    }
+                }
                 // i stopped here planning on sending waam user to the video fragment
                 //fragment = VideoPicFragment.newInstance();
-                if(waamUser != null){
-                    Fragment fragment = new VideoPicFragment(waamUser);
-                    videopic.setColorFilter(Color.BLUE);
-                    aboutsefl.setColorFilter(Color.TRANSPARENT);
-                    interests.setColorFilter(Color.TRANSPARENT);
-                    getChildFragmentManager().beginTransaction()
-                            .replace(profileFrame, fragment)
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .commit();
-                }else {
-                   // if (v.getId() == )
-                    String userId = FirebaseAuth.getInstance().getUid();
-                    //videopic.setColorFilter(Color.BLUE);
-                   // aboutsefl.setColorFilter(Color.TRANSPARENT);
-                    //interests.setColorFilter(Color.TRANSPARENT);
-                    GeneralFactory.getGeneralFactory(getActivity())
-                            .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
-                                @Override
-                                public void loadSpecUse(WaamUser user) {
-                                    Fragment fragment = new VideoPicFragment(waamUser);
-                                    getChildFragmentManager().beginTransaction()
-                                            .replace(profileFrame, fragment)
-                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                            .commit();
-                                }
-                            });
-                }
+
 
                 break;
             case aboutsef:
+                if (v.getId() == aboutsefl.getId()){
 
-                if(waamUser != null){
-                    Fragment fragmentone = AboutMeFragment.newInstance(waamUser);
-                    getChildFragmentManager().beginTransaction()
-                            .replace(profileFrame, fragmentone)
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .commit();
-                }else{
-                    String userId = FirebaseAuth.getInstance().getUid();
-                    aboutsefl.setColorFilter(Color.BLUE);
                     videopic.setColorFilter(Color.TRANSPARENT);
+                    aboutsefl.setColorFilter(Color.BLUE);
                     interests.setColorFilter(Color.TRANSPARENT);
-                    GeneralFactory.getGeneralFactory(getActivity())
-                            .loadSpecUser(userId, user -> {
-                                Fragment fragmentone = AboutMeFragment.newInstance(user);
-                                 getChildFragmentManager().beginTransaction()
-                                        .replace(profileFrame, fragmentone)
-                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                        });
+                    friend.setColorFilter(Color.TRANSPARENT);
+                    if(waamUser != null){
+                        Fragment fragmentone = AboutMeFragment.newInstance(waamUser);
+                        getChildFragmentManager().beginTransaction()
+                                .replace(profileFrame, fragmentone)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commit();
+                    }else{
+                        String userId = FirebaseAuth.getInstance().getUid();
+                       // aboutsefl.setColorFilter(Color.BLUE);
+                        //aboutsefl.setColorFilter(Color.TRANSPARENT);
+
+                       // videopic.setColorFilter(Color.TRANSPARENT);
+                       // interests.setColorFilter(Color.TRANSPARENT);
+                        GeneralFactory.getGeneralFactory(getActivity())
+                                .loadSpecUser(userId, user -> {
+                                    Fragment fragmentone = AboutMeFragment.newInstance(user);
+                                    getChildFragmentManager().beginTransaction()
+                                            .replace(profileFrame, fragmentone)
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                });
+                    }
                 }
+
+
                 break;
             case interest:
                 Fragment fragmentwo = new InterestFragment();
