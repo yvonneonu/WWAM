@@ -233,15 +233,19 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 //fragment = VideoPicFragment.newInstance();
                 if(waamUser != null){
                     Fragment fragment = new VideoPicFragment(waamUser);
+                    videopic.setColorFilter(Color.BLUE);
+                    aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    interests.setColorFilter(Color.TRANSPARENT);
                     getChildFragmentManager().beginTransaction()
                             .replace(profileFrame, fragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .commit();
                 }else {
+                   // if (v.getId() == )
                     String userId = FirebaseAuth.getInstance().getUid();
-                    videopic.setColorFilter(Color.BLUE);
-                    aboutsefl.setColorFilter(Color.TRANSPARENT);
-                    interests.setColorFilter(Color.TRANSPARENT);
+                    //videopic.setColorFilter(Color.BLUE);
+                   // aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    //interests.setColorFilter(Color.TRANSPARENT);
                     GeneralFactory.getGeneralFactory(getActivity())
                             .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
                                 @Override
@@ -280,24 +284,32 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 break;
             case interest:
                 Fragment fragmentwo = new InterestFragment();
-                interests.setColorFilter(Color.BLUE);
-                aboutsefl.setColorFilter(Color.TRANSPARENT);
-                videopic.setColorFilter(Color.TRANSPARENT);
-                getChildFragmentManager().beginTransaction()
-                        .replace(profileFrame, fragmentwo)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .commit();
+                if (v.getId() == interests.getId()){
+                    interests.setColorFilter(Color.BLUE);
+                    aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    friend.setColorFilter(Color.TRANSPARENT);
+                    videopic.setColorFilter(Color.TRANSPARENT);
+                    getChildFragmentManager().beginTransaction()
+                            .replace(profileFrame, fragmentwo)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+                }
+
                 break;
             case friends:
-                Fragment fragmenthree = FrendChannelFragment.newInstance(waamUser);
-                friend.setColorFilter(Color.BLUE);
-                interests.setColorFilter(Color.TRANSPARENT);
-                aboutsefl.setColorFilter(Color.TRANSPARENT);
-                videopic.setColorFilter(Color.TRANSPARENT);
-                getChildFragmentManager().beginTransaction()
-                        .replace(profileFrame, fragmenthree)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .commit();
+
+               if (v.getId() == friend.getId()){
+                   friend.setColorFilter(Color.BLUE);
+                   interests.setColorFilter(Color.TRANSPARENT);
+                   aboutsefl.setColorFilter(Color.TRANSPARENT);
+                   videopic.setColorFilter(Color.TRANSPARENT);
+                   Fragment fragmenthree = FrendChannelFragment.newInstance(waamUser);
+                   getChildFragmentManager().beginTransaction()
+                           .replace(profileFrame, fragmenthree)
+                           .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                           .commit();
+               }
+
                 break;
 
             case message:
