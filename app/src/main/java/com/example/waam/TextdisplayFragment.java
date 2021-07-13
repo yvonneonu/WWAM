@@ -131,12 +131,13 @@ public class TextdisplayFragment extends Fragment {
         textDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == textDisplay.getId()){
+                if (textDisplay.getText() == ""){
                     Intent intent = new Intent(getActivity(), ShareTot.class);
                     startActivity(intent);
                 }
             }
         });
+
 
 
 
