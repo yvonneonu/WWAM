@@ -122,7 +122,7 @@ public class AboutMeFragment extends Fragment {
 
                 if (!response.isSuccessful()){
                     String message = "No Display";
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+//check later                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
                     Log.d("display",response.message());
                     Log.d("display",response.errorBody().toString());
                     return;

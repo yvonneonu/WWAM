@@ -47,7 +47,7 @@ public class textResize extends AppCompatActivity {
 
         pref = getPreferences(MODE_PRIVATE);
 
-        float fs = pref.getFloat("VALUE", 50);
+        float fs = pref.getFloat("VALUE", 25);
 
         float fs2 = pref.getFloat("VALUE", 3);
 
