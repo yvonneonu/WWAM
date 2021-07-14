@@ -48,6 +48,8 @@ public class TextdisplayFragment extends Fragment {
     private Task<Uri> uriTask;
     private DatabaseReference mDatabaseRef;
     private ProgressBar progressBar;
+    private static final String VIDEOPIC = "videoPic";
+
 
 
 
@@ -208,96 +210,6 @@ public class TextdisplayFragment extends Fragment {
 
 
 
-        private String getFileExtension(Uri uri) {
-            // This was just a test
-            ContextWrapper rapper = new ContextWrapper(this);
-            ContentResolver resolver = rapper.getContentResolver();
-            MimeTypeMap mime = MimeTypeMap.getSingleton();
-            return mime.getExtensionFromMimeType(resolver.getType(uri));
-        }
-
-
-        public void uploadPicOrVid(String stire, Uri uri) {
-                String uid = FirebaseAuth.getInstance().getUid();
-                StorageReference mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
-                mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
-                progressBar.setVisibility(View.VISIBLE);
-
-                if (uri != null) {
-                    final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
-                    VideoPicModel videoPicModel = new VideoPicModel();
-
-                    if (filetype.equals("jpg") || filetype.equals("jpeg") || filetype.equals("png") ) {
-                        mUploads = fileref.putFile(uri)
-                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        String uploadId = mDatabaseRef.push().getKey();
-                                        fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri) {
-                                                videoPicModel.setVideo(false);
-                                                videoPicModel.setVideoPicUrl(uri.toString());
-                                                mDatabaseRef.child(uploadId).setValue(videoPicModel);
-                                                progressBar.setVisibility(View.GONE);
-                                                //This might crash it;
-                                                mUploads = null;
-                                            }
-                                        });
-
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
-                                        //This might crash it;
-                                        mUploads = null;
-                                    }
-                                });
-
-                    } else {
-                        uriTask = fileref.putFile(uri).continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
-                            if (!task.isSuccessful()) {
-                                throw task.getException();
-                            }
-                            return fileref.getDownloadUrl();
-                        })
-                                .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Uri> task) {
-                                        if (task.isSuccessful()) {
-                                            Uri downloadUrl = task.getResult();
-                                            String uploadId = mDatabaseRef.push().getKey();
-                                            videoPicModel.setVideo(true);
-                                            videoPicModel.setVideoPicUrl(downloadUrl.toString());
-                                            mDatabaseRef.child(uploadId).setValue(videoPicModel);
-                                            progressBar.setVisibility(View.GONE);
-                                            //This might crash it;
-                                            uriTask = null;
-                                        }
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        progressBar.setVisibility(View.GONE);
-                                        //This might crash it;
-                                        uriTask = null;
-                                    }
-                                });
-
-                    }
-
-
-                } else {
-                    Log.d("CompleteProfile", "No image or video was selected");
-                }
-
-            }
-
-
        /* textDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -308,6 +220,97 @@ public class TextdisplayFragment extends Fragment {
             }
         });*/
         return view;
+    }
+
+
+
+    private String getFileExtension(Uri uri) {
+        // This was just a test
+        ContextWrapper rapper = new ContextWrapper(getActivity());
+        ContentResolver resolver = rapper.getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(resolver.getType(uri));
+    }
+
+
+    public void uploadPicOrVid(String filetype, Uri uri) {
+        String uid = FirebaseAuth.getInstance().getUid();
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
+        progressBar.setVisibility(View.VISIBLE);
+
+        if (uri != null) {
+            final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
+            VideoPicModel videoPicModel = new VideoPicModel();
+
+            if (filetype.equals("jpg") || filetype.equals("jpeg") || filetype.equals("png") ) {
+                mUploads = fileref.putFile(uri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                String uploadId = mDatabaseRef.push().getKey();
+                                fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        videoPicModel.setVideo(false);
+                                        videoPicModel.setVideoPicUrl(uri.toString());
+                                        mDatabaseRef.child(uploadId).setValue(videoPicModel);
+                                        progressBar.setVisibility(View.GONE);
+                                        //This might crash it;
+                                        mUploads = null;
+                                    }
+                                });
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                                //This might crash it;
+                                mUploads = null;
+                            }
+                        });
+
+            } else {
+                uriTask = fileref.putFile(uri).continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileref.getDownloadUrl();
+                })
+                        .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    Uri downloadUrl = task.getResult();
+                                    String uploadId = mDatabaseRef.push().getKey();
+                                    videoPicModel.setVideo(true);
+                                    videoPicModel.setVideoPicUrl(downloadUrl.toString());
+                                    mDatabaseRef.child(uploadId).setValue(videoPicModel);
+                                    progressBar.setVisibility(View.GONE);
+                                    //This might crash it;
+                                    uriTask = null;
+                                }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressBar.setVisibility(View.GONE);
+                                //This might crash it;
+                                uriTask = null;
+                            }
+                        });
+
+            }
+
+
+        } else {
+            Log.d("CompleteProfile", "No image or video was selected");
+        }
+
     }
 
 }
