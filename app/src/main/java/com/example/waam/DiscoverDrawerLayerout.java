@@ -163,7 +163,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
             case R.id.friend:
 
                 fragment = new FriendsFragment();
-                toolbar2.setVisibility(View.GONE);
+                // check it out later toolbar2.setVisibility(View.GONE);
                 bottomNavigationView.setVisibility(View.VISIBLE);
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
                 break;

@@ -1,19 +1,40 @@
 package com.example.waam;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.waam.utils.TextPostFragment;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +44,13 @@ import com.example.waam.utils.TextPostFragment;
 public class TextdisplayFragment extends Fragment {
     private TextView mediaPost, textPost, textDisplay, addImage, showcase;
     ConstraintLayout showText;
+    private StorageTask<UploadTask.TaskSnapshot> mUploads;
+    private Task<Uri> uriTask;
+    private DatabaseReference mDatabaseRef;
+    private ProgressBar progressBar;
+
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,6 +93,7 @@ public class TextdisplayFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,6 +110,13 @@ public class TextdisplayFragment extends Fragment {
 
 
         Fragment fragment = new TextPostFragment();
+        textDisplay.setText("Add New Text Post");
+        addImage.setText("My Text Post");
+
+        showcase.setText("Share your thoughts");
+
+        textPost.setBackgroundColor(Color.BLUE);
+        mediaPost.setBackgroundResource(R.drawable.drawerborder);
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.textdiscontainer, fragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -98,11 +134,12 @@ public class TextdisplayFragment extends Fragment {
 
                     mediaPost.setBackgroundColor(Color.BLUE);
                     textPost.setBackgroundResource(R.drawable.drawerborder);
+
+
                     textDisplay.setText("Upload New Image");
                     addImage.setText("My Media Post");
 
-                    textDisplay.setText("Add New Text Post\"");
-
+                    showcase.setText("Showcase who you are");
 
                     Fragment fragment = new MediaPostFragment();
                     getChildFragmentManager().beginTransaction()
@@ -122,6 +159,10 @@ public class TextdisplayFragment extends Fragment {
                 if (v.getId() == textPost.getId()){
                     textPost.setBackgroundColor(Color.BLUE);
                     mediaPost.setBackgroundResource(R.drawable.drawerborder);
+                    textDisplay.setText("Add New Text Post");
+                    addImage.setText("My Text Post");
+
+                    showcase.setText("Share your thoughts");
 
                     Fragment fragment = new TextPostFragment();
                     FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
@@ -132,22 +173,129 @@ public class TextdisplayFragment extends Fragment {
         });
 
         textDisplay.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
+
             @Override
             public void onClick(View v) {
                 if (textDisplay.getText() == "Add New Text Post"){
-                    addImage.setText("My Text Post");
-                    showcase.setText("Showcase who you are");
+
                     Intent intent = new Intent(getActivity(), ShareTot.class);
                     startActivity(intent);
                 }else {
-                    Intent intent = new Intent(getActivity(), newPhotot.class);
-                    startActivity(intent);
+
+                    BottomSheet bottom = new BottomSheet();
+                    bottom.show(getChildFragmentManager(), "MED");
+                    bottom.onSelectedImageListener(new BottomSheet.SelectedImage() {
+                        @Override
+                        public void selectedImageListener(Uri uri) {
+                            if (mUploads != null || uriTask != null) {
+                                Toast.makeText(getActivity(), "An upload is ongoing", Toast.LENGTH_LONG)
+                                        .show();
+                            } else {
+                                uploadPicOrVid(getFileExtension(uri), uri);
+                                Glide.with(getActivity())
+                                        .asBitmap()
+                                        .load(uri)
+                                        .into(imagethird);
+                                bottom.dismiss();
+                            }
+
+                        }
+                    });
+
                 }
             }
         });
 
 
+
+        private String getFileExtension(Uri uri) {
+            // This was just a test
+            ContextWrapper rapper = new ContextWrapper(this);
+            ContentResolver resolver = rapper.getContentResolver();
+            MimeTypeMap mime = MimeTypeMap.getSingleton();
+            return mime.getExtensionFromMimeType(resolver.getType(uri));
+        }
+
+
+        public void uploadPicOrVid(String stire, Uri uri) {
+                String uid = FirebaseAuth.getInstance().getUid();
+                StorageReference mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
+                progressBar.setVisibility(View.VISIBLE);
+
+                if (uri != null) {
+                    final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
+                    VideoPicModel videoPicModel = new VideoPicModel();
+
+                    if (filetype.equals("jpg") || filetype.equals("jpeg") || filetype.equals("png") ) {
+                        mUploads = fileref.putFile(uri)
+                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        String uploadId = mDatabaseRef.push().getKey();
+                                        fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                videoPicModel.setVideo(false);
+                                                videoPicModel.setVideoPicUrl(uri.toString());
+                                                mDatabaseRef.child(uploadId).setValue(videoPicModel);
+                                                progressBar.setVisibility(View.GONE);
+                                                //This might crash it;
+                                                mUploads = null;
+                                            }
+                                        });
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                                        //This might crash it;
+                                        mUploads = null;
+                                    }
+                                });
+
+                    } else {
+                        uriTask = fileref.putFile(uri).continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+                            return fileref.getDownloadUrl();
+                        })
+                                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task) {
+                                        if (task.isSuccessful()) {
+                                            Uri downloadUrl = task.getResult();
+                                            String uploadId = mDatabaseRef.push().getKey();
+                                            videoPicModel.setVideo(true);
+                                            videoPicModel.setVideoPicUrl(downloadUrl.toString());
+                                            mDatabaseRef.child(uploadId).setValue(videoPicModel);
+                                            progressBar.setVisibility(View.GONE);
+                                            //This might crash it;
+                                            uriTask = null;
+                                        }
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        progressBar.setVisibility(View.GONE);
+                                        //This might crash it;
+                                        uriTask = null;
+                                    }
+                                });
+
+                    }
+
+
+                } else {
+                    Log.d("CompleteProfile", "No image or video was selected");
+                }
+
+            }
 
 
        /* textDisplay.setOnClickListener(new View.OnClickListener() {
