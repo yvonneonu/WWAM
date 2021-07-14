@@ -100,7 +100,9 @@ public class TextdisplayFragment extends Fragment {
                     textPost.setBackgroundResource(R.drawable.drawerborder);
                     textDisplay.setText("Upload New Image");
                     addImage.setText("My Media Post");
-                    showcase.setText("Showcase who you are");
+
+                    textDisplay.setText("Add New Text Post\"");
+
 
                     Fragment fragment = new MediaPostFragment();
                     getChildFragmentManager().beginTransaction()
@@ -120,6 +122,7 @@ public class TextdisplayFragment extends Fragment {
                 if (v.getId() == textPost.getId()){
                     textPost.setBackgroundColor(Color.BLUE);
                     mediaPost.setBackgroundResource(R.drawable.drawerborder);
+
                     Fragment fragment = new TextPostFragment();
                     FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.textdiscontainer, fragment);
@@ -129,10 +132,16 @@ public class TextdisplayFragment extends Fragment {
         });
 
         textDisplay.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                if (textDisplay.getText() == ""){
+                if (textDisplay.getText() == "Add New Text Post"){
+                    addImage.setText("My Text Post");
+                    showcase.setText("Showcase who you are");
                     Intent intent = new Intent(getActivity(), ShareTot.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getActivity(), newPhotot.class);
                     startActivity(intent);
                 }
             }

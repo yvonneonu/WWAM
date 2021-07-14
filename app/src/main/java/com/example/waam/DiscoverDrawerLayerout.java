@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class DiscoverDrawerLayerout extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer1;
     private FirebaseAuth mAuth;
+    private  Toolbar toolbar2;
     private PostViewModel postViewModel;
     BottomNavigationView bottomNavigationView;
 
@@ -39,7 +40,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Toolbar toolbar2 = findViewById(R.id.toolbar1);
+        toolbar2 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar2);
 
         mAuth = FirebaseAuth.getInstance();
@@ -160,7 +161,9 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 break;
 
             case R.id.friend:
+
                 fragment = new FriendsFragment();
+                toolbar2.setVisibility(View.GONE);
                 bottomNavigationView.setVisibility(View.VISIBLE);
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
                 break;
