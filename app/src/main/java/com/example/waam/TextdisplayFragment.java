@@ -21,7 +21,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.bumptech.glide.Glide;
 import com.example.waam.utils.TextPostFragment;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -194,10 +193,10 @@ public class TextdisplayFragment extends Fragment {
                                         .show();
                             } else {
                                 uploadPicOrVid(getFileExtension(uri), uri);
-                                Glide.with(getActivity())
+                               /* Glide.with(getActivity())
                                         .asBitmap()
                                         .load(uri)
-                                        .into(imagethird);
+                                        .into(imagethird);*/
                                 bottom.dismiss();
                             }
 
