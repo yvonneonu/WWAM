@@ -425,40 +425,179 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout24"
                     app:layout_constraintTop_toTopOf="@+id/linearLayout24">
 
+                    <ImageView
+                        android:id="@+id/imageView59"
+                        android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconethnicity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                        />
+
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/textView132"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center|start"
+                        android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"
+                        android:gravity="center|start"
                         android:text="Ethnicity"
-                        app:drawableStartCompat="@drawable/aboutmeiconethnicity" />
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView59"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/ehnity1"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Black/African" />
+                        android:text="Black/African"
+                        app:layout_constraintStart_toStartOf="@+id/textView132"
+                        app:layout_constraintTop_toBottomOf="@+id/textView132" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
             <TextView
                 android:id="@+id/textView78"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="What I am looking for"
-                android:textSize="24sp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="More About Me "
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView73"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.292"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar mattis nunc. Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Fames ac turpis egestas integer eget. Aliquet eget sit amet tellus. Vitae et leo duis ut diam quam nulla porttitor. Nunc pulvinar sapien et ligula ullamcorper malesuada. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. A diam maecenas sed enim. Augue mauris augue neque gravida in fermentum et sollicitudin. Rhoncus urna neque viverra justo nec ultrices dui sapien. Amet facilisis magna etiam tempor orci eu. Pellentesque elit eget gravida cum."
+                app:layout_constraintEnd_toEndOf="@+id/textView78"
+                app:layout_constraintStart_toStartOf="@+id/textView78"
+                app:layout_constraintTop_toBottomOf="@+id/textView78" />
+
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textStyle="bold"
+                android:text="More About whata I am looking for "
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
+            <TextView
+
+                android:id="@+id/textView80"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Sagittis vitae et leo duis ut diam. Consequat mauris nunc congue nisi. Nisl condimentum id venenatis a condimentum vitae. Pharetra et ultrices neque ornare aenean euismod. Eget felis eget nunc lobortis mattis aliquam faucibus purus."
+                app:layout_constraintEnd_toEndOf="@+id/textView79"
+                app:layout_constraintStart_toStartOf="@+id/textView79"
+                app:layout_constraintTop_toBottomOf="@+id/textView79" />
+
+
+            <TextView
+
+                android:id="@+id/textView81"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="16dp"
+                android:text="My life so far"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView80" />
+
+
+            <TextView
+
+                android:id="@+id/textView82"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Neque laoreet suspendisse interdum consectetur. Mollis nunc sed id semper risus in hendrerit. Nibh sit amet commodo nulla facilisi nullam vehicula ipsum. Volutpat diam ut venenatis tellus in metus vulputate eu scelerisque."
+                app:layout_constraintEnd_toEndOf="@+id/textView81"
+                app:layout_constraintStart_toStartOf="@+id/textView81"
+                app:layout_constraintTop_toBottomOf="@+id/textView81" />
+
+
+            <TextView
+
+                android:id="@+id/textView83"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="16dp"
+                android:text="A little about my hobbies "
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView82" />
+
+
+            <TextView
+
+                android:id="@+id/textView85"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Arcu dictum varius duis at consectetur lorem donec. Eu turpis egestas pretium aenean pharetra magna ac. Vitae congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque. Nibh praesent tristique magna sit. "
+                app:layout_constraintEnd_toEndOf="@+id/textView83"
+                app:layout_constraintStart_toStartOf="@+id/textView83"
+                app:layout_constraintTop_toBottomOf="@+id/textView83" />
+
+
+            <TextView
+
+                android:id="@+id/textView86"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="My Plans for the future"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView85" />
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Commodo nulla facilisi nullam vehicula ipsum a arcu. Blandit aliquam etiam erat velit scelerisque in. Aenean vel elit scelerisque mauris pellentesque pulvinar. Nec feugiat nisl pretium fusce id velit ut tortor."
+                app:layout_constraintEnd_toEndOf="@+id/textView86"
+                app:layout_constraintStart_toStartOf="@+id/textView86"
+                app:layout_constraintTop_toBottomOf="@+id/textView86" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
