@@ -154,6 +154,8 @@ public class TextdisplayFragment extends Fragment {
         });
 
 
+
+
         textPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,6 +174,7 @@ public class TextdisplayFragment extends Fragment {
                 }
             }
         });
+
 
         textDisplay.setOnClickListener(new View.OnClickListener() {
 
@@ -193,10 +196,18 @@ public class TextdisplayFragment extends Fragment {
                                         .show();
                             } else {
                                 uploadPicOrVid(getFileExtension(uri), uri);
+                               String ur =  uri.toString();
+                                Intent intent = new Intent(getActivity(), shareMedia.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("typedText", ur);
+                                intent.putExtras(bundle);
+                                Log.d("please diplay", ur);
+                                startActivity(intent);
                                /* Glide.with(getActivity())
                                         .asBitmap()
                                         .load(uri)
                                         .into(imagethird);*/
+
                                 bottom.dismiss();
                             }
 

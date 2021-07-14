@@ -38,7 +38,8 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".newPhotot"></activity>
+        <activity android:name=".shareMedia"></activity>
+        <activity android:name=".newPhotot" />
         <activity android:name=".textResize" />
         <activity android:name=".ShareTot" />
         <activity android:name=".NotificationActivity" />
