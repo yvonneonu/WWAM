@@ -72,6 +72,7 @@
                 android:layout_marginTop="8dp"
                 android:text="Events I would like to attend"
                 android:textSize="24sp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout15"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout15"
@@ -96,6 +97,8 @@
                 android:layout_marginTop="3dp"
                 android:text="More About MySelf"
                 android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView6" />
 
@@ -112,7 +115,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView69">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout18"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -123,26 +126,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+                    <ImageView
+                        android:id="@+id/imageView52"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/profileiconcareer"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/textView74"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
                         android:gravity="center|start"
                         android:text="Career"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        app:drawableStartCompat="@drawable/aboutmeiconcareer" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView52"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textView75"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Doctor" />
-                </LinearLayout>
+                        android:text="Doctor"
+                        app:layout_constraintStart_toStartOf="@+id/textView74"
+                        app:layout_constraintTop_toBottomOf="@+id/textView74" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -152,26 +168,39 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout18"
                     app:layout_constraintTop_toTopOf="@+id/linearLayout18">
 
+                    <ImageView
+                        android:id="@+id/imageView51"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/profileiconheight"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/textView77"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
-                        android:textColor="@color/black"
                         android:gravity="center|start"
                         android:text="Height"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        app:drawableStartCompat="@drawable/aboutmeiconethnicity" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView51"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textView76"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text='5"3' />
-                </LinearLayout>
+                        android:text='5"3'
+                        app:layout_constraintStart_toStartOf="@+id/textView77"
+                        app:layout_constraintTop_toBottomOf="@+id/textView77" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -182,25 +211,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/imageView60"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:src="@drawable/profileiconeducation"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView133"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
                         android:gravity="center|start"
-                        android:textColor="@color/black"
                         android:text="Education"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        app:drawableStartCompat="@drawable/aboutmeiconeducation" />
+                        app:layout_constraintStart_toEndOf="@+id/imageView60"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/testtt"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Law School" />
-                </LinearLayout>
+                        android:text="Law School"
+                        app:layout_constraintStart_toStartOf="@+id/textView133"
+                        app:layout_constraintTop_toBottomOf="@+id/textView133" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout21"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -209,26 +252,40 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout20"
                     app:layout_constraintTop_toTopOf="@+id/linearLayout20">
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/imageView62"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center|start"
+                        android:src="@drawable/profileiconbodytype"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView134"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"
+                        android:gravity="center|start"
                         android:text="Body type"
-                        app:drawableStartCompat="@drawable/aboutmeiconbodytype" />
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView62"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/body1"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Athletic" />
+                        android:text="Athletic"
+                        app:layout_constraintStart_toStartOf="@+id/textView134"
+                        app:layout_constraintTop_toBottomOf="@+id/textView134" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout22"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -238,25 +295,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout20">
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/imageView63"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center|start"
+                        android:src="@drawable/profileiconchildren"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView135"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
+                        android:gravity="center|start"
+                        android:text="Children"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:text="Children"
-                        app:drawableStartCompat="@drawable/aboutmeiconchildren" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView63"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/chil"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="One day" />
-                </LinearLayout>
+                        android:text="One day"
+                        app:layout_constraintStart_toStartOf="@+id/textView135"
+                        app:layout_constraintTop_toBottomOf="@+id/textView135" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout23"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -267,25 +338,39 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout22"
                     app:layout_constraintTop_toTopOf="@+id/linearLayout22">
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/imageView65"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:src="@drawable/profileiconfaith"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView136"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
                         android:gravity="center|start"
-                        android:textColor="@color/black"
                         android:text="Faith"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        app:drawableStartCompat="@drawable/aboutmeiconfaith" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView65"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/faith3"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Christain" />
-                </LinearLayout>
+                        android:text="Christain"
+                        app:layout_constraintStart_toStartOf="@+id/textView136"
+                        app:layout_constraintTop_toBottomOf="@+id/textView136" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout24"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -297,26 +382,40 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout22">
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/imageView66"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:src="@drawable/profileiconpolitics"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView137"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
                         android:gravity="center|start"
-                        android:textColor="@color/black"
                         android:text="Politics"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        app:drawableStartCompat="@drawable/aboutmeiconpolitics" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView66"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/polit"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Liberal" />
+                        android:text="Liberal"
+                        app:layout_constraintStart_toStartOf="@+id/textView137"
+                        app:layout_constraintTop_toBottomOf="@+id/textView137" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -342,7 +441,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Black/African" />
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
