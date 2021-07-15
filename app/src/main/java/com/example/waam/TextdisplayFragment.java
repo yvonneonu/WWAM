@@ -108,6 +108,7 @@ public class TextdisplayFragment extends Fragment {
         showText = view.findViewById(R.id.showText);
         addImage = view.findViewById(R.id.textView121);
         showcase = view.findViewById(R.id.texpost);
+        progressBar = view.findViewById(R.id.progressBar6);
 
 
         Fragment fragment = new TextPostFragment();
@@ -196,7 +197,8 @@ public class TextdisplayFragment extends Fragment {
                                         .show();
                             } else {
                                 uploadPicOrVid(getFileExtension(uri), uri);
-                               String ur =  uri.toString();
+
+                                String ur = uri.toString();
                                 Intent intent = new Intent(getActivity(), shareMedia.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("typedText", ur);

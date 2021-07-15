@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 
 public class shareMedia extends AppCompatActivity {
     private ImageView imageView;
-    String image;
+   private String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +26,12 @@ public class shareMedia extends AppCompatActivity {
             image = bundle.getString("typedText");
 
 
+
+           // uploadPicOrVid(getFileExtension(uri), uri);
             GeneralFactory.getGeneralFactory(this).loadSpecUser(image, new GeneralFactory.SpecificUser() {
                 @Override
                 public void loadSpecUse(WaamUser user) {
+                    user.setImageUrl(image);
                     Glide.with(shareMedia.this)
                             .asBitmap()
                             .fitCenter()
