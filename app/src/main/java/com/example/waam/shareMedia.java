@@ -1,7 +1,7 @@
 package com.example.waam;
 
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +20,16 @@ public class shareMedia extends AppCompatActivity {
         imageView = findViewById(R.id.textView12);
 
 
-        Bundle bundle = getIntent().getExtras();
+       String uri = getIntent().getStringExtra("image");
 
-        if (bundle != null){
+        Glide.with(shareMedia.this)
+                .asBitmap()
+                .fitCenter()
+                .circleCrop()
+                .load(Uri.parse(uri))
+                .into(imageView);
+
+       /* if (bundle != null){
             image = bundle.getString("typedText");
 
 
@@ -45,7 +52,7 @@ public class shareMedia extends AppCompatActivity {
 
         }else {
             Log.d("didnt show", ""+image);
-        }
+        }*/
 
 
     }

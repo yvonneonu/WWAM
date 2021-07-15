@@ -192,26 +192,18 @@ public class TextdisplayFragment extends Fragment {
                     bottom.onSelectedImageListener(new BottomSheet.SelectedImage() {
                         @Override
                         public void selectedImageListener(Uri uri) {
-                            if (mUploads != null || uriTask != null) {
-                                Toast.makeText(getActivity(), "An upload is ongoing", Toast.LENGTH_LONG)
-                                        .show();
-                            } else {
-                                uploadPicOrVid(getFileExtension(uri), uri);
+                         if (uri != null){
+                             Intent intent = new Intent(getActivity(), shareMedia.class);
 
-                                String ur = uri.toString();
-                                Intent intent = new Intent(getActivity(), shareMedia.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putString("typedText", ur);
-                                intent.putExtras(bundle);
-                                Log.d("please diplay", ur);
-                                startActivity(intent);
-                               /* Glide.with(getActivity())
-                                        .asBitmap()
-                                        .load(uri)
-                                        .into(imagethird);*/
+                             intent.putExtra("image", uri.toString());
+                             Log.d("notifyimage", ""+uri);
+                             startActivity(intent);
 
-                                bottom.dismiss();
-                            }
+
+                         }else {
+                             Log.d("error", "bo image uploaded");
+
+                         }
 
                         }
                     });
