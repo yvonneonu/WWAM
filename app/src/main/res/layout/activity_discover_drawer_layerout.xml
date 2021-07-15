@@ -58,6 +58,7 @@
         app:menu="@menu/navigationdraw">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -85,6 +86,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:gravity="center"
                     android:text="Logout"
                     android:textAllCaps="false"
@@ -113,6 +115,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:gravity="center"
                     android:text="Upgrade"
                     android:textAllCaps="false"

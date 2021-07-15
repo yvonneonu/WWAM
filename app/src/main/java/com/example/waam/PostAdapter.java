@@ -53,7 +53,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
             imageView = itemView.findViewById(R.id.delete);
             textView = itemView.findViewById(R.id.post);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(postListener != null){
