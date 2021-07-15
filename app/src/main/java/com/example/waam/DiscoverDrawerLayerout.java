@@ -1,21 +1,26 @@
 package com.example.waam;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -33,6 +38,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
     private PostViewModel postViewModel;
     BottomNavigationView bottomNavigationView;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         NavigationView navigationView1 = findViewById(R.id.nav_view);
         navigationView1.setNavigationItemSelectedListener(this);
 
+        ConstraintLayout constraintLayout = findViewById(R.id.constr);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         LinearLayout linearLayout = findViewById(R.id.logout);
@@ -68,7 +75,13 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         boolean post = getIntent().getBooleanExtra("post",false);
 
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
+        /*if(imm.isActive()){
+            constraintLayout.setVisibility(View.GONE);
+        }else{
+            constraintLayout.setVisibility(View.VISIBLE);
+        }*/
 
 
         linearLayout.setOnClickListener(new View.OnClickListener() {

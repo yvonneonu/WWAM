@@ -80,7 +80,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView6"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="3dp"
@@ -131,8 +131,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/profileiconcareer"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView75"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView74" />
 
                     <TextView
                         android:id="@+id/textView74"
@@ -140,7 +141,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:drawablePadding="10dp"
-                        android:gravity="center|start"
                         android:text="Career"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -173,8 +173,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/profileiconheight"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView76"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView77" />
 
                     <TextView
                         android:id="@+id/textView77"
@@ -216,8 +217,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/profileiconeducation"
+                        app:layout_constraintBottom_toBottomOf="@+id/testtt"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView133" />
 
                     <TextView
                         android:id="@+id/textView133"
@@ -227,9 +229,9 @@
                         android:drawablePadding="10dp"
                         android:gravity="center|start"
                         android:text="Education"
-                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="20sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/imageView60"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -257,8 +259,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/profileiconbodytype"
+                        app:layout_constraintBottom_toBottomOf="@+id/body1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView134" />
 
                     <TextView
                         android:id="@+id/textView134"
@@ -300,8 +303,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/profileiconchildren"
+                        app:layout_constraintBottom_toBottomOf="@+id/chil"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView135" />
 
                     <TextView
                         android:id="@+id/textView135"
@@ -343,8 +347,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/profileiconfaith"
+                        app:layout_constraintBottom_toBottomOf="@+id/faith3"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView136" />
 
                     <TextView
                         android:id="@+id/textView136"
@@ -387,8 +392,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/profileiconpolitics"
+                        app:layout_constraintBottom_toBottomOf="@+id/polit"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView137" />
 
                     <TextView
                         android:id="@+id/textView137"
@@ -428,11 +434,11 @@
                     <ImageView
                         android:id="@+id/imageView59"
                         android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/profileiconethnicity"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                        />
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/profileiconethnicity"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView132" />
 
                     <TextView
                         android:id="@+id/textView132"
