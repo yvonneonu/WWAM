@@ -75,15 +75,6 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         boolean post = getIntent().getBooleanExtra("post",false);
 
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        /*if(imm.isActive()){
-            constraintLayout.setVisibility(View.GONE);
-        }else{
-            constraintLayout.setVisibility(View.VISIBLE);
-        }*/
-
-
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

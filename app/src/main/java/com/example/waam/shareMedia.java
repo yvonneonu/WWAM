@@ -24,8 +24,6 @@ public class shareMedia extends AppCompatActivity {
 
         Glide.with(shareMedia.this)
                 .asBitmap()
-                .fitCenter()
-                .circleCrop()
                 .load(Uri.parse(uri))
                 .into(imageView);
 
