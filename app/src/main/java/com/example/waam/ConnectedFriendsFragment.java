@@ -280,11 +280,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                                 .commit();
                     }else{
                         String userId = FirebaseAuth.getInstance().getUid();
-                       // aboutsefl.setColorFilter(Color.BLUE);
-                        //aboutsefl.setColorFilter(Color.TRANSPARENT);
 
-                       // videopic.setColorFilter(Color.TRANSPARENT);
-                       // interests.setColorFilter(Color.TRANSPARENT);
                         GeneralFactory.getGeneralFactory(getActivity())
                                 .loadSpecUser(userId, user -> {
                                     Fragment fragmentone = AboutMeFragment.newInstance(user);

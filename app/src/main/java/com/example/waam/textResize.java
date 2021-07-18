@@ -132,4 +132,5 @@ public class textResize extends AppCompatActivity {
         postRepository.insertPost(post);
 
     }
+
 }

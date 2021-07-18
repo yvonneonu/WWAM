@@ -50,6 +50,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="More About MySelf"
+            android:textStyle="bold"
             android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
@@ -72,7 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView69">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -83,26 +84,40 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:id="@+id/imageView50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconcareer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
                 <TextView
                     android:id="@+id/textView74"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="10dp"
                     android:gravity="center|start"
                     android:text="Career"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:drawableStartCompat="@drawable/aboutmeiconcareer" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView50"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView75"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Doctor" />
-            </LinearLayout>
+                    android:text="Doctor"
+                    app:layout_constraintStart_toStartOf="@+id/textView74"
+                    app:layout_constraintTop_toBottomOf="@+id/textView74" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout19"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -112,26 +127,40 @@
                 app:layout_constraintStart_toEndOf="@+id/linearLayout18"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout18">
 
+                <ImageView
+                    android:id="@+id/imageView51"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconheight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/textView77"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+
                     android:drawablePadding="10dp"
                     android:gravity="center|start"
                     android:text="Height"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:drawableStartCompat="@drawable/aboutmeiconethnicity" />
-
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView51"
+                    app:layout_constraintTop_toTopOf="parent"
+                   />
                 <TextView
                     android:id="@+id/textView76"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text='5"3' />
-            </LinearLayout>
+                    android:text='5"3'
+                    app:layout_constraintStart_toStartOf="@+id/textView77"
+                    app:layout_constraintTop_toBottomOf="@+id/textView77" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout20"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -142,25 +171,40 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/imageView54"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconeducation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView127"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="10dp"
                     android:gravity="center|start"
                     android:text="Education"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    app:drawableStartCompat="@drawable/aboutmeiconeducation" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView54"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
                 <TextView
                     android:id="@+id/educ"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Law School" />
-            </LinearLayout>
+                    android:text="Law School"
+                    app:layout_constraintStart_toStartOf="@+id/textView127"
+                    app:layout_constraintTop_toBottomOf="@+id/textView127" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout21"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -169,26 +213,42 @@
                 app:layout_constraintStart_toEndOf="@+id/linearLayout20"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout20">
 
+                <ImageView
+                    android:id="@+id/imageView55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconbodytype"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView128"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:gravity="center|start"
+                    android:layout_marginStart="5dp"
+
                     android:text="Body type"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:drawableStartCompat="@drawable/aboutmeiconbodytype" />
-
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView55"
+                    app:layout_constraintTop_toTopOf="parent"
+                />
                 <TextView
                     android:id="@+id/bodytype"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Athletic" />
+                    android:text="Athletic"
+                    app:layout_constraintStart_toStartOf="@+id/textView128"
+                    app:layout_constraintTop_toBottomOf="@+id/textView128" />
 
-            </LinearLayout>
 
-            <LinearLayout
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout22"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -198,25 +258,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout20">
 
+                <ImageView
+                    android:id="@+id/imageView56"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconchildren"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView129"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:gravity="center|start"
+                    android:layout_marginStart="5dp"
+
                     android:text="Children"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:drawableStartCompat="@drawable/aboutmeiconchildren" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView56"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <TextView
                     android:id="@+id/chil"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Four Children" />
-            </LinearLayout>
+                    android:text="Four Children"
+                    app:layout_constraintStart_toStartOf="@+id/textView129"
+                    app:layout_constraintTop_toBottomOf="@+id/textView129" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout23"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -227,25 +303,39 @@
                 app:layout_constraintStart_toEndOf="@+id/linearLayout22"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout22">
 
+                <ImageView
+                    android:id="@+id/imageView57"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconfaith"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView130"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
+                    android:layout_marginStart="5dp"
                     android:gravity="center|start"
                     android:text="Faith"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:drawableStartCompat="@drawable/aboutmeiconfaith" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView57"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/fauthe"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="No Comment" />
-            </LinearLayout>
+                    android:text="No Comment"
+                    app:layout_constraintStart_toStartOf="@+id/textView130"
+                    app:layout_constraintTop_toBottomOf="@+id/textView130" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout24"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -257,26 +347,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout22">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/imageView58"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconpolitics"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView131"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="10dp"
                     android:gravity="center|start"
                     android:text="Politics"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:drawableStartCompat="@drawable/aboutmeiconpolitics" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView58"
+                    app:layout_constraintTop_toTopOf="parent"
+                />
 
                 <TextView
                     android:id="@+id/poli"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Liberal" />
+                    android:text="Liberal"
+                    app:layout_constraintStart_toStartOf="@+id/textView131"
+                    app:layout_constraintTop_toBottomOf="@+id/textView131" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout25"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -286,23 +391,38 @@
                 app:layout_constraintStart_toEndOf="@+id/linearLayout24"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout24">
 
+                <ImageView
+                    android:id="@+id/imageView59"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profileiconethnicity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView132"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:gravity="center|start"
                     android:text="Ethnicity"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:drawableStartCompat="@drawable/aboutmeiconethnicity" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView59"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/ethnicity"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Black/African" />
-            </LinearLayout>
+                    android:text="Black/African"
+                    app:layout_constraintStart_toStartOf="@+id/textView132"
+                    app:layout_constraintTop_toBottomOf="@+id/textView132"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -318,6 +438,7 @@
             android:text="More About Me "
             android:textColor="#000000"
             android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView73"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.292"
@@ -340,6 +461,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:textStyle="bold"
             android:layout_marginEnd="16dp"
             android:text="More About whata I am looking for "
             android:textColor="#000000"
@@ -369,6 +491,7 @@
             android:layout_marginEnd="16dp"
             android:text="My life so far"
             android:textColor="#000000"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView80" />
@@ -394,6 +517,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="16dp"
+            android:textStyle="bold"
             android:text="A little about my hobbies "
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
@@ -423,6 +547,7 @@
             android:layout_marginEnd="16dp"
             android:text="My Plans for the future"
             android:textColor="#000000"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView85" />
