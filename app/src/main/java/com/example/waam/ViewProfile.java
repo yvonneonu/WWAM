@@ -11,19 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.waam.utils.ViewEventAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +25,7 @@ import java.util.List;
  */
 public class ViewProfile extends Fragment implements View.OnClickListener {
     private TextView textView;
-    private ImageView imageView;
+    private ImageView imageView, aboutsefl;
     private BottomNavigationView bottomNavigationView;
 
 
@@ -138,6 +131,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         textView = view.findViewById(R.id.textView71);
         imageView = view.findViewById(R.id.imageView);
         test = view.findViewById(R.id.text);
+        aboutsefl = view.findViewById(R.id.aboutsef);
 
         Fragment fragment;
         //If post is supplied you have to show dis fragment
@@ -173,6 +167,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
             }
         });
         test.setOnClickListener(this);
+        aboutsefl.setOnClickListener(this);
         setHasOptionsMenu(true);
         return view;
 
@@ -183,41 +178,84 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         final int tet = R.id.text;
         final int fram = R.id.fram1;
+        final int aboutsef = R.id.aboutsef;
 
-        if (v.getId() == tet) {
-            if (waamUser != null) {
-                Fragment fragment = new TextdisplayFragment();
-                //  constraintLayout.setVisibility(View.INVISIBLE);
-                getChildFragmentManager().beginTransaction()
-                        .replace(fram, fragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .commit();
-            } else {
-                test.setColorFilter(Color.BLUE);
-                //test.setBackgroundColor(Color.parseColor("#2162FD"));
-                String userId = FirebaseAuth.getInstance().getUid();
-                GeneralFactory.getGeneralFactory(getActivity())
-                        .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
-                            @Override
-                            public void loadSpecUse(WaamUser user) {
-
-                                Fragment fragment = new TextdisplayFragment();
-                                //constraintLayout.setVisibility(View.GONE);
-
-                                getChildFragmentManager().beginTransaction()
-                                        .replace(R.id.containing, fragment)
-                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                        .addToBackStack(null)
-
-                                        .commit();
+        switch (v.getId()){
+            case tet:
+                if (v.getId() == tet) {
+                    test.setColorFilter(Color.BLUE);
+                    aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    if (waamUser != null) {
+                        Fragment fragment = new TextdisplayFragment();
+                        //  constraintLayout.setVisibility(View.INVISIBLE);
+                        getChildFragmentManager().beginTransaction()
+                                .replace(fram, fragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commit();
+                    } else {
 
 
-                            }
+                        String userId = FirebaseAuth.getInstance().getUid();
+                        GeneralFactory.getGeneralFactory(getActivity())
+                                .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                    @Override
+                                    public void loadSpecUse(WaamUser user) {
 
-                        });
-            }
+                                        Fragment fragment = new TextdisplayFragment();
+                                        //constraintLayout.setVisibility(View.GONE);
+
+                                        getChildFragmentManager().beginTransaction()
+                                                .replace(R.id.containing, fragment)
+                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                                .addToBackStack(null)
+
+                                                .commit();
+
+                                    }
+
+                                });
+                    }
+                }
+
+
+                break;
+            case aboutsef:
+                if (v.getId() == aboutsefl.getId()){
+                    test.setColorFilter(Color.TRANSPARENT);
+                    aboutsefl.setColorFilter(Color.BLUE);
+
+                    if (waamUser != null) {
+                        Fragment fragment = new SpinMatch();
+                        //  constraintLayout.setVisibility(View.INVISIBLE);
+                        getChildFragmentManager().beginTransaction()
+                                .replace(fram, fragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commit();
+                    } else {
+
+                        String userId = FirebaseAuth.getInstance().getUid();
+                        GeneralFactory.getGeneralFactory(getActivity())
+                                .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                    @Override
+                                    public void loadSpecUse(WaamUser user) {
+
+                                        Fragment fragment = new SpinMatch();
+                                        //constraintLayout.setVisibility(View.GONE);
+
+                                        getChildFragmentManager().beginTransaction()
+                                                .replace(R.id.containing, fragment)
+                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                                .addToBackStack(null)
+
+                                                .commit();
+
+
+                                    }
+
+                                });
+                    }
+                }
         }
-
 
     }
 
