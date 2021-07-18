@@ -866,10 +866,15 @@ public class GeneralFactory {
                                             String useroneid = contactedUser.get(i).getUid();
 
 
-                                            if (!(useroneid.equals(id))) {//check if the person is on ur list or not
-                                                Log.d("UserIdvalue", id + " and " + user.getUid() + " are not the same");
+                                            if(!user.getUid().equals(contactedUser.get(i).getUid())){
+                                                Log.d("UserIdvalue", user.getUid() + " and " + user.getUid() + " are not the same");
                                                 contactedUser.add(user);
                                             }
+
+                                            /*if (!(useroneid.equals(id))) {//check if the person is on ur list or not
+                                                Log.d("UserIdvalue", id + " and " + user.getUid() + " are not the same");
+                                                contactedUser.add(user);
+                                            }*/
                                         }
                                     } else {
                                         Log.d("Useme", user.getUid());

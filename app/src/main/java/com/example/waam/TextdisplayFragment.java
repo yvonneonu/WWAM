@@ -46,7 +46,7 @@ public class TextdisplayFragment extends Fragment {
     private StorageTask<UploadTask.TaskSnapshot> mUploads;
     private Task<Uri> uriTask;
     private DatabaseReference mDatabaseRef;
-    private ProgressBar progressBar;
+    //private ProgressBar progressBar;
     private static final String VIDEOPIC = "videoPic";
 
 
@@ -108,7 +108,7 @@ public class TextdisplayFragment extends Fragment {
         showText = view.findViewById(R.id.showText);
         addImage = view.findViewById(R.id.textView121);
         showcase = view.findViewById(R.id.texpost);
-        progressBar = view.findViewById(R.id.progressBar6);
+        //progressBar = view.findViewById(R.id.progressBar6);
 
 
         Fragment fragment = new TextPostFragment();
@@ -241,7 +241,7 @@ public class TextdisplayFragment extends Fragment {
         String uid = FirebaseAuth.getInstance().getUid();
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference(VIDEOPIC).child(uid);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(VIDEOPIC).child(uid);
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
 
         if (uri != null) {
             final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filetype);
@@ -259,7 +259,7 @@ public class TextdisplayFragment extends Fragment {
                                         videoPicModel.setVideo(false);
                                         videoPicModel.setVideoPicUrl(uri.toString());
                                         mDatabaseRef.child(uploadId).setValue(videoPicModel);
-                                        progressBar.setVisibility(View.GONE);
+                                        //progressBar.setVisibility(View.GONE);
                                         //This might crash it;
                                         mUploads = null;
                                     }
@@ -270,7 +270,7 @@ public class TextdisplayFragment extends Fragment {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                progressBar.setVisibility(View.GONE);
+                                //progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                                 //This might crash it;
                                 mUploads = null;
@@ -293,7 +293,7 @@ public class TextdisplayFragment extends Fragment {
                                     videoPicModel.setVideo(true);
                                     videoPicModel.setVideoPicUrl(downloadUrl.toString());
                                     mDatabaseRef.child(uploadId).setValue(videoPicModel);
-                                    progressBar.setVisibility(View.GONE);
+                                    //progressBar.setVisibility(View.GONE);
                                     //This might crash it;
                                     uriTask = null;
                                 }
@@ -302,7 +302,7 @@ public class TextdisplayFragment extends Fragment {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                progressBar.setVisibility(View.GONE);
+                                //progressBar.setVisibility(View.GONE);
                                 //This might crash it;
                                 uriTask = null;
                             }
