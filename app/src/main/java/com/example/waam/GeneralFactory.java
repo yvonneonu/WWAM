@@ -80,11 +80,6 @@ public class GeneralFactory {
     private DatabaseReference mDatabaseRef;
 
 
-
-
-
-
-
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
             R.drawable.city_img,
@@ -96,20 +91,17 @@ public class GeneralFactory {
     };
 
 
-
-
-
-    private GeneralFactory(Context context){
+    private GeneralFactory(Context context) {
         eventModelList = new ArrayList<>();
         locationList = new ArrayList<>();
         firebaseDatabase = getInstance();
-        agentModelList =  new ArrayList<>();
+        agentModelList = new ArrayList<>();
         this.context = context;
         mAuth = FirebaseAuth.getInstance();
     }
 
 
-    String[] locationNames = new String[]{"Las Vegas","Los Angeles","Minneapolis","Mississipi","Atlanta","Florida","Miami","Kansas"};
+    String[] locationNames = new String[]{"Las Vegas", "Los Angeles", "Minneapolis", "Mississipi", "Atlanta", "Florida", "Miami", "Kansas"};
 
 
     int[] display = {
@@ -129,40 +121,40 @@ public class GeneralFactory {
     };
 
 
-    public static GeneralFactory getGeneralFactory(Context context){
-        if(generalFactory == null){
+    public static GeneralFactory getGeneralFactory(Context context) {
+        if (generalFactory == null) {
             generalFactory = new GeneralFactory(context);
         }
         return generalFactory;
     }
 
-    public void makeEvent(){
+    public void makeEvent() {
         EventModel eventModelone = new EventModel("As you may have noticed," +
-                " RecyclerView, while powerful and capable",R.drawable.discover_card_img,3,799,750);
+                " RecyclerView, while powerful and capable", R.drawable.discover_card_img, 3, 799, 750);
         EventModel eventModeltwo = new EventModel("As you may have noticed, RecyclerView," +
-                " while powerful and capable",R.drawable.discover_card_img,2,809,750);
+                " while powerful and capable", R.drawable.discover_card_img, 2, 809, 750);
         EventModel eventModelthree = new EventModel("As you may have noticed, RecyclerView," +
-                " while powerful and capable",R.drawable.trending_deal_img,4,879,750);
+                " while powerful and capable", R.drawable.trending_deal_img, 4, 879, 750);
         EventModel eventModelfour = new EventModel("As you may have noticed, RecyclerView," +
-                " while powerful and capable",R.drawable.trending_deal_img,1,799,750);
-        eventModelsArrays = new EventModel[]{eventModelone,eventModeltwo,eventModelthree,eventModelfour};
+                " while powerful and capable", R.drawable.trending_deal_img, 1, 799, 750);
+        eventModelsArrays = new EventModel[]{eventModelone, eventModeltwo, eventModelthree, eventModelfour};
     }
 
-    public List<EventModel> getEventModelList(){
+    public List<EventModel> getEventModelList() {
         eventModelList.clear();
         makeEvent();
         eventModelList.addAll(Arrays.asList(eventModelsArrays));
-        return  eventModelList;
+        return eventModelList;
     }
 
 
-    public void makeLocation(){
-        for(int i = 0 ; i < images.length ; i++){
-            locationList.add(new Location(images[i],locationNames[i]));
+    public void makeLocation() {
+        for (int i = 0; i < images.length; i++) {
+            locationList.add(new Location(images[i], locationNames[i]));
         }
     }
 
-    public List<Location> getLocationList(){
+    public List<Location> getLocationList() {
         locationList.clear();
         makeLocation();
         return locationList;
@@ -175,17 +167,17 @@ public class GeneralFactory {
     }
 
     private void addAgent() {
-        for (int i = 0; i < display.length; i++){
+        for (int i = 0; i < display.length; i++) {
             agentModelList.add(new AgentModel(display[i], name[i], rating[i], rating2[i]));
         }
     }
 
 
-    public void signUpForBase(final String email, final String password, final CardView bar,  WaamUser waamUser){
+    public void signUpForBase(final String email, final String password, final CardView bar, WaamUser waamUser) {
         bar.setVisibility(View.VISIBLE);
-        SharedPref.getInstance(context).setStoredEmail("email",email);
-        SharedPref.getInstance(context).setStoredPassword("password",password);
-        mAuth.createUserWithEmailAndPassword(email,password)
+        SharedPref.getInstance(context).setStoredEmail("email", email);
+        SharedPref.getInstance(context).setStoredPassword("password", password);
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         bar.setVisibility(View.GONE);
@@ -200,16 +192,16 @@ public class GeneralFactory {
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Log.d("Registeration","Registeration was succesful");
-                                        }else{
-                                            Log.d("Registeration","Registeration was not succesful");
+                                        if (task.isSuccessful()) {
+                                            Log.d("Registeration", "Registeration was succesful");
+                                        } else {
+                                            Log.d("Registeration", "Registeration was not succesful");
                                         }
                                     }
                                 })
                                 .addOnFailureListener(e -> {
-                                    Log.d("Registration",e.getMessage());
-                                    Toast.makeText(context,"error"+e.getMessage(),Toast.LENGTH_LONG).show();
+                                    Log.d("Registration", e.getMessage());
+                                    Toast.makeText(context, "error" + e.getMessage(), Toast.LENGTH_LONG).show();
                                     bar.setVisibility(View.GONE);
                                 });
                     }
@@ -228,72 +220,73 @@ public class GeneralFactory {
                 });
     }*/
 
-    public void loginToFireBase(String email, String password,LoginRequest loginRequest){
+    public void loginToFireBase(String email, String password, LoginRequest loginRequest) {
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
+                .addOnFailureListener(e -> Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show())
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         loginUser(loginRequest);
-                    }else{
-                        Log.d("Login","Login was succesfull");
+                    } else {
+                        Log.d("Login", "Login was succesfull");
                     }
 
                 });
     }
 
 
-    public void changePassword(String email, emailAddress getEmailAddress){
-        mAuth.sendPasswordResetEmail(email).addOnFailureListener(e -> Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show())
+    public void changePassword(String email, emailAddress getEmailAddress) {
+        mAuth.sendPasswordResetEmail(email).addOnFailureListener(e -> Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show())
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         enterEmail(getEmailAddress, email);
-                    }else {
+                    } else {
                         Log.d("ResetPassword", "Password sent successfully");
                     }
                 });
     }
-    public void enterEmail(emailAddress getemailAddress, String email){
+
+    public void enterEmail(emailAddress getemailAddress, String email) {
         Call<EmailResponse> emailResponseCall = ApiClient.getService().emailLink(getemailAddress);
 
         emailResponseCall.enqueue(new Callback<EmailResponse>() {
             @Override
             public void onResponse(Call<EmailResponse> call, Response<EmailResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     String link = response.body().getMessage();
 
                     Intent getLink = new Intent(context, passw.class);
-                    Log.d("emailLink",""+link);
-                    getLink.putExtra("email",email);
+                    Log.d("emailLink", "" + link);
+                    getLink.putExtra("email", email);
                     context.startActivity(getLink);
                 } else {
                     String message = "An error occured";
-                    Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     Toast.makeText(context, "Please try again!", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<EmailResponse> call, Throwable t) {
-                Toast.makeText(context, t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
 
-    public void loadNewFriends(String branch,ProgressBar bar,TextView textView, FetchFriends friends){
+    public void loadNewFriends(String branch, ProgressBar bar, TextView textView, FetchFriends friends) {
 
         List<WaamUser> newFriends = new ArrayList<>();
-        if(branch != null){
+        if (branch != null) {
             DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
             mDatebaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     newFriends.clear();
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
                         Long dateNow = System.currentTimeMillis();
                         assert friendAlgo != null;
-                        if((dateNow - friendAlgo.getDateAdded()) <= 30 ){
+                        if ((dateNow - friendAlgo.getDateAdded()) <= 30) {
                             WaamUser waamUser = friendAlgo.getWaamUser();
                             newFriends.add(waamUser);
                         }
@@ -312,7 +305,7 @@ public class GeneralFactory {
 
     }
 
-    public void addToFriend(WaamUser waamUser, String branch){
+    public void addToFriend(WaamUser waamUser, String branch) {
         DatabaseReference mDatabaseReference = firebaseDatabase.getReference(branch);
         String newsId = mDatabaseReference.push().getKey();
         Long dateAdded = System.currentTimeMillis();
@@ -323,36 +316,35 @@ public class GeneralFactory {
         loadFriendForCheck(branch, new FriendChecker() {
             @Override
             public void friendCheck(List<WaamUser> userList) {
-                for(WaamUser user : userList){
-                    if(user.getUid().equals(waamUser.getUid())){
-                        Toast.makeText(context,"You are already friends with"+user.getFullname(),Toast.LENGTH_SHORT)
+                for (WaamUser user : userList) {
+                    if (user.getUid().equals(waamUser.getUid())) {
+                        Toast.makeText(context, "You are already friends with" + user.getFullname(), Toast.LENGTH_SHORT)
                                 .show();
                         return;
                     }
                 }
                 assert newsId != null;
                 mDatabaseReference.child(newsId).setValue(friendAlgo).addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        Toast.makeText(context,"Succesfully added",Toast.LENGTH_LONG).show();
+                    if (task.isSuccessful()) {
+                        Toast.makeText(context, "Succesfully added", Toast.LENGTH_LONG).show();
                     }
                 })
-                        .addOnFailureListener(e -> Log.d("Failure",e.getMessage()));
+                        .addOnFailureListener(e -> Log.d("Failure", e.getMessage()));
             }
         });
 
 
-
     }
 
-    public void loadFriendForCheck(String branch,FriendChecker fetchFriends){
+    public void loadFriendForCheck(String branch, FriendChecker fetchFriends) {
         allFriends = new ArrayList<>();
-        if(branch != null){
+        if (branch != null) {
             DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
             mDatebaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     allFriends.clear();
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
                         assert friendAlgo != null;
                         WaamUser user = friendAlgo.getWaamUser();
@@ -360,33 +352,33 @@ public class GeneralFactory {
                     }
 
                     fetchFriends.friendCheck(allFriends);
-                    Log.d("Allfriends",""+allFriends.size());
+                    Log.d("Allfriends", "" + allFriends.size());
 
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
-                    Log.d("Cancel",error.getMessage());
+                    Log.d("Cancel", error.getMessage());
                 }
             });
-        }else{
-            Toast.makeText(context,"Branch is null",Toast.LENGTH_SHORT)
+        } else {
+            Toast.makeText(context, "Branch is null", Toast.LENGTH_SHORT)
                     .show();
 
         }
 
     }
 
-    public void loadFriends(String branch,FetchFriends fetchFriends){
+    public void loadFriends(String branch, FetchFriends fetchFriends) {
         allFriends = new ArrayList<>();
-        if(branch != null){
+        if (branch != null) {
             DatabaseReference mDatebaseReference = firebaseDatabase.getReference(branch);
             mDatebaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     allFriends.clear();
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
                         assert friendAlgo != null;
                         WaamUser user = friendAlgo.getWaamUser();
@@ -394,18 +386,18 @@ public class GeneralFactory {
                     }
 
                     fetchFriends.friendsFetcher(allFriends);
-                    Log.d("Allfriends",""+allFriends.size());
+                    Log.d("Allfriends", "" + allFriends.size());
 
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
-                    Log.d("Cancel",error.getMessage());
+                    Log.d("Cancel", error.getMessage());
                 }
             });
-        }else{
-            Toast.makeText(context,"Branch is null",Toast.LENGTH_SHORT)
+        } else {
+            Toast.makeText(context, "Branch is null", Toast.LENGTH_SHORT)
                     .show();
 
         }
@@ -413,65 +405,62 @@ public class GeneralFactory {
     }
 
 
-
-
-
-    public void sendMessage(final String message, final String receiverId, final Context context){
-        if(!message.equals("")){
+    public void sendMessage(final String message, final String receiverId, final Context context) {
+        if (!message.equals("")) {
 
             String sender = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
             String timeStamp = String.valueOf(System.currentTimeMillis());
             DatabaseReference reference = firebaseDatabase.getReference("CHAT");
             String chatId = reference.push().getKey();
-            Chat chat = new Chat(message,chatId,sender,receiverId);
+            Chat chat = new Chat(message, chatId, sender, receiverId);
             chat.setTimeStamp(timeStamp);
             chat.setIsSeen(false);
             assert chatId != null;
             reference.child(chatId).setValue(chat)
-                    .addOnFailureListener(e -> Toast.makeText(context,"Message cant be sent",Toast.LENGTH_LONG).show())
+                    .addOnFailureListener(e -> Toast.makeText(context, "Message cant be sent", Toast.LENGTH_LONG).show())
                     .addOnCompleteListener(task -> {
-                        if(task.isSuccessful()){
-                            Toast.makeText(context,"Message was sent",Toast.LENGTH_LONG).show();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context, "Message was sent", Toast.LENGTH_LONG).show();
                         }
                     });
-        }else{
-            Toast.makeText(context,"Message cant be sent",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(context, "Message cant be sent", Toast.LENGTH_LONG).show();
         }
 
     }
 
 
-    public void setOnlineStatus(String status){
+    public void setOnlineStatus(String status) {
         String userId = mAuth.getCurrentUser().getUid();
         DatabaseReference database = getInstance().getReference(WAAMBASE).child(userId);
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("onlineStatus",status);
+        hashMap.put("onlineStatus", status);
         database.updateChildren(hashMap);
     }
 
 
-    public void setTimeStamp(){
+    public void setTimeStamp() {
         String userId = mAuth.getCurrentUser().getUid();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         String dateToString = formatter.format(date);
         DatabaseReference database = getInstance().getReference(WAAMBASE).child(userId);
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("timeStamp",dateToString);
+        hashMap.put("timeStamp", dateToString);
         database.updateChildren(hashMap);
     }
 
-    public void seenMessage(String senderId, String receiverId){
+    public void seenMessage(String senderId, String receiverId) {
         userForSeen = firebaseDatabase.getReference("CHAT");
         valueEventListener = userForSeen.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     Chat chat = ds.getValue(Chat.class);
-                    if(chat.getReceiverId().equals(senderId) && chat.getSenderId().equals(receiverId)){
+                    if (chat.getReceiverId().equals(senderId) && chat.getSenderId().equals(receiverId)) {
                         chat.setIsSeen(true);
-                        Map<String,Object> map = new HashMap<>();
-                        map.put("isSeen",true);
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("isSeen", true);
                         userForSeen.child(chat.getChatId()).updateChildren(map);
                     }
                 }
@@ -484,7 +473,7 @@ public class GeneralFactory {
         });
     }
 
-    public void logOut(Context context){
+    public void logOut(Context context) {
         mAuth.signOut();
         Intent intent = new Intent(context, Login.class);
         context.startActivity(intent);
@@ -492,16 +481,14 @@ public class GeneralFactory {
     }
 
 
-
-
-    public void loadSpecUser(String userdId, final SpecificUser userCallback){
+    public void loadSpecUser(String userdId, final SpecificUser userCallback) {
         DatabaseReference databaseSpecUser = getInstance().getReference(WAAMBASE);
         databaseSpecUser.child(userdId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 WaamUser user = snapshot.getValue(WaamUser.class);
                 userCallback.loadSpecUse(user);
-                Log.d("Userc",""+user.getTypingTo());
+                Log.d("Userc", "" + user.getTypingTo());
             }
 
             @Override
@@ -514,28 +501,28 @@ public class GeneralFactory {
     }
 
 
-    public void loadMessages(final FireBaseMessages fireBaseMessages, final String receiverId,Context context){
+    public void loadMessages(final FireBaseMessages fireBaseMessages, final String receiverId, Context context) {
         chatContainer = new ArrayList<>();
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             final String senderId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            Log.d("SenderId",senderId);
+            Log.d("SenderId", senderId);
             DatabaseReference databaseChats = getInstance().getReference("CHAT");
             databaseChats.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     chatContainer.clear();
-                    Log.d("FirebaseMessages","I am in ondatachanged");
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Log.d("FirebaseMessages", "I am in ondatachanged");
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         Chat chat = dataSnapshot.getValue(Chat.class);
-                        Log.d("SenderId",chat.getSenderId()+"="+senderId);
-                        Log.d("ReceiverId",chat.getReceiverId()+"="+receiverId);
-                        if(chat.getSenderId().equals(senderId) && chat.getReceiverId().equals(receiverId)
-                                || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)){
-                            Log.d("FirebaseMessages","I am in the loop and passed the conditions");
+                        Log.d("SenderId", chat.getSenderId() + "=" + senderId);
+                        Log.d("ReceiverId", chat.getReceiverId() + "=" + receiverId);
+                        if (chat.getSenderId().equals(senderId) && chat.getReceiverId().equals(receiverId)
+                                || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)) {
+                            Log.d("FirebaseMessages", "I am in the loop and passed the conditions");
                             chatContainer.add(chat);
                         }
                     }
-                    Log.d("FirebaseMessages",""+chatContainer.size());
+                    Log.d("FirebaseMessages", "" + chatContainer.size());
                     fireBaseMessages.firebaseMessages(chatContainer);
                 }
 
@@ -544,8 +531,8 @@ public class GeneralFactory {
 
                 }
             });
-        }else{
-            Toast.makeText(context,"Not logged in",Toast.LENGTH_SHORT)
+        } else {
+            Toast.makeText(context, "Not logged in", Toast.LENGTH_SHORT)
                     .show();
             return;
         }
@@ -553,14 +540,14 @@ public class GeneralFactory {
     }
 
 
-    public void loadVidPic(String branch,LoadVidPic loadVidPic){
+    public void loadVidPic(String branch, LoadVidPic loadVidPic) {
         videoPicModelList = new ArrayList<>();
         DatabaseReference mDatebaseReference = firebaseDatabase.getReference(VIDEOPIC).child(branch);
         mDatebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 videoPicModelList.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     VideoPicModel videoPicModel = dataSnapshot.getValue(VideoPicModel.class);
                     videoPicModelList.add(videoPicModel);
                 }
@@ -570,24 +557,24 @@ public class GeneralFactory {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("VideoModel","An error occurred");
+                Log.d("VideoModel", "An error occurred");
             }
         });
 
     }
 
-    public void loadLastMessage(String senderId, String receiverId,TextView last_msg){
+    public void loadLastMessage(String senderId, String receiverId, TextView last_msg) {
         theMessage = "default";
         DatabaseReference databaseChats = getInstance().getReference("CHAT");
         databaseChats.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Chat chat = dataSnapshot.getValue(Chat.class);
-                    if(chat != null){
-                        if(chat.getSenderId().equals(senderId) && chat.getReceiverId().equals(receiverId)
-                                || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)){
-                           //This keeps loading the message and keeps changing it till the last message
+                    if (chat != null) {
+                        if (chat.getSenderId().equals(senderId) && chat.getReceiverId().equals(receiverId)
+                                || chat.getSenderId().equals(receiverId) && chat.getReceiverId().equals(senderId)) {
+                            //This keeps loading the message and keeps changing it till the last message
                             theMessage = chat.getMessage();
                         }
                     }
@@ -596,7 +583,7 @@ public class GeneralFactory {
                 }
 
                 //Still trying.....
-                String finalMess = firstHundred(theMessage,30);
+                String finalMess = firstHundred(theMessage, 30);
                 last_msg.setText(finalMess);
             }
 
@@ -607,7 +594,7 @@ public class GeneralFactory {
         });
     }
 
-    private String firstHundred(String s,int n){
+    private String firstHundred(String s, int n) {
         return s.substring(0, Math.min(s.length(), n));
     }
 
@@ -676,23 +663,23 @@ public class GeneralFactory {
     }*/
 
 
-    public void friendChecker(String receiverId, CheckFriend checkFriend){
-        if(mAuth != null){
-            String senderId = mAuth.getUid()+"friends";
+    public void friendChecker(String receiverId, CheckFriend checkFriend) {
+        if (mAuth != null) {
+            String senderId = mAuth.getUid() + "friends";
 
-            if(senderId != null){
-                Log.d("FriendEver","Yea friends ");
+            if (senderId != null) {
+                Log.d("FriendEver", "Yea friends ");
                 DatabaseReference mDatebaseReference = firebaseDatabase.getReference(senderId);
                 mDatebaseReference.addValueEventListener(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             FriendAlgo friendAlgo = dataSnapshot.getValue(FriendAlgo.class);
                             assert friendAlgo != null;
                             WaamUser user = friendAlgo.getWaamUser();
-                            Log.d("FriendsIndeed","Yea friends ");
-                            if(user.getUid().equals(receiverId)){
+                            Log.d("FriendsIndeed", "Yea friends ");
+                            if (user.getUid().equals(receiverId)) {
                                 checkFriend.checkIfFriend(true);
 
                                 break;
@@ -707,11 +694,11 @@ public class GeneralFactory {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
-                        Log.d("Cancel",error.getMessage());
+                        Log.d("Cancel", error.getMessage());
                     }
                 });
-            }else{
-                Toast.makeText(context,"Branch is null",Toast.LENGTH_SHORT)
+            } else {
+                Toast.makeText(context, "Branch is null", Toast.LENGTH_SHORT)
                         .show();
 
             }
@@ -721,7 +708,7 @@ public class GeneralFactory {
 
     }
 
-    public void loginUser(LoginRequest loginRequest){
+    public void loginUser(LoginRequest loginRequest) {
 
         Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
 
@@ -729,7 +716,7 @@ public class GeneralFactory {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
 
 
                     assert response.body() != null;
@@ -739,16 +726,16 @@ public class GeneralFactory {
 
                     Log.d("show", loginToken);
                     Intent intent = new Intent(context, DiscoverDrawerLayerout.class);
-                    Log.d("LoginToken",loginToken);
-                    intent.putExtra("toking",loginToken);
+                    Log.d("LoginToken", loginToken);
+                    intent.putExtra("toking", loginToken);
                     context.startActivity(intent);
                     //This gets the user logged in
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
 
-                }else {
+                } else {
                     String message = "An error occured please try again";
-                    Toast.makeText(context,message,Toast.LENGTH_LONG).show();
-                    Toast.makeText(context,"Email or Password mismatch!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Email or Password mismatch!", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -757,16 +744,14 @@ public class GeneralFactory {
 
 
                 //String message = t.getLocalizedMessage();
-                Toast.makeText(context, t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
 
             }
         });
     }
 
 
-
-
-    public void uploadProfilePicToFireBase(String filextension, Uri uri){
+    public void uploadProfilePicToFireBase(String filextension, Uri uri) {
         mStorageRef = FirebaseStorage.getInstance().getReference(PROFILEPIC);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(WAAMBASE);
         final StorageReference fileref = mStorageRef.child(System.currentTimeMillis() + "." + filextension);
@@ -818,23 +803,23 @@ public class GeneralFactory {
                 });
     }
 
-    public void fetchAllUser(FetchFriends fetchAllWaamUsers){
+    public void fetchAllUser(FetchFriends fetchAllWaamUsers) {
         allWaamUsers = new ArrayList<>();
         DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
         mDatebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 allWaamUsers.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     WaamUser user = dataSnapshot.getValue(WaamUser.class);
-                    if(!user.getUid().equals(mAuth.getUid())){
+                    if (!user.getUid().equals(mAuth.getUid())) {
                         allWaamUsers.add(user);
                         Gson gson = new Gson();
-                        Log.d("WaamUser",gson.toJson(gson));
+                        Log.d("WaamUser", gson.toJson(gson));
                     }
                 }
                 fetchAllWaamUsers.friendsFetcher(allWaamUsers);
-                Log.d("AllUsers",""+allWaamUsers.size());
+                Log.d("AllUsers", "" + allWaamUsers.size());
             }
 
             @Override
@@ -845,8 +830,7 @@ public class GeneralFactory {
     }
 
 
-
-    public void loadContact(ProgressBar bar,TextView textView,FetchFriends fetchContacts){
+    public void loadContact(ProgressBar bar, TextView textView, FetchFriends fetchContacts) {
         contactedUser = new ArrayList<>();
         usersStringId = new ArrayList<>();
         String userId = FirebaseAuth.getInstance().getUid();
@@ -856,13 +840,13 @@ public class GeneralFactory {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 usersStringId.clear();
-                for(DataSnapshot data : snapshot.getChildren()){
+                for (DataSnapshot data : snapshot.getChildren()) {
                     Chat chat = data.getValue(Chat.class);
-                    if(chat.getReceiverId().equals(userId)){
+                    if (chat.getReceiverId().equals(userId)) {
                         usersStringId.add(chat.getSenderId());
                     }
 
-                    if(chat.getSenderId().equals(userId)){
+                    if (chat.getSenderId().equals(userId)) {
                         usersStringId.add(chat.getReceiverId());
                     }
 
@@ -873,30 +857,31 @@ public class GeneralFactory {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         contactedUser.clear();
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             WaamUser user = dataSnapshot.getValue(WaamUser.class);
-                            for(String id : usersStringId){
-                                if(user.getUid().equals(id)){
-                                    if(contactedUser.size() != 0){
-                                        for(int i = 0 ; i < contactedUser.size() ; i++){
+                            for (String id : usersStringId) {//usertingid contains everyone you chatted with......
+                                if (user.getUid().equals(id)) {//user.guid from from base is d same as the id in userStringId
+                                    if (contactedUser.size() != 0) {//check if the your contact list is not 0
+                                        for (int i = 0; i < contactedUser.size(); i++) {
                                             String useroneid = contactedUser.get(i).getUid();
 
-                                            if(!user.getUid().equals(useroneid)){
-                                                Log.d("UserIdvalue",useroneid+" and "+user.getUid()+" are not the same");
+
+                                            if (!(useroneid.equals(id))) {//check if the person is on ur list or not
+                                                Log.d("UserIdvalue", id + " and " + user.getUid() + " are not the same");
                                                 contactedUser.add(user);
                                             }
                                         }
-                                    }else{
-                                        Log.d("Useme",user.getUid());
+                                    } else {
+                                        Log.d("Useme", user.getUid());
                                         contactedUser.add(user);
                                     }
                                 }
                             }
                         }
 
-                        Log.d("ContactedUser",""+contactedUser.size());
-                        for(int i = 0 ; i < contactedUser.size(); i ++){
-                            Log.d("throwable",contactedUser.get(i).getUid());
+                        Log.d("ContactedUser", "" + contactedUser.size());
+                        for (int i = 0; i < contactedUser.size(); i++) {
+                            Log.d("throwable", contactedUser.get(i).getUid());
                         }
                         fetchContacts.friendsFetcher(contactedUser);
                     }
@@ -920,11 +905,11 @@ public class GeneralFactory {
     }
 
 
-    public void checkTypingStatus(String receiverId){
+    public void checkTypingStatus(String receiverId) {
         String myId = mAuth.getUid();
         DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE).child(myId);
-        HashMap<String,Object> hashMap = new HashMap<>();
-        hashMap.put("typingTo",receiverId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("typingTo", receiverId);
         mDatebaseReference.updateChildren(hashMap);
     }
 
@@ -944,7 +929,7 @@ public class GeneralFactory {
                     Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                     //Register users on firebase......
-                    signUpForBase(waamUser.getEmail(), waamUser.getPassword(),progressBar, waamUser);
+                    signUpForBase(waamUser.getEmail(), waamUser.getPassword(), progressBar, waamUser);
                     Intent intent = new Intent(context, Verification1.class);
                     intent.putExtra("token", response.body().getToken());
                     context.startActivity(intent);
@@ -976,12 +961,12 @@ public class GeneralFactory {
         });
     }
 
-    public boolean validateName(String fnames){
+    public boolean validateName(String fnames) {
         String[] names = fnames.split(" ");
         return names.length >= 2;
     }
 
-    public void sendFriendRequest(WaamUser user){
+    public void sendFriendRequest(WaamUser user) {
         String senderOfRequest = mAuth.getUid();
         String receiverBranch = user.getUid();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child(NOTIFICATIONLIST)
@@ -997,27 +982,26 @@ public class GeneralFactory {
         databaseReference.child(notificationId).setValue(friendRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(context,"request sent",Toast.LENGTH_LONG).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(context, "request sent", Toast.LENGTH_LONG).show();
 
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context,"An error occured",Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "An error occured", Toast.LENGTH_LONG).show();
             }
         });
     }
 
 
-
-    public void sendFriendRequest(Button button,WaamUser user){
+    public void sendFriendRequest(Button button, WaamUser user) {
         String senderOfRequest = mAuth.getUid();
         String receiverBranch = user.getUid();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child(NOTIFICATIONLIST)
                 .child(receiverBranch);
-        RequestFriend requestFriend = new RequestFriend(senderOfRequest,user);
+        RequestFriend requestFriend = new RequestFriend(senderOfRequest, user);
         String notificationId = databaseReference.push().getKey();
         NotificationActions friendRequest = new FriendRequestEvent();
         friendRequest.setWaamUser(user);
@@ -1028,9 +1012,9 @@ public class GeneralFactory {
         databaseReference.child(notificationId).setValue(requestFriend).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
 
-                    Toast.makeText(context,"request sent",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "request sent", Toast.LENGTH_LONG).show();
                     button.setEnabled(false);
                     button.setText("Awaiting confirmation");
                 }
@@ -1038,21 +1022,21 @@ public class GeneralFactory {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context,"An error occured",Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "An error occured", Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    public void loadNotificationList(NotificationsListener notificationsListener){
+    public void loadNotificationList(NotificationsListener notificationsListener) {
         notificationActionsList = new ArrayList<>();
-        String uid = mAuth.getUid()+NOTIFICATIONLIST;
+        String uid = mAuth.getUid() + NOTIFICATIONLIST;
         DatabaseReference mDatabaseReference = firebaseDatabase.getReference().child(NOTIFICATIONLIST)
                 .child(uid);
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 notificationActionsList.clear();
-                for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     NotificationActions notifications = snapshot1.getValue(NotificationActions.class);
                     notificationActionsList.add(notifications);
                 }
@@ -1062,48 +1046,43 @@ public class GeneralFactory {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(context,error.getMessage(), Toast.LENGTH_LONG)
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG)
                         .show();
             }
         });
     }
 
 
-
-    public interface FetchFriends{
+    public interface FetchFriends {
         void friendsFetcher(List<WaamUser> friends);
     }
 
 
-    public interface SpecificUser{
+    public interface SpecificUser {
         void loadSpecUse(WaamUser user);
     }
 
 
-    public interface FireBaseMessages{
+    public interface FireBaseMessages {
         void firebaseMessages(List<Chat> chatCont);
     }
 
-    public interface FriendChecker{
+    public interface FriendChecker {
         void friendCheck(List<WaamUser> userList);
     }
 
-    public interface LoadVidPic{
+    public interface LoadVidPic {
         void loadVidpic(List<VideoPicModel> videoPicModels);
     }
 
-    interface CheckFriend{
+    interface CheckFriend {
         void checkIfFriend(boolean isFriend);
     }
 
 
-    interface NotificationsListener{
+    interface NotificationsListener {
         void notification(List<NotificationActions> notificationActions);
     }
-
-
-
-
 
 
 }
