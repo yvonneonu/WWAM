@@ -515,7 +515,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:text="More About Me "
+                    android:text="More About My Match Details "
                     android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -525,14 +525,49 @@
 
 
                 <TextView
+                    android:id="@+id/more"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"
+                    android:text="Tell us about yourself"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView78" />
+
+
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/textView73"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar mattis nunc. Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Fames ac turpis egestas integer eget. Aliquet eget sit amet tellus. Vitae et leo duis ut diam quam nulla porttitor. Nunc pulvinar sapien et ligula ullamcorper malesuada. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. A diam maecenas sed enim. Augue mauris augue neque gravida in fermentum et sollicitudin. Rhoncus urna neque viverra justo nec ultrices dui sapien. Amet facilisis magna etiam tempor orci eu. Pellentesque elit eget gravida cum."
                     app:layout_constraintEnd_toEndOf="@+id/textView78"
                     app:layout_constraintStart_toStartOf="@+id/textView78"
-                    app:layout_constraintTop_toBottomOf="@+id/textView78" />
+                    app:layout_constraintTop_toBottomOf="@+id/more" >
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="200"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="hint"
+                            android:maxLength="200"
+                            android:inputType="text"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="5dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
 
                 <TextView
                     android:id="@+id/textView79"
@@ -542,22 +577,41 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:textStyle="bold"
-                    android:text="More About whata I am looking for "
+                    android:textSize="15sp"
+                    android:text="More About what you're looking for "
                     android:textColor="#000000"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView73" />
 
-                <TextView
+                <com.google.android.material.card.MaterialCardView
 
                     android:id="@+id/textView80"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Sagittis vitae et leo duis ut diam. Consequat mauris nunc congue nisi. Nisl condimentum id venenatis a condimentum vitae. Pharetra et ultrices neque ornare aenean euismod. Eget felis eget nunc lobortis mattis aliquam faucibus purus."
                     app:layout_constraintEnd_toEndOf="@+id/textView79"
                     app:layout_constraintStart_toStartOf="@+id/textView79"
-                    app:layout_constraintTop_toBottomOf="@+id/textView79" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView79" >
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="200"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="hint"
+                            android:inputType="text"
+                            android:paddingStart="10dp"
+                            android:maxLength="200"
+                            android:paddingEnd="5dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <TextView
@@ -568,24 +622,42 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginEnd="16dp"
-                    android:text="My life so far"
+                    android:text="Your Life so far"
                     android:textStyle="bold"
+                    android:textSize="15sp"
                     android:textColor="#000000"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView80" />
 
 
-                <TextView
+                <com.google.android.material.card.MaterialCardView
 
                     android:id="@+id/textView82"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Neque laoreet suspendisse interdum consectetur. Mollis nunc sed id semper risus in hendrerit. Nibh sit amet commodo nulla facilisi nullam vehicula ipsum. Volutpat diam ut venenatis tellus in metus vulputate eu scelerisque."
                     app:layout_constraintEnd_toEndOf="@+id/textView81"
                     app:layout_constraintStart_toStartOf="@+id/textView81"
-                    app:layout_constraintTop_toBottomOf="@+id/textView81" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView81" >
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="200"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="hint"
+                            android:maxLength="200"
+                            android:inputType="text"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="5dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <TextView
@@ -596,24 +668,43 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginEnd="16dp"
-                    android:text="A little about my hobbies "
+                    android:text="What do you like to do?"
                     android:textColor="#000000"
                     android:textStyle="bold"
+                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView82" />
 
 
-                <TextView
+                <com.google.android.material.card.MaterialCardView
 
                     android:id="@+id/textView85"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Arcu dictum varius duis at consectetur lorem donec. Eu turpis egestas pretium aenean pharetra magna ac. Vitae congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque. Nibh praesent tristique magna sit. "
                     app:layout_constraintEnd_toEndOf="@+id/textView83"
                     app:layout_constraintStart_toStartOf="@+id/textView83"
-                    app:layout_constraintTop_toBottomOf="@+id/textView83" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView83" >
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="200"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="hint"
+                            android:maxLength="200"
+                            android:inputType="text"
+
+                            android:paddingStart="10dp"
+                            android:paddingEnd="5dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <TextView
@@ -624,7 +715,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:text="My Plans for the future"
+                    android:text="Your Plans for the future"
                     android:textColor="#000000"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
