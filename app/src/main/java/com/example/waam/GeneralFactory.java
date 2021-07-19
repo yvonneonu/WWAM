@@ -829,6 +829,7 @@ public class GeneralFactory {
         String userId = FirebaseAuth.getInstance().getUid();
         DatabaseReference databaseReference = firebaseDatabase.getReference("CHAT");
 
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -837,10 +838,12 @@ public class GeneralFactory {
                     Chat chat = data.getValue(Chat.class);
                     if (chat.getReceiverId().equals(userId)) {
                         usersStringId.add(chat.getSenderId());
+                        //Log.d("ChatId",chat.getChatId());
                     }
 
                     if (chat.getSenderId().equals(userId)) {
                         usersStringId.add(chat.getReceiverId());
+                        Log.d("ChatId",chat.getChatId());
                     }
 
                 }
@@ -859,9 +862,10 @@ public class GeneralFactory {
                                             String useroneid = contactedUser.get(i).getUid();
 
 
-                                            if (!(useroneid.equals(id))) {//check if the person is on ur list or not
+                                            if ((useroneid == id)) {//check if the person is on ur list or not
                                                 Log.d("UserIdvalue", id + " and " + user.getUid() + " are not the same");
                                                 contactedUser.add(user);
+
                                             }
                                         }
                                     } else {

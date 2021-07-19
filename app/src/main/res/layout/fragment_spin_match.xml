@@ -515,7 +515,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:text="More About Me "
+                    android:text="More About Me Details"
                     android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -523,8 +523,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view13" />
 
-
                 <TextView
+                    android:id="@+id/more"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"
+                    android:text="Tell Us About Yourself"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView78" />
+
+
+                <EditText
                     android:id="@+id/textView73"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -532,7 +547,7 @@
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar mattis nunc. Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Fames ac turpis egestas integer eget. Aliquet eget sit amet tellus. Vitae et leo duis ut diam quam nulla porttitor. Nunc pulvinar sapien et ligula ullamcorper malesuada. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. A diam maecenas sed enim. Augue mauris augue neque gravida in fermentum et sollicitudin. Rhoncus urna neque viverra justo nec ultrices dui sapien. Amet facilisis magna etiam tempor orci eu. Pellentesque elit eget gravida cum."
                     app:layout_constraintEnd_toEndOf="@+id/textView78"
                     app:layout_constraintStart_toStartOf="@+id/textView78"
-                    app:layout_constraintTop_toBottomOf="@+id/textView78" />
+                    app:layout_constraintTop_toBottomOf="@+id/more" />
 
                 <TextView
                     android:id="@+id/textView79"
