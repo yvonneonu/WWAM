@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SpinMatch">
+    tools:context=".LookingDetails">
 
 
     <ScrollView
@@ -30,7 +30,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="About Myself Details"
+                    android:text="What I'm Looking For Details"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
