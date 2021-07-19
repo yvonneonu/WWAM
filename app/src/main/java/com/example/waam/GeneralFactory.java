@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,6 +42,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -829,7 +836,6 @@ public class GeneralFactory {
         String userId = FirebaseAuth.getInstance().getUid();
         DatabaseReference databaseReference = firebaseDatabase.getReference("CHAT");
 
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -838,12 +844,10 @@ public class GeneralFactory {
                     Chat chat = data.getValue(Chat.class);
                     if (chat.getReceiverId().equals(userId)) {
                         usersStringId.add(chat.getSenderId());
-                        //Log.d("ChatId",chat.getChatId());
                     }
 
                     if (chat.getSenderId().equals(userId)) {
                         usersStringId.add(chat.getReceiverId());
-                        Log.d("ChatId",chat.getChatId());
                     }
 
                 }
@@ -862,11 +866,15 @@ public class GeneralFactory {
                                             String useroneid = contactedUser.get(i).getUid();
 
 
-                                            if ((useroneid == id)) {//check if the person is on ur list or not
+                                            if(!user.getUid().equals(contactedUser.get(i).getUid())){
+                                                Log.d("UserIdvalue", user.getUid() + " and " + user.getUid() + " are not the same");
+                                                contactedUser.add(user);
+                                            }
+
+                                            /*if (!(useroneid.equals(id))) {//check if the person is on ur list or not
                                                 Log.d("UserIdvalue", id + " and " + user.getUid() + " are not the same");
                                                 contactedUser.add(user);
-
-                                            }
+                                            }*/
                                         }
                                     } else {
                                         Log.d("Useme", user.getUid());
@@ -877,9 +885,9 @@ public class GeneralFactory {
                         }
 
                         Log.d("ContactedUser", "" + contactedUser.size());
-                       /* for (int i = 0; i < contactedUser.size(); i++) {
+                        for (int i = 0; i < contactedUser.size(); i++) {
                             Log.d("throwable", contactedUser.get(i).getUid());
-                        }*/
+                        }
                         fetchContacts.friendsFetcher(contactedUser);
                     }
 
