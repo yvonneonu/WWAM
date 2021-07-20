@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class LookingDetails extends Fragment {
+    private ConstraintLayout saveit;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +60,11 @@ public class LookingDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_looking_details, container, false);
+      View view = inflater.inflate(R.layout.fragment_looking_details, container, false);
+        saveit = view.findViewById(R.id.saveit);
+
+
+        return view;
     }
+
 }
