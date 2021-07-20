@@ -91,6 +91,7 @@ public class VideoPicFragment extends Fragment {
                     }else{
                         //you have no media uploaded...
                         recyclerView.setVisibility(View.GONE);
+                        textView.setVisibility(View.VISIBLE);
                         String message = "There are no media";
                         bar.setVisibility(View.GONE);
                         textView.setText(message);
