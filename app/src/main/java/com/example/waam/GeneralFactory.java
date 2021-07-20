@@ -860,21 +860,14 @@ public class GeneralFactory {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             WaamUser user = dataSnapshot.getValue(WaamUser.class);
                             for (String id : usersStringId) {//usertingid contains everyone you chatted with......
-                                if (user.getUid().equals(id)) {//user.guid from from base is d same as the id in userStringId
-                                    if (contactedUser.size() != 0) {//check if the your contact list is not 0
+                                if (user.getUid().equals(id)) {//user.getuid from the  database is d same as the id in userStringId
+                                    if (contactedUser.size() != 0) {//check if the contact list is not 0
                                         for (int i = 0; i < contactedUser.size(); i++) {
                                             String useroneid = contactedUser.get(i).getUid();
-
-
-                                            if(!user.getUid().equals(contactedUser.get(i).getUid())){
-                                                Log.d("UserIdvalue", user.getUid() + " and " + user.getUid() + " are not the same");
-                                                contactedUser.add(user);
-                                            }
-
-                                            /*if (!(useroneid.equals(id))) {//check if the person is on ur list or not
+                                            if (!(useroneid.equals(id))) {//check if the person is on ur list or not
                                                 Log.d("UserIdvalue", id + " and " + user.getUid() + " are not the same");
                                                 contactedUser.add(user);
-                                            }*/
+                                            }
                                         }
                                     } else {
                                         Log.d("Useme", user.getUid());
