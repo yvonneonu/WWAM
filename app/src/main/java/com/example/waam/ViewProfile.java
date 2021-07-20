@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class ViewProfile extends Fragment implements View.OnClickListener {
     private TextView textView;
-    private ImageView imageView, aboutsefl;
+    private ImageView imageView, aboutsefl, interes;
     private BottomNavigationView bottomNavigationView;
 
 
@@ -132,6 +132,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         imageView = view.findViewById(R.id.imageView);
         test = view.findViewById(R.id.text);
         aboutsefl = view.findViewById(R.id.aboutsef);
+        interes = view.findViewById(R.id.interest);
 
         Fragment fragment;
         //If post is supplied you have to show dis fragment
@@ -168,6 +169,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         });
         test.setOnClickListener(this);
         aboutsefl.setOnClickListener(this);
+        interes.setOnClickListener(this);
         setHasOptionsMenu(true);
         return view;
 
@@ -179,12 +181,15 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         final int tet = R.id.text;
         final int fram = R.id.fram1;
         final int aboutsef = R.id.aboutsef;
+        final int inter = R.id.interest;
 
         switch (v.getId()){
             case tet:
                 if (v.getId() == tet) {
                     test.setColorFilter(Color.BLUE);
                     aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    interes.setColorFilter(Color.TRANSPARENT);
+
                     if (waamUser != null) {
                         Fragment fragment = new TextdisplayFragment();
                         //  constraintLayout.setVisibility(View.INVISIBLE);
@@ -223,6 +228,8 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                 if (v.getId() == aboutsefl.getId()){
                     test.setColorFilter(Color.TRANSPARENT);
                     aboutsefl.setColorFilter(Color.BLUE);
+                    interes.setColorFilter(Color.TRANSPARENT);
+
 
                     if (waamUser != null) {
                         Fragment fragment = new SpinMatch();
@@ -255,7 +262,47 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                 });
                     }
                 }
+                break;
+            case inter:
+                if (v.getId() == interes.getId()){
+                    test.setColorFilter(Color.TRANSPARENT);
+                    aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    interes.setColorFilter(Color.BLUE);
+
+                    if (waamUser != null) {
+                        Fragment fragment = new LookingDetails();
+                        //  constraintLayout.setVisibility(View.INVISIBLE);
+                        getChildFragmentManager().beginTransaction()
+                                .replace(fram, fragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commit();
+                    } else {
+
+                        String userId = FirebaseAuth.getInstance().getUid();
+                        GeneralFactory.getGeneralFactory(getActivity())
+                                .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                    @Override
+                                    public void loadSpecUse(WaamUser user) {
+
+                                        Fragment fragment = new LookingDetails();
+                                        //constraintLayout.setVisibility(View.GONE);
+
+                                        getChildFragmentManager().beginTransaction()
+                                                .replace(R.id.containing, fragment)
+                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                                .addToBackStack(null)
+
+                                                .commit();
+
+
+                                    }
+
+                                });
+                    }
+                }
+                break;
         }
+
 
     }
 

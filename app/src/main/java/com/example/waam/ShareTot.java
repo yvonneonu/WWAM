@@ -25,7 +25,9 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
     private ConstraintLayout coonc;
     private TextView name, resizetext;
     private TextInputEditText typeText;
+
     private String text;
+
 
 
     @Override
@@ -38,7 +40,9 @@ public class ShareTot extends AppCompatActivity implements View.OnClickListener 
         String uid = FirebaseAuth.getInstance().getUid();
         image = findViewById(R.id.imageView);
         typeText = findViewById(R.id.typeText);
+
         String more;
+
 
 
         coonc = findViewById(R.id.coonc);
