@@ -852,6 +852,7 @@ public class GeneralFactory {
 
                 }
 
+                Log.d("UserStringId",""+usersStringId.size());
                 DatabaseReference usersBaseReference = firebaseDatabase.getReference(WAAMBASE);
                 usersBaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
