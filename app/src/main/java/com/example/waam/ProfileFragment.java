@@ -50,6 +50,9 @@ public class ProfileFragment extends Fragment {
     private WaamUser user;
     private View view;
     private ImageView imageView;
+   // private BottomNavigationView bottomNavigationView;
+
+
     private TextView textView, career, education, children, politics, bodyType, faith, ehnity;
     private boolean[] boolcont;
     private FirebaseAuth mAuth;
@@ -97,6 +100,9 @@ public class ProfileFragment extends Fragment {
         if(getArguments() != null){
             user = (WaamUser) getArguments().getSerializable(PUT_PROFILE);
         }
+
+
+        //bottomNavigationView.getMenu().getItem(4).setChecked(true);
 
 
         setHasOptionsMenu(true);

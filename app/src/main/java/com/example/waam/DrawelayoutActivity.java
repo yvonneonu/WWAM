@@ -235,6 +235,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             case R.id.profile:
                 fragment = new ProfileFragment();
                 Log.d("view", "profile page");
+                bottomNavigationView.getMenu().getItem(4).setChecked(true);
+
                 item.setIcon(R.drawable.lowernav_profile_icon_active);
                 break;
 

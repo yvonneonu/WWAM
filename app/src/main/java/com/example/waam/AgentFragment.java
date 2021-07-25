@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +22,7 @@ public class AgentFragment extends Fragment {
     private RecyclerView recyclerView;
     private AgentAdapter agentAdapter;
     private List<AgentModel> agentModelList;
+    ImageView imageView;
 
     private GeneralFactory generalFactory;
 
@@ -65,6 +68,8 @@ public class AgentFragment extends Fragment {
         agentModelList = generalFactory.getAgentModelList();
 
         agentAdapter = new AgentAdapter(agentModelList,getActivity());
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
 
     }
 
@@ -75,23 +80,36 @@ public class AgentFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_agent, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
+        imageView = view.findViewById(R.id.Baack);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setAdapter(agentAdapter);
 
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
         agentAdapter.AgentMethod(new AgentAdapter.OnAgentListener() {
             @Override
             public void onAgentCick(int position) {
                 AgentModel agentModel = agentModelList.get(position);
 
-                Fragment fr = new AgentDetailFragment(agentModel);
+              /* Fragment fr = new AgentDetailFragment(agentModel);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentcontainer,fr, "visible_fragment")
                         .addToBackStack(null)
+                        .commit();*/
+
+
+                Fragment fr = new ProfileFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentcontainer, fr, "visible_fragment")
+                        .addToBackStack(null)
                         .commit();
-
-
 
 
             }
