@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.List;
 
 /**
@@ -106,6 +108,7 @@ public class AgentFragment extends Fragment {
 
 
                 Fragment fr = new ProfileFragment();
+                ((BottomNavigationView)getActivity().findViewById(R.id.bottomNavigationView)).setSelectedItemId(R.id.profile);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentcontainer, fr, "visible_fragment")
                         .addToBackStack(null)
