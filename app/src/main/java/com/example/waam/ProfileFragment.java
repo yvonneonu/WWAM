@@ -102,6 +102,8 @@ public class ProfileFragment extends Fragment {
         }
 
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+
         //bottomNavigationView.getMenu().getItem(4).setChecked(true);
 
 

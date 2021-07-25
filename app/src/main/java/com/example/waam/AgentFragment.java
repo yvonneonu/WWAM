@@ -107,7 +107,8 @@ public class AgentFragment extends Fragment {
                         .commit();*/
 
 
-                Fragment fr = new ProfileFragment();
+                Fragment fr = new NewAgentProfileFragment();
+                //Fragment fr = new ProfileFragment();
                 ((BottomNavigationView)getActivity().findViewById(R.id.bottomNavigationView)).setSelectedItemId(R.id.profile);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentcontainer, fr, "visible_fragment")
