@@ -29,7 +29,7 @@ import retrofit2.Response;
 public class LookingFor extends AppCompatActivity {
 
     private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext, namme;
-    private ImageView image;
+    private ImageView image, back;
     private String  spinn2, spinn, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
     private boolean textVisible;
     private int count;
@@ -91,6 +91,8 @@ public class LookingFor extends AppCompatActivity {
         salatext = findViewById(R.id.textView9);
         saveDetail = findViewById(R.id.button);
 
+        back = findViewById(R.id.gobbb);
+
 
         spinner = findViewById(R.id.one);
         bod = findViewById(R.id.textView2);
@@ -108,6 +110,7 @@ public class LookingFor extends AppCompatActivity {
 
         //String toks = getIntent().getStringExtra("token");
         //Log.d("sorry", "iknowyouaretired "+token);
+
 
 
         GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
@@ -299,6 +302,12 @@ public class LookingFor extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         swipe = findViewById(R.id.textView34);
         swipe.setOnClickListener(new View.OnClickListener() {
             @Override

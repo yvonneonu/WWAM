@@ -1,9 +1,9 @@
 package com.example.waam;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +31,8 @@ public class DiscoverEvent extends AppCompatActivity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_discover_event);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
             mToolbar = findViewById(R.id.tool_bar);
             setSupportActionBar(mToolbar);
            mTvTitle = findViewById(R.id.tv_title);
@@ -78,7 +80,8 @@ public class DiscoverEvent extends AppCompatActivity {
         }
 
     public void backtologin(View view) {
-        Intent intent = new Intent(DiscoverEvent.this, DiscoverDrawerLayerout.class);
-        startActivity(intent);
+            finish();
+        /*Intent intent = new Intent(DiscoverEvent.this, DiscoverDrawerLayerout.class);
+        startActivity(intent);*/
     }
 }

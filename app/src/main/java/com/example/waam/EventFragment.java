@@ -2,12 +2,6 @@ package com.example.waam;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -58,7 +56,7 @@ public class EventFragment extends Fragment {
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         eventModels = generalFactory.getEventModelList();
         eventAdapter = new EventAdapter(eventModels,getActivity());
-        eventAdapter.setOnTouch(position -> Toast.makeText(getActivity(),"Mean face "+eventModels.get(position),Toast.LENGTH_SHORT).show());
+       // eventAdapter.setOnTouch(position -> Toast.makeText(getActivity(),"Mean face "+eventModels.get(position),Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -66,6 +64,8 @@ public class EventFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_generic_edg, container, false);
+
+
 
         RecyclerView recyclerViewtwo = view.findViewById(R.id.cyclertwo);
         LinearLayout linearLayout = view.findViewById(R.id.linearLayout10);

@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,13 +60,26 @@ public class DiscoverFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //getSupportActionBar().show();
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        assert activity != null;
+        //Objects.requireNonNull(activity.)
+        //setIcon(R.drawable.topnavlogo);
+
+        Objects.requireNonNull(activity.getSupportActionBar()).setIcon(R.drawable.topnavlogo);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_discover, container, false);
+       View view = inflater.inflate(R.layout.fragment_discover, container, false);
+
+
+       return view;
     }
 
     @Override

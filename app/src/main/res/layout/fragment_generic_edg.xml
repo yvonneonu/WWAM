@@ -100,7 +100,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:paddingBottom="4dp"
-                            android:text="If you had errors in activity_quiz.xml "
+                            android:text="Mystere by Cirque du Soleil at Treasure "
                             android:textAppearance="?attr/textAppearanceHeadline6" />
 
                         <LinearLayout
@@ -456,8 +456,9 @@
                                 android:orientation="vertical">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center"
                                     app:srcCompat="@drawable/entertainment_icon"
                                     tools:src="@tools:sample/avatars" />
 
@@ -494,8 +495,9 @@
                                 android:orientation="vertical">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center"
                                     app:srcCompat="@drawable/entertainment_icon"
                                     tools:src="@tools:sample/avatars" />
 
@@ -530,8 +532,9 @@
                                 android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
                                 app:srcCompat="@drawable/entertainment_icon"
                                 tools:src="@tools:sample/avatars" />
 
@@ -657,7 +660,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="JABAWOCKEEZ: LIVE AT MGM GRAND RESORT"
+                            android:text="JABAWOCKEEZ: LIVE AT MGM GRAND"
                             android:textAppearance="?attr/textAppearanceHeadline6" />
 
                         <LinearLayout
@@ -758,7 +761,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Tony Robins Live! Las Vegas By National Achievers Congress"
+                            android:text="Tony Robins Live! Las Vegas By National"
                             android:textAppearance="?attr/textAppearanceHeadline6" />
 
                         <LinearLayout
@@ -934,8 +937,9 @@
                     android:id="@+id/bam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Trending deals"
-                    android:textSize="17sp"
+                    android:text="Not in your city?"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/textView62"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -971,7 +975,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Discover the top trending deals in this city"
+                    android:text="Don't worry, we've got more in store for you"
                     app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
                     app:layout_constraintStart_toStartOf="@+id/bam"
                     app:layout_constraintTop_toBottomOf="@+id/bam" />

@@ -476,6 +476,9 @@ public class finalProfile extends AppCompatActivity {
 
     }
 
+    public void go(View view) {
+        finish();
+    }
 }
   /*swipe = findViewById(R.id.textView34);
           swipe.setOnClickListener(new View.OnClickListener() {

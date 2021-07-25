@@ -1,12 +1,8 @@
 package com.example.waam;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import java.util.Objects;
 
 /**
@@ -24,6 +26,8 @@ import java.util.Objects;
  * create an instance of this fragment.
  */
 public class ExploreFragment extends Fragment implements View.OnClickListener {
+
+    private Toolbar tool_bar;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,6 +70,11 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
+
+       // ((AppCompatActivity) getActivity()).openDrawer();
+
         setHasOptionsMenu(true);
         Fragment fragment = new EventFragment();
         if(event != null){
@@ -81,30 +90,68 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
         event = view.findViewById(R.id.button8);
         dateIdeas = view.findViewById(R.id.button9);
-        getaway = view.findViewById(R.id.button10);
+        tool_bar = view.findViewById(R.id.tool_bar);
+
+        //getaway = view.findViewById(R.id.button10);
 
         //options that make th
         event.setOnClickListener(this);
         dateIdeas.setOnClickListener(this);
-        getaway.setOnClickListener(this);
-        event.setBackgroundColor(getActivity().getResources().getColor(R.color.purple_500));
+      //  getaway.setOnClickListener(this);
+        //event.setBackgroundColor(getActivity().getResources().getColor(R.color.purple_500));
 
-        buttonsArrays = new Button[]{event,dateIdeas,getaway};
+        buttonsArrays = new Button[]{event,dateIdeas};
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
-        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Explore");
+        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Explore Vegas");
+      //  Objects.requireNonNull(activity.getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        //.setTitle("Explore");
+
         return view;
 
     }
 
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        tool_bar.inflateMenu(R.menu.exploremenu);
+
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.exploremenu, menu);
+
+
+        tool_bar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                final int Location = R.id.location;
+                final int Search = R.id.search;
+                switch (item.getItemId()){
+
+                    case Location:
+                        Fragment fragment = new LocationFragment();
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragmentcontainer,fragment);
+                        ft.commit();
+                        break;
+                    case Search:
+
+                        Intent intent = new Intent(getActivity(), SearchExplore.class);
+                        startActivity(intent);
+                        Log.d("Search","Search is being clicked");
+                        break;
+                }
+
+                return true;
+            }
+        });
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -120,6 +167,9 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
                 ft.commit();
                 break;
             case Search:
+
+                Intent intent = new Intent(getActivity(), SearchExplore.class);
+                startActivity(intent);
                 Log.d("Search","Search is being clicked");
                 break;
         }
@@ -128,20 +178,44 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        final int explore = R.id.button8;
+        final int date = R.id.button9;
+
         Fragment fragment = null;
+
         switch (v.getId()){
-            case R.id.button8:
-                fragment = new EventFragment();
-                getClicked(v);
+
+            case explore:
+
+                if (v.getId() == event.getId()){
+
+                    event.setBackgroundResource(R.drawable.bordertext);
+                    dateIdeas.setBackgroundColor(Color.TRANSPARENT);
+
+
+                    fragment = new EventFragment();
+                    getClicked(v);
+                }
+
                 break;
-            case R.id.button9:
-                fragment = new DateIdeasFragment();
-                getClicked(v);
+
+
+            case date:
+                if (v.getId() == dateIdeas.getId()){
+
+                    dateIdeas.setBackgroundResource(R.drawable.bordertext);
+                    event.setBackgroundColor(Color.TRANSPARENT);
+
+                    fragment = new DateIdeasFragment();
+                    getClicked(v);
+                }
+
                 break;
-            case R.id.button10:
+           /* case R.id.button10:
                 fragment = new GetaAwayFragment();
                 getClicked(v);
-                break;
+                break;*/
         }
 
         if(fragment != null){
@@ -157,7 +231,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
         for(int i = 0 ; i < buttonsArrays.length ; i++){
             if(view.getId() == buttonsArrays[i].getId()){
-               buttonsArrays[i].setBackgroundColor(getActivity().getResources().getColor(R.color.purple_500));
+               buttonsArrays[i].setBackgroundColor(getActivity().getResources().getColor(R.color.orange));
             }else{
                 buttonsArrays[i].setBackground(getActivity().getResources().getDrawable(R.drawable.button_border));
             }

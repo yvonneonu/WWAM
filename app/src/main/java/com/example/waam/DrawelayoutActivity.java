@@ -47,6 +47,9 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         WaamUser friendsProfile = (WaamUser) getIntent().getSerializableExtra("PutProfile");
         WaamUser videopicfragm = (WaamUser) getIntent().getSerializableExtra("WaamUser");
         boolean clicked = getIntent().getBooleanExtra("clicked", false);
+
+        boolean post = getIntent().getBooleanExtra("post",false);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -104,26 +107,13 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //toolbar.setLogo(R.drawable.topnavlogo);
+       // toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
         Log.d("TAG", "in activity null");
         Fragment fragmenting;
-        if (clicked) {
-            fragmenting = new MessagesFragment();
-            bottomNavigationView.getMenu().getItem(1).setChecked(true);
-
-            //onNavigationItemSelected(fragment);
-            //fragment.setSe(true);
-           /* bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-                @Override
-                public void onNavigationItemReselected(@NonNull MenuItem item) {
-                    item.setIcon(R.drawable.lowernav_messages_icon_active);
-                }
-            });(*/
-            // bottomNavigationView.setSelectedItemId(R.id.messages);
-            // bottomNavigationView.onScreenStateChanged(0);
-
-
-            //
-        } else if (waamUser != null) {
+        if(post){
+            fragmenting = new ViewProfile(post);
+        } else if(waamUser != null){
             fragmenting = new ConnectedFriendsFragment(waamUser);
             bottomNavigationView.getMenu().getItem(-0).setChecked(false);
        /* } else if (videopicfragm != null) {
@@ -131,6 +121,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
           //  bottomNavigationView.getMenu().getItem(2).setChecked(true);
         } else {
             fragmenting = new ExploreFragment();
+
             // GeneralFactory.getGeneralFactory(this).loadSpecUser();
 
         }
@@ -155,11 +146,13 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
                 ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
-                bottomNavigationView.getMenu().getItem(-0).setChecked(false);
+                //bottomNavigationView.getMenu().getItem(-0).setChecked(false);
 
 
             }
         });
+        bottomNavigationView.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -182,15 +175,16 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         Log.d("TAG", "not null");
 
         switch (item.getItemId()) {
-            case R.id.membership:
+           /* case R.id.membership:
                 fragment = new BecomeAMemberFragment();
-                break;
+                break;*/
 
             case R.id.notification:
                 Intent intent = new Intent(DrawelayoutActivity.this, NotificationActivity.class);
                 startActivity(intent);
 
 
+                break;
             case R.id.dailymatch:
                 fragment = new FindMtchBlankFragment();
 
@@ -231,6 +225,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
 
             case R.id.friends:
                 fragment = new FriendsFragment();
+                bottomNavigationView.setVisibility(View.VISIBLE);
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
                 break;
 
@@ -252,6 +247,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentcontainer, fragment);
+            ft.addToBackStack(null);
             ft.commit();
             drawer.closeDrawer(GravityCompat.START);
             return true;
@@ -273,4 +269,5 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             drawer.closeDrawer(GravityCompat.START);
         }
     }
+
 }

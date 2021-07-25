@@ -56,6 +56,7 @@ public class shareMedia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadPicOrVid(getFileExtension(Uri.parse(uri)),Uri.parse(uri));
+
             }
         });
 

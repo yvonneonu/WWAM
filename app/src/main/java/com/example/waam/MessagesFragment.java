@@ -175,7 +175,8 @@ public class MessagesFragment extends Fragment {
 
         assert activity != null;
 
-        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
+        Objects.requireNonNull(activity.getSupportActionBar()).setIcon(R.drawable.location);
+                //.setTitle("Messages");
         return  view;
 
 

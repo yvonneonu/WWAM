@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +46,9 @@ public class FriendsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private Toolbar tool_bar;
+    private SearchView searchView;
+    ImageView imageView;
     public FriendsFragment() {
         // Required empty public constructor
     }
@@ -75,6 +79,8 @@ public class FriendsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
         setHasOptionsMenu(true);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
@@ -106,13 +112,20 @@ public class FriendsFragment extends Fragment {
     }
 
 
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
+        tool_bar.inflateMenu(R.menu.findfriends);
         inflater.inflate(R.menu.friendsmenu, menu);
+        //getMenuInflater().inflate(R.menu.main_menu, menu);
+
+      //  getM
         super.onCreateOptionsMenu(menu, inflater);
 
+
         MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+
         final SearchView searchView = (SearchView) searchItem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -130,7 +143,19 @@ public class FriendsFragment extends Fragment {
             }
         });
 
+        tool_bar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                Intent intent = new Intent(getActivity(), AddNewFriends.class);
+                startActivity(intent);
+
+                return true;
+            }
+        });
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -159,7 +184,10 @@ public class FriendsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
         recyclerView = view.findViewById(R.id.friends_recycler);
+        searchView = view.findViewById(R.id.editText6);
         progressBar = view.findViewById(R.id.progressBaring);
+        tool_bar = view.findViewById(R.id.tool_bar);
+        imageView = view.findViewById(R.id.Bck);
         ImageView imageView = view.findViewById(R.id.imageView40);
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swiperefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -170,6 +198,26 @@ public class FriendsFragment extends Fragment {
             }
         });
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.d("TAG", "QueryTextSubmit: " + s);
+
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                friendAdapt.getFilter().filter(s);
+                Log.d("TAG", "QueryTextChange: " + s);
+                return false;
+            }
+        });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

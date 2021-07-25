@@ -91,15 +91,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingVertical="10dp"
                     android:visibility="visible">
 
                     <ImageView
                         android:id="@+id/text"
-                        android:layout_width="20dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_weight="1"
                         android:clickable="true"
                         android:src="@drawable/mylifeicon" />
@@ -107,8 +107,8 @@
                     <ImageView
 
                         android:id="@+id/aboutsef"
-                        android:layout_width="20dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_weight="1"
                         android:clickable="true"
                         android:src="@drawable/aboutmyselficon" />
@@ -116,8 +116,8 @@
                     <ImageView
 
                         android:id="@+id/interest"
-                        android:layout_width="20dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_weight="1"
                         android:clickable="true"
                         android:src="@drawable/aboutmymatchicon" />
@@ -125,8 +125,8 @@
                     <ImageView
 
                         android:id="@+id/friends"
-                        android:layout_width="20dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_weight="1"
                         android:clickable="true"
                         android:src="@drawable/freiendsicon" />

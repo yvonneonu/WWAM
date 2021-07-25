@@ -30,7 +30,9 @@ public class VideoPicFragment extends Fragment {
     private WaamUser waamUser;
     private ProgressBar bar;
     private TextView textView;
+
     private GeneralFactory generalFactory;
+
     private static final String VIDEOPIC = "videopic";
 
 
@@ -74,33 +76,37 @@ public class VideoPicFragment extends Fragment {
         recyclerView = view.findViewById(R.id.vidpicrecycler);
         textView = view.findViewById(R.id.textView106);
         bar = view.findViewById(R.id.progressBar3);
-        String path = waamUser.getUid();
-        Log.d("userId",path);
-        generalFactory.loadVidPic(path, new GeneralFactory.LoadVidPic() {
-            @Override
-            public void loadVidpic(List<VideoPicModel> videoPicModels) {
-                videoPicAdapter = new VideoPicAdapter(videoPicModels,getActivity());
-                Log.d("loadpic","inside pic");
-                if(isAdded()){
-                    if(videoPicModels.size() > 0){
-                        recyclerView.setVisibility(View.VISIBLE);
-                        textView.setVisibility(View.GONE);
-                        recyclerView.setAdapter(videoPicAdapter);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-                        bar.setVisibility(View.GONE);
-                    }else{
-                        //you have no media uploaded...
-                        recyclerView.setVisibility(View.GONE);
-                        textView.setVisibility(View.VISIBLE);
-                        String message = "There are no media";
-                        bar.setVisibility(View.GONE);
-                        textView.setText(message);
-                        Log.d("ElseVidpic","I am here running");
-                    }
 
-                }else{
-                    Log.d("Problem","Not added yet");
-                }
+
+        if (waamUser != null){
+            String path = waamUser.getUid();
+
+            Log.d("userId",path);
+            generalFactory.loadVidPic(path, new GeneralFactory.LoadVidPic() {
+                @Override
+                public void loadVidpic(List<VideoPicModel> videoPicModels) {
+                    videoPicAdapter = new VideoPicAdapter(videoPicModels,getActivity());
+                    Log.d("loadpic","inside pic");
+                    if(isAdded()){
+                        if(videoPicModels.size() > 0){
+                            recyclerView.setVisibility(View.VISIBLE);
+                            textView.setVisibility(View.GONE);
+                            recyclerView.setAdapter(videoPicAdapter);
+                            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+                            bar.setVisibility(View.GONE);
+                        }else{
+                            //you have no media uploaded...
+                            recyclerView.setVisibility(View.GONE);
+                            textView.setVisibility(View.VISIBLE);
+                            String message = "There are no media";
+                            bar.setVisibility(View.GONE);
+                            textView.setText(message);
+                            Log.d("ElseVidpic","I am here running");
+                        }
+
+                    }else{
+                        Log.d("Problem","Not added yet");
+                    }
 
                /* videoPicAdapter.showPicVid(new VideoPicAdapter.MediaListener() {
                     @Override
@@ -112,8 +118,10 @@ public class VideoPicFragment extends Fragment {
                     }
                 });*/
 
-            }
-        });
+                }
+            });
+        }
+
         return view;
     }
 

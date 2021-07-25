@@ -1,10 +1,8 @@
 package com.example.waam;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -52,9 +50,7 @@ public class Login extends BaseActivity implements  SinchService.StartFailedList
         //mRtmClient = mChatManager.getRtmClient();
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_PHONE_STATE},100);
-        }
+
         signup = findViewById(R.id.again);
         pressback = findViewById(R.id.back);
         Log.d("TAG", "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");

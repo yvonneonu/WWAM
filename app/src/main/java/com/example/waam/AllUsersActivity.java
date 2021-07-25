@@ -1,16 +1,17 @@
 package com.example.waam;
 
+import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -28,6 +29,9 @@ public class AllUsersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alluseractivity);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         RecyclerView recyclerView = findViewById(R.id.friends_recycler);
         textView = findViewById(R.id.textView99);
@@ -59,9 +63,17 @@ public class AllUsersActivity extends AppCompatActivity {
                             if(friendAdapt != null && FirebaseAuth.getInstance().getCurrentUser() != null){
                                 String branch = FirebaseAuth.getInstance().getCurrentUser().getUid()+FRIENDS;
                                 //generalFactoryInstance.addToFriend(user,branch);
-                                Intent intent = new Intent(AllUsersActivity.this, DrawelayoutActivity.class);
+
+                                /*Fragment fragment = new ConnectedFriendsFragment();
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.container_layout,fragment)
+                                        .commit();*/
+
+                                Toast.makeText(AllUsersActivity.this, "Sent", Toast.LENGTH_LONG).show();
+
+                                /*Intent intent = new Intent(AllUsersActivity.this, DrawelayoutActivity.class);
                                 intent.putExtra(ProfileFragment.PUT_PROFILE,user);
-                                startActivity(intent);
+                                startActivity(intent);*/
                             }
 
                         }

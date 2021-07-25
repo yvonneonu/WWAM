@@ -329,4 +329,8 @@ public class Interest extends AppCompatActivity {
         });
 
     }
+
+    public void go(View view) {
+        finish();
+    }
 }

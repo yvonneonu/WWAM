@@ -1,6 +1,6 @@
 package com.example.waam;
 
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,8 +45,15 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
         toolbar2 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar2);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_PHONE_STATE},100);
+        }
+
+
 
         mAuth = FirebaseAuth.getInstance();
         NavigationView navigationView1 = findViewById(R.id.nav_view);
@@ -106,7 +112,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         toggle.syncState();
 
         //toolbar2.setBackgroundColor(getResources().getColor(R.color.black));
-        toolbar2.setLogo(R.drawable.topnavlogo);
+       // toolbar2.setLogo(R.drawable.topnavlogo);
         toolbar2.setNavigationIcon(R.drawable.ic_baseline_menu_24);
        //Log.d("TAG", "in activity null");
         Fragment fragment;
@@ -118,10 +124,12 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
             bottomNavigationView.getMenu().getItem(-0).setChecked(false);
         }else{
             fragment = new DiscoverFragment();
+            //fragment.add
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragmentcontainer, fragment);
+        ft.addToBackStack(null);
         ft.commit();
 
 
@@ -131,31 +139,50 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 Fragment fragment = new ViewProfile();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 bottomNavigationView.setVisibility(View.GONE);
+
                 ft.replace(R.id.fragmentcontainer,fragment);
+
                 ft.addToBackStack(null);
+
                 ft.commit();
                 drawer1.closeDrawer(GravityCompat.START);
-                bottomNavigationView.getMenu().getItem(-0).setChecked(false);
-
 
             }
         });
 
-}
+        bottomNavigationView.setVisibility(View.VISIBLE);
+
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //updateNavigationBarState();
+    }
+
+
+    // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         Fragment fragment = null;
         Log.d("TAG", "not null");
         switch (item.getItemId()) {
-            case R.id.membership:
+           /* case R.id.membership:
                 fragment = new BecomeAMemberFragment();
                 bottomNavigationView.setVisibility(View.VISIBLE);
-                break;
+                break;*/
 
             case R.id.notification:
                 Intent intent = new Intent(DiscoverDrawerLayerout.this, NotificationActivity.class);
                 startActivity(intent);
+                break;
 
             case R.id.dailymatch:
                 fragment = new FindMtchBlankFragment();
@@ -185,6 +212,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
             case R.id.datingagent:
                 fragment = new AgentFragment();
+                bottomNavigationView.setVisibility(View.VISIBLE);
+
                 bottomNavigationView.getMenu().getItem(4).setChecked(true);
                 break;
 
@@ -197,18 +226,25 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
             case R.id.profile:
                 fragment = new ProfileFragment();
+                bottomNavigationView.setVisibility(View.VISIBLE);
+
                 Log.d("show", "profile not showing");
                 item.setIcon(R.drawable.lowernav_profile_icon_active);
                 break;
 
             case R.id.messages:
                 fragment = new MessagesFragment();
+                bottomNavigationView.getMenu().getItem(1).setChecked(true);
+
                 item.setIcon(R.drawable.lowernav_messages_icon_active);
                 break;
 
             case R.id.friends:
                 fragment = new FriendsFragment();
+
                 bottomNavigationView.setVisibility(View.VISIBLE);
+                //bottomNavigationView.getMenu().getItem(2).setChecked(true);
+
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
                 break;
 
@@ -216,6 +252,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
             case R.id.agent:
                 fragment = new AgentFragment();
                 bottomNavigationView.setVisibility(View.VISIBLE);
+               // bottomNavigationView.getMenu().getItem(4).setChecked(true);
                 item.setIcon(R.drawable.lowernav_agent_icon_active);
                 break;
 
@@ -224,10 +261,17 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
             Log.d("TAG", "not null");
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentcontainer, fragment);
+            ft.addToBackStack(null);
+
+
+
             ft.commit();
             drawer1.closeDrawer(GravityCompat.START);
+
             return true;
         } else {
+           // bottomNavigationView.getMenu().getItem(-0).setChecked(true);
+
             Log.d("TAG", "is null");
         }
 
@@ -241,15 +285,20 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         super.onBackPressed();
         if (drawer1.isDrawerOpen(GravityCompat.START)) {
             drawer1.closeDrawer(GravityCompat.START);
+
         }
-    }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
-
-
 
 
 }
+   /* @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }*/
+
+
+
+
+

@@ -502,4 +502,7 @@ public class CompleteProfile extends AppCompatActivity {
     }
 
 
+    public void gob(View view) {
+        finish();
+    }
 }

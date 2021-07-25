@@ -182,6 +182,12 @@ public class ProfileFragment extends Fragment {
 
         Button friendRequest = view.findViewById(R.id.button11);
 
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        assert activity != null;
+
+        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
+
         textView = dialog.findViewById(R.id.textView70);
         imageView = view.findViewById(R.id.imageView31);
         education = view.findViewById(R.id.testtt);
@@ -254,13 +260,6 @@ public class ProfileFragment extends Fragment {
             });
 
 
-
-
-
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        assert activity != null;
-        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
 
         return  view;
 
