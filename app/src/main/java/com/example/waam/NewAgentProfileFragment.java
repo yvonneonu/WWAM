@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +25,8 @@ import androidx.fragment.app.Fragment;
  */
 public class NewAgentProfileFragment extends Fragment implements View.OnClickListener {
     private ConstraintLayout constraintLayout;
+    private ImageView imageVi, aboutsefl, friend;
+    TextView textView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,8 +76,15 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_agent_profile, container, false);
         view.findViewById(R.id.bookme).setOnClickListener(this);
+        imageVi = view.findViewById(R.id.videopic);
+        textView = view.findViewById(R.id.textdisplay);
+        aboutsefl = view.findViewById(R.id.aboutsef);
+        friend = view.findViewById(R.id.friends);
 
 
+        imageVi.setOnClickListener(this);
+        aboutsefl.setOnClickListener(this);
+        friend.setOnClickListener(this);
 
 
         return view;
@@ -82,6 +92,10 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        final int vid = R.id.videopic;
+        final int aboutse = R.id.aboutsef;
+        final int frien = R.id.friends;
+
         switch (v.getId()){
             case R.id.bookme:
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
@@ -120,6 +134,43 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
                 });*/
                 alertDialog.show();
                 break;
+            case vid:
+                if (v.getId() == imageVi.getId()){
+                    imageVi.setColorFilter(Color.BLUE);
+                    aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    friend.setColorFilter(Color.TRANSPARENT);
+                     textView.setText("You do not have any imgae");
+
+                }else {
+
+                }
+                break;
+            case aboutse:
+                if (v.getId() == aboutsefl.getId()){
+                    aboutsefl.setColorFilter(Color.BLUE);
+                    friend.setColorFilter(Color.TRANSPARENT);
+                    imageVi.setColorFilter(Color.TRANSPARENT);
+                    //textView.setText();
+                    textView.setVisibility(View.GONE);
+
+                    Fragment fragment = new MoreAgentFragment();
+                    getChildFragmentManager().beginTransaction()
+                            .replace(R.id.framee, fragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+
+                }else {
+
+                }
+            case frien:
+                if (v.getId() == friend.getId()){
+                    friend.setColorFilter(Color.BLUE);
+                    imageVi.setColorFilter(Color.TRANSPARENT);
+                    aboutsefl.setColorFilter(Color.TRANSPARENT);
+
+                    textView.setText("You do not have any images");
+                }
+
         }
 
     }
