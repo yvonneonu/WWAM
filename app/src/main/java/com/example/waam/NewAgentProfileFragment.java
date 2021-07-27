@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
     private ConstraintLayout constraintLayout;
     private ImageView imageVi, aboutsefl, friend;
     TextView textView;
+    FrameLayout frameLayout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,11 +83,14 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
         textView = view.findViewById(R.id.textdisplay);
         aboutsefl = view.findViewById(R.id.aboutsef);
         friend = view.findViewById(R.id.friends);
+        frameLayout = view.findViewById(R.id.framee);
+        constraintLayout = view.findViewById(R.id.bookme);
 
 
         imageVi.setOnClickListener(this);
         aboutsefl.setOnClickListener(this);
         friend.setOnClickListener(this);
+        constraintLayout.setOnClickListener(this);
 
 
         return view;
@@ -92,84 +98,103 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        final int butto = R.id.bookme;
         final int vid = R.id.videopic;
         final int aboutse = R.id.aboutsef;
         final int frien = R.id.friends;
-
         switch (v.getId()){
-            case R.id.bookme:
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                LayoutInflater factory = LayoutInflater.from(getActivity());
-                final View view = factory.inflate(R.layout.agenttrquest, null);
-                TextView text = view.findViewById(R.id.textView70);
 
-                SpannableStringBuilder click = new SpannableStringBuilder("You must book this agent to access the \n chat feature! ");
-                click.setSpan(new ForegroundColorSpan(Color.CYAN),40,45, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
-                text.setText(click);
-                alertDialog.setView(view);
+            case vid:
+        if (v.getId() == imageVi.getId()) {
+            imageVi.setColorFilter(Color.BLUE);
+            aboutsefl.setColorFilter(Color.TRANSPARENT);
+            friend.setColorFilter(Color.TRANSPARENT);
 
-                Button button = view.findViewById(R.id.close);
-                Button button1 = view.findViewById(R.id.button10);
-                ImageView imageView = view.findViewById(R.id.cancell);
+            // textView.setText("You do not have any imgae");
 
-                imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getActivity().finish();
-                    }
-                });
+            // textView.setVisibility(View.INVISIBLE);
+            // frameLayout.setVisibility(View.INVISIBLE);
+        }
+        break;
 
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                     //   Intent intent = new Intent(getActivity(), )You must book this agent to access the \n chat here
-                    }
-                });
+        case frien:
+        if (v.getId() == friend.getId()){
+            frameLayout.setVisibility(View.INVISIBLE);
+            friend.setColorFilter(Color.BLUE);
+            imageVi.setColorFilter(Color.TRANSPARENT);
+            aboutsefl.setColorFilter(Color.TRANSPARENT);
+
+          //  frameLayout.setVisibility(View.INVISIBLE);
+
+
+          //  Fragment fragment = new FrendChannelFragment();
+
+
+        }
+        break;
+        case aboutse:
+        Fragment fragment = new MoreAgentFragment();
+
+        if (v.getId() == aboutsefl.getId()){
+            aboutsefl.setColorFilter(Color.BLUE);
+            friend.setColorFilter(Color.TRANSPARENT);
+            imageVi.setColorFilter(Color.TRANSPARENT);
+            //textView.setText();
+
+            //textView.setVisibility(View.GONE);
+
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.framee, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    //.commitAllowingStateLoss();
+            .commit();
+
+        }
+        break;
+
+            case butto:
+                if (v.getId() == constraintLayout.getId()) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                    LayoutInflater factory = LayoutInflater.from(getActivity());
+                    final View view = factory.inflate(R.layout.agenttrquest, null);
+                    TextView text = view.findViewById(R.id.textView70);
+
+                    SpannableStringBuilder click = new SpannableStringBuilder("You must book this agent to access the \n chat feature! ");
+                    click.setSpan(new ForegroundColorSpan(Color.CYAN),40,45, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+                    text.setText(click);
+                    alertDialog.setView(view);
+
+                    Button button = view.findViewById(R.id.close);
+                    Button button1 = view.findViewById(R.id.button10);
+                    ImageView imageView = view.findViewById(R.id.cancell);
+
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getActivity().finish();
+                        }
+                    });
+
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), BookAgent.class);
+                            startActivity(intent);
+                            //   Intent intent = new Intent(getActivity(), )You must book this agent to access the \n chat here
+                        }
+                    });
 
                /* alertDialog.setNegativeButton("Schließen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
                         dialog.dismiss();
                     }
                 });*/
-                alertDialog.show();
+                    alertDialog.show();
+                }
+
                 break;
-            case vid:
-                if (v.getId() == imageVi.getId()){
-                    imageVi.setColorFilter(Color.BLUE);
-                    aboutsefl.setColorFilter(Color.TRANSPARENT);
-                    friend.setColorFilter(Color.TRANSPARENT);
-                     textView.setText("You do not have any imgae");
-
-                }else {
-
-                }
-                break;
-            case aboutse:
-                if (v.getId() == aboutsefl.getId()){
-                    aboutsefl.setColorFilter(Color.BLUE);
-                    friend.setColorFilter(Color.TRANSPARENT);
-                    imageVi.setColorFilter(Color.TRANSPARENT);
-                    //textView.setText();
-                    textView.setVisibility(View.GONE);
-
-                    Fragment fragment = new MoreAgentFragment();
-                    getChildFragmentManager().beginTransaction()
-                            .replace(R.id.framee, fragment)
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .commit();
-
-                }else {
-
-                }
-            case frien:
-                if (v.getId() == friend.getId()){
-                    friend.setColorFilter(Color.BLUE);
-                    imageVi.setColorFilter(Color.TRANSPARENT);
-                    aboutsefl.setColorFilter(Color.TRANSPARENT);
-
-                    textView.setText("You do not have any images");
-                }
 
         }
 

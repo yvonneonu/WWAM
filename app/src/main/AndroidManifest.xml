@@ -38,8 +38,9 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".AddNewFriends"></activity>
-        <activity android:name=".SearchExplore"></activity>
+        <activity android:name=".BookAgent"></activity>
+        <activity android:name=".AddNewFriends" />
+        <activity android:name=".SearchExplore" />
         <activity android:name=".shareMedia" />
         <activity android:name=".newPhotot" />
         <activity android:name=".textResize" />
@@ -65,7 +66,7 @@
         <activity android:name=".DiscoverEvent" />
         <activity
             android:name=".DiscoverDrawerLayerout"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".LookingFor" />
         <activity android:name=".finalProfile" />
         <activity android:name=".picture" />
@@ -77,7 +78,7 @@
         <activity android:name=".Profile" />
         <activity
             android:name=".DrawelayoutActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".PaymentPage" />
         <activity android:name=".Successverified" />
         <activity android:name=".Verfy2" />

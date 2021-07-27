@@ -234,7 +234,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
 
             case R.id.profile:
                 //fragment = new ProfileFragment();
-               // fragment = new NewAgentProfileFragment();
+               fragment = new NewAgentProfileFragment();
                 Log.d("view", "profile page");
                 bottomNavigationView.getMenu().getItem(4).setChecked(true);
 

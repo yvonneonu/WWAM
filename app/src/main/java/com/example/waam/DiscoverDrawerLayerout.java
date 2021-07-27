@@ -226,7 +226,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
             case R.id.profile:
                 //fragment = new ProfileFragment();
-                //fragment = new NewAgentProfileFragment();
+                fragment = new NewAgentProfileFragment();
                 bottomNavigationView.setVisibility(View.VISIBLE);
 
                 Log.d("show", "profile not showing");
