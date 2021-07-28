@@ -48,7 +48,7 @@ public class FriendsFragment extends Fragment {
     private ProgressBar progressBar;
     private Toolbar tool_bar;
     private SearchView searchView;
-    ImageView imageView;
+    ImageView imageView1;
     public FriendsFragment() {
         // Required empty public constructor
     }
@@ -187,7 +187,7 @@ public class FriendsFragment extends Fragment {
         searchView = view.findViewById(R.id.editText6);
         progressBar = view.findViewById(R.id.progressBaring);
         tool_bar = view.findViewById(R.id.tool_bar);
-        imageView = view.findViewById(R.id.Bck);
+        imageView1 = view.findViewById(R.id.Bck);
         ImageView imageView = view.findViewById(R.id.imageView40);
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swiperefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -198,7 +198,7 @@ public class FriendsFragment extends Fragment {
             }
         });
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().finish();

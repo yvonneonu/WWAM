@@ -92,7 +92,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
             @Override
             public void loadSpecUse(WaamUser user) {
-                Glide.with(DiscoverDrawerLayerout.this)
+                Glide.with(getApplicationContext())
                         .asBitmap()
                         .fitCenter()
                         .circleCrop()
@@ -112,7 +112,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         toggle.syncState();
 
         //toolbar2.setBackgroundColor(getResources().getColor(R.color.black));
-       // toolbar2.setLogo(R.drawable.topnavlogo);
+       toolbar2.setLogo(R.drawable.topnavlogo);
         toolbar2.setNavigationIcon(R.drawable.ic_baseline_menu_24);
        //Log.d("TAG", "in activity null");
         Fragment fragment;

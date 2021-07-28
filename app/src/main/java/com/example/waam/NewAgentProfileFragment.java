@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +28,7 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
     private ConstraintLayout constraintLayout;
     private ImageView imageVi, aboutsefl, friend;
     TextView textView;
-    FrameLayout frameLayout;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,10 +79,9 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
         View view = inflater.inflate(R.layout.fragment_new_agent_profile, container, false);
         view.findViewById(R.id.bookme).setOnClickListener(this);
         imageVi = view.findViewById(R.id.videopic);
-        textView = view.findViewById(R.id.textdisplay);
         aboutsefl = view.findViewById(R.id.aboutsef);
         friend = view.findViewById(R.id.friends);
-        frameLayout = view.findViewById(R.id.framee);
+
         constraintLayout = view.findViewById(R.id.bookme);
 
 
@@ -113,28 +111,47 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
 
             // textView.setText("You do not have any imgae");
 
+            Fragment fragment = new ImageAgentFragment();
+
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.framee, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    //.commitAllowingStateLoss();
+                    .commit();
+
             // textView.setVisibility(View.INVISIBLE);
             // frameLayout.setVisibility(View.INVISIBLE);
+        }else {
+
         }
         break;
 
         case frien:
         if (v.getId() == friend.getId()){
-            frameLayout.setVisibility(View.INVISIBLE);
+            
             friend.setColorFilter(Color.BLUE);
             imageVi.setColorFilter(Color.TRANSPARENT);
             aboutsefl.setColorFilter(Color.TRANSPARENT);
 
           //  frameLayout.setVisibility(View.INVISIBLE);
 
+            Fragment fragment = new ImageAgentFragment();
+
+            getChildFragmentManager().beginTransaction()
+                       .replace(R.id.framee, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    //.commitAllowingStateLoss();
+                    .commit();
 
           //  Fragment fragment = new FrendChannelFragment();
 
 
+        }else {
+
         }
         break;
         case aboutse:
-        Fragment fragment = new MoreAgentFragment();
+
 
         if (v.getId() == aboutsefl.getId()){
             aboutsefl.setColorFilter(Color.BLUE);
@@ -142,6 +159,7 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
             imageVi.setColorFilter(Color.TRANSPARENT);
             //textView.setText();
 
+            Fragment fragment = new MoreAgentFragment();
             //textView.setVisibility(View.GONE);
 
             getChildFragmentManager().beginTransaction()
@@ -149,6 +167,8 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     //.commitAllowingStateLoss();
             .commit();
+
+        }else {
 
         }
         break;

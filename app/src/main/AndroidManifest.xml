@@ -38,7 +38,8 @@
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".BookAgent"></activity>
+        <activity android:name=".FullVideoScreen"></activity>
+        <activity android:name=".BookAgent" />
         <activity android:name=".AddNewFriends" />
         <activity android:name=".SearchExplore" />
         <activity android:name=".shareMedia" />

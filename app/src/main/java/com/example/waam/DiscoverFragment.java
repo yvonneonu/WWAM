@@ -62,13 +62,15 @@ public class DiscoverFragment extends Fragment {
         }
         //getSupportActionBar().show();
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+       AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         assert activity != null;
-        //Objects.requireNonNull(activity.)
+        Objects.requireNonNull(activity);
         //setIcon(R.drawable.topnavlogo);
 
-        Objects.requireNonNull(activity.getSupportActionBar()).setIcon(R.drawable.topnavlogo);
+//        Objects.requireNonNull(activity.getSupportActionBar()).setIcon(R.drawable.topnavlogo);
 
     }
 

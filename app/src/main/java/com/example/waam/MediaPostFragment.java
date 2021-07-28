@@ -1,17 +1,16 @@
 package com.example.waam;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -96,8 +95,11 @@ public class MediaPostFragment extends Fragment {
                                 recyclerView.setVisibility(View.VISIBLE);
                                 textView.setVisibility(View.GONE);
                                 recyclerView.setAdapter(videoPicAdapter);
+
                                 recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                                 bar.setVisibility(View.GONE);
+
+
                             }else{
                                 //you have no media uploaded...
                                 recyclerView.setVisibility(View.GONE);
