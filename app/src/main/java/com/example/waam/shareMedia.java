@@ -114,7 +114,7 @@ public class shareMedia extends AppCompatActivity {
                                         mUploads = null;
 
                                         Intent intent = new Intent(shareMedia.this,DiscoverDrawerLayerout.class);
-                                        intent.putExtra("urivid",uri);
+                                        intent.putExtra("media",FROMMEDIA);
                                         startActivity(intent);
                                     }
                                 });
