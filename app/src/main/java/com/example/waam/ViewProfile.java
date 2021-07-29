@@ -32,6 +32,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     private boolean post;
 
     private WaamUser waamUser;
+    private  String media = "";
 
 
     private ImageView test;
@@ -62,6 +63,10 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         this.post = post;
     }
 
+
+    public ViewProfile(String media){
+        this.media = media;
+    }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -142,7 +147,14 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                     .replace(R.id.containing, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
-        } else {
+        }else if(media.equals(shareMedia.FROMMEDIA)){
+            fragment = new MediaPostFragment();
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.containing, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .commit();
+        }
+        else {
             fragment = new ViewProfileDefaultFragment();
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.containing, fragment)

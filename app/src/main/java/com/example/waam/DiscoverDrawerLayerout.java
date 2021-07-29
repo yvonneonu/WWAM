@@ -33,9 +33,10 @@ import com.google.firebase.auth.FirebaseAuth;
 public class DiscoverDrawerLayerout extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer1;
     private FirebaseAuth mAuth;
-    private  Toolbar toolbar2;
+    private Toolbar toolbar2;
     private PostViewModel postViewModel;
     BottomNavigationView bottomNavigationView;
+    private String media = "";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -50,9 +51,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         setSupportActionBar(toolbar2);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_PHONE_STATE},100);
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_PHONE_STATE}, 100);
         }
-
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -68,18 +68,19 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         navigationView1.setBackgroundColor(getResources().getColor(R.color.blue));
         navigationView1.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer1, toolbar2, R.string.open, R.string.close);
-       // toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
+        // toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
         //toggle.setDrawerArrowDrawable(R.drawable.ic_baseline_menu_24, );
 
         //toolbar2.setNavigationIcon(R.drawable.ic_baseline_lock_24);
 
-       // NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View hView =  navigationView1.getHeaderView(0);
+        // NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView = navigationView1.getHeaderView(0);
         ImageView imageView = hView.findViewById(R.id.imageView7);
-        TextView nav_user = (TextView)hView.findViewById(R.id.textView96);
+        TextView nav_user = (TextView) hView.findViewById(R.id.textView96);
         TextView viewProfile = hView.findViewById(R.id.textView95);
 
-        boolean post = getIntent().getBooleanExtra("post",false);
+        boolean post = getIntent().getBooleanExtra("post", false);
+        media = getIntent().getStringExtra("media");
 
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,24 +106,25 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         });
 
 
-
-
         WaamUser waamUser = (WaamUser) getIntent().getSerializableExtra("YvonneSleep");
         drawer1.addDrawerListener(toggle);
         toggle.syncState();
 
         //toolbar2.setBackgroundColor(getResources().getColor(R.color.black));
-       toolbar2.setLogo(R.drawable.topnavlogo);
+        toolbar2.setLogo(R.drawable.topnavlogo);
         toolbar2.setNavigationIcon(R.drawable.ic_baseline_menu_24);
-       //Log.d("TAG", "in activity null");
+        //Log.d("TAG", "in activity null");
         Fragment fragment;
 
-        if(post){
+        if (post) {
             fragment = new ViewProfile(post);
-        } else if(waamUser != null){
+        }else if(media.equals(shareMedia.FROMMEDIA)){
+            fragment = new ViewProfile(shareMedia.FROMMEDIA);
+        }
+        else if (waamUser != null) {
             fragment = new ConnectedFriendsFragment(waamUser);
             bottomNavigationView.getMenu().getItem(-0).setChecked(false);
-        }else{
+        } else {
             fragment = new DiscoverFragment();
             //fragment.add
         }
@@ -140,7 +142,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 bottomNavigationView.setVisibility(View.GONE);
 
-                ft.replace(R.id.fragmentcontainer,fragment);
+                ft.replace(R.id.fragmentcontainer, fragment);
 
                 ft.addToBackStack(null);
 
@@ -154,6 +156,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
 
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -198,8 +201,6 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 bottomNavigationView.setVisibility(View.VISIBLE);
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
                 break;
-
-
 
 
             case R.id.upcomingevent:
@@ -253,7 +254,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
             case R.id.agent:
                 fragment = new AgentFragment();
                 bottomNavigationView.setVisibility(View.VISIBLE);
-               // bottomNavigationView.getMenu().getItem(4).setChecked(true);
+                // bottomNavigationView.getMenu().getItem(4).setChecked(true);
                 item.setIcon(R.drawable.lowernav_agent_icon_active);
                 break;
 
@@ -265,13 +266,12 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
             ft.addToBackStack(null);
 
 
-
             ft.commit();
             drawer1.closeDrawer(GravityCompat.START);
 
             return true;
         } else {
-           // bottomNavigationView.getMenu().getItem(-0).setChecked(true);
+            // bottomNavigationView.getMenu().getItem(-0).setChecked(true);
 
             Log.d("TAG", "is null");
         }

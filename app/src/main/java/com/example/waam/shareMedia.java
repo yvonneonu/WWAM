@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.content.ContentResolver;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class shareMedia extends AppCompatActivity {
     private ProgressBar progressBar;
     private static final String PROFILEPIC = "profilePic";
     private static final String VIDEOPIC = "videoPic";
+    public static  final String FROMMEDIA = "fromMedia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +112,10 @@ public class shareMedia extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         //This might crash it;
                                         mUploads = null;
+
+                                        Intent intent = new Intent(shareMedia.this,DiscoverDrawerLayerout.class);
+                                        intent.putExtra("urivid",uri);
+                                        startActivity(intent);
                                     }
                                 });
 
@@ -143,6 +149,12 @@ public class shareMedia extends AppCompatActivity {
                                     mDatabaseRef.child(uploadId).setValue(videoPicModel);
                                     progressBar.setVisibility(View.GONE);
                                     //This might crash it;
+                                    //Intent intent = new Intent(shareMedia.this,);
+                                    //intent.putExtra("urivid",uri);
+                                    //startActivity(intent);
+                                    Intent intent = new Intent(shareMedia.this,DiscoverDrawerLayerout.class);
+                                    intent.putExtra("media",FROMMEDIA);
+                                    startActivity(intent);
                                 }
                             }
                         })
