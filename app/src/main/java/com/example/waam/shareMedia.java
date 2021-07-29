@@ -60,7 +60,6 @@ public class shareMedia extends AppCompatActivity {
                 uploadPicOrVid(getFileExtension(Uri.parse(uri)),Uri.parse(uri));
 
 
-
             }
         });
 
