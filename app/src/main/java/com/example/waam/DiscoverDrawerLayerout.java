@@ -36,7 +36,6 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
     private Toolbar toolbar2;
     private PostViewModel postViewModel;
     BottomNavigationView bottomNavigationView;
-    private String media = "";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -80,7 +79,9 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         TextView viewProfile = hView.findViewById(R.id.textView95);
 
         boolean post = getIntent().getBooleanExtra("post", false);
-        media = getIntent().getStringExtra("media");
+        String media = getIntent().getStringExtra("media");
+
+        Log.d("Media", ""+media);
 
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +119,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         if (post) {
             fragment = new ViewProfile(post);
-        }else if(media.equals(shareMedia.FROMMEDIA)){
+        }else if(media != null && media.equals(shareMedia.FROMMEDIA)){
             fragment = new ViewProfile(shareMedia.FROMMEDIA);
         }
         else if (waamUser != null) {
