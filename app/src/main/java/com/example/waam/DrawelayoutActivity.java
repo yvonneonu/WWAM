@@ -31,6 +31,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
     private BottomNavigationView bottomNavigationView;
     private Intent intent;
     private FirebaseAuth mAuth;
+
     String uid ;
 
 
