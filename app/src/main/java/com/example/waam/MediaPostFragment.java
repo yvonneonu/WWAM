@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +30,7 @@ public class MediaPostFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private List<VideoPicModel> videoPicModelList;
     private RecyclerView recyclerView;
     private VideoPicAdapter videoPicAdapter;
     private TextView textView;
@@ -69,6 +72,7 @@ public class MediaPostFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        videoPicModelList = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         id = mAuth.getUid();
 
@@ -84,6 +88,8 @@ public class MediaPostFragment extends Fragment {
         recyclerView = view.findViewById(R.id.imagerecycler);
         textView = view.findViewById(R.id.textView106);
         bar = view.findViewById(R.id.progressBar3);
+
+
         GeneralFactory.getGeneralFactory(getContext())
                 .loadVidPic(id, new GeneralFactory.LoadVidPic() {
                     @Override
@@ -96,6 +102,7 @@ public class MediaPostFragment extends Fragment {
                                 textView.setVisibility(View.GONE);
                                 recyclerView.setAdapter(videoPicAdapter);
 
+                                videoPicModelList = videoPicModels;
                                 recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                                 bar.setVisibility(View.GONE);
 
@@ -113,6 +120,17 @@ public class MediaPostFragment extends Fragment {
                         }else{
                             Log.d("Problem","Not added yet");
                         }
+
+                        videoPicAdapter.showPicVid(new VideoPicAdapter.MediaListener() {
+                            @Override
+                            public void mediaListener(int position) {
+                                Intent intent = new Intent(getActivity(), FullVideoScreen.class);
+                                VideoPicModel videoPicModel = videoPicModels.get(position);
+                                intent.putExtra("picvic",videoPicModel);
+                                startActivity(intent);
+                            }
+                        });
+
                     }
                 });
 
