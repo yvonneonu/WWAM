@@ -53,7 +53,7 @@
                 <ImageView
                     android:id="@+id/imageView10"
                     android:layout_width="match_parent"
-                    android:layout_height="480dp"
+                    android:layout_height="490dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/profileheadbg"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -83,13 +83,13 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="150dp"
+                    android:layout_marginTop="50dp"
                     android:layout_marginEnd="5dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/diningout"
                     app:layout_constraintEnd_toStartOf="@+id/imageView1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView10" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
                 <TextView
                     android:id="@+id/textView20"
@@ -106,8 +106,8 @@
                 <CheckBox
                     android:id="@+id/radioButton"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
@@ -122,13 +122,13 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="150dp"
+                    android:layout_marginTop="50dp"
                     android:layout_marginEnd="5dp"
                     android:scaleType="center"
                     android:src="@drawable/travel"
                     app:layout_constraintEnd_toStartOf="@+id/imageView2"
                     app:layout_constraintStart_toEndOf="@+id/imageView0"
-                    app:layout_constraintTop_toTopOf="@+id/imageView10" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
                 <TextView
                     android:id="@+id/textView21"
@@ -145,8 +145,8 @@
                 <CheckBox
                     android:id="@+id/radioButton1"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
@@ -161,13 +161,13 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="150dp"
+                    android:layout_marginTop="50dp"
                     android:layout_marginEnd="24dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/sports"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -184,8 +184,8 @@
                 <CheckBox
                     android:id="@+id/radioButton2"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
@@ -199,11 +199,11 @@
                     android:id="@+id/imageView3"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/nightclubsdancing"
                     app:layout_constraintEnd_toEndOf="@+id/imageView0"
-                    app:layout_constraintHorizontal_bias="0.0"
+
                     app:layout_constraintStart_toStartOf="@+id/imageView0"
                     app:layout_constraintTop_toBottomOf="@+id/imageView0" />
 
@@ -222,8 +222,8 @@
                 <CheckBox
                     android:id="@+id/radioButton3"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
@@ -237,11 +237,11 @@
                     android:id="@+id/imageView4"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/coffeeconversation"
                     app:layout_constraintEnd_toEndOf="@+id/imageView1"
-                    app:layout_constraintHorizontal_bias="1.0"
+
                     app:layout_constraintStart_toStartOf="@+id/imageView1"
                     app:layout_constraintTop_toBottomOf="@+id/imageView1" />
 
@@ -260,8 +260,8 @@
                 <CheckBox
                     android:id="@+id/radioButton4"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
@@ -275,11 +275,11 @@
                     android:id="@+id/imageView5"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/mmuseumart"
                     app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                    app:layout_constraintHorizontal_bias="1.0"
+
                     app:layout_constraintStart_toStartOf="@+id/imageView2"
                     app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -298,8 +298,8 @@
                 <CheckBox
                     android:id="@+id/radioButton5"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
@@ -313,15 +313,13 @@
                     android:id="@+id/imageView6"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/mmoviesvideos"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                     app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                    app:layout_constraintHorizontal_bias="0.0"
+
                     app:layout_constraintStart_toStartOf="@+id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -338,15 +336,14 @@
                 <CheckBox
                     android:id="@+id/radioButton6"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
                     android:onClick="onCheckboxClicked"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:shadowColor="#FFEB3B"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView6"
                     app:layout_constraintStart_toStartOf="@+id/textView6" />
 
@@ -354,15 +351,13 @@
                     android:id="@+id/imageView8"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/mmusicconcerts"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                     app:layout_constraintEnd_toEndOf="@+id/imageView4"
-                    app:layout_constraintHorizontal_bias="0.0"
+
                     app:layout_constraintStart_toStartOf="@+id/imageView4"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -379,8 +374,8 @@
                 <CheckBox
                     android:id="@+id/radioButton8"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
@@ -394,16 +389,13 @@
                     android:id="@+id/imageView9"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/winetasting"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                     app:layout_constraintEnd_toEndOf="@+id/imageView5"
-                    app:layout_constraintHorizontal_bias="1.0"
+
                     app:layout_constraintStart_toStartOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -420,8 +412,8 @@
                 <CheckBox
                     android:id="@+id/radioButton9"
                     style="@style/CustomCheckbox02"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
