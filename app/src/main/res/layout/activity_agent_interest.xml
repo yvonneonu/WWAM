@@ -28,7 +28,7 @@
             android:gravity="center"
             android:text="Select your Interest"
 
-             />
+            />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -53,7 +53,7 @@
                 <ImageView
                     android:id="@+id/imageView10"
                     android:layout_width="match_parent"
-                    android:layout_height="480dp"
+                    android:layout_height="0dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/profileheadbg"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -127,6 +127,7 @@
                     android:scaleType="center"
                     android:src="@drawable/travel"
                     app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                    app:layout_constraintHorizontal_bias="0.773"
                     app:layout_constraintStart_toEndOf="@+id/imageView0"
                     app:layout_constraintTop_toTopOf="@+id/imageView10" />
 
@@ -251,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="Coffee \nConversation"
+                    android:text="Coffee Conversation"
                     android:textColor="@color/white"
                     android:textSize="10dp"
                     app:layout_constraintStart_toStartOf="@+id/imageView4"
@@ -316,12 +317,10 @@
                     android:layout_marginTop="13dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/mmoviesvideos"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                     app:layout_constraintEnd_toEndOf="@+id/imageView3"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -357,12 +356,10 @@
                     android:layout_marginTop="13dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/mmusicconcerts"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                     app:layout_constraintEnd_toEndOf="@+id/imageView4"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/imageView4"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -398,12 +395,10 @@
                     android:layout_marginTop="10dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/winetasting"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                     app:layout_constraintEnd_toEndOf="@+id/imageView5"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -458,6 +453,53 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/button4" />
 
+                <ImageView
+                    android:id="@+id/imageView72"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="13dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/winetasting"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toStartOf="@+id/imageView6"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+                <TextView
+                    android:id="@+id/textView174"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Entertainment"
+                    android:textColor="@color/white"
+                    android:textSize="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/imageView72"
+                    app:layout_constraintTop_toTopOf="@+id/imageView72" />
+
+
+                <CheckBox
+                    style="@style/CustomCheckbox02"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:buttonTint="@color/yellow"
+                    android:onClick="onCheckboxClicked"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView72"
+                    app:layout_constraintStart_toStartOf="@+id/imageView72" />
+
+                <ImageView
+
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="13dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/mmusicconcerts"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                    app:layout_constraintStart_toStartOf="@+id/imageView8"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
