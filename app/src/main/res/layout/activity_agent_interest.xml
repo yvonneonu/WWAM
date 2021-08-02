@@ -744,14 +744,16 @@
 
                 <CheckBox
                     style="@style/CustomCheckbox02"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:buttonTint="@color/yellow"
                     android:onClick="onCheckboxClicked"
                     android:scaleX="1"
-                    android:scaleY="1"/>
+                    android:scaleY="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView80"
+                    app:layout_constraintStart_toStartOf="@+id/imageView80" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
