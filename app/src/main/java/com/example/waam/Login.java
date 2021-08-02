@@ -35,7 +35,7 @@ public class Login extends BaseActivity implements  SinchService.StartFailedList
 
 
 
-    final String url_Login = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/";
+    final String url_Login = "http://ec2-52-36-253-117.us-west-2.compute.amazonaws.com";
 
 
     @Override

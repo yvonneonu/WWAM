@@ -30,7 +30,7 @@ public class FetchSpinnerValues {
 
     public void fetchEducation(EducationListener educationListener, String token) {
         //http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/education
-        String baseUrl = "http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/";
+        String baseUrl = "http://ec2-52-36-253-117.us-west-2.compute.amazonaws.com/api/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
