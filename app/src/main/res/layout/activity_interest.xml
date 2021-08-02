@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="490dp"
     tools:context=".Interest">
 
     <androidx.appcompat.widget.Toolbar
@@ -19,16 +19,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="go"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
         <TextView
             android:layout_width="match_parent"
-            android:textSize="18sp"
-            android:textColor="@color/black"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Select your Interest"
+            android:textColor="@color/black"
+            android:textSize="18sp"
 
-             />
+            />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -54,10 +55,9 @@
                     android:id="@+id/imageView10"
                     android:layout_width="match_parent"
                     android:layout_height="490dp"
-                    android:scaleType="fitXY"
+                    android:scaleType="center"
                     android:src="@drawable/profileheadbg"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -316,8 +316,9 @@
                     android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/mmoviesvideos"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
 
+                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
                     app:layout_constraintStart_toStartOf="@+id/imageView3"
                     app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -354,8 +355,9 @@
                     android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/mmusicconcerts"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView4"
 
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView4"
                     app:layout_constraintStart_toStartOf="@+id/imageView4"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
@@ -392,8 +394,9 @@
                     android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/winetasting"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
 
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
                     app:layout_constraintStart_toStartOf="@+id/imageView5"
                     app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
