@@ -22,14 +22,14 @@ public class Unfriend extends AppCompatActivity {
         textView27.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "This user is no longer a friend!",
+                Toast.makeText(Unfriend.this, "This user is no longer a friend!",
                  Toast.LENGTH_LONG).show();
             }
         });
-        textView28.setOnClickListener(new View.OnClickListener() {
+        textView23.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "This user is no longer a friend!",
+                Toast.makeText(Unfriend.this, "This user has been blocked!",
                         Toast.LENGTH_LONG).show();
             }
         });

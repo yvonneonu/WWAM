@@ -85,6 +85,7 @@ public class NotificationNotAllowedFragment extends Fragment {
               Intent intent = new Intent(getActivity(), NotificationListener.class);
 
 
+              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Log.d("because i no get money", ""+getContext().getPackageName());
                 getActivity().startService(intent.putExtras(bundle));
                 //getActivity().startService(new Intent(getActivity(), NotificationListener.class));
