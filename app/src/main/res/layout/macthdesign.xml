@@ -47,11 +47,10 @@
                 android:id="@+id/imageView37"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="3dp"
                 android:src="@drawable/ic_baseline_room_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView52"
                 app:layout_constraintTop_toBottomOf="@+id/textView52"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -86,7 +85,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.424" />
+            />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

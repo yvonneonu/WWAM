@@ -15,7 +15,16 @@ public class NotificationListener extends NotificationListenerService {
     @Override
     public void onCreate() {
         super.onCreate();
-        startActivity(new Intent(Notification_Settings));
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        Intent intent = new Intent(Notification_Settings);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        //.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //startActivity(new Intent(Notification_Settings));
+
+        //Intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
     }
 
     @Override
@@ -28,6 +37,7 @@ public class NotificationListener extends NotificationListenerService {
 
     @Override
     public IBinder onBind(Intent i) {
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return super.onBind(i);
     }
 }

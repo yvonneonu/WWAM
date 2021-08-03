@@ -54,7 +54,7 @@
 
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        android:background="@color/blue"
+        android:background="@color/bpBlue"
         app:menu="@menu/navigationdraw">
 
         <androidx.constraintlayout.widget.ConstraintLayout

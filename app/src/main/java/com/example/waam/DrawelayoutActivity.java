@@ -65,7 +65,7 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
 
         //mAuth = FirebaseAuth.getInstance();
 
-        navigationView.setBackgroundColor(getResources().getColor(R.color.blue));
+        //navigationView.setBackgroundColor(getResources().getColor(R.color.blue));
 
         navigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
 
