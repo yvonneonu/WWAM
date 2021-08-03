@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/blue"
+    android:background="@color/bpBlue"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -64,6 +64,17 @@
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/textView96" />
 
+    <ImageView
+        android:id="@+id/imageView76"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/icon_view_active"
+        app:layout_constraintEnd_toStartOf="@+id/textView95"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView97" />
+
     <TextView
         android:id="@+id/textView95"
         android:layout_width="0dp"
@@ -73,6 +84,6 @@
         android:layout_marginEnd="40dp"
         android:text="View Profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/imageView76"
         app:layout_constraintTop_toBottomOf="@+id/textView97" />
 </androidx.constraintlayout.widget.ConstraintLayout>

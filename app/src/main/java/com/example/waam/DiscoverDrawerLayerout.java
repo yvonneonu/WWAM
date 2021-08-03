@@ -64,7 +64,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         LinearLayout linearLayout = findViewById(R.id.logout);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         drawer1 = findViewById(R.id.drawer1_layout);
-        navigationView1.setBackgroundColor(getResources().getColor(R.color.blue));
+       // navigationView1.setBackgroundColor(getResources().getColor(R.color.blue));
         navigationView1.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer1, toolbar2, R.string.open, R.string.close);
         // toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
@@ -79,6 +79,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         TextView viewProfile = hView.findViewById(R.id.textView95);
 
         boolean post = getIntent().getBooleanExtra("post", false);
+        boolean comingtoBecoomingAgent = getIntent().getBooleanExtra("comingtoBecoomingAgent", false);
         String media = getIntent().getStringExtra("media");
 
         Log.d("Media", ""+media);
@@ -125,6 +126,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         else if (waamUser != null) {
             fragment = new ConnectedFriendsFragment(waamUser);
             bottomNavigationView.getMenu().getItem(-0).setChecked(false);
+        } else if (comingtoBecoomingAgent){
+            fragment = new BecomeAMemberFragment();
         } else {
             fragment = new DiscoverFragment();
             //fragment.add

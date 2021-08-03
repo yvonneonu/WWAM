@@ -79,11 +79,11 @@ public class DrawerEventFragment extends Fragment {
 
     private void eventDesign() {
         int[] display = {
-                R.drawable.topnav_profile,
-                R.drawable.top_scroll_profile_img,
-                R.drawable.profile_img_user,
-                R.drawable.group_img_2,
-                R.drawable.topnav_profile,
+                R.drawable.winetasting,
+                R.drawable.diningout,
+                R.drawable.winetasting,
+                R.drawable.diningout,
+                R.drawable.winetasting,
 
 
         };

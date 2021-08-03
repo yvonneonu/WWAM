@@ -1,15 +1,16 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 public class AgentInterest extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class AgentInterest extends AppCompatActivity {
 
     ImageView back;
     Button ContNext;
+    private boolean comingtoBecoomingAgent;
     private String Dinninout = "Dinning Out";
 
     private String Travel = "Travel";
@@ -45,7 +47,10 @@ public class AgentInterest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agent_interest);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         back = findViewById(R.id.back);
+
 
 
         zeroText = findViewById(R.id.textView20);
@@ -79,12 +84,9 @@ public class AgentInterest extends AppCompatActivity {
         ContNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new BecomeAMemberFragment();
-                // R.id.container - the id of a view that will hold your fragment; usually a FrameLayout
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, fragment)
-                        .commit();
-               // Intent intent = new Intent(AgentInterest.this, BecomeAMemberFragment.)
+              Intent intent = new Intent(AgentInterest.this, DiscoverDrawerLayerout.class);
+              intent.putExtra("comingtoBecoomingAgent", true);
+              startActivity(intent);
             }
         });
 
@@ -97,6 +99,9 @@ public class AgentInterest extends AppCompatActivity {
         });
     }
 
+    //public AgentInterest(boolean comingtoBecoomingAgent){
+     //   this.comingtoBecoomingAgent = comingtoBecoomingAgent;
+    //}
 
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
