@@ -16,9 +16,9 @@
 
 
         <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="go"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
         <TextView
             android:layout_width="match_parent"
@@ -48,14 +48,16 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/imageView10"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/profileheadbg"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -424,32 +426,6 @@
                     app:layout_constraintStart_toStartOf="@+id/textView9" />
 
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:backgroundTint="@color/blue"
-                    android:text="SAVE AND CONTINUE"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-                <TextView
-                    android:id="@+id/swipe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:backgroundTint="@color/white"
-                    android:text="Skip for now >>"
-                    android:textAllCaps="false"
-                    android:textColor="@color/offwhite"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button4" />
-
                 <ImageView
                     android:id="@+id/imageView72"
                     android:layout_width="100dp"
@@ -475,7 +451,7 @@
 
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/checkBox10"
                     style="@style/CustomCheckbox02"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -657,7 +633,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView74" />
 
                 <TextView
-
+                    android:id="@+id/texte"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -707,6 +683,7 @@
                     app:layout_constraintTop_toTopOf="@+id/imageView79" />
 
                 <CheckBox
+                    android:id="@+id/checkBox8"
                     style="@style/CustomCheckbox02"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -732,6 +709,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView77" />
 
                 <TextView
+                    android:id="@+id/secondtolast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -743,6 +721,7 @@
                     app:layout_constraintTop_toTopOf="@+id/imageView80" />
 
                 <CheckBox
+                    android:id="@+id/checkBox7"
                     style="@style/CustomCheckbox02"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -754,6 +733,84 @@
                     android:scaleY="1"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView80"
                     app:layout_constraintStart_toStartOf="@+id/imageView80" />
+
+                <ImageView
+
+                    android:id="@+id/imageView54"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/mmusicconcerts"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView78"
+                    app:layout_constraintStart_toStartOf="@+id/imageView78"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView78" />
+
+                <TextView
+
+                    android:id="@+id/lastText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Science"
+                    android:textColor="@color/white"
+                    android:textSize="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/imageView54"
+                    app:layout_constraintTop_toTopOf="@+id/imageView54" />
+
+                <CheckBox
+                    android:id="@+id/lastOne"
+                    style="@style/CustomCheckbox02"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:buttonTint="@color/yellow"
+                    android:onClick="onCheckboxClicked"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView54"
+                    app:layout_constraintStart_toStartOf="@+id/imageView54" />
+
+
+                <TextView
+                    android:id="@+id/textView180"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Other Interest:"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/textView179"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView79" />
+
+                <Button
+                    android:id="@+id/button20"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/white"
+                    android:paddingRight="300dp"
+                    android:text="25"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView54"
+                    app:layout_constraintStart_toStartOf="@+id/textView180"
+                    app:layout_constraintTop_toBottomOf="@+id/textView180" />
+
+                <Button
+                    android:id="@+id/ContNext"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/yellow"
+                    android:text="Continue"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="@+id/button20"
+                    app:layout_constraintStart_toStartOf="@+id/button20"
+                    app:layout_constraintTop_toBottomOf="@+id/button20" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
