@@ -1,6 +1,5 @@
 package com.example.waam;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,17 +12,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.sinch.android.rtc.SinchError;
-import com.sinch.android.rtc.calling.Call;
 
 import java.util.List;
 
-public class ChatMessage extends BaseActivity implements SinchService.StartFailedListener {
+//import com.sinch.android.rtc.SinchError;
+//import com.sinch.android.rtc.calling.Call;
+
+public class ChatMessage extends AppCompatActivity{
+        //BaseActivity implements SinchService.StartFailedListener {
     public static final String NEW_FRIENDS = "com.example.waam.WaamUserFromChatList";
     public static final String FRIENDS = "com.example.waam.WaamUserFromFriends";
     public static final String INTENT_EXTRA_IS_PEER_MODE = "videoChat";
@@ -338,15 +340,7 @@ public class ChatMessage extends BaseActivity implements SinchService.StartFaile
             //getUid();
 
 
-            Call call = getSinchServiceInterface().callUserVideo(receiverId);
-            String callId = call.getCallId();
 
-            Log.d("chek", callId);
-
-            Intent mainActivity = new Intent(ChatMessage.this, CallScreenActivity.class);
-            mainActivity.putExtra(SinchService.CALL_ID, callId);
-            startActivity(mainActivity);
-            Log.d("chek", ""+SinchService.CALL_ID);
         }
 
 
@@ -397,17 +391,6 @@ public class ChatMessage extends BaseActivity implements SinchService.StartFaile
         finish();
     }
 
-    @Override
-    public void onStartFailed(SinchError error) {
-        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
-
-    }
-
-    @Override
-    public void onStarted() {
-
-      //  openPlaceCallActivity();
-    }
 
     private void openPlaceCallActivity() {
 

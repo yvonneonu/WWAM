@@ -21,11 +21,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.sinch.android.rtc.SinchError;
+//import com.sinch.android.rtc.SinchError;
 
-public class SignUpSecond extends BaseActivity implements  SinchService.StartFailedListener {
+public class SignUpSecond extends AppCompatActivity{
+        //BaseActivity implements  SinchService.StartFailedListener {
 
     private GeneralFactory generalFactory;
     private CardView progressBar;
@@ -166,15 +168,7 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
             waamUser.setGender(gender);
             waamUser.setSeeking(interest);
             waamUser.setRelationship(relationship);
-            if (!Email.equals(getSinchServiceInterface().getUserName())) {
-                getSinchServiceInterface().stopClient();
 
-            }
-            if (!getSinchServiceInterface().isStarted()){
-                getSinchServiceInterface().startClient(Email);
-                Log.d("chek", Email);
-
-            }
 
             generalFactory.requestUser(waamUser,progressBar);
             //requestUser(waamUser);
@@ -265,24 +259,7 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
         startActivity(intent);
     }
 
-    @Override
-    public void onStartFailed(SinchError error) {
-        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
-       // if (mSpinner != null) {
-         //   mSpinner.dismiss();
-        //}
-    }
 
-    @Override
-    public void onStarted() {
-
-    }
-    @Override
-    protected void onServiceConnected() {
-        imageView.setEnabled(true);
-        getSinchServiceInterface().setStartListener(this);
-
-    }
 
    /* @Override
     protected void onPause() {

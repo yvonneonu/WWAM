@@ -32,6 +32,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-connectycube-sdk.pro',
+                    'proguard-gson.pro',
+                    'proguard-rules.pro',
+                    'proguard-matisse.pro',
+                    'proguard-glide.pro'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -45,12 +54,19 @@ repositories {
     }
 }
 
+//dependencies {
+   // compile(name:'sinch-android-rtc', version:'+', ext:'aar')
+//}
 dependencies {
-    compile(name:'sinch-android-rtc', version:'+', ext:'aar')
+    implementation "com.connectycube:connectycube-android-sdk-chat:1.9.2"
+    implementation "com.connectycube:connectycube-android-sdk-videochat:1.9.2"
+    implementation "com.connectycube:connectycube-android-sdk-storage:1.9.2"
+    implementation "com.connectycube:connectycube-android-sdk-pushnotifications:1.9.2"
 }
 
 dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
 
 
     // implementation project(':LayoutManagerGroup')
@@ -111,9 +127,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
 
     //Agora RTC SDK for video call
-    implementation(name:'sinch-android-rtc', version:'+', ext:'aar')
+    //implementation(name:'sinch-android-rtc', version:'+', ext:'aar')
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     def room_version = "2.3.0"
 

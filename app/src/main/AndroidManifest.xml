@@ -48,7 +48,6 @@
         <activity android:name=".textResize" />
         <activity android:name=".ShareTot" />
         <activity android:name=".NotificationActivity" />
-        <activity android:name=".CallScreenActivity" />
         <activity android:name=".VideoCallActivity" />
         <activity android:name=".SignUpSecond" />
         <activity android:name=".CallingActivity" />
@@ -56,10 +55,8 @@
             android:name=".AllUsersActivity"
             android:parentActivityName=".DrawelayoutActivity" />
 
-        <service android:name=".SinchService" />
         <service android:name=".NotificationListener" />
 
-        <activity android:name=".IncomingCallScreenActivity" />
         <activity android:name=".Unfriend" />
         <activity android:name=".DailyMatch" />
         <activity android:name=".AgentProfile" />

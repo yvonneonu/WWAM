@@ -1,49 +1,65 @@
 package com.example.waam;
 
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.IBinder;
+import android.view.View;
+import android.widget.ProgressBar;
 
-public class BaseActivity extends Activity implements ServiceConnection {
+import androidx.appcompat.app.AppCompatActivity;
 
-    private SinchService.SinchServiceInterface mSinchServiceInterface;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getApplicationContext().bindService(new Intent(this, SinchService.class), this,
-                BIND_AUTO_CREATE);
+import java.util.HashMap;
+
+import kotlin.jvm.internal.Intrinsics;
+
+public class BaseActivity extends AppCompatActivity {
+    private HashMap _$_findViewCache;
+
+    public final void hideProgress(@NotNull ProgressBar progressbar) {
+        Intrinsics.checkParameterIsNotNull(progressbar, "progressbar");
+        this.getWindow().clearFlags(16);
+        progressbar.setVisibility(View.INVISIBLE);
     }
 
-    @Override
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        if (SinchService.class.getName().equals(componentName.getClassName())) {
-            mSinchServiceInterface = (SinchService.SinchServiceInterface) iBinder;
-            onServiceConnected();
+    public final void showProgress(@NotNull ProgressBar progressbar) {
+        Intrinsics.checkParameterIsNotNull(progressbar, "progressbar");
+        this.getWindow().setFlags(16, 16);
+        progressbar.setVisibility(View.VISIBLE);
+    }
+
+    public final void showProgressValueIfNotNull(@NotNull ProgressBar progressbar, @Nullable Integer progress) {
+        Intrinsics.checkParameterIsNotNull(progressbar, "progressbar");
+        this.showProgress(progressbar);
+        if (progress != null) {
+            if (progressbar.isIndeterminate()) {
+                progressbar.setIndeterminate(false);
+            }
+
+            progressbar.setProgress(progress);
+        } else if (!progressbar.isIndeterminate()) {
+            progressbar.setIndeterminate(true);
         }
+
     }
 
-    @Override
-    public void onServiceDisconnected(ComponentName componentName) {
-        if (SinchService.class.getName().equals(componentName.getClassName())) {
-            mSinchServiceInterface = null;
-            onServiceDisconnected();
+    public View _$_findCachedViewById(int var1) {
+        if (this._$_findViewCache == null) {
+            this._$_findViewCache = new HashMap();
         }
+
+        View var2 = (View)this._$_findViewCache.get(var1);
+        if (var2 == null) {
+            var2 = this.findViewById(var1);
+            this._$_findViewCache.put(var1, var2);
+        }
+
+        return var2;
     }
 
-    protected void onServiceConnected() {
-        // for subclasses
-    }
+    public void _$_clearFindViewByIdCache() {
+        if (this._$_findViewCache != null) {
+            this._$_findViewCache.clear();
+        }
 
-    protected void onServiceDisconnected() {
-        // for subclasses
     }
-
-    protected SinchService.SinchServiceInterface getSinchServiceInterface() {
-        return mSinchServiceInterface;
-    }
-
 }
