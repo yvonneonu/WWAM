@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class ViewProfile extends Fragment implements View.OnClickListener {
     private TextView textView;
-    private ImageView imageView, aboutsefl, interes;
+    private ImageView imageView, aboutsefl, interes, frien;
     private BottomNavigationView bottomNavigationView;
 
 
@@ -138,6 +138,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         test = view.findViewById(R.id.text);
         aboutsefl = view.findViewById(R.id.aboutsef);
         interes = view.findViewById(R.id.interest);
+        frien = view.findViewById(R.id.friends);
 
         Fragment fragment;
         //If post is supplied you have to show dis fragment
@@ -182,6 +183,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         test.setOnClickListener(this);
         aboutsefl.setOnClickListener(this);
         interes.setOnClickListener(this);
+        frien.setOnClickListener(this);
         setHasOptionsMenu(true);
         return view;
 
@@ -194,6 +196,9 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         final int fram = R.id.fram1;
         final int aboutsef = R.id.aboutsef;
         final int inter = R.id.interest;
+        final int friend = R.id.friends;
+
+
 
         switch (v.getId()){
             case tet:
@@ -201,6 +206,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                     test.setColorFilter(Color.BLUE);
                     aboutsefl.setColorFilter(Color.TRANSPARENT);
                     interes.setColorFilter(Color.TRANSPARENT);
+                    frien.setColorFilter(Color.TRANSPARENT);
 
                     if (waamUser != null) {
                         Fragment fragment = new TextdisplayFragment();
@@ -241,6 +247,8 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                     test.setColorFilter(Color.TRANSPARENT);
                     aboutsefl.setColorFilter(Color.BLUE);
                     interes.setColorFilter(Color.TRANSPARENT);
+                    frien.setColorFilter(Color.TRANSPARENT);
+
 
 
                     if (waamUser != null) {
@@ -280,6 +288,8 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                     test.setColorFilter(Color.TRANSPARENT);
                     aboutsefl.setColorFilter(Color.TRANSPARENT);
                     interes.setColorFilter(Color.BLUE);
+                    frien.setColorFilter(Color.TRANSPARENT);
+
 
                     if (waamUser != null) {
                         Fragment fragment = new LookingDetails();
@@ -297,6 +307,46 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                     public void loadSpecUse(WaamUser user) {
 
                                         Fragment fragment = new LookingDetails();
+                                        //constraintLayout.setVisibility(View.GONE);
+
+                                        getChildFragmentManager().beginTransaction()
+                                                .replace(R.id.containing, fragment)
+                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                                .addToBackStack(null)
+
+                                                .commit();
+
+
+                                    }
+
+                                });
+                    }
+                }
+                break;
+
+            case friend:
+                if (v.getId() == friend){
+                    test.setColorFilter(Color.TRANSPARENT);
+                    aboutsefl.setColorFilter(Color.TRANSPARENT);
+                    interes.setColorFilter(Color.TRANSPARENT);
+                    frien.setColorFilter(Color.BLUE);
+
+
+                    if (waamUser != null){
+                        Fragment fragment = new ViewAddFriend();
+                        //  constraintLayout.setVisibility(View.INVISIBLE);
+                        getChildFragmentManager().beginTransaction()
+                                .replace(fram, fragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commit();
+                    }else {
+                        String userId = FirebaseAuth.getInstance().getUid();
+                        GeneralFactory.getGeneralFactory(getActivity())
+                                .loadSpecUser(userId, new GeneralFactory.SpecificUser() {
+                                    @Override
+                                    public void loadSpecUse(WaamUser user) {
+
+                                        Fragment fragment = new ViewAddFriend();
                                         //constraintLayout.setVisibility(View.GONE);
 
                                         getChildFragmentManager().beginTransaction()
