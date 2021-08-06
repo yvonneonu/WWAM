@@ -24,10 +24,28 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.connectycube.auth.session.ConnectycubeSettings;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.LogLevel;
+import com.connectycube.core.exception.ResponseException;
+import com.connectycube.core.helper.StringifyArrayList;
+import com.connectycube.users.ConnectycubeUsers;
+import com.connectycube.users.model.ConnectycubeUser;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.text.StringsKt;
+
 //import com.sinch.android.rtc.SinchError;
 
 public class SignUpSecond extends AppCompatActivity{
         //BaseActivity implements  SinchService.StartFailedListener {
+        private static String applicationID = "4663";
+    private static String authKey = "RWV8dBeCsCh6g2a";
+    private static String authSecret = "yhuExsebKPu8F8S";
+    private static String accountKey = "BqZHeqx5VVn9myVe4FY1";
 
     private GeneralFactory generalFactory;
     private CardView progressBar;
@@ -42,12 +60,18 @@ public class SignUpSecond extends AppCompatActivity{
     ImageView imageView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_second);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
+        ConnectycubeSettings.getInstance().init(getApplicationContext(), applicationID, authKey, authSecret);
+        ConnectycubeSettings.getInstance().setAccountKey(accountKey);
+
+        ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_PHONE_STATE},100);
@@ -95,6 +119,37 @@ public class SignUpSecond extends AppCompatActivity{
         });
 
     }
+
+
+
+
+    private boolean isUsersEmpty(ArrayList users) {
+        Iterable $this$forEach$iv = (Iterable)users;
+        boolean $i$f$forEach = false;
+        Iterator var4 = $this$forEach$iv.iterator();
+
+        String var10000;
+        do {
+            if (!var4.hasNext()) {
+                return false;
+            }
+
+            Object element$iv = var4.next();
+            ConnectycubeUser user = (ConnectycubeUser)element$iv;
+            boolean var7 = false;
+            var10000 = user.getLogin();
+            Intrinsics.checkExpressionValueIsNotNull(var10000, "user.login");
+            if (StringsKt.isBlank((CharSequence)var10000)) {
+                break;
+            }
+
+            var10000 = user.getPassword();
+            Intrinsics.checkExpressionValueIsNotNull(var10000, "user.password");
+        } while(!StringsKt.isBlank((CharSequence)var10000));
+
+        return true;
+    }
+
 
 
     private boolean isNetworkAvailableAndConnected() {
@@ -168,6 +223,39 @@ public class SignUpSecond extends AppCompatActivity{
             waamUser.setGender(gender);
             waamUser.setSeeking(interest);
             waamUser.setRelationship(relationship);
+
+
+
+
+            final ConnectycubeUser user = new ConnectycubeUser(Email, Passwor);
+            user.setLogin(Email);
+            user.setPassword(Passwor);
+            user.setEmail(Email);
+            user.setFullName(fullname);
+            user.setPhone("47802323143");
+            user.setWebsite("https://dozensofdreams.com");
+            StringifyArrayList<String> tags = new StringifyArrayList<String>();
+            tags.add("iphone");
+            tags.add("apple");
+            user.setTags(tags);
+
+            Log.d("timemail", "usersignup"+user.getEmail());
+
+
+            ConnectycubeUsers.signUp(user).performAsync(new EntityCallback<ConnectycubeUser>() {
+                @Override
+                public void onSuccess(ConnectycubeUser user, Bundle args) {
+
+                    Log.d("time", ""+user.getId());
+                }
+
+                @Override
+                public void onError(ResponseException error) {
+                    Log.d("time", ""+error);
+
+
+                }
+            });
 
 
             generalFactory.requestUser(waamUser,progressBar);

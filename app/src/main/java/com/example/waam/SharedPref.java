@@ -12,6 +12,7 @@ public class SharedPref {
     public static final String PASSWORD = "password";
     public static final String UID = "uid";
     public static final String VALUE = "50";
+    public static final String CONNECTID = "CID";
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
 
@@ -25,6 +26,14 @@ public class SharedPref {
         return pref;
     }
 
+    public int getStoredConnectid(){
+        return sharedPref.getInt(CONNECTID, 0);
+    }
+    public void setStoredConnectId(String key, int Connectid){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(key, Connectid);
+        editor.apply();
+    }
     public String getStoredToken() {
         return sharedPref.getString(TOKEN, null);
     }
