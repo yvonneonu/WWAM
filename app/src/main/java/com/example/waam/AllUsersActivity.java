@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -42,6 +43,13 @@ public class AllUsersActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+
+
+
+
+
         generalFactoryInstance.fetchAllUser(new GeneralFactory.FetchFriends() {
             @Override
             public void friendsFetcher(List<WaamUser> friends) {
@@ -71,9 +79,9 @@ public class AllUsersActivity extends AppCompatActivity {
 
                                 Toast.makeText(AllUsersActivity.this, "Sent", Toast.LENGTH_LONG).show();
 
-                                /*Intent intent = new Intent(AllUsersActivity.this, DrawelayoutActivity.class);
+                                Intent intent = new Intent(AllUsersActivity.this, DrawelayoutActivity.class);
                                 intent.putExtra(ProfileFragment.PUT_PROFILE,user);
-                                startActivity(intent);*/
+                                startActivity(intent);
                             }
 
                         }

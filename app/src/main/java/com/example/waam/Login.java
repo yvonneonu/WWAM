@@ -115,6 +115,8 @@ public class Login extends BaseActivity{
                     public void onSuccess(ConnectycubeUser user, Bundle args) {
                         Log.d("suscesssignin", ""+user.getFullName());
 
+                        Log.d("suscesssignin", ""+user.getId());
+
                     }
 
                     @Override

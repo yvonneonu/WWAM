@@ -37,7 +37,7 @@ public class SlideFragment1 extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_slide1, container, false);
 
         GeneralFactory.getGeneralFactory(getActivity())
-                .fetchAllUser(friends -> {
+                ,.fetchAllUser(friends -> {
                     mList = friends;
                     initView(rootView);
                     initListener();
