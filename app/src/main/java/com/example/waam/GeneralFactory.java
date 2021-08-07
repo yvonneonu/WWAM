@@ -1,7 +1,6 @@
 package com.example.waam;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,11 +40,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -226,6 +219,7 @@ public class GeneralFactory {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         loginUser(loginRequest);
+
                     } else {
                         Log.d("Login", "Login was succesfull");
                     }
@@ -717,6 +711,14 @@ public class GeneralFactory {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()) {
+
+
+
+                    Log.d("accesstoken", mAuth
+                            .getInstance()
+                            .getCurrentUser()
+                            .getIdToken(false)
+                            .getResult().getToken());
 
 
                     assert response.body() != null;
