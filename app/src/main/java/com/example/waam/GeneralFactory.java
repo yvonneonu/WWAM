@@ -18,6 +18,7 @@ import androidx.cardview.widget.CardView;
 
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.exception.ResponseException;
+import com.connectycube.core.request.PagedRequestBuilder;
 import com.connectycube.users.ConnectycubeUsers;
 import com.connectycube.users.model.ConnectycubeUser;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,7 +35,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -184,6 +184,8 @@ public class GeneralFactory {
                         Toast.makeText(context, "You have signed up", Toast.LENGTH_LONG).show();
                         //This is where we set the values we want our users to have
                         String userId = mAuth.getCurrentUser().getUid();
+
+
                         DatabaseReference mDatebaseReference = getInstance().getReference(WAAMBASE);
                         mDatebaseReference.child(userId)
                                 .setValue(waamUser)
@@ -802,8 +804,36 @@ public class GeneralFactory {
     }
 
     public void fetchAllUser(FetchFriends fetchAllWaamUsers) {
+
+
+
         allWaamUsers = new ArrayList<>();
-        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
+
+        PagedRequestBuilder pagedRequestBuilder = new PagedRequestBuilder();
+        pagedRequestBuilder.setPage(1);
+        pagedRequestBuilder.setPerPage(50);
+
+        List<Integer> usersIds = new ArrayList<>();
+        usersIds.add(22);
+        usersIds.add(23);
+
+        Bundle params = new Bundle();
+
+        ConnectycubeUsers.getUsersByIDs(usersIds, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+            @Override
+            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle args) {
+
+                Log.d("grap", ""+users);
+            }
+
+            @Override
+            public void onError(ResponseException error) {
+                Log.d("non", ""+error);
+
+            }
+        });
+
+       /* DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
         mDatebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -811,20 +841,42 @@ public class GeneralFactory {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     WaamUser user = dataSnapshot.getValue(WaamUser.class);
                     if (!user.getUid().equals(mAuth.getUid())) {
+
+
                         allWaamUsers.add(user);
+                        ConnectycubeUsers.getUserByLogin(user.getFullname()).performAsync(new EntityCallback<ConnectycubeUser>() {
+                            @Override
+                            public void onSuccess(ConnectycubeUser user, Bundle args) {
+                                Log.d("usersloged", ""+user.getId());
+
+                            }
+
+                            @Override
+                            public void onError(ResponseException error) {
+                                Log.d("usersloged", ""+error);
+
+
+                            }
+                        });
+
                         Gson gson = new Gson();
                         Log.d("WaamUser", gson.toJson(gson));
+
+
+
                     }
                 }
                 fetchAllWaamUsers.friendsFetcher(allWaamUsers);
                 Log.d("AllUsers", "" + allWaamUsers.size());
+
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
 
     }

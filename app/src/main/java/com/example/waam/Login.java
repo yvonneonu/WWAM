@@ -35,7 +35,7 @@ public class Login extends BaseActivity{
     private String loginToken;
     private EditText editPass;
     private EditText editEmail;
-    private String Email;
+    private String Email, token;
     private String Password;
     private ProgressDialog mSpinner;
 
@@ -54,6 +54,8 @@ public class Login extends BaseActivity{
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+        token = SharedPref.getInstance(this).getStoredToken();
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //I stopped here thank you
@@ -105,8 +107,27 @@ public class Login extends BaseActivity{
 
 
 
+                String projectId = "...";
+                String accessToken = "...";
 
-                final ConnectycubeUser user = new ConnectycubeUser();
+                ConnectycubeUsers.signInUsingFirebase(Email, token).performAsync(new EntityCallback<ConnectycubeUser>() {
+                    @Override
+                    public void onSuccess(ConnectycubeUser user, Bundle args) {
+
+                        Log.d("suscesssignin", ""+user.getFullName());
+
+                    }
+
+                    @Override
+                    public void onError(ResponseException error) {
+                        Log.d("suscesssignin", ""+error);
+
+
+                    }
+                });
+
+
+               /* final ConnectycubeUser user = new ConnectycubeUser();
                 user.setLogin(Email);
                 user.setPassword(Password);
 
@@ -123,7 +144,7 @@ public class Login extends BaseActivity{
                     public void onError(ResponseException error) {
 
                     }
-                });
+                });*/
 
                 GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(), loginRequest.getPassword(), loginRequest);
                 //GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);

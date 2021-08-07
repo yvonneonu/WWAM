@@ -1,7 +1,7 @@
 package com.example.waam;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -14,6 +14,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
+import com.connectycube.users.ConnectycubeUsers;
+import com.connectycube.users.model.ConnectycubeUser;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -79,9 +83,24 @@ public class AllUsersActivity extends AppCompatActivity {
 
                                 Toast.makeText(AllUsersActivity.this, "Sent", Toast.LENGTH_LONG).show();
 
-                                Intent intent = new Intent(AllUsersActivity.this, DrawelayoutActivity.class);
+                                ConnectycubeUsers.getUserByLogin(branch).performAsync(new EntityCallback<ConnectycubeUser>() {
+                                    @Override
+                                    public void onSuccess(ConnectycubeUser user, Bundle args) {
+                                        Log.d("usersloged", ""+user.getId());
+
+                                    }
+
+                                    @Override
+                                    public void onError(ResponseException error) {
+                                        Log.d("usersloged", ""+error);
+
+
+                                    }
+                                });
+
+                               /* Intent intent = new Intent(AllUsersActivity.this, DrawelayoutActivity.class);
                                 intent.putExtra(ProfileFragment.PUT_PROFILE,user);
-                                startActivity(intent);
+                                startActivity(intent);*/
                             }
 
                         }

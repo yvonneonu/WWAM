@@ -78,9 +78,12 @@ public class FriendsFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
+
+
+        }
+
+       ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         setHasOptionsMenu(true);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
         String branchName = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
