@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,10 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.connectycube.core.EntityCallback;
-import com.connectycube.core.exception.ResponseException;
-import com.connectycube.users.ConnectycubeUsers;
-import com.connectycube.users.model.ConnectycubeUser;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -27,6 +24,7 @@ public class AllUsersActivity extends AppCompatActivity {
     private List<WaamUser> friendModelList;
     private GeneralFactory generalFactoryInstance;
     private ProgressBar bar;
+    private WaamUser waamUser;
     private TextView textView;
     public static final String FRIENDS = "friends";
 
@@ -81,22 +79,57 @@ public class AllUsersActivity extends AppCompatActivity {
                                         .replace(R.id.container_layout,fragment)
                                         .commit();*/
 
+
                                 Toast.makeText(AllUsersActivity.this, "Sent", Toast.LENGTH_LONG).show();
 
-                                ConnectycubeUsers.getUserByLogin(branch).performAsync(new EntityCallback<ConnectycubeUser>() {
+                                if (friendModelList != null){
+                                    String myId = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
+                                    generalFactoryInstance.loadFriends(myId, new GeneralFactory.FetchFriends() {
+                                        @Override
+                                        public void friendsFetcher(List<WaamUser> friends) {
+                                            Log.d("SizeOfFriend",""+friends.size());
+//                                            Log.d("IsFriend", ""+waamUser.getUid());
+                                            for(WaamUser user : friends){
+
+
+                                                Log.d("IAmInFor", ""+waamUser.getUid());
+                                                if(user.getUid().equals(waamUser.getUid())){
+                                                  //  Log.d("IAmTrue", ""+waamUser.getUid());
+                                                    Intent intent = new Intent(AllUsersActivity.this,ChatMessage.class);
+                                                    intent.putExtra(ChatMessage.FRIENDS,waamUser);
+                                                    startActivity(intent);
+                                                }else{
+                                                   // Log.d("IAmFalse", ""+waamUser.getUid());
+                                                    // button.setVisibility(View.VISIBLE);
+                                                    //linlayout.setVisibility(View.GONE);
+                                                }
+                                            }
+                                        }
+                                    });
+                                }else {
+                                    Log.d("yessoo", ""+friendModelList);
+                                }
+
+                              /*  String User = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                ConnectycubeUsers.getUserByEmail(User).performAsync(new EntityCallback<ConnectycubeUser>() {
+
+
                                     @Override
-                                    public void onSuccess(ConnectycubeUser user, Bundle args) {
-                                        Log.d("usersloged", ""+user.getId());
+                                    public void onSuccess(ConnectycubeUser user, Bundle bundle) {
+
+                                        Log.d("getthisuser", ""+user);
 
                                     }
 
                                     @Override
                                     public void onError(ResponseException error) {
-                                        Log.d("usersloged", ""+error);
+
+                                        Log.d("getthisuser", ""+error.getMessage());
 
 
                                     }
-                                });
+                                });*/
+
 
                                /* Intent intent = new Intent(AllUsersActivity.this, DrawelayoutActivity.class);
                                 intent.putExtra(ProfileFragment.PUT_PROFILE,user);
@@ -105,6 +138,9 @@ public class AllUsersActivity extends AppCompatActivity {
 
                         }
                     });
+
+
+
                 }else{
                     recyclerView.setVisibility(View.GONE);
                     bar.setVisibility(View.GONE);

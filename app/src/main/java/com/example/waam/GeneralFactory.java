@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -16,11 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
-import com.connectycube.core.EntityCallback;
-import com.connectycube.core.exception.ResponseException;
-import com.connectycube.core.request.PagedRequestBuilder;
-import com.connectycube.users.ConnectycubeUsers;
-import com.connectycube.users.model.ConnectycubeUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -225,6 +220,7 @@ public class GeneralFactory {
                 .addOnFailureListener(e -> Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+
                         loginUser(loginRequest);
                     } else {
                         Log.d("Login", "Login was succesfull");
@@ -352,7 +348,7 @@ public class GeneralFactory {
                     }
 
                     fetchFriends.friendCheck(allFriends);
-                    Log.d("Allfriends", "" + allFriends.size());
+                    Log.d("Allfriends1", "" + allFriends.size());
 
                 }
 
@@ -386,7 +382,7 @@ public class GeneralFactory {
                     }
 
                     fetchFriends.friendsFetcher(allFriends);
-                    Log.d("Allfriends", "" + allFriends.size());
+                    Log.d("Allfriends2", "" + allFriends.size());
 
                 }
 
@@ -719,6 +715,7 @@ public class GeneralFactory {
                 if (response.isSuccessful()) {
 
 
+
                     assert response.body() != null;
                     String loginToken = response.body().getToken();
                     SharedPref.getInstance(context).setStoredToken(SharedPref.TOKEN, loginToken);
@@ -809,31 +806,8 @@ public class GeneralFactory {
 
         allWaamUsers = new ArrayList<>();
 
-        PagedRequestBuilder pagedRequestBuilder = new PagedRequestBuilder();
-        pagedRequestBuilder.setPage(1);
-        pagedRequestBuilder.setPerPage(50);
 
-        List<Integer> usersIds = new ArrayList<>();
-        usersIds.add(22);
-        usersIds.add(23);
-
-        Bundle params = new Bundle();
-
-        ConnectycubeUsers.getUsersByIDs(usersIds, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
-            @Override
-            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle args) {
-
-                Log.d("grap", ""+users);
-            }
-
-            @Override
-            public void onError(ResponseException error) {
-                Log.d("non", ""+error);
-
-            }
-        });
-
-       /* DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
+       DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
         mDatebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -844,20 +818,6 @@ public class GeneralFactory {
 
 
                         allWaamUsers.add(user);
-                        ConnectycubeUsers.getUserByLogin(user.getFullname()).performAsync(new EntityCallback<ConnectycubeUser>() {
-                            @Override
-                            public void onSuccess(ConnectycubeUser user, Bundle args) {
-                                Log.d("usersloged", ""+user.getId());
-
-                            }
-
-                            @Override
-                            public void onError(ResponseException error) {
-                                Log.d("usersloged", ""+error);
-
-
-                            }
-                        });
 
                         Gson gson = new Gson();
                         Log.d("WaamUser", gson.toJson(gson));
@@ -870,13 +830,15 @@ public class GeneralFactory {
                 Log.d("AllUsers", "" + allWaamUsers.size());
 
 
+
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });*/
+        });
 
 
     }

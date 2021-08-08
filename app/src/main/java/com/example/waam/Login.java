@@ -56,7 +56,6 @@ public class Login extends BaseActivity{
         setContentView(R.layout.activity_login);
         token = SharedPref.getInstance(this).getStoredToken();
 
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //I stopped here thank you
        // this.makeLogin();
@@ -110,7 +109,7 @@ public class Login extends BaseActivity{
                 String projectId = "...";
                 String accessToken = "...";
 
-                ConnectycubeUsers.signInUsingFirebase(Email, token).performAsync(new EntityCallback<ConnectycubeUser>() {
+               /* ConnectycubeUsers.signInByEmail(Email, Password).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
                     public void onSuccess(ConnectycubeUser user, Bundle args) {
 
@@ -124,10 +123,10 @@ public class Login extends BaseActivity{
 
 
                     }
-                });
+                });*/
 
 
-               /* final ConnectycubeUser user = new ConnectycubeUser();
+               final ConnectycubeUser user = new ConnectycubeUser();
                 user.setLogin(Email);
                 user.setPassword(Password);
 
@@ -138,13 +137,19 @@ public class Login extends BaseActivity{
 
                         Log.d("suscesssignin", ""+user.getId());
 
+                        Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
+//                        Log.d("LoginToken", loginToken);
+                        intent.putExtra("toking", loginToken);
+                       startActivity(intent);
                     }
 
                     @Override
                     public void onError(ResponseException error) {
+                        Log.d("suscesssignin3", ""+user.getFullName());
+
 
                     }
-                });*/
+                });
 
                 GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(), loginRequest.getPassword(), loginRequest);
                 //GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
