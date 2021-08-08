@@ -17,6 +17,7 @@ import java.util.List;
 
 public class AddNewFriends extends AppCompatActivity {
     private SearchView input;
+
     private List<ConnectycubeUser> friendModelList;
     private FriendAdapt friendAdapt;
     private RecyclerView recyclerView;

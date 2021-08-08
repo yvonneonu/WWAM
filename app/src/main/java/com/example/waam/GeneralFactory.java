@@ -809,14 +809,10 @@ public class GeneralFactory {
 
 
 
-    public void fetchAllUser(FetchAllFriends fetchAllFriends) {
 
-
-
+    public void fetchAllUser(FetchFriends fetchAllWaamUsers) {
         allWaamUsers = new ArrayList<>();
-
-
-      DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
+        DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
         mDatebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -824,34 +820,22 @@ public class GeneralFactory {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     WaamUser user = dataSnapshot.getValue(WaamUser.class);
                     if (!user.getUid().equals(mAuth.getUid())) {
-
-
                         allWaamUsers.add(user);
-
                         Gson gson = new Gson();
                         Log.d("WaamUser", gson.toJson(gson));
-
-
-
                     }
                 }
                 fetchAllWaamUsers.friendsFetcher(allWaamUsers);
                 Log.d("AllUsers", "" + allWaamUsers.size());
-
-
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("fetsct", ""+error);
 
             }
         });
-
-
     }
+
 
     public void fetchAllUser1(FetchAllConnecty fetchAllConnecty) {
 
