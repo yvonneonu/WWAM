@@ -29,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class DiscoverDrawerLayerout extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer1;
@@ -91,21 +92,28 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                         .logOut(DiscoverDrawerLayerout.this);
             }
         });
-        String uid = FirebaseAuth.getInstance().getUid();
-        GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
-            @Override
-            public void loadSpecUse(WaamUser user) {
-                Glide.with(getApplicationContext())
-                        .asBitmap()
-                        .fitCenter()
-                        .circleCrop()
-                        .load(user.getImageUrl())
-                        .into(imageView);
+
+        final FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
+        if (mFirebaseUser != null) {
+
+            String uid = FirebaseAuth.getInstance().getUid();
+            GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
+                @Override
+                public void loadSpecUse(WaamUser user) {
+                    Glide.with(getApplicationContext())
+                            .asBitmap()
+                            .fitCenter()
+                            .circleCrop()
+                            .load(user.getImageUrl())
+                            .into(imageView);
 
 
-                nav_user.setText(user.getFullname());
-            }
-        });
+                    nav_user.setText(user.getFullname());
+                }
+            });
+        }
+
+
 
 
         WaamUser waamUser = (WaamUser) getIntent().getSerializableExtra("YvonneSleep");

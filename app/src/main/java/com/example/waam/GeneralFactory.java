@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
+import com.connectycube.core.request.PagedRequestBuilder;
+import com.connectycube.users.ConnectycubeUsers;
+import com.connectycube.users.model.ConnectycubeUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,7 +35,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -807,7 +812,40 @@ public class GeneralFactory {
         allWaamUsers = new ArrayList<>();
 
 
-       DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
+        PagedRequestBuilder pagedRequestBuilder = new PagedRequestBuilder();
+        pagedRequestBuilder.setPage(1);
+        pagedRequestBuilder.setPerPage(50);
+
+        Bundle params = new Bundle();
+
+        ArrayList<String> usersPhones = new ArrayList<>();
+//       String branch = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        usersPhones.add("drip@gmail.com");
+     //   usersPhones.add(fetchAllWaamUsers.friendsFetcher(allWaamUsers));
+
+
+
+        ConnectycubeUsers.getUsersByEmails(usersPhones, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+            @Override
+            public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle args) {
+                Log.d("AllUsers", "" +users.size());
+
+
+            }
+
+            @Override
+            public void onError(ResponseException error) {
+                Log.d("AllUsers", ""+error.getMessage());
+
+
+            }
+        });
+
+
+      // allWaamUsers.add()
+        //WaamUser user = FirebaseAuth.getInstance()
+      /* DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
         mDatebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -836,9 +874,10 @@ public class GeneralFactory {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("fetsct", ""+error);
 
             }
-        });
+        });*/
 
 
     }
