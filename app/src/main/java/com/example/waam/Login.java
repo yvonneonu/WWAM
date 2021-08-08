@@ -12,12 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.connectycube.auth.session.ConnectycubeSettings;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.users.ConnectycubeUsers;
 import com.connectycube.users.model.ConnectycubeUser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GetTokenResult;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -38,6 +44,7 @@ public class Login extends BaseActivity{
     private String Email, token;
     private String Password;
     private ProgressDialog mSpinner;
+    FirebaseAuth mAuth;
 
     private static String applicationID = "4663";
     private static String authKey = "RWV8dBeCsCh6g2a";
@@ -106,7 +113,65 @@ public class Login extends BaseActivity{
 
 
 
-                String projectId = "...";
+                Log.d("accesstoken", mAuth
+                        .getInstance()
+                        .getCurrentUser()
+                        .getIdToken(true)
+                        .getResult().getToken());
+
+                String projectId = "waam-96a1b";
+                    /*String accessToken = mAuth
+                            .getInstance()
+                            .getCurrentUser()
+                            .getIdToken(true);*/
+
+                String phon = mAuth.getInstance().getCurrentUser().getPhoneNumber();
+
+                Log.d("currentUserPhonenumbe", ""+phon);
+                mAuth.getInstance()
+                        .getCurrentUser()
+                        .getIdToken(true)
+                        .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<GetTokenResult> task) {
+
+                                if (task.isSuccessful()){
+                                    String idToken = task.getResult().getToken();
+
+                                    ConnectycubeUsers.signInUsingFirebase(projectId, idToken).performAsync(new EntityCallback<ConnectycubeUser>() {
+                                        @Override
+                                        public void onSuccess(ConnectycubeUser user, Bundle args) {
+
+
+                                          //  assert response.body() != null;
+                                          //  String loginToken = response.body().getToken();
+                                         //   SharedPref.getInstance(context).setStoredToken(SharedPref.TOKEN, loginToken);
+
+
+                                            Log.d("Connecticubeusers", user.getEmail());
+                                            //Log.d("show", loginToken);
+                                            Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
+                                         //   Log.d("LoginToken", loginToken);
+                                            intent.putExtra("toking", loginToken);
+                                            startActivity(intent);
+                                        }
+
+                                        @Override
+                                        public void onError(ResponseException error) {
+                                            Log.d("Connecticubeusers", error.getMessage());
+
+
+                                        }
+                                    });
+
+
+                                }else {
+                                    Log.d("Connecticubeusers", "there was an error");
+
+                                }
+                            }
+                        });
+                /*String projectId = "...";
                 String accessToken = "...";
 
                /* ConnectycubeUsers.signInByEmail(Email, Password).performAsync(new EntityCallback<ConnectycubeUser>() {
@@ -126,7 +191,7 @@ public class Login extends BaseActivity{
                 });*/
 
 
-               final ConnectycubeUser user = new ConnectycubeUser();
+              /* final ConnectycubeUser user = new ConnectycubeUser();
                 user.setLogin(Email);
                 user.setPassword(Password);
 
@@ -149,7 +214,7 @@ public class Login extends BaseActivity{
 
 
                     }
-                });
+                });*/
 
                 GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(), loginRequest.getPassword(), loginRequest);
                 //GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
