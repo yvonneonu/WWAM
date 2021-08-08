@@ -1,23 +1,16 @@
 package com.example.waam;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
+import com.connectycube.users.model.ConnectycubeUser;
 
 import java.util.List;
 
@@ -41,7 +34,8 @@ public class ChatMessage extends AppCompatActivity{
     private List<Chat> chats;
     private GeneralFactory generalFactoryInstance;
     private WaamUser contactlist;
-    private WaamUser userFriends;
+    //private WaamUser userFriends;
+    private ConnectycubeUser userFriends;
     private TextView textViewStatus;
     private ImageView videoButton;
     public static final int MAX_INPUT_NAME_LENGTH = 64;
@@ -100,9 +94,37 @@ public class ChatMessage extends AppCompatActivity{
         textViewStatus = findViewById(R.id.status);
         ImageView displayPic = findViewById(R.id.imagetool);
         videoButton = findViewById(R.id.Video);
-        videoButton.setOnClickListener(buttonClickListener);
-        contactlist =  (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
-        userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
+        //videoButton.setOnClickListener(buttonClickListener);
+        contactlist = (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
+        userFriends = (ConnectycubeUser) getIntent().getSerializableExtra(FRIENDS);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      /* userFriends = (WaamUser) getIntent().getSerializableExtra(FRIENDS);
         String myId = FirebaseAuth.getInstance().getUid();
         //initUIAndData();
         if(userFriends != null){
@@ -208,7 +230,7 @@ public class ChatMessage extends AppCompatActivity{
 
 
 
-        }else{
+     /*   }else{
             String receiverId = contactlist.getUid();
 
             generalFactoryInstance.loadSpecUser(receiverId, user -> {
@@ -273,7 +295,7 @@ public class ChatMessage extends AppCompatActivity{
                 public void afterTextChanged(Editable s) {
 
                 }
-            });
+            });*/
 
 
             /*videoButton.setOnClickListener(new View.OnClickListener() {
@@ -311,7 +333,7 @@ public class ChatMessage extends AppCompatActivity{
                         startActivity(intent);
                     }
                 }
-            });*/
+            });
         }
 
 
@@ -330,7 +352,7 @@ public class ChatMessage extends AppCompatActivity{
                     stopButtonClicked();
                     break;*/
 
-            }
+            /*}
         }
     };
 
@@ -384,7 +406,7 @@ public class ChatMessage extends AppCompatActivity{
         peerMode.setChecked(true);
     }*/
 
-    private void showToast(String text) {
+    /*private void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
     public void goback(View view) {
@@ -394,8 +416,8 @@ public class ChatMessage extends AppCompatActivity{
 
     private void openPlaceCallActivity() {
 
+    }*/
     }
-
 
 
 }

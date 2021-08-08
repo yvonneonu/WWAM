@@ -11,14 +11,14 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.connectycube.users.model.ConnectycubeUser;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class AddNewFriends extends AppCompatActivity {
     private SearchView input;
 
-    private List<ConnectycubeUser> friendModelList;
+    private List<WaamUser> friendModelList;
     private FriendAdapt friendAdapt;
     private RecyclerView recyclerView;
     private TextView text, send;
@@ -42,7 +42,7 @@ public class AddNewFriends extends AppCompatActivity {
 
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(AddNewFriends.this);
 
-        generalFactory.fetchAllUser(new GeneralFactory.FetchAllConnecty() {
+      /*  generalFactory.fetchAllUser(new GeneralFactory.FetchAllConnecty() {
             @Override
             public void fetchConnectyUsers(List<ConnectycubeUser> connectycubeUsers) {
                 if (connectycubeUsers.size() > 0){
@@ -57,9 +57,9 @@ public class AddNewFriends extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
 
-      /*  generalFactory.fetchAllUser(new GeneralFactory.FetchFriends() {
+       generalFactory.fetchAllUser(new GeneralFactory.FetchFriends() {
             @Override
             public void friendsFetcher(List<WaamUser> friends) {
                 friendModelList = friends;
@@ -89,7 +89,7 @@ public class AddNewFriends extends AppCompatActivity {
                                         .commit();*/
                                 /*Intent intent = new Intent(AddNewFriends.this, DrawelayoutActivity.class);
                                 intent.putExtra(ProfileFragment.PUT_PROFILE,user);
-                                startActivity(intent);
+                                startActivity(intent);*/
                             }
 
                         }
@@ -101,7 +101,7 @@ public class AddNewFriends extends AppCompatActivity {
                 }
 
             }
-        });*/
+        });
 
 
 

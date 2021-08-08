@@ -373,6 +373,8 @@ public class GeneralFactory {
 
     }
 
+
+
     public void loadFriends(String branch, FetchFriends fetchFriends) {
         allFriends = new ArrayList<>();
         if (branch != null) {
@@ -484,6 +486,27 @@ public class GeneralFactory {
     }
 
 
+    public void loadSpecUserFromConnec(String email) {
+
+
+        ConnectycubeUsers.getUserByEmail(email).performAsync(new EntityCallback<ConnectycubeUser>() {
+            @Override
+            public void onSuccess(ConnectycubeUser user, Bundle args) {
+                Log.d("UserEmail", user.getFullName());
+
+            }
+
+            @Override
+            public void onError(ResponseException error) {
+                Log.d("UserError", error.getMessage());
+
+
+            }
+        });
+
+
+
+    }
     public void loadSpecUser(String userdId, final SpecificUser userCallback) {
         DatabaseReference databaseSpecUser = getInstance().getReference(WAAMBASE);
         databaseSpecUser.child(userdId).addValueEventListener(new ValueEventListener() {
