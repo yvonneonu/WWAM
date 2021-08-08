@@ -35,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class GeneralFactory {
     private List<EventModel> eventModelList;
     private FirebaseAuth mAuth;
     private EventModel[] eventModelsArrays;
+    private List<ConnectycubeUser> connectycubeUserList;
     private List<Location> locationList;
     private static final String WAAMBASE = "waamuser_base";
     private static final String PROFILEPIC = "profilePic";
@@ -805,7 +807,53 @@ public class GeneralFactory {
                 });
     }
 
-    public void fetchAllUser(FetchFriends fetchAllWaamUsers) {
+
+
+    public void fetchAllUser(FetchAllFriends fetchAllFriends) {
+
+
+
+        allWaamUsers = new ArrayList<>();
+
+
+      DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
+        mDatebaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                allWaamUsers.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    WaamUser user = dataSnapshot.getValue(WaamUser.class);
+                    if (!user.getUid().equals(mAuth.getUid())) {
+
+
+                        allWaamUsers.add(user);
+
+                        Gson gson = new Gson();
+                        Log.d("WaamUser", gson.toJson(gson));
+
+
+
+                    }
+                }
+                fetchAllWaamUsers.friendsFetcher(allWaamUsers);
+                Log.d("AllUsers", "" + allWaamUsers.size());
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("fetsct", ""+error);
+
+            }
+        });
+
+
+    }
+
+    public void fetchAllUser1(FetchAllConnecty fetchAllConnecty) {
 
 
 
@@ -819,14 +867,31 @@ public class GeneralFactory {
         Bundle params = new Bundle();
 
         ArrayList<String> usersPhones = new ArrayList<>();
+        connectycubeUserList = new ArrayList<>();
 //       String branch = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         usersPhones.add("drip@gmail.com");
-     //   usersPhones.add(fetchAllWaamUsers.friendsFetcher(allWaamUsers));
+        //   usersPhones.add(fetchAllWaamUsers.friendsFetcher(allWaamUsers));
 
 
 
-        ConnectycubeUsers.getUsersByEmails(usersPhones, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+        ConnectycubeUsers.getUsers(pagedRequestBuilder).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
+            @Override
+            public void onSuccess(ArrayList<ConnectycubeUser> connectycubeUsers, Bundle bundle) {
+
+                connectycubeUserList = connectycubeUsers;
+                fetchAllConnecty.fetchConnectyUsers(connectycubeUserList);
+
+            }
+
+            @Override
+            public void onError(ResponseException e) {
+                Log.d("works", ""+e.getMessage());
+
+
+            }
+        });
+      /*  ConnectycubeUsers.getUsersByEmails(usersPhones, pagedRequestBuilder, params).performAsync(new EntityCallback<ArrayList<ConnectycubeUser>>() {
             @Override
             public void onSuccess(ArrayList<ConnectycubeUser> users, Bundle args) {
                 Log.d("AllUsers", "" +users.size());
@@ -840,10 +905,10 @@ public class GeneralFactory {
 
 
             }
-        });
+        });*/
 
 
-      // allWaamUsers.add()
+        // allWaamUsers.add()
         //WaamUser user = FirebaseAuth.getInstance()
       /* DatabaseReference mDatebaseReference = firebaseDatabase.getReference(WAAMBASE);
         mDatebaseReference.addValueEventListener(new ValueEventListener() {
@@ -881,6 +946,7 @@ public class GeneralFactory {
 
 
     }
+
 
 
     public void loadContact(ProgressBar bar, TextView textView, FetchFriends fetchContacts) {
@@ -1136,5 +1202,8 @@ public class GeneralFactory {
         void notification(List<NotificationActions> notificationActions);
     }
 
+    interface FetchAllConnecty{
+        void fetchConnectyUsers(List<ConnectycubeUser> connectycubeUsers);
+    }
 
 }

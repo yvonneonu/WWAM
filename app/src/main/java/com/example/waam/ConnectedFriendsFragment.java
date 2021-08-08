@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.connectycube.users.model.ConnectycubeUser;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private WaamUser waamUser;
+    private ConnectycubeUser waamUser;
     private GeneralFactory generalFactory;
     private  Button button;
     private   ImageView videopic, aboutsefl, interests, friend;
@@ -48,7 +49,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private String mParam2;
 
 
-    public ConnectedFriendsFragment(WaamUser waamUser) {
+    public ConnectedFriendsFragment(ConnectycubeUser waamUser) {
         this.waamUser = waamUser;
 
     }
@@ -165,17 +166,17 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 @Override
                 public void friendsFetcher(List<WaamUser> friends) {
                     Log.d("SizeOfFriend",""+friends.size());
-                    Log.d("IsFriend", ""+waamUser.getUid());
+                    Log.d("IsFriend", ""+waamUser.getId());
                     for(WaamUser user : friends){
 
 
-                        Log.d("IAmInFor", ""+waamUser.getUid());
-                        if(user.getUid().equals(waamUser.getUid())){
-                            Log.d("IAmTrue", ""+waamUser.getUid());
+                        Log.d("IAmInFor", ""+waamUser.getId());
+                        if(user.getUid().equals(waamUser.getId())){
+                            Log.d("IAmTrue", ""+waamUser.getId());
                             linlayout.setVisibility(View.VISIBLE);
                             button.setVisibility(View.GONE);
                         }else{
-                            Log.d("IAmFalse", ""+waamUser.getUid());
+                            Log.d("IAmFalse", ""+waamUser.getId());
                             button.setVisibility(View.VISIBLE);
                             linlayout.setVisibility(View.GONE);
                         }

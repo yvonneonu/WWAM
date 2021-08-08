@@ -1,8 +1,10 @@
 package com.example.waam;
 
+import com.connectycube.users.model.ConnectycubeUser;
+
 import java.io.Serializable;
 
-public class WaamUser implements Serializable {
+public class WaamUser extends ConnectycubeUser implements Serializable {
     private String fullname;
     private String email;
     private String zipcode;

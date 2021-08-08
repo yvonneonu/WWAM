@@ -11,13 +11,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.connectycube.users.model.ConnectycubeUser;
 
 import java.util.List;
 
 public class AddNewFriends extends AppCompatActivity {
     private SearchView input;
-    private List<WaamUser> friendModelList;
+    private List<ConnectycubeUser> friendModelList;
     private FriendAdapt friendAdapt;
     private RecyclerView recyclerView;
     private TextView text, send;
@@ -41,7 +41,24 @@ public class AddNewFriends extends AppCompatActivity {
 
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(AddNewFriends.this);
 
-        generalFactory.fetchAllUser(new GeneralFactory.FetchFriends() {
+        generalFactory.fetchAllUser(new GeneralFactory.FetchAllConnecty() {
+            @Override
+            public void fetchConnectyUsers(List<ConnectycubeUser> connectycubeUsers) {
+                if (connectycubeUsers.size() > 0){
+                    friendAdapt = new FriendAdapt(friendModelList,AddNewFriends.this);
+                    //bar.setVisibility(View.GONE);
+
+                    recyclerView.setVisibility(View.VISIBLE);
+                    // textView.setVisibility(View.GONE);
+                    recyclerView.setLayoutManager(new GridLayoutManager(AddNewFriends.this,3));
+                    recyclerView.setAdapter(friendAdapt);
+                }else {
+
+                }
+            }
+        });
+
+      /*  generalFactory.fetchAllUser(new GeneralFactory.FetchFriends() {
             @Override
             public void friendsFetcher(List<WaamUser> friends) {
                 friendModelList = friends;
@@ -71,7 +88,7 @@ public class AddNewFriends extends AppCompatActivity {
                                         .commit();*/
                                 /*Intent intent = new Intent(AddNewFriends.this, DrawelayoutActivity.class);
                                 intent.putExtra(ProfileFragment.PUT_PROFILE,user);
-                                startActivity(intent);*/
+                                startActivity(intent);
                             }
 
                         }
@@ -83,7 +100,7 @@ public class AddNewFriends extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
 
 

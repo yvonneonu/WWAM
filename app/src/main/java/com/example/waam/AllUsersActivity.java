@@ -13,13 +13,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.connectycube.users.model.ConnectycubeUser;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class AllUsersActivity extends AppCompatActivity {
     private FriendAdapt friendAdapt;
-    private List<WaamUser> friendModelList;
+    private List<ConnectycubeUser> friendModelList;
     private GeneralFactory generalFactoryInstance;
     private ProgressBar bar;
     private WaamUser waamUser;
@@ -124,10 +125,14 @@ public class AllUsersActivity extends AppCompatActivity {
 
 
 
-        generalFactoryInstance.fetchAllUser(new GeneralFactory.FetchFriends() {
+        generalFactoryInstance.fetchAllUser(new GeneralFactory.FetchAllConnecty() {
             @Override
-            public void friendsFetcher(List<WaamUser> friends) {
-                friendModelList = friends;
+            public void fetchConnectyUsers(List<ConnectycubeUser> connectycubeUsers) {
+
+
+
+
+                friendModelList = connectycubeUsers;
 
                 if(friendModelList.size() > 0){
                     friendAdapt = new FriendAdapt(friendModelList,AllUsersActivity.this);
@@ -141,7 +146,7 @@ public class AllUsersActivity extends AppCompatActivity {
                     friendAdapt.friendMover(new FriendAdapt.FriendAptListener() {
                         @Override
                         public void friendResponder(int position) {
-                            WaamUser user = friendModelList.get(position);
+                           ConnectycubeUser user = friendModelList.get(position);
                             if(friendAdapt != null && FirebaseAuth.getInstance().getCurrentUser() != null){
                                 String branch = FirebaseAuth.getInstance().getCurrentUser().getUid()+FRIENDS;
                                 //generalFactoryInstance.addToFriend(user,branch);
@@ -220,7 +225,10 @@ public class AllUsersActivity extends AppCompatActivity {
                     textView.setVisibility(View.VISIBLE);
                 }
 
+
+
             }
+
         });
 
 

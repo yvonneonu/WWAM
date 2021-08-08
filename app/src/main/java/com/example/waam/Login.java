@@ -106,7 +106,7 @@ public class Login extends BaseActivity{
 
 
 
-                String projectId = "waam-96a1b";
+                String projectId = "...";
                 String accessToken = "...";
 
                /* ConnectycubeUsers.signInByEmail(Email, Password).performAsync(new EntityCallback<ConnectycubeUser>() {
@@ -126,31 +126,7 @@ public class Login extends BaseActivity{
                 });*/
 
 
-                  final ConnectycubeUser user = new ConnectycubeUser();
-                user.setLogin(Email);
-                user.setPassword(Password);
-
-                ConnectycubeUsers.signInUsingFirebase(projectId, accessToken).performAsync(new EntityCallback<ConnectycubeUser>() {
-                    @Override
-                    public void onSuccess(ConnectycubeUser user, Bundle args) {
-                        Log.d("suscesssignin", ""+user.getFullName());
-
-                        Log.d("suscesssignin", ""+user.getId());
-
-                        Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
-//                        Log.d("LoginToken", loginToken);
-                        intent.putExtra("toking", loginToken);
-                       startActivity(intent);
-                    }
-
-                    @Override
-                    public void onError(ResponseException error) {
-                        Log.d("suscesssignin3", ""+user.getFullName());
-
-
-                    }
-                });
-              /* final ConnectycubeUser user = new ConnectycubeUser();
+               final ConnectycubeUser user = new ConnectycubeUser();
                 user.setLogin(Email);
                 user.setPassword(Password);
 
@@ -173,7 +149,7 @@ public class Login extends BaseActivity{
 
 
                     }
-                });*/
+                });
 
                 GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(), loginRequest.getPassword(), loginRequest);
                 //GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
