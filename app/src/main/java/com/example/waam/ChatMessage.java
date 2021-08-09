@@ -17,7 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.waam.Notification.Token;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.ktx.Firebase;
 import com.sinch.android.rtc.SinchError;
 import com.sinch.android.rtc.calling.Call;
 
@@ -209,6 +215,7 @@ public class ChatMessage extends BaseActivity implements SinchService.StartFaile
         }else{
             String receiverId = contactlist.getUid();
 
+
             generalFactoryInstance.loadSpecUser(receiverId, user -> {
                 if(user != null){
                     Log.d("LoadSpec",""+user);
@@ -274,6 +281,7 @@ public class ChatMessage extends BaseActivity implements SinchService.StartFaile
             });
 
 
+            updateToken(FirebaseInstanceId.getInstance().getToken());
             /*videoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -390,6 +398,16 @@ public class ChatMessage extends BaseActivity implements SinchService.StartFaile
         peerMode.setChecked(true);
     }*/
 
+
+    private void updateToken(String token){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token tokenn = new Token(token);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        reference.child(firebaseUser.getUid()).setValue(tokenn);
+
+
+
+    }
     private void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }

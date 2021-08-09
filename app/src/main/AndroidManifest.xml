@@ -58,6 +58,7 @@
 
         <service android:name=".SinchService" />
         <service android:name=".NotificationListener" />
+        <service android:name=".Notification.MyBaseFireBaseId" />
 
         <activity android:name=".IncomingCallScreenActivity" />
         <activity android:name=".Unfriend" />
