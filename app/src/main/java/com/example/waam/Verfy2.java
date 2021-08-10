@@ -16,8 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +32,7 @@ public class Verfy2 extends AppCompatActivity {
     private TextView shownum;
 
 
+    private FirebaseAuth mAuth;
     // String phonenumber, otp;
     int randonnumber;
     Button getotp, con;
@@ -34,7 +40,7 @@ public class Verfy2 extends AppCompatActivity {
     String otp_text;
     String phonenumber = "";
     String token;
-    String otp;
+    private String verificationid; ;
     private String bearer;
     EditText first, secd, third, fourt, fifth, six;
     UserService userService;
@@ -46,7 +52,6 @@ public class Verfy2 extends AppCompatActivity {
         setContentView(R.layout.activity_verfy2);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 
 
         Bundle bundle = getIntent().getExtras();
@@ -69,20 +74,37 @@ public class Verfy2 extends AppCompatActivity {
         six = findViewById(R.id.editText13);
 
         String phonenumber = getIntent().getStringExtra("number");
-       // Fullname = getIntent().getStringExtra("name");
+        // Fullname = getIntent().getStringExtra("name");
         shownum.setText(phonenumber);
         final StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
+        sendVerificaionCode(phonenumber);
+        mAuth = FirebaseAuth.getInstance();
         getotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                gottensendotp();
+                String firstotp = first.getText().toString();
+                String Secondotp = secd.getText().toString();
+                String Thirdotp = third.getText().toString();
+                String Fouthotp = fourt.getText().toString();
+                String Fifthotp = fifth.getText().toString();
+                String Sixotp = six.getText().toString();
+                String completeotp = firstotp + Secondotp + Thirdotp + Fouthotp + Fifthotp + Sixotp;
+
+                if (completeotp.isEmpty()){
+                    secd.setError("entr");
+                    secd.requestFocus();
+                }
+                verifyCode(completeotp);
+
+                //gottensendotp();
 
             }
         });
+
+
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +115,7 @@ public class Verfy2 extends AppCompatActivity {
                 bundle.putString("phonenumber", phonenumber);
                 bundle.putString("bearer", token);
                 bundle.putString("name", Fullname);
-                Log.d("TAG", ""+Fullname);
+                Log.d("TAG", "" + Fullname);
 
                 // bundle.putString("name", Fullname);
 
@@ -101,6 +123,29 @@ public class Verfy2 extends AppCompatActivity {
             }
         });
 
+    }
+    private void verifyCode(String code){
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationid, code);
+        signInWithCredential(credential);
+
+    }
+
+    private void signInWithCredential(PhoneAuthCredential credential) {
+
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+
+                            Intent intent = new Intent(Verfy2.this, Successverified.class);
+                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }else {
+                            Log.d("task is not successful", ""+task.getException());
+                        }
+                    }
+                });
     }
 
     private void gottensendotp() {
@@ -228,6 +273,7 @@ public class Verfy2 extends AppCompatActivity {
                 //Toast.makeText(SignUp.this, message, Toast.LENGTH_LONG).show();
             }
 
+
         }
 
         @Override
@@ -238,5 +284,41 @@ public class Verfy2 extends AppCompatActivity {
 
     });
 
+
+
     }
+    private void sendVerificaionCode(String number){
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                number,
+                60,
+                TimeUnit.SECONDS,
+                Verfy2.this,
+                mCallback
+
+        );
+
+    }
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
+            mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+            verificationid = s;
+        }
+
+        @Override
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+            String code = phoneAuthCredential.getSmsCode();
+            verifyCode(code);
+
+        }
+
+        @Override
+        public void onVerificationFailed(@NonNull FirebaseException e) {
+            Log.d("onverificationfailed", ""+e.getMessage());
+
+        }
+    };
 }

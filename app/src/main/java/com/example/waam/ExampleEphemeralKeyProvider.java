@@ -1,8 +1,8 @@
 package com.example.waam;
 
 
+import android.content.Context;
 import android.util.Log;
-import android.view.ViewTreeObserver;
 
 import androidx.annotation.Size;
 
@@ -22,10 +22,12 @@ import retrofit2.Response;
 
 public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
 
-    private final String token;
+    private String token;
+    Context context;
     UserService userService;
 
-    public ExampleEphemeralKeyProvider(String token) {
+    public ExampleEphemeralKeyProvider(String token, Context context) {
+        this.context = context;
         this.token = token;
     }
 
@@ -36,6 +38,8 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
         apiParamMap.put("api_version", apiVersion);
 
          user(apiVersion, ephemeralKeyUpdateListener);
+        token = SharedPref.getInstance(context).getStoredToken();
+
        /* Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://ec2-54-188-200-48.us-west-2.compute.amazonaws.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -77,6 +81,7 @@ public class ExampleEphemeralKeyProvider implements EphemeralKeyProvider {
 
             userService = new ApiClient().getService();
             ephemeral.setStripeVersion(api);
+
             Call<Ephemeral> ephemeralCall = userService.getEphemeral(ephemeral, "Bearer " +token);
             ephemeralCall.enqueue(new Callback<Ephemeral>() {
                 @Override

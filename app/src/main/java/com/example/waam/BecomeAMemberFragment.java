@@ -1,7 +1,7 @@
 package com.example.waam;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -76,6 +75,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
     private PaymentSession paymentSession;
     private Stripe stripe;
     private String pay;
+    Context context;
     //private String paymentIntentClientSecret;
 
 
@@ -116,7 +116,9 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
         super.onCreate(savedInstanceState);
         Log.d("TAG","I am in oncreate");
 
-        token = getActivity().getIntent().getStringExtra("toking");
+       // token = getActivity().getIntent().getStringExtra("toking");
+        token = SharedPref.getInstance(getActivity()).getStoredToken();
+
 
         PaymentConfiguration.init(getActivity(), "pk_test_51ITAgKBgd3O4ny7mXz17kU4QCrp3hQ0CQjpSdjHhXmDkoDYxRVgj9diGYnenw5cCVBigd0iFLv1kZ1LhDaTKlhlh00ZJpFHeVy");
 
@@ -133,7 +135,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
                 getActivity().getApplicationContext(),
                 Objects.requireNonNull(getString(R.string.publishablekey)));
 
-        token = getActivity().getIntent().getStringExtra("toking");
+       // token = getActivity().getIntent().getStringExtra("toking");
         setUpPayment();
 
 
@@ -147,6 +149,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
         View view = inflater.inflate(R.layout.fragment_become_a_member, container, false);
         setHasOptionsMenu(true);
+
 
         Log.d("Become","Inside Become a membwer");
        // int color = getActivity().getResources().getColor(R.color.green);
@@ -455,7 +458,7 @@ public class BecomeAMemberFragment extends Fragment implements View.OnClickListe
 
     private void setUpPayment(){
 
-        CustomerSession.initCustomerSession(getActivity(), new ExampleEphemeralKeyProvider(token));
+        CustomerSession.initCustomerSession(getActivity(), new ExampleEphemeralKeyProvider(token, context));
 
         Log.d("CustomerSession","Customer session started");
         paymentSession = new PaymentSession(this, new PaymentSessionConfig.Builder()

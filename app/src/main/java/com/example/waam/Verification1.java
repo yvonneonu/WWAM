@@ -10,18 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthSettings;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.hbb20.CountryCodePicker;
-
-import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,40 +68,7 @@ public class Verification1 extends AppCompatActivity {
                 initialsendotp(phonenumber);
 
 
-// Whenever verification is triggered with the whitelisted number,
-// The test phone number and code should be whitelisted in the console.
-                String phoneNumber = "+16505554567";
-                String smsCode = "123456";
 
-                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                FirebaseAuthSettings firebaseAuthSettings = firebaseAuth.getFirebaseAuthSettings();
-
-// Configure faking the auto-retrieval with the whitelisted numbers.
-                firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phonenumber, smsCode);
-
-                PhoneAuthOptions options = PhoneAuthOptions.newBuilder(firebaseAuth)
-                        .setPhoneNumber(phonenumber)
-                        .setTimeout(60L, TimeUnit.SECONDS)
-                        .setActivity(Verification1.this)
-                        .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                            @Override
-                            public void onVerificationCompleted(PhoneAuthCredential credential) {
-                                // Instant verification is applied and a credential is directly returned.
-                                // ...
-                                Log.d("hgcfg", ""+credential);
-                            }
-
-                            @Override
-                            public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Log.d("hgcfg", ""+e);
-
-
-                            }
-
-                            // ...
-                        })
-                        .build();
-                PhoneAuthProvider.verifyPhoneNumber(options);
 
 
             }

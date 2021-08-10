@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class PaymentPage extends AppCompatActivity {
     private LinearLayout pay;
     private String payMeth;
     private String token;
+    Context context;
     private Stripe stripe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,9 @@ public class PaymentPage extends AppCompatActivity {
         setSupportActionBar(bar);
         price = getIntent().getStringExtra("price");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        token = getIntent().getStringExtra("");
+        token = SharedPref.getInstance(this).getStoredToken();
+
+        //token = getIntent().getStringExtra("");
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -252,7 +256,7 @@ public class PaymentPage extends AppCompatActivity {
 
 
     private void setUpPayment(){
-        CustomerSession.initCustomerSession(this, new ExampleEphemeralKeyProvider(token));
+        CustomerSession.initCustomerSession(this, new ExampleEphemeralKeyProvider(token, context));
         paymentSession = new PaymentSession(this, new PaymentSessionConfig.Builder()
                 .setShippingInfoRequired(false)
                 .setShippingMethodsRequired(false)

@@ -16,7 +16,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
+import com.connectycube.auth.session.ConnectycubeSettings;
 import com.connectycube.core.EntityCallback;
+import com.connectycube.core.LogLevel;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.core.request.PagedRequestBuilder;
 import com.connectycube.users.ConnectycubeUsers;
@@ -79,6 +81,12 @@ public class GeneralFactory {
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
 
+    private static String applicationID = "4663";
+    private static String authKey = "RWV8dBeCsCh6g2a";
+    private static String authSecret = "yhuExsebKPu8F8S";
+    private static String accountKey = "BqZHeqx5VVn9myVe4FY1";
+
+
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
             R.drawable.event_img,
@@ -124,9 +132,15 @@ public class GeneralFactory {
     public static GeneralFactory getGeneralFactory(Context context) {
         if (generalFactory == null) {
             generalFactory = new GeneralFactory(context);
+            ConnectycubeSettings.getInstance().init(context, applicationID, authKey, authSecret);
+            ConnectycubeSettings.getInstance().setAccountKey(accountKey);
+
+            ConnectycubeSettings.getInstance().setLogLevel(LogLevel.NOTHING);
         }
         return generalFactory;
     }
+
+
 
     public void makeEvent() {
         EventModel eventModelone = new EventModel("As you may have noticed," +
