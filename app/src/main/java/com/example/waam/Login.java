@@ -12,14 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.connectycube.auth.session.ConnectycubeSettings;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.users.ConnectycubeUsers;
 import com.connectycube.users.model.ConnectycubeUser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -116,13 +121,15 @@ public class Login extends BaseActivity{
                         .getIdToken(true)
                         .getResult().getToken());*/
 
-                String projectId = "waam-96a1b";
+                String projectId =
+                        "chatapp-d17df";
+                String accessoken = "5amj4sq2ZLXD14F153FmVTM0Xp73";
                     /*String accessToken = mAuth
                             .getInstance()
                             .getCurrentUser()
                             .getIdToken(true);*/
 
-                String phon = mAuth.getInstance().getCurrentUser().getPhoneNumber();
+             //  String phon = mAuth.getInstance().getCurrentUser().getPhoneNumber();
 
 
                 FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -172,11 +179,14 @@ public class Login extends BaseActivity{
                                     Log.d("iddd", "idToken");
                                 }
                             }
-                        });
-               /* Log.d("currentUserPhonenumbe", ""+phon);
-                mAuth.getInstance()
-                        .getCurrentUser()
-                        .getIdToken(true)
+                        });*/
+            //   Log.d("currentUserPhonenumbe", ""+phon);
+
+                FirebaseUser mUser1 = FirebaseAuth.getInstance().getCurrentUser();
+
+              //  FirebaseAuth.getInstance().getCurrentUser().getIdToken(true);
+
+                mUser1.getIdToken(true)
                         .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                             @Override
                             public void onComplete(@NonNull Task<GetTokenResult> task) {
@@ -184,8 +194,13 @@ public class Login extends BaseActivity{
                                 if (task.isSuccessful()){
                                     String idToken = task.getResult().getToken();
                                     Log.d("iddd", idToken);
+                                    String userr = FirebaseAuth.getInstance().getAccessToken(true).toString();
 
-                                    ConnectycubeUsers.signInUsingFirebase(projectId, token).performAsync(new EntityCallback<ConnectycubeUser>() {
+
+                                    Log.d("iddd", userr);
+
+
+                                    ConnectycubeUsers.signInUsingFirebase(projectId, idToken).performAsync(new EntityCallback<ConnectycubeUser>() {
                                         @Override
                                         public void onSuccess(ConnectycubeUser user, Bundle args) {
 
@@ -194,8 +209,10 @@ public class Login extends BaseActivity{
                                           //  String loginToken = response.body().getToken();
                                          //   SharedPref.getInstance(context).setStoredToken(SharedPref.TOKEN, loginToken);
 
+                                            Log.d("Connecticubeusers", userr.toString());
+                                            Log.d("UsersIretyrns", ""+user.getPhone());
 
-                                            Log.d("Connecticubeusers", user.getEmail());
+//                                            Log.d("Connecticubeusers", user.getEmail());
                                             //Log.d("show", loginToken);
                                             Intent intent = new Intent(Login.this, DiscoverDrawerLayerout.class);
                                          //   Log.d("LoginToken", loginToken);
@@ -217,11 +234,11 @@ public class Login extends BaseActivity{
 
                                 }
                             }
-                        });*/
+                        });
                 /*String projectId = "...";
                 String accessToken = "...";*/
 
-                ConnectycubeUsers.signInByEmail(Email, Password).performAsync(new EntityCallback<ConnectycubeUser>() {
+              /*  ConnectycubeUsers.signInByEmail(Email, Password).performAsync(new EntityCallback<ConnectycubeUser>() {
                     @Override
                     public void onSuccess(ConnectycubeUser user, Bundle args) {
 
@@ -235,7 +252,7 @@ public class Login extends BaseActivity{
 
 
                     }
-                });
+                });*/
 
 
               /* final ConnectycubeUser user = new ConnectycubeUser();

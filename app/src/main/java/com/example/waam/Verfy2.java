@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
@@ -81,6 +82,8 @@ public class Verfy2 extends AppCompatActivity {
 
         sendVerificaionCode(phonenumber);
         mAuth = FirebaseAuth.getInstance();
+        mAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
+
         getotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +131,12 @@ public class Verfy2 extends AppCompatActivity {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationid, code);
         signInWithCredential(credential);
 
+
+
+
     }
+
+
 
     private void signInWithCredential(PhoneAuthCredential credential) {
 
@@ -138,6 +146,13 @@ public class Verfy2 extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
 
+                            FirebaseUser user = task.getResult().getUser();
+                           String  ud = FirebaseAuth.getInstance().getAccessToken(true).toString();
+
+
+                           Log.d("use", ""+user);
+
+                            Log.d("yri", ud);
                             Intent intent = new Intent(Verfy2.this, Successverified.class);
                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
