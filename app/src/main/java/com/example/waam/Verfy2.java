@@ -100,9 +100,9 @@ public class Verfy2 extends AppCompatActivity {
                     secd.setError("entr");
                     secd.requestFocus();
                 }
-                verifyCode(completeotp);
+               // verifyCode(completeotp);
 
-                //gottensendotp();
+                gottensendotp();
 
             }
         });

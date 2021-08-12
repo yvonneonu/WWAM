@@ -759,6 +759,8 @@ public class GeneralFactory {
                 if (response.isSuccessful()) {
 
 
+                    String projectId = "chatapp-d17df";
+
 
                     assert response.body() != null;
                     String loginToken = response.body().getToken();
@@ -770,6 +772,33 @@ public class GeneralFactory {
                     Log.d("LoginToken", loginToken);
                     intent.putExtra("toking", loginToken);
                     context.startActivity(intent);
+
+                    //String  accesstoken = mAuth.getCurrentUser().getIdToken(true).toString();
+
+
+                   /* FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+                    mUser.getIdToken(true)
+                            .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                    if (task.isSuccessful()) {
+                                        String idToken = task.getResult().getToken();
+                                        String user = task.getResult().getSignInProvider();
+
+                                         String phon = mAuth.getInstance().getCurrentUser().getPhoneNumber();
+
+                                        // Send token to your backend via HTTPS
+                                        Log.d("acess", phon);
+
+
+                                        // ...
+                                    } else {
+                                        // Handle error -> task.getException();
+                                    }
+                                }
+                            });*/
+
+
+
                     //This gets the user logged in
                     //startActivity(new Intent(Login.this, MainActivity.class).putExtra("name", loginResponse));
 

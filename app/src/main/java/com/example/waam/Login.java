@@ -15,16 +15,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.connectycube.auth.session.ConnectycubeSettings;
-import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
-import com.connectycube.core.exception.ResponseException;
-import com.connectycube.users.ConnectycubeUsers;
-import com.connectycube.users.model.ConnectycubeUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.auth.PhoneAuthCredential;
+
+import java.util.concurrent.Executor;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -64,6 +64,7 @@ public class Login extends BaseActivity{
         setContentView(R.layout.activity_login);
         token = SharedPref.getInstance(this).getStoredToken();
         Log.d("take", token);
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //I stopped here thank you
@@ -132,6 +133,7 @@ public class Login extends BaseActivity{
              //  String phon = mAuth.getInstance().getCurrentUser().getPhoneNumber();
 
 
+
                 FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
 
               /*  mUser.getIdToken(true)
@@ -181,7 +183,7 @@ public class Login extends BaseActivity{
                             }
                         });*/
             //   Log.d("currentUserPhonenumbe", ""+phon);
-
+/*
                 FirebaseUser mUser1 = FirebaseAuth.getInstance().getCurrentUser();
 
               //  FirebaseAuth.getInstance().getCurrentUser().getIdToken(true);
@@ -234,7 +236,7 @@ public class Login extends BaseActivity{
 
                                 }
                             }
-                        });
+                        });*/
                 /*String projectId = "...";
                 String accessToken = "...";*/
 
@@ -279,6 +281,8 @@ public class Login extends BaseActivity{
 
                     }
                 });*/
+
+               // signInWithPhoneAuthCredential();
 
                 GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(), loginRequest.getPassword(), loginRequest);
                 //GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(),loginRequest.getPassword(),loginRequest,mRtmClient);
@@ -325,7 +329,28 @@ public class Login extends BaseActivity{
         startActivity(intent);
     }
 
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("crese", ""+task.getException());
 
+                            FirebaseUser user = task.getResult().getUser();
+                            Log.d("useeeee", ""+user);
+                            // Update UI
+                        } else {
+                            // Sign in failed, display a message and update the UI
+                            Log.w("TAG", "signInWithCredential:failure", task.getException());
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                // The verification code entered was invalid
+                            }
+                        }
+                    }
+                });
+    }
 
     @Override
     protected void onPause() {
@@ -378,8 +403,8 @@ public class Login extends BaseActivity{
             return null;
         }
 
-    }
 
+    }
 
 
 }
