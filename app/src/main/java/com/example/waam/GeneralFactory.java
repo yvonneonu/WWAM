@@ -759,6 +759,13 @@ public class GeneralFactory {
                 if (response.isSuccessful()) {
 
 
+                    loadSpecUser(mAuth.getUid(), new SpecificUser() {
+                        @Override
+                        public void loadSpecUse(WaamUser user) {
+                            Log.d("UserphoneNumber", user.getPhoneNumber());
+                        }
+                    });
+
 
                     assert response.body() != null;
                     String loginToken = response.body().getToken();
@@ -1068,9 +1075,13 @@ public class GeneralFactory {
                     Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                     //Register users on firebase......
-                    signUpForBase(waamUser.getEmail(), waamUser.getPassword(), progressBar, waamUser);
+
+
+
+                    //signUpForBase(waamUser.getEmail(), waamUser.getPassword(), progressBar, waamUser);
                     Intent intent = new Intent(context, Verification1.class);
                     intent.putExtra("token", response.body().getToken());
+                    intent.putExtra("waamusercube", waamUser);
                     context.startActivity(intent);
                     // startActivity(new Intent(SignUp.this, Verification1.class).putExtra("token", response.body().getToken()));
                     // intent.putExtra("profilepics", imageUri);

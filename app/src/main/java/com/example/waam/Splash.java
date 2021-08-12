@@ -22,6 +22,7 @@ public class Splash extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
        // bundle.getString("token");
 
+        WaamUser user = (WaamUser) getIntent().getSerializableExtra("waamusercube");
         String phonenumber = getIntent().getStringExtra("phonenumber");
     //    String token = getIntent().getStringExtra("token");
         String token = bundle.getString("token");
@@ -44,6 +45,7 @@ public class Splash extends AppCompatActivity {
                 }
 
                 home.putExtra("name", Fullname);
+                home.putExtra("waamusercube",user);
                 Log.d("TAG", ""+Fullname);
 
                 startActivity(home);

@@ -27,6 +27,7 @@ public class Verification1 extends AppCompatActivity {
     int randonnumber;
     String otp_text;
     String API_KEY;
+    private WaamUser waamUser;
     private String token;
     UserService userService;
     String Fullname;
@@ -45,6 +46,7 @@ public class Verification1 extends AppCompatActivity {
         if (bundle != null)
         token = bundle.getString("token");
         Fullname = bundle.getString("name");
+        waamUser = (WaamUser) getIntent().getSerializableExtra("waamusercube");
 
 
         ccp = findViewById(R.id.ccp);
@@ -64,6 +66,7 @@ public class Verification1 extends AppCompatActivity {
                String me = ccp.getSelectedCountryCodeWithPlus();
                 String phonenumbe = userphoneno.getText().toString();
                 String phonenumber = me + phonenumbe;
+                waamUser.setPhoneNumber(phonenumber);
                 Log.d("tag", phonenumber);
                 initialsendotp(phonenumber);
 
@@ -104,6 +107,7 @@ public class Verification1 extends AppCompatActivity {
 
                   Log.d("TAG", ""+Fullname);
                    Intent mainactivity = new Intent(Verification1.this, Splash.class);
+                   mainactivity.putExtra("waamusercube",waamUser);
                    mainactivity.putExtras(bundle);
 
                    startActivity(mainactivity);

@@ -40,6 +40,7 @@ public class Verfy2 extends AppCompatActivity {
     TextView resend;
     String otp_text;
     String phonenumber = "";
+    WaamUser waamUser;
     String token;
     private String verificationid; ;
     private String bearer;
@@ -75,6 +76,7 @@ public class Verfy2 extends AppCompatActivity {
         six = findViewById(R.id.editText13);
 
         String phonenumber = getIntent().getStringExtra("number");
+        waamUser = (WaamUser) getIntent().getSerializableExtra("waamusercube");
         // Fullname = getIntent().getStringExtra("name");
         shownum.setText(phonenumber);
         final StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -145,7 +147,6 @@ public class Verfy2 extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-
                             FirebaseUser user = task.getResult().getUser();
                            String  ud = FirebaseAuth.getInstance().getAccessToken(true).toString();
 
@@ -250,6 +251,12 @@ public class Verfy2 extends AppCompatActivity {
         public void onResponse(Call<Myotpresponse> call, Response<Myotpresponse> response) {
             if (response.isSuccessful()) {
                 // response.body().getToken();
+
+                //Write d code for sign in and login here
+                //den u can perform authorization here too
+
+                GeneralFactory.getGeneralFactory(Verfy2.this)
+                        .signUpForBase(waamUser.getEmail(),waamUser.getPassword(),null,waamUser);
 
                 String email = SharedPref.getInstance(Verfy2.this).getStoredEmail();
                 String pass = SharedPref.getInstance(Verfy2.this).getStoredPassword();

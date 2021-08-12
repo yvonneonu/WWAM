@@ -18,6 +18,7 @@ public class WaamUser implements Serializable {
     private String timeStamp;
     private String typingTo;
     private String imageUrl;
+    private String phoneNumber;
 
     public String getImageUrl() {
         return imageUrl;
@@ -166,5 +167,13 @@ public class WaamUser implements Serializable {
 
     public void setRelationship(String relationship) {
         this.relationship = relationship;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
