@@ -242,7 +242,25 @@ public class GeneralFactory {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
 
-                        loginUser(loginRequest);
+
+                        ConnectycubeUsers.signInByEmail(email, password).performAsync(new EntityCallback<ConnectycubeUser>() {
+                            @Override
+                            public void onSuccess(ConnectycubeUser user, Bundle args) {
+                                loginUser(loginRequest);
+                                Log.d("Login", ""+user.getFullName());
+
+
+                            }
+
+                            @Override
+                            public void onError(ResponseException error) {
+                                Log.d("Login", ""+error.getMessage());
+
+
+                            }
+                        });
+
+
                     } else {
                         Log.d("Login", "Login was succesfull");
                     }
@@ -757,6 +775,9 @@ public class GeneralFactory {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()) {
+
+
+
 
 
                     String projectId = "chatapp-d17df";
