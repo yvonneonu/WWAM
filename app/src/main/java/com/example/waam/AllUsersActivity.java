@@ -15,14 +15,22 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.chat.ConnectycubeRestChatService;
 import com.connectycube.chat.ConnectycubeRoster;
 import com.connectycube.chat.listeners.RosterListener;
 import com.connectycube.chat.listeners.SubscriptionListener;
+import com.connectycube.chat.model.ConnectycubeChatDialog;
+import com.connectycube.chat.model.ConnectycubeDialogType;
 import com.connectycube.chat.model.ConnectycubePresence;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
 import com.connectycube.users.model.ConnectycubeUser;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import timber.log.Timber;
 
 public class AllUsersActivity extends AppCompatActivity {
     private ConnectiAdapeter friendAdapt;
@@ -68,8 +76,31 @@ public class AllUsersActivity extends AppCompatActivity {
                         @Override
                         public void friendResponder1(int position) {
                             ConnectycubeUser user = friendModelList.get(position);
+                            Intent intent = new Intent(AllUsersActivity.this, ChatMessage.class);
+                            intent.putExtra("userId",user.getId());
+                            startActivity(intent);
+                            /*ArrayList<Integer> occupantIds = new ArrayList<Integer>();
+                            occupantIds.add(user.getId());
 
-                            generalFactoryInstance.loadSpecUserFromConnec(user.getEmail());
+                            ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
+                            dialog.setType(ConnectycubeDialogType.PRIVATE);
+                            dialog.setOccupantsIds(occupantIds);
+
+
+                            ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
+                                @Override
+                                public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
+                                    Log.d("Timber",createdDialog.getDialogId());
+
+                                }
+
+                                @Override
+                                public void onError(ResponseException exception) {
+                                    Timber.d("%s", exception.getMessage());
+                                }
+                            });*/
+
+                            /*generalFactoryInstance.loadSpecUserFromConnec(user.getEmail());
                             int addUser = user.getId();
 
                             Log.d("getid", ""+addUser);
@@ -151,7 +182,7 @@ public class AllUsersActivity extends AppCompatActivity {
 
 
                                     }
-                                }
+                                }*/
 
 
 

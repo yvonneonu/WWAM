@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.connectycube.auth.session.ConnectycubeSettings;
+import com.connectycube.chat.ConnectycubeRestChatService;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -63,18 +67,42 @@ public class NotificationAllowedFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        String dialogId =  "61160a812889a70012e4ed2d";
+        boolean enabled = false;
+
+
+        //ConnectycubeSettings.getInstance().setEnablePushNotification(true); // default is 'true'
+
+        //boolean isEnabled = ConnectycubeSettings.getInstance().isEnablePushNotification();
+
+
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        ConnectycubeRestChatService.updateDialogNotificationSending(dialogId, enabled).performAsync(new EntityCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result, Bundle params) {
+
+                Log.d("PushNotif","Not allowed");
+                //if result == false - push notifications was disabled, otherwise - enabled
+            }
+
+            @Override
+            public void onError(ResponseException e) {
+                Log.d("PushNotificationb",e.getMessage());
+
+            }
+        });
+
+
         notificationActionsList = new ArrayList<>();
         generalFactory = GeneralFactory.getGeneralFactory(getActivity());
 
-
-        ConnectycubeSettings.getInstance().setEnablePushNotification(true); // default is 'true'
-
-        boolean isEnabled = ConnectycubeSettings.getInstance().isEnablePushNotification();
 
 
 

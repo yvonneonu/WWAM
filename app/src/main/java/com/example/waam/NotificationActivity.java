@@ -28,12 +28,12 @@ public class NotificationActivity extends AppCompatActivity {
         Fragment fragment;
 
         if(isNotificationEnabled()){
-            fragment = new NotificationNotAllowedFragment();
+            fragment = new NotificationAllowedFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.notification_container, fragment);
             ft.commit();
         }else{
-            fragment = new NotificationAllowedFragment();
+            fragment = new NotificationNotAllowedFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.notification_container, fragment);
             ft.commit();

@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -17,6 +18,7 @@ import com.connectycube.chat.listeners.ChatDialogMessageListener;
 import com.connectycube.chat.model.ConnectycubeChatDialog;
 import com.connectycube.chat.model.ConnectycubeChatMessage;
 import com.connectycube.chat.model.ConnectycubeDialogType;
+import com.connectycube.chat.request.MessageGetBuilder;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.exception.ResponseException;
 import com.connectycube.users.model.ConnectycubeUser;
@@ -25,6 +27,8 @@ import org.jivesoftware.smack.SmackException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 //import com.sinch.android.rtc.SinchError;
 //import com.sinch.android.rtc.calling.Call;
@@ -46,6 +50,7 @@ public class ChatMessage extends AppCompatActivity{
     private List<Chat> chats;
     private GeneralFactory generalFactoryInstance;
     private WaamUser contactlist;
+    private ConnectycubeChatDialog privateDialog;
     //private WaamUser userFriends;
     private ConnectycubeUser userFriends;
     private TextView textViewStatus;
@@ -96,6 +101,104 @@ public class ChatMessage extends AppCompatActivity{
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        int userId = getIntent().getIntExtra("userId",0);
+
+        ArrayList<Integer> occupantIds = new ArrayList<>();
+        occupantIds.add(userId);
+
+        ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
+        dialog.setType(ConnectycubeDialogType.PRIVATE);
+        dialog.setOccupantsIds(occupantIds);
+
+
+
+
+
+
+
+
+        ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
+            @Override
+            public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
+                Log.d("Timber",createdDialog.getDialogId());
+                ArrayList<Integer> occupantIds = new ArrayList<Integer>();
+                occupantIds.add(userId);
+
+                ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
+                dialog.setType(ConnectycubeDialogType.PRIVATE);
+                dialog.setOccupantsIds(occupantIds);
+
+
+                ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
+                    @Override
+                    public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
+                        Log.d("Timber",createdDialog.getDialogId());
+
+                        ArrayList<Integer> occupantIds = new ArrayList<Integer>();
+                        occupantIds.add(userId);
+
+                        ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
+                        dialog.setType(ConnectycubeDialogType.PRIVATE);
+                        dialog.setOccupantsIds(occupantIds);
+
+
+                        ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
+                            @Override
+                            public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
+                                Log.d("Timber",createdDialog.getDialogId());
+                                 privateDialog = createdDialog;
+
+
+                                ConnectycubeChatDialog chatDialog = new ConnectycubeChatDialog(privateDialog.getDialogId());
+
+                                MessageGetBuilder messageGetBuilder = new MessageGetBuilder();
+                                messageGetBuilder.setLimit(100);
+                                // messageGetBuilder.gt("date_sent", "1455098137");
+
+                                ConnectycubeRestChatService.getDialogMessages(chatDialog, messageGetBuilder).performAsync(new EntityCallback<ArrayList<ConnectycubeChatMessage>>() {
+                                    @Override
+                                    public void onSuccess(ArrayList<ConnectycubeChatMessage> messages, Bundle bundle) {
+
+                                        for(int i = 0 ; i < messages.size() ; i++){
+                                            Log.d("bodyTems",messages.get(i).getBody());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(ResponseException error) {
+                                        Log.d("bodyTemsBieb", error.getMessage());
+                                    }
+                                });
+
+                            }
+
+                            @Override
+                            public void onError(ResponseException exception) {
+                                Timber.d("%s", exception.getMessage());
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onError(ResponseException exception) {
+                        Timber.d("%s", exception.getMessage());
+                    }
+                });
+
+
+
+
+            }
+
+            @Override
+            public void onError(ResponseException exception) {
+                Timber.d("%s", exception.getMessage());
+            }
+        });
+
+
         // getActionBar().hide();
 
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -114,22 +217,51 @@ public class ChatMessage extends AppCompatActivity{
 
 
 
-         int userss = userFriends.getId();
 
 
+        imageButtonSender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(privateDialog != null){
 
-        ArrayList<Integer> occupantIds = new ArrayList<Integer>();
-        occupantIds.add(userss);
-        Log.d("getuser", ""+userss);
+                    try {
 
-        ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
-        dialog.setType(ConnectycubeDialogType.PRIVATE);
-        dialog.setOccupantsIds(occupantIds);
+                        ConnectycubeChatMessage chatMessage = new ConnectycubeChatMessage();
+                        chatMessage.setBody(editText.getText().toString().trim());
+                        chatMessage.setSaveToHistory(true);
+                        privateDialog.sendMessage(chatMessage);
 
+                        editText.setText("");
+
+                    } catch (SmackException.NotConnectedException | InterruptedException e) {
+
+                        Log.d("BuhariCode", e.getMessage());
+                    }
+
+                    privateDialog.addMessageListener(new ChatDialogMessageListener() {
+                        @Override
+                        public void processMessage(String dialogId, ConnectycubeChatMessage message, Integer senderId) {
+
+                        }
+
+                        @Override
+                        public void processError(String dialogId, ChatException exception, ConnectycubeChatMessage message, Integer senderId) {
+
+                        }
+                    });
+
+
+                }else{
+
+                    Log.d("ElseisBalling","ElseIsking");
+
+                }
+            }
+        });
 //or just use DialogUtils
 //ConnectycubeChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);
 
-        ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
+        /*ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
             @Override
             public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
 
@@ -184,7 +316,7 @@ public class ChatMessage extends AppCompatActivity{
             }
             //generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
             editText.setText("");
-        });
+        });*/
 
 
 
