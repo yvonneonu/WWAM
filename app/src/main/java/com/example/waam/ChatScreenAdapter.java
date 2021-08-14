@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.connectycube.chat.model.ConnectycubeChatMessage;
-import com.connectycube.users.model.ConnectycubeUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -25,12 +24,11 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static  final int LEFT = 0;
     private final List<ConnectycubeChatMessage> listOfChats;
     private final Context context;
-    private final String receiversPic;
 
-    public ChatScreenAdapter(List<ConnectycubeChatMessage> chatHolder, Context context, String receiversPic) {
+
+    public ChatScreenAdapter(List<ConnectycubeChatMessage> chatHolder, Context context) {
         listOfChats = chatHolder;
         this.context = context;
-        this.receiversPic = receiversPic;
 
     }
 
@@ -50,13 +48,13 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final ConnectycubeChatMessage chat = listOfChats.get(position);
-        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ConnectycubeUser connectycubeUser = new ConnectycubeUser();
-        if(connectycubeUser != null){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        int userId = SharedPref.getInstance(context).getStoredConnectid();
+        if(user != null){
 
-            if(chat.getSenderId().equals(connectycubeUser.getId())){
+            if(chat.getSenderId().equals(userId)){
                 Senderview senderView = (Senderview) holder;
-                //senderView.textView.setText(chat.getMessage());
+                senderView.textView.setText(chat.getBody());
 
                 Glide.with(context)
                         .asBitmap()
@@ -64,12 +62,11 @@ public class ChatScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         .into(senderView.emoji);
             }else{
                 final ReceiverView receiverView = (ReceiverView) holder;
-              //  receiverView.textView.setText(chat.getMessage());
+                receiverView.textView.setText(chat.getBody());
                 Glide.with(context)
                         .asBitmap()
-                        .placeholder(R.drawable.profile_img_user)
+                        .load(R.drawable.profile_img_user)
                         .circleCrop()
-                        .load(receiversPic)
                         .into(receiverView.imageView);
 
                 Glide.with(context)

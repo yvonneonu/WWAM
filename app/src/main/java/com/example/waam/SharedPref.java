@@ -13,6 +13,7 @@ public class SharedPref {
     public static final String UID = "uid";
     public static final String VALUE = "50";
     public static final String CONNECTID = "CID";
+    public static final String CONNECTYCUBEID = "connectycubeid";
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
 
@@ -94,6 +95,19 @@ public class SharedPref {
         editor.apply();
 
     }
+
+
+
+    public void setConnectyCubeId(String key, int cube){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(key, cube);
+        editor.apply();
+    }
+
+    public String getConnectycubeId(){
+        return sharedPref.getString(CONNECTYCUBEID,null);
+    }
+
 
     public float getStoredValue() {
         return sharedPref.getFloat(VALUE, 50);

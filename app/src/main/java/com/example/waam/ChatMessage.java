@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.connectycube.chat.ConnectycubeRestChatService;
@@ -47,7 +48,7 @@ public class ChatMessage extends AppCompatActivity{
     private String mTargetName;
     private RecyclerView recyclerView;
     private ChatScreenAdapter chatScreenAdapter;
-    private List<Chat> chats;
+    private List<ConnectycubeChatMessage> chats;
     private GeneralFactory generalFactoryInstance;
     private WaamUser contactlist;
     private ConnectycubeChatDialog privateDialog;
@@ -97,6 +98,18 @@ public class ChatMessage extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_message);
+
+        //edtMess
+        ImageButton imageButtonSender = findViewById(R.id.imageButton);
+        generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
+        EditText editText = findViewById(R.id.edtMess);
+        textViewStatus = findViewById(R.id.status);
+        ImageView displayPic = findViewById(R.id.imagetool);
+        videoButton = findViewById(R.id.Video);
+        //videoButton.setOnClickListener(buttonClickListener);
+        contactlist = (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
+        userFriends = (ConnectycubeUser) getIntent().getSerializableExtra(FRIENDS);
+
         //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -159,9 +172,15 @@ public class ChatMessage extends AppCompatActivity{
                                     @Override
                                     public void onSuccess(ArrayList<ConnectycubeChatMessage> messages, Bundle bundle) {
 
-                                        for(int i = 0 ; i < messages.size() ; i++){
-                                            Log.d("bodyTems",messages.get(i).getBody());
-                                        }
+                                        chats = messages;
+
+                                        chatScreenAdapter = new ChatScreenAdapter(chats, ChatMessage.this);
+                                        recyclerView = findViewById(R.id.recyclerView);
+                                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatMessage.this);
+                                        recyclerView.setAdapter(chatScreenAdapter);
+                                        recyclerView.setLayoutManager(linearLayoutManager);
+
+
                                     }
 
                                     @Override
@@ -202,22 +221,6 @@ public class ChatMessage extends AppCompatActivity{
         // getActionBar().hide();
 
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        //edtMess
-        ImageButton imageButtonSender = findViewById(R.id.imageButton);
-        generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
-        EditText editText = findViewById(R.id.edtMess);
-        textViewStatus = findViewById(R.id.status);
-        ImageView displayPic = findViewById(R.id.imagetool);
-        videoButton = findViewById(R.id.Video);
-        //videoButton.setOnClickListener(buttonClickListener);
-        contactlist = (WaamUser) getIntent().getSerializableExtra(NEW_FRIENDS);
-        userFriends = (ConnectycubeUser) getIntent().getSerializableExtra(FRIENDS);
-
-
-
-
-
 
         imageButtonSender.setOnClickListener(new View.OnClickListener() {
             @Override

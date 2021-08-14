@@ -126,6 +126,7 @@ public class Login extends BaseActivity{
                       //  int user
                         Log.d("Login1", ""+user.getEmail());
                         int signed = user.getId();
+                        SharedPref.getInstance(Login.this).setConnectyCubeId(SharedPref.CONNECTYCUBEID,user.getId());
 
 
 
