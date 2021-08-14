@@ -126,6 +126,7 @@ public class AllUsersActivity extends AppCompatActivity {
                                 chatRoster.addRosterListener(rosterListener);
                                 //  int userID = 34;
 
+                            //08100642038aA@
                                 if (chatRoster.contains(addUser)) {
                                     try {
                                         chatRoster.subscribe(addUser);
