@@ -1,17 +1,17 @@
 package com.example.waam;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.connectycube.auth.session.ConnectycubeSettings;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -72,6 +72,12 @@ public class NotificationAllowedFragment extends Fragment {
         generalFactory = GeneralFactory.getGeneralFactory(getActivity());
 
 
+        ConnectycubeSettings.getInstance().setEnablePushNotification(true); // default is 'true'
+
+        boolean isEnabled = ConnectycubeSettings.getInstance().isEnablePushNotification();
+
+
+
 
         if(notificationViewAdapter != null){
             notificationViewAdapter.acceptOrReject(new NotificationViewAdapter.AcceptOrDeny() {
@@ -110,6 +116,7 @@ public class NotificationAllowedFragment extends Fragment {
 
             }
         });
+
     }
 
     @Override
@@ -122,4 +129,8 @@ public class NotificationAllowedFragment extends Fragment {
         textView = view.findViewById(R.id.nonote);
         return view;
     }
+
+
+
+
 }

@@ -26,6 +26,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +59,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
 
         mAuth = FirebaseAuth.getInstance();
+       //int me = Integer.parseInt(mAuth.getCurrentUser().getUid());
+       //Log.d("me", ""+me);
         NavigationView navigationView1 = findViewById(R.id.nav_view);
         navigationView1.setNavigationItemSelectedListener(this);
 
@@ -85,11 +90,30 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         Log.d("Media", ""+media);
 
+
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GeneralFactory.getGeneralFactory(DiscoverDrawerLayerout.this)
                         .logOut(DiscoverDrawerLayerout.this);
+
+                ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
+
+                chatService.logout(new EntityCallback() {
+
+                    @Override
+                    public void onSuccess(Object o, Bundle bundle) {
+                        Log.d("logout", ""+o);
+
+                    }
+
+                    @Override
+                    public void onError(ResponseException errors) {
+                        Log.d("logout1", ""+errors.getMessage());
+
+
+                    }
+                });
             }
         });
 

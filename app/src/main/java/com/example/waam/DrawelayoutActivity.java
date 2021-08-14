@@ -22,6 +22,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -85,6 +88,24 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
             public void onClick(View v) {
                 GeneralFactory.getGeneralFactory(DrawelayoutActivity.this)
                         .logOut(DrawelayoutActivity.this);
+
+                ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
+
+                chatService.logout(new EntityCallback() {
+
+                    @Override
+                    public void onSuccess(Object o, Bundle bundle) {
+                        Log.d("logout", ""+o);
+
+                    }
+
+                    @Override
+                    public void onError(ResponseException errors) {
+                        Log.d("logout", ""+errors.getMessage());
+
+
+                    }
+                });
             }
         });
         String uid = FirebaseAuth.getInstance().getUid();

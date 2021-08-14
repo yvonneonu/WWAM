@@ -15,7 +15,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.connectycube.auth.session.ConnectycubeSettings;
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.core.EntityCallback;
 import com.connectycube.core.LogLevel;
+import com.connectycube.core.exception.ResponseException;
+import com.connectycube.users.ConnectycubeUsers;
+import com.connectycube.users.model.ConnectycubeUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -114,6 +119,57 @@ public class Login extends BaseActivity{
                 loginRequest.setEmail(editEmail.getText().toString());
                 loginRequest.setPassword(editPass.getText().toString());
 
+                ConnectycubeUsers.signInByEmail(Email, Password).performAsync(new EntityCallback<ConnectycubeUser>() {
+                    @Override
+                    public void onSuccess(ConnectycubeUser user, Bundle args) {
+
+                      //  int user
+                        Log.d("Login1", ""+user.getEmail());
+                        int signed = user.getId();
+
+
+
+                        ConnectycubeChatService.ConfigurationBuilder chatServiceConfigurationBuilder = new ConnectycubeChatService.ConfigurationBuilder();
+                        chatServiceConfigurationBuilder.setSocketTimeout(60);
+                        chatServiceConfigurationBuilder.setKeepAlive(true);
+                        chatServiceConfigurationBuilder.setUseTls(true); //By default TLS is disabled.
+                        ConnectycubeChatService.setConfigurationBuilder(chatServiceConfigurationBuilder);
+
+                        ConnectycubeChatService chatService = ConnectycubeChatService.getInstance();
+
+
+                        final ConnectycubeUser user1 = new ConnectycubeUser();
+
+                        user1.setId(user.getId());
+                        user1.setPassword(Password);
+                        chatService.login(user1, new EntityCallback() {
+
+
+                            @Override
+                            public void onSuccess(Object o, Bundle bundle) {
+                               Log.d("chatservice", ""+o);
+
+
+                            }
+
+                            @Override
+                            public void onError(ResponseException errors) {
+                                Log.d("chatservice1", ""+errors.getMessage());
+
+
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onError(ResponseException error) {
+                        Log.d("Login", ""+error.getMessage());
+
+
+                    }
+                });
 
 
                 GeneralFactory.getGeneralFactory(Login.this).loginToFireBase(loginRequest.getEmail(), loginRequest.getPassword(), loginRequest);

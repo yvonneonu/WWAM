@@ -2,6 +2,7 @@ package com.example.waam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -13,8 +14,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.connectycube.chat.ConnectycubeChatService;
+import com.connectycube.chat.ConnectycubeRoster;
+import com.connectycube.chat.listeners.RosterListener;
+import com.connectycube.chat.listeners.SubscriptionListener;
+import com.connectycube.chat.model.ConnectycubePresence;
 import com.connectycube.users.model.ConnectycubeUser;
 
+import java.util.Collection;
 import java.util.List;
 
 public class AllUsersActivity extends AppCompatActivity {
@@ -63,10 +70,94 @@ public class AllUsersActivity extends AppCompatActivity {
                             ConnectycubeUser user = friendModelList.get(position);
 
                             generalFactoryInstance.loadSpecUserFromConnec(user.getEmail());
+                            int addUser = user.getId();
 
-                            Intent intent = new Intent(AllUsersActivity.this, ChatMessage.class);
+                            Log.d("getid", ""+addUser);
+
+                            RosterListener rosterListener = new RosterListener() {
+                                @Override
+                                public void entriesDeleted(Collection<Integer> userIds) {
+                                    Log.d("taaag2", ""+userIds.toString());
+
+
+
+                                }
+
+                                @Override
+                                public void entriesAdded(Collection<Integer> userIds) {
+                                    Log.d("taaag", ""+userIds.toString());
+
+
+                                }
+
+                                @Override
+                                public void entriesUpdated(Collection<Integer> userIds) {
+                                    Log.d("taaag1", ""+userIds.toString());
+
+
+                                }
+
+                                @Override
+                                public void presenceChanged(ConnectycubePresence presence) {
+
+                                }
+                            };
+
+                            SubscriptionListener subscriptionListener = new SubscriptionListener() {
+                                @Override
+                                public void subscriptionRequested(int userId) {
+
+                                    Log.d("taaag5", ""+userId);
+
+
+                                }
+                            };
+
+
+                            Log.d("boningyourface", ""+ConnectycubeRoster.SubscriptionMode.mutual);
+                            Log.d("boningyourfac", ""+subscriptionListener);
+
+                            ConnectycubeRoster chatRoster = ConnectycubeChatService.getInstance().getRoster(ConnectycubeRoster.SubscriptionMode.mutual, subscriptionListener);
+
+
+                            Log.d("logthis", ""+chatRoster.toString());
+
+
+                                chatRoster.addRosterListener(rosterListener);
+                                //  int userID = 34;
+
+                                if (chatRoster.contains(addUser)) {
+                                    try {
+                                        chatRoster.subscribe(addUser);
+                                        Log.d("gre", ""+chatRoster.getEntries());
+
+                                            Intent intent = new Intent(AllUsersActivity.this, ChatMessage.class);
+                                            intent.putExtra(ChatMessage.FRIENDS, user);
+                                            startActivity(intent);
+
+
+                                    } catch (Exception e) {
+                                        Log.d("gre", ""+e.getMessage());
+
+
+                                    }
+                                } else {
+                                    try {
+                                        chatRoster.createEntry(addUser, null);
+                                    } catch (Exception e) {
+                                        Log.d("gre12", ""+e.getMessage());
+
+
+
+                                    }
+                                }
+
+
+
+
+                           /* Intent intent = new Intent(AllUsersActivity.this, ChatMessage.class);
                             intent.putExtra(ChatMessage.FRIENDS, user);
-                            startActivity(intent);
+                            startActivity(intent);*/
                            /* if (friendAdapt != null && FirebaseAuth.getInstance().getCurrentUser() != null) {
                                 String branch = FirebaseAuth.getInstance().getCurrentUser().getUid() + FRIENDS;
 

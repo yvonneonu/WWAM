@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.waam">
 
+
+
     <uses-permission android:name="android:permission.BIND_NOTIFICATION_lISTENER_SERVICE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -57,6 +59,14 @@
 
         <service android:name=".NotificationListener" />
 
+        <service
+            android:name="com.connectycube.pushnotifications.services.fcm.FcmPushListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
         <activity android:name=".Unfriend" />
         <activity android:name=".DailyMatch" />
         <activity android:name=".AgentProfile" />
@@ -97,6 +107,8 @@
             </intent-filter>
         </activity>
 
+        <meta-data android:name="com.connectycube.pushnotifications.SENDER_ID" android:value="299192676420" />
+        <meta-data android:name="com.connectycube.pushnotifications.ENVIRONMENT" android:value="DEVELOPMENT" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.android.fileprovider"

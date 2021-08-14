@@ -1,6 +1,7 @@
 package com.example.waam;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -10,8 +11,19 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.connectycube.chat.ConnectycubeRestChatService;
+import com.connectycube.chat.exception.ChatException;
+import com.connectycube.chat.listeners.ChatDialogMessageListener;
+import com.connectycube.chat.model.ConnectycubeChatDialog;
+import com.connectycube.chat.model.ConnectycubeChatMessage;
+import com.connectycube.chat.model.ConnectycubeDialogType;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
 import com.connectycube.users.model.ConnectycubeUser;
 
+import org.jivesoftware.smack.SmackException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 //import com.sinch.android.rtc.SinchError;
@@ -88,6 +100,7 @@ public class ChatMessage extends AppCompatActivity{
 
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        //edtMess
         ImageButton imageButtonSender = findViewById(R.id.imageButton);
         generalFactoryInstance = GeneralFactory.getGeneralFactory(this);
         EditText editText = findViewById(R.id.edtMess);
@@ -101,13 +114,77 @@ public class ChatMessage extends AppCompatActivity{
 
 
 
+         int userss = userFriends.getId();
+
+
+
+        ArrayList<Integer> occupantIds = new ArrayList<Integer>();
+        occupantIds.add(userss);
+        Log.d("getuser", ""+userss);
+
+        ConnectycubeChatDialog dialog = new ConnectycubeChatDialog();
+        dialog.setType(ConnectycubeDialogType.PRIVATE);
+        dialog.setOccupantsIds(occupantIds);
+
+//or just use DialogUtils
+//ConnectycubeChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);
+
+        ConnectycubeRestChatService.createChatDialog(dialog).performAsync(new EntityCallback<ConnectycubeChatDialog>() {
+            @Override
+            public void onSuccess(ConnectycubeChatDialog createdDialog, Bundle params) {
+
+
+                Log.d("getalluser", ""+createdDialog.getName());
 
 
 
 
 
 
+            }
 
+            @Override
+            public void onError(ResponseException exception) {
+                Log.d("getalluser", ""+exception.getMessage());
+
+
+            }
+        });
+
+
+        imageButtonSender.setOnClickListener(v -> {
+            String messages = editText.getText().toString().trim();
+
+            try {
+                ConnectycubeChatDialog privateDialog = new ConnectycubeChatDialog();
+
+                ConnectycubeChatMessage chatMessage = new ConnectycubeChatMessage();
+               // String messages =  editText.getText().toString();
+                chatMessage.setBody(messages);
+                chatMessage.setSaveToHistory(true);
+
+                privateDialog.sendMessage(chatMessage);
+
+                privateDialog.addMessageListener(new ChatDialogMessageListener() {
+                    @Override
+                    public void processMessage(String dialogId, ConnectycubeChatMessage message, Integer senderId) {
+                        Log.d("showessage", ""+message.toString());
+
+                    }
+
+                    @Override
+                    public void processError(String dialogId, ChatException exception, ConnectycubeChatMessage message, Integer senderId) {
+
+                    }
+                });
+            } catch (SmackException.NotConnectedException e) {
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //generalFactoryInstance.sendMessage(messages,receiverId,ChatMessage.this);
+            editText.setText("");
+        });
 
 
 

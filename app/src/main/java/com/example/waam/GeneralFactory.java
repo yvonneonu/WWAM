@@ -243,22 +243,7 @@ public class GeneralFactory {
                     if (task.isSuccessful()) {
 
 
-                        ConnectycubeUsers.signInByEmail(email, password).performAsync(new EntityCallback<ConnectycubeUser>() {
-                            @Override
-                            public void onSuccess(ConnectycubeUser user, Bundle args) {
-                                loginUser(loginRequest);
-                                Log.d("Login", ""+user.getFullName());
-
-
-                            }
-
-                            @Override
-                            public void onError(ResponseException error) {
-                                Log.d("Login", ""+error.getMessage());
-
-
-                            }
-                        });
+                        loginUser(loginRequest);
 
 
                     } else {
