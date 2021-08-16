@@ -19,6 +19,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.connectycube.chat.ConnectycubeRestChatService;
+import com.connectycube.chat.model.ConnectycubeChatDialog;
+import com.connectycube.chat.model.ConnectycubeDialogType;
+import com.connectycube.core.Consts;
+import com.connectycube.core.EntityCallback;
+import com.connectycube.core.exception.ResponseException;
+import com.connectycube.core.request.RequestGetBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -113,7 +120,35 @@ public class MessagesFragment extends Fragment {
 
         });
 
-        generalFactory.loadContact(bartwo,textView,friends -> {
+//        RequestGetBuilder requestBuilder = new RequestGetBuilder();
+//        requestBuilder.setLimit(50);
+//        requestBuilder.setSkip(100);
+////requestBuilder.sortAsc(Consts.DIALOG_LAST_MESSAGE_DATE_SENT_FIELD_NAME);
+//
+//        ConnectycubeRestChatService.getChatDialogs(ConnectycubeDialogType.PRIVATE, requestBuilder).performAsync(new EntityCallback<ArrayList<ConnectycubeChatDialog>>() {
+//            @Override
+//            public void onSuccess(ArrayList<ConnectycubeChatDialog> dialogs, Bundle params) {
+//                int totalEntries = params.getInt(Consts.TOTAL_ENTRIES);
+//
+//                Log.d("TotalEntries",""+totalEntries);
+//
+//                for(int i = 0 ; i < totalEntries ; i++){
+//                    Log.d("DialogList",dialogs.get(i).getName());
+//                }
+//
+//
+////Stoped here for today
+//            }
+//
+//            @Override
+//            public void onError(ResponseException exception) {
+//                Log.d("ErrorContact",exception.getMessage());
+//
+//            }
+//        });
+//
+
+        /*generalFactory.loadContact(bartwo,textView,friends -> {
             waamUserList = friends;
             recentChatsAdapt = new RecentChatsAdapt(waamUserList,getActivity());
             int si = waamUserList.size();
@@ -139,7 +174,7 @@ public class MessagesFragment extends Fragment {
                 intent.putExtra(ChatMessage.NEW_FRIENDS,friends.get(position));
                 startActivity(intent);
             });
-        });
+        });*/
 
     }
 

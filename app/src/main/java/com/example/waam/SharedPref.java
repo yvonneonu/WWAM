@@ -3,6 +3,8 @@ package com.example.waam;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.connectycube.users.model.ConnectycubeUser;
+
 
 public class SharedPref {
 
@@ -112,7 +114,6 @@ public class SharedPref {
     public float getStoredValue() {
         return sharedPref.getFloat(VALUE, 50);
     }
-
 
 
 

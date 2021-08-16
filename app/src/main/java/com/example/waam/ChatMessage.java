@@ -20,8 +20,10 @@ import com.connectycube.chat.model.ConnectycubeChatDialog;
 import com.connectycube.chat.model.ConnectycubeChatMessage;
 import com.connectycube.chat.model.ConnectycubeDialogType;
 import com.connectycube.chat.request.MessageGetBuilder;
+import com.connectycube.core.Consts;
 import com.connectycube.core.EntityCallback;
 import com.connectycube.core.exception.ResponseException;
+import com.connectycube.core.request.RequestGetBuilder;
 import com.connectycube.users.model.ConnectycubeUser;
 
 import org.jivesoftware.smack.SmackException;
@@ -123,6 +125,9 @@ public class ChatMessage extends AppCompatActivity{
         dialog.setType(ConnectycubeDialogType.PRIVATE);
         dialog.setOccupantsIds(occupantIds);
 
+        RequestGetBuilder requestBuilder = new RequestGetBuilder();
+        requestBuilder.setLimit(50);
+        requestBuilder.setSkip(100);
 
 
 
