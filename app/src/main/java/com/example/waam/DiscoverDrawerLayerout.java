@@ -252,6 +252,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 bottomNavigationView.setVisibility(View.VISIBLE);
                 //bottomNavigationView.getMenu().getItem(2).setChecked(true);
 
+              //  fragment.ad.addToBackStack(null);
+
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
                 break;
 
@@ -296,6 +298,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
 
     }
+
 
 
 }

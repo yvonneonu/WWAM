@@ -75,11 +75,21 @@ public class FriendsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            return;
+        }
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+
+
         }
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
+
+        //((AppCompatActivity)getActivity()).setSupportActionBar(tool_bar);
+
+       // ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
         setHasOptionsMenu(true);
         GeneralFactory generalFactory = GeneralFactory.getGeneralFactory(getActivity());
@@ -181,6 +191,7 @@ public class FriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
         recyclerView = view.findViewById(R.id.friends_recycler);
@@ -213,8 +224,8 @@ public class FriendsFragment extends Fragment {
             }
             @Override
             public boolean onQueryTextChange(String s) {
-                friendAdapt.getFilter().filter(s);
-                Log.d("TAG", "QueryTextChange: " + s);
+//                friendAdapt.getFilter().filter(s);
+            //    Log.d("TAG", "QueryTextChange: " + s);
                 return false;
             }
         });
@@ -232,6 +243,18 @@ public class FriendsFragment extends Fragment {
     }
 
     private void refreshData() {
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 
 
