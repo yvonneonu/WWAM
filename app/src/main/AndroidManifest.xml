@@ -61,6 +61,7 @@
 
         <service android:name=".SinchService" />
         <service android:name=".NotificationListener" />
+        <service android:name=".Notification.MyBaseFireBaseId" />
 
         <activity android:name=".IncomingCallScreenActivity"    android:screenOrientation="locked"/>
         <activity android:name=".Unfriend"    android:screenOrientation="locked"/>
