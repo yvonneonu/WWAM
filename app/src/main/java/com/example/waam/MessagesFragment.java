@@ -84,6 +84,15 @@ public class MessagesFragment extends Fragment {
         String branchName = FirebaseAuth.getInstance().getUid()+"FRIENDS";
       //  User userReal = getActivity().getIntent().getParcelableExtra(VideoCallActivity.AGOREUSER);
         activity = (AppCompatActivity) getActivity();
+
+        assert activity != null;
+
+
+        Objects.requireNonNull(activity.getSupportActionBar()).show();
+
+        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
+        //.setIcon(R.drawable.location);
+        //.setTitle("Messages");
         generalFactory.loadNewFriends(branchName, barone,textViewNewFriends, friends -> {
             newFriends = friends;
             friendAdapter  = new FriendAdapter(newFriends,getActivity());
@@ -173,17 +182,9 @@ public class MessagesFragment extends Fragment {
         });
 
 
-        assert activity != null;
 
 
-        Objects.requireNonNull(activity.getSupportActionBar()).show();
-
-        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
-                //.setIcon(R.drawable.location);
-                //.setTitle("Messages");
         return  view;
-
-
 
     }
 
@@ -236,4 +237,15 @@ public class MessagesFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
+
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
+    }
 }

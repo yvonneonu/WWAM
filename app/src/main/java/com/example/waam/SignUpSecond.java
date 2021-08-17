@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -25,7 +27,8 @@ import androidx.cardview.widget.CardView;
 
 import com.sinch.android.rtc.SinchError;
 
-public class SignUpSecond extends BaseActivity implements  SinchService.StartFailedListener {
+
+public class SignUpSecond extends BaseActivity implements SinchService.StartFailedListener, View.OnClickListener {
 
     private GeneralFactory generalFactory;
     private CardView progressBar;
@@ -37,7 +40,7 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
     private DatePickerDialog datePickerDialog;
     private UserService userService;
     private ProgressDialog mSpinner;
-    ImageView imageView;
+    ImageView imageView, showpass;
 
 
     @Override
@@ -66,7 +69,9 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
         password = findViewById(R.id.editText);
         confrim = findViewById(R.id.editText88);
         imageView = findViewById(R.id.logo);
+        showpass = findViewById(R.id.show_pass_btn);
 
+        showpass.setOnClickListener(this);
 
         update.setText(getTodaysDate());
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -265,12 +270,13 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
         startActivity(intent);
     }
 
+
     @Override
     public void onStartFailed(SinchError error) {
         Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
-       // if (mSpinner != null) {
-         //   mSpinner.dismiss();
-        //}
+        // if (mSpinner != null) {
+        //   mSpinner.dismiss();
+
     }
 
     @Override
@@ -284,6 +290,27 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
 
     }
 
+    @Override
+    public void onClick(View v) {
+        final int hidepass = R.id.show_pass_btn;
+
+        switch (v.getId()){
+            case hidepass:
+                if (password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                        showpass.setImageResource(R.drawable.ic_baseline_visibility_off_24);
+                        password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+                }else {
+                    showpass.setImageResource(R.drawable.ic_baseline_visibility_24);
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                password.setSelection(password.getText().length());
+
+                break;
+        }
+
+
+    }
    /* @Override
     protected void onPause() {
         if (mSpinner != null) {
