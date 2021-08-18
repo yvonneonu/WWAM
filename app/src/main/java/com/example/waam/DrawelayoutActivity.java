@@ -108,8 +108,8 @@ public class DrawelayoutActivity extends AppCompatActivity implements Navigation
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //toolbar.setLogo(R.drawable.topnavlogo);
-       // toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+        toolbar.setLogo(R.drawable.topnavlogo);
+        //toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
         Log.d("TAG", "in activity null");
         Fragment fragmenting;
         if(post){

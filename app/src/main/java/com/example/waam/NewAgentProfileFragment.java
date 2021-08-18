@@ -68,7 +68,9 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
+
 
     }
 
@@ -89,6 +91,7 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
         aboutsefl.setOnClickListener(this);
         friend.setOnClickListener(this);
         constraintLayout.setOnClickListener(this);
+
 
 
         return view;
@@ -163,6 +166,7 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
             //textView.setVisibility(View.GONE);
 
             getChildFragmentManager().beginTransaction()
+
                     .replace(R.id.framee, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     //.commitAllowingStateLoss();
@@ -219,4 +223,5 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
         }
 
     }
+
 }

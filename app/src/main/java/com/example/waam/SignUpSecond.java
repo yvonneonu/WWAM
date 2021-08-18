@@ -40,7 +40,7 @@ public class SignUpSecond extends BaseActivity implements SinchService.StartFail
     private DatePickerDialog datePickerDialog;
     private UserService userService;
     private ProgressDialog mSpinner;
-    ImageView imageView, showpass;
+    ImageView imageView, showpass, confirm;
 
 
     @Override
@@ -70,8 +70,10 @@ public class SignUpSecond extends BaseActivity implements SinchService.StartFail
         confrim = findViewById(R.id.editText88);
         imageView = findViewById(R.id.logo);
         showpass = findViewById(R.id.show_pass_btn);
+        confirm = findViewById(R.id.confirm);
 
         showpass.setOnClickListener(this);
+        confirm.setOnClickListener(this);
 
         update.setText(getTodaysDate());
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -293,6 +295,7 @@ public class SignUpSecond extends BaseActivity implements SinchService.StartFail
     @Override
     public void onClick(View v) {
         final int hidepass = R.id.show_pass_btn;
+        final int hideComfirm = R.id.confirm;
 
         switch (v.getId()){
             case hidepass:
@@ -307,6 +310,16 @@ public class SignUpSecond extends BaseActivity implements SinchService.StartFail
                 password.setSelection(password.getText().length());
 
                 break;
+            case hideComfirm:
+                if (confrim.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                    confirm.setImageResource(R.drawable.ic_baseline_visibility_off_24);
+                    confrim.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else {
+                    confirm.setImageResource(R.drawable.ic_baseline_visibility_24);
+                    confrim.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                confrim.setSelection(confrim.getText().length());
+
         }
 
 

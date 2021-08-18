@@ -348,6 +348,15 @@
                 app:layout_constraintTop_toTopOf="@+id/imageViewco"
                 app:layout_constraintVertical_bias="0.0" />
 
+            <ImageView
+                android:id="@+id/confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/ic_baseline_visibility_24"
+                app:layout_constraintBottom_toBottomOf="@+id/editText88"
+                app:layout_constraintEnd_toEndOf="@+id/dateofbirth"
+                app:layout_constraintTop_toTopOf="@+id/editText88" />
             <View
                 android:id="@+id/view8"
                 android:layout_width="0dp"

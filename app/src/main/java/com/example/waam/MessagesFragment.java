@@ -241,6 +241,8 @@ public class MessagesFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
+        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Messages");
+
 
     }
     @Override
