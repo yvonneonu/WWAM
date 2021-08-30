@@ -95,7 +95,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="What I'm Looking For"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
