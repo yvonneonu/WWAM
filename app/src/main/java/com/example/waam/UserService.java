@@ -1,5 +1,7 @@
 package com.example.waam;
 
+import com.example.waam.DisplayProfile.ProfileModel;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -64,6 +66,8 @@ public interface UserService {
 
 
 
+    @GET("api/user")
+    Call<ProfileModel> profiledisplay( @Header("Authorization") String token);
 
     @GET("api/userinterest")
     Call<List<DispalyInterest>>display(@Header("Authorization")String token);

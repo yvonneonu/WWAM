@@ -127,6 +127,8 @@ public class SignUpSecond extends BaseActivity implements SinchService.StartFail
         String Update = update.getText().toString();
         String Passwor = password.getText().toString();
         String Confirm = confrim.getText().toString();
+
+
         if(fullname.isEmpty()) {
             name.setError("Full Name is required");
             name.requestFocus();
@@ -173,6 +175,8 @@ public class SignUpSecond extends BaseActivity implements SinchService.StartFail
             waamUser.setGender(gender);
             waamUser.setSeeking(interest);
             waamUser.setRelationship(relationship);
+
+
             if (!Email.equals(getSinchServiceInterface().getUserName())) {
                 getSinchServiceInterface().stopClient();
 
@@ -186,13 +190,10 @@ public class SignUpSecond extends BaseActivity implements SinchService.StartFail
             generalFactory.requestUser(waamUser,progressBar);
             //requestUser(waamUser);
 
-
-
         }
 
-
-
     }
+
 
     private void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -201,6 +202,7 @@ public class SignUpSecond extends BaseActivity implements SinchService.StartFail
                 month = month + 1;
                 String date = makeDateString(dayOfMonth, month, year);
                 update.setText(date);
+
             }
         };
         java.util.Calendar c = java.util.Calendar.getInstance();

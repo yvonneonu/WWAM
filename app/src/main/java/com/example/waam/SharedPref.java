@@ -12,6 +12,7 @@ public class SharedPref {
     public static final String PASSWORD = "password";
     public static final String UID = "uid";
     public static final String VALUE = "50";
+    public static final String AGE = "age";
     private static SharedPref pref;
     private final SharedPreferences sharedPref;
 
@@ -42,6 +43,16 @@ public class SharedPref {
     }
 
     public void setStoredName(String key, String value) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, value);
+        editor.apply();
+
+    }
+    public String getStoredAge() {
+        return sharedPref.getString(AGE, null);
+    }
+
+    public void setStoredAge(String key, String value) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, value);
         editor.apply();

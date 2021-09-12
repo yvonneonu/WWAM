@@ -80,7 +80,7 @@ public class SignUp extends AppCompatActivity {
                   Intent intent = new Intent(SignUp.this,SignUpSecond.class);
                   Bundle bundle = new Bundle();
                   Log.d("Relay",relationship);
-                  bundle.putString(INTEREST, interest);
+                  bundle.putString(INTEREST,    interest);
                   bundle.putString(GENDER,chose);
                   bundle.putString(RELATION,relationship);
                   intent.putExtras(bundle);

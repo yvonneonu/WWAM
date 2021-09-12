@@ -68,7 +68,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginLeft="3dp"
         android:text="Sign up"
-        android:textColor="@color/offblue"
+        android:textColor="@color/bpDarker_blue"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/dont"
         app:layout_constraintStart_toEndOf="@+id/dont" />

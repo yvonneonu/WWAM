@@ -81,7 +81,9 @@
         <activity android:name=".MatchActivity"    android:screenOrientation="locked"/>
         <activity android:name=".Matchfriends"    android:screenOrientation="locked"/>
         <activity android:name=".CompleteProfile"    android:screenOrientation="locked"/>
-        <activity android:name=".LocationDetectActivity"    android:screenOrientation="locked"/>
+        <activity android:name=".LocationDetectActivity"    android:screenOrientation="locked">
+
+        </activity>
         <activity android:name=".Profile"    android:screenOrientation="locked"/>
         <activity
             android:name=".DrawelayoutActivity"
@@ -99,6 +101,7 @@
         <activity android:name=".Interest"    android:screenOrientation="locked"/>
         <activity android:name=".ViewPager"
             android:screenOrientation="locked">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

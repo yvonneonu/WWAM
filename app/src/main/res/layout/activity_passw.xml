@@ -29,7 +29,7 @@
             android:layout_marginTop="108dp"
             android:gravity="center"
             android:text="Password Sent!"
-            android:textColor="@color/offblue"
+            android:textColor="@color/bpDarker_blue"
             android:textSize="25dp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +139,7 @@ address provided below. Please check your wmail to recover your password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
-                android:textColor="@color/offblue" />
+                android:textColor="@color/bpDarker_blue" />
         </LinearLayout>
 
 

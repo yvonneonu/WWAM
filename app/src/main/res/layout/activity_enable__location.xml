@@ -31,7 +31,7 @@
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/bpDarker_blue"
             android:text="NEXT"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/textme"
