@@ -213,7 +213,7 @@ You can withdraw consent at any time."
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:text="Login"
-                android:textColor="@color/offblue"
+                android:textColor="@color/bpDarker_blue"
                 app:layout_constraintBottom_toBottomOf="@+id/textView15"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
                 app:layout_constraintTop_toTopOf="@+id/textView15" />

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,9 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
+
 
     }
 
@@ -89,6 +92,7 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
         aboutsefl.setOnClickListener(this);
         friend.setOnClickListener(this);
         constraintLayout.setOnClickListener(this);
+
 
 
         return view;
@@ -163,6 +167,7 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
             //textView.setVisibility(View.GONE);
 
             getChildFragmentManager().beginTransaction()
+
                     .replace(R.id.framee, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     //.commitAllowingStateLoss();
@@ -175,10 +180,16 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
 
             case butto:
                 if (v.getId() == constraintLayout.getId()) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(requireActivity());
+                  //  View view1 = LayoutInflater.from(getActivity()).inflate(R.layout.agenttrquest, viewGroup, )
+
                     LayoutInflater factory = LayoutInflater.from(getActivity());
+                   // alertDialog.setCancelable(false);
                     final View view = factory.inflate(R.layout.agenttrquest, null);
                     TextView text = view.findViewById(R.id.textView70);
+                    Button button1 = view.findViewById(R.id.button10);
+                    ImageView imageView = view.findViewById(R.id.cancell);
+
 
                     SpannableStringBuilder click = new SpannableStringBuilder("You must book this agent to access the \n chat feature! ");
                     click.setSpan(new ForegroundColorSpan(Color.CYAN),40,45, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
@@ -186,16 +197,15 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
                     text.setText(click);
                     alertDialog.setView(view);
 
-                    Button button = view.findViewById(R.id.close);
-                    Button button1 = view.findViewById(R.id.button10);
-                    ImageView imageView = view.findViewById(R.id.cancell);
+                    final AlertDialog alertDialog1 = alertDialog.create();
 
-                    imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            getActivity().finish();
-                        }
-                    });
+
+
+
+                    Button button = view.findViewById(R.id.close);
+
+
+
 
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -206,17 +216,52 @@ public class NewAgentProfileFragment extends Fragment implements View.OnClickLis
                         }
                     });
 
-               /* alertDialog.setNegativeButton("Schließen", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
-                        dialog.dismiss();
-                    }
-                });*/
-                    alertDialog.show();
+
+
+                    //alertDialog.setIcon(getResources().getDrawable(R.drawable.ic_baseline_close_24));
+
+
+//                alertDialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog,int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+
+
+//                    alertDialog.setNegativeButtonIcon(getResources().getDrawable(R.drawable.ic_baseline_close_24));
+//                    alertDialog.setCancelable(true);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+
+                            alertDialog1.dismiss();
+                            Log.d("lerts", "mee");
+
+
+//                           alertDialog.setNegativeButton("", new DialogInterface.OnClickListener() {
+//                               @Override
+//                               public void onClick(DialogInterface dialog, int which) {
+//                                   dialog.dismiss();
+//                               }
+//                           });
+//
+//                            Log.d("lerts", "mee");
+
+                        }
+                    });
+                  //  alertDialog.show();
+
+
+                    alertDialog1.show();
+
                 }
 
                 break;
 
+
         }
 
     }
+
 }

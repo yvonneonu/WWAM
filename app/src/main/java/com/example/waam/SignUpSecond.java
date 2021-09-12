@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -25,7 +27,8 @@ import androidx.cardview.widget.CardView;
 
 import com.sinch.android.rtc.SinchError;
 
-public class SignUpSecond extends BaseActivity implements  SinchService.StartFailedListener {
+
+public class SignUpSecond extends BaseActivity implements SinchService.StartFailedListener, View.OnClickListener {
 
     private GeneralFactory generalFactory;
     private CardView progressBar;
@@ -37,7 +40,7 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
     private DatePickerDialog datePickerDialog;
     private UserService userService;
     private ProgressDialog mSpinner;
-    ImageView imageView;
+    ImageView imageView, showpass, confirm;
 
 
     @Override
@@ -66,7 +69,11 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
         password = findViewById(R.id.editText);
         confrim = findViewById(R.id.editText88);
         imageView = findViewById(R.id.logo);
+        showpass = findViewById(R.id.show_pass_btn);
+        confirm = findViewById(R.id.confirm);
 
+        showpass.setOnClickListener(this);
+        confirm.setOnClickListener(this);
 
         update.setText(getTodaysDate());
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +127,8 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
         String Update = update.getText().toString();
         String Passwor = password.getText().toString();
         String Confirm = confrim.getText().toString();
+
+
         if(fullname.isEmpty()) {
             name.setError("Full Name is required");
             name.requestFocus();
@@ -166,6 +175,8 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
             waamUser.setGender(gender);
             waamUser.setSeeking(interest);
             waamUser.setRelationship(relationship);
+
+
             if (!Email.equals(getSinchServiceInterface().getUserName())) {
                 getSinchServiceInterface().stopClient();
 
@@ -179,13 +190,10 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
             generalFactory.requestUser(waamUser,progressBar);
             //requestUser(waamUser);
 
-
-
         }
 
-
-
     }
+
 
     private void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -194,6 +202,7 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
                 month = month + 1;
                 String date = makeDateString(dayOfMonth, month, year);
                 update.setText(date);
+
             }
         };
         java.util.Calendar c = java.util.Calendar.getInstance();
@@ -265,12 +274,13 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
         startActivity(intent);
     }
 
+
     @Override
     public void onStartFailed(SinchError error) {
         Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
-       // if (mSpinner != null) {
-         //   mSpinner.dismiss();
-        //}
+        // if (mSpinner != null) {
+        //   mSpinner.dismiss();
+
     }
 
     @Override
@@ -284,6 +294,38 @@ public class SignUpSecond extends BaseActivity implements  SinchService.StartFai
 
     }
 
+    @Override
+    public void onClick(View v) {
+        final int hidepass = R.id.show_pass_btn;
+        final int hideComfirm = R.id.confirm;
+
+        switch (v.getId()){
+            case hidepass:
+                if (password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                        showpass.setImageResource(R.drawable.ic_baseline_visibility_off_24);
+                        password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+                }else {
+                    showpass.setImageResource(R.drawable.ic_baseline_visibility_24);
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                password.setSelection(password.getText().length());
+
+                break;
+            case hideComfirm:
+                if (confrim.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                    confirm.setImageResource(R.drawable.ic_baseline_visibility_off_24);
+                    confrim.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else {
+                    confirm.setImageResource(R.drawable.ic_baseline_visibility_24);
+                    confrim.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                confrim.setSelection(confrim.getText().length());
+
+        }
+
+
+    }
    /* @Override
     protected void onPause() {
         if (mSpinner != null) {

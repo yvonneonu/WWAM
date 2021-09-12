@@ -53,6 +53,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView71" />
 
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+
             <FrameLayout
                 android:id="@+id/frameLayout9"
                 android:layout_width="match_parent"

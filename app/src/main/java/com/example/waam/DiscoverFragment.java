@@ -106,4 +106,16 @@ public class DiscoverFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
+
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
+    }
 }

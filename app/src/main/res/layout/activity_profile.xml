@@ -76,11 +76,11 @@
 
         <TextView
             android:id="@+id/captureImage"
-            android:layout_width="150dp"
-            android:layout_height="20dp"
+            android:layout_width="144dp"
+            android:layout_height="26dp"
             android:text="Take Photo"
-            android:textColor="@color/white"
             android:textAlignment="center"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="@+id/imageView5"
             app:layout_constraintStart_toStartOf="@+id/imageView5"
@@ -117,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/bpDarker_blue"
             android:text="UPLOAD PROFILE IMAGE"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"

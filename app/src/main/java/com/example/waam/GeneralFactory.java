@@ -1,7 +1,6 @@
 package com.example.waam;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,8 +14,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.lifecycle.LiveData;
 
+import com.example.waam.Notification.APIService;
+import com.example.waam.Notification.Client;
+import com.example.waam.Notification.Data;
+import com.example.waam.Notification.MyResponse;
+import com.example.waam.Notification.Sender;
+import com.example.waam.Notification.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -42,11 +47,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,6 +78,7 @@ public class GeneralFactory {
     private String theMessage;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
+    private APIService apiService;
 
 
     private final int[] images = new int[]{R.drawable.eventcardimg,
@@ -226,6 +227,7 @@ public class GeneralFactory {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         loginUser(loginRequest);
+
                     } else {
                         Log.d("Login", "Login was succesfull");
                     }
@@ -420,7 +422,14 @@ public class GeneralFactory {
                     .addOnFailureListener(e -> Toast.makeText(context, "Message cant be sent", Toast.LENGTH_LONG).show())
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(context, "Message was sent", Toast.LENGTH_LONG).show();
+                            loadSpecUser(mAuth.getCurrentUser().getUid(), new SpecificUser() {
+                                @Override
+                                public void loadSpecUse(WaamUser user) {
+                                    sendNotification(receiverId,user.getFullname(),message);
+                                    Toast.makeText(context, "Message was sent", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
                         }
                     });
         } else {
@@ -430,6 +439,44 @@ public class GeneralFactory {
     }
 
 
+    private void sendNotification(String receiver, String username, String message){
+
+        apiService = Client.getClients("https://fcm.googleapis.com/").create(APIService.class);
+        String userId = FirebaseAuth.getInstance().getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = reference.orderByKey().equalTo(receiver);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    Token token = dataSnapshot.getValue(Token.class);
+                    Data data = new Data(userId,R.mipmap.ic_launcher,username+": "+message,"New message",userId);
+                    Sender sender = new Sender(data,token.getToken());
+                    apiService.sendNotification(sender)
+                            .enqueue(new Callback<MyResponse>() {
+                                @Override
+                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                    if(response.code() == 200){
+                                        if(response.body().success == 1){
+
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     public void setOnlineStatus(String status) {
         String userId = mAuth.getCurrentUser().getUid();
         DatabaseReference database = getInstance().getReference(WAAMBASE).child(userId);
@@ -717,6 +764,14 @@ public class GeneralFactory {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()) {
+
+
+
+                    Log.d("accesstoken", mAuth
+                            .getInstance()
+                            .getCurrentUser()
+                            .getIdToken(false)
+                            .getResult().getToken());
 
 
                     assert response.body() != null;

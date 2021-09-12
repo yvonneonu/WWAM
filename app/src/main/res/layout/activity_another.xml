@@ -137,7 +137,7 @@
             android:layout_marginTop="20dp"
             android:text="Send Email"
             android:textAllCaps="false"
-            android:backgroundTint="@color/offblue"
+            android:backgroundTint="@color/bpDarker_blue"
             android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="@+id/editText3"
             app:layout_constraintStart_toStartOf="@+id/editText3"
@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:textColor="@color/offblue"
+            android:textColor="@color/bpDarker_blue"
             app:layout_constraintBottom_toBottomOf="@+id/editText"
             app:layout_constraintStart_toEndOf="@+id/editText"
             app:layout_constraintTop_toTopOf="@+id/editText" />

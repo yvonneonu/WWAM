@@ -43,6 +43,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover_drawer_layerout);
 
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
@@ -230,8 +231,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
                 break;
 
             case R.id.profile:
-                //fragment = new ProfileFragment();
-                fragment = new NewAgentProfileFragment();
+                fragment = new ProfileFragment();
+                //fragment = new NewAgentProfileFragment();
                 bottomNavigationView.setVisibility(View.VISIBLE);
 
                 Log.d("show", "profile not showing");
@@ -250,6 +251,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
                 bottomNavigationView.setVisibility(View.VISIBLE);
                 //bottomNavigationView.getMenu().getItem(2).setChecked(true);
+
+              //  fragment.ad.addToBackStack(null);
 
                 item.setIcon(R.drawable.lowernav_friends_icon_active);
                 break;
@@ -295,6 +298,7 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
 
     }
+
 
 
 }

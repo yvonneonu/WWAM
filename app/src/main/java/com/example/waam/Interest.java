@@ -135,17 +135,24 @@ public class Interest extends AppCompatActivity {
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         // Check which checkbox was clicked
+        //view.setBackgroundResource(R.drawable.selectedbubble);
         switch(view.getId()) {
             case R.id.radioButton:
                 if (checked){
 
                    // Dinninout = zeroText.getText().toString();
 
+
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+                   // (CheckBox) view).setsetBackgroundColor(Color.rgb(64, 131, 207));
                     interestRequestList.add(new InterestRequest(Dinninout));
                     Log.d("DIning", ""+Dinninout);
                 }
                 else {
               //      interest.remove(Dinninout);
+
+
+                    view.setBackgroundResource(R.drawable.checkbox);
                     interestRequestList.remove(new InterestRequest(Dinninout));
                    // Dinninout = "";
                     Log.d("non",""+Dinninout);
@@ -156,6 +163,8 @@ public class Interest extends AppCompatActivity {
                 if (checked){
                    // Travel = oneText.getText().toString();
                     //interest.add(Travel);
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+
                     interestRequestList.add(new InterestRequest(Travel));
                     Log.d("DIning", ""+Travel);
                 }
@@ -163,19 +172,23 @@ public class Interest extends AppCompatActivity {
 //                    interest.remove(Travel);
                     interestRequestList.remove(new InterestRequest(Travel));
 
+                    view.setBackgroundResource(R.drawable.checkbox);
                     //Travel = "";
                 }
                 break;
 
             case R.id.radioButton2:
                 if (checked){
-                   // Sport = twoText.getText().toString();
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+
+                    // Sport = twoText.getText().toString();
                     interestRequestList.add(new InterestRequest(Sport));
                     //interest.add(Sport);
 
                     Log.d("text", "show "+Sport);
                 }
                 else{
+                    view.setBackgroundResource(R.drawable.checkbox);
                   //  interest.remove(Sport);
                     interestRequestList.remove(new InterestRequest(Sport));
 
@@ -185,11 +198,14 @@ public class Interest extends AppCompatActivity {
 
             case R.id.radioButton3:
                 if (checked){
-                  //  NightclubsorDancing = threeText.getText().toString();
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+
+                    //  NightclubsorDancing = threeText.getText().toString();
                     //interest.add(NightclubsorDancing);
                     interestRequestList.add(new InterestRequest(NightclubsorDancing));
 
                 }else {
+                    view.setBackgroundResource(R.drawable.checkbox);
                    // interest.remove(NightclubsorDancing);
                     interestRequestList.remove(new InterestRequest(NightclubsorDancing));
 
@@ -199,11 +215,14 @@ public class Interest extends AppCompatActivity {
 
             case R.id.radioButton4:
                 if (checked){
-                  //  CoffeeConversation = fourText.getText().toString();
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+
+                    //  CoffeeConversation = fourText.getText().toString();
                    // interest.add(CoffeeConversation);
                     interestRequestList.add(new InterestRequest(CoffeeConversation));
 
                 }else {
+                    view.setBackgroundResource(R.drawable.checkbox);
                    // CoffeeConversation = "";
                    // interest.remove(CoffeeConversation);
                     interestRequestList.remove(new InterestRequest(CoffeeConversation));
@@ -213,11 +232,14 @@ public class Interest extends AppCompatActivity {
 
             case R.id.radioButton5:
                 if (checked){
-                   // MusicandArt = fiveText.getText().toString();
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+
+                    // MusicandArt = fiveText.getText().toString();
                    // interest.add(MusicandArt);
                     interestRequestList.add(new InterestRequest(MusicandArt));
 
                 }else {
+                    view.setBackgroundResource(R.drawable.checkbox);
                     //MusicandArt = "";
                   //  interest.remove(MusicandArt);
                     interestRequestList.remove(new InterestRequest(MusicandArt));
@@ -227,11 +249,14 @@ public class Interest extends AppCompatActivity {
 
             case R.id.radioButton6:
                 if (checked){
-                   // MoviesorVideos = sixText.getText().toString();
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+
+                    // MoviesorVideos = sixText.getText().toString();
                  //   interest.add(MoviesorVideos);
                     interestRequestList.add(new InterestRequest(MoviesorVideos));
 
                 }else {
+                    view.setBackgroundResource(R.drawable.checkbox);
                     //MoviesorVideos = "";
                    // interest.remove(MoviesorVideos);
                     interestRequestList.remove(new InterestRequest(MoviesorVideos));
@@ -241,11 +266,14 @@ public class Interest extends AppCompatActivity {
 
             case R.id.radioButton8:
                 if (checked){
-                   // MusicConcerts = sevenText.getText().toString();
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+
+                    // MusicConcerts = sevenText.getText().toString();
                    // interest.add(MusicConcerts);
                     interestRequestList.add(new InterestRequest(MusicConcerts));
 
                 }else {
+                    view.setBackgroundResource(R.drawable.checkbox);
                   //  MusicConcerts = "";
                  //   interest.remove(MusicConcerts);
                     interestRequestList.remove(new InterestRequest(MusicConcerts));
@@ -254,11 +282,14 @@ public class Interest extends AppCompatActivity {
                 break;
             case R.id.radioButton9:
                 if (checked){
-                   // Winetesting = eightText.getText().toString();
+                    view.setBackgroundResource(R.drawable.checkbox_selector);
+
+                    // Winetesting = eightText.getText().toString();
                     //interest.add(Winetesting);
                     interestRequestList.add(new InterestRequest(Winetesting));
 
                 }else {
+                    view.setBackgroundResource(R.drawable.checkbox);
                     //Winetesting = "";
                  //   interest.remove(Winetesting);
                     interestRequestList.remove(new InterestRequest(Winetesting));
