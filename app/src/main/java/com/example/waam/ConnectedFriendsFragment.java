@@ -2,6 +2,8 @@ package com.example.waam;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +25,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.waam.DisplayProfile.ProfileModel;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,8 +51,11 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private WaamUser waamUser;
+    private VideoPicAdapter videoPicAdapter;
     private GeneralFactory generalFactory;
     private  Button button;
+    private TextView age1, gender, state1, country;
+    private String token;
     private   ImageView videopic, aboutsefl, interests, friend;
     private static final String REQUEST = "connectedFriends";
 
@@ -95,6 +111,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                                     .commit();
                         }
                     });
+
         }
 
 
@@ -135,6 +152,12 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         button = view.findViewById(R.id.button15);
         LinearLayout linlayout = view.findViewById(R.id.linear02);
         FrameLayout frameLayout = view.findViewById(R.id.frameLayout9);
+        age1  = view.findViewById(R.id.textView65);
+        gender = view.findViewById(R.id.textView165);
+        token = SharedPref.getInstance(getActivity()).getStoredToken();
+        state1 = view.findViewById(R.id.state1);
+        country = view.findViewById(R.id.countName);
+
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
@@ -146,6 +169,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         interests.setOnClickListener(this);
         friend.setOnClickListener(this);
         button.setOnClickListener(this);
+        profileDetail();
 
 
 
@@ -258,6 +282,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                                                 .commit();
                                     }
                                 });
+
+
+
                     }
                 }
                 // i stopped here planning on sending waam user to the video fragment
@@ -346,6 +373,127 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
 
+    }
+
+    private void profileDetail() {
+        Call<ProfileModel> getProfile = ApiClient.getService().profiledisplay( "Bearer " + token);
+        getProfile.enqueue(new Callback<ProfileModel>() {
+            @Override
+            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+                if (!response.isSuccessful()){
+                    Log.d("no profile", "no profile listed");
+                    return;
+
+                }
+                ProfileModel model = response.body();
+
+
+                String gend = response.body().getGender();
+
+
+                String agg = SharedPref.getInstance(getContext()).getStoredAge();
+                //age.setText(agg);
+
+                if (gend.equals("Man")){
+                    gender.setText("Man");
+                }else {
+                    gender.setText("Female");
+
+                }
+
+                Log.d("location3445", "day"+model.getGender());
+
+                String dateOfBirth = response.body().getBirth_date();
+                String[] parts = dateOfBirth.split("-");
+                int part1 = Integer.parseInt(parts[0]);
+                int part2 = Integer.parseInt(parts[1]);
+                int part3 = Integer.parseInt(parts[2]);
+                Log.d("alldate", ""+part1);
+                Log.d("alldate2", ""+part2);
+                Log.d("alldate3", ""+part3);
+
+                final Geocoder geocoder = new Geocoder(getContext());
+                final String zip = response.body().getZipcode();
+                try {
+                    List<Address> addresses = geocoder.getFromLocationName(zip, 1);
+                    if (addresses != null && !addresses.isEmpty()) {
+                        Address address = addresses.get(0);
+
+                        String abbreviate = address.getCountryName();
+                        String[] FullName = address.getCountryName().split("");
+                        String state = FullName[1];
+                        Log.d("original", state);
+
+                        getCountryCode(abbreviate);
+                        getAge(part1, part2, part3);
+                        Log.d("location", address.getCountryName());
+                        Log.d("location", "" + address.getLocality());
+                        state1.setText(address.getLocality());
+
+                    }
+                } catch (IOException e) {
+                    // handle exception
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ProfileModel> call, Throwable t) {
+
+                Log.d("no profile",t.getMessage());
+            }
+        });
+    }
+
+    private String getAge(int year, int month, int day){
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+            Log.d("htle", ""+age);
+        }
+
+        Integer ageInt = new Integer(age);
+
+        String ageS = ageInt.toString();
+
+        age1.setText(ageS);
+        return ageS;
+    }
+
+    public String getCountryCode(String countryName) {
+
+        // Get all country codes in a string array.
+        String[] isoCountryCodes = Locale.getISOCountries();
+        Map<String, String> countryMap = new HashMap<>();
+        Locale locale;
+        String name;
+
+        // Iterate through all country codes:
+        for (String code : isoCountryCodes) {
+            // Create a locale using each country code
+            locale = new Locale("", code);
+            // Get country name for each code.
+            name = locale.getDisplayCountry();
+            // Map all country names and codes in key - value pairs.
+            countryMap.put(name, code);
+        }
+
+        Log.d("countryname", ""+countryMap.get(countryName));
+        String countryAbbre = countryMap.get(countryName);
+
+        country.setText(countryAbbre);
+
+        Log.d("countryname", countryAbbre);
+        // Return the country code for the given country name using the map.
+        // Here you will need some validation or better yet
+        // a list of countries to give to user to choose from.
+        return countryMap.get(countryName); // "NL" for Netherlands.
     }
 
 

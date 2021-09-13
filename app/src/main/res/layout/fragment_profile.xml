@@ -80,12 +80,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
+                    android:layout_marginRight="2dp"
                     android:layout_weight="1"
-                    android:text="Las Vegas"
+                    android:text=""
                     android:textSize="18sp"
                     app:drawableStartCompat="@drawable/black_location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView65" />
+
+                <TextView
+                    android:id="@+id/textView188"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=","
+                    android:textSize="18sp"
+                    android:layout_marginRight="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView67"
+                    app:layout_constraintStart_toEndOf="@+id/textView67"
+                    app:layout_constraintTop_toTopOf="@+id/textView67" />
+
+                <TextView
+                    android:id="@+id/country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:layout_marginLeft="1dp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView188"
+                    app:layout_constraintStart_toEndOf="@+id/textView188"
+                    app:layout_constraintTop_toTopOf="@+id/textView188" />
 
                 <Button
                     android:id="@+id/button11"
