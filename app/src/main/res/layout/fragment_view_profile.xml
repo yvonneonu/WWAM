@@ -64,18 +64,45 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout10" />
 
-            <TextView
-                android:id="@+id/textView72"
+            <LinearLayout
+                android:id="@+id/linearLayout32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="16dp"
-                android:text="Las Vegas, NV"
-                app:drawableStartCompat="@drawable/black_location"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView71" />
+                app:layout_constraintTop_toBottomOf="@+id/textView71">
+
+
+                <TextView
+                    android:id="@+id/state"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:layout_marginRight="2dp"
+                    app:drawableStartCompat="@drawable/black_location"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/textView186"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="2dp"
+                    android:text="," />
+
+
+                <TextView
+                    android:id="@+id/textView187"
+                    android:layout_marginRight="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
 
 
             <com.google.android.material.card.MaterialCardView
@@ -87,7 +114,7 @@
                 app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView72">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout32">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -112,6 +139,7 @@
                         android:layout_weight="1"
                         android:clickable="true"
                         android:src="@drawable/aboutmyselficon" />
+
 
                     <ImageView
 

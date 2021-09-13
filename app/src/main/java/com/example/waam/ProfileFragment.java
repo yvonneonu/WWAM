@@ -327,14 +327,14 @@ public class ProfileFragment extends Fragment {
                         getAge(part1, part2, part3);
                         Log.d("location", address.getCountryName());
                         Log.d("location", "" + address.getLocality());
-                        location.setText(address.getCountryName());
+                        location.setText(address.getLocality());
 
                     }
                 } catch (IOException e) {
                     // handle exception
                 }
-
             }
+
 
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
@@ -343,6 +343,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
 
     private String getAge(int year, int month, int day){
         Calendar dob = Calendar.getInstance();

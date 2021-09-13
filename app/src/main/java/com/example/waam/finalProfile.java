@@ -28,7 +28,8 @@ import retrofit2.Response;
 
 public class finalProfile extends AppCompatActivity {
 
-    private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext, childrentext, smoketext, drinktext, salatext, namme;
+    private TextView textView, swipe, careerText, bod, ethnictext, faithtext, politictext,
+            childrentext, smoketext, drinktext, salatext, namme, location;
     private ImageView image;
     private String  spinn2, spinn, ret, spinehnic, spinfaith, spinPolitics, spinChildren, spinSmoke, spinDrink, spinsala;
     private boolean textVisible;
@@ -94,6 +95,7 @@ public class finalProfile extends AppCompatActivity {
         drinktext = findViewById(R.id.textView8);
         salatext = findViewById(R.id.textView9);
         saveDetails = findViewById(R.id.button6);
+        location = findViewById(R.id.textView22);
 
 
         spinner = findViewById(R.id.one);
@@ -152,6 +154,11 @@ public class finalProfile extends AppCompatActivity {
                 Log.d("bfei", "jabhbchj");
             }
         });
+
+
+
+
+
         careerSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -398,6 +405,105 @@ public class finalProfile extends AppCompatActivity {
         }, token);
     }
 
+
+//    private void profileDetail() {
+//        Call<ProfileModel> getProfile = ApiClient.getService().profiledisplay( "Bearer " + token);
+//        getProfile.enqueue(new Callback<ProfileModel>() {
+//            @Override
+//            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+//                if (!response.isSuccessful()){
+//                    Log.d("no profile", "no profile listed");
+//                    return;
+//
+//                }
+//                ProfileModel model = response.body();
+//
+//
+//                String gend = response.body().getGender();
+//
+//
+//                String agg = SharedPref.getInstance(getContext()).getStoredAge();
+//                //age.setText(agg);
+//
+//                if (gend.equals("Man")){
+//                    gender.setText("Man");
+//                }else {
+//                    gender.setText("Female");
+//
+//                }
+//
+//                Log.d("location3445", "day"+model.getGender());
+//
+//                String dateOfBirth = response.body().getBirth_date();
+//                String[] parts = dateOfBirth.split("-");
+//                int part1 = Integer.parseInt(parts[0]);
+//                int part2 = Integer.parseInt(parts[1]);
+//                int part3 = Integer.parseInt(parts[2]);
+//                Log.d("alldate", ""+part1);
+//                Log.d("alldate2", ""+part2);
+//                Log.d("alldate3", ""+part3);
+//
+//                final Geocoder geocoder = new Geocoder(getContext());
+//                final String zip = response.body().getZipcode();
+//                try {
+//                    List<Address> addresses = geocoder.getFromLocationName(zip, 1);
+//                    if (addresses != null && !addresses.isEmpty()) {
+//                        Address address = addresses.get(0);
+//
+//                        String abbreviate = address.getCountryName();
+//                        String[] FullName = address.getCountryName().split("");
+//                        String state = FullName[1];
+//                        Log.d("original", state);
+//
+//                        getCountryCode(abbreviate);
+//                        getAge(part1, part2, part3);
+//                        Log.d("location", address.getCountryName());
+//                        Log.d("location", "" + address.getLocality());
+//                        location.setText(address.getLocality());
+//
+//                    }
+//                } catch (IOException e) {
+//                    // handle exception
+//                }
+//            }
+//
+//
+//            @Override
+//            public void onFailure(Call<ProfileModel> call, Throwable t) {
+//
+//                Log.d("no profile",t.getMessage());
+//            }
+//        });
+//    }
+//
+//    public String getCountryCode(String countryName) {
+//
+//        // Get all country codes in a string array.
+//        String[] isoCountryCodes = Locale.getISOCountries();
+//        Map<String, String> countryMap = new HashMap<>();
+//        Locale locale;
+//        String name;
+//
+//        // Iterate through all country codes:
+//        for (String code : isoCountryCodes) {
+//            // Create a locale using each country code
+//            locale = new Locale("", code);
+//            // Get country name for each code.
+//            name = locale.getDisplayCountry();
+//            // Map all country names and codes in key - value pairs.
+//            countryMap.put(name, code);
+//        }
+//
+//        Log.d("countryname", ""+countryMap.get(countryName));
+//        String countryAbbre = countryMap.get(countryName);
+//
+//
+//        Log.d("countryname", countryAbbre);
+//        // Return the country code for the given country name using the map.
+//        // Here you will need some validation or better yet
+//        // a list of countries to give to user to choose from.
+//        return countryMap.get(countryName); // "NL" for Netherlands.
+//    }
 
     private void Hereapi() {
         if (imageUri != null) {

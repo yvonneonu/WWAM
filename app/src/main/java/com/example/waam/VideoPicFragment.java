@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -107,6 +108,17 @@ public class VideoPicFragment extends Fragment {
                     }else{
                         Log.d("Problem","Not added yet");
                     }
+
+
+                    videoPicAdapter.showPicVid(new VideoPicAdapter.MediaListener() {
+                        @Override
+                        public void mediaListener(int position) {
+                            Intent intent = new Intent(getActivity(), FullVideoScreen.class);
+                            VideoPicModel videoPicModel = videoPicModels.get(position);
+                            intent.putExtra("picvic",videoPicModel);
+                            startActivity(intent);
+                        }
+                    });
 
                /* videoPicAdapter.showPicVid(new VideoPicAdapter.MediaListener() {
                     @Override
