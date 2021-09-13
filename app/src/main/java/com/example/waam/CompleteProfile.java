@@ -3,6 +3,8 @@ package com.example.waam;
 import android.content.ContentResolver;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.waam.DisplayProfile.ProfileModel;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,11 +36,23 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CompleteProfile extends AppCompatActivity {
-    private ImageView firstImage, secondImage, thirdImage, fourthImage, fivethImage, sixthImage, seventhImage, eightImage, ninethImage, photo, gallerysave;
+    private ImageView firstImage, secondImage, thirdImage, fourthImage, fivethImage, sixthImage,
+            seventhImage, eightImage, ninethImage, photo, gallerysave;
     ;
-    private TextView wipe, name;
-    private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth, imagesixth, imageseveth, imageeight, profile;
+    private TextView wipe, name, location;
+    private ImageView image, imagefirst, imagesecond, imagethird, imagefourth, imagefifth,
+            imagesixth, imageseveth, imageeight, profile;
     private static final String PROFILEPIC = "profilePic";
     private static final String VIDEOPIC = "videoPic";
     private DatabaseReference mDatabaseRef;
@@ -45,6 +60,7 @@ public class CompleteProfile extends AppCompatActivity {
     private Task<Uri> uriTask;
     private ProgressBar progressBar;
     private Button save;
+    private String token;
 
     private FirebaseAuth mAuth;
 
@@ -61,6 +77,8 @@ public class CompleteProfile extends AppCompatActivity {
 //        Log.d("Complete",imageUri);
         String Fullname = getIntent().getStringExtra("nameprofile");
         String tired = getIntent().getStringExtra("token");
+        token = SharedPref.getInstance(this).getStoredToken();
+
 
         firstImage = findViewById(R.id.imageView0);
         secondImage = findViewById(R.id.imageView1);
@@ -85,8 +103,11 @@ public class CompleteProfile extends AppCompatActivity {
         name = findViewById(R.id.textView19);
         progressBar = findViewById(R.id.progressBar4);
         save = findViewById(R.id.button5);
+        location = findViewById(R.id.textView22);
 
         String uid = FirebaseAuth.getInstance().getUid();
+
+        profileDetail();
 
 
        /* if (imageUri != null) {
@@ -96,6 +117,7 @@ public class CompleteProfile extends AppCompatActivity {
                     .load(Uri.parse(imageUri))
                     .into(profile);
         }*/
+
 
         GeneralFactory.getGeneralFactory(this).loadSpecUser(uid, new GeneralFactory.SpecificUser() {
             @Override
@@ -501,6 +523,81 @@ public class CompleteProfile extends AppCompatActivity {
 
     }
 
+    private void profileDetail() {
+        Call<ProfileModel> getProfile = ApiClient.getService().profiledisplay( "Bearer " + token);
+        getProfile.enqueue(new Callback<ProfileModel>() {
+            @Override
+            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+                if (!response.isSuccessful()){
+                    Log.d("no profile", "no profile listed");
+                    return;
+
+                }
+                ProfileModel model = response.body();
+
+                Log.d("location3445", "day"+model.getGender());
+
+                final Geocoder geocoder = new Geocoder(CompleteProfile.this);
+                final String zip = response.body().getZipcode();
+                try {
+                    List<Address> addresses = geocoder.getFromLocationName(zip, 1);
+                    if (addresses != null && !addresses.isEmpty()) {
+                        Address address = addresses.get(0);
+
+                        String abbreviate = address.getCountryName();
+                        String[] FullName = address.getCountryName().split("");
+                        String state = FullName[1];
+                        Log.d("original", state);
+
+                        getCountryCode(abbreviate);
+
+                        Log.d("location", address.getCountryName());
+                        Log.d("location", "" + address.getLocality());
+                        location.setText(address.getLocality());
+
+                    }
+                } catch (IOException e) {
+                    // handle exception
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ProfileModel> call, Throwable t) {
+
+                Log.d("no profile",t.getMessage());
+            }
+        });
+    }
+
+    public String getCountryCode(String countryName) {
+
+        // Get all country codes in a string array.
+        String[] isoCountryCodes = Locale.getISOCountries();
+        Map<String, String> countryMap = new HashMap<>();
+        Locale locale;
+        String name;
+
+        // Iterate through all country codes:
+        for (String code : isoCountryCodes) {
+            // Create a locale using each country code
+            locale = new Locale("", code);
+            // Get country name for each code.
+            name = locale.getDisplayCountry();
+            // Map all country names and codes in key - value pairs.
+            countryMap.put(name, code);
+        }
+
+        Log.d("countryname", ""+countryMap.get(countryName));
+        String countryAbbre = countryMap.get(countryName);
+
+
+        Log.d("countryname", countryAbbre);
+        // Return the country code for the given country name using the map.
+        // Here you will need some validation or better yet
+        // a list of countries to give to user to choose from.
+        return countryMap.get(countryName); // "NL" for Netherlands.
+    }
 
     public void gob(View view) {
         finish();

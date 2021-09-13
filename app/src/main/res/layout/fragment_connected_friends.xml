@@ -71,19 +71,44 @@
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/textView72"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="16dp"
-                android:text="Las Vegas, NV"
+                android:orientation="horizontal"
                 app:drawableStartCompat="@drawable/black_location"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout33" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
 
+                <TextView
+                    android:id="@+id/state1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    app:drawableStartCompat="@drawable/black_location"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:text="," />
+
+                <TextView
+                    android:id="@+id/countName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:layout_marginLeft="2dp" />
+
+            </LinearLayout>
 
 
             <FrameLayout

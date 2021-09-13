@@ -43,7 +43,7 @@ public class Profile extends AppCompatActivity {
     UserService userService;
     String tokinfromLogin;
     private String token;
-    ImageView imageView;
+    ImageView imageView, pict;
     TextView textView, gallery, wipe;
     Button upload;
     String bigTokeng;
@@ -72,10 +72,18 @@ public class Profile extends AppCompatActivity {
         gallery = findViewById(R.id.galary);
         upload = findViewById(R.id.button3);
         wipe = findViewById(R.id.swipe);
+        pict = findViewById(R.id.imageView5);
+
         if (Build.VERSION.SDK_INT >= 23) {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
         }
 
+        pict.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+            }
+        });
         textView.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

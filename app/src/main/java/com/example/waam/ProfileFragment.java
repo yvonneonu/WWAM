@@ -63,12 +63,11 @@ public class ProfileFragment extends Fragment {
     // private BottomNavigationView bottomNavigationView;
 
 
-    private TextView textView, career, education, children, politics, bodyType, faith, ehnity, age1, gender, location;
+    private TextView textView, career, education, children, politics, bodyType, faith, ehnity, age1,
+            gender, location, county;
     private boolean[] boolcont;
     private FirebaseAuth mAuth;
     private String token;
-
-
 
     private String sender = "1";
     private String receiver = "2";
@@ -218,6 +217,7 @@ public class ProfileFragment extends Fragment {
         age1 = view.findViewById(R.id.textView65);
         gender = view.findViewById(R.id.textView185);
         location = view.findViewById(R.id.textView67);
+        county = view.findViewById(R.id.country);
 
 
         displayInterest();
@@ -388,6 +388,7 @@ public class ProfileFragment extends Fragment {
         String countryAbbre = countryMap.get(countryName);
 
 
+        county.setText(countryAbbre);
         Log.d("countryname", countryAbbre);
         // Return the country code for the given country name using the map.
         // Here you will need some validation or better yet

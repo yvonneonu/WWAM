@@ -54,7 +54,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private VideoPicAdapter videoPicAdapter;
     private GeneralFactory generalFactory;
     private  Button button;
-    private TextView age1, gender;
+    private TextView age1, gender, state1, country;
     private String token;
     private   ImageView videopic, aboutsefl, interests, friend;
     private static final String REQUEST = "connectedFriends";
@@ -155,6 +155,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         age1  = view.findViewById(R.id.textView65);
         gender = view.findViewById(R.id.textView165);
         token = SharedPref.getInstance(getActivity()).getStoredToken();
+        state1 = view.findViewById(R.id.state1);
+        country = view.findViewById(R.id.countName);
 
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -167,6 +169,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         interests.setOnClickListener(this);
         friend.setOnClickListener(this);
         button.setOnClickListener(this);
+        profileDetail();
 
 
 
@@ -425,7 +428,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                         getAge(part1, part2, part3);
                         Log.d("location", address.getCountryName());
                         Log.d("location", "" + address.getLocality());
-                        //location.setText(address.getCountryName());
+                        state1.setText(address.getLocality());
 
                     }
                 } catch (IOException e) {
@@ -484,6 +487,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         Log.d("countryname", ""+countryMap.get(countryName));
         String countryAbbre = countryMap.get(countryName);
 
+        country.setText(countryAbbre);
 
         Log.d("countryname", countryAbbre);
         // Return the country code for the given country name using the map.
