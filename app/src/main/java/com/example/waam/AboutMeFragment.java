@@ -264,13 +264,15 @@ public class AboutMeFragment extends Fragment {
 
                 String log = response.body().toString();
                 Log.d("take", log);
-                ChildrenRecordModel childrenRecordModel = response.body();
 
-                childrenRecordModel.getChildrenRecords();
+                    ChildrenRecordModel childrenRecordModel = response.body();
+
+                    childrenRecordModel.getChildrenRecords();
 
 //                children.setText(childrenRecordModel.getChildrenRecords().get(0).getName());
 
-                Log.d("carer",new Gson().toJson(response.body()));
+                    Log.d("carer",new Gson().toJson(response.body()));
+
             }
 
             @Override
@@ -297,12 +299,15 @@ public class AboutMeFragment extends Fragment {
                 String log = response.body().toString();
                 Log.d("take", log);
 
-                RecordModel recordModel = response.body();
-                recordModel.getModel();
 
-                //education.setText(recordModel.getModel().get(0).getName());
+                    RecordModel recordModel = response.body();
+                    recordModel.getModel();
 
-                Log.d("carer",new Gson().toJson(response.body()));
+                    //education.setText(recordModel.getModel().get(0).getName());
+
+                    Log.d("carer",new Gson().toJson(response.body()));
+
+
             }
 
             @Override
@@ -327,16 +332,23 @@ public class AboutMeFragment extends Fragment {
                     return;
                 }
 
+
                 String log = response.body().toString();
                 Log.d("take", log);
 
-                OcupationRecordModel ocupationRecordModel = response.body();
-                ocupationRecordModel.getOccupationRecords();
+                if (user.getUid().equals(response.body().getOccupationRecords().get(0).getId())){
+
+                    OcupationRecordModel ocupationRecordModel = response.body();
+                    ocupationRecordModel.getOccupationRecords();
 
 
-                career.setText(ocupationRecordModel.getOccupationRecords().get(0).getName());
+                    career.setText(ocupationRecordModel.getOccupationRecords().get(0).getName());
 
-                Log.d("carer",new Gson().toJson(response.body()));
+                    Log.d("carer",new Gson().toJson(response.body()));
+                }else {
+                    Log.d("event12", ""+ log);
+                }
+
             }
 
             @Override
@@ -354,27 +366,30 @@ public class AboutMeFragment extends Fragment {
            public void onResponse(Call<List<UserResult>> call, Response<List<UserResult>> response) {
                if (!response.isSuccessful()) {
                    String message = "No Event";
+
                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
                    Log.d("event1", response.message());
                    Log.d("event", response.errorBody().toString());
                    return;
                }
-               String log = response.body().toString();
-               Log.d("take", log);
+               String loggg = response.body().get(0).getId();
+               Log.d("take", loggg);
 
 
 
 
-               List<UserResult> userResults = response.body();
+                   List<UserResult> userResults = response.body();
 
-               eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
-               recyclerView.setAdapter(eventDisplayAdapter);
+                   eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
+                   recyclerView.setAdapter(eventDisplayAdapter);
 
-               recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+                   recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-               // politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
+                   // politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
 
-               Log.d("event12",new Gson().toJson(response.body()));
+                   Log.d("event12",new Gson().toJson(response.body()));
+
+
 
            }
 

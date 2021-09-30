@@ -11,15 +11,15 @@
     app:cardCornerRadius="15dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:background="@color/bpTransparent_black"
+
     >
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        app:cardCornerRadius="12dp"
+
 
         android:background="@color/bpTransparent_black"
         android:layout_height="match_parent">
@@ -42,9 +42,9 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Unfriend"
+                android:text="Block User"
                 android:textAlignment="center"
-                android:textColor="@color/bpDarker_blue"
+
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView28"

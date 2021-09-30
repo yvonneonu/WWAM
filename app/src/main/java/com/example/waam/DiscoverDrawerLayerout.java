@@ -82,6 +82,8 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
         boolean post = getIntent().getBooleanExtra("post", false);
         boolean comingtoBecoomingAgent = getIntent().getBooleanExtra("comingtoBecoomingAgent", false);
         String media = getIntent().getStringExtra("media");
+        String media1 = getIntent().getStringExtra("media1");
+
 
         Log.d("Media", ""+media);
 
@@ -121,6 +123,9 @@ public class DiscoverDrawerLayerout extends AppCompatActivity implements Navigat
 
         if (post) {
             fragment = new ViewProfile(post);
+        }else if (media1 != null){
+            fragment = new ViewProfile();
+
         }else if(media != null && media.equals(shareMedia.FROMMEDIA)){
             fragment = new ViewProfile(shareMedia.FROMMEDIA);
         }

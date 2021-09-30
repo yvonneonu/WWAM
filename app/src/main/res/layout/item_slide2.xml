@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <ImageView
             android:id="@+id/img_bg"
             android:layout_width="match_parent"
@@ -29,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="4dp"
             android:background="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,12 +46,39 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:text="Adrea, 26"
+                android:layout_marginEnd="2dp"
+                android:text=""
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/textView191"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <TextView
+                android:id="@+id/textView191"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:text=","
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                app:layout_constraintEnd_toStartOf="@+id/textView192"
+                app:layout_constraintStart_toEndOf="@+id/tv_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+            <TextView
+                android:id="@+id/textView192"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView191"
+                app:layout_constraintStart_toEndOf="@+id/textView191"
+                app:layout_constraintTop_toTopOf="@+id/textView191" />
 
             <ImageView
                 android:id="@+id/tv_user_say"
@@ -68,12 +97,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="3dp"
                 android:layout_marginTop="5dp"
                 android:elevation="3dp"
-                android:text="San Francisco, CA"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="@+id/tv_user_say"
+                app:layout_constraintEnd_toStartOf="@+id/textView189"
                 app:layout_constraintStart_toEndOf="@+id/tv_user_say"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+            <TextView
+                android:id="@+id/textView189"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:text=","
+                app:layout_constraintBottom_toBottomOf="@+id/img_user"
+                app:layout_constraintEnd_toStartOf="@+id/textView190"
+                app:layout_constraintStart_toEndOf="@+id/img_user"
+                app:layout_constraintTop_toTopOf="@+id/img_user"
+                app:layout_constraintVertical_bias="0.58" />
+
+            <TextView
+                android:id="@+id/textView190"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView189"
+                app:layout_constraintStart_toEndOf="@+id/textView189"
+                app:layout_constraintTop_toTopOf="@+id/textView189"
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -17,8 +17,8 @@
 
             <ImageView
                 android:id="@+id/imageView32"
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/discovermatchesbox"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +32,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView32">
 
@@ -42,9 +40,9 @@
                     android:id="@+id/textView65"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
                     android:textSize="24sp"
-                    android:layout_weight="1"
                     android:textStyle="bold" />
 
                 <TextView
@@ -53,34 +51,55 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:layout_marginEnd="2dp"
-                    android:text="Years Old,"
                     android:layout_weight="1"
-
+                    android:text="Years Old | "
+                    android:textColor="@color/black"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/textView165"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text=""
                     android:layout_weight="1"
+                    android:text=""
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView32">
+
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:src="@color/red"
+                    android:layout_height="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="online"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/textView72"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:drawableStartCompat="@drawable/black_location"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
 
@@ -89,9 +108,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="2dp"
-                    app:drawableStartCompat="@drawable/black_location"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    app:drawableStartCompat="@drawable/black_location" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -104,13 +123,54 @@
                     android:id="@+id/countName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
-                    android:text=""
-                    android:layout_marginLeft="2dp" />
+                    android:text="" />
 
             </LinearLayout>
 
 
+            <LinearLayout
+                android:id="@+id/linearLayout30"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView72"
+                app:layout_constraintTop_toBottomOf="@+id/textView72">
+
+                <ImageView
+                    android:id="@+id/sendMessage"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+
+                    android:clickable="true"
+                    android:src="@drawable/messagebuttonnavicon" />
+
+
+                <ImageView
+
+                    android:id="@+id/sent"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:src="@drawable/topnavchats" />
+
+<!--                <ImageView-->
+
+<!--                    android:id="@+id/interest2"-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:clickable="true"-->
+<!--                    android:src="@drawable/topnavchats" />-->
+
+            </LinearLayout>
             <FrameLayout
                 android:id="@+id/frameLayout9"
                 android:layout_width="match_parent"
@@ -208,7 +268,7 @@
                 app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout9">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout30">
 
                 <LinearLayout
                     android:layout_width="match_parent"

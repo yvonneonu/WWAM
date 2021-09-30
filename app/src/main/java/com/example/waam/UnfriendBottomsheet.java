@@ -23,9 +23,17 @@ public class UnfriendBottomsheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_unfriend, container, false);
+
+//        view.setBackgroundColor(Color.TRANSPARENT);
+//        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent())
+//                .getLayoutParams();
+//        CoordinatorLayout.Behavior behavior = params.getBehavior();
+//        ((View) contentView.getParent()).setBackgroundColor(Color.TRANSPARENT);
+
         TextView block = view.findViewById(R.id.textView28);
         TextView cancel = view.findViewById(R.id.textView2);
         TextView unfriend = view.findViewById(R.id.textView27);
+
 
         unfriend.setOnClickListener(new View.OnClickListener() {
             @Override

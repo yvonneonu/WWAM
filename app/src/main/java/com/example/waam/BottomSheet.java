@@ -48,6 +48,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_picture, container, false);
+
         TextView takePic = view.findViewById(R.id.textView28);
         TextView cancel = view.findViewById(R.id.textView2);
 

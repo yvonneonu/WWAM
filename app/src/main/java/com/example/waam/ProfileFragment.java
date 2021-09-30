@@ -128,10 +128,7 @@ public class ProfileFragment extends Fragment {
 
        token = SharedPref.getInstance(getActivity()).getStoredToken();
 
-
-
-
-      Log.d("tok", ""+token);
+        Log.d("tok", ""+token);
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -238,6 +235,7 @@ public class ProfileFragment extends Fragment {
                     .into(imageView);
 
 
+
         }else{
             mAuth = FirebaseAuth.getInstance();
             String uid = mAuth.getUid();
@@ -275,75 +273,74 @@ public class ProfileFragment extends Fragment {
 
 
     private void profileDetail() {
-        Call<ProfileModel> getProfile = ApiClient.getService().profiledisplay( "Bearer " + token);
-        getProfile.enqueue(new Callback<ProfileModel>() {
-            @Override
-            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
-                if (!response.isSuccessful()){
-                    Log.d("no profile", "no profile listed");
-                    return;
-
-                }
-                ProfileModel model = response.body();
 
 
-                String gend = response.body().getGender();
-
-
-                String agg = SharedPref.getInstance(getContext()).getStoredAge();
-                //age.setText(agg);
-
-                if (gend.equals("Man")){
-                    gender.setText("Man");
-                }else {
-                    gender.setText("Female");
-
-                }
-
-                Log.d("location3445", "day"+model.getGender());
-
-                String dateOfBirth = response.body().getBirth_date();
-                String[] parts = dateOfBirth.split("-");
-                int part1 = Integer.parseInt(parts[0]);
-                int part2 = Integer.parseInt(parts[1]);
-                int part3 = Integer.parseInt(parts[2]);
-                Log.d("alldate", ""+part1);
-                Log.d("alldate2", ""+part2);
-                Log.d("alldate3", ""+part3);
-
-                final Geocoder geocoder = new Geocoder(getContext());
-                final String zip = response.body().getZipcode();
-                try {
-                    List<Address> addresses = geocoder.getFromLocationName(zip, 1);
-                    if (addresses != null && !addresses.isEmpty()) {
-                        Address address = addresses.get(0);
-
-                        String abbreviate = address.getCountryName();
-                        String[] FullName = address.getCountryName().split("");
-                        String state = FullName[1];
-                        Log.d("original", state);
-
-                        getCountryCode(abbreviate);
-                        getAge(part1, part2, part3);
-                        Log.d("location", address.getCountryName());
-                        Log.d("location", "" + address.getLocality());
-                        location.setText(address.getLocality());
+            Call<ProfileModel> getProfile = ApiClient.getService().profiledisplay("Bearer " + token);
+            getProfile.enqueue(new Callback<ProfileModel>() {
+                @Override
+                public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+                    if (!response.isSuccessful()) {
+                        Log.d("no profile", "no profile listed");
+                        return;
 
                     }
-                } catch (IOException e) {
-                    // handle exception
+                    ProfileModel model = response.body();
+
+
+                    String gend = response.body().getGender();
+
+
+                    if (gend.equals("Man")) {
+                        Log.d("show me", gend);
+                        gender.setText("Man");
+                    } else {
+                        gender.setText("Female");
+
+                    }
+
+                    Log.d("location3445", "day" + model.getGender());
+
+                    String dateOfBirth = response.body().getBirth_date();
+                    String[] parts = dateOfBirth.split("-");
+                    int part1 = Integer.parseInt(parts[0]);
+                    int part2 = Integer.parseInt(parts[1]);
+                    int part3 = Integer.parseInt(parts[2]);
+                    Log.d("alldate", "" + part1);
+                    Log.d("alldate2", "" + part2);
+                    Log.d("alldate3", "" + part3);
+
+                    final Geocoder geocoder = new Geocoder(getContext());
+                    final String zip = response.body().getZipcode();
+                    try {
+                        List<Address> addresses = geocoder.getFromLocationName(zip, 1);
+                        if (addresses != null && !addresses.isEmpty()) {
+                            Address address = addresses.get(0);
+
+                            String abbreviate = address.getCountryName();
+                            String[] FullName = address.getCountryName().split("");
+                            String state = FullName[1];
+                            Log.d("original", state);
+
+                            getCountryCode(abbreviate);
+                            getAge(part1, part2, part3);
+                            Log.d("location", address.getCountryName());
+                            Log.d("location", "" + address.getLocality());
+                            location.setText(address.getLocality());
+
+                        }
+                    } catch (IOException e) {
+                        // handle exception
+                    }
                 }
-            }
 
+                @Override
+                public void onFailure(Call<ProfileModel> call, Throwable t) {
+                    Log.d("no profile", t.getMessage());
+                }
 
-            @Override
-            public void onFailure(Call<ProfileModel> call, Throwable t) {
+            });
 
-                Log.d("no profile",t.getMessage());
-            }
-        });
     }
-
 
     private String getAge(int year, int month, int day){
         Calendar dob = Calendar.getInstance();

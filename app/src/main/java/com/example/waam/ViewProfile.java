@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -31,7 +32,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ViewProfile#newInstance} factory method to
@@ -42,8 +42,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
     private ImageView imageView, aboutsefl, interes, frien;
     private BottomNavigationView bottomNavigationView;
 
-    private String token;
-
+    private String token, newImage;
 
     private boolean post;
 
@@ -98,6 +97,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -114,6 +114,8 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         setHasOptionsMenu(true);
         mAuth = FirebaseAuth.getInstance();
         token = SharedPref.getInstance(getContext()).getStoredToken();
+        //newImage = getActivity().getIntent().getExtras().getString("image123");
+
 
 
 
@@ -132,6 +134,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         menu.clear();
         inflater.inflate(R.menu.viewprofile, menu);
         super.onCreateOptionsMenu(menu, inflater);
+
         // MenuItem item = menu.findItem(R.id.message);
         //item.setIcon(R.drawable.lowernav_friends_icon);
         //super.onCreateOptionsMenu(menu, inflater);
@@ -161,19 +164,31 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
         stateName = view.findViewById(R.id.state);
         country = view.findViewById(R.id.textView187);
 
+        String uri = getActivity().getIntent().getStringExtra("image1");
+
+
+        Glide.with(getContext())
+                .asBitmap()
+                .fitCenter()
+                .circleCrop()
+                .load(uri)
+                .into(imageView);
         Fragment fragment;
+
         //If post is supplied you have to show dis fragment
         if (post) {
             fragment = new TextdisplayFragment();
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.containing, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .addToBackStack(null)
                     .commit();
         }else if(media.equals(shareMedia.FROMMEDIA)){
             fragment = new MediaPostFragment();
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.containing, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .addToBackStack(null)
                     .commit();
         }
         else {
@@ -181,8 +196,10 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.containing, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .addToBackStack(null)
                     .commit();
         }
+
 
 
 
@@ -199,8 +216,24 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                         .into(imageView);
 
                 textView.setText(user.getFullname());
+                String image = user.getImageUrl();
+
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), FullImage.class);
+                        intent.putExtra("image", image);
+                        startActivity(intent);
+
+                    }
+                });
             }
         });
+
+        Glide.with(this)
+                .asBitmap()
+                .load(newImage)
+                .into(imageView);
         test.setOnClickListener(this);
         aboutsefl.setOnClickListener(this);
         interes.setOnClickListener(this);
@@ -235,6 +268,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                         getChildFragmentManager().beginTransaction()
                                 .replace(fram, fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null)
                                 .commit();
                     } else {
 
@@ -252,7 +286,6 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                                 .replace(R.id.containing, fragment)
                                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                                 .addToBackStack(null)
-
                                                 .commit();
 
                                     }
@@ -278,6 +311,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                         getChildFragmentManager().beginTransaction()
                                 .replace(fram, fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null)
                                 .commit();
                     } else {
 
@@ -294,7 +328,6 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                                 .replace(R.id.containing, fragment)
                                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                                 .addToBackStack(null)
-
                                                 .commit();
 
 
@@ -318,6 +351,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                         getChildFragmentManager().beginTransaction()
                                 .replace(fram, fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null)
                                 .commit();
                     } else {
 
@@ -334,7 +368,6 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                                 .replace(R.id.containing, fragment)
                                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                                 .addToBackStack(null)
-
                                                 .commit();
 
 
@@ -359,6 +392,7 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                         getChildFragmentManager().beginTransaction()
                                 .replace(fram, fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null)
                                 .commit();
                     }else {
                         String userId = FirebaseAuth.getInstance().getUid();
@@ -374,7 +408,6 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
                                                 .replace(R.id.containing, fragment)
                                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                                 .addToBackStack(null)
-
                                                 .commit();
 
 

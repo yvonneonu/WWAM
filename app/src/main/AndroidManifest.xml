@@ -31,29 +31,57 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="locked"
-
-    android:supportsRtl="true"
+        android:supportsRtl="true"
         android:theme="@style/Theme.Waam"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".AgentInterest"    android:screenOrientation="locked"/>
-        <activity android:name=".FullVideoScreen"    android:screenOrientation="locked"/>
-        <activity android:name=".BookAgent"    android:screenOrientation="locked"/>
-        <activity android:name=".AddNewFriends"    android:screenOrientation="locked"/>
-        <activity android:name=".SearchExplore"    android:screenOrientation="locked"/>
-        <activity android:name=".shareMedia"    android:screenOrientation="locked"/>
-        <activity android:name=".newPhotot"    android:screenOrientation="locked"/>
-        <activity android:name=".textResize"     android:screenOrientation="locked"/>
-        <activity android:name=".ShareTot"    android:screenOrientation="locked"/>
-        <activity android:name=".NotificationActivity"    android:screenOrientation="locked"/>
-        <activity android:name=".CallScreenActivity"    android:screenOrientation="locked"/>
-        <activity android:name=".VideoCallActivity"    android:screenOrientation="locked"/>
-        <activity android:name=".SignUpSecond"    android:screenOrientation="locked"/>
-        <activity android:name=".CallingActivity"    android:screenOrientation="locked"/>
+        <activity android:name=".UpdateImage"></activity>
+        <activity android:name=".FullImage" />
+        <activity
+            android:name=".AgentInterest"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".FullVideoScreen"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".BookAgent"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".AddNewFriends"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".SearchExplore"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".shareMedia"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".newPhotot"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".textResize"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".ShareTot"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".NotificationActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".CallScreenActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".VideoCallActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".SignUpSecond"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".CallingActivity"
+            android:screenOrientation="locked" />
         <activity
             android:name=".AllUsersActivity"
             android:parentActivityName=".DrawelayoutActivity"
@@ -63,45 +91,98 @@
         <service android:name=".NotificationListener" />
         <service android:name=".Notification.MyBaseFireBaseId" />
 
-        <activity android:name=".IncomingCallScreenActivity"    android:screenOrientation="locked"/>
-        <activity android:name=".Unfriend"    android:screenOrientation="locked"/>
-        <activity android:name=".DailyMatch"    android:screenOrientation="locked"/>
-        <activity android:name=".AgentProfile"    android:screenOrientation="locked"/>
-        <activity android:name=".ChatMessage"    android:screenOrientation="locked"/>
-        <activity android:name=".SearcMessage"    android:screenOrientation="locked"/>
-        <activity android:name=".DiscoverEvent"    android:screenOrientation="locked"/>
+        <activity
+            android:name=".IncomingCallScreenActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Unfriend"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".DailyMatch"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".AgentProfile"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".ChatMessage"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".SearcMessage"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".DiscoverEvent"
+            android:screenOrientation="locked" />
         <activity
             android:name=".DiscoverDrawerLayerout"
             android:screenOrientation="locked"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".LookingFor"    android:screenOrientation="locked"/>
-        <activity android:name=".finalProfile"    android:screenOrientation="locked"/>
-        <activity android:name=".picture"    android:screenOrientation="locked"/>
-        <activity android:name=".LocationDetailActivity"    android:screenOrientation="locked"/>
-        <activity android:name=".MatchActivity"    android:screenOrientation="locked"/>
-        <activity android:name=".Matchfriends"    android:screenOrientation="locked"/>
-        <activity android:name=".CompleteProfile"    android:screenOrientation="locked"/>
-        <activity android:name=".LocationDetectActivity"    android:screenOrientation="locked">
-
-        </activity>
-        <activity android:name=".Profile"    android:screenOrientation="locked"/>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".LookingFor"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".finalProfile"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".picture"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".LocationDetailActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".MatchActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Matchfriends"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".CompleteProfile"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".LocationDetectActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Profile"
+            android:screenOrientation="locked" />
         <activity
             android:name=".DrawelayoutActivity"
-            android:windowSoftInputMode="adjustPan"    android:screenOrientation="locked"/>
-        <activity android:name=".PaymentPage"    android:screenOrientation="locked"/>
-        <activity android:name=".Successverified"    android:screenOrientation="locked"/>
-        <activity android:name=".Verfy2"    android:screenOrientation="locked"/>
-        <activity android:name=".Splash"    android:screenOrientation="locked"/>
-        <activity android:name=".Verification1"    android:screenOrientation="locked"/>
-        <activity android:name=".MainActivity"    android:screenOrientation="locked"/>
-        <activity android:name=".passw"    android:screenOrientation="locked"/>
-        <activity android:name=".Another"    android:screenOrientation="locked"/>
-        <activity android:name=".SignUp"    android:screenOrientation="locked"/>
-        <activity android:name=".Login"    android:screenOrientation="locked"/>
-        <activity android:name=".Interest"    android:screenOrientation="locked"/>
-        <activity android:name=".ViewPager"
+            android:screenOrientation="locked"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".PaymentPage"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Successverified"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Verfy2"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Splash"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Verification1"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".passw"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Another"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".SignUp"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Login"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".Interest"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".ViewPager"
             android:screenOrientation="locked">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
