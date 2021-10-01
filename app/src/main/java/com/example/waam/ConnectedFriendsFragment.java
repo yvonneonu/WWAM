@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -54,7 +53,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private WaamUser waamUser;
     private FirebaseAuth mAuth;
     private GeneralFactory generalFactory;
-    private TextView age1, gender, location, county;
+    private TextView age1, gender, location, county, name1;
     private  Button button;
     private   ImageView videopic, aboutsefl, interests, friend;
     private static final String REQUEST = "connectedFriends";
@@ -113,7 +112,9 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                             ft.add(R.id.profileframe, fr)
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                     .commit();
+
                         }
+
                     });
         }
 
@@ -124,6 +125,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.unfriend, menu);
+
 
 
 
@@ -146,6 +148,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_connected_friends, container, false);
         videopic = view.findViewById(R.id.videopic);
+        name1 = view.findViewById(R.id.disableName);
         aboutsefl = view.findViewById(R.id.aboutsef);
         ImageView profilePic = view.findViewById(R.id.imageView32);
         interests = view.findViewById(R.id.interest);
@@ -162,6 +165,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
 
 
 
+        setHasOptionsMenu(true);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
 //        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
@@ -170,7 +174,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         activity.getSupportActionBar().hide();
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        toolbar.setTitle("Andrea");
+//        toolbar.setTitle("Andrea");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +183,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
             }
         });
 
+        toolbar.inflateMenu(R.menu.unfriend);
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 //        toolbar.setTitle(getActivity().getResources().getString(R.string.app_name));
 //        getActivity().set
@@ -429,6 +434,11 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
 
                     // Log.d("location3445", "day" + model.getGender());
 
+                    String fullname = waamUser.getFullname();
+                    String[] name = fullname.split(" ");
+                    String fname = name[0];
+
+
                     String dateOfBirth = waamUser.getBirth_date();
                     String[] parts = dateOfBirth.split("-");
                     int part1 = Integer.parseInt(parts[0]);
@@ -455,6 +465,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                             Log.d("location", address.getCountryName());
                             Log.d("location", "" + address.getLocality());
                             location.setText(address.getLocality());
+                            name1.setText(fname);
+
 
                         }
                     } catch (IOException e) {
