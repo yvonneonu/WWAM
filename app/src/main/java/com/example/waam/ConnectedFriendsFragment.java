@@ -19,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -158,11 +160,30 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         location = view.findViewById(R.id.state1);
         county = view.findViewById(R.id.countName);
 
+
+
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
 //        Objects.requireNonNull(activity.getSupportActionBar()).setTitle("Profile");
 //        getSupportActionBar().hide();
+        //activity.getSupportActionBar().hide();
         activity.getSupportActionBar().hide();
+
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar.setTitle("Andrea");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+            }
+        });
+
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        toolbar.setTitle(getActivity().getResources().getString(R.string.app_name));
+//        getActivity().set
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         cardView7.setOnClickListener(this);
         cardView8.setOnClickListener(this);
