@@ -55,7 +55,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private GeneralFactory generalFactory;
     private TextView age1, gender, location, county, name1;
     private  Button button;
-    private   ImageView videopic, aboutsefl, interests, friend;
+    private   ImageView videopic, aboutsefl, interests, friend, tryit;
     private static final String REQUEST = "connectedFriends";
     private String token;
 
@@ -162,6 +162,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         gender = view.findViewById(R.id.textView165);
         location = view.findViewById(R.id.state1);
         county = view.findViewById(R.id.countName);
+        tryit= view.findViewById(R.id.imageView8);
 
 
 
@@ -199,6 +200,12 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         button.setOnClickListener(this);
         profileDetail();
 
+
+//        Drawable buttonDrawable = button.getBackground();
+//        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+//        //the color is a direct color int and not a color resource
+//        DrawableCompat.setTint(buttonDrawable, Color.RED);
+//        tryit.setBackground(buttonDrawable);
 
 
         if(waamUser != null){

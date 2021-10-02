@@ -90,6 +90,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -101,17 +102,19 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:id="@+id/linearLayout33"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout33"
+                    android:id="@+id/linearLayout3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="2dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -148,285 +151,310 @@
                 </LinearLayout>
 
 
-                <LinearLayout
-                               android:layout_width="50dp"
-                             android:layout_height="50dp"
-                               android:layout_marginTop="2dp"
-                               android:layout_marginEnd="16dp"
-                    android:background="@color/black"
-                              app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/layout_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
 
-                              <ImageView
-                                   android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                   android:layout_marginRight="2dp"
-                                   android:layout_weight="1"
-                                   android:src="@color/red" />
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="2dp"
+                        android:backgroundTint="@color/red"
+                        android:background="@drawable/onlinestatus"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/textView193"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                               <TextView
-                                    android:layout_width="wrap_content"
-                                 android:layout_height="wrap_content"
-                                 android:layout_marginRight="2dp"
-                                 android:layout_weight="1"
-                                   android:text="online" />
-                          </LinearLayout>
+                    <TextView
+                        android:id="@+id/textView193"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Online"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView8"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView32"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="300dp"-->
-<!--                android:scaleType="centerCrop"-->
-<!--                android:src="@drawable/discovermatchesbox" />-->
+            <LinearLayout
+                android:id="@+id/textView72"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal"
+                app:drawableStartCompat="@drawable/black_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
 
+                <TextView
+                    android:id="@+id/state1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    app:drawableStartCompat="@drawable/black_location" />
 
-<!--
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:text="," />
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/textView72"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginTop="2dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                app:drawableStartCompat="@drawable/black_location"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/linearLayout33">-->
+                <TextView
+                    android:id="@+id/countName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:text="" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/state1"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginRight="2dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:text=""-->
-<!--                    app:drawableStartCompat="@drawable/black_location" />-->
+            </LinearLayout>
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginRight="2dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:text="," />-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:paddingVertical="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView72">
 
-<!--                <TextView-->
-<!--                    android:id="@+id/countName"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="2dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:text="" />-->
+                <ImageView
+                    android:id="@+id/sendMessage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:src="@drawable/messagebuttonnavicon"
+                    app:layout_constraintEnd_toStartOf="@+id/sent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-<!--            </LinearLayout>-->
+                <ImageView
 
+                    android:id="@+id/sent"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:src="@drawable/topnavchats"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sendMessage"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/linearLayout30"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:paddingVertical="10dp"-->
-<!--                android:visibility="visible"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/textView72"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/textView72">-->
+                <TextView
+                    android:id="@+id/textView195"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="hgxfcgvhm"
+                    app:layout_constraintEnd_toStartOf="@+id/textView194"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sendMessage" />
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/sendMessage"-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:layout_weight="1"-->
+                <TextView
+                    android:id="@+id/textView194"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:text="hghfxgchgvhmnb"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView195"
+                    app:layout_constraintTop_toBottomOf="@+id/sent" />
 
-<!--                    android:clickable="true"-->
-<!--                    android:src="@drawable/messagebuttonnavicon" />-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout30">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp"
+                    android:visibility="visible">
 
-<!--                <ImageView-->
+                    <ImageView
+                        android:id="@+id/videopic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:src="@drawable/mylifeicon" />
 
-<!--                    android:id="@+id/sent"-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:clickable="true"-->
-<!--                    android:src="@drawable/topnavchats" />-->
+                    <ImageView
 
-<!--                &lt;!&ndash;                <ImageView&ndash;&gt;-->
+                        android:id="@+id/aboutsef"
+                        android:layout_width="20dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:src="@drawable/aboutmyselficon" />
 
-<!--                &lt;!&ndash;                    android:id="@+id/interest2"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_width="20dp"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_height="30dp"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:clickable="true"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:src="@drawable/topnavchats" />&ndash;&gt;-->
+                    <ImageView
 
-<!--            </LinearLayout>-->
+                        android:id="@+id/interest"
+                        android:layout_width="20dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:src="@drawable/aboutmymatchicon" />
 
-<!--            <FrameLayout-->
-<!--                android:id="@+id/frameLayout9"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                android:visibility="gone"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/textView72">-->
+                    <ImageView
 
-<!--                <Button-->
-<!--                    android:id="@+id/button15"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:text="Send Friend Request"-->
-<!--                    android:visibility="gone" />-->
+                        android:id="@+id/friends"
+                        android:layout_width="20dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:src="@drawable/freiendsicon" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/linear02"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:visibility="gone">-->
+            <FrameLayout
+                android:id="@+id/profileframe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView3">
 
-<!--                    <com.google.android.material.card.MaterialCardView-->
-<!--                        android:id="@+id/cardView8"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="100dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:elevation="5dp"-->
-<!--                        app:cardElevation="5dp">-->
-
-<!--                        <LinearLayout-->
-<!--                            android:id="@+id/linlayone"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:gravity="center"-->
-<!--                            android:orientation="vertical">-->
-
-<!--                            <ImageView-->
-<!--                                android:id="@+id/imageView33"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                app:srcCompat="@drawable/ic_baseline_mail_outline_24" />-->
-
-<!--                            <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginTop="5dp"-->
-<!--                                android:text="Send Message" />-->
-<!--                        </LinearLayout>-->
-
-<!--                    </com.google.android.material.card.MaterialCardView>-->
-
-<!--                    <com.google.android.material.card.MaterialCardView-->
-<!--                        android:id="@+id/cardView7"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="100dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:elevation="5dp"-->
-<!--                        app:cardElevation="5dp">-->
-
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:gravity="center"-->
-<!--                            android:orientation="vertical">-->
-
-<!--                            <ImageView-->
-<!--                                android:id="@+id/imageView34"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                app:srcCompat="@drawable/ic_baseline_chat_24" />-->
-
-<!--                            <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginTop="5dp"-->
-<!--                                android:text="Chat With Me" />-->
-<!--                        </LinearLayout>-->
-<!--                    </com.google.android.material.card.MaterialCardView>-->
-<!--                </LinearLayout>-->
-
-<!--            </FrameLayout>-->
-
-<!--            <com.google.android.material.card.MaterialCardView-->
-<!--                android:id="@+id/materialCardView3"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                app:cardElevation="5dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/linearLayout30">-->
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:paddingVertical="10dp"-->
-<!--                    android:visibility="visible">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/videopic"-->
-<!--                        android:layout_width="30dp"-->
-<!--                        android:layout_height="30dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:clickable="true"-->
-<!--                        android:src="@drawable/mylifeicon" />-->
-
-<!--                    <ImageView-->
-
-<!--                        android:id="@+id/aboutsef"-->
-<!--                        android:layout_width="20dp"-->
-<!--                        android:layout_height="30dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:clickable="true"-->
-<!--                        android:src="@drawable/aboutmyselficon" />-->
-
-<!--                    <ImageView-->
-
-<!--                        android:id="@+id/interest"-->
-<!--                        android:layout_width="20dp"-->
-<!--                        android:layout_height="30dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:clickable="true"-->
-<!--                        android:src="@drawable/aboutmymatchicon" />-->
-
-<!--                    <ImageView-->
-
-<!--                        android:id="@+id/friends"-->
-<!--                        android:layout_width="20dp"-->
-<!--                        android:layout_height="30dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:clickable="true"-->
-<!--                        android:src="@drawable/freiendsicon" />-->
-<!--                </LinearLayout>-->
-<!--            </com.google.android.material.card.MaterialCardView>-->
-
-<!--            <FrameLayout-->
-<!--                android:id="@+id/profileframe"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.0"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/materialCardView3">-->
-
-<!--            </FrameLayout>-->
+            </FrameLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--            <ImageView-->
+    <!--                android:id="@+id/imageView32"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="300dp"-->
+    <!--                android:scaleType="centerCrop"-->
+    <!--                android:src="@drawable/discovermatchesbox" />-->
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="108dp" />-->
+
+
+                <FrameLayout
+                    android:id="@+id/frameLayout9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nest">
+
+                    <Button
+                        android:id="@+id/button15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Send Friend Request"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/linear02"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardView8"
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:elevation="5dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:id="@+id/linlayone"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/imageView33"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/ic_baseline_mail_outline_24" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Send Message" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardView7"
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:elevation="5dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/imageView34"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/ic_baseline_chat_24" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Chat With Me" />
+                        </LinearLayout>
+                   </com.google.android.material.card.MaterialCardView>
+                 </LinearLayout>
+
+             </FrameLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
