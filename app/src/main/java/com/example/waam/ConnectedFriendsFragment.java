@@ -53,7 +53,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
     private WaamUser waamUser;
     private FirebaseAuth mAuth;
     private GeneralFactory generalFactory;
-    private TextView age1, gender, location, county, name1;
+    private TextView age1, gender, location, county, name1, onlineOrOffline;
     private  Button button;
     private   ImageView videopic, aboutsefl, interests, friend, tryit, pressBack;
     private static final String REQUEST = "connectedFriends";
@@ -156,7 +156,7 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         CardView cardView8 = view.findViewById(R.id.cardView8);
         CardView cardView7 = view.findViewById(R.id.cardView7);
         button = view.findViewById(R.id.button15);
-        LinearLayout linlayout = view.findViewById(R.id.linear02);
+        //LinearLayout linlayout = view.findViewById(R.id.linear02);
         FrameLayout frameLayout = view.findViewById(R.id.frameLayout9);
         age1 = view.findViewById(R.id.textView65);
         gender = view.findViewById(R.id.textView165);
@@ -164,6 +164,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         county = view.findViewById(R.id.countName);
         tryit= view.findViewById(R.id.imageView8);
         pressBack = view.findViewById(R.id.Bac);
+
+        onlineOrOffline = view.findViewById(R.id.textViewOnlineState);
 
 
 
@@ -192,8 +194,8 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        cardView7.setOnClickListener(this);
-        cardView8.setOnClickListener(this);
+     //   cardView7.setOnClickListener(this);
+        //cardView8.setOnClickListener(this);
         videopic.setOnClickListener(this);
         aboutsefl.setOnClickListener(this);
         interests.setOnClickListener(this);
@@ -230,6 +232,14 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                     .into(profilePic);
 
 
+            generalFactory.loadSpecUser(waamUser.getUid(), new GeneralFactory.SpecificUser() {
+                @Override
+                public void loadSpecUse(WaamUser user) {
+                    if(user.getOnlineStatus().equals("online")) onlineOrOffline.setText(R.string.online);
+                    else onlineOrOffline.setText("Offline");
+                }
+            });
+
             String myId = FirebaseAuth.getInstance().getUid()+AllUsersActivity.FRIENDS;
             generalFactory.loadFriends(myId, new GeneralFactory.FetchFriends() {
                 @Override
@@ -242,12 +252,12 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
                         Log.d("IAmInFor", ""+waamUser.getUid());
                         if(user.getUid().equals(waamUser.getUid())){
                             Log.d("IAmTrue", ""+waamUser.getUid());
-                            linlayout.setVisibility(View.VISIBLE);
+                            //linlayout.setVisibility(View.VISIBLE);
                             button.setVisibility(View.GONE);
                         }else{
                             Log.d("IAmFalse", ""+waamUser.getUid());
                             button.setVisibility(View.VISIBLE);
-                            linlayout.setVisibility(View.GONE);
+                            //linlayout.setVisibility(View.GONE);
                         }
                     }
                 }
