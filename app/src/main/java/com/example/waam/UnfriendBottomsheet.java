@@ -1,5 +1,6 @@
 package com.example.waam;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,22 @@ public class UnfriendBottomsheet extends BottomSheetDialogFragment {
 
     }
 
+
+
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setMargins(view);
+    }
+
+    @Override
+    public int getTheme() {
+        return R.style.NoBackgroundDialogTheme;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,6 +46,8 @@ public class UnfriendBottomsheet extends BottomSheetDialogFragment {
 //                .getLayoutParams();
 //        CoordinatorLayout.Behavior behavior = params.getBehavior();
 //        ((View) contentView.getParent()).setBackgroundColor(Color.TRANSPARENT);
+
+        view.setBackgroundColor(Color.TRANSPARENT);
 
         TextView block = view.findViewById(R.id.textView28);
         TextView cancel = view.findViewById(R.id.textView2);
@@ -65,4 +84,13 @@ public class UnfriendBottomsheet extends BottomSheetDialogFragment {
     private void Unfrien() {
         //if (CurrentS)
     }
+
+    void setMargins(View view) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(10, 0, 10, 0);
+            view.requestLayout();
+        }
+    }
+
 }
