@@ -30,7 +30,7 @@ public class VideoPicFragment extends Fragment {
     private VideoPicAdapter videoPicAdapter;
     private WaamUser waamUser;
     private ProgressBar bar;
-    private TextView textView;
+    private TextView textView, textView1;
 
     private GeneralFactory generalFactory;
 
@@ -77,6 +77,7 @@ public class VideoPicFragment extends Fragment {
         recyclerView = view.findViewById(R.id.vidpicrecycler);
         textView = view.findViewById(R.id.textView106);
         bar = view.findViewById(R.id.progressBar3);
+        textView1 = view.findViewById(R.id.textView196);
 
 
         if (waamUser != null){
@@ -92,6 +93,8 @@ public class VideoPicFragment extends Fragment {
                         if(videoPicModels.size() > 0){
                             recyclerView.setVisibility(View.VISIBLE);
                             textView.setVisibility(View.GONE);
+                            textView1.setVisibility(View.VISIBLE);
+
                             recyclerView.setAdapter(videoPicAdapter);
                             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                             bar.setVisibility(View.GONE);
@@ -99,6 +102,7 @@ public class VideoPicFragment extends Fragment {
                             //you have no media uploaded...
                             recyclerView.setVisibility(View.GONE);
                             textView.setVisibility(View.VISIBLE);
+                            textView1.setVisibility(View.GONE);
                             String message = "There are no media";
                             bar.setVisibility(View.GONE);
                             textView.setText(message);

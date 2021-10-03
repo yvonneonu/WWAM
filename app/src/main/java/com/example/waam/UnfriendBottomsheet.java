@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,15 +51,17 @@ public class UnfriendBottomsheet extends BottomSheetDialogFragment {
         view.setBackgroundColor(Color.TRANSPARENT);
 
         TextView block = view.findViewById(R.id.textView28);
-        TextView cancel = view.findViewById(R.id.textView2);
+        ImageView cancel = view.findViewById(R.id.textView2);
         TextView unfriend = view.findViewById(R.id.textView27);
 
 
         unfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Unfrien();
-                String message = "This user is no longer in your friend list";
+               // Unfrien();
+//                String message = "This user is no longer in your friend list";
+                String message = "User has been Blocked";
+
                 Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
             }
         });
@@ -67,7 +70,7 @@ public class UnfriendBottomsheet extends BottomSheetDialogFragment {
         block.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = "User Blocked";
+                String message = "User has been Reported";
                 Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
             }
         });

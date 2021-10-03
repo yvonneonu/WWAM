@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
 
             android:text="My Life Stories"
+            android:visibility="gone"
             android:textColor="#000000"
             android:textSize="25sp" />
 
