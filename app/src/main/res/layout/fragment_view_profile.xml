@@ -45,6 +45,8 @@
                     android:scaleType="centerCrop"
 
                     tools:srcCompat="@tools:sample/avatars" />
+
+
             </FrameLayout>
 
 
@@ -54,13 +56,35 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="Name"
+                android:text="Name, "
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView193"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout10" />
+
+            <TextView
+                android:id="@+id/textView193"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="32 | "
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/textView71"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout10" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Male"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/textView193"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout10" />
 
             <LinearLayout
@@ -69,9 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView71">
 
@@ -79,27 +101,28 @@
                 <TextView
                     android:id="@+id/state"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:text=""
-                    android:layout_marginRight="2dp"
-                    app:drawableStartCompat="@drawable/black_location"
-                    android:layout_height="wrap_content"/>
+                    app:drawableStartCompat="@drawable/black_location" />
+
                 <TextView
                     android:id="@+id/textView186"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginRight="2dp"
+                    android:layout_weight="1"
                     android:text="," />
 
 
                 <TextView
                     android:id="@+id/textView187"
-                    android:layout_marginLeft="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:layout_weight="1"/>
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:text="" />
 
             </LinearLayout>
 
