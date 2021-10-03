@@ -169,8 +169,8 @@ public class ViewProfile extends Fragment implements View.OnClickListener {
 
         Glide.with(getContext())
                 .asBitmap()
-                .fitCenter()
-                .circleCrop()
+//                .fitCenter()
+//                .circleCrop()
                 .load(uri)
                 .into(imageView);
         Fragment fragment;

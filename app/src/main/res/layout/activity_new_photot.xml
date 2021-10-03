@@ -66,21 +66,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="160dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profileheadbg" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/background"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="160dp"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@drawable/profileheadbg" />-->
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="300dp"
-                    android:layout_height="200dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
                     android:layout_gravity="center"
                     android:paddingBottom="15dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/profileicon" />
+                    android:scaleType="centerCrop"
+
+                    app:srcCompat="@drawable/city_img" />
 
 
             </FrameLayout>
