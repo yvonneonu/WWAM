@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -235,8 +234,21 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
             generalFactory.loadSpecUser(waamUser.getUid(), new GeneralFactory.SpecificUser() {
                 @Override
                 public void loadSpecUse(WaamUser user) {
-                    if(user.getOnlineStatus().equals("online")) onlineOrOffline.setText(R.string.online);
-                    else onlineOrOffline.setText("Offline");
+                    if(user.getOnlineStatus().equals("online")) {
+                        onlineOrOffline.setText(R.string.online);
+                        Glide.with(getActivity())
+                                .asBitmap()
+                                .load((R.drawable.onlinestatus))
+                                .into(tryit);
+                    }
+                    else {
+                        onlineOrOffline.setText("Offline");
+                        Glide.with(getActivity())
+                                .asBitmap()
+                                .load((R.drawable.offlinestatus))
+                                .into(tryit);
+                    }
+
                 }
             });
 

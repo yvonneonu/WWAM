@@ -165,8 +165,8 @@
                         android:id="@+id/imageView8"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:background="@drawable/onlinestatus"
-                        android:backgroundTint="@color/bulletColor"
+                        android:layout_marginEnd="5dp"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/textViewOnlineState"
                         app:layout_constraintStart_toStartOf="parent"
@@ -177,7 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Online"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -313,7 +313,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:text="Start Chart"
+                    android:text="Start Chat"
                     android:textColor="#000000"
                     app:layout_constraintEnd_toEndOf="@+id/floatingActionButton3"
                     app:layout_constraintStart_toStartOf="@+id/floatingActionButton3"
@@ -429,13 +429,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profileframe">
 
-                <Button
-                    android:id="@+id/button15"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Send Friend Request"
-                    android:visibility="visible" />
+
+                    android:orientation="vertical"
+                    app:cardCornerRadius="10dp">
+
+                    <Button
+                        android:id="@+id/button15"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/orange"
+                        android:drawableLeft="@drawable/ic_baseline_person_add_alt_1_24"
+                        android:paddingLeft="60dp"
+                        android:drawablePadding="-50dp"
+                        android:text="Send Friend Request"
+                        android:visibility="visible" />
+
+                </androidx.cardview.widget.CardView>
+
 
             </FrameLayout>
 
