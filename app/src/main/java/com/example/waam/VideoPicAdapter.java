@@ -66,7 +66,7 @@ public class VideoPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             videoView.setMediaController(mediaController);
             videoView.setVideoURI(uri);
             videoView.requestFocus();
-            videoView.start();
+//            videoView.start();
 
         }else{
             PicHolder picHolder = (PicHolder) holder;

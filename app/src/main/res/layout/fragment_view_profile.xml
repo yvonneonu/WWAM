@@ -28,24 +28,23 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <ImageView
-                    android:id="@+id/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="180dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profileheadbg"
-                     />
+<!--                <ImageView-->
+<!--                    android:id="@+id/background"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="180dp"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@drawable/profileheadbg"-->
+<!--                     />-->
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="300dp"
-                    android:layout_height="200dp"
-                    android:paddingBottom="15dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
                     android:layout_gravity="center"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/profileicon"
-                   />
+                    android:paddingBottom="15dp"
+                    android:scaleType="centerCrop"
+
+                    tools:srcCompat="@tools:sample/avatars" />
             </FrameLayout>
 
 

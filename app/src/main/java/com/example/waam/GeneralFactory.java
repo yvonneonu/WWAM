@@ -534,6 +534,7 @@ public class GeneralFactory {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 WaamUser user = snapshot.getValue(WaamUser.class);
+
                 userCallback.loadSpecUse(user);
                 Log.d("Userc", "" + user.getTypingTo());
             }
@@ -1037,7 +1038,7 @@ public class GeneralFactory {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(context, "request sent", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "request sent", Toast.LENGTH_SHORT).show();
 
                 }
             }

@@ -1,18 +1,17 @@
 package com.example.waam;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -37,7 +36,7 @@ public class FrendChannelFragment extends Fragment {
     private FriendAdapt friendAdapt;
     private List<WaamUser> friendModelList;
     private WaamUser waamUser;
-    private TextView textView;
+    private TextView textView, textView1;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
 
@@ -81,11 +80,13 @@ public class FrendChannelFragment extends Fragment {
                 friendAdapt = new FriendAdapt(friendModelList,getActivity());
                 if(friends.size() < 1){
                     textView.setVisibility(View.VISIBLE);
+                    textView1.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     //Friends List is empty
                 }else{
                     recyclerView.setVisibility(View.VISIBLE);
                     textView.setVisibility(View.GONE);
+                    textView1.setVisibility(View.VISIBLE);
                     recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                     recyclerView.setAdapter(friendAdapt);
                 }
@@ -116,11 +117,13 @@ public class FrendChannelFragment extends Fragment {
 
                 if(friends.size() < 1){
                     textView.setVisibility(View.VISIBLE);
+                    textView1.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                 }else{
 
                     recyclerView.setVisibility(View.VISIBLE);
                     textView.setVisibility(View.GONE);
+                    textView1.setVisibility(View.VISIBLE);
                     recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                     recyclerView.setAdapter(friendAdapt);
                 }
@@ -157,6 +160,7 @@ public class FrendChannelFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recy);
         progressBar = view.findViewById(R.id.progressBar2);
         textView = view.findViewById(R.id.textView107);
+        textView1 = view.findViewById(R.id.textView10);
         /*recyclerView = view.findViewById(R.id.friends_recycler);
         progressBar = view.findViewById(R.id.progressBaring);
         ImageView imageView = view.findViewById(R.id.imageView40);

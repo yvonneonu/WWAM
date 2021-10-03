@@ -39,8 +39,15 @@ public class FriendAdapt extends RecyclerView.Adapter<FriendAdapt.FriendHolder> 
     @Override
     public void onBindViewHolder(@NonNull FriendHolder holder, int position) {
         WaamUser friendModel = friendsContainer.get(position);
-        holder.firstname.setText(friendModel.getFullname());
-        holder.lastname.setText(friendModel.getFullname());
+        String allname = friendModel.getFullname();
+
+        String[] all = allname.split(" ");
+
+        String fname = all[0];
+        String lname = all[1];
+
+        holder.firstname.setText(fname);
+        holder.lastname.setText(lname);
         Glide.with(context)
                 .asBitmap()
                 .circleCrop()
