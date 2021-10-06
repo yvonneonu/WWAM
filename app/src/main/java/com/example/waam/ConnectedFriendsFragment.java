@@ -203,6 +203,10 @@ public class ConnectedFriendsFragment extends Fragment implements View.OnClickLi
         profileDetail();
 
 
+        videopic.setColorFilter(Color.BLUE);
+        aboutsefl.setColorFilter(Color.TRANSPARENT);
+        interests.setColorFilter(Color.TRANSPARENT);
+        friend.setColorFilter(Color.TRANSPARENT);
 //        Drawable buttonDrawable = button.getBackground();
 //        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
 //        //the color is a direct color int and not a color resource
