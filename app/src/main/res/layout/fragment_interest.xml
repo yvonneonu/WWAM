@@ -302,7 +302,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="3dp"
                             android:gravity="center"
-                            android:text="Law School"
+                            android:text="Four Children"
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold" />
