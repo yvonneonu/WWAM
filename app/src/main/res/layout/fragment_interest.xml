@@ -837,10 +837,11 @@
             app:layout_constraintTop_toBottomOf="@+id/constrain">
 
             <LinearLayout
+                android:id="@+id/littlemorecont"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="10dp"
-                android:layout_height="match_parent">
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/textView78"
@@ -857,18 +858,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar mattis nunc. Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Fames ac turpis egestas integer eget. Aliquet eget sit amet tellus. Vitae et leo duis ut diam quam nulla porttitor. Nunc pulvinar sapien et ligula ullamcorper malesuada. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. A diam maecenas sed enim. Augue mauris augue neque gravida in fermentum et sollicitudin. Rhoncus urna neque viverra justo nec ultrices dui sapien. Amet facilisis magna etiam tempor orci eu. Pellentesque elit eget gravida cum."
-/>
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar mattis nunc. Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Fames ac turpis egestas integer eget. Aliquet eget sit amet tellus. Vitae et leo duis ut diam quam nulla porttitor. Nunc pulvinar sapien et ligula ullamcorper malesuada. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. A diam maecenas sed enim. Augue mauris augue neque gravida in fermentum et sollicitudin. Rhoncus urna neque viverra justo nec ultrices dui sapien. Amet facilisis magna etiam tempor orci eu. Pellentesque elit eget gravida cum." />
 
                 <TextView
+                    android:id="@+id/readmore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginStart="3dp"
                     android:layout_marginBottom="3dp"
-                    android:textColor="@color/bpDarker_blue"
                     android:text="Read More"
-                    />
+                    android:textColor="@color/bpDarker_blue"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
