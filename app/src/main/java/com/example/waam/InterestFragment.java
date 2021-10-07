@@ -89,6 +89,7 @@ public class InterestFragment extends Fragment {
         faith = view.findViewById(R.id.fauthe);
         ehnity = view.findViewById(R.id.ethnicity);
         littleMoredetails = view.findViewById(R.id.textView73);
+
         readMore = view.findViewById(R.id.readmore);
         littlemorecontainer = view.findViewById(R.id.littlemorecont);
 
@@ -103,7 +104,14 @@ public class InterestFragment extends Fragment {
         }
 
 
-        readMore.setOnClickListener(v -> littleMoredetails.setText(example));
+        readMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                littleMoredetails.setText(example);
+                readMore.setVisibility(View.GONE);
+            }
+        });
+//        readMore.setOnClickListener(v -> littleMoredetails.setText(example));
         occupationShow();
         educationShow();
         childrenShow();
