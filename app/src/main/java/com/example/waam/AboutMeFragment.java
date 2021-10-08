@@ -108,6 +108,14 @@ public class AboutMeFragment extends Fragment {
         }else{
             ready.setVisibility(View.GONE);
         }
+
+        ready.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                littleMoredetails.setText(example);
+                ready.setVisibility(View.GONE);
+            }
+        });
         //eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
        // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         //recyclerView.setAdapter(eventDisplayAdapter);
