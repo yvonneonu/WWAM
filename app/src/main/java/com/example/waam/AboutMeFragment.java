@@ -32,7 +32,7 @@ public class AboutMeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private View view;
     private String token;
-    private TextView textView, career, education, children, politics, bodyType, faith, ehnity;
+    private TextView textView, career, education, children, politics, bodyType, faith, ehnity, littleMoredetails, ready;
     public static final String PUT_PROFILE = "PutProfile";
 
     private static final String ARG_PARAM1 = "param1";
@@ -45,6 +45,9 @@ public class AboutMeFragment extends Fragment {
     private WaamUser user;
     private EventDisplayAdapter eventDisplayAdapter;
     private List<UserResult> userResults = new ArrayList<>();
+
+
+    private String example = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh cras pulvinar mattis nunc. Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Fames ac turpis egestas integer eget. Aliquet eget sit amet tellus. Vitae et leo duis ut diam quam nulla porttitor. Nunc pulvinar sapien et ligula ullamcorper malesuada. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. A diam maecenas sed enim. Augue mauris augue neque gravida in fermentum et sollicitudin. Rhoncus urna neque viverra justo nec ultrices dui sapien. Amet facilisis magna etiam tempor orci eu. Pellentesque elit eget gravida cum.";
 
 
     public AboutMeFragment() {
@@ -93,8 +96,18 @@ public class AboutMeFragment extends Fragment {
         bodyType = view.findViewById(R.id.bodytype);
         faith = view.findViewById(R.id.fauthe);
         ehnity = view.findViewById(R.id.ethnicity);
+        littleMoredetails = view.findViewById(R.id.textView73);
+        ready = view.findViewById(R.id.read);
 
 
+
+        if(countWords(example) > 50){
+            String words = getNwords(example,50);
+            littleMoredetails.setText(words);
+            ready.setVisibility(View.VISIBLE);
+        }else{
+            ready.setVisibility(View.GONE);
+        }
         //eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
        // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         //recyclerView.setAdapter(eventDisplayAdapter);
@@ -112,6 +125,46 @@ public class AboutMeFragment extends Fragment {
 
 
         return view;
+    }
+
+    public String getNwords(String myString, int number) {
+        String [] arr = myString.split("\\s+");
+        //Splits words & assign to the arr[]  ex : arr[0] -> Copying ,arr[1] -> first
+
+
+        ; // NUMBER OF WORDS THAT YOU NEED
+        String nWords="";
+
+        // concatenating number of words that you required
+        for(int i=0; i<number ; i++){
+            nWords = nWords + " " + arr[i] ;
+        }
+
+        return nWords;
+    }
+
+    public static int countWords(String s) {
+        int wordCount = 0;
+
+        boolean word = false;
+        int endOfLine = s.length() - 1;
+
+        for (int i = 0; i < s.length(); i++) {
+            // if the char is a letter, word = true.
+            if (Character.isLetter(s.charAt(i)) && i != endOfLine) {
+                word = true;
+                // if char isn't a letter and there have been letters before,
+                // counter goes up.
+            } else if (!Character.isLetter(s.charAt(i)) && word) {
+                wordCount++;
+                word = false;
+                // last word of String; if it doesn't end with a non letter, it
+                // wouldn't count without this.
+            } else if (Character.isLetter(s.charAt(i)) && i == endOfLine) {
+                wordCount++;
+            }
+        }
+        return wordCount;
     }
 
     private void ethnicity() {
