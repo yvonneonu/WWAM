@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +45,7 @@ public class AboutMeFragment extends Fragment {
     private RecyclerView recyclerView;
     private WaamUser user;
     private EventDisplayAdapter eventDisplayAdapter;
+    private NoeventAdapter adapter;
     private List<UserResult> userResults = new ArrayList<>();
 
 
@@ -441,14 +443,24 @@ public class AboutMeFragment extends Fragment {
 
                    List<UserResult> userResults = response.body();
 
-                   eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
-                   recyclerView.setAdapter(eventDisplayAdapter);
+                   if (userResults.isEmpty()){
+                       adapter = new NoeventAdapter(getActivity());
+                       recyclerView.setAdapter(adapter);
 
-                   recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+                       recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
-                   // politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
+                   }else {
+                       eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
+                       recyclerView.setAdapter(eventDisplayAdapter);
 
-                   Log.d("event12",new Gson().toJson(response.body()));
+                       recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+                       // politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
+
+                       Log.d("event12",new Gson().toJson(response.body()));
+                   }
+
+
 
 
 
