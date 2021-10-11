@@ -5,11 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,6 +45,7 @@ public class AboutMeFragment extends Fragment {
     private RecyclerView recyclerView;
     private WaamUser user;
     private EventDisplayAdapter eventDisplayAdapter;
+    private LinearLayout linearLayout;
     private NoeventAdapter adapter;
     private List<UserResult> userResults = new ArrayList<>();
 
@@ -100,6 +101,7 @@ public class AboutMeFragment extends Fragment {
         ehnity = view.findViewById(R.id.ethnicity);
         littleMoredetails = view.findViewById(R.id.textView73);
         ready = view.findViewById(R.id.read);
+        linearLayout = view.findViewById(R.id.container);
 
 
 
@@ -443,13 +445,8 @@ public class AboutMeFragment extends Fragment {
 
                    List<UserResult> userResults = response.body();
 
-                   if (userResults.isEmpty()){
-                       adapter = new NoeventAdapter(getActivity());
-                       recyclerView.setAdapter(adapter);
-
-                       recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-
-                   }else {
+                   if (userResults.size() > 0){
+                       linearLayout.setVisibility(View.GONE);
                        eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
                        recyclerView.setAdapter(eventDisplayAdapter);
 
@@ -458,6 +455,32 @@ public class AboutMeFragment extends Fragment {
                        // politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
 
                        Log.d("event12",new Gson().toJson(response.body()));
+                       //fecth from api and dispaly on adapter
+
+
+
+//                       adapter = new NoeventAdapter(getActivity());
+//                       recyclerView.setAdapter(adapter);
+//
+//                       recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+
+                       //jhfihfgbhrgtgbdffgbgtdgfggdfg show three boxes
+
+
+
+
+                   }else {
+                       linearLayout.setVisibility(View.VISIBLE);
+                       recyclerView.setVisibility(View.GONE);
+//                       eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
+//                       recyclerView.setAdapter(eventDisplayAdapter);
+//
+//                       recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+//
+//                       // politics.setText(politicsRecordModel.getPoliticsModel().get(0).getName());
+//
+//                       Log.d("event12",new Gson().toJson(response.body()));
+                       //fecth from api and dispaly on adapter
                    }
 
 

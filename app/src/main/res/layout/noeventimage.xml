@@ -4,7 +4,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lin"
+    android:id="@+id/lin11"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -18,7 +18,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="150dp"
-        android:background="#94D3D0CD"
+        android:background="#6B817F7D"
         android:layout_height="150dp"
         android:layout_marginTop="10dp"
         app:cardCornerRadius="10dp">

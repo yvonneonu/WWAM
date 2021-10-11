@@ -30,8 +30,8 @@ public class NoeventAdapter extends RecyclerView.Adapter<NoeventAdapter.Viewhold
     @Override
     public void onBindViewHolder(@NonNull NoeventAdapter.Viewholder holder, int position) {
 
-        holder.cardView.getCardBackgroundColor();
-        holder.imageView.getDrawable();
+        //holder.cardView.getCardBackgroundColor();
+       // holder.imageView.getDrawable();
         holder.textView.getText();
     }
 
