@@ -571,8 +571,16 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
         <TextView
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+            android:id="@+id/non"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="8dp"
+            android:text="No Events Has been Added"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView78" />
 
 
         <!--        <TextView-->
@@ -691,13 +699,27 @@
 <!--            app:layout_constraintStart_toStartOf="@+id/textView86"-->
 <!--            app:layout_constraintTop_toBottomOf="@+id/textView86" />-->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView78">
+            app:layout_constraintTop_toBottomOf="@+id/non">
 
 
             <LinearLayout
@@ -708,6 +730,48 @@
                 android:visibility="visible">
 
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:text="No Events Has been Added"-->
+                    <!--                        android:textSize="15sp" />-->
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="#6B817F7D"
+
+                        app:cardCornerRadius="10dp">
+                        <!-- Media -->
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/content_description_media"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="40dp"
+                            android:text="No Events"
+                            android:textSize="15sp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -716,18 +780,17 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="No Events Has been Added"
-                        android:textSize="15sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="No Events Has been Added"-->
+<!--                        android:textSize="15sp" />-->
 
                     <com.google.android.material.card.MaterialCardView
-                        android:layout_width="120dp"
+                        android:layout_width="match_parent"
                         android:layout_height="120dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="8dp"
                         android:backgroundTint="#6B817F7D"
                         app:cardCornerRadius="10dp">
                         <!-- Media -->
@@ -758,58 +821,18 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="No Events Has been Added"
-                        android:textSize="15sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="No Events Has been Added"-->
+<!--                        android:textSize="15sp" />-->
 
                     <com.google.android.material.card.MaterialCardView
-                        android:layout_width="120dp"
+                        android:layout_width="match_parent"
                         android:layout_height="120dp"
-                        android:layout_marginTop="10dp"
-                        android:backgroundTint="#6B817F7D"
-                        app:cardCornerRadius="10dp">
-                        <!-- Media -->
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="@string/content_description_media"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="40dp"
-                            android:text="No Events"
-                            android:textSize="15sp" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="No Events Has been Added"
-                        android:textSize="15sp" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="2dp"
                         android:backgroundTint="#6B817F7D"
                         app:cardCornerRadius="10dp">
                         <!-- Media -->
