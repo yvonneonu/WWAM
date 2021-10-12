@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ public class AboutMeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private View view;
     private String token;
-    private TextView textView, career, education, children, politics, bodyType, faith, ehnity, littleMoredetails, ready;
+    private TextView textView, career, education, children, politics, bodyType, faith, ehnity, littleMoredetails, ready, text1;
     public static final String PUT_PROFILE = "PutProfile";
 
     private static final String ARG_PARAM1 = "param1";
@@ -45,8 +46,8 @@ public class AboutMeFragment extends Fragment {
     private RecyclerView recyclerView;
     private WaamUser user;
     private EventDisplayAdapter eventDisplayAdapter;
+    private ProgressBar progressBar;
     private LinearLayout linearLayout;
-    private NoeventAdapter adapter;
     private List<UserResult> userResults = new ArrayList<>();
 
 
@@ -102,6 +103,8 @@ public class AboutMeFragment extends Fragment {
         littleMoredetails = view.findViewById(R.id.textView73);
         ready = view.findViewById(R.id.read);
         linearLayout = view.findViewById(R.id.container);
+        text1 = view.findViewById(R.id.non);
+        progressBar = view.findViewById(R.id.progressbar1);
 
 
 
@@ -445,9 +448,11 @@ public class AboutMeFragment extends Fragment {
 
                    List<UserResult> userResults = response.body();
 
-                   if (userResults.size() < 0){
+                   if (userResults.size() > 0){
                        linearLayout.setVisibility(View.GONE);
                        recyclerView.setVisibility(View.VISIBLE);
+                       text1.setVisibility(View.GONE);
+                       progressBar.setVisibility(View.GONE);
                        eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
                        recyclerView.setAdapter(eventDisplayAdapter);
 
@@ -475,6 +480,8 @@ public class AboutMeFragment extends Fragment {
                    }else {
                        linearLayout.setVisibility(View.VISIBLE);
                        recyclerView.setVisibility(View.GONE);
+                       text1.setVisibility(View.VISIBLE);
+                       progressBar.setVisibility(View.GONE);
                        Log.d("show", "linerarlayout");
 //                       eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
 //                       recyclerView.setAdapter(eventDisplayAdapter);
