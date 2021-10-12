@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -39,6 +40,7 @@ public class FrendChannelFragment extends Fragment {
     private TextView textView, textView1;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private LinearLayout linearLayout;
 
     public FrendChannelFragment() {
         // Required empty public constructor
@@ -81,12 +83,14 @@ public class FrendChannelFragment extends Fragment {
                 if(friends.size() < 1){
                     textView.setVisibility(View.VISIBLE);
                     textView1.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                     //Friends List is empty
                 }else{
                     recyclerView.setVisibility(View.VISIBLE);
                     textView.setVisibility(View.GONE);
                     textView1.setVisibility(View.VISIBLE);
+                    linearLayout.setVisibility(View.GONE);
                     recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                     recyclerView.setAdapter(friendAdapt);
                 }
@@ -118,12 +122,14 @@ public class FrendChannelFragment extends Fragment {
                 if(friends.size() < 1){
                     textView.setVisibility(View.VISIBLE);
                     textView1.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 }else{
 
                     recyclerView.setVisibility(View.VISIBLE);
                     textView.setVisibility(View.GONE);
                     textView1.setVisibility(View.VISIBLE);
+                    linearLayout.setVisibility(View.GONE);
                     recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
                     recyclerView.setAdapter(friendAdapt);
                 }
@@ -161,6 +167,7 @@ public class FrendChannelFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar2);
         textView = view.findViewById(R.id.textView107);
         textView1 = view.findViewById(R.id.textView10);
+        linearLayout = view.findViewById(R.id.images);
         /*recyclerView = view.findViewById(R.id.friends_recycler);
         progressBar = view.findViewById(R.id.progressBaring);
         ImageView imageView = view.findViewById(R.id.imageView40);
