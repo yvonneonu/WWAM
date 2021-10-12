@@ -445,8 +445,9 @@ public class AboutMeFragment extends Fragment {
 
                    List<UserResult> userResults = response.body();
 
-                   if (userResults.size() > 0){
+                   if (userResults.size() < 0){
                        linearLayout.setVisibility(View.GONE);
+                       recyclerView.setVisibility(View.VISIBLE);
                        eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
                        recyclerView.setAdapter(eventDisplayAdapter);
 
@@ -456,6 +457,8 @@ public class AboutMeFragment extends Fragment {
 
                        Log.d("event12",new Gson().toJson(response.body()));
                        //fecth from api and dispaly on adapter
+
+                       Log.d("show", "recyclerview");
 
 
 
@@ -472,6 +475,7 @@ public class AboutMeFragment extends Fragment {
                    }else {
                        linearLayout.setVisibility(View.VISIBLE);
                        recyclerView.setVisibility(View.GONE);
+                       Log.d("show", "linerarlayout");
 //                       eventDisplayAdapter = new EventDisplayAdapter(userResults, getActivity());
 //                       recyclerView.setAdapter(eventDisplayAdapter);
 //

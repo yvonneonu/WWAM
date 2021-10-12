@@ -61,16 +61,7 @@
         </androidx.cardview.widget.CardView>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/horizontalScrollView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/container"
-            tools:layout_editor_absoluteX="186dp"
-            tools:layout_editor_absoluteY="384dp">
 
-
-        </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             android:id="@+id/textView69"
@@ -570,7 +561,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Event I like"
+            android:text="Events I like"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -578,6 +569,11 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
 
         <!--        <TextView-->
 <!--            android:id="@+id/textView73"-->
@@ -697,16 +693,63 @@
 
         <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView78">
 
+
             <LinearLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_height="150dp">
+                android:visibility="visible">
+
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="No Events Has been Added"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="#6B817F7D"
+                        app:cardCornerRadius="10dp">
+                        <!-- Media -->
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/content_description_media"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="40dp"
+                            android:text="No Events"
+                            android:textSize="15sp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -723,10 +766,10 @@
                         android:textSize="15sp" />
 
                     <com.google.android.material.card.MaterialCardView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:layout_marginTop="10dp"
-                        android:background="#6B817F7D"
+                        android:backgroundTint="#6B817F7D"
                         app:cardCornerRadius="10dp">
                         <!-- Media -->
                         <ImageView
@@ -741,7 +784,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="50dp"
+                            android:layout_marginTop="40dp"
                             android:text="No Events"
                             android:textSize="15sp" />
                     </com.google.android.material.card.MaterialCardView>
@@ -749,8 +792,6 @@
                 </LinearLayout>
 
 
-
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -760,21 +801,22 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="No Events Has been Added"
-                        android:textSize="15sp"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_height="wrap_content"/>
+                        android:text="No Events Has been Added"
+                        android:textSize="15sp" />
+
                     <com.google.android.material.card.MaterialCardView
-                        android:layout_width="150dp"
-                        android:background="#6B817F7D"
-                        android:layout_height="150dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:layout_marginTop="10dp"
+                        android:backgroundTint="#6B817F7D"
                         app:cardCornerRadius="10dp">
                         <!-- Media -->
                         <ImageView
                             android:layout_width="50dp"
-                            android:layout_gravity="center"
                             android:layout_height="50dp"
+                            android:layout_gravity="center"
                             android:contentDescription="@string/content_description_media"
                             android:scaleType="centerCrop"
                             app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
@@ -783,57 +825,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="50dp"
-                            android:textSize="15sp"
-                            android:text="No Events"/>
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
-
-
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="No Events Has been Added"
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"/>
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="150dp"
-                        android:background="#6B817F7D"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="10dp"
-                        app:cardCornerRadius="10dp">
-                        <!-- Media -->
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_gravity="center"
-                            android:layout_height="50dp"
-                            android:contentDescription="@string/content_description_media"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="50dp"
-                            android:textSize="15sp"
-                            android:text="No Events"/>
+                            android:layout_marginTop="40dp"
+                            android:text="No Events"
+                            android:textSize="15sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 
             </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
